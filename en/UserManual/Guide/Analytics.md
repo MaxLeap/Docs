@@ -18,7 +18,7 @@ The Dashboard of Analytics is a bulletin of your app data, which includes:
 * Top 10 Channels
 
 <p class="image-wrapper">
-	![dashboard](/images/dashboard.png)
+	![dashboard](/images/dashboard.png?raw=true)
 
 **Daily report** shows the main data of today, yesterday and the variance. The data includes New Users, Active Users, New/Active Users, Sessions and Average Session Length. You can even check the percentage change of New users and Active users compared with last day.
 <br />
@@ -41,7 +41,7 @@ Trends includes:
 * App Versions for checking the amount variance of New Users, Active Users, Sessions and Session Length of different versions in a certain time zone.
 
 <p class="image-wrapper">
-	![newusers](/images/newusers.png)
+	![newusers](/images/newusers.png?raw=true)
 	
 You can check the historical data and developing tread of those data in Trends with Line Charts and Tables.
 <br />
@@ -58,7 +58,7 @@ In App Version, you can choose contents to display in Line Chart, such as New Us
 #### Retention
 
 <p class="image-wrapper">
-	![retention](/images/retention.png)
+	![retention](/images/retention.png?raw=true)
 	
 Retention shows the variance of retention rate along with the time from a certain time point. The first row of Retention Table shows the date, the second one shows the amount of New Users and the third one shows the retention rate after a certain time length. Take the daily retention as an example, the 3rd row to 5th row would be the Next Day Retention, Two Days Retention and Three Days Retention. The time can be extended to 30 days.
 <br />
@@ -69,7 +69,7 @@ With retention rate, you can analyze the app attraction towards your users. For 
 #### Distribution
 
 <p class="image-wrapper">
-	![channels](/images/channels.png)
+	![channels](/images/channels.png?raw=true)
 	
 Distribution is for you to analyze the Channels. You can check data of each Channel in the Channel page, including New Users, Active Users, Sessions and Session Length. Take Android as an example, you can compare the data of Google Play and Amazon Store, analyze the data traffic in each Channel and strengthen some Channels according to the results.
 <br />
@@ -87,12 +87,12 @@ Corresponding configuration is needed in the app. Take Android as an example, yo
 User Engagement is used to describe the Frequency and Session Length. Session Length is how long users stay in your app within a Session, while the Frequency refers to how often users engage in your app.
 
 <p class="image-wrapper">
-	![sessionlength](/images/sessionlength.png)
+	![sessionlength](/images/sessionlength.png?raw=true)
 	
 There are two parts in Session Length. The first one is each Session Length of all users while the second one is the total Session Length of all users. Those two parts are displayed in Histograms and Tables. The Histogram can show the Session Length straightly with the Session Length as abscissa and Amount as ordinate. The contents in the Table include the Session Length, Session Amount and Proportion of this Session among all Sessions. The Daily Session Length is set by day which means that you can check the total Session Length within one day.
 
 <p class="image-wrapper">
-	![frequency](/images/frequency.png)
+	![frequency](/images/frequency.png?raw=true)
 
 Frequency is also displayed in Histograms and Tables. The abscissa of histogram represents the range of Session Amount while the ordinate represents the users amount within this range. The Table includes range of Session Amount, User Amount and the Proportion of this kind of users.With data of Frequency, your app can be estimated to be high-frequency or low-frequency app. You can even identify the Session Length and Frequency Type by integrating with Session Length. For example, the musical app would be the high-frequency short-session-length app since users might enter the app to select a song and then put it in background while the weather app would be a low-ferquecny short-session-length app since users would just open it once in the morning to check the daily weather. You can improve and perfect your app by defining its type with User Engagement.
 
@@ -101,7 +101,7 @@ Frequency is also displayed in Histograms and Tables. The abscissa of histogram 
 User Actions offers you a deep-going way to analyze user behavior with Events, Screen Flow and Funnels.
 
 <p class="image-wrapper">
-	![events](/images/events.png)
+	![events](/images/events.png?raw=true)
 
 **Events** refers to certain User Behavior which can be created in Console by clicking Add New Event, filling Event Name, platform and Event Description. You can record an event by invoking following code:  
 
@@ -122,7 +122,7 @@ The Event will be available in the Events list after being created in Console or
 If it is the interface of transferring dimensions that your were invoking when triggering this event, you can check the different keys at the bottom of this page as well as the amount and proportion of values in this key. You can even check the fluctuation of this Event by clicking More.
 
 <p class="image-wrapper">
-	![screenflow](/images/screenflow.png)
+	![screenflow](/images/screenflow.png?raw=true)
 	
 
 Events can only record one single event of users. If you want to learn more about the procedure, you will need Screen Flow. You need to invoke the following codes to display the Screen Flow in the page：    
@@ -163,7 +163,7 @@ The data in Funnel can help you optimize some typical procedures, like sign up, 
 Terminal contains information of your devices, including Device Models, Resolutions, Firmware Versions, Access, Carriers and Countries. All those information will be displayed in Pie Chart and Table.
 
 <p class="image-wrapper">
-	![device](/images/device.png)
+	![device](/images/device.png?raw=true)
 	
 **Device Models** refer to the model of users’ devices. Take iOS as an example, there might be iPhone 6, iPhone 5, iPad Air, iPad Mini and etc. The vertical axis represents device name while the horizontal axis represents the amount. You can choose New Users or Sessions in Histogram and if you pay attention, you can find the difference in distribution proportion of data and come to the conclusion that the Sessions of New devices will be longer and the old ones will be shorter. The information in the Table concludes device info, amount of new users, percentage of new users among all active users, session amount and the proportion of those sessions.
 <br />
