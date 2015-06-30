@@ -1,10 +1,10 @@
 # LAS Docs
 
-These are the markdown sources for all of the [platform guides](https://leap.as/en_us/docs/overview.html) of LAS. The content for the guides is stored in this repo.
+These are the markdown sources for all of the [platform docs](https://leap.as/en_us/docs/overview.html) of LAS. The content for the docs is stored in this repo.
 
 ## Repository Structure
 
-The guides are organized first by language, then by platform. Each platform directory contains a set of markdown files, one for each main section in the guide.
+The docs are organized first by language, then by platform. Each platform directory contains a set of markdown files, one for each main section in the guide.
 
     .
     ├── {language}
