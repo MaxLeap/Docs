@@ -1,76 +1,50 @@
 
 ## 开始使用Cloud Code
 
-## 	**什么是Cloud Code服务**
-Cloud Code的使命是帮助您在云端实现业务逻辑，使LAS应用具备快速，高效地实现复杂业务逻辑的能力。
+## Cloud Code简介
+
+####	**什么是Cloud Code服务**
+Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
+
+
+####    **为何您需要Cloud Code服务**
+
+如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助Cloud Code实现。Cloud Code有如下优势：
+
+* 强大的运算能力：Cloud Code运行在Leap Cloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
+* 可以使用各种第三方类库，提升开发效率
+
+####	**Cloud Code如何工作**
+
 <p class="image-wrapper">
-[imgWhatsCloudCode](/images/imgWHATSCloudCode.png)
+![imgWhatsCloudCode](../../../Images/imgCloudCodeWorkflow.png)
 
-我们提供的服务模块有：
+一个Cloud Code项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用Cloud Code命令行工具lcc上传到Leap Cloud，Leap Cloud会生成对应的docker image。用lcc deploy可以让Leap Cloud启动Docker container运行该Docker image。
 
-* 	Function:   将方法实现独立部署在云端
-* 	Hook:       对Cloud Data进行任何操作前/后，调用自定义方法
-* 	Job:        定时任务
-
-##    **为何您需要Cloud Code服务**
-
-* 更强大：云端高效完成大量计算，完成移动客户端无法实现的功能
-* 更高效：提升获取Cloud Data等云端资源的效率
-* 更安全：Docker方式在云端运行，资源隔离
-* 支持第三方类库
-
-##	Cloud Code概况
-
-
-## 1.	创建应用
-LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。
-
-* 	**如何创建LAS应用**
-
-	> 1. 	在Dashboard中，点击**创建应用**，填写App信息：
-			<p class="image-wrapper">
-			![imgCreateAppInfo](/images/imgCreateAppInfo.png)
-
-	>  创建App需提供：
-	>>* 应用名称，平台，默认语言
-	>>* 应用类型：常规应用或者游戏应用（LAS提供的Analytics服务会针对这两种应用类型，相应地采取更精准的分析策略）
-	>
-	> 2.	获取相关密钥
-	>
-	>  创建应用后，点击确认，我们便可获取密钥：
-	>  <p class="image-wrapper">
-	  ![imgCreateAppFinish](/images/imgCreateAppFinish.png)
-	>		
-	>  我们也可在App Settings中获取密钥：
-	>  <p class="image-wrapper">
-			![imgCreateAppGetKey](/images/imgCreateAppGetKey.png)
-	>
-	>  Cloud Code将使用到的KEY的类型包括：
-	>>* Application ID
-	>>* Master Key
+目前Cloud Code支持Java，我们在近期会推出Python版本。企业版在下个版本会支持多个Docker container，Failover，Auto scaling等功能。
 	  
-## 2.	创建和配置Cloud Code项目
+## 创建和配置Cloud Code项目
 
-### 创建Cloud Code项目
+### 1.	创建Cloud Code项目
 
-#### 1. 使用Cloud Code项目模版
+#### + 使用Cloud Code项目模版
 >
-
 * 	**什么是LAS Cloud Code Java项目模板**
-	
+>	
 	LAS Cloud Code项目模板是利用Maven构建的Java项目。
 	* 架构
   	* 测试项目
-
+>
 * 	**如何获取LAS Cloud Code Java项目模板**
   	* Git命令获取
 		`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
   	* 其他下载渠道：[Java Template Project](http://www.baidu.com)
-
+>
 * 	**如何使用LAS Cloud Code Java项目模板**
-
+>
 	* 	**Android Studio**
-
+>
 		>	1. 打开Android Studio，点击“Import project”
 		>	2. 进入项目模板根目录，选择“pom.xml”
 		>
@@ -80,9 +54,9 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 		>
 		>	 	<p class="image-wrapper">
 		>		![imgAndroidStudioOpenPomFinish](/images/imgAndroidStudioOpenPomFinish.png)
-
+>
 	* 	**Eclipse** （需要安装Maven插件）
-
+>
 		>	1. 将项目模板（cloud-code-template-java文件夹）移至您的Eclipse Workspace中（若直接获取至此目录中，请忽略该步）
 		>	2.	打开Eclipse，点击 "File" -> "Import..."
 		>	3. 选择 "???" -> "???"
@@ -90,16 +64,36 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 		>	 	<p class="image-wrapper">
 		>		![imgEclipseImportMaven](/images/imgEclipseImportMaven.png)
 		>	3. ????		
-	
+>	
 	  **使用时需注意：** 
-	> 1.	第一次Load该项目时，需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
+	> 1.	第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
 	> 2.	LAS Cloud Code Java项目模板是基于Maven构建的，您使用的IDE需安装Maven插件方可打开
 
-### 配置Cloud Code项目
+#### + 添加至已有项目
+>
+* 	**如何获取LAS Cloud Code Java SDK**
+>
+>	*	打开Maven项目的pom文件，添加如下依赖：
+>	
+	```Java
+	<dependency>
+    <groupId>com.ilegendsoft</groupId>
+    <artifactId>cloud-code-test-framework</artifactId>
+    <version>2.2.1-SNAPSHOT</version>
+    </dependency>
+	```
+>	
+>	  **使用时需注意：** 
+	> 1.	这个依赖包含了基础的SDK客户端和本地单元测试框架
+>
+>	*	打开Maven项目的pom文件，添加如下配置：
+>	
 
-* 	**如何连接Cloud Code项目与应用**
+### 2.	配置Cloud Code项目
 
-	>	1. 打开项目中的global.json文件（/src/main/resources/config/global.json）
+* 	**如何连接LAS应用与Cloud Code项目**
+
+	>	1.	在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 	>
 	>		```java
 	>		{
@@ -117,45 +111,161 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 	>
 	>		```
 	>
-	>	2. 根据创建应用时获取的key，修改下列键的值：
+	>	根据创建应用时获取的key，修改下列键的值：
 	>	
 	>	 键|值|
 	>  	 ------------|-------|
 	>	 applicationName|应用名称
 	>	 applicationId|Application ID
 	>	 applicationKey|Master Key
+	>
+	>	2. 打开Maven项目的pom文件，添加如下配置：
+	>	
+	>	
+	>	```Java
+	>	<properties>
+	        <nexus.develop.host>10.10.10.137:8081</nexus.develop.host>
+	        <nexus.production.host>54.164.163.132:8081</nexus.production.host>
+	    </properties>
+	>
+	    <repositories>
+	        <repository>
+	            <id>public</id>
+	            <name>Public Repositories</name>
+	            <url>http://${nexus.develop.host}/nexus/content/groups/public</url>
+	        </repository>
+	        <repository>
+	            <id>releases</id>
+	            <name>Internal Releases</name>
+	            <url>http://${nexus.develop.host}/nexus/content/repositories/releases</url>
+	        </repository>
+	        <repository>
+	            <id>snapshots</id>
+	            <name>Internal Releases</name>
+	            <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
+	        </repository>
+	    </repositories>
+	>
+	    <pluginRepositories>
+	        <pluginRepository>
+	            <id>public</id>
+	            <name>Public Repositories</name>
+	            <url>http://${nexus.develop.host}/nexus/content/groups/public</url>
+	        </pluginRepository>
+	    </pluginRepositories>
+	>
+	    <profiles>
+	        <profile>
+	            <id>dev</id>
+	            <distributionManagement>
+	                <repository>
+	                    <id>releases</id>
+	                    <name>Internal Releases</name>
+	                    <url>http://${nexus.develop.host}/nexus/content/repositories/releases</url>
+	                </repository>
+	                <snapshotRepository>
+	                    <id>snapshots</id>
+	                    <name>Internal Releases</name>
+	                    <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
+	                </snapshotRepository>
+	            </distributionManagement>
+	        </profile>
+	        <profile>
+	            <id>pro</id>
+	            <distributionManagement>
+	                <repository>
+	                    <id>releases</id>
+	                    <name>Internal Releases</name>
+	                    <url>http://${nexus.production.host}/content/repositories/releases</url>
+	                </repository>
+	                <snapshotRepository>
+	                    <id>snapshots</id>
+	                    <name>Internal Releases</name>
+	                    <url>http://${nexus.production.host}/content/repositories/snapshots</url>
+	                </snapshotRepository>
+	            </distributionManagement>
+	        </profile>
+	    </profiles>
+	>
+	    <dependencies>
+	    <dependency>
+	        <groupId>com.ilegendsoft</groupId>
+	        <artifactId>cloud-code-test-framework</artifactId>
+	        <version>2.2.1-SNAPSHOT</version>
+	    </dependency>
+	        <dependency>
+	            <groupId>junit</groupId>
+	            <artifactId>junit</artifactId>
+	            <version>4.11</version>
+	            <scope>test</scope>
+	        </dependency>
+	    </dependencies>
+	>
+	> 
+	    <build>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-dependency-plugin</artifactId>
+	                <executions>
+	                    <execution>
+	                        <id>copy-mod-dependencies-to-target</id>
+	                        <phase>process-classes</phase>
+	                        <goals>
+	                            <goal>copy-dependencies</goal>
+	                        </goals>
+	                        <configuration>
+	                            <outputDirectory>target/lib</outputDirectory>
+	                            <includeScope>compile</includeScope>
+	                        </configuration>
+	                    </execution>
+	                </executions>
+	            </plugin>
+	            <plugin>
+	                <artifactId>maven-assembly-plugin</artifactId>
+	                <configuration>
+	                    <descriptors>
+	                        <descriptor>src/main/assembly/mod.xml</descriptor>
+	                    </descriptors>
+	                </configuration>
+	                <executions>
+	                    <execution>
+	                        <id>assemble</id>
+	                        <phase>package</phase>
+	                        <goals>
+	                            <goal>single</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+	            </plugin>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-compiler-plugin</artifactId>
+	                <version>3.0</version>
+	                <configuration>
+	                    <source>1.8</source>
+	                    <target>1.8</target>
+	                </configuration>
+	            </plugin>
+	        </plugins>
+	    </build>
+	    ```
+	>	
+		  **使用时需注意：** 
+		> 1.	LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。[点击此处](...)进入创建应用教程。
 
-## 简介
-**Cloud Code愿景：**
 
-1. 	业务独立：
-	客户端只获得所需结果，将业务逻辑的计算和实现移至云端，独立实现，独立维护。
-	
-	优势：
-	> * 更合理的App技术架构，提高App与后端服务的通信效率 ([点我了解详情](...))
-	> * 独立修改，云端部署，避免牵一发而动全身造成的低效和浪费
-	> * 用户无需安装新版本，即可享受新功能
-	> * 利用云计算，确保应用具有高计算能力
+## 样例项目
 
-2. 	定时任务：
-	如数据库定期清理，或者定期向用户推送消息。
-	
-	优势：
-	> * 一键设置，自动运行
-	> * 实时监控任务的运行状态
+您可以通过样例项目*Hello World*了解Cloud Code的“开发，上传，部署，测试”过程。
 
-**Cloud Code功能：**
+#### 1. 开发
 
 
 
-	Function和Job均可通过API调用方式启用：
-	
-	Cloud Code服务|API地址|请求方式|
-	------------|-------|------|
-	function|/functions/{name}|POST|
-	job|/jobs/{name}|POST|
-	config|/console/config|GET|
-	jobNames|/console/jobNames|GET|
+#### 2. 上传及部署
+
+#### 3. 测试
 
 ## Cloud Function
 
