@@ -6,15 +6,17 @@ These are the markdown sources for all of the [platform docs](https://leap.as/en
 
 The docs are organized first by language, then by platform. Each platform directory contains a set of markdown files, one for each main section in the guide.
 
-    .
-    ├── {language}
-    │   └── {platform}
-    │   │   └── {section}
-    │   └── common
-    │       └── {section}
-    ├── .gitignore
-    ├── tokens.json
-    └── README.md
+	.
+	├── {language}
+	│   └── {platform}
+	│   │   └── {catgory}
+	│   │   │   └── {section}
+	│   └── Common
+	│   │   └── {catgory}
+	│   │   │   └── {section}
+	├── {images}
+	├── .gitignore
+	└── README.md
 
 For example, `/en/iOS/` contains all of sections for the iOS guide in English. You'll notice a `common` folder in each language. This folder contains content that is shared amongst all of the platforms. That helps us avoid duplicating content unnecessarily.
 
