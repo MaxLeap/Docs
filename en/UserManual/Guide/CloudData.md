@@ -3,7 +3,7 @@
 Push Notification is a push system powered by the notification system in your cell phone. In LAS, you can easily edit the content and send it to a certain group of people.
 
 <p class="image-wrapper">
-    ![Push Notification](/images/push.png)
+    ![Push Notification](/images/push.png?raw=true)
 
 <br />
 #### send push notification
