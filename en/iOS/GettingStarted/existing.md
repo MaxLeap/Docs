@@ -22,7 +22,7 @@ search: true
 	Make sure the "Copy items to destination's group folder" checkbox is checked.
 	
 	<p class="image-wrapper">
-	![](/images/drag_sdk_to_project.png)
+	![](../images/drag_sdk_to_project.png)
 
 3. Add the dependencies
 
@@ -30,12 +30,12 @@ search: true
 	Expand 'Link Binary With Libraries' as shown.
 	
 	<p class="image-wrapper">
-	![](/images/add_dependencies.png)
+	![](../images/add_dependencies.png)
 	
     Make sure "Enable Modules (C and Objective-C)" and "Link Frameworks Automatically" build settings are YES.
     
     <p class="image-wrapper">
-    ![](/images/enable_modules.png)
+    ![](../images/enable_modules.png)
     
 	Click the + button in the bottom left of the 'Link Binary With Libraries' section and add the following libraries:
 	
