@@ -756,7 +756,7 @@ LASFile *file = [LASFile fileWithName:@"resume.txt" data:data];
 Notice in this example that we give the file a name of `resume.txt`. There's two things to note here:
 
 - You don't need to worry about filename collisions. Each upload gets a unique identifier so there's no problem with uploading multiple files named `resume.txt`.
-- It's important that you give a name to the file that has a file extension. This lets LAS figure out the file type and handle it accordingly. So, if you're storing PNG images, make sure your filename ends with `.png?raw=true`.
+- It's important that you give a name to the file that has a file extension. This lets LAS figure out the file type and handle it accordingly. So, if you're storing PNG images, make sure your filename ends with `.png`.
 
 Next you'll want to save the file up to the cloud.
 
@@ -794,7 +794,7 @@ You can easily store images by converting them to `NSData` and then using `LASFi
 
 ```objective_c
 NSData *imageData = UIImagePNGRepresentation(image);
-LASFile *imageFile = [LASFile fileWithName:@"image.png?raw=true" data:imageData];
+LASFile *imageFile = [LASFile fileWithName:@"image.png" data:imageData];
  
 LASObject *userPhoto = [LASObject objectWithClassName:@"UserPhoto"];
 userPhoto[@"imageName"] = @"My trip to Hawaii!";
@@ -1163,7 +1163,7 @@ post[@"user"] = user;
 
 The User class is a special class that is dedicated to storing `LASUser` objects. In the data browser, you'll see a little person icon next to the User class:
 
-![](/images/user_icon.png?raw=true)
+![](/images/user_icon.png)
 
 ## Roles
 

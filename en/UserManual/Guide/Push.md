@@ -163,7 +163,7 @@ Setting up Push Notifications is often a source of frustration for developers. T
 
 
 [ios quick start]: ../../quickstart/ios/existing.html
-[tutorial_img_link]: /images/tutorial_link.png?raw=true
+[tutorial_img_link]: /images/tutorial_link.png
 [tutorial_link]: ../../ios_push_tutorial.html
 [ios guide #objects]: ../../docs/cloudData/ios.html#Objects
 [ios guide #query]: ../../docs/cloudData/ios.html#Queries

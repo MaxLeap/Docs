@@ -8,7 +8,7 @@ Segments refers to smaller subgroups, which are divided based on the same featur
 * Check if the retention rate is rising after the optimization towards iPhone 6 Plus.
 
 <p class="image-wrapper">
-	![Segment](/images/segment.png?raw=true)
+	![Segment](/images/segment.png)
 
 <br />
 Here are the details on how to use Segments.

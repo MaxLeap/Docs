@@ -4,7 +4,7 @@
 Many developers may encounter such circumstance that you have the need to change a figure in your program after the app is already available in the App Store. The revise can be easy enough while the app review may take as long as one week to upload it to the App Store. With Cloud Config, this situation will no longer exist. You can change a figure in LAS at anytime and your app will get this figure from cloud and edit the figure inside your app forthwith.
 
 <p class="image-wrapper">
-    ![Cloud Config](/images/cloudconfig.png?raw=true)
+    ![Cloud Config](/images/cloudconfig.png)
 
 <br />
 #### Click Add New Parameter in Cloud Config.

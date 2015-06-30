@@ -1,7 +1,7 @@
 ## App Issues
 
 <p class="image-wrapper">
-	![Issues](/images/issues.png?raw=true)
+	![Issues](/images/issues.png)
 
 <br />
 #### User submitted an app issue
@@ -13,7 +13,7 @@ FAQs can solve most problems for users, but there must be some situations that t
 The issues come from the App are available in App Issues in LAS Console, which can be divided into four categories: New Issues, Open Issues, Closed Issues and All Issues. The issues will be placed in New Issues firstly and then the Open Issues after you replied it. This issue will end up in the Close Issues when you solved the problem or just couldn’t figure it out. The three categories we just mentioned are all available in All Issues.
 
 <p class="image-wrapper">
-	![Issues Mobile](/images/issue_mobile.png?raw=true)
+	![Issues Mobile](/images/issue_mobile.png)
 	
 <br />
 <br />

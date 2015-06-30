@@ -4,7 +4,7 @@
 ## 	**什么是Cloud Code服务**
 Cloud Code的使命是帮助您在云端实现业务逻辑，使LAS应用具备快速，高效地实现复杂业务逻辑的能力。
 <p class="image-wrapper">
-[imgWhatsCloudCode](/images/imgWHATSCloudCode.png?raw=true)
+[imgWhatsCloudCode](/images/imgWHATSCloudCode.png)
 
 我们提供的服务模块有：
 
@@ -29,7 +29,7 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 
 	> 1. 	在Dashboard中，点击**创建应用**，填写App信息：
 			<p class="image-wrapper">
-			![imgCreateAppInfo](/images/imgCreateAppInfo.png?raw=true)
+			![imgCreateAppInfo](/images/imgCreateAppInfo.png)
 
 	>  创建App需提供：
 	>>* 应用名称，平台，默认语言
@@ -39,11 +39,11 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 	>
 	>  创建应用后，点击确认，我们便可获取密钥：
 	>  <p class="image-wrapper">
-	  ![imgCreateAppFinish](/images/imgCreateAppFinish.png?raw=true)
+	  ![imgCreateAppFinish](/images/imgCreateAppFinish.png)
 	>		
 	>  我们也可在App Settings中获取密钥：
 	>  <p class="image-wrapper">
-			![imgCreateAppGetKey](/images/imgCreateAppGetKey.png?raw=true)
+			![imgCreateAppGetKey](/images/imgCreateAppGetKey.png)
 	>
 	>  Cloud Code将使用到的KEY的类型包括：
 	>>* Application ID
@@ -75,11 +75,11 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 		>	2. 进入项目模板根目录，选择“pom.xml”
 		>
 		>	 	<p class="image-wrapper">
-		>		![imgAndroidStudioOpenPom](/images/imgAndroidStudioOpenPom.png?raw=true)
+		>		![imgAndroidStudioOpenPom](/images/imgAndroidStudioOpenPom.png)
 		>	3. 按照默认配置点击下一步，直到完成 
 		>
 		>	 	<p class="image-wrapper">
-		>		![imgAndroidStudioOpenPomFinish](/images/imgAndroidStudioOpenPomFinish.png?raw=true)
+		>		![imgAndroidStudioOpenPomFinish](/images/imgAndroidStudioOpenPomFinish.png)
 
 	* 	**Eclipse** （需要安装Maven插件）
 
@@ -88,7 +88,7 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 		>	3. 选择 "???" -> "???"
 		>
 		>	 	<p class="image-wrapper">
-		>		![imgEclipseImportMaven](/images/imgEclipseImportMaven.png?raw=true)
+		>		![imgEclipseImportMaven](/images/imgEclipseImportMaven.png)
 		>	3. ????		
 	
 	  **使用时需注意：** 
@@ -174,7 +174,7 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 * 使用Cloud Function：
 > 1.	Schedule Job时调用。可直接选择部署在云端的Cloud Function，作为运行Job的运行目标函数
 > <p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png?raw=true)
+	![imgScheduleJobs](/images/imgScheduleJobs.png)
 >
 > 2.	通过API调用
 > 
@@ -206,7 +206,7 @@ LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务
 * 使用Job：
 > *	在Console中手动运行Job
 >	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png?raw=true)
+	![imgScheduleJobs](/images/imgScheduleJobs.png)
 >
 > *	通过API调用
 >
@@ -348,11 +348,11 @@ LAS Cloud Code SDK 提供了Console类用来记录日志，你可以在Main, Hoo
 > *	在Cloud Code中添加Log:
 > 
 >	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png?raw=true)
+	![imgScheduleJobs](/images/imgScheduleJobs.png)
 > *	在Console中查看Log:
 > 
 >	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png?raw=true)
+	![imgScheduleJobs](/images/imgScheduleJobs.png)
    
    	使用Log需注意:
 

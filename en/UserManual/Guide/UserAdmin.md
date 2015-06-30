@@ -3,7 +3,7 @@
 LAS supports Users with different Roles in their accounts. You can make such settings in User Admin.
 
 <p class="image-wrapper">
-	![User Management](/images/usermanagement.png?raw=true)
+	![User Management](/images/usermanagement.png)
 
 #### Create a new User
 Firstly, please click the Create User in Users interface of User Admin, then fill the detailed information of this user in the coming page, including Username, Email Address, Password, Role and App. The Role refers to this user’s authorities, which will be introduced extensively in the following sections. The App refers to the app list which allows users to visit.
