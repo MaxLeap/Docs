@@ -32,14 +32,12 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 >
 * 	**什么是LAS Cloud Code Java项目模板**
 >	
-	LAS Cloud Code项目模板是利用Maven构建的Java项目。
-	* 架构
-  	* 测试项目
+	LAS Cloud Code项目模板是利用Maven构建的Java项目，预设的配置文件结构及对LAS Cloud Code服务的引用皆已完成。我们只需完成*“连接LAS项目”*的配置，即可开始Cloud Code的开发与部署。
 >
 * 	**如何获取LAS Cloud Code Java项目模板**
-  	* Git命令获取
+>
+	Git命令获取
 		`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
-  	* 其他下载渠道：[Java Template Project](http://www.baidu.com)
 >
 * 	**如何使用LAS Cloud Code Java项目模板**
 >
@@ -47,23 +45,12 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 >
 		>	1. 打开Android Studio，点击“Import project”
 		>	2. 进入项目模板根目录，选择“pom.xml”
-		>
-		>	 	<p class="image-wrapper">
-		>		![imgAndroidStudioOpenPom](/images/imgAndroidStudioOpenPom.png)
 		>	3. 按照默认配置点击下一步，直到完成 
-		>
-		>	 	<p class="image-wrapper">
-		>		![imgAndroidStudioOpenPomFinish](/images/imgAndroidStudioOpenPomFinish.png)
 >
-	* 	**Eclipse** （需要安装Maven插件）
+	* 	**IntelliJ**
 >
-		>	1. 将项目模板（cloud-code-template-java文件夹）移至您的Eclipse Workspace中（若直接获取至此目录中，请忽略该步）
-		>	2.	打开Eclipse，点击 "File" -> "Import..."
-		>	3. 选择 "???" -> "???"
-		>
-		>	 	<p class="image-wrapper">
-		>		![imgEclipseImportMaven](/images/imgEclipseImportMaven.png)
-		>	3. ????		
+		>	1.	打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
+		>	2. 进入项目模板根目录，选择“pom.xml”
 >	
 	  **使用时需注意：** 
 	> 1.	第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
@@ -86,8 +73,6 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 >	  **使用时需注意：** 
 	> 1.	这个依赖包含了基础的SDK客户端和本地单元测试框架
 >
->	*	打开Maven项目的pom文件，添加如下配置：
->	
 
 ### 2.	配置Cloud Code项目
 
@@ -97,15 +82,14 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>
 	>		```java
 	>		{
-	>		    "applicationName" : "helloword",              //应用名称
-	>		    "applicationId": "YOUR_APPLICATION_ID",       //应用ID
-	>		    "applicationKey": "YOUR_MASTER_KEY",          //应用master-key
-	>		    "lang" : "java",                              //cloudcode开发语言，支持多种语言
-	>		    "java-main": "Main",                          //cloudcode主程序入口
-	>		    "package-hook" : "hook",                      //hook目录
-	>		    "package-entity" : "bean",                    //Class实体目录
-	>		    "global": {                                   //其他参数配置
-	>		    "zVersion": "0.2.1"                           //cloudcode当前版本  ??需要修改么??
+	>		    "applicationName" : "helloword",             
+	>		    "applicationId": "YOUR_APPLICATION_ID",      	>		    "applicationKey": "YOUR_MASTER_KEY",         
+	>		    "lang" : "java",                             
+	>		    "java-main": "Main",                        
+	>		    "package-hook" : "YOUR_HOOK_DIR",                  
+	>		    "package-entity" : "YOUR_ENTITY_DIR",                  
+	>		    "global": {                                  
+	>		    "zVersion": "0.2.1"                           ??需要修改么??
 	>		    }
 	>		}
 	>
@@ -115,11 +99,15 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>	
 	>	 键|值|
 	>  	 ------------|-------|
-	>	 applicationName|应用名称
+	>	 applicationName|LAS应用名称
 	>	 applicationId|Application ID
 	>	 applicationKey|Master Key
+	>	 package-hook|Hook目录
+	>	 package-entity|Class实体目录
 	>
-	>	2. 打开Maven项目的pom文件，添加如下配置：
+	>	2. 配置测试及打包插件：（模板项目中已配置好，可略过此步）
+	>	
+	>	打开Maven项目的pom文件，添加如下配置：
 	>	
 	>	
 	>	```Java
@@ -251,42 +239,193 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	    </build>
 	    ```
 	>	
+	>	3.	配置（模板项目中已配置好，可略过此步）
+	>	
+	>	在/src/main/assembly（请确保此路径存在）中新建mod.xml文件，并在其中添加如下配置：
+	>	
+	>	```Java
+>	<?xml version="1.0" encoding="UTF-8"?>
+	<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+>
+	    <id>mod</id>
+	    <formats>
+	        <format>zip</format>
+	    </formats>
+	    <includeBaseDirectory>false</includeBaseDirectory>
+	    <fileSets>
+	        <fileSet>
+	            <outputDirectory>/config</outputDirectory>
+	            <directory>src/main/resources/config</directory>
+	            <includes>
+	                <include>**</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/public</outputDirectory>
+	            <directory>src/main/resources/public</directory>
+	            <includes>
+	                <include>**</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/lib</outputDirectory>
+	            <directory>target</directory>
+	            <includes>
+	                <include>${project.artifactId}-${project.version}.jar</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/lib</outputDirectory>
+	            <directory>target/lib</directory>
+	            <excludes>
+	                <exclude>jackson-*.jar</exclude>
+	                <exclude>vertx-*.jar</exclude>
+	                <exclude>log4j-*.jar</exclude>
+	                <exclude>slf4j-*.jar</exclude>
+	                <exclude>cloud-code-base-*.jar</exclude>
+	                <exclude>cloud-code-sdk-client-*.jar</exclude>
+	                <exclude>cloud-code-test-framework-*.jar</exclude>
+	                <exclude>netty-*.jar</exclude>
+	                <exclude>rxBus-*.jar</exclude>
+	                <exclude>rxjava-*.jar</exclude>
+	                <exclude>sun-client-api-*.jar</exclude>
+	                <exclude>hazelcast-*.jar</exclude>
+	                <exclude>junit-*.jar</exclude>
+	            </excludes>
+	        </fileSet>
+	    </fileSets>
+>	</assembly>
+	>	```
+	>
+	>	
+>	
 		  **使用时需注意：** 
 		> 1.	LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。[点击此处](...)进入创建应用教程。
 
 
-## 样例项目
 
-您可以通过样例项目*Hello World*了解Cloud Code的“开发，上传，部署，测试”过程。
+## 样例项目 － 开发，部署，测试
+
+您可以通过样例项目*Hello World*的实现，了解Cloud Code的“开发，打包，上传，部署，测试”的全过程。 (Hello World函数将实现一个简单的功能：将用户输入的Key-Value数据显示出来。)
 
 #### 1. 开发
+完成上述配置步骤之后，我们便可以向Main函数中定义我们的Cloud Function了：
 
+```Java
+import as.leap.code.LASLoader;
+import as.leap.code.Response;
+import as.leap.code.impl.GlobalConfig;
+import as.leap.code.impl.LASLoaderBase;
+import as.leap.code.impl.ZResponse;
 
+public class Main extends LASLoaderBase implements LASLoader {
+    @Override
+    public void main(GlobalConfig globalConfig) {
+    
+    //定义Cloud Function
+        defineFunction("HelloWorld", request -> {
+            Response<String> response = new ZResponse<String>(String.class);
+            response.setResult(request.parameter(String.class));
+            return response;
+        });
+    }
+}
+```
+> **需注意：** 
+>
+1.	Main函数需要继承LASLoaderBase并实现LASLoader接口
 
-#### 2. 上传及部署
+#### 2. 打包
 
-#### 3. 测试
+在IDE的Terminal中运行Maven命令：
+
+`mvn package -Dmaven.test.skip=true`
+
+我们将在项目根目录下的target文件夹中发现 xxx-1.0-SNAPSHOT-mod.zip 文件，这便是我们想要的package.
+
+#### 3. 上传及部署
+
+>	1. 	获取Cloud Code命令行工具 LASCC 
+>	2.	用LASCC工具，上传Cloud Code
+> 
+>>	1.	登录
+>>
+>>	命令： `lascc login <UserName>`
+>>
+>>	2.	选择所要部署的目标应用，作为后续操作的上下文
+>>
+>>	命令： `lascc use <AppName>`
+>>
+>>	3.	上传package
+>>
+>>	命令： `lascc upload <PackagePath>`
+>>	
+>>	package上传到Leap Cloud后，将会被制作成Docker image
+>
+>	3.	用LASCC工具，部署Cloud Code
+>
+>>	1.	登录并选择目标应用
+>>
+>>	2.	启动Docker image
+>>
+>>	命令： `lascc deploy <VersionNumber>`
+>>
+>>	注：这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（zVersion字段的值）；您还可以通过`lascc lv`命令，获取该应用下所有Cloud Code的版本号
+
+#### 4. Curl测试
+
+通过Curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
+
+```shell
+curl -X POST \
+-H "X-ZCloud-AppId: YOUR_APPID" \
+-H "X-ZCloud-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+-d '{"Life":"isBecomingEasier"}' \
+http://10.10.10.176:8080/functions/HelloWorld
+```
+此时，我们将得到如下结果：
+
+```shell
+{"Life":"isBecomingEasier"}
+```
+说明部署成功
 
 ## Cloud Function
 
-* 定义Cloud Function：
->1.	进入主程序入口(main函数)
->2.	使用defineFunction来定义你的Function
->
-  ``` java
-	  defineFunction("hello", request -> {
-	      Response<String> response = new ZResponse<String>(String.class);
-	      response.setResult(request.parameter(String.class));
-	      return response;
-	  });
-  ```
+* 	Cloud Function简介：
 
-* 使用Cloud Function：
-> 1.	Schedule Job时调用。可直接选择部署在云端的Cloud Function，作为运行Job的运行目标函数
-> <p class="image-wrapper">
+	在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。除此之外，Cloud Code SDK还支持对Cloud Data的使用。
+>	
+>	Cloud Data使用范例
+>
+>	* 定义Class
+>
+>>	1.	新建一个Class，并继承ZCloudObject类
+>>
+>>	```java
+	public class MyObject extends ZCloudObject {
+	    	private String name;
+		    public String getName() {
+		        return name;
+		    }
+		    public void setName(String name) {
+		        this.name = name;
+		    }
+		}
+	```
+>	
+>
+
+* 	使用Cloud Function：
+
+> 	1.	Schedule Job时调用。可直接选择部署在云端的Cloud Function，作为运行Job的运行目标函数
+> 	<p class="image-wrapper">
 	![imgScheduleJobs](/images/imgScheduleJobs.png)
 >
-> 2.	通过API调用
+> 	2.	通过API调用
 > 
   ```shell
 	curl -X POST \
@@ -328,7 +467,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	   	http://10.10.10.176:8080/jobs/helloJob
    ```
 
-## Cloud Data ?
+## 使用Cloud Data ?
 
 *	定义Class：
 
