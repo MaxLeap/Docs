@@ -18,7 +18,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 ####	**Cloud Code如何工作**
 
 <p class="image-wrapper">
-![imgWhatsCloudCode](../../../Images/imgCloudCodeWorkflow.png)
+![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
 一个Cloud Code项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用Cloud Code命令行工具lcc上传到Leap Cloud，Leap Cloud会生成对应的docker image。用lcc deploy可以让Leap Cloud启动Docker container运行该Docker image。
 
