@@ -5,15 +5,15 @@ These are the markdown sources for all of the [platform docs](https://leap.as/en
 ## Repository Structure
 
 The docs are organized first by language, then by platform. Each platform directory contains a set of markdown files, one for each main section in the guide.
-
+	
 	.
 	├── {language}
 	│   └── {platform}
 	│   │   └── {catgory}
 	│   │   │   └── {section}
 	│   └── Common
-	│   │   └── {catgory}
-	│   │   │   └── {section}
+	│       └── {catgory}
+	│           └── {section}
 	├── {images}
 	├── .gitignore
 	└── README.md
@@ -22,7 +22,7 @@ For example, `/en/iOS/` contains all of sections for the iOS guide in English. Y
 
 ## How Do I Contribute?
 
-If you have any fixes or suggestions, simply send us a pull request! The [documentation](https://leap.as/en_us/docs/overview.html) will be regenerated from master as needed.
+If you have any fixes or suggestions, simply send us a pull request! The [documentation](https://leap.as/en_us/docs/overview.html) will be regenerated from master as needed.Please refer to [Contributing to LAS Docs](https://github.com/LeapAppServices/LAS-Docs/blob/master/CONTRIBUTING.md).
 
 ## Can I Access The Docs Offline?
 
