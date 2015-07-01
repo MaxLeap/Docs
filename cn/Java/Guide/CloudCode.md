@@ -223,7 +223,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	    </build>
 	    ```
 	>	
-	>	3.	配置（模板项目中已配置好，可略过此步）
+	>	3.	配置打包规则（模板项目中已配置好，可略过此步）
 	>	
 	>	在/src/main/assembly（请确保此路径存在）中新建mod.xml文件，并在其中添加如下配置：
 	>	
@@ -285,8 +285,9 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>
 	>	
 >	
-		  **使用时需注意：** 
-		> 1.	LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。[点击此处](...)进入创建应用教程。
+>	**使用时需注意：** 
+>
+>	LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。[点击此处](...)进入创建应用教程。
 
 
 
@@ -383,18 +384,18 @@ http://10.10.10.176:8080/functions/HelloWorld
 
 	Cloud Function是您使用Cloud Code的一个入口，通过它，我们可以使用定义在Cloud Code中的业务逻辑。
 		
-	**为什么您需要Cloud Function：**
+	*	**为什么您需要Cloud Function：**
 	
-	Cloud Function能很好地满足如下需求：
-	*	不同平台，不同应用之间共享业务逻辑
-	* 	用户无需更新即可享用新功能：独立于客户端部署及维护
-	*	减少客户端网络流量及运算负荷
+		Cloud Function能很好地满足如下需求：
+		*	不同平台，不同应用之间共享业务逻辑
+		* 	用户无需更新即可享用新功能：独立于客户端部署及维护
+		*	减少客户端网络流量及运算负荷
 	
 * 	**创建和使用Cloud Function：**
 	
 	Cloud Code可由三部分构成：Cloud Code SDK，Custom Code以及3rd Party Lib。在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。这个部分，我们将向您介绍如何通过Cloud Function使用Cloud Code SDK。
 >	
->	在Cloud Function中访问Cloud Data
+>	**在Cloud Function中访问Cloud Data**
 >
 >	* 定义Cloud Data Object（在管理界面中，称之为“Class”）
 >
@@ -506,17 +507,19 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 		http://10.10.10.176:8080/jobs/YOUR_JOBNAME
 	```
 
-## Hook
+## Hook for Cloud Data
 
-*	Hook简介
->	如果说Cloud Data是一座仓库，那么Hook就是门卫：对Cloud Data Object的所有操作（新建）
->
->	Background Job可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。
+*	**Hook简介**
 
-* 定义Hook：
->1.	实现ZEntityManagerHook接口(建议直接继承ZEntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
->
->```java
+	如果说Cloud Data是一座仓库，那么Hook就是仓库管理员。用户对Cloud Data Object进行任何操作时（包括新建，删除及修改），Hook都可在其之前或之后，进行特定的操作。
+
+	例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
+
+*	**创建和使用Hook：**
+	
+	实现ZEntityManagerHook接口(建议直接继承ZEntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
+
+	```java
 	  @EntityManager("MyObject")
 	  public class MyObjectHook extends ZEntityManagerHookBase<MyObject> {
 	      @Override
@@ -548,29 +551,55 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 
    	定义Hook需注意：
 
-	>* Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
-	>* 所有Hook必须在同一个package下，并在global.json配置中标注该选项，如下：
-	> `"package-hook" : "hook"`
-	>* 内建Collection和自定义Collection均支持Hook，内建Collection原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
+	>* 	Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
+	>*	须将自定义实体放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
+	>* 	须配置global.json文件以识别该package，如：
+	> 	`"package-hook" : "hook"`
+	>* 	内建Collection和自定义Collection均支持Hook，内建Collection原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
    
 	
 ## Log
 
-LAS Cloud Code SDK 提供了Console类用来记录日志，你可以在Main, Hook, Handler中使用它。目前我们提供Info, Warn, Error三个级别
+*	**Log简介**
 
-* 使用Log:
-> *	在Cloud Code中添加Log:
-> 
->	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png)
-> *	在Console中查看Log:
-> 
->	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png)
-   
+	Cloud Code提供Log功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理门户中查看所有的日志。
+
+* 	**在Cloud Code中记录Log**:
+
+	1.	在项目主入口Main函数中，获取Logger实例
+	2. 在Main/Hook/Handler等package的函数中，您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+	
+	```java
+		public class Main extends LASLoaderBase implements LASLoader {
+			Logger logger = LoggerFactory.getLogger(Main.class);
+    		public void myMethod(){
+        		logger.error("Oops! Error, got you!");
+        		logger.warn("I'm Warning");
+        		logger.info("I'm Information");
+    		}
+		}
+	```	
    	使用Log需注意:
 
 	>*	本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
 	>*	如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
 	>*	在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
+	
+* 	**系统自动记录的Log**:
+	
+	除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
+	
+	>*	本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
+	>*	如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
+	>*	在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
+	
+*	**如何查看查看Log**:
+
+   进入“管理门户”，点击“开发者中心”－“日志”，您便可查看该应用的所有日志。
+   
+   img
+   
+   您还可通过切换Error，Warn和Info选项，来查看不同类型的日志。
+   
+
 	
