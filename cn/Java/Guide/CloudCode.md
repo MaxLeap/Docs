@@ -755,7 +755,7 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 		lascc deploy <版本号>
 		```
 
-		`<版本号>`为如zcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloude Code；如果部署不存在的版本，会提示错误："version of appId not exists"
+		`<版本号>`为如zcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloud Code；如果部署不存在的版本，会提示错误："version of appId not exists"
 
  	7.	停止cloudcode：
 	
