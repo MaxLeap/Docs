@@ -81,18 +81,17 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>	1.	在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 	>
 	>		```java
-	>		{
-	>		    "applicationName" : "helloword",             
-	>		    "applicationId": "YOUR_APPLICATION_ID",      	>		    "applicationKey": "YOUR_MASTER_KEY",         
-	>		    "lang" : "java",                             
-	>		    "java-main": "Main",                        
-	>		    "package-hook" : "YOUR_HOOK_DIR",                  
-	>		    "package-entity" : "YOUR_ENTITY_DIR",                  
-	>		    "global": {                                  
-	>		    "zVersion": "0.2.1"                           ??需要修改么??
-	>		    }
-	>		}
-	>
+			{
+			    "applicationName" : "helloword",             
+			    "applicationId": "YOUR_APPLICATION_ID",      			    "applicationKey": "YOUR_MASTER_KEY",         
+			    "lang" : "java",                             
+			    "java-main": "Main",                        
+			    "package-hook" : "YOUR_HOOK_DIR",                  
+			    "package-entity" : "YOUR_ENTITY_DIR",                  
+			    "global": {                                  
+			    "zVersion": "0.0.1"
+			    }
+			}
 	>		```
 	>
 	>	根据创建应用时获取的key，修改下列键的值：
@@ -104,7 +103,8 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>	 applicationKey|Master Key
 	>	 package-hook|Hook目录
 	>	 package-entity|Class实体目录
-	>
+	>	 zVersion|当前Cloud Code项目版本号
+	>	
 	>	2. 配置测试及打包插件：（模板项目中已配置好，可略过此步）
 	>	
 	>	打开Maven项目的pom文件，添加如下配置：
