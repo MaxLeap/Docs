@@ -7,7 +7,7 @@
 Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
 
-####    **为何您需要Cloud Code服务**
+####	**为何您需要Cloud Code服务**
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助Cloud Code实现。Cloud Code有如下优势：
 
@@ -32,7 +32,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 >
 * 	**什么是LAS Cloud Code Java项目模板**
 >	
-	LAS Cloud Code项目模板是利用Maven构建的Java项目，预设的配置文件结构及对LAS Cloud Code服务的引用皆已完成。我们只需完成*“连接LAS项目”*的配置，即可开始Cloud Code的开发与部署。
+	LAS Cloud Code项目模板是利用Maven构建的Java项目，预设的文件结构，项目配置及对LAS Cloud Code服务的引用皆已完成。我们只需完成*“连接LAS项目”*的配置，即可开始Cloud Code的开发与部署。
 >
 * 	**如何获取LAS Cloud Code Java项目模板**
 >
@@ -60,7 +60,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 >
 * 	**如何获取LAS Cloud Code Java SDK**
 >
->	*	打开Maven项目的pom文件，添加如下依赖：
+>	打开Maven项目的pom文件，添加如下依赖：
 >	
 	```Java
 	<dependency>
@@ -71,7 +71,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	```
 >	
 >	  **使用时需注意：** 
-	> 1.	这个依赖包含了基础的SDK客户端和本地单元测试框架
+>	这个依赖包含了基础的SDK客户端和本地单元测试框架
 >
 
 ### 2.	配置Cloud Code项目
@@ -335,13 +335,13 @@ public class Main extends LASLoaderBase implements LASLoader {
 ```
 > **需注意：** 
 >
-1.	Main函数需要继承LASLoaderBase并实现LASLoader接口
+Main函数需要继承LASLoaderBase并实现LASLoader接口
 
 #### 2. 打包
 
-在IDE的Terminal中运行Maven命令：
+在IDE的Terminal（当前项目根目录）中运行Maven命令：
 
-`mvn package -Dmaven.test.skip=true`
+`mvn package`
 
 我们将在项目根目录下的target文件夹中发现 xxx-1.0-SNAPSHOT-mod.zip 文件，这便是我们想要的package.
 
@@ -391,21 +391,22 @@ http://10.10.10.176:8080/functions/HelloWorld
 ```shell
 {"Life":"isBecomingEasier"}
 ```
-说明部署成功
+表明测试通过，部署成功。
 
 ## Cloud Function
 
 * 	Cloud Function简介：
-
-	在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。除此之外，Cloud Code SDK还支持对Cloud Data的使用。
+	
+	
+	Cloud Code可由三部分构成：Custom Code，Cloud Code SDK以及3rd Party Lib。在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。这个部分，我们将向您介绍如何在Cloud Function中使用Cloud Code SDK。
 >	
->	Cloud Data使用范例
+>	在Cloud Function中访问Cloud Data
 >
->	* 定义Class
+>	* 定义Cloud Data Object（在管理界面中，称之为“Class”）
 >
->>	1.	新建一个Class，并继承ZCloudObject类
->>
->>	```java
+>	新建一个Cloud Data Object，并继承ZCloudObject类
+>
+>	```java
 	public class MyObject extends ZCloudObject {
 	    	private String name;
 		    public String getName() {
@@ -417,136 +418,100 @@ http://10.10.10.176:8080/functions/HelloWorld
 		}
 	```
 >	
+>	定义Cloud Data Object需注意：
+>>	
+>>*	一个Class实体对应后端数据库中的一张表
+>>*	须将自定义实体放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
+>>*	须配置global.json文件以识别该package，如：
+>>	`"package-entity" : "data"`
+>>* 每张表初始化后都会自动产生几个默认的字段如objectId、createdAt、updatedAt、ACL
 >
-
-* 	使用Cloud Function：
-
-> 	1.	Schedule Job时调用。可直接选择部署在云端的Cloud Function，作为运行Job的运行目标函数
-> 	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png)
+>	* Cloud Data Object的CRUD
 >
-> 	2.	通过API调用
-> 
-  ```shell
-	curl -X POST \
-   -H "X-ZCloud-AppId: *YOUR_APPID*" \
-   -H "X-ZCloud-APIKey: *YOUR_APIKEY*" \
-   -H "Content-Type: application/json" \
-   -d '{"name":"HanMeimei"}' \
-   http://10.10.10.176:8080/functions/hello
-   ```
-  
-## Job
-
-* 定义Job：
->1.	进入主程序入口(main函数)
->2.	使用defineJob来定义Job
->	
->
-  ``` java
-  defineJob("helloJob", request -> {
-      Response response = new ZResponse(String.class);
-      response.setResult("hello job");
-      return response;
-  });
-  ```
-> 或者，您可移步至*Console引导*，获取在console中定义Job的方法，以及如何查看Job的运行状态。
-
-* 使用Job：
-> *	在Console中手动运行Job
->	<p class="image-wrapper">
-	![imgScheduleJobs](/images/imgScheduleJobs.png)
->
-> *	通过API调用
->
-	```shell
-		curl -X POST \
-	   	-H "X-ZCloud-AppId: *YOUR_APPID*" \
-	   	-H "X-ZCloud-APIKey: *YOUR_APIKEY*" \
-	   	-H "Content-Type: application/json" \
-	   	http://10.10.10.176:8080/jobs/helloJob
-   ```
-
-## 使用Cloud Data ?
-
-*	定义Class：
-
-	>1.	新建一个Class
-	>2.	继承自`ZCloudObject`对象
-	>
-	```java
-	public class MyObject extends ZCloudObject {
-	    	private String name;
-		    public String getName() {
-		        return name;
-		    }
-		    public void setName(String name) {
-		        this.name = name;
-		    }
-		}
-	```
-> 或者，您可移步至*Console引导*，获取在console中定义Class的方法。
-
-	
-	定义Class需注意：
->* 一个Class实体对应后端数据库中的一张表
->* 每张表初始化后都会自动产生几个默认的字段如objectId、createdAt、updatedAt、ACL
->* 所有自定义实体必须在同一个package下，并在global.json配置中标注该package选项，如下：
->	`"package-entity" : "bean"`
-	
-	
-* 使用Class：
-
-	>1. 新建一个函数（包含业务逻辑）实现ZHandler
-	>2. 注册服务接口
-	
-	```java
-	//业务逻辑
-	public class MyHandler {
-		private static final Logger LOGGER = LoggerFactory.getLogger(MyHandler.class);
-		public ZHandler<Request, Response> helloMyObject() {
+>	```java
+	public void MyObjectManager(){
 			ZEntityManager<MyObject> myObjectZEntityManager = ZEntityManagerFactory.getManager(MyObject.class);
-			return request -> {
-				MyObject obj = request.parameter(MyObject.class); //????
-				String name = obj.getName();
-				//新增Object
-				SaveResult<MyObject> saveMsg = myObjectZEntityManager.create(obj);
-				String objObjectId = saveMsg.getSaveMessage().objectId().toString();
-				//复制Object
-				obj.setName(name + "_" + 2);
-				SaveResult<MyObject> cloneSaveMsg = myObjectZEntityManager.create(obj);
-				//查询Object
-				LASQuery sunQuery = LASQuery.instance();
-				sunQuery.equalTo("name", name + "_" + 2);
-				FindMsg<MyObject> findMsg = myObjectZEntityManager.find(sunQuery);
-				MyObject newObj = findMsg.results().get(0);
-				//更新Object
-				LASUpdate update = LASUpdate.getUpdate();
-				update.set("name", name + "_new");
-				UpdateMsg updateMsg = myObjectZEntityManager.update(newObj.objectIdString(), update);
-				//删除Object
-				DeleteResult deleteResult = ninjaZEntityManager.delete(objObjectId);
-				//返回结果
-				Response<String> response = new ZResponse<>(String.class);
-				response.setResult(newObj.getName());
-				return response;
-			};
-		}
+			MyObject obj = new MyObject();
+			obj.setName("Awesome");
+			String name = obj.getName();
+>				
+			//新增Object
+			SaveResult<MyObject> saveMsg = myObjectZEntityManager.create(obj);
+			String objObjectId = saveMsg.getSaveMessage().objectId().toString();
+			//复制Object
+			obj.setName(name + "_" + 2);
+			SaveResult<MyObject> cloneSaveMsg = myObjectZEntityManager.create(obj);
+			//查询Object
+			LASQuery sunQuery = LASQuery.instance();
+			sunQuery.equalTo("name", name + "_" + 2);
+			FindMsg<MyObject> findMsg = myObjectZEntityManager.find(sunQuery);
+			MyObject newObj = findMsg.results().get(0);
+			//更新Object
+			LASUpdate update = LASUpdate.getUpdate();
+			update.set("name", name + "_new");
+			UpdateMsg updateMsg = myObjectZEntityManager.update(newObj.objectIdString(), update);
+			//删除Object
+			DeleteResult deleteResult = ninjaZEntityManager.delete(objObjectId);
 	}
 	```
-	```java
-	//注册服务接口（在main函数中）
-	defineFunction("helloMyObject", new MyHandler(). helloMyObject(console));
-	```
-	
-	使用Class需注意：
+>
+>	我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作：
+>
+> 	`ZEntityManager<MyObject> myObjectZEntityManager = ZEntityManagerFactory.getManager(MyObject.class);`
+> 
+> 	整个过程中系统会自动捕获并返回异常。
 
-	>*	我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作
-	> `ZEntityManager<Ninja> ninjaZEntityManager = ZEntityManagerFactory.getManager(Ninja.class);`
-	> 整个过程中系统会自动捕获并返回异常
-	>* 
-   
-#### Hook
+
+
+## Background Job
+
+*	Background Job简介
+>	Background Job是一组自定义的函数，部署到Leap Cloud后，您可以在管理界面定时/定期的启动它，并随时查看其运行状态。
+>
+>	Background Job可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。
+
+*	如何创建Background Job：
+>	1.	在Cloud Code中定义
+>	
+>	进入主程序入口(main函数)，使用defineJob来定义Job
+>
+>  	``` java
+  		defineJob("helloJob", request -> {
+      	Response response = new ZResponse(String.class);
+      	response.setResult("hello job");
+      	return response;
+  	});
+  	```
+>
+>	2.	在管理门户中定义
+>>	
+>>	1.	进入“开发者中心”，点击“任务”－“已设任务”－“新建任务”
+>>	2.	填写任务详情：
+>>		
+>>		表单项目|作用 
+>>		----|-------|
+>>		名称|任务的名字|
+>>		函数名|想要执行的Backgroud Job的名字
+>>		设置开始|从何时开始执行任务
+>>		设置重复|每隔多久重复执行任务
+>>		参数|提供数据给Backgroud Job
+>>
+>>	img
+
+*	如何测试Background Job：
+>
+>	我们可以利用Curl测试Job是否可用
+>
+>	```shell
+	curl -X POST \
+	-H "X-ZCloud-AppId: YOUR_APPID" \
+	-H "X-ZCloud-APIKey: YOUR_APIKEY" \
+	-H "Content-Type: application/json" \
+	http://10.10.10.176:8080/jobs/YOUR_JOBNAME
+	```
+>	
+
+## Hook
 
 * 定义Hook：
 >1.	实现ZEntityManagerHook接口(建议直接继承ZEntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
