@@ -101,6 +101,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>	 applicationName|LAS应用名称
 	>	 applicationId|Application ID
 	>	 applicationKey|Master Key
+	>	 java-main|入口函数名
 	>	 package-hook|Hook目录
 	>	 package-entity|Class实体目录
 	>	 zVersion|当前Cloud Code项目版本号
@@ -225,7 +226,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>	
 	>	3.	配置打包规则（模板项目中已配置好，可略过此步）
 	>	
-	>	在/src/main/assembly（请确保此路径存在）中新建mod.xml文件，并在其中添加如下配置：
+	>	在/src/main/assembly中新建mod.xml文件，并在其中添加如下配置：
 	>	
 	>	```Java
 >	<?xml version="1.0" encoding="UTF-8"?>
@@ -282,12 +283,23 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	    </fileSets>
 >	</assembly>
 	>	```
-	>
-	>	
->	
->	**使用时需注意：** 
+	> 
+>	注意：如果您选择将打包配置文件放在其他路径下，您则需要更新pom.xml文件中的以下部分，将`src/main/assembly/mod.xml`替换为您自定义的路径：
 >
->	LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。[点击此处](...)进入创建应用教程。
+>	```java
+	<plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<configuration>
+			<descriptors>
+				<descriptor>src/main/assembly/mod.xml</descriptor>
+			</descriptors>
+		</configuration>
+	</plugin>	
+	```
+
+**使用时需注意：** 
+
+LAS Cloud Code的使命是为LAS应用提供更出色，更高效的业务服务，因此，在开始创建LAS Cloud Code项目前，我们必须拥有LAS应用。[点击此处](...)进入创建应用教程。
 
 
 
@@ -378,6 +390,10 @@ http://10.10.10.176:8080/functions/HelloWorld
 ```
 表明测试通过，部署成功。
 
+**Curl测试时需注意：**
+
+*	X-ZCloud-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
+
 ## Cloud Function
 
 * 	**Cloud Function简介：**
@@ -391,18 +407,18 @@ http://10.10.10.176:8080/functions/HelloWorld
 		* 	用户无需更新即可享用新功能：独立于客户端部署及维护
 		*	减少客户端网络流量及运算负荷
 	
-* 	**创建和使用Cloud Function：**
+* 	**创建Cloud Function：**
 	
 	Cloud Code可由三部分构成：Cloud Code SDK，Custom Code以及3rd Party Lib。在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。这个部分，我们将向您介绍如何通过Cloud Function使用Cloud Code SDK。
 >	
->	**在Cloud Function中访问Cloud Data**
+>	**通过Cloud Function访问Cloud Data**
 >
 >	* 定义Cloud Data Object（在管理界面中，称之为“Class”）
 >
 >	新建一个Cloud Data Object，并继承ZCloudObject类
 >
 >	```java
-	public class MyObject extends ZCloudObject {
+	public class MyObject extends LASCloudObject {
 	    	private String name;
 		    public String getName() {
 		        return name;
@@ -424,7 +440,7 @@ http://10.10.10.176:8080/functions/HelloWorld
 >	* Cloud Data Object的CRUD
 >
 >	```java
-	public void MyObjectManager(){
+	public void DoSomethingToCloudData(){
 			ZEntityManager<MyObject> myObjectZEntityManager = ZEntityManagerFactory.getManager(MyObject.class);
 			MyObject obj = new MyObject();
 			obj.setName("Awesome");
@@ -451,11 +467,62 @@ http://10.10.10.176:8080/functions/HelloWorld
 	```
 >
 >	我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作：
->
 > 	`ZEntityManager<MyObject> myObjectZEntityManager = ZEntityManagerFactory.getManager(MyObject.class);`
-> 
 > 	整个过程中系统会自动捕获并返回异常。
+> 
+> 	最后，我们只需将这个方法添加至Cloud Function中即可：
+> 	
+> 	```java
+		defineFunction("UseCloudData", request -> {
+			DoSomethingToCloudData();
+			Response<String> response = new ZResponse<String>(String.class);
+			response.setResult("Done."));
+			return response;
+		}
+> 	```
+> 	
+* 	**使用Cloud Function：**
 
+	1.	API方式调用：
+	
+		Cloud Code服务|API地址|请求方式|
+	------------|-------|------|
+	function|/functions/{name}|POST|
+	job|/jobs/{name}|POST|
+	config|/console/config|GET|
+	jobNames|/console/jobNames|GET|
+	
+	2.	通过Android/iOS SDK调用：
+	
+		Android SDK中：
+	
+		```java
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("key1", 1);
+		params.put("key2", "2");
+		LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
+			@Override
+			public void done(JSONObject object, LASException exception) {
+				assertNull(exception);
+			}
+		});
+		```
+		
+		iOS SDK中：
+	
+		```java
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("key1", 1);
+		params.put("key2", "2");
+		LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
+			@Override
+			public void done(JSONObject object, LASException exception) {
+				assertNull(exception);
+			}
+		});
+		```
+	3. 	添加至Background Job中，帮助完成Job逻辑。
+	
 * 	Cloud Function的测试：
 	
 	请移步至[Hello World 样例](...)以获取Curl测试引导。
@@ -548,7 +615,16 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 	      }
 	  }
   ```
+  
+  定义Hook时，我们需确保目标Cloud Data Object存在，否则会报错。如果Cloud Data Object不存在，我们可以：
+  
+  1.	在管理门户中，添加Class
+  2.	在定义Hook前，新建它：
 
+		```java
+//新增Object
+SaveResult<MyObject> saveMsg = myObjectZEntityManager.create(obj);
+```
    	定义Hook需注意：
 
 	>* 	Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
@@ -567,11 +643,11 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 * 	**在Cloud Code中记录Log**:
 
 	1.	在项目主入口Main函数中，获取Logger实例
-	2. 在Main/Hook/Handler等package的函数中，您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+	2.	您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
 	
 	```java
-		public class Main extends LASLoaderBase implements LASLoader {
-			Logger logger = LoggerFactory.getLogger(Main.class);
+		public class myClass {
+			Logger logger = LoggerFactory.getLogger(myClass.class);
     		public void myMethod(){
         		logger.error("Oops! Error, got you!");
         		logger.warn("I'm Warning");
@@ -589,9 +665,9 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 	
 	除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
 	
-	>*	本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
-	>*	如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
-	>*	在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
+	>*	Cloud Function的上传部署信息
+	>*	Hook Entities的Cache信息
+	>* 	Cloud Code相关的API request信息
 	
 *	**如何查看查看Log**:
 
@@ -601,5 +677,99 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
    
    您还可通过切换Error，Warn和Info选项，来查看不同类型的日志。
    
+## LASCC － Cloud Code 命令行工具
+
+*	**简介**
+
+	LASCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
+	
+*	**如何获取LASCC**
+	
+	1.	获取客户端：
+	
+		```java
+	git clone https://gitlab.ilegendsoft.com/zcloudsdk/zcc.git
+	```
+	2.	将客户端所在路径添加至系统环境变量 $PATH 中：
+	
+		```java
+	export PATH=/Users/awesome/zcc:$PATH
+	```
+*	**如何使用LASCC**
+
+	1.	登录:
+	
+		```java
+		lascc login <用户名>
+		```
+		`<用户名>` 为您登录LAS管理门户的账号，然后根据提示输入密码
+
+	2.	显示所有app：
+	
+		```java
+		lascc apps
+		```
+
+		查询账号下的所有应用，显示的信息为：AppId ：AppName
+
+	3.	选择应用:
+	
+		```java
+		lascc use <应用名>
+		```
+
+		`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
+
+	4.	上传cloudcode:
+	
+		```java
+		lascc upload <文件路径>
+		```
+
+		`<文件路径>`为你将部署的Cloud Code package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
+
+		上传的的代码会被制作成Docker镜像，版本号在Cloud Code项目里的global.json文件中指定：
+	
+		```java
+		"global": {
+		    "zVersion": "0.0.1"
+		}
+		```
+
+	5.	显示所有云端Cloud Code版本:
+	
+		```java
+		lascc lv
+		```
+
+		即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
+
+	6.	部署cloudcode：
+	
+		```java
+		lascc deploy <版本号>
+		```
+
+		`<版本号>`为如zcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloude Code；如果部署不存在的版本，会提示错误："version of appId not exists"
+
+ 	7.	停止cloudcode：
+	
+		```java
+		lascc undeploy
+		```
+
+		停止该应用的Cloud Code，如果之前已经部署过一个版本，需要先停止，再部署。
+
+
+	8.	输出最近的日志：
+	
+		```java
+		lascc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
+		```
+>		
+>		-l 指定输出日志的级别：info或是error
+>		-n 指定log的数量
+>		-s 指定跳过最近的log数量
+
 
 	
