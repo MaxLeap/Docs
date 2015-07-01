@@ -622,9 +622,9 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
   2.	在定义Hook前，新建它：
 
 		```java
-//新增Object
-SaveResult<MyObject> saveMsg = myObjectZEntityManager.create(obj);
-```
+		//新增Object
+		SaveResult<MyObject> saveMsg = myObjectZEntityManager.create(obj);
+		```
    	定义Hook需注意：
 
 	>* 	Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
