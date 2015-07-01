@@ -82,13 +82,14 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>
 	>		```java
 			{
-			    "applicationName" : "helloword",             
-			    "applicationId": "YOUR_APPLICATION_ID",      			    "applicationKey": "YOUR_MASTER_KEY",         
-			    "lang" : "java",                             
-			    "java-main": "Main",                        
-			    "package-hook" : "YOUR_HOOK_DIR",                  
-			    "package-entity" : "YOUR_ENTITY_DIR",                  
-			    "global": {                                  
+			    "applicationName" : "helloword",
+			    "applicationId": "YOUR_APPLICATION_ID",
+			    "applicationKey": "YOUR_MASTER_KEY",
+			    "lang" : "java",
+			    "java-main": "Main",
+			    "package-hook" : "YOUR_HOOK_DIR",
+			    "package-entity" : "YOUR_ENTITY_DIR",
+			    "global": {
 			    "zVersion": "0.0.1"
 			    }
 			}
