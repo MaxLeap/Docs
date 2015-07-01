@@ -6,7 +6,6 @@
 ####	**什么是Cloud Code服务**
 Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
-
 ####	**为何您需要Cloud Code服务**
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助Cloud Code实现。Cloud Code有如下优势：
@@ -114,7 +113,6 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	>	```Java
 	>	<properties>
 	        <nexus.develop.host>10.10.10.137:8081</nexus.develop.host>
-	        <nexus.production.host>54.164.163.132:8081</nexus.production.host>
 	    </properties>
 	>
 	    <repositories>
@@ -156,21 +154,6 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	                    <id>snapshots</id>
 	                    <name>Internal Releases</name>
 	                    <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
-	                </snapshotRepository>
-	            </distributionManagement>
-	        </profile>
-	        <profile>
-	            <id>pro</id>
-	            <distributionManagement>
-	                <repository>
-	                    <id>releases</id>
-	                    <name>Internal Releases</name>
-	                    <url>http://${nexus.production.host}/content/repositories/releases</url>
-	                </repository>
-	                <snapshotRepository>
-	                    <id>snapshots</id>
-	                    <name>Internal Releases</name>
-	                    <url>http://${nexus.production.host}/content/repositories/snapshots</url>
 	                </snapshotRepository>
 	            </distributionManagement>
 	        </profile>
@@ -396,10 +379,20 @@ http://10.10.10.176:8080/functions/HelloWorld
 
 ## Cloud Function
 
-* 	Cloud Function简介：
+* 	**Cloud Function简介：**
+
+	Cloud Function是您使用Cloud Code的一个入口，通过它，我们可以使用定义在Cloud Code中的业务逻辑。
+		
+	**为什么您需要Cloud Function：**
 	
+	Cloud Function能很好地满足如下需求：
+	*	不同平台，不同应用之间共享业务逻辑
+	* 	用户无需更新即可享用新功能：独立于客户端部署及维护
+	*	减少客户端网络流量及运算负荷
 	
-	Cloud Code可由三部分构成：Custom Code，Cloud Code SDK以及3rd Party Lib。在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。这个部分，我们将向您介绍如何在Cloud Function中使用Cloud Code SDK。
+* 	**创建和使用Cloud Function：**
+	
+	Cloud Code可由三部分构成：Cloud Code SDK，Custom Code以及3rd Party Lib。在上述Hello World样例中，我们向您展示了如何定义一个简单的Function。这个部分，我们将向您介绍如何通过Cloud Function使用Cloud Code SDK。
 >	
 >	在Cloud Function中访问Cloud Data
 >
@@ -462,57 +455,63 @@ http://10.10.10.176:8080/functions/HelloWorld
 > 
 > 	整个过程中系统会自动捕获并返回异常。
 
+* 	Cloud Function的测试：
+	
+	请移步至[Hello World 样例](...)以获取Curl测试引导。
+
+## 后台任务
+
+Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
+
+*	**如何创建Background Job：**
 
 
-## Background Job
+	1.	在Cloud Code中定义
 
-*	Background Job简介
->	Background Job是一组自定义的函数，部署到Leap Cloud后，您可以在管理界面定时/定期的启动它，并随时查看其运行状态。
->
->	Background Job可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。
+		进入主程序入口(main函数)，使用defineJob来定义Job
 
-*	如何创建Background Job：
->	1.	在Cloud Code中定义
->	
->	进入主程序入口(main函数)，使用defineJob来定义Job
->
->  	``` java
-  		defineJob("helloJob", request -> {
-      	Response response = new ZResponse(String.class);
-      	response.setResult("hello job");
-      	return response;
-  	});
-  	```
->
->	2.	在管理门户中定义
->>	
->>	1.	进入“开发者中心”，点击“任务”－“已设任务”－“新建任务”
->>	2.	填写任务详情：
->>		
->>		表单项目|作用 
->>		----|-------|
->>		名称|任务的名字|
->>		函数名|想要执行的Backgroud Job的名字
->>		设置开始|从何时开始执行任务
->>		设置重复|每隔多久重复执行任务
->>		参数|提供数据给Backgroud Job
->>
->>	img
+	 	``` java
+	  		defineJob("helloJob", request -> {
+	      	Response response = new ZResponse(String.class);
+	      	response.setResult("hello job");
+	      	return response;
+	  		});
+	  	```
 
-*	如何测试Background Job：
->
->	我们可以利用Curl测试Job是否可用
->
->	```shell
-	curl -X POST \
-	-H "X-ZCloud-AppId: YOUR_APPID" \
-	-H "X-ZCloud-APIKey: YOUR_APIKEY" \
-	-H "Content-Type: application/json" \
-	http://10.10.10.176:8080/jobs/YOUR_JOBNAME
+	2.	在管理门户中定义
+
+		1.	进入“开发者中心”，点击“任务”－“已设任务”－“新建任务”
+		2.	填写任务详情：
+
+			img
+
+			表单项目|作用 
+			----|-------|
+			名称|任务的名字|
+			函数名|想要执行的Backgroud Job的名字
+			设置开始|从何时开始执行任务
+			设置重复|每隔多久重复执行任务
+			参数|提供数据给Backgroud Job
+
+
+*	**如何测试Background Job：**
+
+	我们可以利用Curl测试Job是否可用
+
+	```shell
+		curl -X POST \
+		-H "X-ZCloud-AppId: YOUR_APPID" \		
+		-H "X-ZCloud-APIKey: YOUR_APIKEY" \
+		-H "Content-Type: application/json" \
+		http://10.10.10.176:8080/jobs/YOUR_JOBNAME
 	```
->	
 
 ## Hook
+
+*	Hook简介
+>	如果说Cloud Data是一座仓库，那么Hook就是门卫：对Cloud Data Object的所有操作（新建）
+>
+>	Background Job可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。
 
 * 定义Hook：
 >1.	实现ZEntityManagerHook接口(建议直接继承ZEntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
