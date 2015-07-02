@@ -186,9 +186,9 @@ public class MyObject extends CloudObject {
 }
 ```
 定义Cloud Data Object需注意：
-*一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理界面中创建的 class 名字一样
-*须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
-*须配置global.json文件以识别该package，如：`"package-entity" : "data"`
+* 一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理界面中创建的 class 名字一样
+* 须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
+* 须配置global.json文件以识别该package，如：`"package-entity" : "data"`
 
 ####Cloud Data Object的CRUD
 
