@@ -41,18 +41,18 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 
 ```java
-	{
-	    "applicationName" : "helloword",
-	    "applicationId": "YOUR_APPLICATION_ID",
-	    "applicationKey": "YOUR_MASTER_KEY",
-	    "lang" : "java",
-	    "java-main": "Main",
-	    "package-hook" : "YOUR_HOOK_PACKAGE_NAME",
-	    "package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
-	    "global": {
-	    "version": "0.0.1"
-	    }
+{
+	"applicationName" : "helloword",
+	"applicationId": "YOUR_APPLICATION_ID",
+	"applicationKey": "YOUR_MASTER_KEY",
+	"lang" : "java",
+	"java-main": "Main",
+	"package-hook" : "YOUR_HOOK_PACKAGE_NAME",
+	"package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
+	"global": {
+		"version": "0.0.1"
 	}
+}
 ```
 
 根据创建应用时获取的key，修改下列键的值：
@@ -321,29 +321,31 @@ Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修�
 public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 	@Override
 	public BeforeResult<MyObject> beforeCreate(MyObject obj) {
-	        EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
-	        //创建obj前验证是否重名了
-	        Query sunQuery = Query.instance();
-	        sunQuery.equalTo("name", obj.getName());
-	        FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
-	        if (findMsg.results() != null && findMsg.results().size() > 0) return new BeforeResult<>(obj,false,"obj name repeated");
-	        return new BeforeResult<>(obj, true);
-	  }
-	  
-	  @Override
-	  public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage) {
-	        EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
-	        //创建完obj后修改这个obj的ACL权限
-	            Map<String,Map<String,Boolean>> acl = new HashMap<>();
-	            Map<String,Boolean> value = new HashMap<>();
-	            value.put("read", true);
-	            value.put("write", true);
-	            acl.put(saveMessage.objectId().toString(), value);
-	        Update update = new Update().set("ACL", acl);
-	        myObjectEntityManager.update(saveMessage.objectId().toString(), update);
-	        AfterResult afterResult = new AfterResult(saveMessage);
-	            return afterResult;
-	  }
+		EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+		
+		//创建obj前验证是否重名了
+		Query sunQuery = Query.instance();
+		sunQuery.equalTo("name", obj.getName());
+		FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
+		if (findMsg.results() != null && findMsg.results().size() > 0)
+			return new BeforeResult<>(obj,false,"obj name repeated");
+		return new BeforeResult<>(obj, true);
+	}
+	
+	@Override
+	public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage) {
+		EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+		//创建完obj后修改这个obj的ACL权限
+		Map<String,Map<String,Boolean>> acl = new HashMap<>();
+		Map<String,Boolean> value = new HashMap<>();
+		value.put("read", true);
+		value.put("write", true);
+		acl.put(saveMessage.objectId().toString(), value);
+		Update update = new Update().set("ACL", acl);
+		myObjectEntityManager.update(saveMessage.objectId().toString(), update);
+		AfterResult afterResult = new AfterResult(saveMessage);
+		return afterResult;
+	}
 }
   ```
 
@@ -385,13 +387,13 @@ Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运
 ```java
 public class MyClass {
 	Logger logger = LoggerFactory.getLogger(myClass.class);
-	
-    	public void myMethod(){
-        	logger.error("Oops! Error, got you!");
-        	logger.warn("I'm Warning");
-        	logger.info("I'm Information");
-    	}
+
+	public void myMethod(){
+		logger.error("Oops! Error, got you!");
+		logger.warn("I'm Warning");
+		logger.info("I'm Information");
 	}
+}
 ```
 使用Log需注意:
 * 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
