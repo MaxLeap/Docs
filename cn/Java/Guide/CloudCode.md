@@ -435,7 +435,7 @@ lcc apps
 lcc use <应用名>
 ```
 `<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-###上传cloudcode:
+###上传Cloud Code:
 ```shell
 lcc upload <文件路径>
 ```
@@ -451,7 +451,7 @@ lcc upload <文件路径>
 lcc lv
 ```
 即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
-###部署cloudcode：
+###部署Cloud Code：
 ```shell
 lcc deploy <版本号>
 ```
