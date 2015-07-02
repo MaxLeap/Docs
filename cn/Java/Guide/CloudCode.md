@@ -24,63 +24,78 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 目前Cloud Code支持Java，我们在近期会推出Python版本。企业版在下个版本会支持多个Docker container，Failover，Auto scaling等功能。
 	  
 ## 创建和配置Cloud Code项目
-### 1. 安装maven和Cloud Code Command Line Tools
 
+###	1.	安装Maven和Cloud Code Command Line Tools
 
-### 2.	创建Cloud Code项目
+Cloud Code项目需要使用Maven打包，然后通过Cloud Code Command Line Tools上传及部署，而且Cloud Code项目模板是基于Maven构建的。所以，在开始创建Cloud Code项目之前，我们需要安装Maven和Cloud Code Command Line Tools.
 
-#### + 使用Cloud Code项目模版快速创建项目
+* 	**获取Maven**
+
+	1.	Eclipse:	点击"Help" -> "Install New Software.." -> 在"Work with"中输入：`http://download.eclipse.org/technology/m2e/releases`，在列表中选择"Maven Integration for Eclipse"，即可安装Maven插件。
+	2. 手动下载配置：	`https://maven.apache.org/download.cgi`，下载解压之后，在您的IDE中将该路径添加至相应的配置中。
+
+* 	**获取Cloud Code Command Line Tools**
+	
+	通过git命令获取：
+	
+	```java
+	git clone https://gitlab.ilegendsoft.com/zcloudsdk/zcc.git
+	```
+	
+	有关Cloud Code Command Line Tools更多介绍信息，请移步至[Cloud Code Command Line Tools教程](...)
+
+###	2.	创建Cloud Code项目
+
+####	1.	使用Cloud Code项目模版快速创建项目
 
 * 	**获取LAS Cloud Code Java项目模板**
-		`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
+	`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
 
 * 	**打开LAS Cloud Code Java项目**
->
+
 	* 	**Android Studio**
->
-		>	1. 打开Android Studio，点击“Import project”
-		>	2. 进入项目模板根目录，选择“pom.xml”
-		>	3. 按照默认配置点击下一步，直到完成 
->
+
+		1. 打开Android Studio，点击“Import project”
+		2. 进入项目模板根目录，选择“pom.xml”
+		3. 按照默认配置点击下一步，直到完成 
+
 	* 	**Eclipse**
->
-		>	1.	打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
-		>	2. 进入项目模板根目录，选择“pom.xml”
->	
-	  **使用时需注意：** 
-	> 1.	第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
-
-#### + 添加至已有项目
-	打开Maven项目的pom文件，添加如下依赖：
 	
-	```Java
-	<dependency>
-    <groupId>com.ilegendsoft</groupId>
-    <artifactId>cloud-code-test-framework</artifactId>
-    <version>2.2.1-SNAPSHOT</version>
-    </dependency>
-	```
+		1.	打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
+		2. 进入项目模板根目录，选择“pom.xml”
 
-### 2.	配置Cloud Code项目
+#### 2. 添加至已有项目
 
-	在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
+打开Maven项目的pom文件，添加如下依赖：
+	
+```Java
+<dependency>
+<groupId>com.ilegendsoft</groupId>
+<artifactId>cloud-code-test-framework</artifactId>
+<version>2.2.1-SNAPSHOT</version>
+</dependency>
+```
 
-		```java
-			{
-			    "applicationName" : "helloword",
-			    "applicationId": "YOUR_APPLICATION_ID",
-			    "applicationKey": "YOUR_MASTER_KEY",
-			    "lang" : "java",
-			    "java-main": "Main",
-			    "package-hook" : "YOUR_HOOK_PACKAGE_NAME",
-			    "package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
-			    "global": {
-			    "version": "0.0.1"
-			    }
-			}
-		```
+### 3.	配置Cloud Code项目
 
-	根据创建应用时获取的key，修改下列键的值：
+在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
+
+```java
+	{
+		"applicationName" : "helloword",
+		"applicationId": "YOUR_APPLICATION_ID",
+		"applicationKey": "YOUR_MASTER_KEY",
+		"lang" : "java",
+		"java-main": "Main",
+		"package-hook" : "YOUR_HOOK_PACKAGE_NAME",
+		"package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
+		"global": {
+			"version": "0.0.1"
+		}
+	}
+```
+
+根据创建应用时获取的key，修改下列键的值：
 	
 	 键|值|
   	 ------------|-------|
