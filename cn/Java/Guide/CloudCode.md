@@ -420,22 +420,22 @@ img
    
 ## LCC － Cloud Code 命令行工具
 LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
-*登录:
+###登录:
 ```shell
 lcc login <用户名>
 ```
 `<用户名>` 为您登录LAS管理门户的账号，然后根据提示输入密码
-*显示所有app：
+###显示所有app：
 ```shell
 lcc apps
 ```
 查询账号下的所有应用，显示的信息为：AppId ：AppName
-*选择应用:
+###选择应用:
 ```shell
 lcc use <应用名>
 ```
 `<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-*上传cloudcode:
+###上传cloudcode:
 ```shell
 lcc upload <文件路径>
 ```
@@ -446,22 +446,22 @@ lcc upload <文件路径>
 	"version": "0.0.1"
 }
 ```
-*显示所有云端Cloud Code版本:
+###显示所有云端Cloud Code版本:
 ```shell
 lcc lv
 ```
 即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
-*部署cloudcode：
+###部署cloudcode：
 ```shell
 lcc deploy <版本号>
 ```
 `<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloud Code；如果部署不存在的版本，会提示错误："version of appId not exists"
-*停止cloudcode：
+###停止cloudcode：
 ```shell
 lcc undeploy
 ```
 停止该应用的Cloud Code，如果之前已经部署过一个版本，需要先停止，再部署。
-*输出最近的日志：
+###输出最近的日志：
 ```shell
 lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 
