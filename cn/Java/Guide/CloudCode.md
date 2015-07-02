@@ -56,23 +56,22 @@ Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 请参考 xxx
 
 ### 配置Cloud Code项目
+在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 
-	在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
-
-		```java
-			{
-			    "applicationName" : "helloword",
-			    "applicationId": "YOUR_APPLICATION_ID",
-			    "applicationKey": "YOUR_MASTER_KEY",
-			    "lang" : "java",
-			    "java-main": "Main",
-			    "package-hook" : "YOUR_HOOK_PACKAGE_NAME",
-			    "package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
-			    "global": {
-			    "version": "0.0.1"
-			    }
-			}
-		```
+```java
+	{
+	    "applicationName" : "helloword",
+	    "applicationId": "YOUR_APPLICATION_ID",
+	    "applicationKey": "YOUR_MASTER_KEY",
+	    "lang" : "java",
+	    "java-main": "Main",
+	    "package-hook" : "YOUR_HOOK_PACKAGE_NAME",
+	    "package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
+	    "global": {
+	    "version": "0.0.1"
+	    }
+	}
+```
 
 	根据创建应用时获取的key，修改下列键的值：
 	
@@ -86,9 +85,6 @@ Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 	 package-entity|Class实体目录
 	 zVersion|当前Cloud Code项目版本号
 	
-
-
-
 ## 一个sample function和部署
 
 ### 代码
