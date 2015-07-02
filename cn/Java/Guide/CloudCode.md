@@ -112,7 +112,7 @@ Main class的main method是Cloud Code启动的入口，需要继承LoaderBase并
 
 ### 测试
 
-通过Curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
+通过 curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
 
 ```shell
 curl -X POST \
@@ -129,9 +129,9 @@ Hello, David Wang!
 ```
 表明测试通过，部署成功。
 
-**Curl测试时需注意：**
+>注意:
 
-*	X-LAS-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
+>X-LAS-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
 
 ## Cloud Function
 Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
