@@ -270,16 +270,32 @@ CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSON
 Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
 
 ###创建和监控Background Job
-####在Cloud Code中定义
-进入主程序入口(main函数)，使用defineJob来定义Job
+####在Cloud Code中定义并实现Job Handler
 ``` java
-defineJob("helloJob", request -> {
-	Response response = new ZResponse(String.class);
-	response.setResult("hello job");
-	return response;
-});
+public class MyJobHandler implements Handler {
+    public Response handle(Request request) {
+        Response<String> response = new ResponseImpl<String>(String.class);
+        response.setResult("Job done!");
+        return response;
+    }
+}
 ```
-####在管理界面中定义
+
+然后进入主程序入口(main函数)，使用defineJob来定义Job
+``` java
+defineJob("myJob", new MyJobHandler());
+```
+###测试Background Job
+我们可以利用curl测试Job是否可用
+```shell
+curl -X POST \
+-H "X-ZCloud-AppId: YOUR_APPID" \		
+-H "X-ZCloud-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+https://api.leap.as/jobs/YOUR_JOBNAME
+```
+
+####在管理界面中设置 Job Schedule
 img
 表单项目|作用 
 ----|-------|
@@ -293,16 +309,6 @@ img
 进入“开发者中心”，点击“任务”－>“任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
 选中您想要查看的任务，便可以查看任务详情。
 img
-
-###测试Background Job
-我们可以利用Curl测试Job是否可用
-```shell
-curl -X POST \
--H "X-ZCloud-AppId: YOUR_APPID" \		
--H "X-ZCloud-APIKey: YOUR_APIKEY" \
--H "Content-Type: application/json" \
-https://api.leap.as/jobs/YOUR_JOBNAME
-```
 
 ## Hook for Cloud Data
 Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
@@ -346,7 +352,31 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 * 须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
 * 须配置global.json文件以识别该package，如：`"package-hook" : "hook"`
 * 内建class和自定义class均支持Hook，内建class原有的限制（_User用户名和密码必填，_Installation的deviceToken和installationId二选一）依然有效。
-	
+
+### Hook类型
+
+Cloud Code支持如下类型的Hook：
+* beforeCreate
+在对应的 Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
+//补充一个sample
+
+* afterCreate
+在对应的 Cloud Data 被创建后调用，可以用于执行如 User 创建后给客户经理发封邮件这样的逻辑。
+
+* beforeUpdate
+在对应的 Cloud Data 被更新之前调用，可以用于验证输入的数据是否合法。
+//补充一个sample
+
+* afterUpdate
+在对应的 Cloud Data 被更新之后调用，可以用于如用户更新密码后，给用户邮箱发封提醒邮件。
+
+* beforeDelete
+在对应的 Cloud Data 被删除之前调用，可以用于验证删除是否合法。
+//补充一个sample
+
+* afterDelete
+在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
+
 ## Logging
 Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
 ###在Cloud Code中记录Log
