@@ -193,8 +193,8 @@ public class MyObject extends CloudObject {
 ####Cloud Data Object的CRUD
 
 ```java
-public void DoSomethingToCloudData(){
-        EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+public void doSomethingToCloudData(){
+	EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
 	MyObject obj = new MyObject();
 	obj.setName("Awesome");
 	String name = obj.getName();
@@ -222,34 +222,20 @@ public void DoSomethingToCloudData(){
 	DeleteResult deleteResult = ninjaEntityManager.delete(objObjectId);
 }
 ```
-
-我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作：
-```java
-EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
-```
-整个过程中系统会自动捕获并返回异常。
-
-最后，我们只需将这个方法添加至Cloud Function中即可：
-
-```java
-defineFunction("UseCloudData", request -> {
-	DoSomethingToCloudData();
-	Response<String> response = new Response<String>(String.class);
-	response.setResult("Done."));
-	return response;
-}
-```
+我们可以通过 EntityManager 对 Cloud Data 进行CRUD。
 
 ####使用Cloud Function
 
-#####API方式调用：
-	
-Cloud Code服务|API地址|请求方式|
-------------|-------|------|
-function|/functions/{name}|POST|
-job|/jobs/{name}|POST|
-config|/console/config|GET|
-jobNames|/console/jobNames|GET|
+#####API方式调用
+请求格式如下所示：
+```shell
+curl -X POST \
+-H "X-LAS-AppId: YOUR_APPID" \
+-H "X-LAS-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+-d '{"name":"David Wang"}' \
+https://api.leap.as/functions/hello
+```
 	
 #####通过Android/iOS SDK调用：
 Android SDK中：
@@ -257,10 +243,10 @@ Android SDK中：
 Map<String, Object> params = new HashMap<String, Object>();
 params.put("key1", 1);
 params.put("key2", "2");
-LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
 
+CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
 	@Override
-	public void done(JSONObject object, LASException exception) {
+	public void done(JSONObject object, Exception exception) {
 		assertNull(exception);
 	}
 });
@@ -279,12 +265,8 @@ CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSON
 	}
 });
 ```
-	
-####Cloud Function的测试：
-	
-	请移步至[Hello World 样例](...)以获取Curl测试引导。
 
-## 后台任务
+## Background Job
 Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
 
 ###创建和监控Background Job
@@ -323,7 +305,7 @@ https://api.leap.as/jobs/YOUR_JOBNAME
 ```
 
 ## Hook for Cloud Data
-如果说Cloud Data是一座仓库，那么Hook就是仓库管理员。用户对Cloud Data Object进行任何操作时（包括新建，删除及修改），Hook都可在其之前或之后，进行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
+Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
 ###创建和使用Hook
 实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
@@ -359,15 +341,14 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
   ```
 
 定义Hook需注意：
-*确保目标Cloud Data Object对应的class存在
-*Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
-*须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
-*须配置global.json文件以识别该package，如：
-`"package-hook" : "hook"`
-* 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填，_Installation的deviceToken和installationId二选一）依然有效。
+* 确保目标Cloud Data Object对应的class存在
+* Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
+* 须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
+* 须配置global.json文件以识别该package，如：`"package-hook" : "hook"`
+* 内建class和自定义class均支持Hook，内建class原有的限制（_User用户名和密码必填，_Installation的deviceToken和installationId二选一）依然有效。
 	
-## Log
-Cloud Code提供Log功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
+## Logging
+Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
 ###在Cloud Code中记录Log
 您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
 ```java
@@ -382,23 +363,23 @@ public class MyClass {
 	}
 ```
 使用Log需注意:
-*本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
-*如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
-*在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
+* 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
+* 如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
 	
 ###系统自动记录的Log
 除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
-*Cloud Function的上传部署信息
-*Hook Entities的Cache信息
+* Cloud Function的上传部署信息
+* Hook Entities的Cache信息
 * Cloud Code相关的API request信息
 	
-###如何查看查看Log
-进入“管理网站”，点击“开发者中心”－“日志”，您便可查看该应用的所有日志。
-   
+###查看Log
+可以使用命令行工具lcc查看最近的log
+```shell
+lcc log -n 100
+```
+也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 img
-   
-您还可通过切换Error，Warn和Info选项，来查看不同类型的日志。
-   
+
 ## LCC － Cloud Code 命令行工具
 LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
 ###登录:
