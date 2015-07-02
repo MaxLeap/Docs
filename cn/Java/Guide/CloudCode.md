@@ -297,6 +297,7 @@ https://api.leap.as/jobs/YOUR_JOBNAME
 
 ####在管理界面中设置 Job Schedule
 img
+
 表单项目|作用 
 ----|-------|
 名称|任务的名字|
