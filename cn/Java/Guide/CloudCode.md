@@ -1,12 +1,12 @@
 
-## 开始使用Cloud Code
+# 开始使用Cloud Code
 
 ## Cloud Code简介
 
-####	**什么是Cloud Code服务**
+###什么是Cloud Code服务
 Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
-####	**为什么需要Cloud Code服务**
+###为什么需要Cloud Code服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助Cloud Code实现。Cloud Code有如下优势：
 
@@ -14,7 +14,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 * 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
 * 同一套代码可以为iOS，Android，web site等提供服务
 
-####	**Cloud Code如何工作**
+###Cloud Code如何工作
 
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
@@ -23,30 +23,29 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 目前Cloud Code支持Java，我们在近期会推出Python版本。
 	  
-## 准备工作
-### JDK
+##准备工作
+###JDK
 Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
-### 安装Maven
+###安装Maven
 
-### 安装Cloud Code Command Line Tools（lcc）
+###安装Cloud Code Command Line Tools（lcc）
 
 ## 创建和配置Cloud Code项目
 ### 使用Cloud Code项目模版快速创建项目
-
-* 	**获取LAS Cloud Code Java项目模板**
-		`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
-
-* 	**打开LAS Cloud Code Java项目**
-* 	**Android Studio**
+获取LAS Cloud Code Java项目模板	
+```shell
+git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
+```
+打开LAS Cloud Code Java项目
+*Android Studio
 1. 打开Android Studio，点击“Import project”
 2. 进入项目模板根目录，选择“pom.xml”
 3. 按照默认配置点击下一步，直到完成 
 
-* 	**Eclipse**
-1.	打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
+*Eclipse
+1. 打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
 2. 进入项目模板根目录，选择“pom.xml”
-	
 第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
 
 ### 或添加至已有项目
@@ -152,10 +151,9 @@ Hello, David Wang!
 *	X-LAS-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
 
 ## Cloud Function
+Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
 
-	Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
-	
-###定义Cloud Functio
+###定义Cloud Function
 每个Cloud Function需要实现 as.leap.code.Handler interface，该interface是典型的Functional Interface。
 ```Java
 public interface Handler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
@@ -245,7 +243,9 @@ public void DoSomethingToCloudData(){
 ```
 
 我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作：
-	`EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);`
+```java
+EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+```
 整个过程中系统会自动捕获并返回异常。
 
 最后，我们只需将这个方法添加至Cloud Function中即可：
@@ -261,7 +261,7 @@ defineFunction("UseCloudData", request -> {
 
 ####使用Cloud Function
 
-1.	API方式调用：
+#####API方式调用：
 	
 Cloud Code服务|API地址|请求方式|
 ------------|-------|------|
@@ -270,10 +270,8 @@ job|/jobs/{name}|POST|
 config|/console/config|GET|
 jobNames|/console/jobNames|GET|
 	
-2.	通过Android/iOS SDK调用：
-	
+#####通过Android/iOS SDK调用：
 Android SDK中：
-	
 ```java
 Map<String, Object> params = new HashMap<String, Object>();
 params.put("key1", 1);
@@ -286,7 +284,6 @@ LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<J
 	}
 });
 ```
-
 iOS SDK中：
 ```java
 Map<String, Object> params = new HashMap<String, Object>();
@@ -301,78 +298,59 @@ CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSON
 	}
 });
 ```
-3. 	添加至Background Job中，帮助完成Job逻辑。
 	
 ####Cloud Function的测试：
 	
 	请移步至[Hello World 样例](...)以获取Curl测试引导。
 
 ## 后台任务
-
 Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
 
 ###创建和监控Background Job
+####在Cloud Code中定义
+进入主程序入口(main函数)，使用defineJob来定义Job
+``` java
+defineJob("helloJob", request -> {
+	Response response = new ZResponse(String.class);
+	response.setResult("hello job");
+	return response;
+});
+```
+####在管理界面中定义
+img
+表单项目|作用 
+----|-------|
+名称|任务的名字|
+函数名|想要执行的Backgroud Job的名字
+设置开始|从何时开始执行任务
+设置重复|每隔多久重复执行任务
+参数|提供数据给Backgroud Job
 
-	1.	在Cloud Code中定义
-
-		进入主程序入口(main函数)，使用defineJob来定义Job
-
-	 	``` java
-	  		defineJob("helloJob", request -> {
-	      	Response response = new ZResponse(String.class);
-	      	response.setResult("hello job");
-	      	return response;
-	  		});
-	  	```
-
-	2.	在管理门户中定义
-
-		*	进入“开发者中心”，点击“任务”－“已设任务”－“新建任务”
-		*	填写任务详情：
-
-			img
-
-			表单项目|作用 
-			----|-------|
-			名称|任务的名字|
-			函数名|想要执行的Backgroud Job的名字
-			设置开始|从何时开始执行任务
-			设置重复|每隔多久重复执行任务
-			参数|提供数据给Backgroud Job
-			
-	3.	在管理门户中查看状态
-
-		*	进入“开发者中心”，点击“任务”－“任务状态”，您将能查看所有的任务列表，以及他们的状态概况
-		*	选中您想要查看的任务，便可以查看任务详情
-
-			img
+####在管理门户中查看状态
+进入“开发者中心”，点击“任务”－>“任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
+选中您想要查看的任务，便可以查看任务详情。
+img
 
 ###测试Background Job
-
-	我们可以利用Curl测试Job是否可用
-
-	```shell
-		curl -X POST \
-		-H "X-ZCloud-AppId: YOUR_APPID" \		
-		-H "X-ZCloud-APIKey: YOUR_APIKEY" \
-		-H "Content-Type: application/json" \
-		https://api.leap.as/jobs/YOUR_JOBNAME
-	```
+我们可以利用Curl测试Job是否可用
+```shell
+curl -X POST \
+-H "X-ZCloud-AppId: YOUR_APPID" \		
+-H "X-ZCloud-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+https://api.leap.as/jobs/YOUR_JOBNAME
+```
 
 ## Hook for Cloud Data
-	如果说Cloud Data是一座仓库，那么Hook就是仓库管理员。用户对Cloud Data Object进行任何操作时（包括新建，删除及修改），Hook都可在其之前或之后，进行特定的操作。
-
-	例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
+如果说Cloud Data是一座仓库，那么Hook就是仓库管理员。用户对Cloud Data Object进行任何操作时（包括新建，删除及修改），Hook都可在其之前或之后，进行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
 ###创建和使用Hook
-	
-	实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
-
-	```java
-	  @EntityManager("MyObject")
-	  public class MyObjectHook extends EntityManagerHookBase<MyObject> {
-	      @Override
-	      public BeforeResult<MyObject> beforeCreate(MyObject obj) {
+实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
+```java
+@EntityManager("MyObject")
+public class MyObjectHook extends EntityManagerHookBase<MyObject> {
+	@Override
+	public BeforeResult<MyObject> beforeCreate(MyObject obj) {
 	        EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
 	        //创建obj前验证是否重名了
 	        Query sunQuery = Query.instance();
@@ -380,9 +358,10 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 	        FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
 	        if (findMsg.results() != null && findMsg.results().size() > 0) return new BeforeResult<>(obj,false,"obj name repeated");
 	        return new BeforeResult<>(obj, true);
-	      }
-	      @Override
-	      public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage) {
+	  }
+	  
+	  @Override
+	  public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage) {
 	        EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
 	        //创建完obj后修改这个obj的ACL权限
 	            Map<String,Map<String,Boolean>> acl = new HashMap<>();
@@ -394,145 +373,99 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 	        myObjectEntityManager.update(saveMessage.objectId().toString(), update);
 	        AfterResult afterResult = new AfterResult(saveMessage);
 	            return afterResult;
-	      }
 	  }
+}
   ```
-  
-  定义Hook时，我们需确保目标Cloud Data Object存在，否则会报错。如果Cloud Data Object不存在，我们可以：
-  
-  1.	在管理门户中，添加Class
-  2.	在定义Hook前，新建它：
 
-		```java
-		//新增Object
-		SaveResult<MyObject> saveMsg = myObjectEntityManager.create(obj);
-		```
-   	定义Hook需注意：
-
-	>* 	Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
-	>*	须将自定义实体放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
-	>* 	须配置global.json文件以识别该package，如：
-	> 	`"package-hook" : "hook"`
-	>* 	内建Collection和自定义Collection均支持Hook，内建Collection原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
-   
+定义Hook需注意：
+*确保目标Cloud Data Object对应的class存在
+*Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
+*须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
+*须配置global.json文件以识别该package，如：
+`"package-hook" : "hook"`
+* 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填，_Installation的deviceToken和installationId二选一）依然有效。
 	
 ## Log
-
-	Cloud Code提供Log功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
-
+Cloud Code提供Log功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
 ###在Cloud Code中记录Log
-
-	1.	在项目主入口Main函数中，获取Logger实例
-	2.	您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+```java
+public class MyClass {
+	Logger logger = LoggerFactory.getLogger(myClass.class);
 	
-	```java
-		public class MyClass {
-			Logger logger = LoggerFactory.getLogger(myClass.class);
-    		public void myMethod(){
-        		logger.error("Oops! Error, got you!");
-        		logger.warn("I'm Warning");
-        		logger.info("I'm Information");
-    		}
-		}
-	```	
-   	使用Log需注意:
-
-	>*	本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
-	>*	如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
-	>*	在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
+    	public void myMethod(){
+        	logger.error("Oops! Error, got you!");
+        	logger.warn("I'm Warning");
+        	logger.info("I'm Information");
+    	}
+	}
+```
+使用Log需注意:
+*本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
+*如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
+*在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
 	
 ###系统自动记录的Log
-	
-	除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
-	
-	>*	Cloud Function的上传部署信息
-	>*	Hook Entities的Cache信息
-	>* 	Cloud Code相关的API request信息
+除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
+*Cloud Function的上传部署信息
+*Hook Entities的Cache信息
+* Cloud Code相关的API request信息
 	
 ###如何查看查看Log
-
-   进入“管理网站”，点击“开发者中心”－“日志”，您便可查看该应用的所有日志。
+进入“管理网站”，点击“开发者中心”－“日志”，您便可查看该应用的所有日志。
    
-   img
+img
    
-   您还可通过切换Error，Warn和Info选项，来查看不同类型的日志。
+您还可通过切换Error，Warn和Info选项，来查看不同类型的日志。
    
 ## LCC － Cloud Code 命令行工具
-	LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
-	
-	1.	登录:
-	
-		```java
-		lcc login <用户名>
-		```
-		`<用户名>` 为您登录LAS管理门户的账号，然后根据提示输入密码
+LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
+*登录:
+```shell
+lcc login <用户名>
+```
+`<用户名>` 为您登录LAS管理门户的账号，然后根据提示输入密码
+*显示所有app：
+```shell
+lcc apps
+```
+查询账号下的所有应用，显示的信息为：AppId ：AppName
+*选择应用:
+```shell
+lcc use <应用名>
+```
+`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
+*上传cloudcode:
+```shell
+lcc upload <文件路径>
+```
+`<文件路径>`为你将部署的Cloud Code package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
+上传的的代码会被制作成Docker镜像，版本号在Cloud Code项目里的global.json文件中指定：
+```
+"global": {
+	"version": "0.0.1"
+}
+```
+*显示所有云端Cloud Code版本:
+```shell
+lcc lv
+```
+即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
+*部署cloudcode：
+```shell
+lcc deploy <版本号>
+```
+`<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloud Code；如果部署不存在的版本，会提示错误："version of appId not exists"
+*停止cloudcode：
+```shell
+lcc undeploy
+```
+停止该应用的Cloud Code，如果之前已经部署过一个版本，需要先停止，再部署。
+*输出最近的日志：
+```shell
+lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 
-	2.	显示所有app：
-	
-		```java
-		lcc apps
-		```
-
-		查询账号下的所有应用，显示的信息为：AppId ：AppName
-
-	3.	选择应用:
-	
-		```java
-		lcc use <应用名>
-		```
-
-		`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-
-	4.	上传cloudcode:
-	
-		```java
-		lcc upload <文件路径>
-		```
-
-		`<文件路径>`为你将部署的Cloud Code package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
-
-		上传的的代码会被制作成Docker镜像，版本号在Cloud Code项目里的global.json文件中指定：
-	
-		```java
-		"global": {
-		    "zVersion": "0.0.1"
-		}
-		```
-
-	5.	显示所有云端Cloud Code版本:
-	
-		```java
-		lcc lv
-		```
-
-		即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
-
-	6.	部署cloudcode：
-	
-		```java
-		lcc deploy <版本号>
-		```
-
-		`<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloud Code；如果部署不存在的版本，会提示错误："version of appId not exists"
-
- 	7.	停止cloudcode：
-	
-		```java
-		lcc undeploy
-		```
-
-		停止该应用的Cloud Code，如果之前已经部署过一个版本，需要先停止，再部署。
-
-
-	8.	输出最近的日志：
-	
-		```java
-		lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
-		```
->		
->		-l 指定输出日志的级别：info或是error
->		-n 指定log的数量
->		-s 指定跳过最近的log数量
-
-
-	
+-l 指定输出日志的级别：info或是error
+-n 指定log的数量
+-s 指定跳过最近的log数量
+```
