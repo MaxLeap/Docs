@@ -1,5 +1,5 @@
 
-# 开始使用Cloud Code
+# LAS Cloud Code 使用指南
 
 ## Cloud Code简介
 
@@ -31,27 +31,13 @@ Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
 ###安装Cloud Code Command Line Tools（lcc）
 
-## 创建和配置Cloud Code项目
-### 使用Cloud Code项目模版快速创建项目
+## 快速入门
+### 创建Cloud Code项目
 获取LAS Cloud Code Java项目模板	
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 ```
-打开LAS Cloud Code Java项目
-*Android Studio
-1. 打开Android Studio，点击“Import project”
-2. 进入项目模板根目录，选择“pom.xml”
-3. 按照默认配置点击下一步，直到完成 
-
-*Eclipse
-1. 打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
-2. 进入项目模板根目录，选择“pom.xml”
-第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
-
-### 或添加至已有项目
-请参考 xxx
-
-### 配置Cloud Code项目
+### 修改配置
 在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 
 ```java
@@ -71,20 +57,17 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 
 根据创建应用时获取的key，修改下列键的值：
 	
-	 键|值|
-  	 ------------|-------|
-	 applicationName|LAS应用名称
-	 applicationId|Application ID
-	 applicationKey|Master Key
-	 java-main|入口函数名
-	 package-hook|Hook目录
-	 package-entity|Class实体目录
-	 zVersion|当前Cloud Code项目版本号
-	
-## 一个sample function和部署
+键|值|
+------------|-------|
+applicationName|LAS应用名称
+applicationId|Application ID
+applicationKey|Master Key
+java-main|入口函数名
+package-hook|Hook目录
+package-entity|Class实体目录
+version|当前Cloud Code项目版本号
 
-### 代码
-完成上述配置步骤之后，我们便可以向Main函数中定义我们的Cloud Function了：
+### 定义一个简单的function
 
 ```Java
 import as.leap.code.LASLoader;
@@ -97,7 +80,7 @@ public class Main extends LoaderBase implements Loader {
     @Override
     public void main(GlobalConfig globalConfig) {
     
-    //定义Cloud Function
+    	//定义Cloud Function
         defineFunction("hello", request -> {
             Response<String> response = new Response<String>(String.class);
             response.setResult("Hello, " + request.parameter(Map.class).get("name") + "!");
