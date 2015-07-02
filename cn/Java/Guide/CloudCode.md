@@ -38,17 +38,14 @@ Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 		`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
 
 * 	**打开LAS Cloud Code Java项目**
+* 	**Android Studio**
+1. 打开Android Studio，点击“Import project”
+2. 进入项目模板根目录，选择“pom.xml”
+3. 按照默认配置点击下一步，直到完成 
 
-	* 	**Android Studio**
->
-		>	1. 打开Android Studio，点击“Import project”
-		>	2. 进入项目模板根目录，选择“pom.xml”
-		>	3. 按照默认配置点击下一步，直到完成 
->
-	* 	**Eclipse**
->
-		>	1.	打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
-		>	2. 进入项目模板根目录，选择“pom.xml”
+* 	**Eclipse**
+1.	打开Eclipse，点击 "File" -> "New" -> "Project From Existing Source..."
+2. 进入项目模板根目录，选择“pom.xml”
 	
 第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
 
@@ -123,23 +120,13 @@ Main class的main method是Cloud Code启动的入口，需要继承LoaderBase并
 我们将在项目根目录下的target文件夹中发现 xxx-1.0-SNAPSHOT-mod.zip 文件，这便是我们想要的package.
 
 ### 上传Cloud Code及部署
-	登录
-
-	命令： `lcc login <UserName>`
-
+	登录：lcc login <UserName>
 	选择所要部署的目标应用，作为后续操作的上下文
 
-	命令： `lcc use <AppName>`
+	上传package： lcc use <AppName>
 
-	上传package
-
-	命令： `lcc upload <PackagePath>`
-	
-	部署Cloud Code
-
-	命令： `lcc deploy <VersionNumber>`
-
-	注：这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）；您还可以通过`lcc lv`命令，获取该应用下所有Cloud Code的版本号
+	部署Cloud Code：lcc deploy <VersionNumber>
+	这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）；您还可以通过`lcc lv`命令，获取该应用下所有Cloud Code的版本号
 
 ### 测试
 
@@ -168,7 +155,7 @@ Hello, David Wang!
 
 	Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
 	
-* 	**定义Cloud Function：**
+###定义Cloud Functio
 每个Cloud Function需要实现 as.leap.code.Handler interface，该interface是典型的Functional Interface。
 ```Java
 public interface Handler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
@@ -178,7 +165,7 @@ public interface Handler <T extends as.leap.code.Request, R extends as.leap.code
 用JDK 8 lambda表达式可以如下定义一个function:
 ```Java
 request -> {
-    Response<String> response = new ZResponse<String>(String.class);
+    Response<String> response = new Response<String>(String.class);
     response.setResult("Hello, world!");
     return response;
 }
@@ -186,9 +173,9 @@ request -> {
 JDK6和7可以如下定义:
 
 ```Java
-public class HelloWorldHandler implements LASHandler {
+public class HelloWorldHandler implements Handler {
     public Response handle(Request request) {
-        Response<String> response = new ZResponse<String>(String.class);
+        Response<String> response = new ResponseImpl<String>(String.class);
         response.setResult("Hello, world!");
         return response;
     }
@@ -198,119 +185,125 @@ public class HelloWorldHandler implements LASHandler {
 ```Java
 defineFunction("helloWorld", new HelloWorldHandler());
 ```
->	**通过Cloud Function访问Cloud Data**
->
->	* 定义Cloud Data Object（在管理界面中，称之为“Class”）
->
->	新建一个Cloud Data Object，并继承CloudObject类
->
->	```java
-	public class MyObject extends CloudObject {
-	    	private String name;
-		    public String getName() {
-		        return name;
-		    }
-		    public void setName(String name) {
-		        this.name = name;
-		    }
-		}
-	```
->	
->	定义Cloud Data Object需注意：
->>	
->>*	一个Class实体对应后端数据库中的一张表
->>*	须将自定义实体放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
->>*	须配置global.json文件以识别该package，如：
->>	`"package-entity" : "data"`
->>* 每张表初始化后都会自动产生几个默认的字段如objectId、createdAt、updatedAt、ACL
->
->	* Cloud Data Object的CRUD
->
->	```java
-	public void DoSomethingToCloudData(){
-			EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
-			MyObject obj = new MyObject();
-			obj.setName("Awesome");
-			String name = obj.getName();
->				
-			//新增Object
-			SaveResult<MyObject> saveMsg = myObjectEntityManager.create(obj);
-			String objObjectId = saveMsg.getSaveMessage().objectId().toString();
-			//复制Object
-			obj.setName(name + "_" + 2);
-			SaveResult<MyObject> cloneSaveMsg = myObjectEntityManager.create(obj);
-			//查询Object
-			Query sunQuery = Query.instance();
-			sunQuery.equalTo("name", name + "_" + 2);
-			FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
-			MyObject newObj = findMsg.results().get(0);
-			//更新Object
-			Update update = Update.getUpdate();
-			update.set("name", name + "_new");
-			UpdateMsg updateMsg = myObjectEntityManager.update(newObj.objectIdString(), update);
-			//删除Object
-			DeleteResult deleteResult = ninjaEntityManager.delete(objObjectId);
-	}
-	```
->
->	我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作：
-> 	`EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);`
-> 	整个过程中系统会自动捕获并返回异常。
-> 
-> 	最后，我们只需将这个方法添加至Cloud Function中即可：
-> 	
-> 	```java
-		defineFunction("UseCloudData", request -> {
-			DoSomethingToCloudData();
-			Response<String> response = new Response<String>(String.class);
-			response.setResult("Done."));
-			return response;
-		}
-> 	```
-> 	
-* 	**使用Cloud Function：**
+###通过Cloud Function访问Cloud Data
 
-	1.	API方式调用：
+####定义Cloud Data Object（在管理界面中，称之为“Class”）
+新建一个Cloud Data Object，并继承CloudObject类
+
+```java
+public class MyObject extends CloudObject {
+    private String name;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+}
+```
+*定义Cloud Data Object需注意：
+**	一个Class实体对应后端数据库中的一张表
+**	须将自定义实体放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
+**	须配置global.json文件以识别该package，如：
+	`"package-entity" : "data"`
+** 每张表初始化后都会自动产生几个默认的字段如objectId、createdAt、updatedAt、ACL
+
+####Cloud Data Object的CRUD
+
+```java
+public void DoSomethingToCloudData(){
+        EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+	MyObject obj = new MyObject();
+	obj.setName("Awesome");
+	String name = obj.getName();
+
+	//新增Object
+	SaveResult<MyObject> saveMsg = myObjectEntityManager.create(obj);
+	String objObjectId = saveMsg.getSaveMessage().objectId().toString();
 	
-		Cloud Code服务|API地址|请求方式|
-	------------|-------|------|
-	function|/functions/{name}|POST|
-	job|/jobs/{name}|POST|
-	config|/console/config|GET|
-	jobNames|/console/jobNames|GET|
+	//复制Object
+	obj.setName(name + "_" + 2);
+	SaveResult<MyObject> cloneSaveMsg = myObjectEntityManager.create(obj);
 	
-	2.	通过Android/iOS SDK调用：
+	//查询Object
+	Query sunQuery = Query.instance();
+	sunQuery.equalTo("name", name + "_" + 2);
+	FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
+	MyObject newObj = findMsg.results().get(0);
 	
-		Android SDK中：
+	//更新Object
+	Update update = Update.getUpdate();
+	update.set("name", name + "_new");
+	UpdateMsg updateMsg = myObjectEntityManager.update(newObj.objectIdString(), update);
 	
-		```java
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("key1", 1);
-		params.put("key2", "2");
-		LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
-			@Override
-			public void done(JSONObject object, LASException exception) {
-				assertNull(exception);
-			}
-		});
-		```
-		
-		iOS SDK中：
+	//删除Object
+	DeleteResult deleteResult = ninjaEntityManager.delete(objObjectId);
+}
+```
+
+我们可以通过实体工厂，得到要操作的实体对象管理者来完成相关操作：
+	`EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);`
+整个过程中系统会自动捕获并返回异常。
+
+最后，我们只需将这个方法添加至Cloud Function中即可：
+
+```java
+defineFunction("UseCloudData", request -> {
+	DoSomethingToCloudData();
+	Response<String> response = new Response<String>(String.class);
+	response.setResult("Done."));
+	return response;
+}
+```
+
+####使用Cloud Function
+
+1.	API方式调用：
 	
-		```java
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("key1", 1);
-		params.put("key2", "2");
-		LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
-			@Override
-			public void done(JSONObject object, LASException exception) {
-				assertNull(exception);
-			}
-		});
-		```
-	3. 	添加至Background Job中，帮助完成Job逻辑。
+Cloud Code服务|API地址|请求方式|
+------------|-------|------|
+function|/functions/{name}|POST|
+job|/jobs/{name}|POST|
+config|/console/config|GET|
+jobNames|/console/jobNames|GET|
 	
-* 	Cloud Function的测试：
+2.	通过Android/iOS SDK调用：
+	
+Android SDK中：
+	
+```java
+Map<String, Object> params = new HashMap<String, Object>();
+params.put("key1", 1);
+params.put("key2", "2");
+LASCloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
+
+	@Override
+	public void done(JSONObject object, LASException exception) {
+		assertNull(exception);
+	}
+});
+```
+
+iOS SDK中：
+```java
+Map<String, Object> params = new HashMap<String, Object>();
+params.put("key1", 1);
+params.put("key2", "2");
+
+CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
+
+	@Override
+	public void done(JSONObject object, Exception exception) {
+		assertNull(exception);
+	}
+});
+```
+3. 	添加至Background Job中，帮助完成Job逻辑。
+	
+####Cloud Function的测试：
 	
 	请移步至[Hello World 样例](...)以获取Curl测试引导。
 
@@ -318,7 +311,7 @@ defineFunction("helloWorld", new HelloWorldHandler());
 
 Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
 
-*	**创建和监控Background Job：**
+###创建和监控Background Job
 
 	1.	在Cloud Code中定义
 
@@ -354,7 +347,7 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 
 			img
 
-*	**测试Background Job：**
+###测试Background Job
 
 	我们可以利用Curl测试Job是否可用
 
@@ -371,7 +364,7 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 
 	例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
-*	**创建和使用Hook：**
+###创建和使用Hook
 	
 	实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
 
@@ -427,7 +420,7 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 
 	Cloud Code提供Log功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
 
-* 	**在Cloud Code中记录Log**:
+###在Cloud Code中记录Log
 
 	1.	在项目主入口Main函数中，获取Logger实例
 	2.	您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
@@ -448,7 +441,7 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 	>*	如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
 	>*	在您的Cloud Code项目中，可以添加log4j配置开启debug日志信息，以方便你的本地开发
 	
-* 	**系统自动记录的Log**:
+###系统自动记录的Log
 	
 	除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
 	
@@ -456,7 +449,7 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
 	>*	Hook Entities的Cache信息
 	>* 	Cloud Code相关的API request信息
 	
-*	**如何查看查看Log**:
+###如何查看查看Log
 
    进入“管理网站”，点击“开发者中心”－“日志”，您便可查看该应用的所有日志。
    
