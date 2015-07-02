@@ -462,3 +462,6 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 -n 指定log的数量
 -s 指定跳过最近的log数量
 ```
+
+## Cloud Code进阶
+### 添加 Cloud Code 到已有的项目
