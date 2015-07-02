@@ -355,26 +355,26 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 
 ### Hook类型
 
-Cloud Code支持如下类型的Hook：
-* beforeCreate
+Cloud Code支持六种类型的Hook
+#### beforeCreate
 在对应的 Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
 //补充一个sample
 
-* afterCreate
+#### afterCreate
 在对应的 Cloud Data 被创建后调用，可以用于执行如 User 创建后给客户经理发封邮件这样的逻辑。
 
-* beforeUpdate
+#### beforeUpdate
 在对应的 Cloud Data 被更新之前调用，可以用于验证输入的数据是否合法。
 //补充一个sample
 
-* afterUpdate
+#### afterUpdate
 在对应的 Cloud Data 被更新之后调用，可以用于如用户更新密码后，给用户邮箱发封提醒邮件。
 
-* beforeDelete
+#### beforeDelete
 在对应的 Cloud Data 被删除之前调用，可以用于验证删除是否合法。
 //补充一个sample
 
-* afterDelete
+#### afterDelete
 在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
 
 ## Logging
