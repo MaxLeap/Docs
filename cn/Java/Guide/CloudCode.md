@@ -6,13 +6,13 @@
 ####	**什么是Cloud Code服务**
 Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
-####	**为何您需要Cloud Code服务**
+####	**为什么需要Cloud Code服务**
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助Cloud Code实现。Cloud Code有如下优势：
 
 * 强大的运算能力：Cloud Code运行在Leap Cloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
-* 可以使用各种第三方类库，提升开发效率
+* 同一套代码可以为iOS，Android，web site等提供服务
 
 ####	**Cloud Code如何工作**
 
@@ -21,15 +21,18 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 一个Cloud Code项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用Cloud Code命令行工具lcc上传到Leap Cloud，Leap Cloud会生成对应的docker image。用lcc deploy可以让Leap Cloud启动Docker container运行该Docker image。
 
-目前Cloud Code支持Java，我们在近期会推出Python版本。企业版在下个版本会支持多个Docker container，Failover，Auto scaling等功能。
+目前Cloud Code支持Java，我们在近期会推出Python版本。
 	  
+## 准备工作
+### JDK
+Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
+
+### 安装Maven
+
+### 安装Cloud Code Command Line Tools（lcc）
+
 ## 创建和配置Cloud Code项目
-### 1. 安装maven和Cloud Code Command Line Tools
-
-
-### 2.	创建Cloud Code项目
-
-#### + 使用Cloud Code项目模版快速创建项目
+### 使用Cloud Code项目模版快速创建项目
 
 * 	**获取LAS Cloud Code Java项目模板**
 		`git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git`
@@ -49,10 +52,10 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	
 第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
 
-#### + 添加至已有项目
+### 或添加至已有项目
 请参考 xxx
 
-### 2.	配置Cloud Code项目
+### 配置Cloud Code项目
 
 	在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 
@@ -88,7 +91,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 ## 一个sample function和部署
 
-#### 1. 开发
+### 代码
 完成上述配置步骤之后，我们便可以向Main函数中定义我们的Cloud Function了：
 
 ```Java
@@ -115,7 +118,7 @@ public class Main extends LoaderBase implements Loader {
 >
 Main class的main method是Cloud Code启动的入口，需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function，hook和job。
 
-#### 2. 打包
+### 打包
 
 在当前项目根目录下运行Maven命令：
 
@@ -123,26 +126,26 @@ Main class的main method是Cloud Code启动的入口，需要继承LoaderBase并
 
 我们将在项目根目录下的target文件夹中发现 xxx-1.0-SNAPSHOT-mod.zip 文件，这便是我们想要的package.
 
-#### 3. 上传Cloud Code及部署
-	1.	登录
+### 上传Cloud Code及部署
+	登录
 
 	命令： `lcc login <UserName>`
 
-	2.	选择所要部署的目标应用，作为后续操作的上下文
+	选择所要部署的目标应用，作为后续操作的上下文
 
 	命令： `lcc use <AppName>`
 
-	3.	上传package
+	上传package
 
 	命令： `lcc upload <PackagePath>`
 	
-	4.	部署Cloud Code
+	部署Cloud Code
 
 	命令： `lcc deploy <VersionNumber>`
 
 	注：这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）；您还可以通过`lcc lv`命令，获取该应用下所有Cloud Code的版本号
 
-#### 4. 测试
+### 测试
 
 通过Curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
 
