@@ -1,32 +1,10 @@
 # 快速开始
 
-##	创建LAS项目
-
-###	使用项目模板快速使用LAS SDK
-
-####	1.	获取项目模板
-
-[下载Android项目模板](...)，并解压缩至您的Workspace.
-	
-####	2.	打开项目模板
-
-#####	Android Studio 
-
-	1. 	打开Android Studio，点击“Import project”
-	2. 	进入项目模板根目录，选择“build.gradle”
-	3. 	按照默认配置点击下一步，直到完成 
-
-#####	Eclipse
-	
-	1.	打开Eclipse，点击 "File" -> "Import.." 
-	2. 	选择 "General"-> "Existing Projects into Workspace"
-	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LASStarterProject
-
-###	将LAS SDK添加至已有项目
+##	安装SDK
 
 ####	1.	获取SDK
 
-[下载LAS SDK](...)，并解压缩.
+[下载LAS SDK](...)，并解压缩。
 
 ####	2.	将SDK添加至项目
 
@@ -44,7 +22,7 @@ dependencies {
 	
 ##	配置LAS项目
 
-1.	**连接项目与LAS应用**
+###	连接项目与LAS应用
 	
 	如果您还没有在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
@@ -61,7 +39,7 @@ dependencies {
 	}
 	```
 	
-2.	**权限配置**
+###	权限配置
 
 	在AndroidManifest中，给予应用以下权限：
 	
