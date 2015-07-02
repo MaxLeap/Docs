@@ -49,6 +49,8 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 	
 第一次Load该项目时，可能需要几分钟时间获取并注册相应的组件 `？？正确的术语？？`
 
+#### + 添加至已有项目
+请参考 xxx
 
 ### 2.	配置Cloud Code项目
 
@@ -464,22 +466,8 @@ Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助�
    您还可通过切换Error，Warn和Info选项，来查看不同类型的日志。
    
 ## LCC － Cloud Code 命令行工具
-
-*	**简介**
-
 	LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
 	
-*	**获取LCC**
-	
-	1.	下载LCC：https://github.com/LeapAppServices/lcc
-
-	2.	将客户端所在路径添加至系统环境变量 $PATH 中：
-	
-		```java
-	export PATH=/Users/awesome/zcc:$PATH
-	```
-*	**LCC使用**
-
 	1.	登录:
 	
 		```java
