@@ -43,9 +43,9 @@ LAS分析服务是实时、免费、专业的移动应用统计分析服务，�
 
 LAS分析服务的默认为开启状态，如果您希望关闭分析服务，您可以在主`Activity`中添加如下代码。
 
-  ```Java
+```Java
   LASAnalytics.setAnalyticsEnabled(false);
-  ```
+```
 
 ## 
   

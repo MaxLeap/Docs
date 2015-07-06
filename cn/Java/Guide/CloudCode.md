@@ -557,60 +557,8 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 * 获取Cloud Code SDK
 * 获取测试插件JUnit
 * 获取编译打包插件
-* Cloud Code云端服务器信息
 
 ```Java
-	//服务器地址
-    <properties>
-        <nexus.develop.host>10.10.10.137:8081</nexus.develop.host>
-    </properties>
-	
-	//服务器repository配置
-    <repositories>
-        <repository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <url>http://${nexus.develop.host}/nexus/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>http://${nexus.develop.host}/nexus/content/repositories/releases</url>
-        </repository>
-        <repository>
-            <id>snapshots</id>
-            <name>Internal Releases</name>
-            <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
-        </repository>
-    </repositories>
-	
-    <pluginRepositories>
-        <pluginRepository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <url>http://${nexus.develop.host}/nexus/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
-	
-	//发布信息配置
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <distributionManagement>
-                <repository>
-                    <id>releases</id>
-                    <name>Internal Releases</name>
-                    <url>http://${nexus.develop.host}/nexus/content/repositories/releases</url>
-                </repository>
-                <snapshotRepository>
-                    <id>snapshots</id>
-                    <name>Internal Releases</name>
-                    <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-    </profiles>
-
 	//添加依赖，获取Cloud Code SDK及JUnit测试插件
     <dependencies>
         <dependency>
