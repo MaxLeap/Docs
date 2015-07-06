@@ -21,22 +21,46 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 一个Cloud Code项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用Cloud Code命令行工具lcc上传到Leap Cloud，Leap Cloud会生成对应的docker image。用lcc deploy可以让Leap Cloud启动Docker container运行该Docker image。
 
-目前Cloud Code支持Java，我们在近期会推出Python版本。
+目前Cloud Code支持Java环境，我们在近期会推出Python版本。
 	  
 ##准备工作
-###JDK
+####安装JDK
 Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
-###安装Maven
+####安装Maven
+######Eclipse:	
+1.	点击"Help" >> "Install New Software.."
+2.	在"Work with"中输入：`http://download.eclipse.org/technology/m2e/releases`，在列表中选择"Maven Integration for Eclipse"，即可安装Maven插件。
 
-###安装Cloud Code Command Line Tools（lcc）
+####安装Cloud Code Command Line Tools（Lcc）
+######Linux 和 Mac OSX
+下述命令将把名为"lcc"的工具安装至`/usr/local/bin/lcc`目录。完成后，您可直接在Terminal中使用lcc。
+
+*［！！待选择！！］*
+
+*	自动安装
+
+	```shell
+	curl -s https://******/installer.sh | sudo
+	```
+
+*	Git获取
+
+	进入目录/usr/local/bin，运行git命令获取：
+		
+	```java
+	cd /usr/local/bin
+	git clone https://gitlab.ilegendsoft.com/zcloudsdk/zcc.git
+	```
 
 ## 快速入门
 ### 创建Cloud Code项目
-获取LAS Cloud Code Java项目模板	
+获取LAS Cloud Code Java项目模板
+
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 ```
+
 ### 修改配置
 在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
 
@@ -91,7 +115,7 @@ public class Main extends LoaderBase implements Loader {
 ```
 > **需注意：** 
 >
-Main class的main method是Cloud Code启动的入口，需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function，hook和job。
+Main class的main method是Cloud Code启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
 
 ### 打包
 
@@ -99,16 +123,17 @@ Main class的main method是Cloud Code启动的入口，需要继承LoaderBase并
 
 `mvn package`
 
-我们将在项目根目录下的target文件夹中发现 xxx-1.0-SNAPSHOT-mod.zip 文件，这便是我们想要的package.
+我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
 ### 上传Cloud Code及部署
-	登录：lcc login <UserName>
-	选择所要部署的目标应用，作为后续操作的上下文
-
-	上传package： lcc use <AppName>
-
-	部署Cloud Code：lcc deploy <VersionNumber>
-	这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）；您还可以通过`lcc lv`命令，获取该应用下所有Cloud Code的版本号
+	1. 登录：lcc login <UserName>
+	2. 选择所要部署的目标应用，作为后续操作的上下文：lcc use <AppName>
+	3. 上传Package： lcc upload <PackageLocation>
+	4. 部署Cloud Code：lcc deploy <VersionNumber>
+> **需注意：** 
+>
+*	这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）
+*	请查看[lcc使用向导](...)，以获取lcc的更多信息。
 
 ### 测试
 
@@ -138,12 +163,14 @@ Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各�
 
 ###定义Cloud Function
 每个Cloud Function需要实现 as.leap.code.Handler interface，该interface是典型的Functional Interface。
+
 ```Java
 public interface Handler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
     R handle(T t);
 }
 ```
 用JDK 8 lambda表达式可以如下定义一个function:
+
 ```Java
 request -> {
     Response<String> response = new Response<String>(String.class);
@@ -163,6 +190,7 @@ public class HelloWorldHandler implements Handler {
 }
 ```
 最后，需要在main class里注册该函数。
+
 ```Java
 defineFunction("helloWorld", new HelloWorldHandler());
 ```
@@ -186,11 +214,14 @@ public class MyObject extends CloudObject {
 }
 ```
 定义Cloud Data Object需注意：
+
 * 一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理界面中创建的 class 名字一样
 * 须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
 * 须配置global.json文件以识别该package，如：`"package-entity" : "data"`
 
 ####Cloud Data Object的CRUD
+
+我们可以通过 EntityManager 操作 Cloud Data：
 
 ```java
 public void doSomethingToCloudData(){
@@ -222,12 +253,12 @@ public void doSomethingToCloudData(){
 	DeleteResult deleteResult = ninjaEntityManager.delete(objObjectId);
 }
 ```
-我们可以通过 EntityManager 对 Cloud Data 进行CRUD。
 
 ####使用Cloud Function
 
 #####API方式调用
 请求格式如下所示：
+
 ```shell
 curl -X POST \
 -H "X-LAS-AppId: YOUR_APPID" \
@@ -239,6 +270,7 @@ https://api.leap.as/functions/hello
 	
 #####通过Android/iOS SDK调用：
 Android SDK中：
+
 ```java
 Map<String, Object> params = new HashMap<String, Object>();
 params.put("key1", 1);
@@ -252,6 +284,7 @@ CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSON
 });
 ```
 iOS SDK中：
+
 ```java
 Map<String, Object> params = new HashMap<String, Object>();
 params.put("key1", 1);
@@ -282,11 +315,13 @@ public class MyJobHandler implements Handler {
 ```
 
 然后进入主程序入口(main函数)，使用defineJob来定义Job
+
 ``` java
 defineJob("myJob", new MyJobHandler());
 ```
 ###测试Background Job
 我们可以利用curl测试Job是否可用
+
 ```shell
 curl -X POST \
 -H "X-ZCloud-AppId: YOUR_APPID" \		
@@ -307,7 +342,7 @@ img
 参数|提供数据给Backgroud Job
 
 ####在管理门户中查看状态
-进入“开发者中心”，点击“任务”－>“任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
+进入“开发者中心”，点击“任务” >> “任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
 选中您想要查看的任务，便可以查看任务详情。
 img
 
@@ -316,13 +351,13 @@ Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修�
 
 ###创建和使用Hook
 实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
+
 ```java
 @EntityManager("MyObject")
 public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 	@Override
 	public BeforeResult<MyObject> beforeCreate(MyObject obj) {
 		EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
-		
 		//创建obj前验证是否重名了
 		Query sunQuery = Query.instance();
 		sunQuery.equalTo("name", obj.getName());
@@ -347,35 +382,80 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 		return afterResult;
 	}
 }
-  ```
+```
 
-定义Hook需注意：
+#####定义Hook需注意：
+
 * 确保目标Cloud Data Object对应的class存在
 * Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
 * 须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
 * 须配置global.json文件以识别该package，如：`"package-hook" : "hook"`
-* 内建class和自定义class均支持Hook，内建class原有的限制（_User用户名和密码必填，_Installation的deviceToken和installationId二选一）依然有效。
+* 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
 
 ### Hook类型
 
-Cloud Code支持六种类型的Hook
+Cloud Code支持六种类型的Hook：
 #### beforeCreate
 在对应的 Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
-//补充一个sample
+
+例如：在新建好友分组的时候，需要检查组名是否太长。
+
+```java
+@Override
+public BeforeResult<FriendList> beforeCreate(FriendList list) {
+	String name = list.getName();
+	if (name.length() >= 10)
+		return new BeforeResult<>(obj, false, "Cannot create a friend list with name longer than 10!");
+	return new BeforeResult<>(obj, true);
+}
+```
 
 #### afterCreate
 在对应的 Cloud Data 被创建后调用，可以用于执行如 User 创建后给客户经理发封邮件这样的逻辑。
 
 #### beforeUpdate
 在对应的 Cloud Data 被更新之前调用，可以用于验证输入的数据是否合法。
-//补充一个sample
+
+例如：在修改好友分组的时候，需要检查组名是否已经存在。
+
+```java
+@Override
+public BeforeResult<FriendList> beforeUpdate(FriendList list) {
+	//定义查询条件：
+	Query sunQuery = Query.instance();
+	sunQuery.equalTo("Name", list.getName());
+	//在“好友”表中执行查询
+	EntityManager<Friend> friendEntityManager = EntityManagerFactory.getManager(Friend.class);
+	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);	
+	if (findMsg.results() != null && findMsg.results().size() > 0)
+		return new BeforeResult<>(obj, false, "Update failed because the name of the friend list already exists!");
+	return new BeforeResult<>(obj, true);
+}
+```
 
 #### afterUpdate
 在对应的 Cloud Data 被更新之后调用，可以用于如用户更新密码后，给用户邮箱发封提醒邮件。
 
 #### beforeDelete
 在对应的 Cloud Data 被删除之前调用，可以用于验证删除是否合法。
-//补充一个sample
+
+例如：用户的每位好友都在某个分组下，在删除一个好友分组之前，需要检查这个分组内是否还存在好友。
+
+```java
+@Override
+public BeforeResult<FriendList> beforeDelelte(FriendList list) {
+	//定义查询条件：
+	Query sunQuery = Query.instance();
+	sunQuery.equalTo("listName", list.Name);
+	//在“好友”表中执行查询
+	EntityManager<Friend> friendEntityManager = EntityManagerFactory.getManager(Friend.class);
+	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);
+	
+	if (findMsg.results() != null && findMsg.results().size() > 0)
+		return new BeforeResult<>(obj, false, "Cannot delete a friend list if any friend inside!");
+	return new BeforeResult<>(obj, true);
+}
+```
 
 #### afterDelete
 在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
@@ -384,29 +464,33 @@ Cloud Code支持六种类型的Hook
 Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
 ###在Cloud Code中记录Log
 您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+
 ```java
 public class MyClass {
 	Logger logger = LoggerFactory.getLogger(myClass.class);
 
 	public void myMethod(){
-		logger.error("Oops! Error, got you!");
-		logger.warn("I'm Warning");
+		logger.error("Oops! Error, caught you!");
+		logger.warn("I'm Warning.");
 		logger.info("I'm Information");
 	}
 }
 ```
 使用Log需注意:
+
 * 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
 * 如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
 	
 ###系统自动记录的Log
 除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
+
 * Cloud Function的上传部署信息
 * Hook Entities的Cache信息
 * Cloud Code相关的API request信息
 	
 ###查看Log
 可以使用命令行工具lcc查看最近的log
+
 ```shell
 lcc log -n 100
 ```
@@ -467,3 +551,200 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 
 ## Cloud Code进阶
 ### 添加 Cloud Code 到已有的项目
+####配置pom.xml
+在pom中，我们将配置：
+
+* 获取Cloud Code SDK
+* 获取测试插件JUnit
+* 获取编译打包插件
+* Cloud Code云端服务器信息
+
+```Java
+	//服务器地址
+    <properties>
+        <nexus.develop.host>10.10.10.137:8081</nexus.develop.host>
+    </properties>
+	
+	//服务器repository配置
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>Public Repositories</name>
+            <url>http://${nexus.develop.host}/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>http://${nexus.develop.host}/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <name>Internal Releases</name>
+            <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+	
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>Public Repositories</name>
+            <url>http://${nexus.develop.host}/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+	
+	//发布信息配置
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <distributionManagement>
+                <repository>
+                    <id>releases</id>
+                    <name>Internal Releases</name>
+                    <url>http://${nexus.develop.host}/nexus/content/repositories/releases</url>
+                </repository>
+                <snapshotRepository>
+                    <id>snapshots</id>
+                    <name>Internal Releases</name>
+                    <url>http://${nexus.develop.host}/nexus/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
+	//添加依赖，获取Cloud Code SDK及JUnit测试插件
+    <dependencies>
+        <dependency>
+            <groupId>com.ilegendsoft</groupId>
+            <artifactId>cloud-code-test-framework</artifactId>
+            <version>2.2.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+	
+	//获取编译打包插件
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-mod-dependencies-to-target</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/lib</outputDirectory>
+                            <includeScope>compile</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/mod.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assemble</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.0</version>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+            </configuration>
+          </plugin>
+        </plugins>
+    </build>
+```
+
+####配置打包规则
+
+在/src/main/assembly中新建mod.xml文件，并在其中添加如下配置：
+
+```Java
+	<?xml version="1.0" encoding="UTF-8"?>
+	<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+	    <id>mod</id>
+	    <formats>
+	        <format>zip</format>
+	    </formats>
+	    <includeBaseDirectory>false</includeBaseDirectory>
+	    <fileSets>
+	        <fileSet>
+	            <outputDirectory>/config</outputDirectory>
+	            <directory>src/main/resources/config</directory>
+	            <includes>
+	                <include>**</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/public</outputDirectory>
+	            <directory>src/main/resources/public</directory>
+	            <includes>
+	                <include>**</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/lib</outputDirectory>
+	            <directory>target</directory>
+	            <includes>
+	                <include>${project.artifactId}-${project.version}.jar</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/lib</outputDirectory>
+	            <directory>target/lib</directory>
+	            <excludes>
+	                <exclude>jackson-*.jar</exclude>
+	                <exclude>vertx-*.jar</exclude>
+	                <exclude>log4j-*.jar</exclude>
+	                <exclude>slf4j-*.jar</exclude>
+	                <exclude>cloud-code-base-*.jar</exclude>
+	                <exclude>cloud-code-sdk-client-*.jar</exclude>
+	                <exclude>cloud-code-test-framework-*.jar</exclude>
+	                <exclude>netty-*.jar</exclude>
+	                <exclude>rxBus-*.jar</exclude>
+	                <exclude>rxjava-*.jar</exclude>
+	                <exclude>sun-client-api-*.jar</exclude>
+	                <exclude>hazelcast-*.jar</exclude>
+	                <exclude>junit-*.jar</exclude>
+	            </excludes>
+	        </fileSet>
+	    </fileSets>
+	</assembly>
+```
+
+请注意：如果您选择将打包配置文件放在其他路径下，您则需要更新pom.xml文件中的以下部分，将`src/main/assembly/mod.xml`替换为您自定义的路径：
+
+```java
+	<plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<configuration>
+			<descriptors>
+				<descriptor>src/main/assembly/mod.xml</descriptor>
+			</descriptors>
+		</configuration>
+	</plugin>	
+```
