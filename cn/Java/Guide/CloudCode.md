@@ -87,8 +87,8 @@ applicationName|LAS应用名称
 applicationId|Application ID
 applicationKey|Master Key
 java-main|入口函数名
-package-hook|Hook目录
-package-entity|Class实体目录
+package-hook|Hook包名
+package-entity|Class实体包名
 version|当前Cloud Code项目版本号
 
 ### 定义一个简单的function
