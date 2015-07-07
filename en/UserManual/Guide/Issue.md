@@ -8,7 +8,7 @@ Customer Support Service provide App with the ability to show App FAQs to users 
 FAQ contains a list of Frequently Asked Questions about the App, which can be devided into different categories and languages. Each of the FAQ item will be created in Console and passed to App, and users can refer to those FAQs when they need help. FAQ can also be used as a reference when tech support team are solving issues reported by users.
 	
 #### How to Create FAQ
-?? REMOVED IN CONSOLE ??
+?? REMOVED FROM CONSOLE ??
 
 #### Where to Use FAQ
 
