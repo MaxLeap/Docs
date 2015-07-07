@@ -285,18 +285,15 @@ CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSON
 ```
 iOS SDK中：
 
-```java
-Map<String, Object> params = new HashMap<String, Object>();
-params.put("key1", 1);
-params.put("key2", "2");
-
-CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
-
-	@Override
-	public void done(JSONObject object, Exception exception) {
-		assertNull(exception);
-	}
-});
+```objective-c
+NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
+    [LASCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
+        if (error) {
+            // an error occured
+        } else {
+            // handle the object
+        }
+    }];
 ```
 
 ## Background Job
