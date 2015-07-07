@@ -1,4 +1,5 @@
 # 快速开始
+LAS Core SDK支持 Android 2.3 或以上版本。
 
 ##	安装SDK
 
@@ -24,9 +25,9 @@ dependencies {
 
 ###	连接项目与LAS应用
 	
-	如果您还没有在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+如果您还没有在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
-	```java
+```java
 	import android.app.Application;
 	import as.leap.LASConfig;
 
@@ -37,23 +38,23 @@ dependencies {
 	        LASConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 	    }
 	}
-	```
+```
 	
 ###	权限配置
 
-	在AndroidManifest中，给予应用以下权限：
+在AndroidManifest中，给予应用以下权限：
 	
-	```java
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   	<uses-permission android:name="android.permission.INTERNET" />
-    ```
+```java
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
 	
-	权限|用途|是否必需
-	---|---|---
-	`ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
-	`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
-	`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
+权限|用途|是否必需
+---|---|---
+`ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
+`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
+`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
 	
 ##	快速测试项目配置
 

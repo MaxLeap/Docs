@@ -404,9 +404,9 @@ Cloud Code支持六种类型的Hook：
 @Override
 public BeforeResult<FriendList> beforeCreate(FriendList list) {
 	String name = list.getName();
-	if (name.length() >= 10)
-		return new BeforeResult<>(obj, false, "Cannot create a friend list with name longer than 10!");
-	return new BeforeResult<>(obj, true);
+	if (name.length() > 10)
+		return new BeforeResult<>(list, false, "Cannot create a friend list with name longer than 10!");
+	return new BeforeResult<>(list, true);
 }
 ```
 
@@ -428,8 +428,8 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list) {
 	EntityManager<Friend> friendEntityManager = EntityManagerFactory.getManager(Friend.class);
 	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);	
 	if (findMsg.results() != null && findMsg.results().size() > 0)
-		return new BeforeResult<>(obj, false, "Update failed because the name of the friend list already exists!");
-	return new BeforeResult<>(obj, true);
+		return new BeforeResult<>(list, false, "Update failed because the name of the friend list already exists!");
+	return new BeforeResult<>(list, true);
 }
 ```
 
@@ -452,8 +452,8 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);
 	
 	if (findMsg.results() != null && findMsg.results().size() > 0)
-		return new BeforeResult<>(obj, false, "Cannot delete a friend list if any friend inside!");
-	return new BeforeResult<>(obj, true);
+		return new BeforeResult<>(list, false, "Cannot delete a friend list if any friend inside!");
+	return new BeforeResult<>(list, true);
 }
 ```
 
