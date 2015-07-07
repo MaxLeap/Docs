@@ -2,7 +2,6 @@
 
 ##	安装SDK
 
-###	使用项目模板，快速使用LAS HelpCenter SDK
 HelpCenter是依赖于LAS Core SDK之上的服务，在安装和使用HelpCenter SDK之前，请确保您的项目已经安装LAS Core SDK. 您可以在 [LAS Core SDK安装向导](...)中获取更多信息。
 
 ####	获取SDK
