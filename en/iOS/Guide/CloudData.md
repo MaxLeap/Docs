@@ -60,11 +60,9 @@ There are two things to note here. You didn't have to configure or set up a new 
 
 There are also a few fields you don't need to specify that are provided as a convenience. `objectId` is a unique identifier for each saved object. `createdAt` and `updatedAt` represent the time that each object was created and last modified in the LAS. Each of these fields is filled in by LAS, so they don't exist on a `LASObject` until a save operation has completed.
 
-Note: You can use the `[LASDataManager saveObjectInBackground:block:]` method to provide additional logic which will run after the save completes.
-
 ### Retrieving Objects
 
-Saving data to the cloud is fun, but it's even more fun to get that data out again. If you have the `objectId`, you can retrieve the whole `LASObject` using `LASDataManager`. This is an asynchronous method, with variations for using blocks methods:
+Saving data to the cloud is fun, but it's even more fun to get that data out again. If you have the `objectId`, you can retrieve the whole `LASObject` using `LASQueryManager `. This is an asynchronous method, with a block to run after the retrieve complete:
 
 ```objective_c
 [LASQueryManager getObjectInBackgroundWithClass:@"GameScore" objectId:@"xWMyZ4YEGZ" block:^(LASObject *gameScore, NSError *error) {
@@ -99,8 +97,11 @@ Updating an object is simple. Just set some new data on it and call one of the s
 ```objective_c
 // Retrieve the object by id
 [LASQueryManager getObjectInBackgroundWithClass:@"GameScore" objectId:@"xWMyZ4YEGZ" block:^(LASObject *gameScore, NSError *error) {
-    // Do something with the returned LASObject in the gameScore variable.
-    NSLog(@"%@", gameScore);
+    // Now let's update it with some new data. In this case only cheatMode and score
+	// will get sent to the cloud, playerName hasn't changed.
+	gameScore[@"cheatMode"] = @YES;
+	gameScore[@"score"] = @3539;
+   [LASDataManager saveObjectInBackground:gameScore block:nil];
 }];
 // The InBackground methods are asynchronous, so any code after this will run
 // immediately.  Any code that depends on the query result should be moved
@@ -197,7 +198,7 @@ By default, when fetching an object, related `LASObject`s are not fetched. These
 
 ```objective_c
 LASObject *post = fetchedComment[@"parent"];
-[LASDataManager fetchDataOfObjectInBackground:post block:^(LASObject *object, NSError *error) {
+[LASDataManager fetchDataOfObjectIfNeededInBackground:post block:^(LASObject *object, NSError *error) {
     NSString *title = post[@"title"];
     // do something with your title variable
 }];
@@ -237,6 +238,7 @@ If you want only a subset of the `Posts` you can add extra constraints to the `L
 
 ```objective_c
 LASQuery *query = [relation query];
+[query whereKey:@"title" hasSuffix:@"We"];
 // Add other query constraints.
 ```
 
@@ -274,13 +276,110 @@ bigObject[@"myNull"] = null;
 }];
 ```
 
-We do not recommend storing large pieces of binary data like images or documents using `NSData` fields on `LASObject`. `LASObject`s should not exceed 128 kilobytes in size. To store more, we recommend you use `LASFile`. See the [guide section](#files) for more details.
+We do not recommend storing large pieces of binary data like images or documents using `NSData` fields on `LASObject`. `LASObject`s should not exceed 128 kilobytes in size. To store more, we recommend you use `LASFile` or `LASPrivateFile`. See the [guide section](#files) for more details.
 
 For more information about how LAS handles data, check out our documentation on [Data & Security][data & security guide].
 
+### Subclasses
+
+LAS is designed to get you up and running as quickly as possible. You can access all of your data using the `LASObject` class and access any field with `objectForKey:` or the `[]` subscripting operator. In mature codebases, subclasses have many advantages, including terseness, extensibility, and support for autocomplete. Subclassing is completely optional, but can transform this code:
+
+```objective_c
+LASObject *shield = [LASObject objectWithClassName:@"Armor"];
+shield[@"displayName"] = @"Wooden Shield";
+shield[@"fireProof"] = @NO;
+shield[@"rupees"] = @50;
+```
+
+Into this:
+
+```objective_c
+Armor *shield = [Armor object];
+shield.displayName = @"Wooden Shield";
+shield.fireProof = NO;
+shield.rupees = 50;
+```
+
+### Subclassing LASObject
+
+To create a `LASObject` subclass:
+
+1. Declare a subclass which conforms to the `LASSubclassing` protocol.
+2. Implement the class method `lasClassName`. This is the string you would pass to `initWithClassName:` and makes all future class name references unnecessary. Note: It must return '_User' in subclasses of LASUser and '_Passport' in subclasses of LASPassport.
+3. Import `LASObject+Subclass.h` in your .m file. This implements all methods in `LASSubclassing` beyond `lasClassName`.
+4. Call `[YourClass registerSubclass]` before `[LAS setApplicationId:clientKey:]`. An easy way to do this is with your class [+load][+load api reference](Obj-C only) or with [+initialize][+initialize api reference](both Obj-C and Swift) methods.
+
+
+The following code sucessfully declares, implements, and registers the `Armor` subclass of `LASObject`:
+
+```objective_c
+// Armor.h
+@interface Armor : LASObject<LASSubclassing>
++ (NSString *)lasClassName;
+@end
+
+// Armor.m
+// Import this header to let Armor know that LASObject privately provides most
+// of the methods for LASSubclassing.
+#import <LAS/LASObject+Subclass.h>
+@implementation Armor
++ (void)load {
+    [self registerSubclass];
+}
++ (NSString *)lasClassName {
+    return @"Armor";
+}
+@end
+```
+
+### Properties & Methods
+
+Adding custom properties and methods to your `LASObject` subclass helps encapsulate logic about the class. With `LASSubclassing`, you can keep all your logic about a subject in one place rather than using separate classes for business logic and storage/transmission logic.
+
+`LASObject` supports dynamic synthesizers just like `NSManagedObject`. Declare a property as you normally would, but use `@dynamic` rather than `@synthesize` in your .m file. The following example creates a `displayName` property in the `Armor` class:
+
+```objective_c
+// Armor.h
+@interface Armor : LASObject<LASSubclassing>
++ (NSString *)lasClassName;
+@property (retain) NSString *displayName;
+@end
+
+// Armor.m
+@dynamic displayName;
+```
+
+You can access the `displayName` property using `armor.displayName` or `[armor displayName]` and assign to it using `armor.displayName = @"Wooden Shield"` or `[armor setDisplayName:@"Wooden Sword"]`. Dynamic properties allow Xcode to provide autocomplete and catch typos.
+
+`NSNumber` properties can be implemented either as `NSNumber`s or as their primitive counterparts. Consider the following example:
+
+```objective_c
+@property BOOL fireProof;
+@property int rupees;
+```
+
+In this case, `game[@"fireProof"]` will return an `NSNumber` which is accessed using `boolValue` and `game[@"rupees"]` will return an `NSNumber` which is accessed using `intValue`, but the `fireProof` property is an actual `BOOL` and the rupees property is an actual int. The dynamic getter will automatically extract the `BOOL` or `int` value and the dynamic setter will automatically wrap the value in an `NSNumber`. You are free to use either format. Primitive property types are easier to use but `NSNumber` property types support nil values more clearly.
+
+If you need more complicated logic than simple property access, you can declare your own methods as well:
+
+```objective_c
+@dynamic iconFile;
+
+- (UIImageView *)iconView {
+    LASImageView *view = [[LASImageView alloc] initWithImage:kPlaceholderImage];
+    view.file = self.iconFile;
+    [view loadInBackground];
+    return view;
+}
+```
+
+### Initializing Subclasses
+
+You should create new objects with the `object` class method. This constructs an autoreleased instance of your type and correctly handles further subclassing. To create a reference to an existing object, use `objectWithoutDataWithObjectId:`.
+
 ## Queries
 
-We've already seen how `LASDataManager` with `getObjectInBackgroundWithClass:objectId:block:` can retrieve a single `LASObject` from LAS. There are many other ways to retrieve data with `LASQuery` - you can retrieve many objects at once, put conditions on the objects you wish to retrieve, cache queries automatically to avoid writing that code yourself, and more.
+We've already seen how `LASQueryManager` with `getObjectInBackgroundWithClass:objectId:block:` can retrieve a single `LASObject` from LAS. There are many other ways to retrieve data with `LASQuery` - you can retrieve many objects at once, put conditions on the objects you wish to retrieve, cache queries automatically to avoid writing that code yourself, and more.
 
 ### Basic Queries
 
@@ -307,16 +406,6 @@ LASQuery *query = [LASQuery queryWithClassName:@"GameScore"];
 ```
 
 `[LASQueryManager findObjectsInBackgroundWithQuery:block:]` works in that it assures the network request is done without blocking, and runs the block in the main thread.
-
-Both findObjectsInBackgroundWithBlock: and findObjectsInBackgroundWithTarget:selector: work similarly in that they assure the network request is done without blocking, and run the block/callback in the main thread. There is a corresponding findObjects method that blocks the calling thread, if you are already in a background thread:
-
-```objective_c
-// Only use this code if you are already running it in a background
-// thread, or for testing purposes!
-LASQuery *query = [LASQuery queryWithClassName:@"GameScore"];
-[query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
-NSArray* scoreArray = [query findObjects];
-```
 
 ### Specifying Constraints with NSPredicate
 
@@ -506,7 +595,7 @@ You can also find objects where the key's array value contains each of the value
 
 ### Queries on String Values
 
-Use `whereKey:hasPrefix:` to restrict to string values that start with a particular string. Similar to a MySQL LIKE operator, this is indexed so it is efficient for large datasets:
+Use `whereKey:hasPrefix:` to restrict to string values that start with a particular string. Similar to a MySQL `LIKE` operator, this is indexed so it is efficient for large datasets:
 
 ```objective_c
 // Finds barbecue sauces that start with "Big Daddy's".
@@ -590,9 +679,7 @@ You can issue a query with multiple fields included by calling `includeKey:` mul
 
 ### Counting Objects
 
- Caveat: Count queries are rate limited to a maximum of 160 requests per minute. They can also return inaccurate results for classes with more than 1,000 objects. Thus, it is preferable to architect your application to avoid this sort of count operation (by using counters, for example.) 
-
-If you just need to count how many objects match a query, but you do not need to retrieve the objects that match, you can use `[LASQueryManager countObjectsInBackgroundWithQuery:block:]` instead of `[LASQueryManager findObjectsInBackgroundWithQuery:block:]`. For example, to count how many games have been played by a particular player:
+Count queries can return inaccurate results for classes with more than 1,000 objects. If you just need to count how many objects match a query, but you do not need to retrieve the objects that match, you can use `[LASQueryManager countObjectsInBackgroundWithQuery:block:]` instead of `[LASQueryManager findObjectsInBackgroundWithQuery:block:]`. For example, to count how many games have been played by a particular player:
 
 ```objective_c
 LASQuery *query = [LASQuery queryWithClassName:@"GameScore"];
@@ -626,106 +713,9 @@ LASQuery *query = [LASQuery orQueryWithSubqueries:@[fewWins,lotsOfWins]];
 
 You can add additional constraints to the newly created `LASQuery` that act as an 'and' operator.
 
-Note that we do not, however, support non-filtering constraints (e.g. `limit`, `skip`, `orderBy...`:, `includeKey:`) in the subqueries of the compound query.
+Note that we do not, however, support non-filtering constraints (e.g. `limit`, `skip`, `orderBy...:`, `includeKey:`) in the subqueries of the compound query.
 
-## Subclasses
-
-LAS is designed to get you up and running as quickly as possible. You can access all of your data using the `LASObject` class and access any field with `objectForKey:` or the `[]` subscripting operator. In mature codebases, subclasses have many advantages, including terseness, extensibility, and support for autocomplete. Subclassing is completely optional, but can transform this code:
-
-```objective_c
-LASObject *shield = [LASObject objectWithClassName:@"Armor"];
-shield[@"displayName"] = @"Wooden Shield";
-shield[@"fireProof"] = @NO;
-shield[@"rupees"] = @50;
-```
-
-Into this:
-
-```objective_c
-Armor *shield = [Armor object];
-shield.displayName = @"Wooden Shield";
-shield.fireProof = NO;
-shield.rupees = 50;
-```
-
-### Subclassing LASObject
-
-To create a `LASObject` subclass:
-
-1. Declare a subclass which conforms to the `LASSubclassing` protocol.
-2. Implement the class method `lasClassName`. This is the string you would pass to `initWithClassName:` and makes all future class name references unnecessary. Note: It must return '_User' in subclasses of LASUser and '_Passport' in subclasses of LASPassport.
-3. Import `LASObject+Subclass.h` in your .m file. This implements all methods in `LASSubclassing` beyond `lasClassName`.
-4. Call `[YourClass registerSubclass]` before `[LAS setApplicationId:clientKey:]`. An easy way to do this is with your class' [+load][+load api reference] method.
-
-
-The following code sucessfully declares, implements, and registers the `Armor` subclass of `LASObject`:
-
-```objective_c
-// Armor.h
-@interface Armor : LASObject<LASSubclassing>
-+ (NSString *)lasClassName;
-@end
-
-// Armor.m
-// Import this header to let Armor know that LASObject privately provides most
-// of the methods for LASSubclassing.
-#import <LAS/LASObject+Subclass.h>
-@implementation Armor
-+ (void)load {
-    [self registerSubclass];
-}
-+ (NSString *)lasClassName {
-    return @"Armor";
-}
-@end
-```
-
-### Properties & Methods
-
-Adding custom properties and methods to your `LASObject` subclass helps encapsulate logic about the class. With `LASSubclassing`, you can keep all your logic about a subject in one place rather than using separate classes for business logic and storage/transmission logic.
-
-`LASObject` supports dynamic synthesizers just like `NSManagedObject`. Declare a property as you normally would, but use `@dynamic` rather than `@synthesize` in your .m file. The following example creates a `displayName` property in the `Armor` class:
-
-```objective_c
-// Armor.h
-@interface Armor : LASObject<LASSubclassing>
-+ (NSString *)lasClassName;
-@property (retain) NSString *displayName;
-@end
-
-// Armor.m
-@dynamic displayName;
-```
-
-You can access the `displayName` property using armor.`displayName` or `[armor displayName]` and assign to it using `armor.displayName = @"Wooden Shield"` or `[armor setDisplayName:@"Wooden Sword"]`. Dynamic properties allow Xcode to provide autocomplete and catch typos.
-
-`NSNumber` properties can be implemented either as `NSNumber`s or as their primitive counterparts. Consider the following example:
-
-```objective_c
-@property BOOL fireProof;
-@property int rupees;
-```
-
-In this case, `game[@"fireProof"]` will return an `NSNumber` which is accessed using `boolValue` and `game[@"rupees"]` will return an `NSNumber` which is accessed using `intValue`, but the `fireProof` property is an actual `BOOL` and the rupees property is an actual int. The dynamic getter will automatically extract the `BOOL` or `int` value and the dynamic setter will automatically wrap the value in an `NSNumber`. You are free to use either format. Primitive property types are easier to use but `NSNumber` property types support nil values more clearly.
-
-If you need more complicated logic than simple property access, you can declare your own methods as well:
-
-```objective_c
-@dynamic iconFile;
-
-- (UIImageView *)iconView {
-    LASImageView *view = [[LASImageView alloc] initWithImage:kPlaceholderImage];
-    view.file = self.iconFile;
-    [view loadInBackground];
-    return view;
-}
-```
-
-### Initializing Subclasses
-
-You should create new objects with the `object` class method. This constructs an autoreleased instance of your type and correctly handles further subclassing. To create a reference to an existing object, use `objectWithoutDataWithObjectId:`.
-
-### Queries
+### Subclass Queries
 
 You can get a query for objects of a particular subclass using the class method `query`. The following example queries for armors that the user can afford:
 
@@ -740,118 +730,21 @@ LASQuery *query = [Armor query];
 }];
 ```
 
-## Files
-
-### The LASFile
-
-`LASFile` lets you store application files in the cloud that would otherwise be too large or cumbersome to fit into a regular `LASObject`. The most common use case is storing images but you can also use it for documents, videos, music, and any other binary data (up to 100 megabytes).
-
-Getting started with `LASFile` is easy. First, you'll need to have the data in `NSData` form and then create a `LASFile` with it. In this example, we'll just use a string:
-
-```objective_c
-NSData *data = [@"Working at LAS is great!" dataUsingEncoding:NSUTF8StringEncoding];
-LASFile *file = [LASFile fileWithName:@"resume.txt" data:data];
-```
-
-Notice in this example that we give the file a name of `resume.txt`. There's two things to note here:
-
-- You don't need to worry about filename collisions. Each upload gets a unique identifier so there's no problem with uploading multiple files named `resume.txt`.
-- It's important that you give a name to the file that has a file extension. This lets LAS figure out the file type and handle it accordingly. So, if you're storing PNG images, make sure your filename ends with `.png`.
-
-Next you'll want to save the file up to the cloud.
-
-```objective_c
-[LASFileManager saveFileInBackground:file block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-Finally, after the save completes, you can associate a `LASFile` onto a `LASObject` just like any other piece of data:
-
-```objective_c
-LASObject *jobApplication = [LASObject objectWithClassName:@"JobApplication"]
-jobApplication[@"applicantName"] = @"Joe Smith";
-jobApplication[@"applicantResumeFile"] = file;
-[LASDataManager saveObjectInBackground:jobApplication block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-Retrieving it back involves calling the `getDataOfFileInBackground:block:` on the `LASFileManager`. Here we retrieve the resume file off another `JobApplication` object:
-
-```objective_c
-LASFile *applicantResume = anotherApplication[@"applicantResumeFile"];
-[LASFileManager getDataOfFileInBackground:file block:^(NSData *data, NSError *err) {
-    if (!error) {
-        NSData *resumeData = data;
-    }
-}];
-```
-
-### Images
-
-You can easily store images by converting them to `NSData` and then using `LASFile`. Suppose you have a `UIImage` named image that you want to save as a `LASFile`:
-
-```objective_c
-NSData *imageData = UIImagePNGRepresentation(image);
-LASFile *imageFile = [LASFile fileWithName:@"image.png" data:imageData];
- 
-LASObject *userPhoto = [LASObject objectWithClassName:@"UserPhoto"];
-userPhoto[@"imageName"] = @"My trip to Hawaii!";
-userPhoto[@"imageFile"] = imageFile;
-[userPhoto saveInBackground];
-[LASDataManager saveObjectInBackground:userPhoto block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-Your `LASFile` will be uploaded as part of the save operation on the `userPhoto` object. It's also possible to track a `LASFile`'s [upload and download progress](#progress).
-
-Retrieving the image back involves calling the `getDataOfFileInBackground:block:` on the `LASFileManager`. Here we retrieve the image file off another `UserPhoto` named `anotherPhoto`:
-
-```objective_c
-LASFile *userImageFile = anotherPhoto[@"imageFile"];
-[LASFileManager getDataOfFileInBackground:userImageFile block:^(NSData *imageData, NSError *error) {
-    if (!error) {
-        UIImage *image = [UIImage imageWithData:imageData];
-    }
-}];
-```
-
-### Progress
-
-It's easy to get the progress of both uploads and downloads using `LASFileManager` using `saveFileInBackground:block:progressBlock:` and `getDataOfFileInBackground:block:progressBlock:` respectively. For example:
-
-```objective_c
-NSData *data = [@"Working at LAS is great!" dataUsingEncoding:NSUTF8StringEncoding];
-LASFile *file = [LASFile fileWithName:@"resume.txt" data:data];
-[LASFileManager saveFileInBackground:file block:^(BOOL succeeded, NSError *error) {
-  // Handle success or failure here ...
-} progressBlock:^(int percentDone) {
-  // Update your progress spinner here. percentDone will be between 0 and 100.
-}];
-```
-
-You can delete files that are referenced by objects using the [REST API][rest api]. You will need to provide the master key in order to be allowed to delete a file.
-
-If your files are not referenced by any object in your app, it is not possible to delete them through the [REST API][rest api]. You may request a cleanup of unused files in your app's Settings page. Keep in mind that doing so may break functionality which depended on accessing unreferenced files through their URL property. Files that are currently associated with an object will not be affected.
-
-
 ## Users
 
 At the core of many apps, there is a notion of user accounts that lets users access their information in a secure manner. We provide a specialized user class called `LASUser` that automatically handles much of the functionality required for user account management.
 
 With this class, you'll be able to add user account functionality in your app.
 
-`LASUser` is a subclass of `LASObject` and has all the same features, such as flexible schema, automatic persistence, and a key value interface. All the methods that are on `LASObject` also exist in `LASUser`. The difference is that `LASUser` has some special additions specific to user accounts.
+`LASUser` is a subclass of `LASObject` and has all the same features, such as flexible schema, and a key value interface. All the methods that are on `LASObject` also exist in `LASUser`. The difference is that `LASUser` has some special additions specific to user accounts.
 
 ### Properties
 
 `LASUser` has several properties that set it apart from `LASObject`:
 
-- username: The username for the user (required).
-- password: The password for the user (required on signup).
-- email: The email address for the user (optional).
+- `username`: The username for the user (required).
+- `password`: The password for the user (required on signup).
+- `email`: The email address for the user (optional).
 
 We'll go through each of these in detail as we run through the various use cases for users. Keep in mind that if you set `username` and `email` through these properties, you do not need to set it using the `setObject:forKey:` method — this is set for you automatically.
 
@@ -880,15 +773,15 @@ The first thing your app will do is probably ask the user to sign up. The follow
 
 This call will asynchronously create a new user in your LAS App. Before it does this, it also checks to make sure that both the `username` and `email` are unique. Also, it securely hashes the `password` in the cloud. We never store passwords in plaintext, nor will we ever transmit passwords back to the client in plaintext.
 
-Note that we used the `signUpInBackground:block:` method, not the `saveObjectInBackground:block:` method. New `LASUser`s should always be created using the `signUpInBackground:block:` method. Subsequent updates to a user can be done by calling `saveObjectInBackground:block:`.
+Note that we used the `+[LASUserManager signUpInBackground:block:]` method, not the `+[LASDataManager saveObjectInBackground:block:]` method. New `LASUser`s should always be created using the `+[LASUserManager signUpInBackground:block:]` method. Subsequent updates to a user can be done by calling `+[LASDataManager saveObjectInBackground:block:]`.
 
 If a signup isn't successful, you should read the error object that is returned. The most likely case is that the username or email has already been taken by another user. You should clearly communicate this to your users, and ask them try a different username.
 
-You are free to use an email address as the username. Simply ask your users to enter their email, but fill it in the username property — `LASUser` will work as normal. We'll go over how this is handled in the reset password section.
+You are free to use an email address as the username. Simply ask your users to enter their email, but fill it in the username property — `LASUser` will work as normal. We'll go over how this is handled in the [reset password](#resetting-passwords) section.
 
 ### Logging In
 
-Of course, after you allow users to sign up, you need to let them log in to their account in the future. To do this, you can use the class method `[LASUserManager logInWithUsernameInBackground:password:block:]`.
+Of course, after you allow users to sign up, you need to let them log in to their account in the future. To do this, you can use the class method `+[LASUserManager logInWithUsernameInBackground:password:block:]`.
 
 ```objective_c
 [LASUserManager logInWithUsernameInBackground:@"myname" password:@"mypass" block:^(LASUser *user, NSError *error) {
@@ -906,8 +799,8 @@ Enabling email verification in an application's settings allows the application 
 
 There are three `emailVerified` states to consider:
 
-1. `true` - the user confirmed his or her email address by clicking on the link LAS emailed them. LASUsers can never have a `true` value when the user account is first created.
-2. `false` - at the time the `LASUser` object was last refreshed, the user had not confirmed his or her email address. If `emailVerified` is `false`, consider calling `refresh:` on the `LASUser`.
+1. `true` - the user confirmed his or her email address by clicking on the link LAS emailed them. `LASUser`s can never have a `true` value when the user account is first created.
+2. `false` - at the time the `LASUser` object was last refreshed, the user had not confirmed his or her email address. If `emailVerified` is `false`, consider calling `+[LASDataManager fetchDataOfObjectInBackground:block:]` and passing the `LASUser` as the first argument.
 3. missing - the `LASUser` was created when email verification was off or the `LASUser` does not have an `email`.
 
 ### Current User
@@ -928,7 +821,7 @@ if (currentUser) {
 You can clear the current user by logging them out:
 
 ```objective_c
-[LASUser logOut];
+[LASUserManager logOut];
 LASUser *currentUser = [LASUser currentUser]; // this will now be nil
 ```
 
@@ -950,13 +843,13 @@ You can create an anonymous user using `LASAnonymousUtils`:
 }];
 ```
 
-You can convert an anonymous user into a regular user by setting the username and password, then calling `signUpInBackground:block:`, or by logging in or linking with a service like [Facebook](#facebook-users) or [Twitter](#twitter-users). The converted user will retain all of its data. To determine whether the current user is an anonymous user, you can check `[LASAnonymousUtils isLinkedWithUser:]`
+You can convert an anonymous user into a regular user by setting the username and password, then calling `+[LASUserManager signUpInBackground:block:]`, or by logging in or linking with a service like [Facebook](#facebook-users) or [Twitter](#twitter-users). The converted user will retain all of its data. To determine whether the current user is an anonymous user, you can check `[LASAnonymousUtils isLinkedWithUser:]`
 
 ```objective_c
 if ([LASAnonymousUtils isLinkedWithUser:[LASUser currentUser]]) {
-    [self enableSignUpButton];
+    // current user is anonymous
 } else {
-    [self enableLogOutButton];
+    // current user is regular
 }
 ```
 
@@ -988,7 +881,7 @@ If you’ve created your own authentication routines, or otherwise logged in a u
 
 The `LASUser` class is secured by default. Data stored in a `LASUser` can only be modified by that user. By default, the data can still be read by any client. Thus, some `LASUser` objects are authenticated and can be modified, whereas others are read-only.
 
-Specifically, you are not able to invoke any of the `save` or `delete` methods unless the `LASUser` was obtained using an authenticated method, like `logIn` or `signUp`. This ensures that only the user can alter their own data.
+Specifically, you are not able to invoke any of the save or delete methods unless the `LASUser` was obtained using an authenticated method, like `+[LASUserManager logInWithUsernameInBackground:password:block:]` or `+[LASUserManager signUpInBackground:block:]`. This ensures that only the user can alter their own data.
 
 The following illustrates this security policy:
 
@@ -1106,7 +999,7 @@ It's a fact that as soon as you introduce passwords into a system, users will fo
 To kick off the password reset flow, ask the user for their email address, and call:
 
 ```objective_c
-[LASUser requestPasswordResetForEmailInBackground:@"email@example.com"];
+[LASUserManager requestPasswordResetForEmailInBackground:@"email@example.com"];
 ```
 
 This will attempt to match the given email with the user's email or username field, and will send them a password reset email. By doing this, you can opt to have users use their email as their username, or you can collect it separately and store it in the email field.
@@ -1132,7 +1025,7 @@ LASQuery *query = [LASUser query];
 }];
 ```
 
-In addition, you can use `[LASUserManager getUserObjectWithId:block:]` to get a `LASUser` by id.
+In addition, you can use `+[LASUserManager getUserObjectWithId:block:]` to get a `LASUser` by id.
 
 ### Associations
 
@@ -1159,11 +1052,216 @@ post[@"user"] = user;
 }];
 ```
 
-### Users in the Data Browser
+### Facebook Users
 
-The User class is a special class that is dedicated to storing `LASUser` objects. In the data browser, you'll see a little person icon next to the User class:
+LAS provides an easy way to integrate Facebook with your application. The Facebook SDK can be used with our SDK, and is integrated with the `LASUser` class to make linking your users to their Facebook identities easy.
 
-![](/images/user_icon.png)
+Using our Facebook integration, you can associate an authenticated Facebook user with a `LASUser`. With just a few lines of code, you'll be able to provide a "log in with Facebook" option in your app, and be able to save the user's data to LAS.
+
+**Note:** LAS SDK is compatible both with Facebook SDK 3.x and 4.x for iOS. These instructions are for Facebook SDK 4.x.
+
+#### Setup
+
+To start using Facebook with LAS, you need to:
+
+1. [Set up a Facebook app][set up a facebook app], if you haven't already.
+2. Add your application's Facebook Application ID on your LAS application's settings page.
+3. Follow Facebook's instructions for [getting started with the Facebook SDK][getting started with the facebook sdk] to create an app linked to the Facebook SDK. Double-check that you have added FacebookAppID and URL Scheme values to your application's .plist file.
+4. Download and unzip [LAS iOS SDK][las ios/ox sdk], if you haven't already.
+5. Add `LASFacebookUtils.framework` to your Xcode project, by dragging it into your project folder target.
+
+There's also two code changes you'll need to make. First, add the following to your `application:didFinishLaunchingWithOptions:` method, after you've initialized LAS SDK.
+
+```objective_c
+#import <LASFacebookUtils/LASFacebookUtils.h>
+
+@implementation AppDelegate
+
+- (void)application:(UIApplication *)application didFinishLaunchWithOptions:(NSDictionary *)options {
+   	[LAS setApplicationId:@"lasAppId" clientKey:@"lasClientKey"];
+   	[LASFacebookUtils initializeFacebook];
+}
+
+@end
+```
+	
+Next, add the following handlers in your app delegate.
+
+```objective_c
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
+}
+```
+
+There are two main ways to use Facebook with your LAS users: (1) to log in (or sign up) as a Facebook user and creating a `LASUser`, or (2) linking Facebook to an existing `LASUser`.
+
+#### Log In & Sign Up
+
+`LASUser` provides a way to allow your users to log in or sign up through Facebook. This is done by using the `logInWithPermissions` method like so:
+
+```objective_c
+[LASFacebookUtils logInWithPermissions:permissions block:^(LASUser *user, NSError *error) {
+    if (!user) {
+        NSLog(@"Uh oh. The user cancelled the Facebook login.");
+    } else if (user.isNew) {
+        NSLog(@"User signed up and logged in through Facebook!");
+    } else {
+        NSLog(@"User logged in through Facebook!");
+    }
+}];
+```
+
+When this code is run, the following happens:
+
+1. The user is shown the Facebook login dialog.
+2. The user authenticates via Facebook, and your app receives a callback using `handleOpenURL`.
+3. Our SDK receives the Facebook data and saves it to a `LASUser`. If it's a new user based on the Facebook ID, then that user is created.
+4. Your code block is called with the user.
+
+The permissions argument is an array of strings that specifies what permissions your app requires from the Facebook user. These permissions must only include read permissions. The `LASUser` integration doesn't require any permissions to work out of the box. [Read more permissions on Facebook's developer guide][facebook permissions].
+
+To acquire publishing permissions for a user so that your app can, for example, post status updates on their behalf, you must call `[LASFacebookUtils reauthorizeUser:withPublishPermissions:audience:block:]`
+
+```objective_c
+[LASFacebookUtils reauthorizeUser:[LASUser currentUser]
+              withPublishPermissions:@[@"publish_actions"]
+                            audience:FBSessionDefaultAudienceFriends
+                               block:^(BOOL succeeded, NSError *error) {
+                                   if (succeeded) {
+                                       // Your app now has publishing permissions for the user
+                                   }
+                               }];
+```
+
+#### Linking
+
+If you want to associate an existing `LASUser` to a Facebook account, you can link it like so:
+
+```objective_c
+if (![LASFacebookUtils isLinkedWithUser:user]) {
+    [LASFacebookUtils linkUser:user permissions:nil block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Woohoo, user logged in with Facebook!");
+        }
+    }];
+}
+```
+
+The steps that happen when linking are very similar to log in. The difference is that on successful login, the existing `LASUser` is updated with the Facebook information. Future logins via Facebook will now log in the user to their existing account.
+
+If you want to unlink Facebook from a user, simply do this:
+
+```objective_c
+[LASFacebookUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError *error) {
+    if (succeeded) {
+        NSLog(@"The user is no longer associated with their Facebook account.");
+    }
+}];
+```
+
+#### Facebook SDK and LAS
+
+The Facebook iOS SDK provides a number of helper classes for interacting with Facebook's API. Generally, you will use the `FBRequest` class to interact with Facebook on behalf of your logged-in user. [You can read more about the Facebook SDK here][facebook sdk reference].
+
+Our library manages the user's `FBSession` object for you. You can simply call `[LASFacebookUtils session]` to access the session instance, which can then be passed to `FBRequest`s.
+
+### Twitter Users
+
+As with Facebook, LAS also provides an easy way to integrate Twitter authentication into your application. The LAS SDK provides a straightforward way to authorize and link a Twitter account to your `LASUser`s. With just a few lines of code, you'll be able to provide a "log in with Twitter" option in your app, and be able to save their data to LAS.
+
+#### Setup
+
+To start using Twitter with LAS, you need to:
+
+1. [Set up a Twitter app][set up twitter app], if you haven't already.
+2. Add your application's Twitter consumer key on your LAS application's settings page.
+3. When asked to specify a "Callback URL" for your Twitter app, please insert a valid URL. This value will not be used by your iOS or Android application, but is necessary in order to enable authentication through Twitter.
+4. Add the `Accounts.framework` and `Social.framework` libraries to your Xcode project.
+5. Add the following where you initialize the LAS SDK, such as in `application:didFinishLaunchingWithOptions:`.
+
+```objective_c
+[LASTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY"
+consumerSecret:@"YOUR CONSUMER SECRET"];
+```
+
+If you encounter any issues that are Twitter-related, a good resource is the [official Twitter documentation][twitter documentation].
+
+There are two main ways to use Twitter with your LAS users: (1) logging in as a Twitter user and creating a `LASUser`, or (2) linking Twitter to an existing `LASUser`.
+
+#### Login & Signup
+
+`LASTwitterUtils` provides a way to allow your `LASUser`s to log in or sign up through Twitter. This is accomplished using the `logInWithBlock:`  message:
+
+```objective_c
+[LASTwitterUtils logInWithBlock:^(LASUser *user, NSError *error) {
+    if (!user) {
+        NSLog(@"Uh oh. The user cancelled the Twitter login.");
+        return;
+    } else if (user.isNew) {
+        NSLog(@"User signed up and logged in with Twitter!");
+    } else {
+        NSLog(@"User logged in with Twitter!");
+    }
+}];
+```
+
+When this code is run, the following happens:
+
+1. The user is shown the Twitter login dialog.
+2. The user authenticates via Twitter, and your app receives a callback.
+3. Our SDK receives the Twitter data and saves it to a `LASUser`. If it's a new user based on the Twitter handle, then that user is created.
+4. Your `block` is called with the user.
+
+#### Linking
+
+If you want to associate an existing `LASUser` with a Twitter account, you can link it like so:
+
+```objective_c
+if (![LASTwitterUtils isLinkedWithUser:user]) {
+    [LASTwitterUtils linkUser:user block:^(BOOL succeeded, NSError *error) {
+        if ([LASTwitterUtils isLinkedWithUser:user]) {
+            NSLog(@"Woohoo, user logged in with Twitter!");
+        }
+    }];
+}
+```
+
+The steps that happen when linking are very similar to log in. The difference is that on successful login, the existing `LASUser` is updated with the Twitter information. Future logins via Twitter will now log the user into their existing account.
+
+If you want to unlink Twitter from a user, simply do this:
+
+```objective_c
+[LASTwitterUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError *error) {
+    if (!error && succeeded) {
+        NSLog(@"The user is no longer associated with their Twitter account.");
+    }
+}];
+```
+
+#### Twitter API Calls
+
+Our SDK provides a straightforward way to sign your API HTTP requests to the [Twitter REST API][twitter rest api] when your app has a Twitter-linked `LASUser`. To make a request through our API, you can use the `LAS_Twitter` singleton provided by `LASTwitterUtils`:
+
+```objective_c
+NSURL *verify = [NSURL URLWithString:@"https://api.twitter.com/1/account/verify_credentials.json"];
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:verify];
+[[LASTwitterUtils twitter] signRequest:request];
+NSURLResponse *response = nil;
+NSError *error = nil;
+NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                     returningResponse:&response
+                                                 error:&error];
+```
 
 ## Roles
 
@@ -1171,7 +1269,7 @@ As your app grows in scope and user-base, you may find yourself needing more coa
 
 For example, in your application with curated content, you may have a number of users that are considered "Moderators" and can modify and delete content created by other users. You may also have a set of users that are "Administrators" and are allowed all of the same privileges as Moderators, but can also modify the global settings for the application. By adding users to these roles, you can ensure that new users can be made moderators or administrators, without having to manually grant permission to every resource for each user.
 
-We provide a specialized class called `LASRole` that represents these role objects in your client code. `LASRole` is a subclass of `LASObject`, and has all of the same features, such as a flexible schema, automatic persistence, and a key value interface. All the methods that are on `LASObject` also exist on `LASRole`. The difference is that `LASRole` has some additions specific to management of roles.
+We provide a specialized class called `LASRole` that represents these role objects in your client code. `LASRole` is a subclass of `LASObject`, and has all of the same features, such as a flexible schema and a key value interface. All the methods that are on `LASObject` also exist on `LASRole`. The difference is that `LASRole` has some additions specific to management of roles.
 
 ### Properties
 
@@ -1270,229 +1368,101 @@ LASRole *moderators = /* Your "Moderators" role */;
 }];
 ```
 
-## Facebook Users
+## Files
 
-LAS provides an easy way to integrate Facebook with your application. The Facebook SDK can be used with our SDK, and is integrated with the `LASUser` class to make linking your users to their Facebook identities easy.
+### The LASFile
 
-Using our Facebook integration, you can associate an authenticated Facebook user with a `LASUser`. With just a few lines of code, you'll be able to provide a "log in with Facebook" option in your app, and be able to save the user's data to LAS.
+`LASFile` lets you store application files in the cloud that would otherwise be too large or cumbersome to fit into a regular `LASObject`. The most common use case is storing images but you can also use it for documents, videos, music, and any other binary data (up to 100 megabytes).
 
-### Setup
-
-To start using Facebook with LAS, you need to:
-
-1. [Set up a Facebook app][set up a facebook app], if you haven't already.
-2. Add your application's Facebook Application ID on your LAS application's settings page.
-3. Follow Facebook's instructions for [getting started with the Facebook SDK][getting started with the facebook sdk] to create an app linked to the Facebook SDK. Double-check that you have added FacebookAppID and URL Scheme values to your application's .plist file.
-4. Download and unzip [LAS iOS SDK][las ios/ox sdk], if you haven't already.
-5. Add `LASFacebookUtils.framework` to your Xcode project, by dragging it into your project folder target.
-6. Add the following where you initialize the LAS SDK, for example, like in `application:didFinishLaunchingWithOptions:`
+Getting started with `LASFile` is easy. First, you'll need to have the data in `NSData` form and then create a `LASFile` with it. In this example, we'll just use a string:
 
 ```objective_c
-	#import <LASFacebookUtils/LASFacebookUtils.h>
-
-	@implementation AppDelegate
-
-	- (void)application:(UIApplication *)application didFinishLaunchWithOptions:(NSDictionary *)options {
-    	[LASFacebookUtils initializeFacebook];
-    	[LAS setApplicationId:@"lasAppId" clientKey:@"lasClientKey"];
-	}
-	
-	@end
+NSData *data = [@"Working at LAS is great!" dataUsingEncoding:NSUTF8StringEncoding];
+LASFile *file = [LASFile fileWithName:@"resume.txt" data:data];
 ```
 
-7. In your app delegate, add the following handlers:
+Notice in this example that we give the file a name of `resume.txt`. There's two things to note here:
+
+- You don't need to worry about filename collisions. Each upload gets a unique identifier so there's no problem with uploading multiple files named `resume.txt`.
+- It's important that you give a name to the file that has a file extension. This lets LAS figure out the file type and handle it accordingly. So, if you're storing PNG images, make sure your filename ends with `.png`.
+
+Next you'll want to save the file up to the cloud. As with `LASObject`, there is 'save' method on `LASFileManager` you can use.
 
 ```objective_c
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-
-    return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                        withSession:[LASFacebookUtils session]];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [FBAppCall handleDidBecomeActiveWithSession:[LASFacebookUtils session]];
-}
+[LASFileManager saveFileInBackground:file block:^(BOOL succeeded, NSError *error) {
+    // Handle success or failure here ...
+}];
 ```
 
-There are two main ways to use Facebook with your LAS users: (1) to log in (or sign up) as a Facebook user and creating a `LASUser`, or (2) linking Facebook to an existing `LASUser`.
-
-### Log In & Sign Up
-
-`LASUser` provides a way to allow your users to log in or sign up through Facebook. This is done by using the `logInWithPermissions` method like so:
+Finally, after the save completes, you can associate a `LASFile` onto a `LASObject` just like any other piece of data:
 
 ```objective_c
-[LASFacebookUtils logInWithPermissions:permissions block:^(LASUser *user, NSError *error) {
-    if (!user) {
-        NSLog(@"Uh oh. The user cancelled the Facebook login.");
-    } else if (user.isNew) {
-        NSLog(@"User signed up and logged in through Facebook!");
-    } else {
-        NSLog(@"User logged in through Facebook!");
+LASObject *jobApplication = [LASObject objectWithClassName:@"JobApplication"]
+jobApplication[@"applicantName"] = @"Joe Smith";
+jobApplication[@"applicantResumeFile"] = file;
+[LASDataManager saveObjectInBackground:jobApplication block:^(BOOL succeeded, NSError *error) {
+    // Handle success or failure here ...
+}];
+```
+
+Retrieving it back involves calling the `getDataOfFileInBackground:block:` on the `LASFileManager`. Here we retrieve the resume file off another `JobApplication` object:
+
+```objective_c
+LASFile *applicantResume = anotherApplication[@"applicantResumeFile"];
+[LASFileManager getDataOfFileInBackground:file block:^(NSData *data, NSError *err) {
+    if (!error) {
+        NSData *resumeData = data;
     }
 }];
 ```
 
-LAS is compatible with version 3.2 of the Facebook iOS SDK.
+### Images
 
-When this code is run, the following happens:
-
-1. The user is shown the Facebook login dialog.
-2. The user authenticates via Facebook, and your app receives a callback using `handleOpenURL`.
-3. Our SDK receives the Facebook data and saves it to a `LASUser`. If it's a new user based on the Facebook ID, then that user is created.
-4. Your code block is called with the user.
-
-The permissions argument is an array of strings that specifies what permissions your app requires from the Facebook user. These permissions must only include read permissions. The `LASUser` integration doesn't require any permissions to work out of the box. [Read more permissions on Facebook's developer guide][facebook permissions guide].
-
-To acquire publishing permissions for a user so that your app can, for example, post status updates on their behalf, you must call `[LASFacebookUtils reauthorizeUser:withPublishPermissions:audience:block:]`
+You can easily store images by converting them to `NSData` and then using `LASFile`. Suppose you have a `UIImage` named image that you want to save as a `LASFile`:
 
 ```objective_c
-[LASFacebookUtils reauthorizeUser:[LASUser currentUser]
-              withPublishPermissions:@[@"publish_actions"]
-                            audience:FBSessionDefaultAudienceFriends
-                               block:^(BOOL succeeded, NSError *error) {
-                                   if (succeeded) {
-                                       // Your app now has publishing permissions for the user
-                                   }
-                               }];
+NSData *imageData = UIImagePNGRepresentation(image);
+LASFile *imageFile = [LASFile fileWithName:@"image.png" data:imageData];
+ 
+LASObject *userPhoto = [LASObject objectWithClassName:@"UserPhoto"];
+userPhoto[@"imageName"] = @"My trip to Hawaii!";
+userPhoto[@"imageFile"] = imageFile;
+[userPhoto saveInBackground];
+[LASDataManager saveObjectInBackground:userPhoto block:^(BOOL succeeded, NSError *error) {
+    // Handle success or failure here ...
+}];
 ```
 
-### Linking
+Your `LASFile` will be uploaded as part of the save operation on the `userPhoto` object. It's also possible to track a `LASFile`'s [upload and download progress](#progress).
 
-If you want to associate an existing `LASUser` to a Facebook account, you can link it like so:
-
-```objective_c
-if (![LASFacebookUtils isLinkedWithUser:user]) {
-    [LASFacebookUtils linkUser:user permissions:nil block:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Woohoo, user logged in with Facebook!");
-        }
-    }];
-}
-```
-
-The steps that happen when linking are very similar to log in. The difference is that on successful login, the existing `LASUser` is updated with the Facebook information. Future logins via Facebook will now log in the user to their existing account.
-
-If you want to unlink Facebook from a user, simply do this:
+Retrieving the image back involves calling the `getDataOfFileInBackground:block:` on the `LASFileManager`. Here we retrieve the image file off another `UserPhoto` named `anotherPhoto`:
 
 ```objective_c
-[LASFacebookUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError *error) {
-    if (succeeded) {
-        NSLog(@"The user is no longer associated with their Facebook account.");
+LASFile *userImageFile = anotherPhoto[@"imageFile"];
+[LASFileManager getDataOfFileInBackground:userImageFile block:^(NSData *imageData, NSError *error) {
+    if (!error) {
+        UIImage *image = [UIImage imageWithData:imageData];
     }
 }];
 ```
 
-### Facebook SDK and LAS
+### Progress
 
-The Facebook iOS SDK provides a number of helper classes for interacting with Facebook's API. Generally, you will use the `FBRequest` class to interact with Facebook on behalf of your logged-in user. [You can read more about the Facebook SDK here][facebook sdk reference].
-
-Our library manages the user's `FBSession` object for you. You can simply call `[LASFacebookUtils session]` to access the session instance, which can then be passed to `FBRequest`s.
-
-## Twitter Users
-
-As with Facebook, LAS also provides an easy way to integrate Twitter authentication into your application. The LAS SDK provides a straightforward way to authorize and link a Twitter account to your `LASUser`s. With just a few lines of code, you'll be able to provide a "log in with Twitter" option in your app, and be able to save their data to LAS.
-
-### Setup
-
-To start using Twitter with LAS, you need to:
-
-1. [Set up a Twitter app][set up twitter app], if you haven't already.
-2. Add your application's Twitter consumer key on your LAS application's settings page.
-3. When asked to specify a "Callback URL" for your Twitter app, please insert a valid URL. This value will not be used by your iOS or Android application, but is necessary in order to enable authentication through Twitter.
-4. Add the `LASSNS.framework`, `Accounts.framework` and `Social.framework` libraries to your Xcode project.
-5. Add the following where you initialize the LAS SDK, such as in `application:didFinishLaunchingWithOptions:`.
+It's easy to get the progress of both uploads and downloads using `LASFileManager` using `saveFileInBackground:block:progressBlock:` and `getDataOfFileInBackground:block:progressBlock:` respectively. For example:
 
 ```objective_c
-[LASTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY"
-consumerSecret:@"YOUR CONSUMER SECRET"];
-```
-
-If you encounter any issues that are Twitter-related, a good resource is the [official Twitter documentation][twitter documentation].
-
-There are two main ways to use Twitter with your LAS users: (1) logging in as a Twitter user and creating a `LASUser`, or (2) linking Twitter to an existing `LASUser`.
-
-### Login & Signup
-
-LASTwitterUtils provides a way to allow your `LASUser`s to log in or sign up through Twitter. This is accomplished using the `logInWithBlock:`  message:
-
-```objective_c
-[LASTwitterUtils logInWithBlock:^(LASUser *user, NSError *error) {
-    if (!user) {
-        NSLog(@"Uh oh. The user cancelled the Twitter login.");
-        return;
-    } else if (user.isNew) {
-        NSLog(@"User signed up and logged in with Twitter!");
-    } else {
-        NSLog(@"User logged in with Twitter!");
-    }
+NSData *data = [@"Working at LAS is great!" dataUsingEncoding:NSUTF8StringEncoding];
+LASFile *file = [LASFile fileWithName:@"resume.txt" data:data];
+[LASFileManager saveFileInBackground:file block:^(BOOL succeeded, NSError *error) {
+  // Handle success or failure here ...
+} progressBlock:^(int percentDone) {
+  // Update your progress spinner here. percentDone will be between 0 and 100.
 }];
 ```
 
-When this code is run, the following happens:
+You can delete files that are referenced by objects using the [REST API][rest api]. You will need to provide the master key in order to be allowed to delete a file.
 
-1. The user is shown the Twitter login dialog.
-2. The user authenticates via Twitter, and your app receives a callback.
-3. Our SDK receives the Twitter data and saves it to a `LASUser`. If it's a new user based on the Twitter handle, then that user is created.
-4. Your `block` is called with the user.
-
-### Linking
-
-If you want to associate an existing `LASUser` with a Twitter account, you can link it like so:
-
-```objective_c
-if (![LASTwitterUtils isLinkedWithUser:user]) {
-    [LASTwitterUtils linkUser:user block:^(BOOL succeeded, NSError *error) {
-        if ([LASTwitterUtils isLinkedWithUser:user]) {
-            NSLog(@"Woohoo, user logged in with Twitter!");
-        }
-    }];
-}
-```
-
-The steps that happen when linking are very similar to log in. The difference is that on successful login, the existing `LASUser` is updated with the Twitter information. Future logins via Twitter will now log the user into their existing account.
-
-If you want to unlink Twitter from a user, simply do this:
-
-```objective_c
-[LASTwitterUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError *error) {
-    if (!error && succeeded) {
-        NSLog(@"The user is no longer associated with their Twitter account.");
-    }
-}];
-```
-
-### Twitter API Calls
-
-Our SDK provides a straightforward way to sign your API HTTP requests to the [Twitter REST API][twitter rest api] when your app has a Twitter-linked `LASUser`. To make a request through our API, you can use the `LAS_Twitter` singleton provided by `LASTwitterUtils`:
-
-```objective_c
-NSURL *verify = [NSURL URLWithString:@"https://api.twitter.com/1/account/verify_credentials.json"];
-NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:verify];
-[[LASTwitterUtils twitter] signRequest:request];
-NSURLResponse *response = nil;
-NSError *error = nil;
-NSData *data = [NSURLConnection sendSynchronousRequest:request
-                                     returningResponse:&response
-                                                 error:&error];
-```
-
-## Cloud Functions
-
-Cloud Functions can be called from iOS using `LASCode`. For example, to call the Cloud Function named `hello`:
-
-```objective_c
-[LASCloudCode callFunctionInBackground:@"hello"
-                      	 withParameters:@{} 
-                                 block:^(NSString *result, NSError *error) {
-   if (!error) {
-     // result is @"Hello world!"
-   }
-}];
-```
+If your files are not referenced by any object in your app, it is not possible to delete them through the [REST API][rest api]. You may request a cleanup of unused files in your app's Settings page. Keep in mind that doing so may break functionality which depended on accessing unreferenced files through their URL property. Files that are currently associated with an object will not be affected.
 
 ## GeoPoints
 
@@ -1563,7 +1533,7 @@ query.limit = 10;
 
 At this point `placesObjects` will be an array of objects ordered by distance (nearest to farthest) from `userGeoPoint`. Note that if an additional `orderByAscending:`/`orderByDescending:` constraint is applied, it will take precedence over the distance ordering.
 
-To limit the results using distance check out `whereKey:nearGeoPoint:withinMiles:`, `whereKey:nearGeoPoint:withinKilometers:`, and whereKey:nearGeoPoint:withinRadians.
+To limit the results using distance check out `whereKey:nearGeoPoint:withinMiles:`, `whereKey:nearGeoPoint:withinKilometers:`, and `whereKey:nearGeoPoint:withinRadians:`.
 
 It's also possible to query for the set of objects that are contained within a particular area. To find the objects in a rectangular bounding box, add the `whereKey:withinGeoBoxFromSouthwest:toNortheast:` restriction to your `LASQuery`.
 
@@ -1588,11 +1558,25 @@ At the moment there are a couple of things to watch out for:
 1. Each `LASObject` class may only have one key with a `LASGeoPoint` object.
 2. Points should not equal or exceed the extreme ends of the ranges. Latitude should not be -90.0 or 90.0. Longitude should not be -180.0 or 180.0. Attempting to set latitude or longitude out of bounds will cause an error.
 
+## Cloud Code
+
+Cloud Functions can be called from iOS using `LASCode`. For example, to call the Cloud Function named `hello`:
+
+```objective_c
+[LASCloudCode callFunctionInBackground:@"hello"
+                      	 withParameters:@{} 
+                                 block:^(NSString *result, NSError *error) {
+   if (!error) {
+     // result is @"Hello world!"
+   }
+}];
+```
+
 ## Handling Errors
 
 LAS has a few simple patterns for surfacing errors and handling them in your code.
 
-There are two types of errors you may encounter. The first is those dealing with logic errors in the way you're using the SDK. These types of errors result in an `NSException` being raised. For an example take a look at the following code:
+There are two types of errors you may encounter. The first is those dealing with logic errors in the way you're using the SDK. These types of errors result in an `NSException` being raised, and log detail of the exception. **Please take attention of logs beginning with something like "<LAS> Exception:" in Xcode console.** For an example take a look at the following code:
 
 ```objective_c
 LASUser *user = [LASUser user];
@@ -1646,7 +1630,7 @@ The query might also fail because the device couldn't connect to the LAS. Here's
 }
 ```
 
-When the callback expects a `NSNumber`, its boolValue tells you whether the operation succeeded or not. For example, this is how you might implement the callback for `LASDataManager`'s `+saveObjectInBackground:block:` method:
+The callback block expects a `BOOL` argument, its value tells you whether the operation succeeded or not. For example, this is how you might implement the block for `LASDataManager`'s `+saveObjectInBackground:block:` method:
 
 ```objective_c
 [LASDataManager saveObjectInBackground:nil block:^(BOOL succeeded, NSError *error) {
@@ -1662,7 +1646,7 @@ When the callback expects a `NSNumber`, its boolValue tells you whether the oper
 }];
 ```
 
-By default, all connections have a timeout of 10 seconds, so the synchronous methods will not hang indefinitely.
+By default, all connections have a timeout of 10 seconds.
 
 For a list of all possible `NSError` types, see the Error Codes section of the [API][ios api reference].
 
@@ -1682,26 +1666,40 @@ LASACL *defaultACL = [LASACL ACL];
 
 Please keep secure access to your data in mind as you build your applications for the protection of both you and your users.
 
-Our [Data & Security][data & security guide] Guide has detailed descriptions of the various ways Parse can help keep your app's data safe.
+Our [Data & Security][data & security guide] Guide has detailed descriptions of the various ways LAS can help keep your app's data safe.
 
 ### Settings
 
 In addition to coding securely, please review the settings pages for your applications to select options that will restrict access to your applications as much as is appropriate for your needs. For example, if users should be unable to log in without a Facebook account linked to their application, disable all other login mechanisms. Specify your Facebook application IDs, Twitter consumer keys, and other such information to enable server-side validation of your users' login attempts.
 
 
+
 [ios quick start]: ../../quickstart/ios/existing.html
 [data & security guide]: about:blank
 [ios api reference]: ../../api/ios/index.html
 [las ios/ox sdk]: http://cf.appfra.com/X2WTe8-sS878AirEjM9KLA/zcf-005fe580-8256-401d-adad-9824d0028a55.zip
+[rest api]: ../../api/ios/index.html
 
-[+load api reference]: https://developer.apple.com/library/ios/documentation/cocoa/reference/foundation/classes/nsobject_class/reference/reference.html#//apple_ref/occ/clm/NSObject/load
-[rest api]: /
+
+
+
+[+load api reference]: https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/#//apple_ref/occ/clm/NSObject/load
+
+[+initialize api reference]: https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/#//apple_ref/occ/clm/NSObject/initialize
+
 [access control list]: http://en.wikipedia.org/wiki/Access_control_list
 [role-based access control]: http://en.wikipedia.org/wiki/Role-based_access_control
+
 [set up a facebook app]: https://developers.facebook.com/apps
+
 [getting started with the facebook sdk]: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
+
 [facebook permissions]: https://developers.facebook.com/docs/reference/api/permissions/
+
 [facebook sdk reference]: https://developers.facebook.com/docs/reference/ios/current/
+
 [set up twitter app]: https://dev.twitter.com/apps
+
 [twitter documentation]: https://dev.twitter.com/docs
+
 [twitter rest api]: https://dev.twitter.com/docs/api
