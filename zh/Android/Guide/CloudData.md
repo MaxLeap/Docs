@@ -405,32 +405,3 @@ query.whereExists("score");
 query.whereDoesNotExist("score");
 ```
 
-You can use the whereMatchesKeyInQuery method to get objects where a key matches the value of a key in a set of objects resulting from another query. For example, if you have a class containing sports teams and you store a user's hometown in the user class, you can issue one query to find the list of users whose hometown teams have winning records. The query would look like:
-
-```java
-LASQuery<LASObject> teamQuery = LASQuery.getQuery("Team");
-teamQuery.whereGreaterThan("winPct", 0.5);
-LASQuery<LASUser> userQuery = LASUser.getQuery();
-userQuery.whereMatchesKeyInQuery("hometown", "city", teamQuery);
-LASQueryManager.findAllInBackground(userQuery, new FindCallback<LASUser>() {
-    
-  @Override
-  public void done(List<LASUser> results, LASException e) {
-    // results has the list of users with a hometown team with a winning record
-  }
-});
-```
-
-Conversely, to get objects where a key does not match the value of a key in a set of objects resulting from another query, use whereDoesNotMatchKeyInQuery. For example, to find users whose hometown teams have losing records:
-
-```java
-LASQuery<LASUser> losingUserQuery = LASUser.getQuery();
-losingUserQuery.whereDoesNotMatchKeyInQuery("hometown", "city", teamQuery);
-LASQueryManager.findAllInBackground(losingUserQuery, new FindCallback<LASUser>() {
-    
-  @Override
-  public void done(List<LASUser> results, LASException e) {
-    // results has the list of users with a hometown team with a losing record
-  }
-});
-```
