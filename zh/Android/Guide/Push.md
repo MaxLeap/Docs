@@ -100,44 +100,16 @@ LAS Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud
 #####新建Receiver
 
 ```java
-	public class CustomPushReceiver extends LASPushBroadcastReceiver {
-
-    @Override
-    protected Class<? extends Activity> getActivity(Intent intent) {
-        return YOUR_ACTIVITY.class;
-    }
-
-    @Override
-    protected Notification getNotification(Context context, Intent intent) {
-        return super.getNotification(context, intent);
-    }
-
-    @Override
-    protected void startIntent(Context context, Intent intent) {
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        super.startIntent(context, intent);
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
-    }
-
-    @Override
-    protected Uri getUri(Intent intent) {
-        return super.getUri(intent);
-    }
-	// 自定义 Notification 的 LargeIcon
-    @Override
-    protected Bitmap getLargeIcon(Context context) {
-        return super.getLargeIcon(context);
-    }
-	// 自定义 Notification 的 SmallIcon
-    @Override
-    protected int getSmallIconId(Context context) {
-        return super.getSmallIconId(context);
-    }
+public class CustomPushReceiver extends LASPushBroadcastReceiver {
+	@Override
+	protected Class<? extends Activity> getActivity(Intent intent) {
+		return YOUR_ACTIVITY.class;
 	}
+	@Override
+	protected Uri getUri(Intent intent) {
+		return super.getUri(intent);
+	}
+}
 ```
 
 #####自定义：跳转到Activity
