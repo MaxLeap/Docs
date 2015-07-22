@@ -6,7 +6,7 @@
 Cloud Data是Leap Cloud提供的数据存储服务，它建立在对象`LASObject`的基础上，每个`LASObject`包含若干键值对。所有`LASObject`均存储在Leap Cloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外Leap Cloud还提供一些特殊的对象，如`LASUser`(用户)，`LASRole`(角色)，`LASFile`(文件)，`LASGeoPoint`(地理位置)，他们都是基于`LASObject`的对象。
 
 ### 为何需要Cloud Data服务
-Cloud Data将帮助您数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
@@ -142,7 +142,6 @@ LASQueryManager.getInBackground(query, objId, new GetCallback<LASObject>() {
 ```
 
 ###删除
-
 #####删除LASObject
 您可以使用`LASDataManager.deleteInBackground()` 方法删除LASObjcet。确认删除是否成功，您可以使用 DeleteCallback 回调来处理删除操作的结果。
 
@@ -167,6 +166,66 @@ comment.remove("isRead");
 // 保存
 LASDataManager.saveInBackground(comment.remove);
 ```
+
+### 计数器
+
+计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
+
+比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
+
+#####递增计数器
+此时，我们可以利用`increment()`方法，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
+
+```java
+gameScore.increment("score");
+LASDataManager.saveInBackground(gameScore);
+```
+#####指定增量
+
+```java
+gameScore.increment("score",1000);
+LASDataManager.saveInBackground(gameScore);
+```
+#####递减计数器
+
+```java
+gameScore.decrement("score",1000);
+LASDataManager.saveInBackground(gameScore);
+```
+
+###数组
+
+您可以通过以下方式，将数组类型的值保存至LASObject的某字段(如下例中的skills字段)下：
+
+#####增加至数组尾部
+您可以使用`add()`或`addAll()`向`skills`属性的值的尾部，增加一个或多个值。
+
+```java
+gameScore.add("skills", "driving");
+gameScore.addAll("skills", Arrays.asList("flying", "kungfu"));
+LASDataManager.saveInBackground(gameScore);
+```
+
+同时，您还可以通过`addUnique()` 及 `addAllUnique()`方法，仅增加与已有数组中所有item都不同的值。
+
+#####使用新数组覆盖
+调用`put()`函数，`skills`字段下原有的数组值将被覆盖：
+
+```java
+gameScore.put("skills", Arrays.asList("flying", "kungfu"));
+LASDataManager.saveInBackground(gameScore);
+```
+#####删除某数组字段的值
+调用`removeAll()`函数，`skills`字段下原有的数组值将被清空：
+
+```java
+gameScore.removeAll("skills");
+LASDataManager.saveInBackground(gameScore);
+```
+
+注意：
+
+* Remove和Add/Put必需分开调用保存函数，否则数据不能正常上传。
 
 ###关联数据
 对象可以与其他对象相联系。如前面所述，我们可以把一个 LASObject 的实例 a，当成另一个 LASObject 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
