@@ -174,7 +174,7 @@ LASDataManager.saveInBackground(comment.remove);
 比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
 
 #####递增计数器
-此时，我们可以利用`increment()`方法，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
+此时，我们可以利用`increment()`方法(默认增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
 
 ```java
 gameScore.increment("score");
@@ -186,6 +186,8 @@ LASDataManager.saveInBackground(gameScore);
 gameScore.increment("score",1000);
 LASDataManager.saveInBackground(gameScore);
 ```
+
+注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
 #####递减计数器
 
 ```java
