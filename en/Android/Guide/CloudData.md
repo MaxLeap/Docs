@@ -767,6 +767,8 @@ public class App extends Application {
 }
 ```
 
+
+
 ### Accessors, Mutators, and Methods
 
 Adding methods to your LASObject subclass helps encapsulate logic about the class. You can keep all your logic about a subject in one place rather than using separate classes for business logic and storage/transmission logic.

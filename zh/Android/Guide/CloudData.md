@@ -362,8 +362,8 @@ public void UploadFile(Bitmap img){
 	String fileName = myFile.getName();
 	```
 * 	可以将 LASFile 直接存储到其他对象的某个属性里，后续可以取出来继续使用。
-*  
-```java
+ 
+	```java
 	//创建一个LASObject，包含ImageName，ImageFile字段
 	LASObject imgupload = new LASObject("ImageUploaded");
 	imgupload.put("ImageName", "testpic");
@@ -372,7 +372,7 @@ public void UploadFile(Bitmap img){
 	//保存
 	LASDataManager.saveInBackground(imgupload, new SaveCallback() {
 		@Override
-			public void done(LASException e) {
+		public void done(LASException e) {
 		}
 	});
 	```
