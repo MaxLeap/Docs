@@ -1,5 +1,5 @@
 
-## App Issues
+# App Issues
 
 ### Install SDK
 

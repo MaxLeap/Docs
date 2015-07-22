@@ -1,4 +1,4 @@
-## App FAQ
+# App FAQ
 #### Introduction
 With App FAQs, you can set your app FAQs in LAS Console with different languages and display them in your app. If the problem your users just encountered can’t be found in your FAQs, they can submit their questions using the Contact Us option in that interface.
 

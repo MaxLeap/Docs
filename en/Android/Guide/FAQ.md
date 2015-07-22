@@ -1,5 +1,5 @@
 
-## App FAQs
+# App FAQs
 
 ### Install SDK
 
