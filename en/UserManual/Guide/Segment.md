@@ -1,4 +1,4 @@
-## Segments
+# Segments
 #### introduction
 Segments refers to smaller subgroups, which are divided based on the same features or behaviors. You can make data analysis towards a certain Segment, send push notifications or even change the in-app user behavior according to your requirements with Cloud Config. Segments offers multiple functions for you to explore, for example:
 <br />

@@ -1,4 +1,4 @@
-## App Analytics
+# App Analytics
 #### INTRODUCTION
 In Analytics, you can see all kinds of data of your app, like the amount of New/Active Users, Session Amount, Version info, Retention Rate, Channel, and etc. Of course, you can also analyze users behavior deeply through Custom Events. We cordially recommend you to do that and will introduce the methods and advantages of Custom Events in the following content.
 <br />

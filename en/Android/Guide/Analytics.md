@@ -1,5 +1,5 @@
 
-## Analytics
+# Analytics
 
 ### Install SDK
 
