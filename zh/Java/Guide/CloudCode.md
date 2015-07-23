@@ -113,9 +113,9 @@ public class Main extends LoaderBase implements Loader {
     }
 }
 ```
-> **需注意：** 
->
-Main class的main method是Cloud Code启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
+注意：
+
+* Main class的main method是Cloud Code启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
 
 ### 打包
 
@@ -126,13 +126,15 @@ Main class的main method是Cloud Code启动的入口（在global.json中指定�
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
 ### 上传Cloud Code及部署
-	1. 登录：lcc login <UserName>
-	2. 选择所要部署的目标应用，作为后续操作的上下文：lcc use <AppName>
-	3. 上传Package： lcc upload <PackageLocation>
-	4. 部署Cloud Code：lcc deploy <VersionNumber>
-> **需注意：** 
->
+1. 登录：lcc login <UserName>
+2. 选择所要部署的目标应用，作为后续操作的上下文：lcc use <AppName>
+3. 上传Package： lcc upload <PackageLocation>
+4. 部署Cloud Code：lcc deploy <VersionNumber>
+
+**注意：** 
+
 *	这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）
+* 	若您在部署之前，已经部署过某个版本的Cloud Code，需要先卸载该版本的Cloud Code，才能部署新版本。
 *	请查看[lcc使用向导](...)，以获取lcc的更多信息。
 
 ### 测试
@@ -154,9 +156,9 @@ Hello, David Wang!
 ```
 表明测试通过，部署成功。
 
->注意:
+注意:
 
->X-LAS-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
+* X-LAS-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
 
 ## Cloud Function
 Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
