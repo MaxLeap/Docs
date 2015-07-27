@@ -8,6 +8,10 @@
 * **动态配置：**
 * **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
 
+## 下一步
+
+**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config]()或[Android开发指南 － Cloud Config]()。**
+
 ##云参数列表
 在开发者中心"云配置"中，我们可以查看该应用下所有的云参数的列表。该列表包含以下列：
 
@@ -27,3 +31,7 @@ Detail|(修改/删除按钮)
 在Detail列中选择修改按钮，即可进入修改页面。
 
 在Detail列中选择修改按钮，点击确认，即可删除该云参数。
+
+## 下一步
+
+**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config]()或[Android开发指南 － Cloud Config]()。**
