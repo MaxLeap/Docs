@@ -39,7 +39,8 @@ Android：
 
 填写GCM推送凭据：
 
-img
+![imgSTPush.png](../../../images/imgSTPush.png)
+
 
 推送服务的详细介绍，请查看[推送使用指南](..)
 
@@ -53,5 +54,20 @@ img
 ![imgSTAuth.png](../../../images/imgSTAuth.png)
 
 有关用户认证的详细介绍，请查看[用户认证开发指南](..)
+
+##电子邮件设置
+LAS可以在以下场景，帮助您自动发送邮件：
+* **验证邮箱**：您可以通过打开或关闭“验证电子邮箱”，设置新用户注册或修改邮箱时是否需要验证。
+* 重置密码
+
+![imgSTEmail.png](../../../images/imgSTEmail.png)
+
+同时，并且您可以自定义各种邮件的模版：
+
+![imgSTEmailTemplate.png](../../../images/imgSTEmailTemplate.png)
+
+
+
+
 
 
