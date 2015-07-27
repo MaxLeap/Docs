@@ -13,7 +13,7 @@
 * **保障用户体验：**选择向指定Segment发送消息，更具有针对性
 * **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
 
-**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － Marketing]()或[Android开发指南 － Marketing]()。**
+**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － Marketing]()或[Android开发指南 － Marketing](../../Android/Guide/Marketing.md)。**
 ##营销活动列表
 在"营销推广"报表中，我们可以查看该应用下所有的活动（包括**应用内消息**和**活动**）的列表：
 
@@ -86,4 +86,4 @@
 
 ## 下一步
 
-**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － Marketing]()或[Android开发指南 － Marketing]()。**
+**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － Marketing]()或[Android开发指南 － Marketing](../../Android/Guide/Marketing.md)。**
