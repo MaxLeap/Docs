@@ -41,7 +41,7 @@ If you only want to modify your last commit message, it's very simple:
 
     LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_IOS: '/devguide/ios.htm',
     LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_ANDROID: '/devguide/android.html',
-    比如在文件插入../devguide/ios.htm#Marketing, 就可以写成LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_IOS#Marketing
+    比如在文件插入/devguide/ios.htm#Marketing, 就可以写成LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_IOS#Marketing
 
 ### See also:
 [Git Book Chapter 7.6: Git Tools - Rewriting History](http://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)
