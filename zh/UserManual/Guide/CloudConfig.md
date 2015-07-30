@@ -27,6 +27,20 @@ Detail|(修改/删除按钮)
 
 ![imgCFAddConfig.png](../../../images/imgCFAddConfig.png)
 
+云参数新建完毕后，系统将提示您，是否向不同的Segment赋不同的值：
+
+![imgCFAddConfigPopup.png](../../../images/imgCFAddConfigPopup.png)
+
+点击确定后，您将进入云参数的修改界面：
+
+点击“添加云参数”，您便可以不同的Segment设定不同的参数值：
+
+![imgCFAddSegment.png](../../../images/imgCFAddSegment.png)
+
+最后，您的云参数的值将随着不同的Segment而具有不同的值：
+
+![imgCFSegmentDone.png](../../../images/imgCFSegmentDone.png)
+
 ###修改/删除云参数
 在Detail列中选择修改按钮，即可进入修改页面。
 

@@ -24,7 +24,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 * 配置：查看云代码的配置文件global.json. 包括 应用名，应用信息(App ID/MasterKey)，Cloud Code项目信息(编写语言/入口函数名/Hook包名/Entity包名)及版本号等信息。
 * 上传时间
 
-![imgCCJobList](../../../images/imgCCJobList.png)
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 
 ##任务计划
@@ -32,7 +32,8 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 ####查看任务计划列表
 通过任务计划报表，我们可以查看当前已经被安排的任务，点击每个任务计划，可以修改计划信息。
-![imgCCScheduleJob](../../../images/imgCCScheduleJob.png)
+
+![imgCCJobList.png](../../../images/imgCCJobList.png)
 
 ####新建任务计划
 您可以通过“创建任务计划”，运行云代码中的任务。创建时，您需要提供
@@ -45,8 +46,10 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 ![imgCCScheduleJob](../../../images/imgCCScheduleJob.png)
 
-##计划执行状态
+####查看计划执行状态
 任务状态中，您可以查看任务计划，每次执行任务后的状态和结果。包括执行时间，结束时间以及是否成功。
+
+![imgCCJobStatus.png](../../../images/imgCCJobStatus.png)
 
 ##日志
 您可以通过日志，查看以下信息：
@@ -64,6 +67,8 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 * 今日执行次数
 * 今日平均延时：执行时间与计划之间的延时
 * 操作：该函数历史调用次数，成功次数及失败次数
+
+![imgCCFunctionList.png](../../../images/imgCCFunctionList.png)
 
 ##实例
 

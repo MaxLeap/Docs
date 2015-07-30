@@ -3,25 +3,38 @@
 在设置中，您可以获取并设置应用相关的配置：
 
 * 应用密匙信息
-* 产品发布信息：包括？？
+* 应用发布信息：
 * 应用配置信息：如推送配置，用户认证配置，电子邮件配置，应用权限等。
 
 ##常规设置
 在常规设置中，您可以配置应用的以下信息：
 
 ####应用基本信息
-* LAS应用名：
-* URL:??
-* 默认语言：？？
-* 描述：？？
+* LAS应用名，应用类型（App或Game），操作系统（Android或iOS）
+* URL：应用主页
+* 默认语言：该应用管理页面使用的默认语言
+* 描述
+
+![imgSTGeneral1](../../../images/imgSTGeneral1.png)
 
 ####产品发布信息
+您可以通过API调用的方式，获取此处的所有信息：
+
 Android：
 
 * Android URL Schema
 * Android Package Name
 * Google Play Store
-* 应用图标：
+* 应用图标
+
+![imgSTGeneral2.png](../../../images/imgSTGeneral2.png)
+
+iOS：
+
+* iOS URL Schema
+* App Store ID
+* iTunes App Store
+* 应用图标
 
 ####删除应用
 您可以通过点击左下角的“删除应用”按钮，彻底删除该应用。同时，该应用下的所有数据都将被删除。
