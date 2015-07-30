@@ -63,4 +63,4 @@
 
 ## 下一步
 
-**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config]()或[Android开发指南 － Cloud Config](../../Android/Guide/CloudConfig.md)。**
+**如果您希望进一步了解LAS用户服务服务SDK，请参考[iOS开发指南 － 用户管理]()或[Android开发指南 － 用户管理](../../Android/Guide/CloudData.md)。**
