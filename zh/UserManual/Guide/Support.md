@@ -2,7 +2,7 @@
 ##简介
 Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ列表的管理及用户反馈的处理界面。
 
-**如果您希望进一步了解LAS Support服务SDK，请参考[iOS开发指南 － Support]()或[Android开发指南 － Support](../../Android/Guide/Support.md)。**
+**如果您希望进一步了解LAS Support服务SDK，请参考[iOS开发指南 － 支持](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#支持)或[Android开发指南 － 支持](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#支持)。**
 
 ##用户反馈
 
@@ -36,7 +36,7 @@ Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。
 
 注意：
 
-在与用户沟通，处理反馈时，您可以插入图片或FAQ（[FAQ详细介绍](#FAQ)请见下文）
+在与用户沟通，处理反馈时，您可以插入图片或FAQ（FAQ详细介绍请见下文）
 
 
 ##FAQ
@@ -54,4 +54,4 @@ Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。
 
 ## 下一步
 
-**如果您希望进一步了解LAS Support服务SDK，请参考[iOS开发指南 － Support]()或[Android开发指南 － Support](../../Android/Guide/Support.md)。**
+**如果您希望进一步了解LAS Support服务SDK，请参考[iOS开发指南 － 支持](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#支持)或[Android开发指南 － 支持](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#支持)。**
