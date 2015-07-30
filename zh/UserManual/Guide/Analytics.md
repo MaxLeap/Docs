@@ -43,7 +43,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 * 过滤器：指定应用版本和渠道
 * 时间段：指定特定的时间跨度
 	
-**如果您希望进一步了解LAS分析服务SDK，请参考[iOS开发指南 － 分析服务](../../iOS/Guide/Analytics.md)或[Android开发指南 － 分析服务](../../Android/Guide/Analytics.md)。**
+**如果您希望进一步了解LAS分析服务SDK，请参考[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#分析)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#分析)。**
 
 如果您对此服务中某些术语有疑问，请查看[LAS术语释义](..)。
 
