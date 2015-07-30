@@ -85,5 +85,4 @@
 ![imgMActivatePush.png](../../../images/imgMActivatePush.png)
 
 ## 下一步
-
 **如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － Marketing]()或[Android开发指南 － Marketing](/zh/Android/Guide/Marketing.md)。**

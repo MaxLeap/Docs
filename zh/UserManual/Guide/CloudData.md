@@ -41,5 +41,4 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 ![imgCDDeleteClass](../../../images/imgCDDeleteClass.png)
 
 ## 下一步
-
 **如果您希望进一步了解LAS Cloud Data服务SDK，请参考[iOS开发指南 － Cloud Data]()或[Android开发指南 － Cloud Data](../../Android/Guide/CloudData.md)。**

@@ -9,7 +9,6 @@
 * **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
 
 ## 下一步
-
 **如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config]()或[Android开发指南 － Cloud Config](../../Android/Guide/CloudConfig.md)。**
 
 ##云参数列表
