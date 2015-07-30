@@ -1,5 +1,5 @@
 
-#Support
+#支持
 ##简介
 Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ的管理及用户反馈的处理界面。
 
