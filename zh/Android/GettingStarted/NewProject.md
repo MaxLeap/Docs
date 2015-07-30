@@ -1,32 +1,28 @@
-# 快速开始
+#	安装SDK
 
-##	安装SDK
+##	使用模板创建LAS项目
 
-####	使用项目模板，快速使用LAS SDK
-
-#####	1.	获取项目模板
-
-[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，并解压缩至您的Workspace.
+1.	获取项目模板：[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，并解压缩至您的Workspace.
 	
-####	2.	打开项目模板
+2.	打开项目模板
 
-#####	Android Studio 
+	Android Studio 
 
 	1. 	打开Android Studio，点击“Import project”
 	2. 	进入项目模板根目录，选择“build.gradle”
 	3. 	按照默认配置点击下一步，直到完成 
 
-#####	Eclipse
+	Eclipse
 	
 	1.	打开Eclipse，点击 "File" -> "Import.." 
 	2. 	选择 "General"-> "Existing Projects into Workspace"
 	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LASStarterProject
 	
-##	配置LAS项目
+#	配置LAS项目
 
-###	连接项目与LAS应用
+1. 连接项目与LAS应用
 	
-	如果您还没有在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+	在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
 	```java
 	import android.app.Application;
@@ -41,7 +37,7 @@
 	}
 	```
 	
-###	权限配置
+2. 权限配置
 
 	在AndroidManifest中，给予应用以下权限：
 	
@@ -57,7 +53,7 @@
 	`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
 	`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
 	
-##	快速测试项目配置
+3. 快速测试项目配置
 
 为了测试项目是否已经注连接上LAS应用及其LAS云服务，我们可以向Application的onCreate()方法中添加以下代码：
 
@@ -87,4 +83,5 @@ public class MyApplication extends Application {
 
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
-至此，恭喜您已经完成LAS SDK的安装与必要的配置。请移步至[SDK使用教程](...)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
+# 下一步
+至此，您已经完成LAS SDK的安装与必要的配置。请移步至[iOS SDK使用教程](...)或[Android SDK使用教程](...)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
