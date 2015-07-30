@@ -6,7 +6,7 @@
 
 #####	1.	获取项目模板
 
-[下载Android项目模板](...)，并解压缩至您的Workspace.
+[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，并解压缩至您的Workspace.
 	
 ####	2.	打开项目模板
 

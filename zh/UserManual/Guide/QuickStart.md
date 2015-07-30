@@ -6,7 +6,7 @@
 
 #####	1.	获取项目模板
 
-[下载Android项目模板](...)，并解压缩至您的Workspace.
+[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，并解压缩至您的Workspace.
 	
 ####	2.	打开项目模板
 
@@ -87,4 +87,4 @@ public class MyApplication extends Application {
 
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
-至此，恭喜您已经完成LAS SDK的安装与必要的配置。请移步至[SDK使用教程](...)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
+至此，恭喜您已经完成LAS SDK的安装与必要的配置。请移步至[SDK使用教程](LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。

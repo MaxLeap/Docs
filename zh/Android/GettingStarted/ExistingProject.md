@@ -5,7 +5,7 @@ LAS Core SDK支持 Android 2.3 或以上版本。
 
 ####	1.	获取SDK
 
-[下载LAS SDK](...)，并解压缩。
+[下载LAS SDK](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/las-sdk-all.zip)，并解压缩。
 
 ####	2.	将SDK添加至项目
 
