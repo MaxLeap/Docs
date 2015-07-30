@@ -54,7 +54,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 * Cloud Function的上传部署信息
 * Hook Entities的Cache信息
 * 云代码API请求信息
-* 在云代码中通过日志API纪录的其他日志
+* 在云代码中通过日志API记录的其他日志
 
 日志被分为三种类型：Info（信息），Error（错误）及Warn（警告）。
 
@@ -68,7 +68,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 ##实例
 
 ##白名单
-将任务添加至白名单后，请求调用该任务时，将进行Http请求头中X-LAS-AppId和X-LAS-APIKey的校验。
+将任务添加至白名单后，请求调用该任务时，将不进行Http请求头中X-LAS-AppId和X-LAS-APIKey的校验。
 
 ## 下一步
 
