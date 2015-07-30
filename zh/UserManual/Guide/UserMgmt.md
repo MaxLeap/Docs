@@ -1,8 +1,6 @@
 # 用户管理
 在用户管理中，您可以实现用户，用户角色以及用户分群的管理。同时您还可以查看并且维护所有的安装纪录。
 
-## 下一步
-
 **如果您希望进一步了解LAS用户服务服务SDK，请参考[iOS开发指南 － 用户管理](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#用户)或[Android开发指南 － 用户管理](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#用户)。**
 
 ##用户
