@@ -37,7 +37,7 @@ You can enter the issue detail page by clicking on it and find informations belo
 
 Notice:
 
-You can send images or existing FAQs when communicating with users or handling issues. （Please check contents below for [FAQ详细介绍](#FAQ)） 
+You can send images or existing FAQs when communicating with users or handling issues. （Please check contents below for FAQ）
 
 
 ##FAQ
