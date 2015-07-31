@@ -76,4 +76,4 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 ## 下一步
 
-**如果您希望进一步了解LAS Cloud Code服务SDK，请参考[Java开发指南 － Cloud Code](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**
+**如果您希望进一步了解LAS Cloud Code服务SDK，请参考[Java开发指南 － 云代码](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**

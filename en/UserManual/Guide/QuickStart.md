@@ -6,7 +6,7 @@
 
 #####	1.	Get Project Template
 
-[下载Android项目模板](...)，and decompress it to your Workspace. 
+[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，and decompress it to your Workspace. 
 	
 ####	2.	Open Project Template
 
@@ -84,4 +84,4 @@ The test code is tryig to create a “CLASS” － “People” in Cloud Data an
 
 It indicates that the data storage in Cloud Data is successfully completed with client.
 
-Congratulations on the LAS SDK installtion and configuration. Please click [SDK使用教程](...) to check more detailed introduction and usage of LAS, and start your LAS Cloud Service now.
+Congratulations on the LAS SDK installtion and configuration. Please click [SDK使用教程](LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of LAS, and start your LAS Cloud Service now.

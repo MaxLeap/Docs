@@ -44,7 +44,7 @@ LAS Analytics helps you learn about your users and their behavoir, thus make mor
 	>	* Segments: check index variation in specific segment.
 	>	* Filters: for specific app versions and channels.
 	>	* Timeframe: choose the specifc time span.	
-**If you want to learn more about LAS Analytics Service SDK, please check [iOS开发指南 － 分析服务](../../iOS/Guide/Analytics.md) or [Android开发指南 － 分析服务](../../Android/Guide/Analytics.md)。**
+**If you want to learn more about LAS Analytics Service SDK, please check [iOS Guide － 分析服务](../../iOS/Guide/Analytics.md) or [Android Guide － 分析服务](../../Android/Guide/Analytics.md)。**
 
 ## Overview
 
@@ -231,6 +231,6 @@ API Usage shows the usage of LAS cloud service of your app.
     
 ## Next
 
-**If you want to learn more about LAS Analytics Service SDK, please check [iOS开发指南 － 分析服务]() or [Android开发指南 － 分析服务]() for more details.**
+**If you want to learn more about LAS Analytics Service SDK, please check [iOS Guide － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Analytics) or [Android Guide － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Analytics) for more details.**
     
     

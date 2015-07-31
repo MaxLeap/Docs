@@ -13,7 +13,7 @@ With data from Analytics and Segment provided by LAS Users, you can make and imp
 * **Ensure the user experience: **More targeted to send messages to certain Segment 
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
-**If you want to learn more about LAS Marketing Service SDK, please check [iOS开发指南 － Marketing]() or [Android开发指南 － Marketing](../../Android/Guide/Marketing.md) for more details.**
+**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing]() or [Android Guide － Marketing](../../Android/Guide/Marketing.md) for more details.**
 ##Marketing Campaign List营销活动列表
 In Marketing Campaign list, you can check all campaign（including**In-app Messages**and**Push Notifications**）details of an app:
 
@@ -37,7 +37,7 @@ A push contains contents as shown below, you need to fill and are able to previe
 
 * Push title 
 * Push content 
-* The parameter send to clients （Please check [营销推广 － iOS开发指南](..) or [营销推广 － Android开发指南](..) for more details.） 
+* The parameter send to clients （Please check [营销推广 － iOS Guide](..) or [营销推广 － Android Guide](..) for more details.） 
 ![imgMAddPush2.png.png](../../../images/imgMAddPush2.png)
 
 Notice:
@@ -67,7 +67,7 @@ An in-app message contains contents as shown below, you need to fill and are abl
 * Select Layout: the layout of text and image
 * Select Background: choose background color&image(Support image upload)
 * Design&Edit Content: the content, color, font and font-size
-* Set Call to Action: the target Activity that will be jumped to after clicking Call to Action（Please check [营销推广 － iOS开发指南](..) or [营销推广 － Android开发指南](..) for more details）
+* Set Call to Action: the target Activity that will be jumped to after clicking Call to Action（Please check [营销推广 － iOS Guide](..) or [营销推广 － Android Guide](..) for more details）
 
 ![imgMAddMsg2.png](../../../images/imgMAddMsg2.png)
 
@@ -86,4 +86,4 @@ The default status of a new campaign is Draft. You can select a push and click "
 
 ## Next
 
-**If you want to learn more about LAS Marketing Service SDK, please check [iOS开发指南 － Marketing]() or [Android开发指南 － Marketing](../../Android/Guide/Marketing.md) for more details.**
+**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing]() or [Android Guide － Marketing](../../Android/Guide/Marketing.md) for more details.**

@@ -3,7 +3,7 @@
 Support is a comprehensive customer service project provided by Leap Cloud for developers.This project provides complete FAQ page and feedback chat window in clients. Support service also provides FAQ list management and feedback handling interface in Console.
 
 
-**If you want to learn more about LAS Support Service SDK, please check [iOS开发指南 － Support]() or [Android开发指南 － Support](../../Android/Guide/Support.md) for more details.**
+**If you want to learn more about LAS Support Service SDK, please check [iOS Guide － Support]() or [Android Guide － Support](../../Android/Guide/Support.md) for more details.**
 
 ##App Issues
 
@@ -55,4 +55,4 @@ You can add FAQ in any section by clicking the "+ FAQ" button.
 
 ## Next 
 
-**If you want to learn more about LAS Support Service SDK, please check [iOS开发指南 － Support]() or [Android开发指南 － Support](../../Android/Guide/Support.md) for more detail.**
+**If you want to learn more about LAS Support Service SDK, please check [iOS Guide － Support]() or [Android Guide － Support](../../Android/Guide/Support.md) for more detail.**
