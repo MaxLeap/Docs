@@ -55,4 +55,4 @@ You can add FAQ in any section by clicking the "+ FAQ" button.
 
 ## Next 
 
-**If you want to learn more about LAS Support Service SDK, please check [iOS Guide － Support]() or [Android Guide － Support](../../Android/Guide/Support.md) for more detail.**
+**If you want to learn more about LAS Support Service SDK, please check [iOS Guide － Support](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Support) or [Android Guide － Support](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_Android#Support) for more detail.**

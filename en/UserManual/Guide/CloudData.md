@@ -11,9 +11,9 @@ Cloud Data can help you build and maintain the facility of your database, thus f
 * Sort out the deployment and maintenance of hardware resourses.
 * Provide standard and complete data access API
 * Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
-* Realize the Hook of cloud data with the Cloud Code service.可结合Cloud Code服务，实现云端数据的Hook （Please check [Cloud Code引导](。。。) for more details.） 
+* Realize the Hook of cloud data with the Cloud Code service.可结合Cloud Code服务，实现云端数据的Hook （Please check [Cloud Code Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.） 
 
-**If you want to learn more about LAS Cloud Data Service SDK, please check [iOS Guide － Cloud Data]() or [Android Guide － Cloud Data](../../Android/Guide/CloudData.md) for more details.**
+**If you want to learn more about LAS Cloud Data Service SDK, please check [iOS Guide － Cloud Data](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CloudData) or [Android Guide － Cloud Data](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_Android#CloudData) for more details.**
 
 ##Class List
 In Data of Dev Center, you can check the class list of your app:
@@ -43,4 +43,4 @@ Select the Class you want to delete in the Class table, choose More>>Del Class a
 
 ## Next
 
-**If you want to learn more about LAS Cloud Data Service SDK, please check [iOS Guide － Cloud Data]() or [Android Guide － Cloud Data](../../Android/Guide/CloudData.md) for more details.**
+**If you want to learn more about LAS Cloud Data Service SDK, please check [iOS Guide － Cloud Data](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CloudData) or [Android Guide － Cloud Data](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_Android#CloudData) for more details.**
