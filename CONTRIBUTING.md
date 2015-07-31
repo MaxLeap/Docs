@@ -39,9 +39,14 @@ If you only want to modify your last commit message, it's very simple:
 
 We provide several path-maps here, you can compile links of other pages with those paths:
 
-    LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_IOS: '/devguide/ios.htm',
-    LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_ANDROID: '/devguide/android.html',
-    For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LAS_DOCS_GUIDE_LLINK_PLACEHOLDER_IOS#Marketing
+    LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS: '/devguide/ios.html',
+    LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID: '/devguide/android.html',
+    LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA: '/devguide/java.html',
+    LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS: '/tutorials/ios.html',
+    LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID: '/tutorials/android.html',
+    LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL: '/usermanual'
+        
+    For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 
 ### See also:
 [Git Book Chapter 7.6: Git Tools - Rewriting History](http://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)
