@@ -13,9 +13,8 @@ With data from Analytics and Segment provided by LAS Users, you can make and imp
 * **Ensure the user experience: **More targeted to send messages to certain Segment 
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
-**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Marketing) for more details.**
+**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_Android#Marketing) for more details.**
 ##Marketing Campaign List
-
 In Marketing Campaign list, you can check all campaign（including**In-app Messages**and**Push Notifications**）details of an app:
 
 ![imgMCampaignList.png](../../../images/imgMCampaignList.png)
@@ -87,4 +86,4 @@ The default status of a new campaign is Draft. You can select a push and click "
 
 ## Next
 
-**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Marketing) for more details.**
+**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_Android#Marketing) for more details.**

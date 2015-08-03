@@ -14,8 +14,7 @@ With data from Analytics and Segment provided by LAS Users, you can make and imp
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
 **If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Marketing) for more details.**
-##Marketing Campaign List
-
+##Marketing Campaign List营销活动列表
 In Marketing Campaign list, you can check all campaign（including**In-app Messages**and**Push Notifications**）details of an app:
 
 ![imgMCampaignList.png](../../../images/imgMCampaignList.png)
@@ -28,7 +27,7 @@ Click "New Campaign + " >> Push, and then you can enter the create new Push page
 The target users can be divided into 3 types:
 
 * All users
-* Users from certain Segments （Please check [UserManual of Segment](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/usermgmt.html) for more information about creating new **Segment** ）
+* Users from certain Segments （Please check [用户分群使用手册](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/usermgmt.html) for more information about creating new **Segment** ）
 * Users using certain devices
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)
@@ -76,7 +75,7 @@ Notice:
 
 * You can create multiple messages in a campaign by clicking the "+" button on the left.
 * 
-####Step 3：Schedule Campaign and Set Expire Date
+####步骤三：Schedule Campaign and Set Expire Date
 ![imgMAddMsg3.png](../../../images/imgMAddMsg3.png)
 
 ##Activate the Push/In-app message
