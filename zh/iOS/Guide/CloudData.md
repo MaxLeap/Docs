@@ -8,7 +8,7 @@ language_tabs:
 search: true
 ---
 
-# iOS 指南
+# 云数据
 
 如果您尚未安装 SDK，请先查阅[快速入门指南][ios quick start]，安装 SDK 并使之在 Xcode 中运行。
 您还可以查看我们的 [API 参考][ios api reference]，了解有关我们 SDK 的更多详细信息。

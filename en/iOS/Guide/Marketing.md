@@ -1,8 +1,8 @@
 ---
-titile: Push Notification Guide
+titile: Marketing
 ---
 
-# Push Notification Guide
+# Marketing
 
 If you haven't installed the SDK yet, please [head over to the Push QuickStart][ios quick start] to get our SDK up and running.
 
