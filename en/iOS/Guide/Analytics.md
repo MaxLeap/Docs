@@ -58,4 +58,4 @@ NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 [LASAnalytics trackEvent:@"purchase" dimensions:dict];
 ```
 
-[ios_quick_start_guide]: ../../quickstart/ios/existing.html
+[ios_quick_start_guide]: ../../quickstart/ios/core/existing.html

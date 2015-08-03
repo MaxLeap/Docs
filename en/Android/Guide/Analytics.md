@@ -3,7 +3,7 @@
 
 ### Install SDK
 
-Please make sure that you have integrated the LAS Core lib. If not, please check [QuickStart](../../quickstart/android/existing.html) to integrate it.
+Please make sure that you have integrated the LAS Core lib. If not, please check [QuickStart](../../quickstart/android/core/existing.html) to integrate it.
 
 ### Set AndroidManifest.xml File
 

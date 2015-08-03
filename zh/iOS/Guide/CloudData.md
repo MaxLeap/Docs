@@ -1703,7 +1703,7 @@ LASACL *defaultACL = [LASACL ACL];
 
 
 
-[ios quick start]: ../../quickstart/ios/existing.html
+[ios quick start]: ../../quickstart/ios/core/existing.html
 [data & security guide]: about:blank
 [ios api reference]: ../../api/ios/index.html
 [las ios/ox sdk]: https://github.com/LeapAppServices/LAS-SDK-Release/blob/master/iOS/v1.5.2/LASAll-v1.5.2.zip?raw=true

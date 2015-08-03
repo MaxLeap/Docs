@@ -1674,7 +1674,7 @@ In addition to coding securely, please review the settings pages for your applic
 
 
 
-[ios quick start]: ../../quickstart/ios/existing.html
+[ios quick start]: ../../quickstart/ios/core/existing.html
 [data & security guide]: about:blank
 [ios api reference]: ../../api/ios/index.html
 [las ios/ox sdk]: http://cf.appfra.com/X2WTe8-sS878AirEjM9KLA/zcf-005fe580-8256-401d-adad-9824d0028a55.zip

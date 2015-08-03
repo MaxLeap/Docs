@@ -162,7 +162,7 @@ Setting up Push Notifications is often a source of frustration for developers. T
 - If your app has been released for a while, it's possible for the recipient estimate on the push composer page to be higher than the pushes sent value on the push results page. The push composer estimate is generated via running your push segment query over your app's installation table. We do not automatically delete installation objects when the users uninstall your app. When we try to send a push, we detect uninstalled installations and do not include them in the pushes sent value on the results page.
 
 
-[ios quick start]: ../../quickstart/ios/existing.html
+[ios quick start]: ../../quickstart/ios/core/existing.html
 [tutorial_img_link]: /images/tutorial_link.png
 [tutorial_link]: ../../ios_push_tutorial.html
 [ios guide #objects]: ../../docs/cloudData/ios.html#Objects
