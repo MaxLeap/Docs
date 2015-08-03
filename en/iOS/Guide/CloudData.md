@@ -7,7 +7,7 @@ language_tabs:
 
 ---
 
-# iOS Developer Guide
+# Cloud Data
 
 If you haven't installed the SDK yet, please [head over to the QuickStart guide][ios quick start] to get our SDK up and running in Xcode. Note that we support iOS 6.0 and higher. You can also check out our [API Reference][ios api reference] for more detailed information about our SDK.
 

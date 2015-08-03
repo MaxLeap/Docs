@@ -5,7 +5,7 @@ language_tabs:
   - java
 ---
 
-# Android Guide
+# Cloud Data
 
 If you haven't installed the SDK yet, please [head over to the QuickStart guide][android guide quick start] to get our SDK up and running in Eclipse. You can also check out our [API Reference][android guide api reference] for more detailed information about our SDK.
 
