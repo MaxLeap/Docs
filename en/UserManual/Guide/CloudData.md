@@ -35,7 +35,7 @@ After the creation of new Class, you can select the Class and do modifications a
 * Add new row: add new data
 * Filter the data: click the hourglass icon 
 * Choose column: click the Table button on the top right corner
-* 
+
 ###Delete Class 
 Select the Class you want to delete in the Class table, choose More>>Del Class and then click Apply.
 
