@@ -39,7 +39,7 @@ If you only want to modify your last commit message, it's very simple:
 
 We provide several path-maps here, you can compile links of other pages with those paths:
 
-    'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '../docs.html',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '../docs.html',
         'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS': '../devguide/ios.html',
         'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN': '../devguide/ios.html#CloudData',
         'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN': '../devguide/ios.html#Analytics',
