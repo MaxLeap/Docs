@@ -11,7 +11,7 @@ LAS Analytics collects all kinds of data of apps and users with clients and Clou
 LAS Analytics is a real-time free and professional mobile apps Analytics Service. It provides multi-analysis of operation status, deep knowledge of typical users and advice on optimizing operating strategies, which will finally realize：
 
 *	Comprehend the operation status and trend: from New Users, Active Users, Sessions and App Versions to User bahevior, User attributes and behavioral features, we provide all kinds of indexes to help you understand your app's operation and iteration effect. 
-*	Fully perceive user bahevior: Reproduce the behavoir of each user and keep abreast of their engagement, retention and conversion.
+*	Fully perceive user bahevior: Reproduce the behavior of each user and keep abreast of their engagement, retention and conversion.
 *	Improve user experience: Define user segments and customize user experience for differenct segments.
 *	Promote app revenue: Track consumer behavior, make marketing strategies and maximize the marketing effect.
 
@@ -53,21 +53,27 @@ DashBoard shows: Main indexes(New Users, Active Users and Sessions) and Revenue 
 
 ###  Overview of Main Indexes Yesterday
 
-img
+![imgAAOverview1.png](../../../images/imgAAOverview1.png) 
 
 Mainly includes：three main indexes yesterday(New Users, Active Users and Sessions), Revenue amount and Growth Rate.
 	
 ###  Index Variation Along With Time
 
- img
+![imgAAOverview2.png](../../../images/imgAAOverview2.png) 
 
 ###  Index Geographical Distribution
 
-img
+![imgAAOverview3.png](../../../images/imgAAOverview3.png) 
     
-###  New Users and Sessions ？？TO ASK ？？
+###  User Retention
 
-img
+Includes user retention for the last 5 weeks
+
+![imgAAOverview4.png](../../../images/imgAAOverview4.png) 
+
+#####  Device information
+
+![imgAAOverview5.png](../../../images/imgAAOverview5.png) 
 
 ## Trend
 
@@ -82,16 +88,17 @@ The informaiton you can get from here includes but is not limited to:
 
 Qucik show: The hourly trend of those 3 main indexes in 48 hours.
 
-img
+![imgAATrendRT.png](../../../images/imgAATrendRT.png) 
+
 ###New Users/Active Users/Sessions
 
-img1；img2；img3
+![imgAATrendNU.png](../../../images/imgAATrendNU.png) 
 
 ###App Versions/Channels
 
 Show the amount distribution of those 3 main indexes among different app versions/channels.
 
-img1； img2
+![imgAATrendAV.png](../../../images/imgAATrendAV.png) 
 
 ## Retention
 
@@ -104,7 +111,7 @@ Retention report shows the retention rate after new users come in different give
 
 1.  Retention Rate
 
-    img
+![imgAARetention.png](../../../images/imgAARetention.png) 
 
 ## Payment
 

@@ -60,7 +60,7 @@ Leap Cloud提供分析服务，帮助您全面分析运营状况，深度了解�
 ![imgOVSupport](../../../images/imgOVSupport.png) 
 
 ##下一步
-* 有关Leap Cloud各服务的详细介绍，请返回文档中心[]。
+* 有关Leap Cloud各服务的详细介绍，请返回[文档中心](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)。
 * 有关SDK的使用介绍，请查看[iOS开发指南](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android开发指南](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)。
 
 
