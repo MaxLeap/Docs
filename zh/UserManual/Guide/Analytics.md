@@ -64,7 +64,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
     
 #####  用户留存情况
 展示最近5周新增用户在随后每周的留存率：
-![imgAAOverview4.png](../../../images/imgAAOverview4.png) 
+![imgAAOverview4.png](../../../images/imgAAOverview4.png)
 
 #####  用户设备分布
 ![imgAAOverview5.png](../../../images/imgAAOverview5.png) 
@@ -108,7 +108,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 #### 留存率
 留存率展示某一天/周/月注册用户，随后的留存率：
 
-![imgAARetention.png](../../../images/imgAARetention.png) 
+![imgAARetention.png](../../../images/imgAARetention.png)
 
 ## 收入
 
@@ -119,6 +119,8 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 * 用户购买情况变化
 * 购买规律（何时，注册后多久出现购买高峰）
 * 用户购买力/潜在购买力
+
+![imgAARevenue.png](../../../images/imgAARevenue.png) 
 
 1.  趋势
     
@@ -157,6 +159,8 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 1.  会话时长
 
     展示某一天中，不同会话时长对应的会话数量及用户数量
+    
+    ![imgAAUE.png](../../../images/imgAAUE.png) 
 	
 2.  会话频率
 
@@ -185,29 +189,23 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 2.  自定义事件
 
     展示所有自定义事件在两天内的触发次数
-    
-    img
-    
+        
 	请注意，我们还可以添加自定义事件：
-	> 1. 点击管理事件 -> 添加事件
-	> 2. 填写事件名称和描述
+	
+	1. 点击管理事件 -> 添加事件
+	2. 填写事件名称和描述
+	
 	关于自定义事件的实现，请移步至[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)
-	
-	img
-	
+		
 3.  路径沙漏
 
     展示所有自定义沙漏中各个事件之间的流向
-    
-    img
-    
+        
     请注意，我们还可以添加自定义路径沙漏：
 	> 1. 点击管理沙漏 -> 添加沙漏
 	> 2. 填写沙漏名
 	> 3. 点击添加步骤，按照顺序，添加目标事件
 	    	
-    img
-
 ## 终端
 
 终端向您展示：用户所持移动终端的信息。
