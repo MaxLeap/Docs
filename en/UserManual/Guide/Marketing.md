@@ -13,7 +13,7 @@ With data from Analytics and Segment provided by LAS Users, you can make and imp
 * **Ensure the user experience: **More targeted to send messages to certain Segment 
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
-**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Marketing) for more details.**
+**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
 ##Marketing Campaign List
 
 In Marketing Campaign list, you can check all campaign（including**In-app Messages**and**Push Notifications**）details of an app:
@@ -28,7 +28,7 @@ Click "New Campaign + " >> Push, and then you can enter the create new Push page
 The target users can be divided into 3 types:
 
 * All users
-* Users from certain Segments （Please check [UserManual of Segment](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/usermgmt.html) for more information about creating new **Segment** ）
+* Users from certain Segments （Please check [UserManual of Segment](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
 * Users using certain devices
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)
@@ -38,7 +38,7 @@ A push contains contents as shown below, you need to fill and are able to previe
 
 * Push title 
 * Push content 
-* The parameter send to clients （Please check [Marketing － iOS Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Marketing － Android Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) for more details.） 
+* The parameter send to clients
 ![imgMAddPush2.png.png](../../../images/imgMAddPush2.png)
 
 Notice:
@@ -68,7 +68,7 @@ An in-app message contains contents as shown below, you need to fill and are abl
 * Select Layout: the layout of text and image
 * Select Background: choose background color&image(Support image upload)
 * Design&Edit Content: the content, color, font and font-size
-* Set Call to Action: the target Activity that will be jumped to after clicking Call to Action（Please check [Marketing － iOS Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Marketing － Android Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) for more details）
+* Set Call to Action: the target Activity that will be jumped to after clicking Call to Action
 
 ![imgMAddMsg2.png](../../../images/imgMAddMsg2.png)
 
@@ -87,4 +87,4 @@ The default status of a new campaign is Draft. You can select a push and click "
 
 ## Next
 
-**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Marketing) for more details.**
+**If you want to learn more about LAS Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**

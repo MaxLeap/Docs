@@ -9,7 +9,7 @@
 * **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
 
 ## 下一步
-**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config]()或[Android开发指南 － Cloud Config](../../Android/Guide/CloudConfig.md)。**
+**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)或[Android开发指南 － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)。**
 
 ##云参数列表
 在开发者中心"云配置"中，我们可以查看该应用下所有的云参数的列表。该列表包含以下列：
@@ -47,4 +47,4 @@ Detail|(修改/删除按钮)
 
 ## 下一步
 
-**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config]()或[Android开发指南 － Cloud Config](../../Android/Guide/CloudConfig.md)。**
+**如果您希望进一步了解LAS Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)或[Android开发指南 － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)。**

@@ -13,7 +13,7 @@
 * **保障用户体验：**选择向指定Segment发送消息，更具有针对性
 * **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
 
-**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#营销)或[Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#营销)。**
+**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
 ##营销活动列表
 在"营销推广"报表中，我们可以查看该应用下所有的活动（包括**应用内消息**和**活动**）的列表：
 
@@ -27,7 +27,7 @@
 选择接受推送的目标用户为下列三种类型之一：
 
 * 所有用户
-* 指定Segment用户分群（关于**用户分群**的新建，请查看[用户分群使用手册](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/usermgmt.html#用户分群)）
+* 指定Segment用户分群（关于**用户分群**的新建，请查看[用户分群使用手册](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_ZH)）
 * 指定设备
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)
@@ -37,7 +37,7 @@
 
 * 推送标题
 * 推送消息内容文字
-* 传递至客户端的参数（详情请查看 [iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#推送消息) 或者 [Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#推送消息)。）
+* 传递至客户端的参数
 
 ![imgMAddPush2.png.png](../../../images/imgMAddPush2.png)
 
@@ -67,7 +67,7 @@
 * 选择布局：图像文字的布局
 * 选择背景：背景颜色或背景图片（支持上传图片）
 * 设计&编辑内容：消息内容文字，以及文字颜色样式
-* 设置点击行为：用户点击Call to Action按钮之后，跳转的目标Activity（详情请查看 [iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#定义跳转Activity) 或者 [Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#定义跳转Activity)。）
+* 设置点击行为：用户点击Call to Action按钮之后，跳转的目标Activity（详情请查看 [iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#DEFINE_TARGETACTIVITY_ZH) 或者 [Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#DEFINE_TARGETACTIVITY_ZH)。）
 
 ![imgMAddMsg2.png](../../../images/imgMAddMsg2.png)
 
@@ -85,4 +85,4 @@
 ![imgMActivatePush.png](../../../images/imgMActivatePush.png)
 
 ## 下一步
-**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#营销)或[Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#营销)。**
+**如果您希望进一步了解LAS Marketing服务SDK，请参考[iOS开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**

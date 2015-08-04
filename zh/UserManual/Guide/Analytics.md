@@ -43,7 +43,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 * 过滤器：指定应用版本和渠道
 * 时间段：指定特定的时间跨度
 	
-**如果您希望进一步了解LAS分析服务SDK，请参考[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#分析)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#分析)。**
+**如果您希望进一步了解LAS分析服务SDK，请参考[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
 
 如果您对此服务中某些术语有疑问，请查看[LAS术语释义](..)。
 
@@ -191,7 +191,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 	请注意，我们还可以添加自定义事件：
 	> 1. 点击管理事件 -> 添加事件
 	> 2. 填写事件名称和描述
-	关于自定义事件的实现，请移步至[LAS分析服务SDK使用向导](...)
+	关于自定义事件的实现，请移步至[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)
 	
 	img
 	

@@ -12,7 +12,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 * 不同于传统关系型数据库，向云端存储数据无需提前建表，JSON 格式的对象随存随取，高并发访问轻松无压力
 * 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Java开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
-**如果您希望进一步了解LAS Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#云数据)或[Android开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#云数据)。**
+**如果您希望进一步了解LAS Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
 
 ##Class列表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的Class的列表：
@@ -41,4 +41,4 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 ![imgCDDeleteClass](../../../images/imgCDDeleteClass.png)
 
 ## 下一步
-**如果您希望进一步了解LAS Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#云数据)或[Android开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#云数据)。**
+**如果您希望进一步了解LAS Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
