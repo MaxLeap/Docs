@@ -231,6 +231,6 @@ API Usage shows the usage of LAS cloud service of your app.
     
 ## Next
 
-**If you want to learn more about LAS Analytics Service SDK, please check [iOS Guide － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Analytics) or [Android Guide － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Analytics) for more details.**
+**If you want to learn more about LAS Analytics Service SDK, please check [iOS Guide － Analytics](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Analytics) or [Android Guide － Analytics](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#Analytics) for more details.**
     
     
