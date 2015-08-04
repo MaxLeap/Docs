@@ -39,12 +39,13 @@ LAS Analytics helps you learn about your users and their behavoir, thus make mor
 2.    Precise Segment: analyze the attributes and behavoir of your segments. 
 3.    Plenty Reports: LAS provides a whole set of complete and intuitive reports through operator's eyes:
 
-	> We can also customize the data displayed in reports with filters below:
-	>
-	>	* Segments: check index variation in specific segment.
-	>	* Filters: for specific app versions and channels.
-	>	* Timeframe: choose the specifc time span.	
-**If you want to learn more about LAS Analytics Service SDK, please check [iOS Guide － 分析服务](../../iOS/Guide/Analytics.md) or [Android Guide － 分析服务](../../Android/Guide/Analytics.md)。**
+    We can also customize the data displayed in reports with filters below:
+
+    * Segments: check index variation in specific segment.
+    * Filters: for specific app versions and channels.
+    * Timeframe: choose the specifc time span.	
+
+**If you want to learn more about LAS Analytics Service SDK, please check [iOS Guide － Analytics](../../iOS/Guide/Analytics.md) or [Android Guide － Analytics](../../Android/Guide/Analytics.md)。**
 
 ## Overview
 
