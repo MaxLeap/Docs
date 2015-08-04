@@ -11,7 +11,7 @@ Cloud Data can help you build and maintain the facility of your database, thus f
 * Sort out the deployment and maintenance of hardware resourses.
 * Provide standard and complete data access API
 * Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
-* Realize the Hook of cloud data with the Cloud Code service.可结合Cloud Code服务，实现云端数据的Hook （Please check [Cloud Code Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.） 
+* Realize the Hook of cloud data with the Cloud Code service（Please check [Cloud Code Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.） 
 
 **If you want to learn more about LAS Cloud Data Service SDK, please check [iOS Guide － Cloud Data](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN) or [Android Guide － Cloud Data](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN) for more details.**
 
