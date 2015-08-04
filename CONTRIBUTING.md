@@ -39,12 +39,40 @@ If you only want to modify your last commit message, it's very simple:
 
 We provide several path-maps here, you can compile links of other pages with those paths:
 
-    LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS: '/devguide/ios.html',
-    LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID: '/devguide/android.html',
-    LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA: '/devguide/java.html',
-    LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS: '/tutorials/ios.html',
-    LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID: '/tutorials/android.html',
-    LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL: '/usermanual'
+    'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS': '../devguide/ios.html',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN': '../devguide/ios.html#CloudData',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN': '../devguide/ios.html#Analytics',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN': '../devguide/ios.html#CloudConfig',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN': '../devguide/ios.html#Marketing',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#DEFINE_TARGETACTIVITY_EN': '',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN': '../devguide/ios.html#Support',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN': '../devguide/ios.html#User',
+
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '../devguide/android.html',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '../devguide/android.html#CloudData',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN': '../devguide/android.html#Analytics',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN': '../devguide/android.html#CloudConfig',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN': '../devguide/android.html#Marketing',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#DEFINE_TARGETACTIVITY_EN': '',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN': '../devguide/android.html#Support',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN': '../devguide/android.html#User',
+
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '../devguide/ios.html#云数据',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH': '../devguide/android.html#云数据',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH': '../devguide/android.html#分析',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH': '../devguide/android.html#云配置',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH': '../devguide/android.html#营销',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#DEFINE_TARGETACTIVITY_ZH': '',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH': '../devguide/android.html#支持',
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH': '../devguide/android.html#用户',
+
+        'LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '../devguide/java.html',
+        'LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS': '../../tutorials/ios.html',
+        'LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '../../tutorials/android.html',
+        'LAS_DOCS_LINK_PLACEHOLDER_USERMANUAL': '../usermanual',
+        'LAS_DOCS_LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_ZH': '',
+        'LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN': ''
         
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 
