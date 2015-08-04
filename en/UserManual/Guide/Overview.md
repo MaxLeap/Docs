@@ -1,66 +1,70 @@
-#LAS云服务概览
+#Overview of LAS Cloud Service
 
-##什么是LAS云服务
+##What is LAS Cloud Service
 
-LAS云服务为移动应用的研发，用户运营，市场营销及客户服务提供**一揽子MBaaS解决方案**。Leap Cloud通过客户端SDK以及后台管理网站，提供云存储，云代码，推送，数据分析，用户管理，客户支持等服务：
+LAS Cloud Service provides **a Package Solution of MBaaS** for app development, mobile operation, marketing and customer service. Leap Cloud provides cloud storage, cloud code, push notification, analytics, user management and support with client SDK and back-end management website.
 
-* 帮助开发者摆脱基础架构运维，后端代码的实现及测试;
-* 帮助运营人员掌握运营状况，优化运营策略；
-* 帮助市场营销人员进行精准营销，提高转化率；
-* 帮助客服人员及时高效的处理用户反馈，提升用户满意度。
+* Developer: Get rid of IT infrastructure, as well as the implementation & testing of corresponding backend services;
+* Operator: Optimize operation strategies with comprehensive operation analytics;
+* Marketer: Improve conversion with precise marketing campaign;
+* Support: Improve customer satisfaction by handling feedback timely and efficiently.
+
 
 ![imgOVBusinessFlow](../../../images/imgOVBusinessFlow.png)
 
-LAS云服务通过上述策略，帮助您将创意快速的转化为移动应用，并且实施高效的用户运营及市场营销，从而提高用户活跃度及应用营收。
+With all strategies aforementioned, LAS Cloud Service can help you transfer your concept into a real app and imporve your user engagament and business with efficient operation and marketing campaign. 
 
-##研发：快速上市
-传统的移动应用者在移动开发过程中，通常会遇到二八法则的困扰：约有80%的时间被花在对提高应用体验或营收无关的事情上，而只有20%的时间真正用以实现创意/提高营收。
-#####专注于创意
-当我们深入分析，我们会发现传统的移动开发流程包括：
+##Development: Expedited Launch
+Traditional app developer may be caught by the 80-20 Law during the app development: 80% time are spent in improving the user experience and other events that are not related to the revenue, while only 20% time are spent in invention realization and revenue expansion.
 
-* 购买服务器：包括数据服务器/后端服务器
-* 搭建数据库，开发后端服务
-* 开发移动端SDK：包括各个平台的SDK
-* 大量的测试：包括数据库稳定性，服务器的稳定性，SDK的准确性等
-* 实现应用创意
+#####Invention
+The trational app development includes:
 
-而LAS云服务，能帮助您扫除实现应用创意前的所有障碍。当您开始使用LAS云服务构建您的应用时，您已经拥有了：应用研发所必需的后端系统及客户端SDK供开发者使用，以及强大的后端管理系统供研发/运营/市场/客服人员使用。
+* Buy Server: Data server/Back-end server
+* Construct database and develop back-end service
+* Develop mobile SDK for all platforms
+* Extensive test: the stability of database and server, the accuracy of SDK
+* Realize app invention
 
-#####安全
-Leap Cloud提供的后端基础设施架构上，已成功的支持着亿级用户量的应用，保证了其稳定性及安全性。
+While, LAS Cloud Service removed all obstacles for you and your invention. You have already got the necessary back-end system and mobile SDK for developers, the powerful back-end management system for developers/operators/marketers/support team on starting LAS Cloud Service.
 
-##数据：专业分析
-随着移动应用的普及，移动应用市场已非“酒香不怕巷子深”的时期。只有掌握数据，分析数据，才能更了解用户以及运营状况，以做出更合理的营销策略。
+#####Safety
+The back-end infrastructure architecture provided by Leap Cloud has supported app with billions of users and greatly guaranteed its stability and safety.
 
-Leap Cloud提供分析服务，帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
 
-*	洞察运营概况及趋势：从产品新增用户、活跃用户、应用启动次数、版本分布，到用户的使用细节、用户属性以及行为特征，你可以洞察到各类数据指标，全面了解产品运营情况和迭代效果。
-*	洞察用户行为：还原每位用户的使用行为链条，并掌握其活跃度，留存率及转化率。
-*	提升用户体验：定义用户分群，针对不同用户群体提供个性化体验。
-*	提升应用营收：跟踪消费行为，制定营销策略，最大化的提升营销效果。
+##Data: Professional Analytics
 
-#####用户分群
-您可以根据数据分析结果，将指定类型的人群划分在同一个用户分群下。您便可以在其他LAS服务中使用该用户分群，以达到不同类型用户的个性化服务。
+The mobile app market is no longer about the quiet efforts. Along with the app popularity, the acquisition and analysis of data is the only way to realy get to know users and operation status, thus make appropriate  strategies.
 
-##市场：精准营销
-采用LAS云服务，您的营销将更加有效率，更为精准。一个典型LAS应用的营销场景：
+The Analytics provided by Leap Cloud can comprehensively analyze your operation status, get a deep understanding of typical users, optimize operation strategies and finnaly realize the ability to:
 
-1. 营销人员查看分析报告，结合营销历史，当前用户活跃度及消费情况，策划营销活动
-2. 向不同的用户分群推送差异化消息，或制作应用内消息
-3. 定时或重复定时发送营销活动
-4. 实时查看营销活动状况，及时调整
+*	Penetrate the overview and trend of your operation: You can understand the operation status and iteration effect with indexs from new users, active users, session amount, versions to user actions, attributes and behaviors.
+*	Penetrate user actions: Reproduce the screenflow of each user and get to know the engagement, retention and conversion.
+*	Improve user experience: Define user segments and assign customized experience for each segment.
+*	Improve Revenue: Track the payment trend, make marketing campaign and maximize your marketing effect.
 
-通过上述场景，我们不难发现LAS云服务能极大地帮助您制作更合理的营销策略，并且及时地获知营销状况，最大程度地提高营收。
+#####Segment
+You can create a user segment based on analysis results and any combination of user attributes. Then you can analyze different behavior of certain user segment and customize app experience and marketing campaign.
 
-##用户：及时互动
+##Marketing: Precise Promotion
+Your marketing campaign will be more effective and precise with LAS Cloud Service. A typical LAS app marketing can be summarized as follows:
 
-为了帮助运营人员提升应用用户的满意度，Leap Cloud提供了一套标准客服方案。在客户端，提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，
-客服方案提供FAQ列表的管理及用户反馈的处理界面。
+1. Marketers check analysis report and plan a campaign based on marketing history, current user engagement and payment.
+2. Send different push notifications or in-app messages to different segments.
+3. Schedule or reschedule the marketing campaign.
+4. Check marketing campagin list in real time and timely modify it.
+
+
+As mentioned above, LAS Cloud Service can easily help you make reasonable marketing strategies, check marketing status in real time and greatly improve your business.
+
+##Users: Timely Support
+
+In order to improve customer satisfaction, Leap Cloud provide you with a standard customer service system. This project provides complete FAQ page and feedback chat window in clients and an easy-to-use FAQ management and feedback handling page in Console. 
 
 ![imgOVSupport](../../../images/imgOVSupport.png) 
 
-##下一步
-* 有关Leap Cloud各服务的详细介绍，请返回[文档中心](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)。
-* 有关SDK的使用介绍，请查看[iOS开发指南](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android开发指南](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)。
+##Next
+* Please go back to [Documents](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME) for more detailed information about Leap Cloud Service.
+* Please check [iOS Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)or [Android Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) for SDK Guide.
 
 
