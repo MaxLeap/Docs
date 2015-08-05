@@ -33,7 +33,7 @@ isRead|false|布尔
 
 ```java
 LASObject myComment = new LASObject("Comment");
-myComment.put("cotent", "我很喜欢这条分享");
+myComment.put("content", "我很喜欢这条分享");
 myComment.put("pubUserId", 1314520);
 myComment.put("isRead", false);
 LASDataManager.saveInBackground(myComment);
@@ -52,7 +52,8 @@ LASDataManager.saveInBackground(myComment);
 	createdAt|对象的创建时间
 	updatedAt|对象的最后修改时间
 
-* **同步操作/异步操作:** 在 Android 平台上，大部分的代码是在主线程上运行的，如果在主线程上进行耗时的阻塞性操作，如访问网络等，您的代码可能会无法正常运行，避免这个问题的方法是把会导致阻塞的同步操作改为异步，在一个后台线程运行，例如 save() 还有一个异步的版本 saveInBackground()，需要传入一个在异步操作完成后运行的回调函数。查询、更新、删除操作也都有对应的异步版本。
+* **大小限制：** LAS Object的大小被限制在128K以内。
+* **同步操作/异步操作：** 在 Android 平台上，大部分的代码是在主线程上运行的，如果在主线程上进行耗时的阻塞性操作，如访问网络等，您的代码可能会无法正常运行，避免这个问题的方法是把会导致阻塞的同步操作改为异步，在一个后台线程运行，例如 save() 还有一个异步的版本 saveInBackground()，需要传入一个在异步操作完成后运行的回调函数。查询、更新、删除操作也都有对应的异步版本。
 * 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是LASObject，为支持JSON编码的类型即可.
 * 您可以在调用 `LASDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
 
@@ -84,6 +85,7 @@ LASQueryManager.getInBackground("Comment", objId, new GetCallback<LASObject>() {
   }
 });
 ```
+
 也可以通过"属性值+LASQuery"方式获取LASObject：
 
 ```java
@@ -273,10 +275,11 @@ LASDataManager.fetchInBackground(post, new GetCallback<LASObject>() {
         }
 });
 ```
+
 ####一对多关联
 将两条评论分别关联至一条微博中：
 
-```JAVA
+```java
 // 创建微博信息
 LASObject myPost = new LASObject("Post");
 myPost.put("content", "这是我的第一条微博信息，请大家多多关照。");
