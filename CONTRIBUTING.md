@@ -1,8 +1,8 @@
-# Contributing to LAS Docs
+# Contributing to Lep Cloud Docs
 
 Thanks for taking the time to contribute!
 
-The following is a set of guidelines for contributing to LAS's Documentation. These are just guidelines, not rules, use your best judgment and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to Lep Cloud's Documentation. These are just guidelines, not rules, use your best judgment and feel free to propose changes to this document in a pull request.
 
 ## Submitting Issues
 
