@@ -1,26 +1,26 @@
 #营销
 ##简介
-###什么是LAS Marketing服务
+###什么是Leap Cloud Marketing服务
 
 Marketing服务是Leap Cloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。消息的创建，设置和发送均在Console中完成。
 
-###为何需要LAS Marketing服务
+###为何需要Leap Cloud Marketing服务
 
-结合LAS分析服务提供的分析数据，以及LAS Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。LAS Marketing服务的优势在于：
+结合Leap Cloud分析服务提供的分析数据，以及Leap Cloud Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。Leap Cloud Marketing服务的优势在于：
 
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
 * **保障用户体验：**选择向指定Segment发送消息，更具有针对性
 * **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
 
-###LAS Marketing服务如何工作
+###Leap Cloud Marketing服务如何工作
 Pic
 
 ## 推送消息
 推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定跳转行为。
 
 ###配置
-LAS Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
+Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
 
 1. 提供 **Sender ID** 和 **API key**. 请在[Google开发者中心](..)获取这两个Key.
 2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
@@ -56,7 +56,7 @@ LAS Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud
 	    </intent-filter>
 	    </receiver>
 	    
-	    <receiver android:name="as.leap.LASPushBroadcastReceiver" android:exported="false">
+	    <receiver android:name="as.leap.LCPushBroadcastReceiver" android:exported="false">
 	    <intent-filter>
 	        <action android:name="as.leap.push.intent.RECEIVE"/>
 	        <action android:name="as.leap.push.intent.OPEN"/>
@@ -79,10 +79,10 @@ LAS Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud
 	    android:name="as.leap.push.notification_icon"
 	    android:resource="@android:drawable/ic_dialog_alert" />
 	```
-5. **启用Marketing服务：**在`Application.onCreate()`中的`LASConfig.initialize()`方法**之前**添加：
+5. **启用Marketing服务：**在`Application.onCreate()`中的`LCConfig.initialize()`方法**之前**添加：
 
 	```java
-	LASConfig.setMarketingEnabled(true);
+	LCConfig.setMarketingEnabled(true);
 	```
 
 注意：
@@ -93,14 +93,14 @@ LAS Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud
 
 您可以通过以下步骤自定义推送消息的显示和处理。
 
-1. 新建CustomPushReceiver类，并继承LASPushBroadcastReceiver
+1. 新建CustomPushReceiver类，并继承LCPushBroadcastReceiver
 2. 在CustomPushReceiver类中完成一系列自定义：点击后的跳转，图标等
 3. 在`AndroidManifest.xml`中配置CustomPushReceiver
 
 #####新建Receiver
 
 ```java
-public class CustomPushReceiver extends LASPushBroadcastReceiver {
+public class CustomPushReceiver extends LCPushBroadcastReceiver {
 	@Override
 	protected Class<? extends Activity> getActivity(Intent intent) {
 		return YOUR_ACTIVITY.class;
@@ -123,7 +123,7 @@ protected Class<? extends Activity> getActivity(Intent intent)
 Intent intent = getIntent();
 if (intent != null && intent.getExtras() != null) {
     for (String key : intent.getExtras().keySet()) {
-        LASLog.i(TAG, key + " = " + intent.getStringExtra(key));
+        LCLog.i(TAG, key + " = " + intent.getStringExtra(key));
     }
 }
 ```
@@ -176,7 +176,7 @@ protected Notification getNotification(Context context, Intent intent)
 ```
 
 #####配置CustomPushReceiver
-用下列Receiver替换默认的`as.leap.LASPushBroadcastReceiver`：
+用下列Receiver替换默认的`as.leap.LCPushBroadcastReceiver`：
 
 ```xml
 <receiver
@@ -192,10 +192,10 @@ protected Notification getNotification(Context context, Intent intent)
 ## 应用内消息
 
 ###配置
-为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`LASConfig.initialize()`方法**之前**添加：
+为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`LCConfig.initialize()`方法**之前**添加：
 
 ```java
-LASConfig.setMarketingEnabled(true);
+LCConfig.setMarketingEnabled(true);
 ```
 
 ###定义跳转Activity
@@ -208,7 +208,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	Intent intent = getIntent();
 	if (intent != null && intent.getExtras() != null) {
 		for (String key : intent.getExtras().keySet()) {
-			LASLog.i(TAG, key + " = " + intent.getStringExtra(key));
+			LCLog.i(TAG, key + " = " + intent.getStringExtra(key));
 		}
 	}
 }
@@ -220,15 +220,15 @@ protected void onCreate(Bundle savedInstanceState) {
 @Override
 protected void onResume() {
 		super.onResume();
-	LASMarketing.setInAppMessageDisplayActivity(this);
-	LASAnalytics.onResume(this);
+	LCMarketing.setInAppMessageDisplayActivity(this);
+	LCAnalytics.onResume(this);
 }
 
 @Override
 protected void onPause() {
 		super.onPause();
-	LASMarketing.dismissCurrentInAppMessage();
-	LASMarketing.clearInAppMessageDisplayActivity();
-	LASAnalytics.onPause(this);
+	LCMarketing.dismissCurrentInAppMessage();
+	LCMarketing.clearInAppMessageDisplayActivity();
+	LCAnalytics.onPause(this);
 }
 ```

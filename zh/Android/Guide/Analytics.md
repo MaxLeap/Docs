@@ -2,11 +2,11 @@
 
 ## 简介
 
-### 什么是LAS分析服务
-LAS分析服务通过客户端及Cloud Data，收集应用及用户的各种数据，并在Leap Cloud中进行专业分析，最终生成面向运营者的报表。
+### 什么是Leap Cloud分析服务
+Leap Cloud分析服务通过客户端及Cloud Data，收集应用及用户的各种数据，并在Leap Cloud中进行专业分析，最终生成面向运营者的报表。
 
-### 为何需要LAS分析服务
-LAS分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
+### 为何需要Leap Cloud分析服务
+Leap Cloud分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
 
 *	**洞察运营概况及趋势**：从产品新增用户、活跃用户、应用启动次数、版本分布，到用户的使用细节、用户属性以及行为特征，你可以洞察到各类数据指标，全面了解产品运营情况和迭代效果。
 *	**洞察用户行为**：还原每位用户的使用行为链条，并掌握其活跃度，留存率及转化率。
@@ -14,8 +14,8 @@ LAS分析服务是实时、免费、专业的移动应用统计分析服务，�
 *	**提升应用营收**：跟踪消费行为，制定营销策略，最大化的提升营销效果。
 
 
-### LAS分析如何工作
-“LAS分析”SDK，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
+### Leap Cloud分析如何工作
+“Leap Cloud分析”SDK，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
 
 *  自动收集信息（如终端信息，安装信息等）
 *  追踪会话，页面访问
@@ -25,16 +25,16 @@ LAS分析服务是实时、免费、专业的移动应用统计分析服务，�
 收集到的数据会被保存至云端，Leap Cloud将针对不同时间的数据，对每个用户进行分析，也会将所有用户的数据汇总，进行全局分析。此外，您还可以自定义筛选条件，借助Leap Cloud生成相应的分析报表。
 
 ## 启用服务
-安装SDK完成后，LAS服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
+安装SDK完成后，Leap Cloud服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
 
 1.	终端信息
 2.	应用启动和退出
 3.	应用崩溃等异常信息
 
-LAS分析服务的默认状态为**开启**，如果您希望**关闭**分析服务，您可以在主`Activity`的`onCreate()`中添加如下代码。
+Leap Cloud分析服务的默认状态为**开启**，如果您希望**关闭**分析服务，您可以在主`Activity`的`onCreate()`中添加如下代码。
 
 ```Java
-LASAnalytics.setAnalyticsEnabled(false);
+LCAnalytics.setAnalyticsEnabled(false);
 ```
 
 ## 渠道
@@ -43,7 +43,7 @@ LASAnalytics.setAnalyticsEnabled(false);
 ```java
 <application>
 	<meta-data
-		android:name="las_channel"
+		android:name="LC_channel"
 		android:value="YOUR_CHANNEL_NAME">
 	</meta-data>
 </application>
@@ -59,19 +59,19 @@ LASAnalytics.setAnalyticsEnabled(false);
 	@Override
 	protected void onPause() {
 	  super.onPause();
-	  LASAnalytics.onPause(this);
+	  LCAnalytics.onPause(this);
 	}
 	@Override
 	protected void onResume() {
 	  super.onResume();
-	  LASAnalytics.onResume(this);
+	  LCAnalytics.onResume(this);
 	}
 	```
 
 * 离开应用后，在特定时间内，用户重返应用，系统将继续上一个会话。该时间长度可自定义（单位：秒）：在主Activity的`onCreate()`函数中添加：
 
 	```java
-	LASAnalytics.setSessionContinueSecond(30)
+	LCAnalytics.setSessionContinueSecond(30)
 	```
 * 当用户注销或离开应用超过特定时间，会话结束。用户重返应用时，将开始新的会话。
 
@@ -93,7 +93,7 @@ pageName|String|应用页面的名称
 @Override
 protected void onResume() {
   super.onResume();
-  LASAnalytics.onPageStart(pageName);
+  LCAnalytics.onPageStart(pageName);
 }
 ```
 
@@ -103,7 +103,7 @@ protected void onResume() {
 @Override
 protected void onPause() {
   super. onPause();
-  LASAnalytics.onPageEnd(pageName);
+  LCAnalytics.onPageEnd(pageName);
 }
 ```
 
@@ -127,5 +127,5 @@ value| String|事件参数的值
 在您希望跟踪的代码部分，调用如下方法：
 
 ```java
-LASAnalytics.logEvent(eventId, eventCount, dimensions);
+LCAnalytics.logEvent(eventId, eventCount, dimensions);
 ```

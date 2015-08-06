@@ -5,14 +5,14 @@ Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。
 
 ## 准备工作
 
-1. 安装并配置LAS Core SDK. 详细步骤，请查看[QuickStart - Core SDK](..)
+1. 安装并配置Leap Cloud Core SDK. 详细步骤，请查看[QuickStart - Core SDK](..)
 2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](..)
 
 ## 进入Help Center页面
 Help Center页面调用FAQ页面非常方便，您只需调用如下代码即可：
 
 ```java
-LASHelpCenter.openFaqs(this);
+LCHelpCenter.openFaqs(this);
 ```
 
 用户便可在Help Center页面内查看FAQ列表，或者提供反馈。
@@ -21,16 +21,16 @@ LASHelpCenter.openFaqs(this);
 
 您可以通过以下配置，允许用户可以通过Help Center页面右上角的按钮进入反馈问题对话页面：
 
-在`Application.onCreate()`中，`LASConfig.initialize()`之后，添加：
+在`Application.onCreate()`中，`LCConfig.initialize()`之后，添加：
 
 ```java
-LASHelpCenter.allowAlertNewMessage(true);
+LCHelpCenter.allowAlertNewMessage(true);
 ```
 
-或者，您可以通过下`LASHelpCenter.openConversation()`直接进入反馈问题对话页面：
+或者，您可以通过下`LCHelpCenter.openConversation()`直接进入反馈问题对话页面：
 
 ```java
-LASHelpCenter.openConversation(context);
+LCHelpCenter.openConversation(context);
 ```
 
 

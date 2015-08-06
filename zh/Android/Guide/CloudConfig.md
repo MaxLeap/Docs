@@ -2,7 +2,7 @@
 
 ## 简介
 ###什么是Cloud Config
-每个应用在云端都有一个对应的`LASCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在Leap Cloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在Leap Cloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
 ###为何需要Cloud Config
 将应用的部分配置放置在云端的优势在于：
 
@@ -20,15 +20,15 @@ Value|参数的值
 
 您还可以为不同的Segment设置不同的参数值。新建Cloud Config参数的详细步骤，请查看[Console使用指南 - Cloud Config](..).
 
-##获取LASCloudConfig对象
-您可以通过`LASCloudConfig.getCurrentCloudConfig()`方法获取最新的Cloud Config.
+##获取LCCloudConfig对象
+您可以通过`LCCloudConfig.getCurrentCloudConfig()`方法获取最新的Cloud Config.
 
 ```java
-LASCloudConfig currentConfig = LASCloudConfig.getCurrentCloudConfig();
+LCCloudConfig currentConfig = LCCloudConfig.getCurrentCloudConfig();
 ```
 
-##获取LASCloudConfig中的参数值
-在获取一个云端参数的值时，您需要知道该参数的值类型，然后通过对LASCloudConfig实例调用`getType()`方法获取对应参数的值。该方法需要传入两个参数：第一个为云端参数名，第二个为默认值。当云端不存在响应的参数时，系统将会把默认值赋值给该参数。
+##获取LCCloudConfig中的参数值
+在获取一个云端参数的值时，您需要知道该参数的值类型，然后通过对LCCloudConfig实例调用`getType()`方法获取对应参数的值。该方法需要传入两个参数：第一个为云端参数名，第二个为默认值。当云端不存在响应的参数时，系统将会把默认值赋值给该参数。
 
 ```java
 currentConfig.getString(key, defaultValue)
@@ -45,12 +45,12 @@ currentConfig.getDate(key, defaultValue)
 
 ## 修改Cloud Config
 
-您可以通过`LASCloudConfigManager.getInBackground()`获取`LASCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为新的参数值。
+您可以通过`LCCloudConfigManager.getInBackground()`获取`LCCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为新的参数值。
 
 ```java
-LASCloudConfigManager.getInBackground(new ConfigCallback() {
+LCCloudConfigManager.getInBackground(new ConfigCallback() {
     @Override
-    public void done(LASCloudConfig cloudConfig, LASException exception) {
+    public void done(LCCloudConfig cloudConfig, LCException exception) {
         if (exception == null) {
             int y = currentConfig.getInt("y", 100);
         } else{}
@@ -65,18 +65,18 @@ LASCloudConfigManager.getInBackground(new ConfigCallback() {
 @Override
 protected void onResume() {
     super.onResume();
-    LASCloudConfigManager.refereshKeysInBackground();
+    LCCloudConfigManager.refereshKeysInBackground();
 }
 ```
 
 ###添加跟踪
 
-您可以通过`LASCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
+您可以通过`LCCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
 
 ```java
-LASCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
+LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
     @Override
-    public void done(LASCloudConfig cloudConfig) {
+    public void done(LCCloudConfig cloudConfig) {
        int newKeyX = cloudConfig.get("keyX", null);
     }
 });
@@ -89,18 +89,18 @@ LASCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() 
 移除的办法很简单，您只需添加如下代码：
 
 ```java
-LASCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
+LCCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
 ```
 
 移除一个云端参数的所有跟踪：
 
 ```java
-LASCloudConfigManager.removeObserver("x");
+LCCloudConfigManager.removeObserver("x");
 ```
 
 移除所有参数的所有跟踪：
 
 ```java
-LASCloudConfigManager.removeAllObservers();
+LCCloudConfigManager.removeAllObservers();
 ```
 

@@ -1,5 +1,5 @@
 
-# LAS Cloud Code 使用指南
+# Leap Cloud Cloud Code 使用指南
 
 ## Cloud Code简介
 
@@ -55,7 +55,7 @@ Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
 ## 快速入门
 ### 创建Cloud Code项目
-获取LAS Cloud Code Java项目模板
+获取LC Cloud Code Java项目模板
 
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
@@ -83,18 +83,18 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 	
 键|值|
 ------------|-------|
-applicationName|LAS应用名称
+applicationName|Leap Cloud应用名称
 applicationId|Application ID
 applicationKey|Master Key
 java-main|入口函数名
 package-hook|Hook包名
-package-entity|Class实体包名
+package-entity|CLeap Clouds实体包名
 version|当前Cloud Code项目版本号
 
 ### 定义一个简单的function
 
 ```Java
-import as.leap.code.LASLoader;
+import as.leap.code.LCLoader;
 import as.leap.code.Response;
 import as.leap.code.impl.GlobalConfig;
 import as.leap.code.impl.LoaderBase;
@@ -143,8 +143,8 @@ public class Main extends LoaderBase implements Loader {
 
 ```shell
 curl -X POST \
--H "X-LAS-AppId: YOUR_APPID" \
--H "X-LAS-APIKey: YOUR_APIKEY" \
+-H "X-LC-AppId: YOUR_APPID" \
+-H "X-LC-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
@@ -158,7 +158,7 @@ Hello, David Wang!
 
 注意:
 
-* X-LAS-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
+* X-LC-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
 
 ## Cloud Function
 Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
@@ -263,8 +263,8 @@ public void doSomethingToCloudData(){
 
 ```shell
 curl -X POST \
--H "X-LAS-AppId: YOUR_APPID" \
--H "X-LAS-APIKey: YOUR_APIKEY" \
+-H "X-LC-AppId: YOUR_APPID" \
+-H "X-LC-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
@@ -289,7 +289,7 @@ iOS SDK中：
 
 ```objective-c
 NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
-    [LASCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
+    [LCCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
         if (error) {
             // an error occured
         } else {
@@ -502,7 +502,7 @@ LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管�
 ```shell
 lcc login <用户名>
 ```
-`<用户名>` 为您登录LAS管理门户的账号，然后根据提示输入密码
+`<用户名>` 为您登录Leap Cloud管理门户的账号，然后根据提示输入密码
 ###显示所有app：
 ```shell
 lcc apps
