@@ -13,7 +13,7 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 
 在应用管理页面中，您可以查看，新建和管理各个版本的云代码及相应的日志。
 
-**如果您希望进一步了解LAS Cloud Code服务SDK，请参考[Java开发指南 － Cloud Code](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**
+**如果您希望进一步了解Leap Cloud 云代码服务SDK，请参考[Java开发指南 － Cloud Code](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**
 
 ##版本状态
 在"版本状态"报表中，我们可以查看上传至该应用下的所有的云代码。该报表包含以下列：
@@ -72,8 +72,8 @@ Cloud Code是部署运行在Leap Cloud上的代码，您可以用它来实现较
 ##实例
 
 ##白名单
-将任务添加至白名单后，请求调用该任务时，将不进行Http请求头中X-LAS-AppId和X-LAS-APIKey的校验。
+将任务添加至白名单后，请求调用该任务时，将不进行Http请求头中X-LC-AppId和X-LC-APIKey的校验。
 
 ## 下一步
 
-**如果您希望进一步了解LAS Cloud Code服务SDK，请参考[Java开发指南 － 云代码](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**
+**如果您希望进一步了解Leap Cloud 云代码服务SDK，请参考[Java开发指南 － 云代码](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**

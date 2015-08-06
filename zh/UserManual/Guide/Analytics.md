@@ -1,13 +1,13 @@
 # 分析
 ## 简介
 
-###	什么是LAS分析服务
+###	什么是Leap Cloud分析服务
 
-LAS分析服务通过客户端及Cloud Data，收集应用及用户的各种数据，并在Leap Cloud中进行专业分析，最终生成面向运营者的报表。
+Leap Cloud分析服务通过客户端及Cloud Data，收集应用及用户的各种数据，并在Leap Cloud中进行专业分析，最终生成面向运营者的报表。
 
-###	为何需要LAS分析服务
+###	为何需要Leap Cloud分析服务
 
-LAS分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
+Leap Cloud分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
 
 *	洞察运营概况及趋势：从产品新增用户、活跃用户、应用启动次数、版本分布，到用户的使用细节、用户属性以及行为特征，你可以洞察到各类数据指标，全面了解产品运营情况和迭代效果。
 *	洞察用户行为：还原每位用户的使用行为链条，并掌握其活跃度，留存率及转化率。
@@ -15,9 +15,9 @@ LAS分析服务是实时、免费、专业的移动应用统计分析服务，�
 *	提升应用营收：跟踪消费行为，制定营销策略，最大化的提升营销效果。
 
 
-###	LAS分析如何工作
+###	Leap Cloud分析如何工作
 
-“LAS分析”SDK，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
+“LC分析”SDK，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
 1.  自动收集信息（如终端信息等）
 2.  追踪会话
 2.  自定义事件
@@ -25,7 +25,7 @@ LAS分析服务是实时、免费、专业的移动应用统计分析服务，�
 4.  追踪页面访问
 5.  收集安装信息
 
-LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，做出更有效的运营策略，
+Leap Cloud"分析"服务将通过以下功能，帮助您更了解用户及其行为，做出更有效的运营策略，
 
 1. **用户分析：** 包括“趋势”，“留存”，“终端”等模块
 2. **使用行为分析：** 包括”用户使用率“，”用户行为“等模块
@@ -33,9 +33,9 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 
 #### 优势：
 
-1.    最佳实践：LAS提供业内极具竞争力的分析参数和模型，经过亿级用户量应用的验证
+1.    最佳实践：Leap Cloud提供业内极具竞争力的分析参数和模型，经过亿级用户量应用的验证
 2.    用户群划分：您可以分析自定义用户群的属性及行为
-3.    丰富的报表：透过运营者视角，LAS提供一套完整的，直观的报表:
+3.    丰富的报表：透过运营者视角，Leap Cloud提供一套完整的，直观的报表:
 
 我们还可以通过下列筛选因子，自定义报表的显示数据：
 	
@@ -43,7 +43,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 * 过滤器：指定应用版本和渠道
 * 时间段：指定特定的时间跨度
 	
-**如果您希望进一步了解LAS分析服务SDK，请参考[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
+**如果您希望进一步了解Leap Cloud分析服务SDK，请参考[iOS开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
 
 ## 概览
 
@@ -194,7 +194,7 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
 	1. 点击管理事件 -> 添加事件
 	2. 填写事件名称和描述
 	
-	关于自定义事件的实现，请移步至[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)
+	关于自定义事件的实现，请移步至[iOS开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)
 		
 3.  路径沙漏
 
@@ -223,6 +223,6 @@ LAS"分析"服务将通过以下功能，帮助您更了解用户及其行为，
     
 ## 下一步
 
-**如果您希望进一步了解LAS分析服务SDK，请参考[iOS开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#分析)或[Android开发指南 － 分析服务](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#分析)。**
+**如果您希望进一步了解Leap Cloud分析服务SDK，请参考[iOS开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#分析)或[Android开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#分析)。**
     
     
