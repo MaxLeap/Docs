@@ -10,7 +10,7 @@ The advantages of putting part of configuration in cloud can be summarized as fo
 
 ## Next
 
-**If you want to learn more about LAS Cloud Config Service SDK, please check [iOS Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**
+**If you want to learn more about LC Cloud Config Service SDK, please check [iOS Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**
 
 ##Cloud Parameter List
 In Cloud Config of Dev Center, we can check all cloud parameter list of your app. The table includes following cloumns:
@@ -34,4 +34,4 @@ You can delete the cloud parameter by clicking Delete button in column Detail.
 
 ## Next
 
-**If you want to learn more about LAS Cloud Config Service SDK, please check [iOS Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**
+**If you want to learn more about LC Cloud Config Service SDK, please check [iOS Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**

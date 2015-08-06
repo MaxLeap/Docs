@@ -10,7 +10,7 @@ You can get and modify the relative settings of your app in App Settings:
 You can config following information of an app in General Settings:
 
 ####Basic Info
-* LAS App Name:
+* Leap Cloud App Name:
 * URL:??
 * Default language: ？？
 * Description: ？？
@@ -42,7 +42,7 @@ Fill GCM Push Credentials:
 ![imgSTPush.png](../../../images/imgSTPush.png)
 
 
-Please check [推送使用指南](..) for more detailed information of Push Notification.
+Please check [Push Guide](..) for more detailed information of Push Notification.
 
 ##User Authentication
 You can turn on/off the authentications below:
@@ -53,10 +53,10 @@ You can turn on/off the authentications below:
 
 ![imgSTAuth.png](../../../images/imgSTAuth.png)
 
-Please check [用户认证开发指南](..) for more detailed information of User Authentication.
+Please check [User Authentication Guide](..) for more detailed information of User Authentication.
 
 ##Email Settings 
-LAS can send emails automatically in following conditions: 
+Leap Cloud can send emails automatically in following conditions: 
 * **Email Verification**: You can decide whether your users need to verfiy their email when sign up or change email address by turning on/off "Verify user's email address".
 * Password Reset
 

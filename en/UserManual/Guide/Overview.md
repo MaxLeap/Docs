@@ -1,8 +1,8 @@
-#Overview of LAS Cloud Service
+#Overview of Leap Cloud Service
 
-##What is LAS Cloud Service
+##What is Leap Cloud Service
 
-LAS Cloud Service provides **a Package Solution of MBaaS** for app development, mobile operation, marketing and customer service. Leap Cloud provides cloud storage, cloud code, push notification, analytics, user management and support with client SDK and back-end management website.
+Leap Cloud Service provides **a Package Solution of MBaaS** for app development, mobile operation, marketing and customer service. Leap Cloud provides cloud storage, cloud code, push notification, analytics, user management and support with client SDK and back-end management website.
 
 * Developer: Get rid of IT infrastructure, as well as the implementation & testing of corresponding backend services;
 * Operator: Optimize operation strategies with comprehensive operation analytics;
@@ -12,7 +12,7 @@ LAS Cloud Service provides **a Package Solution of MBaaS** for app development, 
 
 ![imgOVBusinessFlow](../../../images/imgOVBusinessFlow.png)
 
-With all strategies aforementioned, LAS Cloud Service can help you transfer your concept into a real app and imporve your user engagament and business with efficient operation and marketing campaign. 
+With all strategies aforementioned, Leap Cloud Service can help you transfer your concept into a real app and imporve your user engagament and business with efficient operation and marketing campaign. 
 
 ##Development: Expedited Launch
 Traditional app developer may be caught by the 80-20 Law during the app development: 80% time are spent in improving the user experience and other events that are not related to the revenue, while only 20% time are spent in invention realization and revenue expansion.
@@ -26,7 +26,7 @@ The trational app development includes:
 * Extensive test: the stability of database and server, the accuracy of SDK
 * Realize app invention
 
-While, LAS Cloud Service removed all obstacles for you and your invention. You have already got the necessary back-end system and mobile SDK for developers, the powerful back-end management system for developers/operators/marketers/support team on starting LAS Cloud Service.
+While, Leap Cloud Service removed all obstacles for you and your invention. You have already got the necessary back-end system and mobile SDK for developers, the powerful back-end management system for developers/operators/marketers/support team on starting Leap Cloud Service.
 
 #####Safety
 The back-end infrastructure architecture provided by Leap Cloud has supported app with billions of users and greatly guaranteed its stability and safety.
@@ -47,7 +47,7 @@ The Analytics provided by Leap Cloud can comprehensively analyze your operation 
 You can create a user segment based on analysis results and any combination of user attributes. Then you can analyze different behavior of certain user segment and customize app experience and marketing campaign.
 
 ##Marketing: Precise Promotion
-Your marketing campaign will be more effective and precise with LAS Cloud Service. A typical LAS app marketing can be summarized as follows:
+Your marketing campaign will be more effective and precise with Leap Cloud Service. A typical Leap Cloud app marketing can be summarized as follows:
 
 1. Marketers check analysis report and plan a campaign based on marketing history, current user engagement and payment.
 2. Send different push notifications or in-app messages to different segments.
@@ -55,7 +55,7 @@ Your marketing campaign will be more effective and precise with LAS Cloud Servic
 4. Check marketing campagin list in real time and timely modify it.
 
 
-As mentioned above, LAS Cloud Service can easily help you make reasonable marketing strategies, check marketing status in real time and greatly improve your business.
+As mentioned above, Leap Cloud Service can easily help you make reasonable marketing strategies, check marketing status in real time and greatly improve your business.
 
 ##Users: Timely Support
 
