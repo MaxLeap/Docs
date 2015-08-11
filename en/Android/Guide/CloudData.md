@@ -7,18 +7,12 @@ language_tabs:
 
 # Cloud Data
 
-If you haven't installed the SDK yet, please [head over to the QuickStart guide][android guide quick start] to get our SDK up and running in Eclipse. You can also check out our [API Reference][android guide api reference] for more detailed information about our SDK.
-
-[android guide quick start]: ../../quickstart/android/core/existing.html
-[android guide api reference]: ../../api/android/index.html
-
-
-
+If you haven't installed the SDK yet, please head over to [Android QuickStart](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID) or [Android QuickStart](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS) to get our SDK up and running in Eclipse. You can also check out our [iOS API Reference][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] or [Andorid API Reference][LC_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID] for more detailed information about our SDK.
 
 ## Objects
 ### The LCObject
 
-Storing data on LC is built around the LCObject. Each LCObject contains key-value pairs of JSON-compatible data. This data is schemaless, which means that you don't need to specify ahead of time what keys exist on each LCObjec. You simply set whatever key-value pairs yoou want, and our backend will store it.
+Storing data on LeapCloud is built around the LCObject. Each LCObject contains key-value pairs of JSON-compatible data. This data is schemaless, which means that you don't need to specify ahead of time what keys exist on each LCObjec. You simply set whatever key-value pairs yoou want, and our backend will store it.
 
 For example, let's say you're tracking high scores for a game. A single LCObject could contain:
 

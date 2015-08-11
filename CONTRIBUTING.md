@@ -78,6 +78,8 @@ We provide several path-maps here, you can compile links of other pages with tho
         'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '../../tutorials/android.html',
         'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS': '../../quickstart/ios/core/existing.html',
         'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '../../quickstart/android/core/existing.html',
+        'LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '../../api/ios/index.html',
+        'LC_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '../../api/android/index.html',
 
         
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing

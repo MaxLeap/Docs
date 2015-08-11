@@ -3,7 +3,7 @@
 
 ### Install SDK
 
-Please make sure that you have integrated LeapCloud Core lib. If not, please check [Android QuickStart](../../quickstart/android/core/existing.html) to integrate it.
+Please make sure that you have integrated LeapCloud Core lib. If not, please check [Android QuickStart](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID) or [Android QuickStart](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)to integrate it.
 
 ### Set AndroidManifest.xml File
 

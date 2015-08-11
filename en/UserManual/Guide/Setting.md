@@ -10,7 +10,7 @@ You can get and modify the relative settings of your app in App Settings:
 You can config following information of an app in General Settings:
 
 ####Basic Info
-* Leap Cloud App Name:
+* LeapCloud App Name:
 * URL:??
 * Default language: ？？
 * Description: ？？
@@ -56,7 +56,7 @@ You can turn on/off the authentications below:
 Please check [User Authentication Guide](..) for more detailed information of User Authentication.
 
 ##Email Settings 
-Leap Cloud can send emails automatically in following conditions: 
+LeapCloud can send emails automatically in following conditions: 
 * **Email Verification**: You can decide whether your users need to verfiy their email when sign up or change email address by turning on/off "Verify user's email address".
 * Password Reset
 

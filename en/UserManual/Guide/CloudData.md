@@ -2,7 +2,7 @@
 ## Introduction
 
 ### What is Cloud Data
-Cloud Data is the data storage service provided by Leap Cloud. It is based on the `LCObject` and each `LCObject` contains several key-values. All `LCObject` are stored in Leap Cloud, you can perform operations towards them with iOS/Android Core SDK. Besides, Leap Cloud  provides some special objects, like `LCUser`, `LCRole`, `LCFile` and `LCGeoPoint`. They are all based on `LCObject`.
+Cloud Data is the data storage service provided by LeapCloud. It is based on the `LCObject` and each `LCObject` contains several key-values. All `LCObject` are stored in LeapCloud, you can perform operations towards them with iOS/Android Core SDK. Besides, LeapCloud  provides some special objects, like `LCUser`, `LCRole`, `LCFile` and `LCGeoPoint`. They are all based on `LCObject`.
 
 
 ### Why is Cloud Data Nccessary
