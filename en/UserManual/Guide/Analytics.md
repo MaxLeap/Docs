@@ -45,7 +45,7 @@ Leap Cloud Analytics helps you learn about your users and their behavoir, thus m
     * Filters: for specific app versions and channels.
     * Timeframe: choose the specifc time span.	
 
-**If you want to learn more about Leap Cloud Analytics Service SDK, please check [iOS Guide － Analytics](../../iOS/Guide/Analytics.md) or [Android Guide － Analytics](../../Android/Guide/Analytics.md)。**
+**If you want to learn more about Leap Cloud Analytics Service SDK, please check [Android Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) or [iOS Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN)。**
 
 ## Overview
 
@@ -194,7 +194,7 @@ The informaiton you can get from here includes but is not limited to:
 	Please notice that we can also customize the report by：
 	> 1. Clicking Manage Event -> Add New Event
 	> 2. Filling the Event ID and Event Desc
-	As for the achievement of customized events, please check [LAS分析服务SDK使用向导](...) for more details.
+	As for the achievement of customized events, please check [Android Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) or [iOS Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN) for more details.
 	
 	img
 	
@@ -239,6 +239,6 @@ API Usage shows the usage of Leap Cloud cloud service of your app.
     
 ## Next
 
-**If you want to learn more about Leap Cloud Analytics Service SDK, please check [iOS Guide － Analytics](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN) or [Android Guide － Analytics](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) for more details.**
+**If you want to learn more about Leap Cloud Analytics Service SDK, please check [iOS Guide － Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN) or [Android Guide － Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) for more details.**
     
     

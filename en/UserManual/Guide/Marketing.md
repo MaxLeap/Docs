@@ -13,7 +13,7 @@ With data from Analytics and Segment provided by Leap Cloud Users, you can make 
 * **Ensure the user experience: **More targeted to send messages to certain Segment 
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
-**If you want to learn more about Leap Cloud Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
+**If you want to learn more about Leap Cloud Marketing Service SDK, please check [iOS Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
 ##Marketing Campaign List
 
 In Marketing Campaign list, you can check all campaign（including**In-app Messages**and**Push Notifications**）details of an app:
@@ -28,7 +28,7 @@ Click "New Campaign + " >> Push, and then you can enter the create new Push page
 The target users can be divided into 3 types:
 
 * All users
-* Users from certain Segments （Please check [UserManual of Segment](LAS_DOCS__LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
+* Users from certain Segments （Please check [UserManual of Segment](LC_DOCS__LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
 * Users using certain devices
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)
@@ -87,4 +87,4 @@ The default status of a new campaign is Draft. You can select a push and click "
 
 ## Next
 
-**If you want to learn more about Leap Cloud Marketing Service SDK, please check [iOS Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
+**If you want to learn more about Leap Cloud Marketing Service SDK, please check [iOS Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**

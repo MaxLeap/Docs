@@ -1,13 +1,13 @@
 # CloudConfig
 
-### LAS CloudConfig
+###What's CloudConfig
 
 With online parameter, you can control your app behavior without re-publishing. SDK will automatically get the latest CloudConfig parameter from server once the app is running.
 
 ### Get Current CloudConfig
 
 ```java
-LASCloudConfig currentConfig = LASCloudConfig.getCurrentCloudConfig();
+LCCloudConfig currentConfig = LCCloudConfig.getCurrentCloudConfig();
 ```
 
 ### Get Value of CloudConfig
@@ -34,9 +34,9 @@ and so on.
 You can refresh CloudConfig promptly with following code:
 
 ```java
-LASCloudConfigManager.getInBackground(new ConfigCallback() {
+LCCloudConfigManager.getInBackground(new ConfigCallback() {
     @Override
-    public void done(LASCloudConfig cloudConfig, LASException exception) {
+    public void done(LCCloudConfig cloudConfig, LCException exception) {
         if (exception != null) {
             //do something when error
             return;
@@ -54,9 +54,9 @@ LASCloudConfigManager.getInBackground(new ConfigCallback() {
 To take prompt actions towards the CloudConfig parameter value change, please invoke following code:
 
 ```java
-LASCloudConfigManager.observeKeyInBackground("x", new ValueChangedCallback() {
+LCCloudConfigManager.observeKeyInBackground("x", new ValueChangedCallback() {
     @Override
-    public void done(LASCloudConfig cloudConfig) {
+    public void done(LCCloudConfig cloudConfig) {
        int newX = cloudConfig.get("x", null);
     }
 });
@@ -69,19 +69,19 @@ Multiple observers are supported on one Key.
 Remove a certain observer
 
 ```java
-LASCloudConfigManager.removeObserver("x",  previousValueChangedCallback);
+LCCloudConfigManager.removeObserver("x",  previousValueChangedCallback);
 ```
 
 Remove all observers on a certain key.
 
 ```java
-LASCloudConfigManager.removeObserver("x");
+LCCloudConfigManager.removeObserver("x");
 ```
 
 Remove all observers
 
 ```java
-LASCloudConfigManager.removeAllObservers();
+LCCloudConfigManager.removeAllObservers();
 ```
 
 #### Refresh Keys in Background
@@ -92,6 +92,6 @@ To ensure the validity of observer, please execute following code after the Acti
 @Override
 protected void onResume() {
     super.onResume();
-    LASCloudConfigManager.refereshKeysInBackground();
+    LCCloudConfigManager.refereshKeysInBackground();
 }
 ```

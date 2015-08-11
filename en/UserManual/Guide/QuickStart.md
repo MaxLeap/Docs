@@ -18,23 +18,23 @@
 
 #####	Eclipse
 	
-	1.	Open Eclipse，and click "File" -> "Import.."  	2. 	Select "General"-> "Existing Projects into Workspace" 	3. 	Check “Select root directory”，enter workspace directory and select LASStarterProject in project list. 
+	1.	Open Eclipse，and click "File" -> "Import.."  	2. 	Select "General"-> "Existing Projects into Workspace" 	3. 	Check “Select root directory”，enter workspace directory and select LCStarterProject in project list. 
 	
 ##	Config Leap Cloud Project
 
 ###	Connect Project with Leap Cloud App 
 	
-	Invoke `LASConfig.initialize` in onCreate() method of Application to set your app's Application ID and REST API Key：
+	Invoke `LCConfig.initialize` in onCreate() method of Application to set your app's Application ID and REST API Key：
 	
 	```java
 	import android.app.Application;
-	import as.leap.LASConfig;
+	import as.leap.LCConfig;
 
 	public class MyApplication extends Application {
 	    @Override
 	    public void onCreate() {
 	        super.onCreate();
-	        LASConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 	    }
 	}
 	```
@@ -60,20 +60,20 @@ In order to test whether the project is connected to Leap Cloud app and its clou
 
 ```java
 import android.app.Application;
-import as.leap.LASConfig;
-import as.leap.LASDataManager;
-import as.leap.LASObject;
+import as.leap.LCConfig;
+import as.leap.LCDataManager;
+import as.leap.LCObject;
 
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LASConfig.initialize(this, "{{appid}}", "{{restkey}}");
+        LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
         
         //Test Project Configuration：
-        LASObject testObject = new LASObject("People");
+        LCObject testObject = new LCObject("People");
         testObject.put("Name", "David Wang");
-        LASDataManager.saveInBackground(testObject);
+        LCDataManager.saveInBackground(testObject);
     }
 }
 ```
@@ -84,4 +84,4 @@ The test code is tryig to create a “CLASS” － “People” in Cloud Data an
 
 It indicates that the data storage in Cloud Data is successfully completed with client.
 
-Congratulations on the Leap Cloud SDK installtion and configuration. Please click [SDK Tutorial](LAS_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of LAS, and start your Leap Cloud Service now.
+Congratulations on the Leap Cloud SDK installtion and configuration. Please click [SDK Tutorial](LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of LC, and start your Leap Cloud Service now.
