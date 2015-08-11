@@ -15,8 +15,6 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 
 ### Cloud Data服务如何工作
 
-Pic
-
 ## Cloud Object
 存储在Cloud Data的对象称为`LCObject`，而每个`LCObject`被规划至不同的`class`中（类似“表”的概念)。`LCObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 LCObject包含哪些属性，也无需指定属性值的类型。您可以随时向`LCObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
 
