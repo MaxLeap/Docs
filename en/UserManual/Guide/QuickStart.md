@@ -2,7 +2,7 @@
 
 ##	Install SDK
 
-####	Qucik Start with LeapCloud SDK Using Project Template
+####	Quick Start with LeapCloud SDK Using Project Template
 
 #####	1.	Get Project Template
 

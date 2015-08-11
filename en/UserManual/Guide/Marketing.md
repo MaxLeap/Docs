@@ -75,7 +75,7 @@ An in-app message contains contents as shown below, you need to fill and are abl
 Notice:
 
 * You can create multiple messages in a campaign by clicking the "+" button on the left.
-* 
+
 ####Step 3：Schedule Campaign and Set Expire Date
 ![imgMAddMsg3.png](../../../images/imgMAddMsg3.png)
 

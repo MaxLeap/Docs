@@ -64,12 +64,8 @@ In order to improve customer satisfaction, LeapCloud provide you with a standard
 ![imgOVSupport](../../../images/imgOVSupport.png) 
 
 ##Next
-<<<<<<< HEAD
-* Please go back to [Documents](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME) for more detailed information about Leap Cloud Service.
-* Please check [iOS Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android Guide](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) for SDK Guide.
-=======
+
 * Please go back to [Documents](LC_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME) for more detailed information about LeapCloud Service.
 * Please check [iOS Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)or [Android Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) for SDK Guide.
->>>>>>> 61d6c5ad24498392b8f5138dfd491e9e8b33126b
 
 

@@ -10,10 +10,10 @@ You can get and modify the relative settings of your app in App Settings:
 You can config following information of an app in General Settings:
 
 ####Basic Info
-* LeapCloud App Name:
-* URL:??
-* Default language: ？？
-* Description: ？？
+* LeapCloud App Name
+* URL
+* Default language
+* Description
 
 ####Release Product
 Android：
