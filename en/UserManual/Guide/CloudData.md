@@ -20,7 +20,7 @@ In Data of Dev Center, you can check the class list of your app:
 
 ![imgCDClassList.png](../../../images/imgCDClassList.png)
 
-If the type of a field is LCRelation, then it is related to other LCObject. The value of this column will show as "View Relations". You can check all LCObject related to this property by clicking it.
+If the type of a property is LCRelation, then it is related to other LCObject. The value of this column will show as "View Relations". You can check all LCObject related to this property by clicking it.
 
 ![imgCDShowRelation.png](../../../images/imgCDShowRelation.png)
 
