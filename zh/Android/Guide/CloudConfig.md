@@ -2,7 +2,7 @@
 
 ## 简介
 ###什么是Cloud Config
-每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在Leap Cloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在LeapCloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
 ###为何需要Cloud Config
 将应用的部分配置放置在云端的优势在于：
 

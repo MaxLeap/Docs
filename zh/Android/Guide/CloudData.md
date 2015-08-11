@@ -3,7 +3,7 @@
 ## 简介
 
 ### 什么是Cloud Data服务
-Cloud Data是Leap Cloud提供的数据存储服务，它建立在对象`LCObject`的基础上，每个`LCObject`包含若干键值对。所有`LCObject`均存储在Leap Cloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外Leap Cloud还提供一些特殊的对象，如`LCUser`(用户)，`LCRole`(角色)，`LCFile`(文件)，`LCGeoPoint`(地理位置)，他们都是基于`LCObject`的对象。
+Cloud Data是LeapCloud提供的数据存储服务，它建立在对象`LCObject`的基础上，每个`LCObject`包含若干键值对。所有`LCObject`均存储在LeapCloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外LeapCloud还提供一些特殊的对象，如`LCUser`(用户)，`LCRole`(角色)，`LCFile`(文件)，`LCGeoPoint`(地理位置)，他们都是基于`LCObject`的对象。
 
 ### 为何需要Cloud Data服务
 Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
@@ -234,7 +234,7 @@ LCDataManager.saveInBackground(gameScore);
 ###关联数据
 对象可以与其他对象相联系。如前面所述，我们可以把一个 LCObject 的实例 a，当成另一个 LCObject 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
 
-注：Leap Cloud 云端是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。 
+注：LeapCloud 云端是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。 
 
 ####一对一关联
 例如：一条微博信息可能会对应多条评论。创建一条微博信息并对应一条评论信息，您可以这样写：
@@ -823,7 +823,7 @@ LCQueryManager.findAllInBackground(mainQuery, new FindCallback<LCObject>() {
 ```
 
 ###缓存查询
-经常需要缓存一些查询的结果到磁盘上，这可以让您在离线的时候，或者应用刚启动，网络请求还没有足够时间完成的时候可以展现一些数据给用户。Leap Cloud 会自动清空缓存，当缓存占用了太多空间的时候。
+经常需要缓存一些查询的结果到磁盘上，这可以让您在离线的时候，或者应用刚启动，网络请求还没有足够时间完成的时候可以展现一些数据给用户。LeapCloud 会自动清空缓存，当缓存占用了太多空间的时候。
 
 默认情况下的查询不会使用缓存，除非您使用 setCachePolicy 方法明确设置启用。例如，尝试从网络请求，如果网络不可用则从缓存数据中获取，可以这样设置：
 
@@ -1082,7 +1082,7 @@ LCUser currentUser = LCUser.getCurrentUser(); //此时，crrentUser将为null
 
 ###重置密码
 
-如果用户忘记密码，Leap Cloud提供了一种方法，让用户安全地重置起密码。 重置密码的流程很简单，开发者只要求用户输入注册的电子邮件地址即可：
+如果用户忘记密码，LeapCloud提供了一种方法，让用户安全地重置起密码。 重置密码的流程很简单，开发者只要求用户输入注册的电子邮件地址即可：
 
 ```java
 LCUserManager.requestPasswordResetInBackground(
@@ -1098,13 +1098,13 @@ LCUserManager.requestPasswordResetInBackground(
 如果邮箱与用户注册时提供的邮箱匹配，系统将发出密码重置邮件。密码重置流程如下：
 
 * 用户输入他们的电子邮件，请求重置自己的密码。
-* Leap Cloud 向用户提供的邮箱发送一封电子邮件，该邮件提供密码重置链接。
+* LeapCloud 向用户提供的邮箱发送一封电子邮件，该邮件提供密码重置链接。
 * 用户根据向导点击重置密码链接，打开一个LC的页面，输入一个新的密码。
-* Leap Cloud 将用户的密码重置为新输入的密码。
+* LeapCloud 将用户的密码重置为新输入的密码。
 
 ###查询用户
 
-您可以通过特殊的UserQuery查询用户数据。Leap Cloud对用户数据安全性提供充分的保障，如需获取更多信息，请移步至[用户对象的安全性](..)。
+您可以通过特殊的UserQuery查询用户数据。LeapCloud对用户数据安全性提供充分的保障，如需获取更多信息，请移步至[用户对象的安全性](..)。
 
 ```java
 LCQuery<LCUser> query = LCUser.getQuery();
@@ -1122,7 +1122,7 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCUser>() {
 
 ###邮箱验证
 
-Leap Cloud提供强大的邮箱验证服务，您只需在Console >> App Settings >> Email Settings中Enable "Verify user's email address", 系统便会自动在LCUser中添加`emailVerified`字段。并且，当LCUser的email字段被赋值或者修改, 且`emailVerified`字 字段的值为false. Leap Cloud便会自动向用户发送一个链接，用户点击链接后便会将`emailVerified`设置为true.
+LeapCloud提供强大的邮箱验证服务，您只需在Console >> App Settings >> Email Settings中Enable "Verify user's email address", 系统便会自动在LCUser中添加`emailVerified`字段。并且，当LCUser的email字段被赋值或者修改, 且`emailVerified`字 字段的值为false. LeapCloud便会自动向用户发送一个链接，用户点击链接后便会将`emailVerified`设置为true.
 
 `emailVerified`字段有三种状态:
 
@@ -1131,7 +1131,7 @@ Leap Cloud提供强大的邮箱验证服务，您只需在Console >> App Setting
 * 空 - 邮箱验证功能未开，或者用户未提供邮箱
 
 ###匿名用户
-匿名用户是指提供用户名和密码，系统为您创建的一类特殊用户，它享有其他用户具备的相同功能。不过，一旦注销，匿名用户的所有数据都将无法访问。如果您的应用需要使用一个相对弱化的用户系统时，您可以考虑 Leap Cloud 提供的匿名用户系统来实现您的功能。
+匿名用户是指提供用户名和密码，系统为您创建的一类特殊用户，它享有其他用户具备的相同功能。不过，一旦注销，匿名用户的所有数据都将无法访问。如果您的应用需要使用一个相对弱化的用户系统时，您可以考虑 LeapCloud 提供的匿名用户系统来实现您的功能。
 
 您可以通过LCAnonymousUtils获取一个匿名的用户账号：
 
@@ -1154,7 +1154,7 @@ LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
 Boolean isAnonymous = LCAnonymousUtils.isLinked(LCUser.getCurrentUser());
 ```
 
-您可以选择让系统自动创建匿名用户（本地创建，无需网络连接）, 以便立即开始使用应用. 设置自动创建匿名用户后, LCUser.getCurrentUser()将永远不为null。 然而，当您在存储与该匿名用户相关的LCObject时，Leap Cloud会在云端创建该匿名用户。
+您可以选择让系统自动创建匿名用户（本地创建，无需网络连接）, 以便立即开始使用应用. 设置自动创建匿名用户后, LCUser.getCurrentUser()将永远不为null。 然而，当您在存储与该匿名用户相关的LCObject时，LeapCloud会在云端创建该匿名用户。
 
 #####如何自动创建匿名用户
 在主Application的onCreate()方法中添加：
@@ -1168,7 +1168,7 @@ LCUser.enableAutomaticUser();
 User 表是一个特殊的表，专门存储 LCUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](...)中查看。
 
 ##用户角色
-随着用户数量的增长，使用角色进行权限管理将更有效。所有赋予某一角色的权限，将被该角色包含的用户所继承。用户角色是一组用户的集合，同时，一个用户角色也可以包含另一个用户角色。在Leap Cloud中有一个对应的`_Role` class来存储用户角色。
+随着用户数量的增长，使用角色进行权限管理将更有效。所有赋予某一角色的权限，将被该角色包含的用户所继承。用户角色是一组用户的集合，同时，一个用户角色也可以包含另一个用户角色。在LeapCloud中有一个对应的`_Role` class来存储用户角色。
 
 ###字段说明
 
@@ -1332,7 +1332,7 @@ LCDataManager.saveInBackground(publicPost);
 
 ### 用户对象的安全性
 
-Leap Cloud对用户对象的安全性进行了规范。默认情况下，存储在用户对象中的数据，只能被该用户本身修改。客户端可以读取其他用户的数据，但无权限修改或删除。所以，只有用户登录后所获取的用户对象，才能被修改。
+LeapCloud对用户对象的安全性进行了规范。默认情况下，存储在用户对象中的数据，只能被该用户本身修改。客户端可以读取其他用户的数据，但无权限修改或删除。所以，只有用户登录后所获取的用户对象，才能被修改。
 
 以下例子很好的描绘了用户对象的安全性:
 
@@ -1372,15 +1372,15 @@ LCRoleManager.saveInBackground(role);
 
 ##第三方登录
 
-为简化用户的注册及登录流程，并且集成LC应用与Facebook, Twitter等应用，Leap Cloud提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与LC SDK，并将LCUser与第三方应用的用户ID进行连接。
+为简化用户的注册及登录流程，并且集成LC应用与Facebook, Twitter等应用，LeapCloud提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与LC SDK，并将LCUser与第三方应用的用户ID进行连接。
 
 ###使用Facebook账号登录
 Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Facebook应用的设备，LC应用可通过设备上的Facebook用户凭据，直接实现用户登录。对于未安装Facebook应用的设备，用户可以通过一个标准化的Facebook登录页面，提供相应的登录信息。
 
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。
+使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。
 ####准备工作
 1. 在[Facebook开发者中心](https://developers.facebook.com)创建Facebook应用。点击My Apps >> Add a New App
-2. 打开Leap Cloud Console >> App Settings >> User Authentication.勾选Allow Facebook Authentication. 并将步骤一中获取的Facebook Application ID 和 App Secret填写至相应位置。
+2. 打开LeapCloud Console >> App Settings >> User Authentication.勾选Allow Facebook Authentication. 并将步骤一中获取的Facebook Application ID 和 App Secret填写至相应位置。
 3. 集成Facebook SDK，添加Facebook Login按钮。详细步骤，请参考[Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4)
 4. 在项目的Application.onCreate()函数中，于LCConfig.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
 
@@ -1397,7 +1397,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ####登录并注册新LCUser
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。如：
+使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。如：
 
 ```java
 LCFacebookUtils.logInInBackground(this, new LogInCallback<LCUser>() {
@@ -1418,7 +1418,7 @@ LCFacebookUtils.logInInBackground(this, new LogInCallback<LCUser>() {
 
 * 用户通过Facebook SDK提供的Login with Facebook界面登录Facebook
 * Facebook验证登录信息，并返回结果.
-* Leap Cloud SDK接受结果，并保存至LCUser. 如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户.
+* LeapCloud SDK接受结果，并保存至LCUser. 如果该Facebook用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户.
 * 调用LC的LogInCallback登录该LCUser.
 
 ####绑定LCUser与Facebook账号
@@ -1437,7 +1437,7 @@ if (!LCFacebookUtils.isLinked(user)) {
 }
 ```
 
-绑定成功后，Leap Cloud将会把该Facebook账号的信息更新至该LCUser中。下次再使用该Facebook账号登录应用时，Leap Cloud将检测到其已绑定LCUser，便不会为该Facebook账号添加新的LCUser.
+绑定成功后，LeapCloud将会把该Facebook账号的信息更新至该LCUser中。下次再使用该Facebook账号登录应用时，LeapCloud将检测到其已绑定LCUser，便不会为该Facebook账号添加新的LCUser.
 
 ####解除绑定
 
@@ -1451,15 +1451,15 @@ LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-解除绑定成功后，Leap Cloud将会把该Facebook账号的信息从该LCUser中移除。下次再使用该Facebook账号登录应用时，Leap Cloud将检测到其未绑定LCUser，便会为该Facebook账号添加新的LCUser.
+解除绑定成功后，LeapCloud将会把该Facebook账号的信息从该LCUser中移除。下次再使用该Facebook账号登录应用时，LeapCloud将检测到其未绑定LCUser，便会为该Facebook账号添加新的LCUser.
 
 ###使用Twitter账号登录
 与Facebook类似，Twitter的Android SDK，也能帮助应用优化登录体验。对于已经安装Twitter应用的设备，LC应用可通过设备上的Twitter用户凭据，直接实现用户登录。对于未安装Twitter应用的设备，用户可以通过一个标准化的Twitter登录页面，提供相应的登录信息。
 
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。
+使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。
 ####准备工作
 1. 在[Twitter开发者中心](...)创建Twitter应用。点击My Apps >> Add a New App
-2. 打开Leap Cloud Console >> App Settings >> User Authentication.勾选Allow Twitter Authentication. 并将步骤一中获取的Twitter consumer Key填写至相应位置。
+2. 打开LeapCloud Console >> App Settings >> User Authentication.勾选Allow Twitter Authentication. 并将步骤一中获取的Twitter consumer Key填写至相应位置。
 3. 集成Twitter SDK，添加Twitter Login按钮。详细步骤，请参考[Add Twitter Login to Your App or Website](...)
 4. 在项目的Application.onCreate()函数中，于LCConfig.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
 
@@ -1476,7 +1476,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ####登录并注册新LCUser
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。如：
+使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。如：
 
 ```java
 LCTwitterUtils.logInInBackground(this, new LogInCallback<LCUser>() {
@@ -1497,7 +1497,7 @@ LCTwitterUtils.logInInBackground(this, new LogInCallback<LCUser>() {
 
 * 用户通过Twitter SDK提供的Login with Twitter界面登录Twitter
 * Twitter验证登录信息，并返回结果.
-* Leap Cloud SDK接受结果，并保存至LCUser. 如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户.
+* LeapCloud SDK接受结果，并保存至LCUser. 如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户.
 * 调用LC的LogInCallback登录该LCUser.
 
 ####绑定LCUser与Twitter账号
@@ -1516,7 +1516,7 @@ if (!LCTwitterUtils.isLinked(user)) {
 }
 ```
 
-绑定成功后，Leap Cloud将会把该Twitter账号的信息更新至该LCUser中。下次再使用该Twitter账号登录应用时，Leap Cloud将检测到其已绑定LCUser，便不会为该Twitter账号添加新的LCUser.
+绑定成功后，LeapCloud将会把该Twitter账号的信息更新至该LCUser中。下次再使用该Twitter账号登录应用时，LeapCloud将检测到其已绑定LCUser，便不会为该Twitter账号添加新的LCUser.
 
 ####解除绑定
 
@@ -1530,11 +1530,11 @@ LCTwitterUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-解除绑定成功后，Leap Cloud将会把该Twitter账号的信息从该LCUser中移除。下次再使用该Twitter账号登录应用时，Leap Cloud将检测到其未绑定LCUser，便会为该Twitter账号添加新的LCUser.
+解除绑定成功后，LeapCloud将会把该Twitter账号的信息从该LCUser中移除。下次再使用该Twitter账号登录应用时，LeapCloud将检测到其未绑定LCUser，便会为该Twitter账号添加新的LCUser.
 
 ##地理位置
 
-Leap Cloud提供LCGeoPoint对象，帮助用户根据地球的经度和纬度坐标进行基于地理位置的信息查询。
+LeapCloud提供LCGeoPoint对象，帮助用户根据地球的经度和纬度坐标进行基于地理位置的信息查询。
 
 ####LCGeoPoint字段说明
 
