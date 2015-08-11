@@ -18,7 +18,7 @@ Leap Cloud Analytics is a real-time free and professional mobile apps Analytics 
 
 ###	How does Leap Cloud Analytics Work
 
-Leap Cloud Anaylytics SDK helps us track user behavoir and provides data for cloud analytics service, which includes:
+Leap Cloud Analytics SDK helps us track user behavoir and provides data for cloud analytics service, which includes:
 
 1.  Collect information automatically(like terminal info, etc.)
 2.  Track Sessions

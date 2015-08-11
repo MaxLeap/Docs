@@ -1,7 +1,7 @@
 # Cloud Config
 ## Introduction
 ###What is Cloud Config
-Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config  app parameter in Leap Cloud with Console and read cloud parameter with iOS/Android SDK.
+Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in Leap Cloud with Console and read cloud parameter with iOS/Android SDK.
 ###Why is Cloud Config Necessary
 The advantages of putting part of configuration in cloud can be summarized as follows:
 
