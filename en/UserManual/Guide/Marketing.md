@@ -28,7 +28,7 @@ Click "New Campaign + " >> Push, and then you can enter the create new Push page
 The target users can be divided into 3 types:
 
 * All users
-* Users from certain Segments （Please check [UserManual of Segment](LC_DOCS__LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
+* Users from certain Segments （Please check [UserManual of Segment](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
 * Users using certain devices
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)

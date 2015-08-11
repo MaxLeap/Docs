@@ -70,7 +70,7 @@ We provide several path-maps here, you can compile links of other pages with tho
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '../devguide/java.html',
         
         'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL': '../usermanual',
-        'LC_DOCS__LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '../usermanual/usermgmt.html'
+        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '../usermanual/usermgmt.html'
         'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '../usermanual/usermgmt.html',
 
         
