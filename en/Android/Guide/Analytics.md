@@ -27,6 +27,7 @@ Leap Cloud Analytics SDK helps us track user behavoir and provides data for clou
 
 The data collected will be saved to cloud. Leap Cloud will analyze users in each time zone as well as the overview of all users. Moreover, you can customize filters and generate relative reports收集到的数据会被保存至云端，Leap Cloud将针对不同时间的数据，对每个用户进行分析，也会将所有用户的数据汇总，进行全局分析。此外，您还可以自定义筛选条件，借助Leap Cloud生成相应的分析报表。
 
+
 ## Enable Service启用服务
 After the installation of SDK, Leap Cloud will track app data automatically, including:安装SDK完成后，Leap Cloud服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
 
@@ -82,6 +83,7 @@ Session is the period of time a user interfaces with an application. Session can
 
 Page is the interface visited by users. Page can take records of Visit Times, Total Occurrences, Screen Flow, etc.页面（screen）代表被用户访问的应用界面。纪录页面访问，可获取页面访问量，访问路径，访问深度等数据。
 
+
 ###Filed Description字段说明
 
 Filed Name|Type|Description
@@ -118,6 +120,7 @@ Notice:注意：
 ## Customized Events自定义事件
 
 Customized Events can set tracking point in app and take records of users action and collect data.自定义事件可以实现在应用程序中埋点，以纪录用户的点击行为并且采集相应数据。
+
 
 ###Filed Description字段说明
 Filed Name|Type|Description

@@ -1,7 +1,7 @@
 # 云配置
 ## 简介
 ###什么是Cloud Config
-每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在Leap Cloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在LeapCloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
 ###为何需要Cloud Config
 将应用的部分配置放置在云端的优势在于：
 
@@ -9,7 +9,7 @@
 * **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
 
 ## 下一步
-**如果您希望进一步了解Leap Cloud Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)或[Android开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)。**
+**如果您希望进一步了解LeapCloud Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)或[Android开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)。**
 
 ##云参数列表
 在开发者中心"云配置"中，我们可以查看该应用下所有的云参数的列表。该列表包含以下列：
@@ -47,4 +47,4 @@ Detail|(修改/删除按钮)
 
 ## 下一步
 
-**如果您希望进一步了解Leap Cloud Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)或[Android开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)。**
+**如果您希望进一步了解LeapCloud Cloud Config服务SDK，请参考[iOS开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)或[Android开发指南 － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)。**

@@ -1,26 +1,26 @@
 #营销
 ##简介
-###什么是Leap Cloud Marketing服务
+###什么是LeapCloud Marketing服务
 
-Marketing服务是Leap Cloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。消息的创建，设置和发送均在Console中完成。
+Marketing服务是LeapCloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。消息的创建，设置和发送均在Console中完成。
 
-###为何需要Leap Cloud Marketing服务
+###为何需要LeapCloud Marketing服务
 
-结合Leap Cloud分析服务提供的分析数据，以及Leap Cloud Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。Leap Cloud Marketing服务的优势在于：
+结合LeapCloud分析服务提供的分析数据，以及LeapCloud Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。LeapCloud Marketing服务的优势在于：
 
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
 * **保障用户体验：**选择向指定Segment发送消息，更具有针对性
 * **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
 
-###Leap Cloud Marketing服务如何工作
+###LeapCloud Marketing服务如何工作
 Pic
 
 ## 推送消息
 推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定跳转行为。
 
 ###配置
-Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
+LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
 
 1. 提供 **Sender ID** 和 **API key**. 请在[Google开发者中心](..)获取这两个Key.
 2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
