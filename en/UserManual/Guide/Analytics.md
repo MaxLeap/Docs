@@ -10,7 +10,7 @@ LeapCloud Analytics collects all kinds of data of apps and users with clients an
 
 LeapCloud Analytics is a real-time free and professional mobile apps Analytics Service. It provides multi-analysis of operation status, deep knowledge of typical users and advice on optimizing operating strategies, which will finally realize：
 
-*	Comprehend the operation status and trend: from New Users, Active Users, Sessions and App Versions to User bahevior, User attributes and behavioral features, we provide all kinds of indexes to help you understand your app's operation and iteration effect. 
+*	Comprehend the operation status and trend: from New Users, Active Users, Sessions and App Versions to User bahevior, User properties and behavioral features, we provide all kinds of properties to help you understand your app's operation and iteration effect. 
 *	Fully perceive user bahevior: Reproduce the behavior of each user and keep abreast of their engagement, retention and conversion.
 *	Improve user experience: Define user segments and customize user experience for differenct segments.
 *	Promote app revenue: Track consumer behavior, make marketing strategies and maximize the marketing effect.
@@ -36,12 +36,12 @@ LeapCloud Analytics helps you learn about your users and their behavoir, thus ma
 #### Advantages: 
 
 1.    Best practice: LeapCloud provides you with the most competitive analytics parameters and model, and is verified by apps with billions of users. 
-2.    Precise Segment: analyze the attributes and behavoir of your segments. 
+2.    Precise Segment: analyze the properties and behavoir of your segments. 
 3.    Plenty Reports: LeapCloud provides a whole set of complete and intuitive reports through operator's eyes:
 
     We can also customize the data displayed in reports with filters below:
 
-    * Segments: check index variation in specific segment.
+    * Segments: check property variation in specific segment.
     * Filters: for specific app versions and channels.
     * Timeframe: choose the specifc time span.	
 
@@ -49,19 +49,19 @@ LeapCloud Analytics helps you learn about your users and their behavoir, thus ma
 
 ## Overview
 
-DashBoard shows: Main indexes(New Users, Active Users and Sessions) and Revenue variation.
+DashBoard shows: Main properties(New Users, Active Users and Sessions) and Revenue variation.
 
-###  Overview of Main Indexes Yesterday
+###  Overview of Main Properties Yesterday
 
 ![imgAAOverview1.png](../../../images/imgAAOverview1.png) 
 
-Mainly includes：three main indexes yesterday(New Users, Active Users and Sessions), Revenue amount and Growth Rate.
+Mainly includes：three main properties yesterday(New Users, Active Users and Sessions), Revenue amount and Growth Rate.
 	
-###  Index Variation Along With Time
+###  property Variation Along With Time
 
 ![imgAAOverview2.png](../../../images/imgAAOverview2.png) 
 
-###  Index Geographical Distribution
+###  Property Geographical Distribution
 
 ![imgAAOverview3.png](../../../images/imgAAOverview3.png) 
     
@@ -77,7 +77,7 @@ Includes user retention for the last 5 weeks
 
 ## Trend
 
-Trend shows how indexes(New Users, Active Users and Sessions) varies in different dimensions.
+Trend shows how properties(New Users, Active Users and Sessions) varies in different dimensions.
 
 The informaiton you can get from here includes but is not limited to:
 
@@ -86,7 +86,7 @@ The informaiton you can get from here includes but is not limited to:
 
 ### Real Time
 
-Qucik show: The hourly trend of those 3 main indexes in 48 hours.
+Qucik show: The hourly trend of those 3 main properties in 48 hours.
 
 ![imgAATrendRT.png](../../../images/imgAATrendRT.png) 
 
@@ -96,7 +96,7 @@ Qucik show: The hourly trend of those 3 main indexes in 48 hours.
 
 ###App Versions/Channels
 
-Show the amount distribution of those 3 main indexes among different app versions/channels.
+Show the amount distribution of those 3 main properties among different app versions/channels.
 
 ![imgAATrendAV.png](../../../images/imgAATrendAV.png) 
 
@@ -115,7 +115,7 @@ Retention report shows the retention rate after new users come in different give
 
 ## Payment
 
-Payment shows the variation of main payment indexes(Revenue, Order Count, Paying Users Count, First Payment and Penetrance).
+Payment shows the variation of main payment properties(Revenue, Order Count, Paying Users Count, First Payment and Penetrance).
 
 > The informaiton you can get from here includes but is not limited to:
 
@@ -125,7 +125,7 @@ Payment shows the variation of main payment indexes(Revenue, Order Count, Paying
 
 1.  Trend
     
-    Shows the variation of main payment indexes(Revenue, Order Count, Paying Users Count)
+    Shows the variation of main payment properties(Revenue, Order Count, Paying Users Count)
     
 2.  First Payment
 
@@ -144,7 +144,7 @@ Payment shows the variation of main payment indexes(Revenue, Order Count, Paying
     
 4.  Countries
 
-    Displayes the variation of different indexes among different countries.
+    Displayes the variation of different properties among different countries.
     
 5.  Distribution 
     

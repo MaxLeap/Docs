@@ -1,4 +1,4 @@
-#Overview of LeapCloud Service
+properties#Overview of LeapCloud Service
 
 ##What is LeapCloud Service
 
@@ -38,13 +38,13 @@ The mobile app market is no longer about the quiet efforts. Along with the app p
 
 The Analytics provided by LeapCloud can comprehensively analyze your operation status, get a deep understanding of typical users, optimize operation strategies and finnaly realize the ability to:
 
-*	Penetrate the overview and trend of your operation: You can understand the operation status and iteration effect with indexs from new users, active users, session amount, versions to user actions, attributes and behaviors.
+*	Penetrate the overview and trend of your operation: You can understand the operation status and iteration effect with properties from new users, active users, session amount, versions to user actions, properties and behaviors.
 *	Penetrate user actions: Reproduce the screenflow of each user and get to know the engagement, retention and conversion.
 *	Improve user experience: Define user segments and assign customized experience for each segment.
 *	Improve Revenue: Track the payment trend, make marketing campaign and maximize your marketing effect.
 
 #####Segment
-You can create a user segment based on analysis results and any combination of user attributes. Then you can analyze different behavior of certain user segment and customize app experience and marketing campaign.
+You can create a user segment based on analysis results and any combination of user properties. Then you can analyze different behavior of certain user segment and customize app experience and marketing campaign.
 
 ##Marketing: Precise Promotion
 Your marketing campaign will be more effective and precise with LeapCloud Service. A typical LeapCloud app marketing can be summarized as follows:

@@ -1,4 +1,4 @@
-# Cloud Data
+property# Cloud Data
 ## Introduction
 
 ### What is Cloud Data
@@ -20,7 +20,7 @@ In Data of Dev Center, you can check the class list of your app:
 
 ![imgCDClassList.png](../../../images/imgCDClassList.png)
 
-If the type of a field is LCRelation, then it is related to other LCObject. The value of this column will show as "View Relations". You can check all LCObject related to this attribute by clicking it.
+If the type of a field is LCRelation, then it is related to other LCObject. The value of this column will show as "View Relations". You can check all LCObject related to this property by clicking it.
 
 ![imgCDShowRelation.png](../../../images/imgCDShowRelation.png)
 
@@ -31,7 +31,7 @@ Click "+ Add Class" button, enter the Class name and then you've created the new
 
 After the creation of new Class, you can select the Class and do modifications as shown below:
 
-* Add new column: add attribute of Class
+* Add new column: add Class property
 * Add new row: add new data
 * Filter the data: click the hourglass icon 
 * Choose column: click the Table button on the top right corner
