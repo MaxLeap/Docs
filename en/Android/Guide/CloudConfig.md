@@ -5,12 +5,9 @@ Every app has a `LASCloudConfig` object in the cloud to store the parameters of 
 ###Why is Cloud Config Necessary
 The advantages of putting part of configuration in cloud can be summarized as follows:
 
-<<<<<<< HEAD
 * **dynamic configuration: **
 * **Personalized User Experience: **You can config parameters based on Segment in cloud and customize different experience for different users.
-=======
-###What's CloudConfig
->>>>>>> 61d6c5ad24498392b8f5138dfd491e9e8b33126b
+
 
 ##Add parameters in Cloud Config向Cloud Config中添加参数
 You can add parameters in Cloud Config with Console. You need to define following indexes of parameter when you add a new cloud parameter: 您可以通过Console向Cloud Config中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
@@ -54,18 +51,9 @@ You can get `LCCloudConfig` object with `LCCloudConfigManager.getInBackground()`
 LCCloudConfigManager.getInBackground(new ConfigCallback() {
     @Override
     public void done(LCCloudConfig cloudConfig, LCException exception) {
-<<<<<<< HEAD
         if (exception == null) {
             int y = currentConfig.getInt("y", 100);
         } else{}
-=======
-        if (exception != null) {
-            //do something when error
-            return;
-        }
-        // do something when success
-        int y = cloudConfig.getInt("y", 100);
->>>>>>> 61d6c5ad24498392b8f5138dfd491e9e8b33126b
     }
 });
 ```
@@ -87,17 +75,10 @@ protected void onResume() {
 您可以通过`LCCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
 
 ```java
-<<<<<<< HEAD
 LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
     @Override
     public void done(LCCloudConfig cloudConfig) {
        int newKeyX = cloudConfig.get("keyX", null);
-=======
-LCCloudConfigManager.observeKeyInBackground("x", new ValueChangedCallback() {
-    @Override
-    public void done(LCCloudConfig cloudConfig) {
-       int newX = cloudConfig.get("x", null);
->>>>>>> 61d6c5ad24498392b8f5138dfd491e9e8b33126b
     }
 });
 ```
@@ -109,11 +90,7 @@ LCCloudConfigManager.observeKeyInBackground("x", new ValueChangedCallback() {
 移除的办法很简单，您只需添加如下代码：
 
 ```java
-<<<<<<< HEAD
 LCCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
-=======
-LCCloudConfigManager.removeObserver("x",  previousValueChangedCallback);
->>>>>>> 61d6c5ad24498392b8f5138dfd491e9e8b33126b
 ```
 
 移除一个云端参数的所有跟踪：
@@ -127,9 +104,6 @@ LCCloudConfigManager.removeObserver("x");
 ```java
 LCCloudConfigManager.removeAllObservers();
 ```
-
-<<<<<<< HEAD
-=======
 #### Refresh Keys in Background
 
 To ensure the validity of observer, please execute following code after the Activity is running. All keys under observation will get the latest parameter value from server and once there's change, it will invoke observer registered.
@@ -141,4 +115,3 @@ protected void onResume() {
     LCCloudConfigManager.refereshKeysInBackground();
 }
 ```
->>>>>>> 61d6c5ad24498392b8f5138dfd491e9e8b33126b
