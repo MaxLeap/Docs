@@ -55,7 +55,7 @@ iOS：
 ![imgSTPush.png](../../../images/imgSTPush.png)
 
 
-推送服务的详细介绍，请查看[推送使用指南](..)
+推送服务的详细介绍，请查看[iOS开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) or [Android开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
 
 ##用户验证
 您可以打开或关闭以下用户认证方式：
@@ -66,7 +66,7 @@ iOS：
 
 ![imgSTAuth.png](../../../images/imgSTAuth.png)
 
-有关用户认证的详细介绍，请查看[用户认证开发指南](..)
+有关用户认证的详细介绍，请查看[iOS开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) or [Android开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
 
 ##电子邮件设置
 LeapCloud可以在以下场景，帮助您自动发送邮件：
