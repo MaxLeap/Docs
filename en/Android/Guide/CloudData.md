@@ -1,47 +1,50 @@
-#云数据
+# Cloud Data
+## Introduction
 
-## 简介
+### What is Cloud Data
+Cloud Data is the data storage service provided by LeapCloud. It is based on the `LCObject` and each `LCObject` contains several key-values. All `LCObject` are stored in LeapCloud, you can perform operations towards them with iOS/Android Core SDK. Besides, LeapCloud  provides some special objects, like `LCUser`, `LCRole`, `LCFile` and `LCGeoPoint`. They are all based on `LCObject`.
 
-### 什么是Cloud Data服务
-Cloud Data是LeapCloud提供的数据存储服务，它建立在对象`LCObject`的基础上，每个`LCObject`包含若干键值对。所有`LCObject`均存储在LeapCloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外LeapCloud还提供一些特殊的对象，如`LCUser`(用户)，`LCRole`(角色)，`LCFile`(文件)，`LCGeoPoint`(地理位置)，他们都是基于`LCObject`的对象。
 
-### 为何需要Cloud Data服务
-Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### Why is Cloud Data Nccessary
+Cloud Data can help you build and maintain the facility of your database, thus focus on the app service logic that brings real value.  The advantages can be summarized as follows:
 
-* 解决硬件资源的部署和运维
-* 提供标准而又完整的数据访问API
-* 不同于传统关系型数据库，向云端存储数据无需提前建表，数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](。。。)） （！！修改说法！！）
+* Sort out the deployment and maintenance of hardware resourses.
+* Provide standard and complete data access API
+* Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
+* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](。。。) for more details.）（！！修改说法！！）
 
-### Cloud Data服务如何工作
+### How Does Cloud Data Run
 
 ## Cloud Object
+The object that stored in Cloud Data is called `LCObject` and every `LCObject` is planned in different `class`(like table in database). `LCObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by LCObject package, neither does the type of property value. You can add new property and value to `LCObject` at anytime, which could be stored in cloud by Cloud Data service.
 存储在Cloud Data的对象称为`LCObject`，而每个`LCObject`被规划至不同的`class`中（类似“表”的概念)。`LCObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 LCObject包含哪些属性，也无需指定属性值的类型。您可以随时向`LCObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
 
-###新建
-假设我们要保存一条数据到`Comment`class，它包含以下属性：
+###Add New新建
+Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 假设我们要保存一条数据到`Comment`class，它包含以下属性：
 
-属性名|值|值类型
+Property Name|Value|Value Type
 -------|-------|---|
-content|"我很喜欢这条分享"|字符
-pubUserId|1314520|数字
-isRead|false|布尔
+content|"kind of funny"|Character
+pubUserId|1314520|Digit
+isRead|false|Boolean
 
-添加属性的方法与`Java`中的`Map`类似：
+The method of adding property is similar to `Map` in `Java`: 添加属性的方法与`Java`中的`Map`类似：
 
 ```java
 LCObject myComment = new LCObject("Comment");
-myComment.put("content", "我很喜欢这条分享");
+myComment.put("content", "kind of funny");
 myComment.put("pubUserId", 1314520);
 myComment.put("isRead", false);
 LCDataManager.saveInBackground(myComment);
 ```
 
-注意：
+Notice:注意：
 
-* **Comment表合何时创建:** 在运行以上代码时，如果云端（LeapCloud 的服务器，以下简称云端）不存在 Comment 数据表，那么 LeapCloud 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
-* **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **LCObject是Schemaless的:** 如果云端的这个应用中已经存在名为 Comment 的数据表，新建comment对象时，您可以向
+* **When was "Comment" Class created:** If there is no Comment Class in Cloud(LeapCloud Server, hereinafter referred to as Cloud) when you run the code above, then LeapCloud will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
+* 在运行以上代码时，如果云端（LeapCloud 的服务器，以下简称云端）不存在 Comment 数据表，那么 LeapCloud 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
+* **Property Value Type in the Table is consistent表中同一属性值类型一致:** If there is already a data sheet named Comment in the app in cloud, and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
+* 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
+* **LCObject is Schemaless:** 如果云端的这个应用中已经存在名为 Comment 的数据表，新建comment对象时，您可以向
 * **自动创建的属性:** 每个 LCObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
 
 	属性名|值|

@@ -1,12 +1,12 @@
-
+LeapCloud
 #Support
 ##Introduction
-Support is a comprehensive customer service project provided by Leap Cloud for developers.This project provides complete FAQ page and feedback chat window in clients. Support service also provides FAQ list management and feedback handling interface in Console.
+Support is a comprehensive customer service project provided by LeapCloud for developers.This project provides complete FAQ page and feedback chat window in clients. Support service also provides FAQ list management and feedback handling interface in Console.
 
 
 ## Preparation
 
-1. Install and config Leap Cloud Core SDK. Please check [QuickStart - Core SDK](..) for more details.
+1. Install and config LeapCloud Core SDK. Please check [QuickStart - Core SDK](..) for more details.
 2. Install and config HelpCenter SDK. Please check [QuickStart - HelpCenter](..) for more details.
 
 ## Enter Help Center

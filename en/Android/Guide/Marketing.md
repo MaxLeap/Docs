@@ -1,29 +1,30 @@
-#营销
-##简介
-###什么是LeapCloud Marketing服务
+# Marketing
+##Introduction
+###What is LeapCloud Marketing
 
-Marketing服务是LeapCloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。消息的创建，设置和发送均在Console中完成。
-
-###为何需要LeapCloud Marketing服务
-
-结合LeapCloud分析服务提供的分析数据，以及LeapCloud Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。LeapCloud Marketing服务的优势在于：
+Marketing is a promotion and message issuance service provided by LeapCloud. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
 
 
-* **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
-* **保障用户体验：**选择向指定Segment发送消息，更具有针对性
-* **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
+###Why is LeapCloud Marketing Necessary 
+With data from Analytics and Segment provided by LeapCloud Users, you can make and implement marketing strategies with high efficiency. The advantages of LeapCloud Marketing can be summarized as follows: 
 
-###LeapCloud Marketing服务如何工作
+
+* **Improve Penetrance: **Issue marketing campaign at any time to improve the user engagement and penetrance
+* **Ensure the user experience: **More targeted to send messages to certain Segment 
+* **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
+
+
+### How Does LeapCloud Marketing Work
 Pic
 
-## 推送消息
-推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定跳转行为。
+## Push Notification
+Push Notification helps you show messages to plenty of users. After you send the message, users can see it in status bar whether they open the app or not. You can customize message content in Console and send several properties (Key-Vaule) to clients. The application will determine the Target Activity according to the property after users tap on the push.
 
-###配置
-LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
+###Configuration
+LeapCloud Core SDK provides a whole set of push project based on GCM. GCM (Google Cloud Messaging) is a free service that helps developers send messages across multiple platforms. You need to complete following settings to use GCM: 
 
-1. 提供 **Sender ID** 和 **API key**. 请在[Google开发者中心](..)获取这两个Key.
-2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
+1. Provide **Sender ID** and **API key**. Please get those two keys in [Google Developer Center](..). 
+2. Add permission and Push Receiver (used to handle Push and show Notification) in `AndroidManifest.xml`:
 
 	```xml
 	<!-- your package -->
@@ -64,7 +65,7 @@ LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google
 		</receiver>
 	</application>
 	```
-3. **配置Sender ID：**在 `AndroidManifest.xml`的`<application ...> </application>`中添加：
+3. **Config Sender ID：** Adding following code in `<application ...> </application>` in `AndroidManifest.xml`:
 
 	```xml
 	<meta-data
@@ -72,32 +73,32 @@ LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google
 	    android:value="id:YOUR_SENDER_ID" />
 	```
 
-4. **配置推送消息图标：**若不配置，将默认采用应用的图标作为推送消息图标进行显示。
+4. **Config Push Icon：** It will use the app icon as the notification icon by default if there's no configuration.
 
 	```xml
 	<meta-data
 	    android:name="as.leap.push.notification_icon"
 	    android:resource="@android:drawable/ic_dialog_alert" />
 	```
-5. **启用Marketing服务：**在`Application.onCreate()`中的`LCConfig.initialize()`方法**之前**添加：
+5. **Enable Marketing Service：**Add following code **Before** `LCConfig.initialize()` in `Application.onCreate()`: 
 
 	```java
 	LCConfig.setMarketingEnabled(true);
 	```
 
-注意：
+Notice:
 
-* 请将上述YOUR\_PACKAGE\_NAME字段替换成项目的Package名。将YOUR\_SENDER\_ID替换成您的GCM Sender ID.
+* Please replace the aforementioned YOUR\_PACKAGE\_NAME with project Package name and replace YOUR\_SENDER\_ID with GCM Sender ID.
 
-###自定义推送消息的处理
+###Customize Push Processing
 
-您可以通过以下步骤自定义推送消息的显示和处理。
+You can customize the display and processing with following steps:
 
-1. 新建CustomPushReceiver类，并继承LCPushBroadcastReceiver
-2. 在CustomPushReceiver类中完成一系列自定义：点击后的跳转，图标等
-3. 在`AndroidManifest.xml`中配置CustomPushReceiver
+1. Add new CustomPushReceiver class and inherit LCPushBroadcastReceiver 
+2. Customize CustomPushReceiver, including Target Activity, icon, etc.
+3. Config CustomPushReceiver in `AndroidManifest.xml` 
 
-#####新建Receiver
+#####Add New Receiver
 
 ```java
 public class CustomPushReceiver extends LCPushBroadcastReceiver {
@@ -112,12 +113,12 @@ public class CustomPushReceiver extends LCPushBroadcastReceiver {
 }
 ```
 
-#####自定义：跳转到Activity
+#####Customization: Target Activity
 ```java
 protected Class<? extends Activity> getActivity(Intent intent)
 ```
 
-返回非 null 值后，点击 Notification 后会自动跳转到指定的 Activity，在跳转到的 Activity 中可以通过 `getIntent()` 得到该条 Push 所携带的信息
+After returns with a non-null value, it will enter Target Activity automatically on tapping Notification. In this Target Activity, the message carried by the Push can be got with `getIntent()`. 
 
 ```java
 Intent intent = getIntent();
@@ -128,29 +129,29 @@ if (intent != null && intent.getExtras() != null) {
 }
 ```
 
-#####自定义：跳转到Uri
+#####Customization: Target Uri
 ```java
 protected Uri getUri(Intent intent)
 ```
 
-返回非 null 值后，点击 Notification 后会自动跳转到指定的 Uri
+After returns with a non-null value, it will enter Target Uri automatically on tapping Notification.
 
-注意：getActivity() 的优先级要高于 getUri()。如果 getActivity（）没有返回 null 的话，则 getUri() 会被忽略
+Notice: getActivity() takes precedence over getUri(). If getActivity（）doesn't returns null, then getUri() will be ignored. 
 
-#####其他自定义
-定义 Notification 的 LargeIcon
+#####Other Customization 
+Config Notification LargeIcon
 
 ```java
  protected Bitmap getLargeIcon(Context context)
 ```
 
-自定义 Notificatioin 的 SmallIcon
+Config Notificatioin SmallIcon
 
 ```java
 protected int getSmallIconId(Context context)
 ```
 
-或者如之前所述，在 `AndroidManifest.xml` 中配置
+Or, you can config in `AndroidManifest.xml` as aforementioned 
 
 ```xml
 <meta-data
@@ -158,25 +159,25 @@ protected int getSmallIconId(Context context)
     android:resource="@android:drawable/ic_dialog_alert" />
 ```
 
-修改 Intent：如果希望修改点击 Notification 获得的 Intent 的信息（如 Intent 的 Flag），可以重写如下代码
+Modify Intent: If you want to modify the Intent info got by tapping the Notification (like the Intent Flag), please override following code 
 
 ```java
 @Override
 protected void startIntent(Context context, Intent intent) {
-	// 修改 Intent 的 Flag 信息
+	// Set flag for intent
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     super.startIntent(context, intent);
 }
 ```
 
-完全自定义 Notification：如果希望自己创建 Notification 对象，可以重写如下方法
+Completely Customize Notification：If you want to create Notification object all by yourself, please override following method
 
 ```java
 protected Notification getNotification(Context context, Intent intent)
 ```
 
-#####配置CustomPushReceiver
-用下列Receiver替换默认的`as.leap.LCPushBroadcastReceiver`：
+#####Config CustomPushReceiver
+Replace default `as.leap.LCPushBroadcastReceiver` with following Receiver：
 
 ```xml
 <receiver
@@ -189,19 +190,19 @@ protected Notification getNotification(Context context, Intent intent)
 </receiver>
 ```
 
-## 应用内消息
+## In-app Message
 
-###配置
-为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`LCConfig.initialize()`方法**之前**添加：
+###Configuration
+In order to user in-app message, you need to **enable Marketing service：** add following code before `LCConfig.initialize()` in `Application.onCreate()` :
 
 ```java
 LCConfig.setMarketingEnabled(true);
 ```
 
-###定义跳转Activity
-您可以在Console新建应用内消息时，自定义用户点击后跳转到某个Activity(详细步骤，请查看[Console使用指南－Marketing](。。))。假设我们在Console定义某个应用内消息时，指定用户点击后的跳转为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
+###Define Target Activity
+When you create new in-app message in Console, you can customize Target Activity on tapping the message. (For more details, please check [Console Guide－Marketing](。。)). Suppose that we set `InAppMessageActivity` as the Target Avtivity when defining in-app message in Console, then we need to add new `InAppMessageActivity` and inherit `AppCompatActivity` while developing: 
 
-在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
+The message carried by this in-app message can be got by `getIntent()` in the `InAppMessageActivity`.
 
 ```java
 protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +215,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-并在`onResume()`和`onPause()`方法中添加如下代码：
+and add code in `onResume()` and `onPause()`
 
 ```java
 @Override

@@ -2,7 +2,7 @@
 ##简介
 ###什么是LeapCloud Marketing服务
 
-Marketing服务是LeapCloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。消息的创建，设置和发送均在Console中完成。
+Marketing服务是LeapCloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标Activity。消息的创建，设置和发送均在Console中完成。
 
 ###为何需要LeapCloud Marketing服务
 
@@ -17,7 +17,7 @@ Marketing服务是LeapCloud提供的营销和信息发布功能。目前提供�
 Pic
 
 ## 推送消息
-推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定跳转行为。
+推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标Activity。
 
 ###配置
 LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
@@ -94,7 +94,7 @@ LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google
 您可以通过以下步骤自定义推送消息的显示和处理。
 
 1. 新建CustomPushReceiver类，并继承LCPushBroadcastReceiver
-2. 在CustomPushReceiver类中完成一系列自定义：点击后的跳转，图标等
+2. 在CustomPushReceiver类中完成一系列自定义：点击后的目标Activity，图标等
 3. 在`AndroidManifest.xml`中配置CustomPushReceiver
 
 #####新建Receiver
@@ -112,12 +112,12 @@ public class CustomPushReceiver extends LCPushBroadcastReceiver {
 }
 ```
 
-#####自定义：跳转到Activity
+#####自定义：目标Activity
 ```java
 protected Class<? extends Activity> getActivity(Intent intent)
 ```
 
-返回非 null 值后，点击 Notification 后会自动跳转到指定的 Activity，在跳转到的 Activity 中可以通过 `getIntent()` 得到该条 Push 所携带的信息
+返回非 null 值后，点击 Notification 后会自动进入到目标Activity，在目标Activity中可以通过 `getIntent()` 得到该条 Push 所携带的信息
 
 ```java
 Intent intent = getIntent();
@@ -128,12 +128,12 @@ if (intent != null && intent.getExtras() != null) {
 }
 ```
 
-#####自定义：跳转到Uri
+#####自定义：目标Uri
 ```java
 protected Uri getUri(Intent intent)
 ```
 
-返回非 null 值后，点击 Notification 后会自动跳转到指定的 Uri
+返回非 null 值后，点击 Notification 后会自动进入目标Uri
 
 注意：getActivity() 的优先级要高于 getUri()。如果 getActivity（）没有返回 null 的话，则 getUri() 会被忽略
 
@@ -198,8 +198,8 @@ protected Notification getNotification(Context context, Intent intent)
 LCConfig.setMarketingEnabled(true);
 ```
 
-###定义跳转Activity
-您可以在Console新建应用内消息时，自定义用户点击后跳转到某个Activity(详细步骤，请查看[Console使用指南－Marketing](。。))。假设我们在Console定义某个应用内消息时，指定用户点击后的跳转为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
+###定义目标Activity
+您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](。。))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
 
 在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
 

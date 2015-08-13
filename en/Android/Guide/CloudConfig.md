@@ -1,16 +1,16 @@
-# Cloud Config
+properties# Cloud Config
 ## Introduction
 ###What is Cloud Config
-Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in Leap Cloud with Console and read cloud parameter with iOS/Android SDK.
+Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in LeapCloud with Console and read cloud parameter with iOS/Android SDK.
 ###Why is Cloud Config Necessary
-The advantages of putting part of configuration in cloud can be summarized as follows:
+The advantages of putting part ofLeapCloud configuration in cloud can be summarized as follows:
 
 * **dynamic configuration: **
 * **Personalized User Experience: **You can config parameters based on Segment in cloud and customize different experience for different users.
 
 
 ##Add parameters in Cloud Config
-You can add parameters in Cloud Config with Console. You need to define following indexes of parameter when you add a new cloud parameter: 
+You can add parameters in Cloud Config with Console. You need to define following properties of parameter when you add a new cloud parameter: 
 
 Index|Value
 -------|-------
@@ -45,7 +45,7 @@ currentConfig.getDate(key, defaultValue)
 
 ## Edit Cloud Config
 
-You can get `LCCloudConfig` object with `LCCloudConfigManager.getInBackground()` and then invoke `currentConfig.getInt()` to refresh parameter value. There are two parameters in this method: the first one is cloud parameter name and the second one is new parameter name.
+You can get `LCCloudConfig` object with `LCCloudConfigManager.getInBackground()` and then invoke `currentConfig.getInt()` to refresh parameter value. There are two parameters in this method: one is cloud parameter name and the other is new parameter name.
 
 ```java
 LCCloudConfigManager.getInBackground(new ConfigCallback() {
@@ -72,7 +72,7 @@ protected void onResume() {
 
 ###Add Track
 
-您可以通过`LCCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
+You can track cloud paramter change with `LCCloudConfigManager.observeKeyInBackground()` and get latest parameter value in time. There are two parameters in this method: one is cloud parameter name and the other is an instance of the callback class "ValueChangedCallback".
 
 ```java
 LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
@@ -83,23 +83,24 @@ LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
 });
 ```
 
-注意，一个云端参数支持多个跟踪。
+Notice:
+A cloud parameter supports multiple tracks.
 
-###移除跟踪
+###Remove Track
 
-移除的办法很简单，您只需添加如下代码：
+You can add following code to remode the track:
 
 ```java
 LCCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
 ```
 
-移除一个云端参数的所有跟踪：
+Remove all tracks of a cloud parameter:
 
 ```java
 LCCloudConfigManager.removeObserver("x");
 ```
 
-移除所有参数的所有跟踪：
+Remove all tracks of all cloud parameters:
 
 ```java
 LCCloudConfigManager.removeAllObservers();
