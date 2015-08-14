@@ -16,7 +16,7 @@ LeapCloud Analytics is a real-time free and professional mobile apps Analytics S
 *	Promote app revenue: Track consumer behavior, make marketing strategies and maximize the marketing effect.
 
 
-###	How does LeapCloud Analytics Work
+###	How Does LeapCloud Analytics Work
 
 LeapCloud Analytics SDK helps us track user behavoir and provides data for cloud Analytics service, which includes:
 
@@ -31,17 +31,17 @@ The data collected will be saved to cloud. LeapCloud will analyze users in each 
 ## Enable Service
 After the installation of SDK, LeapCloud will track app data automatically, including:
 1.	Terminal
-2.	Startup and exit
-3.	App crash
+2.	Start and exit
+3.	App crash and other exception message
 
-The defalut status of LeapCloud Analytics Service is Enabled. You can add following code in `onCreate()` of the main `Activity` to disable it: 
+LeapCloud Analytics Service is **Enabled** by default. You can add following code in `onCreate()` in main `Activity` to **disable** it: 
 
 ```Java
 LCAnalytics.setAnalyticsEnabled(false);
 ```
 
 ## Channel
-Channel represents where did user download the app, like GooglePlay, App Store or other customized sources. You can add following code in AndroidManifest.xml 
+Channel represents the store users download the app from, like GooglePlay, App Store or other customized sources. You can add following code in AndroidManifest.xml 
 
 ```java
 <application>
@@ -53,10 +53,10 @@ Channel represents where did user download the app, like GooglePlay, App Store o
 ```
 
 ##	Session
-Session is the period of time a user interfaces with an application. Session can take records of New Users, Active Users, Startup account, Session Length and etc.
+Session is the period of time a user interfaces with an application. Session can take records of New Users, Active Users, Start account, Session Length and etc.
 ####Track Session
 * Session will be generated automatically on user's login.
-* When users switch among Activities after the login, we need to add following code in `onPause()` and `onResume()` of all Acitivities to realize Pause ,Resume and decide whether users have started a new session. (Tips?)
+* When users switch among Activities after the login, we need to add following code in `onPause()` and `onResume()` of all Acitivities to realize Pause, Resume and decide whether users have started a new session. (Tips?)
 
 	```java
 	@Override
@@ -71,20 +71,20 @@ Session is the period of time a user interfaces with an application. Session can
 	}
 	```
 
-* If users go back to the app within a certain time after they left the app, it will be considered as resuming session. The time range can be defined (specified in seconds) by adding following code in `onCreate()` of Main Activity: 
+* If users go back to the app within a certain time after they left the app, it will be considered as resuming session. The time range can be defined (specified in seconds) by adding following code in `onCreate()` in Main Activity: 
 	```java
 	LCAnalytics.setSessionContinueSecond(30)
 	```
 * If a user leaves your application and returns after a certain time, then it counts as a new start and the old session is over. 
 
-## Customized Page
+## Page Customization 
 
 Page is the interface visited by users. Page can take records of Visit Times, Total Occurrences, Screen Flow, etc.
 
 
-###Filed Description
+###Property Description
 
-Filed Name|Type|Description
+Property Name|Type|Description
 ---|---|---|---
 pageName|String|User-defined name of the page
 
@@ -113,11 +113,11 @@ protected void onPause() {
 Notice:
 
 * Both `onPageStart()` and `onPageEnd()` should be assigned on each page and there should be no intersections.
-* If the page is realize with Activity + Fragment, we should add aforementioned code in`onResume()` and `onPause()` of Fragment to record pageview towards the Fragment. 
+* If the page is realized with Activity + Fragment, we should add aforementioned code in `onResume()` and `onPause()` of Fragment to record pageview towards the Fragment. 
 
-## Customized Events
+## Event Customization
 
-Customized Events can set tracking point in app and take records of users action and collect data.
+Event Customization can set tracking point in app and take records of users action and collect data.
 
 
 ###Property Description

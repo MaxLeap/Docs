@@ -1,4 +1,4 @@
-properties# Cloud Config
+# Cloud Config
 ## Introduction
 ###What is Cloud Config
 Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in LeapCloud with Console and read cloud parameter with iOS/Android SDK.
@@ -9,10 +9,10 @@ The advantages of putting part ofLeapCloud configuration in cloud can be summari
 * **Personalized User Experience: **You can config parameters based on Segment in cloud and customize different experience for different users.
 
 
-##Add parameters in Cloud Config
+##Add Parameters in Cloud Config
 You can add parameters in Cloud Config with Console. You need to define following properties of parameter when you add a new cloud parameter: 
 
-Index|Value
+Property|Value
 -------|-------
 Parameter|Parameter Name
 Type|Parameter Type
@@ -28,7 +28,7 @@ LCCloudConfig currentConfig = LCCloudConfig.getCurrentCloudConfig();
 ```
 
 ##Get LC Cloud Config Parameter Value
-For getting a cloud parameter value, you need to know type of the value and then invoke `getType()` method in LC Cloud Config instance. There are two parameters required in this method: the first one is cloud parameter name and the second one is the default value. If there is no parameter in cloud, then the default value will be assigned. 
+For getting a cloud parameter value, you need to know type of the value and then invoke `getType()` method in LC Cloud Config instance. There are two parameters required in this method: the first one is cloud parameter name and the second one is the default value. If there is no cloud parameter, then the default value will be assigned to the parameter. 
 
 ```java
 currentConfig.getString(key, defaultValue)
@@ -43,7 +43,7 @@ currentConfig.getBoolean(key, defaultValue)
 currentConfig.getDate(key, defaultValue)
 ```
 
-## Edit Cloud Config
+## Modify Cloud Config
 
 You can get `LCCloudConfig` object with `LCCloudConfigManager.getInBackground()` and then invoke `currentConfig.getInt()` to refresh parameter value. There are two parameters in this method: one is cloud parameter name and the other is new parameter name.
 
@@ -58,8 +58,8 @@ LCCloudConfigManager.getInBackground(new ConfigCallback() {
 });
 ```
 
-## Track Parameter Change
-After the track is added and any Activity started or resumed, application will check if there is any update through all cloud parameters trackd. Relative logic will be performed if so. Before adding track, you need to add following code in `onResume()` of Activity to ensure the cloud parameter synchronization:
+## Observe Parameter Change
+After the observer is added and any Activity started or resumed, application will check if there is any update through all cloud parameters observed. Relative logic will be performed if so. Before adding observer, you need to add following code in `onResume()` in Activity to ensure the cloud parameter synchronization:
 
 
 ```java
@@ -70,9 +70,9 @@ protected void onResume() {
 }
 ```
 
-###Add Track
+###Add Observer
 
-You can track cloud paramter change with `LCCloudConfigManager.observeKeyInBackground()` and get latest parameter value in time. There are two parameters in this method: one is cloud parameter name and the other is an instance of the callback class "ValueChangedCallback".
+You can observe cloud paramter change with `LCCloudConfigManager.observeKeyInBackground()` and get latest parameter value in time. There are two parameters in this method: one is cloud parameter name and the other is an instance of the callback class "ValueChangedCallback".
 
 ```java
 LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
@@ -84,23 +84,23 @@ LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
 ```
 
 Notice:
-A cloud parameter supports multiple tracks.
+A cloud parameter supports multiple observers.
 
-###Remove Track
+###Remove Observer
 
-You can add following code to remode the track:
+You can add following code to remove the observer:
 
 ```java
 LCCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
 ```
 
-Remove all tracks of a cloud parameter:
+Remove all observers of a cloud parameter:
 
 ```java
 LCCloudConfigManager.removeObserver("x");
 ```
 
-Remove all tracks of all cloud parameters:
+Remove all observers of all cloud parameters:
 
 ```java
 LCCloudConfigManager.removeAllObservers();
