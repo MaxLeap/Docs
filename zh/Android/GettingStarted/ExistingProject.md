@@ -82,4 +82,4 @@
  表明通过客户端，向应用下的Cloud Data存入数据成功。
  
  # 下一步
- 至此，您已经完成LAS SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LAS_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
+ 至此，您已经完成LAS SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。

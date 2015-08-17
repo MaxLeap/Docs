@@ -107,4 +107,4 @@ HelpCenter是依赖于LAS Core SDK之上的服务，在安装和使用HelpCenter
 
 #下一步
 
-至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](...)以获取HelpCenter的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
+至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取HelpCenter的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
