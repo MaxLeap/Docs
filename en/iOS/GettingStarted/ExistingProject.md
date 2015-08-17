@@ -81,4 +81,4 @@ testObject[@"foo"] = @"bar";
 
 Run your app. A new object of class `TestObject` will be sent to the LAS servers and saved. When you're ready, click the button below to test if your data was sent.
 
-When you finish all of these steps above, you should see new data that we just defined appearing in the Cloud Data tab of the [Dashboard](/dashboard).
+When you finish all of these steps above, you should see new data that we just defined appearing in the Cloud Data tab of the *Dashboard*.
