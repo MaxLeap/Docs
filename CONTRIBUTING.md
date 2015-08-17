@@ -39,49 +39,49 @@ If you only want to modify your last commit message, it's very simple:
 
 We provide several path-maps here, you can compile links of other pages with those paths:
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '../docs.html',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '/guide/docs.html',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS': '../devguide/ios.html',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN': '../devguide/ios.html#cloud-data',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN': '../devguide/ios.html#analytics',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN': '../devguide/ios.html#cloud-config',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN': '../devguide/ios.html#marketing',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN': '../devguide/ios.html#support',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN': '../devguide/ios.html#user',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS': '/guide/devguide/ios.html',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN': '/guide/devguide/ios.html#cloud-data',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN': '/guide/devguide/ios.html#analytics',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN': '/guide/devguide/ios.html#cloud-config',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN': '/guide/devguide/ios.html#marketing',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN': '/guide/devguide/ios.html#support',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN': '/guide/devguide/ios.html#user',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '../devguide/ios.html#云数据',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '../devguide/ios.html#分析',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '../devguide/ios.html#营销',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '/guide/devguide/ios.html#云数据',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '/guide/devguide/ios.html#分析',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '/guide/devguide/ios.html#营销',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '../devguide/android.html',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '../devguide/android.html#cloud-data',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN': '../devguide/android.html#analytics',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN': '../devguide/android.html#cloud-config',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN': '../devguide/android.html#marketing',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN': '../devguide/android.html#support',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN': '../devguide/android.html#user',
-
-
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH': '../devguide/android.html#云数据',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH': '../devguide/android.html#分析',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH': '../devguide/android.html#云配置',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH': '../devguide/android.html#营销',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH': '../devguide/android.html#支持',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH': '../devguide/android.html#用户',
-
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '../devguide/java.html',
-
-        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL': '../usermanual',
-        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '../usermanual/usermgmt.html',
-        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '../usermanual/usermgmt.html',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '/guide/devguide/android.html',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '/guide/devguide/android.html#cloud-data',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN': '/guide/devguide/android.html#analytics',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN': '/guide/devguide/android.html#cloud-config',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN': '/guide/devguide/android.html#marketing',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN': '/guide/devguide/android.html#support',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN': '/guide/devguide/android.html#user',
 
 
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS': '../../tutorials/ios.html',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '../../tutorials/android.html',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS': '../../quickstart/ios/core/existing.html',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '../../quickstart/android/core/existing.html',
-        'LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '../../api/ios/index.html',
-        'LC_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '../../api/android/index.html'
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH': '/guide/devguide/android.html#云数据',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH': '/guide/devguide/android.html#分析',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH': '/guide/devguide/android.html#云配置',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH': '/guide/devguide/android.html#营销',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH': '/guide/devguide/android.html#支持',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH': '/guide/devguide/android.html#用户',
+
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '/guide/devguide/java.html',
+
+        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL': '/guide/usermanual',
+        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',
+        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '/guide/usermanual/usermgmt.html',
+
+
+        'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS': '/tutorials/ios.html',
+        'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '/tutorials/android.html',
+        'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS': '/quickstart/ios/core/existing.html',
+        'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
+        'LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
+        'LC_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html'
 
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 
