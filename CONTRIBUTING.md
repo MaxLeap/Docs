@@ -50,6 +50,8 @@ We provide several path-maps here, you can compile links of other pages with tho
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN': '../devguide/ios.html#user',
 
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '../devguide/ios.html#云数据',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '../devguide/ios.html#分析',
+        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '../devguide/ios.html#营销',
 
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '../devguide/android.html',
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '../devguide/android.html#cloud-data',
