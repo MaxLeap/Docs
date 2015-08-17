@@ -84,4 +84,4 @@ The test code is tryig to create a “CLASS” － “People” in Cloud Data an
 
 It indicates that the data storage in Cloud Data is successfully completed with client.
 
-Congratulations on the LeapCloud SDK installtion and configuration. Please click [SDK Tutorial](LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of LC, and start your LeapCloud Service now.
+Congratulations on the LeapCloud SDK installtion and configuration. Please click [SDK Tutorial](LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of LeapCloud, and start your LeapCloud Service now.

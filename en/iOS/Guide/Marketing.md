@@ -12,18 +12,13 @@ Push Notifications are a great way to keep your users engaged and informed about
 
 ## Setting Up Push
 
-If you want to start using push, start by completing the [iOS Push tutorial][tutorial_link] to learn how to configure your app. Come back to this guide afterwards to learn more about the push features offered by LAS.
-
-[![alt Tutorial_link][tutorial_img_link]][tutorial_link]
-
-*Follow the iOS push tutorial.*
-
+If you want to start using push, start by completing the [iOS Push tutorial](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN) to learn how to configure your app. Come back to this guide afterwards to learn more about the push features offered by LAS.
 
 ## Installations
 
 Every LAS application installed on a device has an associated `Installation` object. The `Installation` object is where you store all the data needed to target push notifications. For example, in a baseball app, you could store the teams a user is interested in to send updates about their performance.
 
-In iOS, `Installation` objects are available through the `LASInstallation` class, a subclass of LASObject. It uses the [same API][ios guide #objects] for storing and retrieving data. To access the current `Installation` object from your iOS app, use the `+[LASInstallation currentInstallation]` method.
+In iOS, `Installation` objects are available through the `LASInstallation` class, a subclass of LASObject. It uses the [same API](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN) for storing and retrieving data. To access the current `Installation` object from your iOS app, use the `+[LASInstallation currentInstallation]` method.
 
 First, make your app register for remote notifications by adding the following in your `application:didFinishLaunchingWithOptions:` method (if you haven't already):
 
@@ -148,7 +143,7 @@ The [UIApplicationDelegate documentation](http://developer.apple.com/library/ios
 
 Setting up Push Notifications is often a source of frustration for developers. The process is complicated and invites problems to happen along the way. If you run into issues, try some of these troubleshooting tips.
 
-- Make sure you are using the correct Bundle Identifier in the `Info.plist` file (as described in step 4.1 of the [iOS Push Notifications tutorial][tutorial_link], titled, "Configuring a Push Enabled iOS Application."
+- Make sure you are using the correct Bundle Identifier in the `Info.plist` file (as described in step 4.1 of the [iOS Push Notifications tutorial](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN), titled, "Configuring a Push Enabled iOS Application."
 - Make sure you set the correct provisioning profile in Project > Build Settings (as described in step 4.3 of the iOS Push Notifications tutorial.
 - Clean your project and restart Xcode.
 - Try regenerating the provisioning profile by navigating to [Certificates, Identifiers & Profiles](https://developer.apple.com/account/overview.action), changing the App ID set on the provisioning profile, and changing it back. You will need to reinstall the profile as described in step two of the tutorial (Creating the Provisioning Profile) and set it in your Project's Build Settings as described in step 4 ( Configuring a Push Enabled iOS Application).
