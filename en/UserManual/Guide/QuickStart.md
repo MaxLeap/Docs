@@ -12,9 +12,9 @@
 
 #####	Android Studio 
 
-	1. 	Open Android Studio，and click “Import project” 
-	2. 	Enter the root directory of project template, and select “build.gradle” 
-	3. 	Select next steps according to the default settings, untill it's done.
+1. 	Open Android Studio，and click “Import project” 
+2. 	Enter the root directory of project template, and select “build.gradle” 
+3. 	Select next steps according to the default settings, untill it's done.
 
 #####	Eclipse
 	
@@ -24,29 +24,29 @@
 
 ###	Connect Project with LeapCloud App 
 	
-	Invoke `LCConfig.initialize` in onCreate() method of Application to set your app's Application ID and REST API Key：
+Invoke `LCConfig.initialize` in onCreate() method of Application to set your app's Application ID and REST API Key：
 	
-	```java
-	import android.app.Application;
-	import as.leap.LCConfig;
+```java
+import android.app.Application;
+import as.leap.LCConfig;
 
-	public class MyApplication extends Application {
-	    @Override
-	    public void onCreate() {
-	        super.onCreate();
-	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
-	    }
+public class MyApplication extends Application {
+	@Override
+	public void onCreate() {
+	    super.onCreate();
+	    LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 	}
-	```
+}
+```
 	
 ###	Permission Configuration
 
-	Give following permissions to the app in AndroidManifest: 
+Give following permissions to the app in AndroidManifest: 
 	
-	```java
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   	<uses-permission android:name="android.permission.INTERNET" />
+```java
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
     ```
 	
 	Permission|Usage|If it's neccessary

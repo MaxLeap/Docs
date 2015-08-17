@@ -28,7 +28,7 @@ Click "New Campaign + " >> Push, and then you can enter the create new Push page
 The target users can be divided into 3 types:
 
 * All users
-* Users from certain Segments （Please check [UserManual of Segment](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL/#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
+* Users from certain Segments （Please check [UserManual of Segment](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
 * Users using certain devices
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)
@@ -44,7 +44,7 @@ A push contains contents as shown below, you need to fill and are able to previe
 Notice:
 
 * You can create multiple messages in a campaign by clicking the "+" button on the left.
-* 
+
 ####Step 3: Schedule Campaign
 
 Finally, you need to set the sending time and expire time.

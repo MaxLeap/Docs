@@ -5,8 +5,8 @@ Support服务是LeapCloud为开发者提供的一套标准应用客服方案。�
 
 ## 准备工作
 
-1. 安装并配置LeapCloud Core SDK. 详细步骤，请查看[QuickStart - Core SDK](..)
-2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](..)
+1. 安装并配置LeapCloud Core SDK. 详细步骤，请查看[QuickStart - Core SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
+2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
 
 ## 进入Help Center页面
 Help Center页面调用FAQ页面非常方便，您只需调用如下代码即可：

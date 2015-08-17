@@ -11,7 +11,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
 * 不同于传统关系型数据库，向云端存储数据无需提前建表，数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](。。。)） （！！修改说法！！）
+* 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ### Cloud Data服务如何工作
 
@@ -357,7 +357,7 @@ query.skip(10);
 query.limit(10);
 ```
 
-更多关于 LCQuery 的信息，请查看的[查询指南](..)。查询的时候，一个 LCRelation 对象运作起来像一个对象链表，因此任何您作用在链表上的查询（除了 include），都可以作用在 LCRelation上。
+更多关于 LCQuery 的信息，请查看的*查询*部分。查询的时候，一个 LCRelation 对象运作起来像一个对象链表，因此任何您作用在链表上的查询（除了 include），都可以作用在 LCRelation上。
 
 ###数据类型
 
@@ -389,7 +389,7 @@ bigObject.put("myNull", JSONObject.NULL);
 LCDataManager.saveInBackground(bigObject);
 ```
 
-我们不建议存储较大的二进制数据，如图像或文件不应使用 LCObject 的 byte[] 字段类型。LCObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 LCFile 对象来存储，具体使用方法可见 [文件指南](..)。 关于处理数据的更多信息，可查看[数据安全指南](...)。
+我们不建议存储较大的二进制数据，如图像或文件不应使用 LCObject 的 byte[] 字段类型。LCObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 LCFile 对象来存储，具体使用方法可见*文件*部分。 关于处理数据的更多信息，可查看*数据安全指南*。
 
 ## 文件
 ###LCFile的创建和上传
@@ -1104,7 +1104,7 @@ LCUserManager.requestPasswordResetInBackground(
 
 ###查询用户
 
-您可以通过特殊的UserQuery查询用户数据。LeapCloud对用户数据安全性提供充分的保障，如需获取更多信息，请移步至[用户对象的安全性](..)。
+您可以通过特殊的UserQuery查询用户数据。LeapCloud对用户数据安全性提供充分的保障，如需获取更多信息，请查看*用户对象的安全性*部分。
 
 ```java
 LCQuery<LCUser> query = LCUser.getQuery();
@@ -1165,7 +1165,7 @@ LCUser.enableAutomaticUser();
 
 ### 在Console中管理用户
 
-User 表是一个特殊的表，专门存储 LCUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](...)中查看。
+User 表是一个特殊的表，专门存储 LCUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL)中查看。
 
 ##用户角色
 随着用户数量的增长，使用角色进行权限管理将更有效。所有赋予某一角色的权限，将被该角色包含的用户所继承。用户角色是一组用户的集合，同时，一个用户角色也可以包含另一个用户角色。在LeapCloud中有一个对应的`_Role` class来存储用户角色。
@@ -1458,9 +1458,9 @@ LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
 
 使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。
 ####准备工作
-1. 在[Twitter开发者中心](...)创建Twitter应用。点击My Apps >> Add a New App
+1. 在*Twitter开发者中心*创建Twitter应用。点击My Apps >> Add a New App
 2. 打开LeapCloud Console >> App Settings >> User Authentication.勾选Allow Twitter Authentication. 并将步骤一中获取的Twitter consumer Key填写至相应位置。
-3. 集成Twitter SDK，添加Twitter Login按钮。详细步骤，请参考[Add Twitter Login to Your App or Website](...)
+3. 集成Twitter SDK，添加Twitter Login按钮。详细步骤，请参考*Twitter*官网。
 4. 在项目的Application.onCreate()函数中，于LCConfig.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
 
 ```java

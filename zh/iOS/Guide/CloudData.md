@@ -10,8 +10,8 @@ search: true
 
 # 云数据
 
-如果您尚未安装 SDK，请先查阅[快速入门指南][ios quick start]，安装 SDK 并使之在 Xcode 中运行。
-您还可以查看我们的 [API 参考][ios api reference]，了解有关我们 SDK 的更多详细信息。
+如果您尚未安装 SDK，请先查阅[快速入门指南][LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS]，安装 SDK 并使之在 Xcode 中运行。
+您还可以查看我们的 [API 参考][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS]，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 6.0 及以上版本。
 
@@ -867,7 +867,7 @@ LASUser *currentUser = [LASUser currentUser]; // this will now be nil
 }];
 ```
 
-您可以通过设置用户名和密码，然后调用 `+[LASUserManager signUpInBackground:block:]` 的方式，或者通过登录或关联 [Facebook](#facebook-用户) 或 [Twitter](#twitter-用户) 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以试试 `+[LASAnonymousUtils isLinkedWithUser:]`:
+您可以通过设置用户名和密码，然后调用 `+[LASUserManager signUpInBackground:block:]` 的方式，或者通过登录或关联 *Facebook* 或 *Twitter* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以试试 `+[LASAnonymousUtils isLinkedWithUser:]`:
 
 ```objective_c
 if ([LASAnonymousUtils isLinkedWithUser:[LASUser currentUser]]) {
@@ -941,7 +941,7 @@ LASQuery *query = [LASUser query];
 
 ### 其他对象的安全性
 
-适用于 `LASUser` 的安全模型同样适用于其他对象。对于任何对象，您都可以指定哪些用户可以查看该对象，哪些用户可以修改该对象。为支持这类安全性，每个对象都有一个[访问控制列表][access control list]，由 `LASACL` 类实施。
+适用于 `LASUser` 的安全模型同样适用于其他对象。对于任何对象，您都可以指定哪些用户可以查看该对象，哪些用户可以修改该对象。为支持这类安全性，每个对象都有一个*访问控制列表*，由 `LASACL` 类实施。
 
 使用 `LASACL` 的最简单的方法就是规定某个对象只能由某一用户只读或只写。要创建这样一个对象，首先必须有一个已登录的 `LASUser`。然后，`ACLWithUser` 方法生成一个限制用户访问权限的 `LASACL`。像其他属性一样，保存对象时，对象的 ACL 会更新。这样，就会创建一条只能由当前用户访问的私有数据：
 
@@ -1316,8 +1316,8 @@ NSData *data = [NSURLConnection sendSynchronousRequest:request
 `LASRole` 有几种可以将其与 `LASObject` 区分开的属性：
 
 - `name`：角色名称。该值为必填，只能在创建角色时设置一次。名称只能包含字母数字字符、空格、- 或 _。该名称用于识别角色，不需要其对象 Id 即可达到这个目的。
-- `users`：与用户集的一种[关系](#关系数据)，该用户集将继承其母级角色所拥有的权限。
-- `roles`：与角色集的一种[关系](#关系数据)，该角色集所包含的用户和角色将继承该母级角色所拥有的权限。
+- `users`：与用户集的一种*关系*，该用户集将继承其母级角色所拥有的权限。
+- `roles`：与角色集的一种*关系*，该角色集所包含的用户和角色将继承该母级角色所拥有的权限。
 
 ### 角色对象的安全性
 
@@ -1473,7 +1473,7 @@ userPhoto[@"imageFile"] = imageFile;
 }];
 ```
 
-您的 `LASFile` 将作为保存操作的一部分被上传到 `userPhoto` 对象。还可以跟踪 `LASFile` 的[上传和下载进度](#进度)。
+您的 `LASFile` 将作为保存操作的一部分被上传到 `userPhoto` 对象。还可以跟踪 `LASFile` 的*上传和下载进度*。
 
 您可以调用 `+[LASFileManager getDataOfFileInBackground:block:]` 重新获取此图像。这里我们从另一个名为 `anotherPhoto` 的 `UserPhoto` 获取图像文件：
 
@@ -1490,9 +1490,9 @@ LASFile *userImageFile = anotherPhoto[@"imageFile"];
 
 使用 `+[LASFileManager saveInBackgroundWithBlock:progressBlock:]` 和 `+[LASFileManager getDataInBackgroundWithBlock:progressBlock:]` 可以分别轻松了解 `LASFile` 的上传和下载进度。例如：
 
-您可以用 [REST API][rest api] 删除对象引用的文件。您需要提供主密钥才能删除文件。
+您可以用 [REST API][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] 删除对象引用的文件。您需要提供主密钥才能删除文件。
 
-如果您的文件未被应用中的任何对象引用，则不能通过 [REST API][rest api] 删除它们。您可以在应用的“设置”页面请求清理未使用的文件。请记住，该操作可能会破坏依赖于访问未被引用文件（通过其地址属性）的功能。当前与对象关联的文件将不会受到影响。
+如果您的文件未被应用中的任何对象引用，则不能通过 [REST API][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] 删除它们。您可以在应用的“设置”页面请求清理未使用的文件。请记住，该操作可能会破坏依赖于访问未被引用文件（通过其地址属性）的功能。当前与对象关联的文件将不会受到影响。
 
 ## GeoPoint
 
@@ -1679,7 +1679,7 @@ LASUser *user = [LASUser user];
 
 默认情况下，所有连接的超时时间是 60 秒。
 
-如需了解所有可能的 `NSError` 类型，请查看 [API Reference][ios api reference] 的 `LASErrorCode` 部分。
+如需了解所有可能的 `NSError` 类型，请查看 [API Reference][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] 的 `LASErrorCode` 部分。
 
 ## 安全
 
@@ -1695,21 +1695,9 @@ LASACL *defaultACL = [LASACL ACL];
 [LASACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 ```
 
-您在创建应用程序时请牢记[数据访问安全][data & security guide]的理念，以便保护您和您用户的数据。
-
 ### 设置
 
 除进行安全编码以外，请审核您应用程序的设置页面，以根据您的需求选择关于应用程序访问限制的选项。例如，如果用户应该无法在没有与其应用程序关联的 Facebook 帐户的情况下登录，则禁用所有其他登录机制。指定您的 Facebook 应用程序 ID、Twitter 帐户密钥和其他类似信息，以启用对用户登录的服务器端验证。
-
-
-
-[ios quick start]: ../../quickstart/ios/core/existing.html
-[data & security guide]: about:blank
-[ios api reference]: ../../api/ios/index.html
-[las ios/ox sdk]: https://github.com/LeapAppServices/LAS-SDK-Release/blob/master/iOS/v1.5.2/LASAll-v1.5.2.zip?raw=true
-[rest api]: ../../api/ios/index.html
-
-
 
 
 [+load api reference]: https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/#//apple_ref/occ/clm/NSObject/load

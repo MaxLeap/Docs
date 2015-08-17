@@ -114,6 +114,7 @@ public class CustomPushReceiver extends LCPushBroadcastReceiver {
 ```
 
 #####Customization: Target Activity
+
 ```java
 protected Class<? extends Activity> getActivity(Intent intent)
 ```
@@ -130,6 +131,7 @@ if (intent != null && intent.getExtras() != null) {
 ```
 
 #####Customization: Target Uri
+
 ```java
 protected Uri getUri(Intent intent)
 ```

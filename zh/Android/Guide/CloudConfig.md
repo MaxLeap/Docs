@@ -18,7 +18,7 @@ Parameter|参数名
 Type|参数类型
 Value|参数的值
 
-您还可以为不同的Segment设置不同的参数值。新建Cloud Config参数的详细步骤，请查看[Console使用指南 - Cloud Config](..).
+您还可以为不同的Segment设置不同的参数值。新建Cloud Config参数的详细步骤，请查看[Console使用指南 - Cloud Config](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL).
 
 ##获取LCCloudConfig对象
 您可以通过`LCCloudConfig.getCurrentCloudConfig()`方法获取最新的Cloud Config.

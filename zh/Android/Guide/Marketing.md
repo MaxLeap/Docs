@@ -22,7 +22,7 @@ Pic
 ###配置
 LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
 
-1. 提供 **Sender ID** 和 **API key**. 请在[Google开发者中心](..)获取这两个Key.
+1. 提供 **Sender ID** 和 **API key**. 请在*Google开发者中心*获取这两个Key.
 2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
 
 	```xml
@@ -199,7 +199,7 @@ LCConfig.setMarketingEnabled(true);
 ```
 
 ###定义目标Activity
-您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](。。))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
+您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
 
 在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
 

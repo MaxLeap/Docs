@@ -223,6 +223,6 @@ LeapCloud"分析"服务将通过以下功能，帮助您更了解用户及其行
     
 ## 下一步
 
-**如果您希望进一步了解LeapCloud分析服务SDK，请参考[iOS开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#分析)或[Android开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#分析)。**
+**如果您希望进一步了解LeapCloud分析服务SDK，请参考[iOS开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
     
     

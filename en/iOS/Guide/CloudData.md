@@ -9,7 +9,7 @@ language_tabs:
 
 # Cloud Data
 
-If you haven't installed the SDK yet, please [head over to the QuickStart guide][ios quick start] to get our SDK up and running in Xcode. Note that we support iOS 6.0 and higher. You can also check out our [API Reference][ios api reference] for more detailed information about our SDK.
+If you haven't installed the SDK yet, please head over to the [QuickStart guide](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS) to get our SDK up and running in Xcode. Note that we support iOS 6.0 and higher. You can also check out our [API Reference](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS) for more detailed information about our SDK.
 
 ## Introduction
 	
@@ -276,9 +276,9 @@ bigObject[@"myNull"] = null;
 }];
 ```
 
-We do not recommend storing large pieces of binary data like images or documents using `NSData` fields on `LASObject`. `LASObject`s should not exceed 128 kilobytes in size. To store more, we recommend you use `LASFile` or `LASPrivateFile`. See the [guide section](#files) for more details.
+We do not recommend storing large pieces of binary data like images or documents using `NSData` fields on `LASObject`. `LASObject`s should not exceed 128 kilobytes in size. To store more, we recommend you use `LASFile` or `LASPrivateFile`. 
 
-For more information about how LAS handles data, check out our documentation on [Data & Security][data & security guide].
+For more information about how LAS handles data, check out our documentation on *Data&Security*.
 
 ### Subclasses
 
@@ -777,7 +777,7 @@ Note that we used the `+[LASUserManager signUpInBackground:block:]` method, not 
 
 If a signup isn't successful, you should read the error object that is returned. The most likely case is that the username or email has already been taken by another user. You should clearly communicate this to your users, and ask them try a different username.
 
-You are free to use an email address as the username. Simply ask your users to enter their email, but fill it in the username property — `LASUser` will work as normal. We'll go over how this is handled in the [reset password](#resetting-passwords) section.
+You are free to use an email address as the username. Simply ask your users to enter their email, but fill it in the username property — `LASUser` will work as normal. We'll go over how this is handled in the *reset password* section.
 
 ### Logging In
 
@@ -843,7 +843,7 @@ You can create an anonymous user using `LASAnonymousUtils`:
 }];
 ```
 
-You can convert an anonymous user into a regular user by setting the username and password, then calling `+[LASUserManager signUpInBackground:block:]`, or by logging in or linking with a service like [Facebook](#facebook-users) or [Twitter](#twitter-users). The converted user will retain all of its data. To determine whether the current user is an anonymous user, you can check `[LASAnonymousUtils isLinkedWithUser:]`
+You can convert an anonymous user into a regular user by setting the username and password, then calling `+[LASUserManager signUpInBackground:block:]`, or by logging in or linking with a service like *Facebook* or *Twitter*. The converted user will retain all of its data. To determine whether the current user is an anonymous user, you can check `[LASAnonymousUtils isLinkedWithUser:]`
 
 ```objective_c
 if ([LASAnonymousUtils isLinkedWithUser:[LASUser currentUser]]) {
@@ -1064,10 +1064,10 @@ Using our Facebook integration, you can associate an authenticated Facebook user
 
 To start using Facebook with LAS, you need to:
 
-1. [Set up a Facebook app][set up a facebook app], if you haven't already.
+1. Set up a Facebook app, if you haven't already.
 2. Add your application's Facebook Application ID on your LAS application's settings page.
-3. Follow Facebook's instructions for [getting started with the Facebook SDK][getting started with the facebook sdk] to create an app linked to the Facebook SDK. Double-check that you have added FacebookAppID and URL Scheme values to your application's .plist file.
-4. Download and unzip [LAS iOS SDK][las ios/ox sdk], if you haven't already.
+3. Follow Facebook's instructions for getting started with the Facebook SDK to create an app linked to the Facebook SDK. Double-check that you have added FacebookAppID and URL Scheme values to your application's .plist file.
+4. Download and unzip LAS iOS SDK, if you haven't already.
 5. Add `LASFacebookUtils.framework` to your Xcode project, by dragging it into your project folder target.
 
 There's also two code changes you'll need to make. First, add the following to your `application:didFinishLaunchingWithOptions:` method, after you've initialized LAS SDK.
