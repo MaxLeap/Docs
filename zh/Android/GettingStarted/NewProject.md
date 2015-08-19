@@ -1,10 +1,10 @@
 #	安装SDK
 
-##	使用模板创建LAS项目
+##	使用模板创建LC项目
 
 1.	获取项目模板，并解压缩至您的Workspace
 		
-		<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip">下载Android项目模板</a>
+		<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip">下载Android项目模板</a>
 	
 2.	打开项目模板
 
@@ -18,23 +18,23 @@
 	
 	1.	打开Eclipse，点击 "File" -> "Import.." 
 	2. 	选择 "General"-> "Existing Projects into Workspace"
-	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LASStarterProject
+	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
 	
-#	配置LAS项目
+#	配置LC项目
 
-1. 连接项目与LAS应用
+1. 连接项目与LC应用
 	
-	在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+	在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
 	```java
 	import android.app.Application;
-	import as.leap.LASConfig;
+	import as.leap.LCConfig;
 
 	public class MyApplication extends Application {
 	    @Override
 	    public void onCreate() {
 	        super.onCreate();
-	        LASConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 	    }
 	}
 	```
@@ -57,33 +57,33 @@
 	
 3. 快速测试项目配置
 
-为了测试项目是否已经注连接上LAS应用及其LAS云服务，我们可以向Application的onCreate()方法中添加以下代码：
+为了测试项目是否已经注连接上LC应用及其LC云服务，我们可以向Application的onCreate()方法中添加以下代码：
 
 ```java
 import android.app.Application;
-import as.leap.LASConfig;
-import as.leap.LASDataManager;
-import as.leap.LASObject;
+import as.leap.LCConfig;
+import as.leap.LCDataManager;
+import as.leap.LCObject;
 
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LASConfig.initialize(this, "{{appid}}", "{{restkey}}");
+        LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
         
         //测试项目配置：
-        LASObject testObject = new LASObject("People");
+        LCObject testObject = new LCObject("People");
         testObject.put("Name", "David Wang");
-        LASDataManager.saveInBackground(testObject);
+        LCDataManager.saveInBackground(testObject);
     }
 }
 ```
 
-该段测试代码试图向Cloud Data中创建一个“CLASS” － “People”，并存入一条数据。我们将在管理界面的“开发者中心” -> “云存储” 中发现：
+该段测试代码试图向Cloud Data中创建一个“class” － “People”，并存入一条数据。我们将在管理中心的“开发者中心” -> “云存储” 中发现：
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
 # 下一步
-至此，您已经完成LAS SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
+至此，您已经完成LC SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LC的详细功能介绍以及使用方法，开启LC云服务使用之旅。

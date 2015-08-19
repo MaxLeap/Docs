@@ -61,7 +61,6 @@ We provide several path-maps here, you can compile links of other pages with tho
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN': '/guide/devguide/android.html#support',
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN': '/guide/devguide/android.html#user',
 
-
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH': '/guide/devguide/android.html#云数据',
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH': '/guide/devguide/android.html#分析',
         'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH': '/guide/devguide/android.html#云配置',
@@ -82,9 +81,12 @@ We provide several path-maps here, you can compile links of other pages with tho
         'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
         'LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
         'LC_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html',
-        
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip'
+
+        'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip',        
+        'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip',
+        'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': '',
+        'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip'
+
 
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 

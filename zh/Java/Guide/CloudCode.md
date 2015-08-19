@@ -198,7 +198,7 @@ defineFunction("helloWorld", new HelloWorldHandler());
 ```
 ###通过Cloud Function访问Cloud Data
 
-####定义Cloud Data Object（在管理界面中，称之为“Class”）
+####定义Cloud Data Object（在管理中心中，称之为“class”）
 新建一个Cloud Data Object，并继承CloudObject类
 
 ```java
@@ -217,7 +217,7 @@ public class MyObject extends CloudObject {
 ```
 定义Cloud Data Object需注意：
 
-* 一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理界面中创建的 class 名字一样
+* 一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理中心中创建的 class 名字一样
 * 须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
 * 须配置global.json文件以识别该package，如：`"package-entity" : "data"`
 
@@ -329,7 +329,7 @@ curl -X POST \
 https://api.leap.as/jobs/YOUR_JOBNAME
 ```
 
-####在管理界面中设置 Job Schedule
+####在管理中心中设置 Job Schedule
 img
 
 表单项目|作用 
@@ -340,8 +340,8 @@ img
 设置重复|每隔多久重复执行任务
 参数|提供数据给Backgroud Job
 
-####在管理门户中查看状态
-进入“开发者中心”，点击“任务” >> “任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
+####在管理中心中查看状态
+进入“开发者中心”，点击“云代码” >> “任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
 选中您想要查看的任务，便可以查看任务详情。
 img
 
@@ -460,13 +460,13 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
 
 ## Logging
-Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
+Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。
 ###在Cloud Code中记录Log
 您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
 
 ```java
-public class MyClass {
-	Logger logger = LoggerFactory.getLogger(myClass.class);
+public class Myclass {
+	Logger logger = LoggerFactory.getLogger(myclass.class);
 
 	public void myMethod(){
 		logger.error("Oops! Error, caught you!");
@@ -502,7 +502,7 @@ LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管�
 ```shell
 lcc login <用户名>
 ```
-`<用户名>` 为您登录LeapCloud管理门户的账号，然后根据提示输入密码
+`<用户名>` 为您登录LeapCloud管理中心的账号，然后根据提示输入密码
 ###显示所有app：
 ```shell
 lcc apps

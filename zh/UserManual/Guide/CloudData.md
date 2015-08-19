@@ -14,31 +14,31 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 
 **如果您希望进一步了解LeapCloud Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
 
-##Class列表
-在开发者中心的"数据"分类中，我们可以查看该应用下所有的Class的列表：
+class##列表
+在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
 
-![imgCDClassList.png](../../../images/imgCDClassList.png)
+![imgCDclassList.png](../../../images/imgCDclassList.png)
 
 若某个字段的类型为LCRelation，即关联了其他LCObject，该列的值会显示为"View Relations".点击后，便可查看该属性关联的所有LCObject.
 
 ![imgCDShowRelation.png](../../../images/imgCDShowRelation.png)
 
-###新建/修改Class
-点击"＋添加类"按钮，输入Class名，便可以完成Class的新建：
+###新建/修改class
+点击"＋添加类"按钮，输入class名，便可以完成class的新建：
 
-![imgCDAddClass.png](../../../images/imgCDAddClass.png)
+![imgCDAddclass.png](../../../images/imgCDAddclass.png)
 
-新建Class完毕后，您可以选中改Class后，对其进行如下修改：
+新建class完毕后，您可以选中改class后，对其进行如下修改：
 
-* 新建列：添加Class属性
+* 新建列：添加class属性
 * 新建行：添加一条数据
 * 筛选表格数据显示：点击沙漏图标
 * 选择表格显示列：点击右上角表格图标
 
-###删除Class
-在Claas列表中选中要删除的Class，在右侧选择 更多 >> 删除类，确认即可。
+###删除class
+在Claas列表中选中要删除的class，在右侧选择 更多 >> 删除类，确认即可。
 
-![imgCDDeleteClass](../../../images/imgCDDeleteClass.png)
+![imgCDDeleteclass](../../../images/imgCDDeleteclass.png)
 
 ## 下一步
 **如果您希望进一步了解LeapCloud Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**

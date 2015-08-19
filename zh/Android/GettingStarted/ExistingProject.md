@@ -2,9 +2,9 @@
 
 1.	获取SDK，并解压缩
 
-    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/las-sdk-all.zip">下载LAS SDK</a>
+    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip">下载LeapCloud SDK</a>
 2.	将SDK添加至项目
-    将解压后的所有"LAS-*.jar"文件，拖拽至项目的libs目录中。如果你们的项目没有 libs 目录，那么就在项目的根目录下创建一个：通过右键点击项目 Project，选择 New，接下来点击 Folder 菜单即可创建新目录。
+    将解压后的所有"LeapCloud-*.jar"文件，拖拽至项目的libs目录中。如果你们的项目没有 libs 目录，那么就在项目的根目录下创建一个：通过右键点击项目 Project，选择 New，接下来点击 Folder 菜单即可创建新目录。
 
     Android Studio
     
@@ -12,25 +12,25 @@
     
     ```java
     dependencies {
-        compile fileTree(dir: 'libs', include: 'LAS-*.jar')
+        compile fileTree(dir: 'libs', include: 'LeapCloud-*.jar')
     }
     ```
 	
-#	配置LAS项目
+#	配置LeapCloud项目
  
- 1. 连接项目与LAS应用
+ 1. 连接项目与LeapCloud应用
  	
- 	在Application的onCreate()方法中，调用`LASConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+ 	在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
  	
  	```java
  	import android.app.Application;
- 	import as.leap.LASConfig;
+ 	import as.leap.LCConfig;
  
  	public class MyApplication extends Application {
  	    @Override
  	    public void onCreate() {
  	        super.onCreate();
- 	        LASConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+ 	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
  	    }
  	}
  	```
@@ -53,33 +53,33 @@
  	
  3. 快速测试项目配置
  
- 为了测试项目是否已经注连接上LAS应用及其LAS云服务，我们可以向Application的onCreate()方法中添加以下代码：
+ 为了测试项目是否已经注册至LeapCloud，我们可以向Application的onCreate()方法中添加以下代码：
  
  ```java
  import android.app.Application;
- import as.leap.LASConfig;
- import as.leap.LASDataManager;
- import as.leap.LASObject;
+ import as.leap.LCConfig;
+ import as.leap.LCDataManager;
+ import as.leap.LCObject;
  
  public class MyApplication extends Application {
      @Override
      public void onCreate() {
          super.onCreate();
-         LASConfig.initialize(this, "{{appid}}", "{{restkey}}");
+         LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
          
          //测试项目配置：
-         LASObject testObject = new LASObject("People");
+         LCObject testObject = new LCObject("People");
          testObject.put("Name", "David Wang");
-         LASDataManager.saveInBackground(testObject);
+         LCDataManager.saveInBackground(testObject);
      }
  }
  ```
  
- 该段测试代码试图向Cloud Data中创建一个“CLASS” － “People”，并存入一条数据。我们将在管理界面的“开发者中心” -> “云存储” 中发现：
+ 该段测试代码试图向Cloud Data中创建一个“class” － “People”，并存入一条数据。我们将在管理中心的“开发者中心” -> “云存储” 中发现：
  
  ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
  
  表明通过客户端，向应用下的Cloud Data存入数据成功。
  
  # 下一步
- 至此，您已经完成LAS SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LAS的详细功能介绍以及使用方法，开启LAS云服务使用之旅。
+ 至此，您已经完成LeapCloud SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LC的详细功能介绍以及使用方法，开启LC云服务使用之旅。

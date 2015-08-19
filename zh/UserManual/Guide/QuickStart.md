@@ -6,7 +6,7 @@
 
 #####	1.	获取项目模板
 
-[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，并解压缩至您的Workspace.
+[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip)，并解压缩至您的Workspace.
 	
 ####	2.	打开项目模板
 
@@ -81,7 +81,7 @@ public class MyApplication extends Application {
 }
 ```
 
-该段测试代码试图向Cloud Data中创建一个“CLASS” － “People”，并存入一条数据。我们将在管理界面的“开发者中心” -> “云存储” 中发现：
+该段测试代码试图向Cloud Data中创建一个“class” － “People”，并存入一条数据。我们将在管理中心的“开发者中心” -> “云存储” 中发现：
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 

@@ -102,7 +102,7 @@ LeapCloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google
 ```java
 public class CustomPushReceiver extends LCPushBroadcastReceiver {
 	@Override
-	protected Class<? extends Activity> getActivity(Intent intent) {
+	protected class<? extends Activity> getActivity(Intent intent) {
 		return YOUR_ACTIVITY.class;
 	}
 	@Override
@@ -114,7 +114,7 @@ public class CustomPushReceiver extends LCPushBroadcastReceiver {
 
 #####自定义：目标Activity
 ```java
-protected Class<? extends Activity> getActivity(Intent intent)
+protected class<? extends Activity> getActivity(Intent intent)
 ```
 
 返回非 null 值后，点击 Notification 后会自动进入到目标Activity，在目标Activity中可以通过 `getIntent()` 得到该条 Push 所携带的信息
