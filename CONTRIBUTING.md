@@ -84,7 +84,7 @@ We provide several path-maps here, you can compile links of other pages with tho
 
         'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip',        
         'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip',
-        'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': '',
+        'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip',
         'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip'
 
 
