@@ -10,24 +10,24 @@ search: true
 
 # 云数据
 
-如果您尚未安装 SDK，请先查阅[快速入门指南][LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS]，安装 SDK 并使之在 Xcode 中运行。
-您还可以查看我们的 [API 参考][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS]，了解有关我们 SDK 的更多详细信息。
+如果您尚未安装 SDK，请先查阅[快速入门指南](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+您还可以查看我们的 [API 参考](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 6.0 及以上版本。
 
 ## 简介
 
-LC 平台为您的移动应用程序提供完整的后台解决方案。我们的目标是彻底消除编写服务器代码或维护服务器的需要。
+LeapCloud 平台为您的移动应用程序提供完整的后台解决方案。我们的目标是彻底消除编写服务器代码或维护服务器的需要。
 
 ### 应用
 
-在 LC 平台上，您可以为每个移动应用需求创建一个应用。每个应用均有自己的应用程序 id 以及供您用于 SDK 的客户端密钥。您的 LC 帐户可以容纳多个应用。即使您只有一个应用程序，这也很有用，因为您可以部署不同的版本用于测试和产品运营。
+在 LeapCloud 平台上，您可以为每个移动应用需求创建一个应用。每个应用均有自己的应用程序 id 以及供您用于 SDK 的客户端密钥。您的 LC 帐户可以容纳多个应用。即使您只有一个应用程序，这也很有用，因为您可以部署不同的版本用于测试和产品运营。
 
 ## 对象
 
 ### LCObject
 
-LC 上的数据储存建立在 `LCObject` 的基础上。每个 `LCObject` 包含与 JSON 兼容数据的键值对。该数据是 schemaless 的，即您不需要事先指定每个 `LCObject` 上存在的键。您只需在需要的时候增加键值对，我们的后台会储存它们。
+LeapCloud 上的数据储存建立在 `LCObject` 的基础上。每个 `LCObject` 包含与 JSON 兼容数据的键值对。该数据是 schemaless 的，即您不需要事先指定每个 `LCObject` 上存在的键。您只需在需要的时候增加键值对，我们的后台会储存它们。
 
 例如，假设您要跟踪游戏的高分。单个 `LCObject` 可能包括：
 
@@ -41,7 +41,7 @@ score: 1337, playerName: "Sean Plott", cheatMode: false
 
 ### 保存对象
 
-现在讲如何将上述 `GameScore` 保存到 LC 服务器上。
+现在讲如何将上述 `GameScore` 保存到 LeapCloud 服务器上。
 
 `LCObject` 接口与 `NSMutableDictionary` 类似。我们有一个类 `LCDataManager`保存、删除 `LCObject`s, 和拉取数据。现在我们使用 `LCDataManager` 来保存 `GameScore`:
 
@@ -59,7 +59,7 @@ gameScore[@"cheatMode"] = @NO;
 }];
 ```
 
-该代码运行后，您可能想知道是否真的执行了相关操作。为确保数据正确保存，您可以在 LC 开发中心查看应用中的数据浏览器。您应该会看到类似于以下的内容：
+该代码运行后，您可能想知道是否真的执行了相关操作。为确保数据正确保存，您可以在 LeapCloud 开发中心查看应用中的数据浏览器。您应该会看到类似于以下的内容：
 
 ```
 objectId: "xWMyZ4YEGZ", score: 1337, playerName: "Sean Plott", cheatMode: false,
@@ -1103,9 +1103,9 @@ LC 提供了一种简单的方法，用于将 Facebook 与您的应用程序整�
 若要通过 LC 使用 Facebook，您需要：
 
 1. [设置 Facebook 应用程序][set up a facebook app], 若您尚未设置。
-2. 在您的 LC 应用设置页面添加应用程序的 Facebook 应用 ID。
+2. 在您的 LeapCloud 应用设置页面添加应用程序的 Facebook 应用 ID。
 3. 按照 Facebook 的 [Facebook SDK 入门][getting started with the facebook sdk]提供的说明，创建与 Facebook SDK 关联的应用程序。仔细检查并确认您已经把 FacebookAppID 和 URL Scheme 添加至应用程序的 .plist 文件。
-4. 下载解压 [LeapCloud iOS SDK][LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS]，如果您还没有。
+4. 下载解压 [LeapCloud iOS SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS)，如果您还没有。
 5. 把 `LCFacebookUtils.framework` 添加到您的 Xcode 项目中。
 
 还有两步。首先，把下面的代码添加到您引用的 `application:didFinishLaunchingWithOptions:` 方法中。
@@ -1490,9 +1490,9 @@ LCFile *userImageFile = anotherPhoto[@"imageFile"];
 
 使用 `+[LCFileManager saveInBackgroundWithBlock:progressBlock:]` 和 `+[LCFileManager getDataInBackgroundWithBlock:progressBlock:]` 可以分别轻松了解 `LCFile` 的上传和下载进度。例如：
 
-您可以用 [REST API][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] 删除对象引用的文件。您需要提供主密钥才能删除文件。
+您可以用 [REST API](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS) 删除对象引用的文件。您需要提供主密钥才能删除文件。
 
-如果您的文件未被应用中的任何对象引用，则不能通过 [REST API][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] 删除它们。您可以在应用的“设置”页面请求清理未使用的文件。请记住，该操作可能会破坏依赖于访问未被引用文件（通过其地址属性）的功能。当前与对象关联的文件将不会受到影响。
+如果您的文件未被应用中的任何对象引用，则不能通过 [REST API](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS) 删除它们。您可以在应用的“设置”页面请求清理未使用的文件。请记住，该操作可能会破坏依赖于访问未被引用文件（通过其地址属性）的功能。当前与对象关联的文件将不会受到影响。
 
 ## GeoPoint
 
@@ -1679,7 +1679,7 @@ LCUser *user = [LCUser user];
 
 默认情况下，所有连接的超时时间是 60 秒。
 
-如需了解所有可能的 `NSError` 类型，请查看 [API Reference][LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS] 的 `LCErrorCode` 部分。
+如需了解所有可能的 `NSError` 类型，请查看 [API Reference](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS) 的 `LCErrorCode` 部分。
 
 ## 安全
 
