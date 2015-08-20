@@ -1,38 +1,38 @@
 
-# LeapCloud Cloud Code 使用指南
+# LeapCloud云代码使用指南
 
-## Cloud Code简介
+## 云代码简介
 
-###什么是Cloud Code服务
-Cloud Code是部署运行在LeapCloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
+###什么是云代码服务
+云代码是部署运行在LeapCloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
-###为什么需要Cloud Code服务
+###为什么需要云代码服务
 
-如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助Cloud Code实现。Cloud Code有如下优势：
+如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
-* 强大的运算能力：Cloud Code运行在LeapCloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 强大的运算能力：云代码运行在LeapCloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
 * 同一套代码可以为iOS，Android，web site等提供服务
 
-###Cloud Code如何工作
+###云代码如何工作
 
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-一个Cloud Code项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用Cloud Code命令行工具lcc上传到LeapCloud，LeapCloud会生成对应的docker image。用lcc deploy可以让LeapCloud启动Docker container运行该Docker image。
+一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到LeapCloud，LeapCloud会生成对应的docker image。用lcc deploy可以让LeapCloud启动Docker container运行该Docker image。
 
-目前Cloud Code支持Java环境，我们在近期会推出Python版本。
+目前云代码支持Java环境，我们在近期会推出Python版本。
 	  
 ##准备工作
 ####安装JDK
-Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
+云代码 SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
 ####安装Maven
 ######Eclipse:	
 1.	点击"Help" >> "Install New Software.."
 2.	在"Work with"中输入：`http://download.eclipse.org/technology/m2e/releases`，在列表中选择"Maven Integration for Eclipse"，即可安装Maven插件。
 
-####安装Cloud Code Command Line Tools（Lcc）
+####安装云代码 Command Line Tools（Lcc）
 ######Linux 和 Mac OSX
 下述命令将把名为"lcc"的工具安装至`/usr/local/bin/lcc`目录。完成后，您可直接在Terminal中使用lcc。
 
@@ -54,8 +54,8 @@ Cloud Code SDK支持 JDK6, 7, 8，推荐使用JDK8。
 	```
 
 ## 快速入门
-### 创建Cloud Code项目
-获取LC Cloud Code Java项目模板
+### 创建云代码项目
+获取LeapCloud 云代码 Java项目模板
 
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
@@ -89,7 +89,7 @@ applicationKey|Master Key
 java-main|入口函数名
 package-hook|Hook包名
 package-entity|CLeapClouds实体包名
-version|当前Cloud Code项目版本号
+version|当前云代码项目版本号
 
 ### 定义一个简单的function
 
@@ -115,7 +115,7 @@ public class Main extends LoaderBase implements Loader {
 ```
 注意：
 
-* Main class的main method是Cloud Code启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
+* Main class的main method是云代码项目启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
 
 ### 打包
 
@@ -125,16 +125,16 @@ public class Main extends LoaderBase implements Loader {
 
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
-### 上传Cloud Code及部署
+### 上传云代码及部署
 1. 登录：lcc login <UserName>
 2. 选择所要部署的目标应用，作为后续操作的上下文：lcc use <AppName>
 3. 上传Package： lcc upload <PackageLocation>
-4. 部署Cloud Code：lcc deploy <VersionNumber>
+4. 部署云代码：lcc deploy <VersionNumber>
 
 **注意：** 
 
-*	这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）
-* 	若您在部署之前，已经部署过某个版本的Cloud Code，需要先卸载该版本的Cloud Code，才能部署新版本。
+*	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
+* 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
 *	请查看[lcc使用向导](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
 
 ### 测试
@@ -158,7 +158,7 @@ Hello, David Wang!
 
 注意:
 
-* X-LC-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
+* X-LC-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
 ## Cloud Function
 Cloud Function是运行在LeapCloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
@@ -299,10 +299,10 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
 ```
 
 ## Background Job
-Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
+云代码中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
 
 ###创建和监控Background Job
-####在Cloud Code中定义并实现Job Handler
+####在云代码中定义并实现Job Handler
 ``` java
 public class MyJobHandler implements Handler {
     public Response handle(Request request) {
@@ -387,13 +387,13 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 
 * 确保目标Cloud Data Object对应的class存在
 * Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
-* 须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
-* 须配置global.json文件以识别该package，如：`"package-hook" : "hook"`
+* 须将所有的Hook类放入同一个package中，推荐在/src/main/java下新建一个package，如：“myHooks”
+* 须配置global.json文件以识别该package，如：`"package-hook" : "myHooks"`
 * 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
 
 ### Hook类型
 
-Cloud Code支持六种类型的Hook：
+云代码支持六种类型的Hook：
 #### beforeCreate
 在对应的 Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
 
@@ -460,8 +460,8 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
 
 ## Logging
-Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。
-###在Cloud Code中记录Log
+云代码提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，云代码的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。
+###在云代码中记录Log
 您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
 
 ```java
@@ -485,7 +485,7 @@ public class Myclass {
 
 * Cloud Function的上传部署信息
 * Hook Entities的Cache信息
-* Cloud Code相关的API request信息
+* 云代码相关的API request信息
 	
 ###查看Log
 可以使用命令行工具lcc查看最近的log
@@ -496,8 +496,8 @@ lcc log -n 100
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 img
 
-## LCC － Cloud Code 命令行工具
-LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到LeapCloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
+## LCC － 云代码命令行工具
+LCC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到LeapCloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
 ###登录:
 ```shell
 lcc login <用户名>
@@ -513,32 +513,32 @@ lcc apps
 lcc use <应用名>
 ```
 `<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-###上传Cloud Code:
+###上传云代码:
 ```shell
 lcc upload <文件路径>
 ```
-`<文件路径>`为你将部署的Cloud Code package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
-上传的的代码会被制作成Docker镜像，版本号在Cloud Code项目里的global.json文件中指定：
+`<文件路径>`为你将部署的云代码 package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
+上传的的代码会被制作成Docker镜像，版本号在云代码项目里的global.json文件中指定：
 ```
 "global": {
 	"version": "0.0.1"
 }
 ```
-###显示所有云端Cloud Code版本:
+###显示所有云端云代码版本:
 ```shell
 lcc lv
 ```
-即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
-###部署Cloud Code：
+即显示所有该应用下，用户上传过的云代码的所有版本号。
+###部署云代码：
 ```shell
 lcc deploy <版本号>
 ```
-`<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloud Code；如果部署不存在的版本，会提示错误："version of appId not exists"
+`<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码；如果部署不存在的版本，会提示错误："version of appId not exists"
 ###停止cloudcode：
 ```shell
 lcc undeploy
 ```
-停止该应用的Cloud Code，如果之前已经部署过一个版本，需要先停止，再部署。
+停止该应用的云代码，如果之前已经部署过一个版本，需要先停止，再部署。
 ###输出最近的日志：
 ```shell
 lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
@@ -548,17 +548,17 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 -s 指定跳过最近的log数量
 ```
 
-## Cloud Code进阶
-### 添加 Cloud Code 到已有的项目
+## 云代码进阶
+### 添加云代码至已有的项目
 ####配置pom.xml
 在pom中，我们将配置：
 
-* 获取Cloud Code SDK
+* 获取云代码 SDK
 * 获取测试插件JUnit
 * 获取编译打包插件
 
 ```Java
-	//添加依赖，获取Cloud Code SDK及JUnit测试插件
+	//添加依赖，获取云代码 SDK及JUnit测试插件
     <dependencies>
         <dependency>
             <groupId>com.ilegendsoft</groupId>
