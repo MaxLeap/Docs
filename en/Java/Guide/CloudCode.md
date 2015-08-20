@@ -19,10 +19,9 @@ The service logic can be implemented in client if the app is simple, while if th
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-A Cloud Code project contains Custom Cloud Code, Cloud Code SDK and 3rd Party Libaries. After the development, package the project with maven and upload it to LeapCloud with Cloud Code command line tool lcc and LeapCloud will generate corresponding docker image. LeapCloud can start Docker container and operate the Docker image with lcc deploy.
-一个Cloud Code项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用Cloud Code命令行工具lcc上传到LeapCloud，LeapCloud会生成对应的docker image。用lcc deploy可以让LeapCloud启动Docker container运行该Docker image。
+A Cloud Code project contains Custom Cloud Code, Cloud Code SDK and 3rd Party Libaries. After the development, please package the project with maven and upload it to LeapCloud with Cloud Code command line tool lcc and LeapCloud will generate corresponding docker image. LeapCloud can start Docker container to operate the Docker image with lcc deploy.
 
-Cloud Code support Java only currently, Python version is coming soon.目前Cloud Code支持Java环境，我们在近期会推出Python版本。
+Cloud Code supports Java only currently, Python version is coming soon.
 	  
 ##Preperations
 ####Install JDK 
@@ -35,11 +34,10 @@ Cloud Code supports JDK 6, 7, 8 and JDK 8 is recommended.
 
 ####Install Cloud Code Command Line Tools（Lcc）
 ######Linux and Mac OSX
-Folliwng command will install "lcc" to `/usr/local/bin/lcc`. You can user lcc in Terminal directly after the installation. 下述命令将把名为"lcc"的工具安装至`/usr/local/bin/lcc`目录。完成后，您可直接在Terminal中使用lcc。
-
+Folliwng command will install "lcc" to `/usr/local/bin/lcc`. You can use lcc in Terminal directly after the installation. 
 *［！！待选择！！］*
 
-*	Auto Install 自动安装
+*	Auto Install 
 
 	```shell
 	curl -s https://******/installer.sh | sudo
@@ -47,14 +45,14 @@ Folliwng command will install "lcc" to `/usr/local/bin/lcc`. You can user lcc in
 
 *	Via git command
 
-	Enter /usr/local/bin and operate git to get: 进入目录/usr/local/bin，运行git命令获取：
+	Enter /usr/local/bin and operate git to get: 
 		
 	```java
 	cd /usr/local/bin
 	git clone https://gitlab.ilegendsoft.com/zcloudsdk/zcc.git
 	```
 
-## Quick Start 快速入门
+## Quick Start 
 ### Create Cloud Code Project
 Get LC Cloud Code Java Project Templates
 
@@ -62,8 +60,8 @@ Get LC Cloud Code Java Project Templates
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 ```
 
-### Modify Configuration修改配置
-Add global.json in /src/main/resources/config （Please make sure this path exists）and add following configuration in it: 在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
+### Modify Configuration
+Add global.json in /src/main/resources/config （Please make sure this path exists）and add following configuration in it:
 
 ```java
 {
@@ -80,7 +78,7 @@ Add global.json in /src/main/resources/config （Please make sure this path exis
 }
 ```
 
-Modify following key value according to key got while creating app: 根据创建应用时获取的key，修改下列键的值：
+Modify following key values according to the key you got from creating the app:
 	
 Key|Value|
 ------------|-------|
@@ -116,31 +114,30 @@ public class Main extends LoaderBase implements Loader {
 ```
 Notice:
 
-* The main method of main class is the entrance of cloud code when started (defined in global.json). It needs to inherit LoaderBase and implement loader interface. All cloud functions and jobs should be registered in main method. Main class的main method是Cloud Code启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
+* The main method of main class is the startup entrance of Cloud Code (defined in global.json) and it needs to inherit LoaderBase and implement loader interface. All cloud functions and jobs should be registered in main method. 
+### Package 
 
-### Package 打包
-
-Run Maven command in root directory of current project: 在当前项目根目录下运行Maven命令：
+Run Maven command in root directory of current project:
 
 `mvn package`
 
-We can find *xxx-1.0-SNAPSHOT-mod.zip* in target folder in root directory and this is the package we want. 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
+We can find *xxx-1.0-SNAPSHOT-mod.zip* in target folder in root directory and this is the package we want. 
 
-### Upload Cloud Code and Deploy 上传Cloud Code及部署
-1. Login: lcc login <UserName>登录：lcc login <UserName>
-2. Select the targeting app to be deployed as the context of subsequent actions 选择所要部署的目标应用，作为后续操作的上下文：lcc use <AppName>
-3. Upload 上传Package： lcc upload <PackageLocation>
-4. Deploy 部署Cloud Code：lcc deploy <VersionNumber>
+### Upload and Deploy Cloud Code
+1. Login: lcc login <UserName>
+2. Select the target app to be deployed as the context of subsequent actions: lcc use <AppName>
+3. Upload Package： lcc upload <PackageLocation>
+4. Deploy Cloud Code：lcc deploy <VersionNumber>
 
 **Notice:** 
 
-*	The VersionNumber here is defined in global.json in your Cloud Code project (value og version parameter)这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）
-* 	If you've already deployed Cloud COde of other versions once, please uninstall that version first before the deployment of new version. 若您在部署之前，已经部署过某个版本的Cloud Code，需要先卸载该版本的Cloud Code，才能部署新版本。
-*	Please check [lcc Guide](...) for more details about lcc. 请查看[lcc使用向导](...)，以获取lcc的更多信息。
+*	The VersionNumber here is defined in global.json in your Cloud Code project (value of version parameter)
+* 	If you've already deployed Cloud Code of other versions once, please uninstall that version first before the deployment of the new one.
+*	Please check [lcc Guide](...) for more details about lcc.
 
-### Test 测试
+### Test 
 
-Send following post request towards Cloud Function deployed with curl to test if the Function is deployed well: 通过 curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
+Send following POST request towards Cloud Function which is already deployed with curl to test if the Function is deployed well: 
 
 ```shell
 curl -X POST \
@@ -150,30 +147,29 @@ curl -X POST \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
 ```
-Now, we may get:此时，我们将得到如下结果：
+Now, we may get:
 
 ```shell
 Hello, David Wang!
 ```
-which indicates that the test is passed and the deployment is successful. 表明测试通过，部署成功。
+which indicates that the test is passed and the deployment is successful. 
 
-Notice: 注意:
+Notice: 
 
-* The value of X-LC-APIKey is the API KEY of application, not the Master Key of Cloud Code project. X-LC-APIKey的值为应用的API KEY，而非Cloud Code项目中使用的Master Key.
+* The value of X-LC-APIKey is the API KEY of application, not the Master Key of Cloud Code project. 
 
 ## Cloud Function
-Cloud Function is the code running in LeapCloud which can be used to implement complicated logic and use various 3rd Party Libs.
-Cloud Function是运行在LeapCloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
+Cloud Function is the code running in LeapCloud which could be used to implement complicated logic and use various 3rd Party Libs.
 
-###Define 定义Cloud Function
-Every Cloud Function should implement as.leap.code.Handler interface and this interface is the typical Functional Interface. 每个Cloud Function需要实现 as.leap.code.Handler interface，该interface是典型的Functional Interface。
+###Define Cloud Function
+Every Cloud Function should implement as.leap.code.Handler interface and this interface is the typical Functional Interface. 
 
 ```Java
 public interface Handler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
     R handle(T t);
 }
 ```
-Define a function with JDK 8 lambda expression, as follows:用JDK 8 lambda表达式可以如下定义一个function:
+Define a function with JDK 8 lambda expression, shown as follows:
 
 ```Java
 request -> {
@@ -182,7 +178,7 @@ request -> {
     return response;
 }
 ```
-JDK 6 and 7: JDK6和7可以如下定义:
+JDK 6 and 7:
 
 ```Java
 public class HelloWorldHandler implements Handler {
@@ -193,15 +189,15 @@ public class HelloWorldHandler implements Handler {
     }
 }
 ```
-At last, register the function in main class.最后，需要在main class里注册该函数。
+At last, you need to register the function in main class.
 
 ```Java
 defineFunction("helloWorld", new HelloWorldHandler());
 ```
-###Access Cloud Data with Cloud Function 通过Cloud Function访问Cloud Data
+###Access Cloud Data with Cloud Function
 
-####Define 定义Cloud Data Object（ Called “Class” in Management Interface 在管理界面中，称之为“Class”）
-Create a new Cloud Data Object and inherit CloudObject class 新建一个Cloud Data Object，并继承CloudObject类
+####Define Cloud Data Object（ Called “Class” in Management Interface ）
+Create a new Cloud Data Object and inherit CloudObject class 
 
 ```java
 public class MyObject extends CloudObject {
@@ -219,13 +215,13 @@ public class MyObject extends CloudObject {
 ```
 Notice for defining Cloud Data Object:
 
-* Every Cloud Data Object corresponds to a Cloud Data class and the class name of Cloud Data Object should be the same as the class name created in Management page.一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理界面中创建的 class 名字一样
-* All Cloud Data Objects should be put in one package. Creating a new package in /src/main/java is recommended, such as "data" 须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
-* global.json file is required to identify the package. e.g. `"package-entity" : "data"` 须配置global.json文件以识别该package，如：`"package-entity" : "data"`
+* Every Cloud Data Object corresponds to a Cloud Data class and the class name of Cloud Data Object should be the same as the class name created in Management Console.
+* All Cloud Data Objects should be put in one package. Creating a new package in /src/main/java is recommended, such as "data" 
+* global.json file configuration is required to identify the package. e.g. `"package-entity" : "data"` 
 
 ####CRUD of Cloud Data Object
 
-We can run Cloud Data with EntityManager: 我们可以通过 EntityManager 操作 Cloud Data：
+We can operate Cloud Data with EntityManager: 
 
 ```java
 public void doSomethingToCloudData(){
@@ -258,10 +254,10 @@ public void doSomethingToCloudData(){
 }
 ```
 
-####Use 使用Cloud Function
+####Use Cloud Function
 
-#####Invoke with API API方式调用
-The request format are shown as follows:请求格式如下所示：
+#####Invoke with API
+The request format is shown as follows:
 
 ```shell
 curl -X POST \
@@ -272,7 +268,7 @@ curl -X POST \
 https://api.leap.as/functions/hello
 ```
 	
-#####Invoke with Android/iOS SDK: 通过Android/iOS SDK调用：
+#####Invoke with Android/iOS SDK: 
 In Android SDK：
 
 ```java
@@ -301,10 +297,10 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
 ```
 
 ## Background Job
-You can customize background jobs in Cloud Code to help you finish the repetitive or scheduled job, like database migration, discount push and etc. You can also accomplish some time-consuming mission with job. Cloud Code中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
+You can customize background jobs in Cloud Code to help you finish the repetitive or scheduled jobs, like database migration, discount push and etc. You can also accomplish some time-consuming mission with Job. 
 
-###Create and Observe Background Job创建和监控Background Job
-####Define and Implement Job Handler in Cloud Code 在Cloud Code中定义并实现Job Handler
+###Create and Observe Background Job
+####Define and Implement Job Handler in Cloud Code
 ``` java
 public class MyJobHandler implements Handler {
     public Response handle(Request request) {
@@ -315,13 +311,13 @@ public class MyJobHandler implements Handler {
 }
 ```
 
-Enter the entrance of the application (main function) and define Job with defineJob 然后进入主程序入口(main函数)，使用defineJob来定义Job
+Enter the entrance of the application (main function) and define Job with defineJob 
 
 ``` java
 defineJob("myJob", new MyJobHandler());
 ```
 ###Test Background Job
-We can test if Job work well with curl 我们可以利用curl测试Job是否可用
+We can test with curl to see if the Job works well 
 
 ```shell
 curl -X POST \
@@ -331,7 +327,7 @@ curl -X POST \
 https://api.leap.as/jobs/YOUR_JOBNAME
 ```
 
-####Set Job Schedule in Management Console 在管理界面中设置 Job Schedule
+####Set Job Schedule in Management Console 
 img
 
 Items|Description 
@@ -342,18 +338,18 @@ Schedule Time|Time for running the Job
 Schedule Repeat|Time interval between repeated Jobs
 Parameter|Provide data for Backgroud Job
 
-####Check Status in Management Console在管理门户中查看状态
-You can see the job plan list and their status in Dev Center>>Cloud Code>>Status. Click on the job plan, then you can check its details. 进入“开发者中心”，点击“云代码” >> “任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
-选中您想要查看的任务，便可以查看任务详情。
+####Check Status in Management Console
+You can see the job plan list and their status in Dev Center>>Cloud Code>>Status. 
+Click on the job plan, then you can check its details. 
 img
 
 ## Hook for Cloud Data
 Hook is used to implement certain operations when there are operations towards Cloud Data (including creating, deleting and editing). For example, we can check if the username is taken with beforeCreate Hook when the user is signing up; or we can send a welcome message with afterCreateHook when the user finished registration. Hook can implement data-related business logic well and all services can be implemented in cloud and shared among different apps/platforms.
-Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
-###Create and Use Hook创建和使用Hook
+
+###Create and Use Hook
 Implement EntityManagerHook interface (Inheriting EntityManagerHookBase class directly is recommended since there's default implementation already which means if we want to hook a certain operation, we just need to override corresponding methods.)
-实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
+
 
 ```java
 @EntityManager("MyObject")
@@ -387,22 +383,20 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 }
 ```
 
-#####Notice for defining Hook:定义Hook需注意：
+#####Notice for defining Hook:
 
-* Make sure the corresponding class of targeting Cloud Data Object exists确保目标Cloud Data Object对应的class存在
-* `@EntityManager` annotation is required in Hook class for server to identify which entity is this Hook targeting    Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
-* All Hook class should be put in the same package. Creating a new package under /src/main/java is recommended, like “hook”   须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“myHooks”
-* global.json file configuration is required to identify the package, like `"package-hook" : "myHooks"`   须配置global.json文件以识别该package，如：`"package-hook" : "hook"`
-* Both built-in class and customized class support Hook and restriction of built-in class still works(username and password of _User is required，either deviceToken or installationId of _Installation is required). 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
+* Make sure the corresponding class of target Cloud Data Object exists
+* `@EntityManager` annotation is required in Hook class for server to identify which entity is this Hook targeting
+* All Hook class should be put in the same package. Creating a new package under /src/main/java is recommended, like “myHooks” 
+* global.json file configuration is required to identify the package, like `"package-hook" : "myHooks"` 
+* Both built-in class and customized class support Hook，and restriction of built-in class still works(username and password of _User is required，either deviceToken or installationId of _Installation is required). 
 
 ### Type of Hook
 
 Cloud Code supports 6 different types of Hook:
 #### beforeCreate
-Invoke before the corresponding Cloud Data is created, which could be used test if the data entered is validate.
-在对应的 Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
+Invoke before the corresponding Cloud Data is created, which could be used to test if the data entered is validate.
 For example: test if the list name is too long when creating a new friend list.
-例如：在新建好友分组的时候，需要检查组名是否太长。
 
 ```java
 @Override
@@ -415,13 +409,12 @@ public BeforeResult<FriendList> beforeCreate(FriendList list) {
 ```
 
 #### afterCreate
-Invoke after the corresponding Cloud Data is created, which could be used to perform logic like sending an email to product manager after creating a User. 在对应的 Cloud Data 被创建后调用，可以用于执行如 User 创建后给客户经理发封邮件这样的逻辑。
+Invoke after the corresponding Cloud Data is created, which could be used to perform logic like sending an email to product manager after User creation. 
 
 #### beforeUpdate
-在对应的 Cloud Data 被更新之前调用，可以用于验证输入的数据是否合法。
-Invoke before the corresponding Cloud Data is updated, which could be used test if the data entered is validate.
+Invoke before the corresponding Cloud Data is updated, which could be used to test if the data entered is validate.
 For example: test if the list name is already taken when editing a friend list.
-例如：在修改好友分组的时候，需要检查组名是否已经存在。
+
 
 ```java
 @Override
@@ -439,13 +432,10 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list) {
 ```
 
 #### afterUpdate
-在对应的 Cloud Data 被更新之后调用，可以用于如用户更新密码后，给用户邮箱发封提醒邮件。
-Invoke before the corresponding Cloud Data is updated, which could be used to send emails to users when they changed their password.
+Invoke after the corresponding Cloud Data is updated, which could be used to send emails to users when they changed their password.
 #### beforeDelete
-在对应的 Cloud Data 被删除之前调用，可以用于验证删除是否合法。
 Invoke before the corresponding Cloud Data is deleted, which could be used test if the delete is validate.
 For example, test if there's any friend in this list before deleting a list.
-例如：用户的每位好友都在某个分组下，在删除一个好友分组之前，需要检查这个分组内是否还存在好友。
 
 ```java
 @Override
@@ -464,12 +454,11 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 ```
 
 #### afterDelete
-在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
-Invoke after the corresponding Cloud Data is updated, which could be used to clear other relative data.
+Invoke after the corresponding Cloud Data is deleted, which could be used to clear other relative data.
 ## Logging
-Cloud Code提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，Cloud Code的部署过程，也将被记录下来。您可以在管理界面中查看所有的日志。
-###在Cloud Code中记录Log
-您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+There is Logging function in Cloud Code to record the Function, Hook and Job info during the operations. Besides, the deployment of Cloud Code will also be recorded. You can check all logs in Management Console.
+###Record Log in Cloud Code
+You can record 3 types of log: Error, Warn and Info with logger instance.
 
 ```java
 public class MyClass {
@@ -482,90 +471,91 @@ public class MyClass {
 	}
 }
 ```
-使用Log需注意:
+Notice for using Log:
 
-* 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
-* 如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
-	
-###系统自动记录的Log
-除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
+* Local test won't generate database records but the one after the deployment would. You can check your log info in backend console.
+* If your Function is invoked frequently, please remove the Logs from debugging as much as possible to aviod unneccessary Logs storage.
 
-* Cloud Function的上传部署信息
-* Hook Entities的Cache信息
-* Cloud Code相关的API request信息
 	
-###查看Log
-可以使用命令行工具lcc查看最近的log
+###Log Recorded Automotically
+Except for the Logs manually recorded, there are some other neccessary Logs that would be recorded, including: 
+
+* Deployment info of Cloud Function
+* Cache info of Hook Entities
+* API request info related to Cloud Code
+	
+###Check Log
+Check recent log with command line tool lcc
 
 ```shell
 lcc log -n 100
 ```
-也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
+Or you can check all logs of this app by entering Management Console －> Dev Center －> Cloud Code. 
 img
 
-## LCC － Cloud Code 命令行工具
-LCC命令行工具是为Cloud Code项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到LeapCloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的Cloud Code都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的Cloud Code.
-###登录:
+## LCC － Cloud Code Command Line Tool
+LCC command line tool is designed for the upload, deployment, undeployment and version management of Cloud Code project. You can upload the package generated from Maven to LeapCloud with it and the package will be produced into Docker Image in cloud. As for the deployment, it is about activating the Image with Docker Container. Each version of Cloud Code uploaded to cloud will be saved, you can uninstall any version of Cloud Code and then deploy another one.
+
+###Login:
 ```shell
-lcc login <用户名>
+lcc login <username>
 ```
-`<用户名>` 为您登录LeapCloud管理门户的账号，然后根据提示输入密码
-###显示所有app：
+`<username>` is the account name of LeapCloud Management Console, please enter password then according to the tip.
+###Show All Apps：
 ```shell
 lcc apps
 ```
-查询账号下的所有应用，显示的信息为：AppId ：AppName
-###选择应用:
+Check all apps in your account and show with AppId: AppName
+###Select an App:
 ```shell
-lcc use <应用名>
+lcc use <App name>
 ```
-`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-###上传Cloud Code:
+`<App name>` is the name of target app. After the selection, all the following operations (upload/deployment/undeployment/version management) will take this app as the context.
+###Upload Cloud Code:
 ```shell
-lcc upload <文件路径>
+lcc upload <path of the file>
 ```
-`<文件路径>`为你将部署的Cloud Code package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
-上传的的代码会被制作成Docker镜像，版本号在Cloud Code项目里的global.json文件中指定：
+`<path of the file>` is the Cloud Code package (zip file, generated by mvn package command) you are about to deploy, and it will be uploaded to the app targeted in step 3. 
+The code uploaded will be produced into Docker image and the version number is assigned in global.json in Cloud Code:
 ```
 "global": {
 	"version": "0.0.1"
 }
 ```
-###显示所有云端Cloud Code版本:
+###Show All Versions of Cloud Code
 ```shell
 lcc lv
 ```
-即显示所有该应用下，用户上传过的Cloud Code的所有版本号。
-###部署Cloud Code：
+Show all versions of Cloud Code uploaded under this app. 
+###Deploy Cloud Code：
 ```shell
-lcc deploy <版本号>
+lcc deploy <version number>
 ```
-`<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的Cloud Code；如果部署不存在的版本，会提示错误："version of appId not exists"
-###停止cloudcode：
+`<version number>` is the Cloud Code version number you are about to deploy. For example, Cloud Code of version 0.0.1 will be deployed if lcc deploy 0.0.1 is required. There would be a eroor message "version of appId doesn't exist" if the version you are about to deploy is not available.
+###Undeploy cloudcode：
 ```shell
 lcc undeploy
 ```
-停止该应用的Cloud Code，如果之前已经部署过一个版本，需要先停止，再部署。
-###输出最近的日志：
+Undeploy the Cloud Code of the app: If you need to deploy a new version while there's an old version, please undeploy the old one first. 
+###Export Recent Logs:
 ```shell
 lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 
--l 指定输出日志的级别：info或是error
--n 指定log的数量
--s 指定跳过最近的log数量
-```
+-l Assign the type: info or error 
+-n Assign the log amount 
+-s Assign the log amount you want to skip ```
 
-## Cloud Code进阶
-### 添加 Cloud Code 到已有的项目
-####配置pom.xml
-在pom中，我们将配置：
+## Advanced Cloud Code Usage
+### Add Cloud Code to Existing Project 
+####Config pom.xml
+We'll config following items in pom: 
 
-* 获取Cloud Code SDK
-* 获取测试插件JUnit
-* 获取编译打包插件
+* Get Cloud Code SDK
+* Get plug-in of testing: JUnit
+* Get plug-in of building & packaging
 
 ```Java
-	//添加依赖，获取Cloud Code SDK及JUnit测试插件
+	//Add dependency, get Cloud Code SDK and JUnit(the plug-in of testing)
     <dependencies>
         <dependency>
             <groupId>com.ilegendsoft</groupId>
@@ -580,7 +570,7 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
         </dependency>
     </dependencies>
 	
-	//获取编译打包插件
+	//Get plug-in of building & packaging
     <build>
         <plugins>
             <plugin>
@@ -630,9 +620,9 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
     </build>
 ```
 
-####配置打包规则
+####Config Package Rule
 
-在/src/main/assembly中新建mod.xml文件，并在其中添加如下配置：
+Create new mod.xml file in /src/main/assembly and add following configuration: 
 
 ```Java
 	<?xml version="1.0" encoding="UTF-8"?>
@@ -690,7 +680,7 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 	</assembly>
 ```
 
-请注意：如果您选择将打包配置文件放在其他路径下，您则需要更新pom.xml文件中的以下部分，将`src/main/assembly/mod.xml`替换为您自定义的路径：
+Notice: If you decide to put the package into other path, please update the following content in pom.xml and replace `src/main/assembly/mod.xml` with your customized path: 
 
 ```java
 	<plugin>
