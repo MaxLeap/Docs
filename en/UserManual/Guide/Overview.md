@@ -1,4 +1,4 @@
-properties#Overview of LeapCloud Service
+#Overview of LeapCloud Service
 
 ##What is LeapCloud Service
 
