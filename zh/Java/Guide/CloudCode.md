@@ -135,7 +135,7 @@ public class Main extends LoaderBase implements Loader {
 
 *	这里的VersionNumber定义在您Cloud Code项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的Cloud Code，需要先卸载该版本的Cloud Code，才能部署新版本。
-*	请查看[lcc使用向导](...)，以获取lcc的更多信息。
+*	请查看[lcc使用向导](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
 
 ### 测试
 

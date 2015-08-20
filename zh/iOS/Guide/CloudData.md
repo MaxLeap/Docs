@@ -1105,7 +1105,7 @@ LC 提供了一种简单的方法，用于将 Facebook 与您的应用程序整�
 1. [设置 Facebook 应用程序][set up a facebook app], 若您尚未设置。
 2. 在您的 LC 应用设置页面添加应用程序的 Facebook 应用 ID。
 3. 按照 Facebook 的 [Facebook SDK 入门][getting started with the facebook sdk]提供的说明，创建与 Facebook SDK 关联的应用程序。仔细检查并确认您已经把 FacebookAppID 和 URL Scheme 添加至应用程序的 .plist 文件。
-4. 下载解压 [LC iOS SDK][LC ios/ox sdk]，如果您还没有。
+4. 下载解压 [LeapCloud iOS SDK][LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS]，如果您还没有。
 5. 把 `LCFacebookUtils.framework` 添加到您的 Xcode 项目中。
 
 还有两步。首先，把下面的代码添加到您引用的 `application:didFinishLaunchingWithOptions:` 方法中。
