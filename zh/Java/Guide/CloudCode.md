@@ -19,7 +19,7 @@
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libaries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到LeapCloud，LeapCloud会生成对应的docker image。用lcc deploy可以让LeapCloud启动Docker container运行该Docker image。
+一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到LeapCloud，LeapCloud会生成对应的docker image。用lcc deploy可以让LeapCloud启动Docker container运行该Docker image。
 
 目前云代码支持Java环境，我们在近期会推出Python版本。
 	  
@@ -66,7 +66,7 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 
 ```java
 {
-	"applicationName" : "helloword",
+	"applicationName" : "HelloWorld",
 	"applicationId": "YOUR_APPLICATION_ID",
 	"applicationKey": "YOUR_MASTER_KEY",
 	"lang" : "java",
@@ -88,7 +88,7 @@ applicationId|Application ID
 applicationKey|Master Key
 java-main|入口函数名
 package-hook|Hook包名
-package-entity|CLeapClouds实体包名
+package-entity|Class实体包名
 version|当前云代码项目版本号
 
 ### 定义一个简单的function
@@ -113,6 +113,7 @@ public class Main extends LoaderBase implements Loader {
     }
 }
 ```
+
 注意：
 
 * Main class的main method是云代码项目启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
@@ -125,7 +126,7 @@ public class Main extends LoaderBase implements Loader {
 
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
-### 上传云代码及部署
+### 云代码的上传及部署
 1. 登录：lcc login <UserName>
 2. 选择所要部署的目标应用，作为后续操作的上下文：lcc use <AppName>
 3. 上传Package： lcc upload <PackageLocation>
@@ -198,7 +199,7 @@ defineFunction("helloWorld", new HelloWorldHandler());
 ```
 ###通过Cloud Function访问Cloud Data
 
-####定义Cloud Data Object（在管理中心中，称之为“class”）
+####定义Cloud Data Object（在管理中心中，称之为“Class”）
 新建一个Cloud Data Object，并继承CloudObject类
 
 ```java
@@ -291,9 +292,9 @@ iOS SDK中：
 NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
     [LCCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
         if (error) {
-            // an error occured
+            // 出现异常
         } else {
-            // handle the object
+            // object
         }
     }];
 ```
@@ -329,16 +330,16 @@ curl -X POST \
 https://api.leap.as/jobs/YOUR_JOBNAME
 ```
 
-####在管理中心中设置 Job Schedule
+####在管理中心中Schedule Job Plan
 img
 
 表单项目|作用 
 ----|-------|
 名称|任务的名字|
-函数名|想要执行的Backgroud Job的名字
+函数名|想要执行的后台Job的名字
 设置开始|从何时开始执行任务
 设置重复|每隔多久重复执行任务
-参数|提供数据给Backgroud Job
+参数|提供数据给后台Job
 
 ####在管理中心中查看状态
 进入“开发者中心”，点击“云代码” >> “任务状态”，您将能查看所有的任务列表，以及他们的状态概况。
@@ -465,7 +466,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
 
 ```java
-public class Myclass {
+public class MyClass {
 	Logger logger = LoggerFactory.getLogger(myclass.class);
 
 	public void myMethod(){
@@ -528,17 +529,17 @@ lcc upload <文件路径>
 ```shell
 lcc lv
 ```
-即显示所有该应用下，用户上传过的云代码的所有版本号。
+即显示所有该应用下，用户上传过的云代码的所有版本。
 ###部署云代码：
 ```shell
 lcc deploy <版本号>
 ```
-`<版本号>`为如lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码；如果部署不存在的版本，会提示错误："version of appId not exists"
+`<版本号>`为想要部署的云代码版本号：如执行lcc deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码。如果部署不存在的版本，会提示错误："version of appId not exists"
 ###停止cloudcode：
 ```shell
 lcc undeploy
 ```
-停止该应用的云代码，如果之前已经部署过一个版本，需要先停止，再部署。
+停止该应用的云代码：如果之前已经部署过一个版本，需要先停止，再部署新的版本。
 ###输出最近的日志：
 ```shell
 lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]

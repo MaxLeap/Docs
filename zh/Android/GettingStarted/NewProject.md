@@ -1,24 +1,24 @@
 #	安装SDK
 
-##	使用模板创建LC项目
+##	使用模板创建LeapCloud项目
 
 1.	获取项目模板，并解压缩至您的Workspace
 		
-		<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip">下载Android项目模板</a>
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip">下载Android项目模板</a>
 	
 2.	打开项目模板
 
-	Android Studio 
+Android Studio 
 
-	1. 	打开Android Studio，点击“Import project”
-	2. 	进入项目模板根目录，选择“build.gradle”
-	3. 	按照默认配置点击下一步，直到完成 
+1. 	打开Android Studio，点击“Import project”
+2. 	进入项目模板根目录，选择“build.gradle”
+3. 	按照默认配置点击下一步，直到完成 
 
-	Eclipse
+Eclipse
 	
-	1.	打开Eclipse，点击 "File" -> "Import.." 
-	2. 	选择 "General"-> "Existing Projects into Workspace"
-	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
+1.	打开Eclipse，点击 "File" -> "Import.." 
+2. 	选择 "General"-> "Existing Projects into Workspace"
+3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
 	
 #	配置LC项目
 

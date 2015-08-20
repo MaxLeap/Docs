@@ -6,57 +6,57 @@
 
 #####	1.	获取项目模板
 
-[下载Android项目模板](https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip)，并解压缩至您的Workspace.
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip">下载Android项目模板</a>
 	
 ####	2.	打开项目模板
 
 #####	Android Studio 
 
-	1. 	打开Android Studio，点击“Import project”
-	2. 	进入项目模板根目录，选择“build.gradle”
-	3. 	按照默认配置点击下一步，直到完成 
+1. 	打开Android Studio，点击“Import project”
+2. 	进入项目模板根目录，选择“build.gradle”
+3. 	按照默认配置点击下一步，直到完成 
 
 #####	Eclipse
 	
-	1.	打开Eclipse，点击 "File" -> "Import.." 
-	2. 	选择 "General"-> "Existing Projects into Workspace"
-	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
-	
+1.	打开Eclipse，点击 "File" -> "Import.." 
+2. 	选择 "General"-> "Existing Projects into Workspace"
+3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
+
 ##	配置LeapCloud项目
 
 ###	连接项目与LeapCloud应用
 	
-	如果您还没有在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+如果您还没有在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
-	```java
-	import android.app.Application;
-	import as.leap.LCConfig;
+```java
+import android.app.Application;
+import as.leap.LCConfig;
 
-	public class MyApplication extends Application {
-	    @Override
-	    public void onCreate() {
-	        super.onCreate();
-	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
-	    }
-	}
-	```
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+    }
+}
+```
 	
 ###	权限配置
 
-	在AndroidManifest中，给予应用以下权限：
+在AndroidManifest中，给予应用以下权限：
 	
-	```java
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   	<uses-permission android:name="android.permission.INTERNET" />
-    ```
-	
-	权限|用途|是否必需
-	---|---|---
-	`ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
-	`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
-	`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
-	
+```java
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+权限|用途|是否必需
+---|---|---
+`ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
+`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
+`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
+
 ##	快速测试项目配置
 
 为了测试项目是否已经注连接上LeapCloud应用及其LeapCloud云服务，我们可以向Application的onCreate()方法中添加以下代码：
