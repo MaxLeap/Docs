@@ -387,8 +387,8 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 
 * 确保目标Cloud Data Object对应的class存在
 * Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
-* 须将所有的Hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“myHooks”
-* 须配置global.json文件以识别该package，如：`"package-hook" : "myHooks"`
+* 须将所有的hook class放入同一个package中，推荐在/src/main/java下新建一个package，如：“hook”
+* 须配置global.json文件以识别该package，如：`"package-hook" : "hook"`
 * 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
 
 ### Hook类型
