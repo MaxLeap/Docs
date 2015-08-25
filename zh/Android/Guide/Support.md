@@ -1,11 +1,11 @@
 
 #支持
 ##简介
-Support服务是LeapCloud为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ的管理及用户反馈的处理界面。
+Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ的管理及用户反馈的处理界面。
 
 ## 准备工作
 
-1. 安装并配置LeapCloud Core SDK. 详细步骤，请查看[QuickStart - Core SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
+1. 安装并配置Leap Cloud Core SDK. 详细步骤，请查看[QuickStart - Core SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
 2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
 
 ## 进入Help Center页面

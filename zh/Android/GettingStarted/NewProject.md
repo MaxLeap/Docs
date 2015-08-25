@@ -1,6 +1,6 @@
 #	安装SDK
 
-##	使用模板创建LeapCloud项目
+##	使用模板创建Leap Cloud项目
 
 1.	获取项目模板，并解压缩至您的Workspace
 		
@@ -20,9 +20,9 @@ Eclipse
 2. 	选择 "General"-> "Existing Projects into Workspace"
 3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
 	
-#	配置LeapCloud项目
+#	配置Leap Cloud项目
 
-1. 连接项目与LeapCloud应用
+1. 连接项目与Leap Cloud应用
 	
 	在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
@@ -57,7 +57,7 @@ Eclipse
 	
 3. 快速测试项目配置
 
-为了测试项目是否已经注连接上LeapCloud应用及其LeapCloud云服务，我们可以向Application的onCreate()方法中添加以下代码：
+为了测试项目是否已经注连接上Leap Cloud应用及其Leap Cloud云服务，我们可以向Application的onCreate()方法中添加以下代码：
 
 ```java
 import android.app.Application;
@@ -86,4 +86,4 @@ public class MyApplication extends Application {
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
 # 下一步
-至此，您已经完成LeapCloud SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LeapCloud的详细功能介绍以及使用方法，开启LeapCloud云服务使用之旅。
+至此，您已经完成Leap Cloud SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取Leap Cloud的详细功能介绍以及使用方法，开启Leap Cloud云服务使用之旅。

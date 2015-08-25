@@ -3,7 +3,7 @@
 ## 简介
 
 ### 什么是Cloud Data服务
-Cloud Data是LeapCloud提供的数据存储服务，它建立在对象`LCObject`的基础上，每个`LCObject`包含若干键值对。所有`LCObject`均存储在LeapCloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外LeapCloud还提供一些特殊的对象，如`LCUser`(用户)，`LCRole`(角色)，`LCFile`(文件)，`LCGeoPoint`(地理位置)，他们都是基于`LCObject`的对象。
+Cloud Data是Leap Cloud提供的数据存储服务，它建立在对象`LCObject`的基础上，每个`LCObject`包含若干键值对。所有`LCObject`均存储在Leap Cloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外Leap Cloud还提供一些特殊的对象，如`LCUser`(用户)，`LCRole`(角色)，`LCFile`(文件)，`LCGeoPoint`(地理位置)，他们都是基于`LCObject`的对象。
 
 ### 为何需要Cloud Data服务
 Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
@@ -17,7 +17,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 
 ### LCObject
 
-LeapCloud 上的数据储存建立在 `LCObject` 的基础上。每个 `LCObject` 包含与 JSON 兼容数据的键值对。该数据是 schemaless 的，即您不需要事先指定每个 `LCObject` 上存在的键。您只需在需要的时候增加键值对，我们的后台会储存它们。
+Leap Cloud 上的数据储存建立在 `LCObject` 的基础上。每个 `LCObject` 包含与 JSON 兼容数据的键值对。该数据是 schemaless 的，即您不需要事先指定每个 `LCObject` 上存在的键。您只需在需要的时候增加键值对，我们的后台会储存它们。
 
 例如，假设您要跟踪游戏的高分。单个 `LCObject` 可能包括：
 
@@ -31,7 +31,7 @@ score: 1337, playerName: "Sean Plott", cheatMode: false
 
 ### 保存对象
 
-现在讲如何将上述 `GameScore` 保存到 LeapCloud 服务器上。
+现在讲如何将上述 `GameScore` 保存到 Leap Cloud 服务器上。
 
 `LCObject` 接口与 `NSMutableDictionary` 类似。我们有一个类 `LCDataManager`保存、删除 `LCObject`s, 和拉取数据。现在我们使用 `LCDataManager` 来保存 `GameScore`:
 
@@ -49,7 +49,7 @@ gameScore[@"cheatMode"] = @NO;
 }];
 ```
 
-该代码运行后，您可能想知道是否真的执行了相关操作。为确保数据正确保存，您可以在 LeapCloud 开发中心查看应用中的数据浏览器。您应该会看到类似于以下的内容：
+该代码运行后，您可能想知道是否真的执行了相关操作。为确保数据正确保存，您可以在 Leap Cloud 开发中心查看应用中的数据浏览器。您应该会看到类似于以下的内容：
 
 ```
 objectId: "xWMyZ4YEGZ", score: 1337, playerName: "Sean Plott", cheatMode: false,
@@ -58,9 +58,9 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 这里要注意两点：
 
-1. 在运行这个代码前，您不需要配置或创建名称为 `GameScore` 的新类别。您的 LeapCloud 应用在第一次遇到这个类别时会为您创建该类别。
+1. 在运行这个代码前，您不需要配置或创建名称为 `GameScore` 的新类别。您的 Leap Cloud 应用在第一次遇到这个类别时会为您创建该类别。
 
-2. 为方便起见，我们还提供了几个字段，您不需要指定其内容。`objectId` 是各已存对象的唯一标识符。`createdAt` 和 `updatedAt` 分别是各个对象在 LeapCloud 中的创建时间和最后修改时间。每个字段都由 LeapCloud 填充，所以完成保存操作后，`LCObject` 的这些字段才会有值。
+2. 为方便起见，我们还提供了几个字段，您不需要指定其内容。`objectId` 是各已存对象的唯一标识符。`createdAt` 和 `updatedAt` 分别是各个对象在 Leap Cloud 中的创建时间和最后修改时间。每个字段都由 Leap Cloud 填充，所以完成保存操作后，`LCObject` 的这些字段才会有值。
 
 ### 对象检索
 
@@ -124,7 +124,7 @@ NSDate *createdAt = gameScore.createdAt;
 
 上面的例子包含一种常见的使用案例。`score` 字段是个计数器，需要不断使用玩家的最新得分进行更新。上面的方法虽然可以工作，但是繁琐。如果您有多个客户端在尝试更新同一个计数器就可能会产生一些问题。
 
-为帮助储存计数器类型的数据，LeapCloud 提供了能够以原子递增（或递减）操作任何数字字段的方法。因此，做相同的更新操作可以重写为：
+为帮助储存计数器类型的数据，Leap Cloud 提供了能够以原子递增（或递减）操作任何数字字段的方法。因此，做相同的更新操作可以重写为：
 
 ```objective_c
 [gameScore incrementKey:@"score"];
@@ -168,7 +168,7 @@ NSDate *createdAt = gameScore.createdAt;
 ```objective_c
 // After this, the playerName field will be empty
 [gameScore removeObjectForKey:@"playerName"];
-// Saves the field deletion to the LeapCloud
+// Saves the field deletion to the Leap Cloud
 [LCDataManager saveObjectInBackground:gameScore block:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
@@ -180,7 +180,7 @@ NSDate *createdAt = gameScore.createdAt;
 
 ### 关系数据
 
-对象之间可以存在一定的关系。为了模仿这一行为，可将任意 `LCObject` 用作其他 `LCObject` 中的值。在内部，LeapCloud 框架只将被引用的的对象存储于一个位置，以便保持一致性。
+对象之间可以存在一定的关系。为了模仿这一行为，可将任意 `LCObject` 用作其他 `LCObject` 中的值。在内部，Leap Cloud 框架只将被引用的的对象存储于一个位置，以便保持一致性。
 
 例如，一个博客应用中的许多 `Comment` 可能对应同一个 `Post`。要创建一个带有单一 `Comment` 的 `Post`，您可以这样写：
 
@@ -267,7 +267,7 @@ LCQuery *query = [relation query];
 
 ### 数据类型
 
-目前，我们使用的值的数据类型有 `NSString`、`NSNumber` 和 `LCObject`。LeapCloud 还支持 `NSDate`、`NSData` 和 `NSNull`。
+目前，我们使用的值的数据类型有 `NSString`、`NSNumber` 和 `LCObject`。Leap Cloud 还支持 `NSDate`、`NSData` 和 `NSNull`。
 
 您可以嵌套 `NSDictionary` 和 `NSArray` 对象，以在单一 `LCObject` 中存储具有复杂结构的数据。
 
@@ -305,7 +305,7 @@ bigObject[@"myNull"] = null;
 
 ### 子类
 
-LeapCloud 的设计能让您尽快上手使用。您可以使用 `LCObject` 类访问所有数据，以及通过 `objectForKey:` 或 `[]` 操作符访问任何字段。在成熟的代码库中，子类具有许多优势，包括简洁性、可扩展性和支持自动完成。子类化纯属可选操作，但它会将以下代码：
+Leap Cloud 的设计能让您尽快上手使用。您可以使用 `LCObject` 类访问所有数据，以及通过 `objectForKey:` 或 `[]` 操作符访问任何字段。在成熟的代码库中，子类具有许多优势，包括简洁性、可扩展性和支持自动完成。子类化纯属可选操作，但它会将以下代码：
 
 ```objective_c
 LCObject *shield = [LCObject objectWithclassName:@"Armor"];
@@ -401,7 +401,7 @@ shield.rupees = 50;
 
 ## 查询
 
-我们已经知道如何使用 `+[LCQueryManager getObjectInBackgroundWithclass:objectId:block:]` 从 LeapCloud 中检索单个 `LCObject`。使用 `LCQuery`，还有其他多种检索数据的方法 —— 您可以一次检索多个对象，设置检索对象的条件等。
+我们已经知道如何使用 `+[LCQueryManager getObjectInBackgroundWithclass:objectId:block:]` 从 Leap Cloud 中检索单个 `LCObject`。使用 `LCQuery`，还有其他多种检索数据的方法 —— 您可以一次检索多个对象，设置检索对象的条件等。
 
 ### 基本查询
 
@@ -785,7 +785,7 @@ LCQuery *query = [Armor query];
 }
 ```
 
-这个调用将在您的 LeapCloud 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，它还将密码安全散列在云中。我们从来不明文储存密码，也不会将密码明文传输回客户端。
+这个调用将在您的 Leap Cloud 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，它还将密码安全散列在云中。我们从来不明文储存密码，也不会将密码明文传输回客户端。
 
 **注意**，我们使用的是 `+[LCUserManager signUpInBackground:block:]` 方法，而不是 `+[LCDataManager saveObjectInBackground:block:]` 方法。应始终使用 `+[LCUserManager signUpInBackground:block:]` 方法创建新的 `LCUser`。调用 `+[LCUserManager signUpInBackground:block:]` 可以完成用户的后续更新。
 
@@ -809,11 +809,11 @@ LCQuery *query = [Armor query];
 
 ### 验证电子邮箱
 
-在 LeapCloud 应用设置中启用电子邮箱验证，可以让应用将部分使用体验提供给验证过电子邮箱地址的用户。电子邮箱验证会将 `emailVerified` 键添加到 `LCUser` 中。`LCUser` 的 `email` 被修改后，`emailVerified` 被设置为 `false`。随后，LeapCloud 会向用户发送一个邮件，其中包含一个链接，可将 `emailVerified` 设置为 `true`。
+在 Leap Cloud 应用设置中启用电子邮箱验证，可以让应用将部分使用体验提供给验证过电子邮箱地址的用户。电子邮箱验证会将 `emailVerified` 键添加到 `LCUser` 中。`LCUser` 的 `email` 被修改后，`emailVerified` 被设置为 `false`。随后，Leap Cloud 会向用户发送一个邮件，其中包含一个链接，可将 `emailVerified` 设置为 `true`。
 
 有三种 `emailVerified` 状态需要考虑：
 
-1. `true` － 用户通过点击 LeapCloud 发送给他们的链接确认电子邮箱地址。最初创建用户帐户时，`LCUsers` 没有 `true` 值。
+1. `true` － 用户通过点击 Leap Cloud 发送给他们的链接确认电子邮箱地址。最初创建用户帐户时，`LCUsers` 没有 `true` 值。
 2. `false` － `LCUser` 对象最后一次刷新时，用户未确认其电子邮箱地址。若 `emailVerified` 为 `false`，可以考虑调用 `+[LCDataManager fetchDataOfObjectInBackground:block:]`，把 `LCUser` 传递给第一个参数。
 3. 缺失 － 电子邮箱验证关闭或 `LCUser` 没有 `email` 时创建了 `LCUser`。
 
@@ -982,7 +982,7 @@ publicPost.ACL = postACL;
 [LCACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 ```
 
-在上述代码中，`setDefaultACL` 的第二个参数告诉 LeapCloud 须确保创建对象时分配的默认 ACL 允许当时的用户进行读取和写入。无此设置时，每次用户登录或退出时，您都需要重置 `defaultACL`，以便当前用户被适当赋予访问权限。有此设置时，您在无需明确授予不同权限的情况下，可以忽略对当前用户的更改。
+在上述代码中，`setDefaultACL` 的第二个参数告诉 Leap Cloud 须确保创建对象时分配的默认 ACL 允许当时的用户进行读取和写入。无此设置时，每次用户登录或退出时，您都需要重置 `defaultACL`，以便当前用户被适当赋予访问权限。有此设置时，您在无需明确授予不同权限的情况下，可以忽略对当前用户的更改。
 
 默认的 ACL 让您能轻松创建遵循通用访问模式的应用程序。例如，像 Twitter 这样的应用程序，通常其用户内容是向全世界公开的，因此可能要像下面一样设置默认的 ACL：
 
@@ -998,7 +998,7 @@ LCACL *defaultACL = [LCACL ACL];
 [LCACL setDefaultACL:[LCACL ACL] withAccessForCurrentUser:YES];
 ```
 
-对于将数据载入 LeapCloud 但是并未向任何用户授权访问这些数据的应用程序而言，您要提供一个拒绝当前用户的 ACL：
+对于将数据载入 Leap Cloud 但是并未向任何用户授权访问这些数据的应用程序而言，您要提供一个拒绝当前用户的 ACL：
 
 ```objective_c
 [LCACL setDefaultACL:[LCACL ACL] withAccessForCurrentUser:NO];
@@ -1037,11 +1037,11 @@ LCACL *defaultACL = [LCACL ACL];
 密码重置流程如下：
 
 1. 用户输入电子邮箱地址，请求重置密码。
-2. LeapCloud 向其电子邮箱发送一封包含专用密码重置链接的邮件。
-3. 用户点击重置链接，进入专用 LeapCloud 页面，用户在该页面输入新密码。
+2. Leap Cloud 向其电子邮箱发送一封包含专用密码重置链接的邮件。
+3. 用户点击重置链接，进入专用 Leap Cloud 页面，用户在该页面输入新密码。
 4. 用户输入新密码。现在，用户的密码已经被重置为他们指定的值。
 
-**注意**：该流程中的消息传送操作将根据您在 LeapCloud 上创建该应用时指定的名称引用您的应用程序。
+**注意**：该流程中的消息传送操作将根据您在 Leap Cloud 上创建该应用时指定的名称引用您的应用程序。
 
 ### 查询
 
@@ -1084,18 +1084,18 @@ post[@"user"] = user;
 
 ### Facebook 用户
 
-LeapCloud 提供了一种简单的方法，用于将 Facebook 与您的应用程序整合起来。Facebook SDK 可以与我们的 SDK 一起使用，并且与 `LCUser` 类整合，从而使您能轻松将用户与他们的 Facebook 身份关联。
+Leap Cloud 提供了一种简单的方法，用于将 Facebook 与您的应用程序整合起来。Facebook SDK 可以与我们的 SDK 一起使用，并且与 `LCUser` 类整合，从而使您能轻松将用户与他们的 Facebook 身份关联。
 
-利用我们的 Facebook 整合功能，您可以将通过验证的 Facebook 用户与 `LCUser` 相关联。只需几行代码，您就可以在应用程序中提供“使用 Facebook 登陆”(log in with Facebook)选项，并能够将用户数据保存在 LeapCloud 中。
+利用我们的 Facebook 整合功能，您可以将通过验证的 Facebook 用户与 `LCUser` 相关联。只需几行代码，您就可以在应用程序中提供“使用 Facebook 登陆”(log in with Facebook)选项，并能够将用户数据保存在 Leap Cloud 中。
 
 #### 设置
 
-若要通过 LeapCloud 使用 Facebook，您需要：
+若要通过 Leap Cloud 使用 Facebook，您需要：
 
 1. [设置 Facebook 应用程序][set up a facebook app], 若您尚未设置。
-2. 在您的 LeapCloud 应用设置页面添加应用程序的 Facebook 应用 ID。
+2. 在您的 Leap Cloud 应用设置页面添加应用程序的 Facebook 应用 ID。
 3. 按照 Facebook 的 [Facebook SDK 入门][getting started with the facebook sdk]提供的说明，创建与 Facebook SDK 关联的应用程序。仔细检查并确认您已经把 FacebookAppID 和 URL Scheme 添加至应用程序的 .plist 文件。
-4. 下载解压 [LeapCloud iOS SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS)，如果您还没有。
+4. 下载解压 [Leap Cloud iOS SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS)，如果您还没有。
 5. 把 `LCFacebookUtils.framework` 添加到您的 Xcode 项目中。
 
 还有两步。首先，把下面的代码添加到您引用的 `application:didFinishLaunchingWithOptions:` 方法中。
@@ -1131,7 +1131,7 @@ LeapCloud 提供了一种简单的方法，用于将 Facebook 与您的应用程
 }
 ```
 
-LeapCloud 用户可通过以下两种主要方法使用 Facebook：(1) 以 Facebook 用户身份登录（注册），并创建 LCUser，或者 (2) 将 Facebook 与已有的 LCUser 关联。
+Leap Cloud 用户可通过以下两种主要方法使用 Facebook：(1) 以 Facebook 用户身份登录（注册），并创建 LCUser，或者 (2) 将 Facebook 与已有的 LCUser 关联。
 
 #### 登录与注册
 
@@ -1199,7 +1199,7 @@ if (![LCFacebookUtils isLinkedWithUser:user]) {
 }];
 ```
 
-#### Facebook SDK 与 LeapCloud
+#### Facebook SDK 与 Leap Cloud
 
 Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动。通常，您会使用 `FBRequest` 类代表您的登录用户与 Facebook 互动。若要了解有关 Facebook SDK 的更多内容，[请点击这里][facebook sdk reference]。
 
@@ -1207,17 +1207,17 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 
 ### Twitter 用户
 
-与 Facebook 一样，LeapCloud 也提供了一种将 Twitter 身份验证与您的应用程序整合起来的简单方法。LeapCloud SDK 提供了一种验证 Twitter 帐户并将之与您的 `LCUser` 关联的简单方法。只需几行代码，您就可以在您的应用程序中提供“使用 Twitter 登录"(log in with Twitter)选项，并能够将其数据保存在 LeapCloud 中。
+与 Facebook 一样，Leap Cloud 也提供了一种将 Twitter 身份验证与您的应用程序整合起来的简单方法。Leap Cloud SDK 提供了一种验证 Twitter 帐户并将之与您的 `LCUser` 关联的简单方法。只需几行代码，您就可以在您的应用程序中提供“使用 Twitter 登录"(log in with Twitter)选项，并能够将其数据保存在 Leap Cloud 中。
 
 #### 设置
 
-若要通过 LeapCloud 使用 Twitter，您需要：
+若要通过 Leap Cloud 使用 Twitter，您需要：
 
 1. [设置 Twitter 应用][set up twitter app], 若您尚未设置。
-2. 在您的 LeapCloud 应用设置页面添加您应用的 Twitter 密钥(consumer key)。
+2. 在您的 Leap Cloud 应用设置页面添加您应用的 Twitter 密钥(consumer key)。
 3. 当要求您为 Twitter 应用程序指定 “Callback URL”（回调地址），请插入有效地址。它不会被您的 iOS 或 Android 应用程序使用，但是在通过 Twitter 启用身份验证时非常必要。
 4. 将 `Accounts.framework` 和 `Social.framework` 库添加至您的 Xcode 项目。
-5. 在初始化 LeapCloud SDK 的地方加入以下代码，比如在 `application:didFinishLaunchingWithOptions:` 方法中。
+5. 在初始化 Leap Cloud SDK 的地方加入以下代码，比如在 `application:didFinishLaunchingWithOptions:` 方法中。
 
 ```objective_c
 [LCTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY"
@@ -1226,7 +1226,7 @@ consumerSecret:@"YOUR CONSUMER SECRET"];
 
 若您遇到与 Twitter 相关的任何问题，请查阅 [Twitter 官方文档][twitter documentation]。
 
-LeapCloud 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 用户身份登录，并创建 LCUser，或者 (2) 将 Twitter 与已有的 `LCUser` 关联。
+Leap Cloud 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 用户身份登录，并创建 LCUser，或者 (2) 将 Twitter 与已有的 `LCUser` 关联。
 
 #### 登录与注册
 
@@ -1295,7 +1295,7 @@ NSData *data = [NSURLConnection sendSynchronousRequest:request
 
 ## 角色
 
-随着应用程序使用范围和用户数量的不断壮大，对于各项数据的访问权限，您可能需要更强硬的控制权，与用户关联的 ACL 所提供的控制并不能符合要求。为满足这种需求，LeapCloud 支持[基于角色的访问控制][role-based access control]。根据角色对拥有您 LeapCloud 数据的公共访问权限的用户进行分组是一种合乎逻辑的方法。角色是包含用户和其他角色的命名对象。给某一角色授予的任何权限也意味着将权限授予拥有该角色的用户，以及授予拥有该角色所含角色的任何用户。
+随着应用程序使用范围和用户数量的不断壮大，对于各项数据的访问权限，您可能需要更强硬的控制权，与用户关联的 ACL 所提供的控制并不能符合要求。为满足这种需求，Leap Cloud 支持[基于角色的访问控制][role-based access control]。根据角色对拥有您 Leap Cloud 数据的公共访问权限的用户进行分组是一种合乎逻辑的方法。角色是包含用户和其他角色的命名对象。给某一角色授予的任何权限也意味着将权限授予拥有该角色的用户，以及授予拥有该角色所含角色的任何用户。
 
 例如，在含有分类内容的应用程序中，有些用户被设定为“版主”，他们可以修改和删除其他用户创建的内容。还有一些用户是“管理员”，他们与版主拥有相同的权利，但是还可以修改应用程序的全局设置。通过将用户添加到这些角色中，您可以让新用户成为版主或管理员，而不必手动向各用户授予每个资源的权限。
 
@@ -1311,7 +1311,7 @@ NSData *data = [NSURLConnection sendSynchronousRequest:request
 
 ### 角色对象的安全性
 
-`LCRole` 使用与 LeapCloud 上的所有其他对象相同的安全方案 (ACL)，除非它要求特别设置一个 ACL。一般情况下，只有拥有高级权限的用户（如，主用户或管理员）才能创建或修改角色，因此您应该相应地定义其 ACL。请注意，如果您授予用户对 `LCRole` 的写入权，那么该用户可以将其他用户添加到角色中，甚至可以完全删除该角色。
+`LCRole` 使用与 Leap Cloud 上的所有其他对象相同的安全方案 (ACL)，除非它要求特别设置一个 ACL。一般情况下，只有拥有高级权限的用户（如，主用户或管理员）才能创建或修改角色，因此您应该相应地定义其 ACL。请注意，如果您授予用户对 `LCRole` 的写入权，那么该用户可以将其他用户添加到角色中，甚至可以完全删除该角色。
 
 若要创建新的 `LCRole`，您可以编写：
 
@@ -1407,14 +1407,14 @@ LCRole *moderators = /* Your "Moderators" role */;
 `LCFile` 上手很容易。首先，你要由 `NSData` 类型的数据，然后创建一个 `LCFile` 实例。下面的例子中，我们只是使用一个字符串：
 
 ```objective_c
-NSData *data = [@"Working at LeapCloud is great!" dataUsingEncoding:NSUTF8StringEncoding];
+NSData *data = [@"Working at Leap Cloud is great!" dataUsingEncoding:NSUTF8StringEncoding];
 LCFile *file = [LCFile fileWithName:@"resume.txt" data:data];
 ```
 
 **注意**，在这个例子中，我们把文件命名为 resume.txt。这里要注意两点：
 
 - 您不需要担心文件名冲突。每次上传都会获得一个唯一标识符，所以上传多个文件名为 resume.txt 的文件不同出现任何问题。
-- 重要的是，您要提供一个带扩展名的文件名。这样 LeapCloud 就能够判断文件类型，并对文件进行相应的处理。所以，若您要储存 PNG 图片，务必使文件名以 .png 结尾。
+- 重要的是，您要提供一个带扩展名的文件名。这样 Leap Cloud 就能够判断文件类型，并对文件进行相应的处理。所以，若您要储存 PNG 图片，务必使文件名以 .png 结尾。
 
 然后，您可以把文件保存到云中。与 `LCObject` 相同，使用 `LCFileManager` 上的 save 方法。
 
@@ -1486,7 +1486,7 @@ LCFile *userImageFile = anotherPhoto[@"imageFile"];
 
 ## GeoPoint
 
-LeapCloud 让您可以把真实的纬度和经度坐标与对象关联起来。通过在 `LCObject` 中添加 LCGeoPoint，可以在查询时实现将对象与参考点的距离临近性纳入考虑。这可以让您轻松某些事情，如找出距离与某个用户最近的其他用户或者距离某个用户最近的地标。
+Leap Cloud 让您可以把真实的纬度和经度坐标与对象关联起来。通过在 `LCObject` 中添加 LCGeoPoint，可以在查询时实现将对象与参考点的距离临近性纳入考虑。这可以让您轻松某些事情，如找出距离与某个用户最近的其他用户或者距离某个用户最近的地标。
 
 ### LCGeoPoint
 
@@ -1595,7 +1595,7 @@ LCQuery *query = [LCQuery queryWithclassName:@"PizzaPlaceObject"];
 
 ## 处理错误
 
-LeapCloud 有几种简单的模式可以发现您代码中错误并在进行处理。
+Leap Cloud 有几种简单的模式可以发现您代码中错误并在进行处理。
 
 您可能会遇到两类错误。第一类是关于您在使用 SDK 时的逻辑错误。这类错误会导致异常，同时也会打印出来(有些并不会抛出异常，只是打印出来，而且不对数据进行任何更改)。**请留意 Xcode console 中的日志，这类异常日志会有类似 “<LC> Exception:” 的开头**。相关示例请参阅以下代码：
 
@@ -1606,7 +1606,7 @@ LCUser *user = [LCUser user];
 
 这将抛出一个 `NSInternalInconsistencyException`，因为要求的属性（`username` 和 `password`）尚未设置就调用了 `signUp`。
 
-第二类是通过网络与 LeapCloud 云交互时出现的错误。这些错误要么关乎与云有关的问题，要么关乎与执行所请求操作相关的问题。我们再来看一个示例：
+第二类是通过网络与 Leap Cloud 云交互时出现的错误。这些错误要么关乎与云有关的问题，要么关乎与执行所请求操作相关的问题。我们再来看一个示例：
 
 ```objective_c
 - (void)getMyNote {
@@ -1616,7 +1616,7 @@ LCUser *user = [LCUser user];
 }
 ```
 
-在上面的代码中，我们尝试用不存在的 `objectId` 提取一个对象。LeapCloud 云将返回一个错误，错误代码设置在 `code` 中，错误消息设置在该错误的 `userInfo` 中。可以使用以下代码在您的回调中正确处理错误：
+在上面的代码中，我们尝试用不存在的 `objectId` 提取一个对象。Leap Cloud 云将返回一个错误，错误代码设置在 `code` 中，错误消息设置在该错误的 `userInfo` 中。可以使用以下代码在您的回调中正确处理错误：
 
 ```objective_c
 - (void)callbackForGet:(LCObject *)result error:(NSError *)error {
@@ -1632,7 +1632,7 @@ LCUser *user = [LCUser user];
 }
 ```
 
-设备无法连接到 LeapCloud 后端服务也可能造成查询失败。以下是用于处理上述情况的同一组回调代码，但其中包含了一些额外代码：
+设备无法连接到 Leap Cloud 后端服务也可能造成查询失败。以下是用于处理上述情况的同一组回调代码，但其中包含了一些额外代码：
 
 ```objective_c
 - (void)callbackForGet:(LCObject *)result error:(NSError *)error {
@@ -1643,7 +1643,7 @@ LCUser *user = [LCUser user];
             NSLog(@"Uh oh, we couldn't find the object!");
             // Now also check for connection errors:
         } else if ([error code] == kLCErrorConnectionFailed) {
-            NSLog(@"Uh oh, we couldn't even connect to the LeapCloud!");
+            NSLog(@"Uh oh, we couldn't even connect to the Leap Cloud!");
         } else if (error) {
             NSLog(@"Error: %@", [error userInfo][@"error"]);
         }
@@ -1659,7 +1659,7 @@ LCUser *user = [LCUser user];
         NSLog(@"Everything went fine!");
     } else {
         if ([error code] == kLCErrorConnectionFailed) {
-            NSLog(@"Uh oh, we couldn't even connect to the LeapCloud!");
+            NSLog(@"Uh oh, we couldn't even connect to the Leap Cloud!");
         } else if (error) {
             NSLog(@"Error: %@", [error userInfo][@"error"]);
         }

@@ -4,11 +4,11 @@
 
 	请确认您使用的是Xcode最新版本（5.0+），目标平台为iOS 6.0 或者更高版本。
 
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LeapCloud-SDK-Release/master/iOS/v1.5.0/LeapCloudAll-v1.5.0.zip">下载SDK</a>
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/Leap Cloud-SDK-Release/master/iOS/v1.5.0/Leap CloudAll-v1.5.0.zip">下载SDK</a>
 
 2. 添加SDK到您的应用
 
-	将下载的 `LeapCloud.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
+	将下载的 `Leap Cloud.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
@@ -39,31 +39,31 @@
 打开AppDelegate.m文件，并将如下import添加到文件顶部：
 
 ```objc
-#import <LeapCloud/LeapCloud.h>
+#import <Leap Cloud/Leap Cloud.h>
 ```
 
 然后将以下代码复制到 `application:didFinishLaunchingWithOptions:` 方法中：
 
 ```objc
-[LeapCloud setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
+[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
 ```
 
-把 `your_application_id` 和 `your_client_id ` 替换成您自己的 LeapCloud 应用的。
+把 `your_application_id` 和 `your_client_id ` 替换成您自己的 Leap Cloud 应用的。
 
 编译并运行！
 
 
-# 测试是否可以连接到 LeapCloud 服务器
+# 测试是否可以连接到 Leap Cloud 服务器
 
-为了检测是否可以连接 LeapCloud 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
+为了检测是否可以连接 Leap Cloud 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 
 ```objc
-#import <LeapCloud/LeapCloud.h>
+#import <Leap Cloud/Leap Cloud.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[LeapCloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 // 创建一条数据
 LCObject *testObject = [LCObject objectWithClassName:@"Person"];

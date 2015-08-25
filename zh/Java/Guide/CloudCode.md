@@ -1,16 +1,16 @@
 
-# LeapCloud云代码使用指南
+# Leap Cloud云代码使用指南
 
 ## 云代码简介
 
 ###什么是云代码服务
-云代码是部署运行在LeapCloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
+云代码是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
 ###为什么需要云代码服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
-* 强大的运算能力：云代码运行在LeapCloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 强大的运算能力：云代码运行在Leap Cloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
 * 同一套代码可以为iOS，Android，web site等提供服务
 
@@ -19,7 +19,7 @@
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到LeapCloud，LeapCloud会生成对应的docker image。用lcc deploy可以让LeapCloud启动Docker container运行该Docker image。
+一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到Leap Cloud，Leap Cloud会生成对应的docker image。用lcc deploy可以让Leap Cloud启动Docker container运行该Docker image。
 
 目前云代码支持Java环境，我们在近期会推出Python版本。
 	  
@@ -55,7 +55,7 @@
 
 ## 快速入门
 ### 创建云代码项目
-获取LeapCloud 云代码 Java项目模板
+获取Leap Cloud 云代码 Java项目模板
 
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
@@ -83,7 +83,7 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 	
 键|值|
 ------------|-------|
-applicationName|LeapCloud应用名称
+applicationName|Leap Cloud应用名称
 applicationId|Application ID
 applicationKey|Master Key
 java-main|入口函数名
@@ -162,7 +162,7 @@ Hello, David Wang!
 * X-LC-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
 ## Cloud Function
-Cloud Function是运行在LeapCloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
+Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
 
 ###定义Cloud Function
 每个Cloud Function需要实现 as.leap.code.Handler interface，该interface是典型的Functional Interface。
@@ -498,12 +498,12 @@ lcc log -n 100
 img
 
 ## LCC － 云代码命令行工具
-LCC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到LeapCloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
+LCC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
 ###登录:
 ```shell
 lcc login <用户名>
 ```
-`<用户名>` 为您登录LeapCloud管理中心的账号，然后根据提示输入密码
+`<用户名>` 为您登录Leap Cloud管理中心的账号，然后根据提示输入密码
 ###显示所有app：
 ```shell
 lcc apps

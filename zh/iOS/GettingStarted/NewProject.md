@@ -14,7 +14,7 @@
 	打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面这行的注释:
     
     ```objc
-    [LeapCloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+    [Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
     ```
     
     把 `your_application_id` 和 `your_client_key` 替换成您自己 app 的。
@@ -28,11 +28,11 @@
 
 
 ```objc
-#import <LeapCloud/LeapCloud.h>
+#import <Leap Cloud/Leap Cloud.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[LeapCloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 // 创建一条数据
 LCObject *testObject = [LCObject objectWithClassName:@"Person"];

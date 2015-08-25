@@ -7,14 +7,14 @@
 
     <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
 
-2. 连接 LeapCloud 云端应用
+2. 连接 Leap Cloud 云端应用
 
 	在运行之前，还要进行一些配置：
 	
 	打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面几行的注释:
     
     ```objc
-    [LeapCloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+    [Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
     [LCHelpCenter install];
     ```
     
@@ -25,18 +25,18 @@
     
 # 测试项目配置
 
-1. 检测是否可以连接到 LeapCloud 云端应用
+1. 检测是否可以连接到 Leap Cloud 云端应用
 
 	在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 
 	```objc
-	#import <LeapCloud/LeapCloud.h>
+	#import <Leap Cloud/Leap Cloud.h>
 	#import <LCHelpCenter/LCHelpCenter.h>
 	
 	- (BOOL)application:(UIApplication *)application 	didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-	[LeapCloud setApplicationId:@"your_application_id" 	clientKey:@"your_client_key"];
+	[Leap Cloud setApplicationId:@"your_application_id" 	clientKey:@"your_client_key"];
 	[LCHelpCenter install];
 	
 	// 创建一条数据
@@ -73,5 +73,5 @@
 	
 	![ios_issue_message_view](../../../images/ios_issue_message_view.png)
 	
-	在 LeapCloud 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
+	在 Leap Cloud 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
 
