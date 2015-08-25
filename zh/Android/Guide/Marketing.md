@@ -13,9 +13,6 @@ Marketing服务是LeapCloud提供的营销和信息发布功能。目前提供�
 * **保障用户体验：**选择向指定Segment发送消息，更具有针对性
 * **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
 
-###LeapCloud Marketing服务如何工作
-Pic
-
 ## 推送消息
 推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标Activity。
 

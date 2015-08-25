@@ -1,27 +1,17 @@
----
-title: iOS 开发指南 | LC
-
-language_tabs:
-  - objective_c
-  - Swift
-
-search: true
----
-
-# 云数据
-
-如果您尚未安装 SDK，请先查阅[快速入门指南](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
-您还可以查看我们的 [API 参考](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
-
-**注意**：我们支持 iOS 6.0 及以上版本。
+#云数据
 
 ## 简介
 
-LeapCloud 平台为您的移动应用程序提供完整的后台解决方案。我们的目标是彻底消除编写服务器代码或维护服务器的需要。
+### 什么是Cloud Data服务
+Cloud Data是LeapCloud提供的数据存储服务，它建立在对象`LCObject`的基础上，每个`LCObject`包含若干键值对。所有`LCObject`均存储在LeapCloud上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外LeapCloud还提供一些特殊的对象，如`LCUser`(用户)，`LCRole`(角色)，`LCFile`(文件)，`LCGeoPoint`(地理位置)，他们都是基于`LCObject`的对象。
 
-### 应用
+### 为何需要Cloud Data服务
+Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
-在 LeapCloud 平台上，您可以为每个移动应用需求创建一个应用。每个应用均有自己的应用程序 id 以及供您用于 SDK 的客户端密钥。您的 LC 帐户可以容纳多个应用。即使您只有一个应用程序，这也很有用，因为您可以部署不同的版本用于测试和产品运营。
+* 解决硬件资源的部署和运维
+* 提供标准而又完整的数据访问API
+* 不同于传统关系型数据库，向云端存储数据无需提前建表，数据对象以 JSON 格式随存随取，高并发访问轻松无压力
+* 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## 对象
 
