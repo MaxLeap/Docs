@@ -68,7 +68,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
         
         //Test Project Configuration：
         LCObject testObject = new LCObject("People");
