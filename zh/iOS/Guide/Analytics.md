@@ -2,7 +2,6 @@
 # 分析
 
 ## 简介
-
 ### 什么是LeapCloud分析服务
 LeapCloud分析服务通过客户端及Cloud Data，收集应用及用户的各种数据，并在LeapCloud中进行专业分析，最终生成面向运营者的报表。
 
