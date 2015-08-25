@@ -1,4 +1,3 @@
-
 # 安装SDK
 
 1. 下载并解压缩 SDK
@@ -68,12 +67,12 @@
 
 // 创建一条数据
 LCObject *testObject = [LCObject objectWithClassName:@"Person"];
-testObject[@"foo"] = @"bar";
+testObject[@"Name"] = @"David Wang";
 [LCDataManager saveObjectInBackground:testObject block:nil];
 ```
 
-这段代码目的是在云端创建一条类名为 `Person` 的数据。如果云端还没有 `TestObject` 这个类，则会先创建这个类，然后再插入数据。
+这段代码目的是在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
 
-运行您的应用。然后可以在 Dev Center -> Data 中看到刚创建的数据。
+运行您的应用。然后可以在 开发者中心 -> 云存储 中看到刚创建的数据。
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
