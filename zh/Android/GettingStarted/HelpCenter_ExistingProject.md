@@ -1,6 +1,6 @@
 #	安装SDK
 
-HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用HelpCenter SDK之前，请确保您的项目已经安装LC Core SDK. 您可以在 [LC Core SDK安装向导](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)中获取更多信息。
+HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用HelpCenter SDK之前，请确保您的项目已经安装LeapCloud Core SDK. 您可以在 [LeapCloud Core SDK安装向导](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)中获取更多信息。
 
 1. 获取SDK
 
@@ -10,7 +10,7 @@ HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用Help
 
 	Android Studio 
 
-	1. 	打开Android Studio，点击“File” >> "New.." >> "Import Module"，选择所下载SDK的"LC HelpCenter"目录
+	1. 	打开Android Studio，点击“File” >> "New.." >> "Import Module"，选择所下载SDK的"LeapCloud HelpCenter"目录
 	2. 	打开需要使用HelpCenter的Module，在其build.gradle中添加如下依赖：
 	
 		```java
@@ -19,7 +19,7 @@ HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用Help
 		}
 		```
 
-#	连接项目与LC应用
+#	连接项目与LeapCloud应用
 	
 	如果您还没有在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
@@ -68,7 +68,7 @@ HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用Help
 		@Override
 		public void onCreate() {
 			super.onCreate();
-			LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+			LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 			
 			//测试项目配置：
 			LCObject testObject = new LCObject("People");
@@ -82,10 +82,10 @@ HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用Help
 	
 	![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 	
-	表明通过客户端，向应用下的Cloud Data存入数据成功。至此，LC SDK的安装与配置完成。
+	表明通过客户端，向应用下的Cloud Data存入数据成功。至此，LeapCloud SDK的安装与配置完成。
 
-2. 测试LC HelpCenter SDK
-	为了测试项目能否使用LC HelpCenter服务，我们可以向Application的onCreate()方法中添加以下代码：
+2. 测试LeapCloud HelpCenter SDK
+	为了测试项目能否使用LeapCloud HelpCenter服务，我们可以向Application的onCreate()方法中添加以下代码：
 	
 	```java
 	LCHelpCenter.openFaqs(MainActivity.this);
@@ -107,4 +107,4 @@ HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用Help
 
 #下一步
 
-至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)以获取HelpCenter的详细功能介绍以及使用方法，开启LC云服务使用之旅。
+至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)以获取HelpCenter的详细功能介绍以及使用方法，开启LeapCloud云服务使用之旅。
