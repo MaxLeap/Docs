@@ -57,7 +57,7 @@ Eclipse
 	
 3. 快速测试项目配置
 
-为了测试项目是否已经注连接上LC应用及其LC云服务，我们可以向Application的onCreate()方法中添加以下代码：
+为了测试项目是否已经注连接上LeapCloud应用及其LeapCloud云服务，我们可以向Application的onCreate()方法中添加以下代码：
 
 ```java
 import android.app.Application;
@@ -86,4 +86,4 @@ public class MyApplication extends Application {
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
 # 下一步
-至此，您已经完成LC SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LC的详细功能介绍以及使用方法，开启LC云服务使用之旅。
+至此，您已经完成LeapCloud SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取LeapCloud的详细功能介绍以及使用方法，开启LeapCloud云服务使用之旅。
