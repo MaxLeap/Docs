@@ -1,15 +1,15 @@
 # 云配置
 
 ## 简介
-###什么是Cloud Config
+###什么是云配置
 每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在LeapCloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
-###为何需要Cloud Config
+###为何需要云配置
 将应用的部分配置放置在云端的优势在于：
 
 * **动态配置：**
 * **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
 
-##向Cloud Config中添加参数
+##在云配置中添加参数
 您可以通过Console向Cloud Config中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
 
 属性名|值
@@ -43,9 +43,11 @@ currentConfig.getBoolean(key, defaultValue)
 currentConfig.getDate(key, defaultValue)
 ```
 
-## 修改Cloud Config
+## 更新云配置
 
-您可以通过`LCCloudConfigManager.getInBackground()`获取`LCCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为新的参数值。
+在每次 app 进入前台时，SDK 会自动更新上述方法获取的 currentConfig. 您也可以调用以下代码手动刷新所有云参数：
+
+您可以通过`LCCloudConfigManager.getInBackground()`获取`LCCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为默认值。
 
 ```java
 LCCloudConfigManager.getInBackground(new ConfigCallback() {
@@ -58,7 +60,7 @@ LCCloudConfigManager.getInBackground(new ConfigCallback() {
 });
 ```
 
-## 跟踪参数变化
+## 监听
 为参数添加跟踪后，系统将在Activity开始或继续时，遍历所有被跟踪的云端参数是否有更新，若存在更新，则会执行相应的逻辑。添加跟踪之前，您需要在Activity的`onResume()`函数中添加如下代码，以确保参数与云端同步：
 
 ```java
@@ -69,7 +71,7 @@ protected void onResume() {
 }
 ```
 
-###添加跟踪
+###添加监听
 
 您可以通过`LCCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
 
@@ -84,7 +86,7 @@ LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
 
 注意，一个云端参数支持多个跟踪。
 
-###移除跟踪
+###移除监听
 
 移除的办法很简单，您只需添加如下代码：
 
@@ -104,3 +106,12 @@ LCCloudConfigManager.removeObserver("x");
 LCCloudConfigManager.removeAllObservers();
 ```
 
+## 云参数值类型
+
+`LCConfig` 支持绝大多数 `LCObject`支持的值类型:
+
+- `String`
+- `Number`
+- `Date`
+- `Array`
+- `Dictionary`

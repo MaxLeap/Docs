@@ -20,7 +20,7 @@ Eclipse
 2. 	选择 "General"-> "Existing Projects into Workspace"
 3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
 	
-#	配置LC项目
+#	配置LeapCloud项目
 
 1. 连接项目与LC应用
 	
@@ -69,7 +69,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
         
         //测试项目配置：
         LCObject testObject = new LCObject("People");

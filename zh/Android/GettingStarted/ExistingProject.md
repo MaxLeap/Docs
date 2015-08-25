@@ -65,7 +65,7 @@
      @Override
      public void onCreate() {
          super.onCreate();
-         LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+         LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
          
          //测试项目配置：
          LCObject testObject = new LCObject("People");

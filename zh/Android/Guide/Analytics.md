@@ -119,11 +119,18 @@ protected void onPause() {
 ###字段说明
 字段名|类型|描述
 ---|---|---|---
-eventId|String|事件ID
+eventId|String|事件名
 key| String |事件参数
 value| String|事件参数的值
 
-###追踪自定义事件
+请注意, 自定义事件名 (event_id) 请尽量保持其为静态值, 否则可能出现数目庞大的自定义事件列表, 而无法达到了解与分析用户行为的目的.
+
+###统计自定义事件发生次数
+```java
+LCAnalytics.logEvent(eventId);
+```
+
+###统计事件及其属性
 在您希望跟踪的代码部分，调用如下方法：
 
 ```java

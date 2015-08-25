@@ -68,7 +68,7 @@ HelpCenter是依赖于LeapCloud Core SDK之上的服务，在安装和使用Help
 		@Override
 		public void onCreate() {
 			super.onCreate();
-			LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+			LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 			
 			//测试项目配置：
 			LCObject testObject = new LCObject("People");
