@@ -22,7 +22,7 @@ Eclipse
 	
 #	配置LeapCloud项目
 
-1. 连接项目与LC应用
+1. 连接项目与LeapCloud应用
 	
 	在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
 	
