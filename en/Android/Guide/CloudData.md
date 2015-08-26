@@ -2,7 +2,7 @@
 ## Introduction
 
 ### What is Cloud Data
-Cloud Data is the data storage service provided by LeapCloud. It is based on the `LCObject` and each `LCObject` contains several key-values. All `LCObject` are stored in LeapCloud, you can perform operations towards them with iOS/Android Core SDK. Besides, LeapCloud  provides some special objects, like `LCUser`, `LCRole`, `LCFile` and `LCGeoPoint`. They are all based on `LCObject`.
+Cloud Data is the data storage service provided by Leap Cloud. It is based on the `LCObject` and each `LCObject` contains several key-values. All `LCObject` are stored in Leap Cloud, you can perform operations towards them with iOS/Android Core SDK. Besides, Leap Cloud  provides some special objects, like `LCUser`, `LCRole`, `LCFile` and `LCGeoPoint`. They are all based on `LCObject`.
 
 
 ### Why is Cloud Data Nccessary
@@ -17,10 +17,9 @@ Cloud Data can help you build and maintain the facility of your database, thus f
 
 ## Cloud Object
 The object that stored in Cloud Data is called `LCObject` and every `LCObject` is planned in different `class`(like table in database). `LCObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by LCObject package, neither does the type of property value. You can add new property and value to `LCObject` at anytime, which could be stored in cloud by Cloud Data service.
-存储在Cloud Data的对象称为`LCObject`，而每个`LCObject`被规划至不同的`class`中（类似“表”的概念)。`LCObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 LCObject包含哪些属性，也无需指定属性值的类型。您可以随时向`LCObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
 
-###Add New新建
-Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 假设我们要保存一条数据到`Comment`class，它包含以下属性：
+###Create New
+Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 
 
 Property Name|Value|Value Type
 -------|-------|---|
@@ -28,7 +27,7 @@ content|"kind of funny"|Character
 pubUserId|1314520|Digit
 isRead|false|Boolean
 
-The method of adding property is similar to `Map` in `Java`: 添加属性的方法与`Java`中的`Map`类似：
+The method of adding property is similar to `Map` in `Java`: 
 
 ```java
 LCObject myComment = new LCObject("Comment");
@@ -38,42 +37,41 @@ myComment.put("isRead", false);
 LCDataManager.saveInBackground(myComment);
 ```
 
-Notice:注意：
+Notice:
 
-* **When was "Comment" Class created:** If there is no Comment Class in Cloud(LeapCloud Server, hereinafter referred to as Cloud) when you run the code above, then LeapCloud will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
-* 在运行以上代码时，如果云端（LeapCloud 的服务器，以下简称云端）不存在 Comment 数据表，那么 LeapCloud 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
-* **Property Value Type in the Table is consistent表中同一属性值类型一致:** If there is already a data sheet named Comment in the app in cloud, and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
-* 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **LCObject is Schemaless:** 如果云端的这个应用中已经存在名为 Comment 的数据表，新建comment对象时，您可以向
-* **自动创建的属性:** 每个 LCObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
+* **When was "Comment" Class created:** If there is no Comment Class in Cloud(Leap Cloud Server, hereinafter referred to as Cloud) when you run the code above, then Leap Cloud will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
+* **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
+* **LCObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `LCObject` ahead of time.
+* **Property Created Automatically:** Every LCObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by Leap Cloud backend system automatically, please don't save data with those properties in the code.
 
-	属性名|值|
+	Property Name|Value|
 	-------|-------|
-	objectId|对象的唯一标识符
-	createdAt|对象的创建时间
-	updatedAt|对象的最后修改时间
+	objectId|Unique Identifier of the Object
+	createdAt|Date Created of the Object 
+	updatedAt|Date Last Modified of the Object 
 
-* **大小限制：** LC Object的大小被限制在128K以内。
-* **同步操作/异步操作：** 在 Android 平台上，大部分的代码是在主线程上运行的，如果在主线程上进行耗时的阻塞性操作，如访问网络等，您的代码可能会无法正常运行，避免这个问题的方法是把会导致阻塞的同步操作改为异步，在一个后台线程运行，例如 save() 还有一个异步的版本 saveInBackground()，需要传入一个在异步操作完成后运行的回调函数。查询、更新、删除操作也都有对应的异步版本。
-* 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是LCObject，为支持JSON编码的类型即可.
-* 您可以在调用 `LCDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
+* **Size Limit:** The size limit for LC Object is 128K.
+* **synchronous/asynchronous operation:** Most of the code in Android platform works on the main thread while if there is any time-consuming blocking operation, like access to the network, your code may not be working properly. To avoid this, you can change the synchronous operation that may cause blocking into asynchronous operation and run it in a background thread, e.g. saveInBackground() is the asynchronous version of save(), and it requires a parameter - a callback instance - which will be executed once the asynchronous operation is done. There are also corresponding asynchronous versions for operations like query, update and delete. 
+* The name of the key should be alphabetic characters while the type can be letters, numbers, Boolean, arrays, LCObject and any other types that support JSON. 
+* You can provide the second parameter, SaveCallback instance, when invoking `LCDataManager.saveInBackground()` to check if the creation is succeeded. 
 
 	```java
 	LCDataManager.saveInBackground(myComment, new SaveCallback() {
 	  @Override
 	  public void done(LCException e) {
 	    if(e==null){
-	      // 新建成功
+	      // Succeeded
 	    } else{
-	      // 新建失败
+	      // Failed
 	    }
 	  }
 	});
 ```
 
-###查询
-#####查询LCObject
-您可以通过某条数据的ObjectId，获取完整的`LCObject`。调用`LCQueryManager.getInBackground()`方法需要提供三个参数：第一个为查询对象所属的class名，第二个参数为ObjectId，第三个参数为回调函数，将在getInBackground()方法完成后调用。
+###Query
+#####LCObject Query
+You can get the complete `LCObject` with the ObjectId of any piece of data. There are three required parameters for invoking `LCQueryManager.getInBackground()`: class name of the object, ObjectId and callback function, which would be invoked in getInBackground() method.
+
 
 ```java
 String objId="OBJECT_ID";
@@ -81,13 +79,13 @@ LCQueryManager.getInBackground("Comment", objId, new GetCallback<LCObject>() {
 
   @Override
   public void done(LCObject Object, LCException e) {
-    // Object即为所查询的对象
+    // Object is the target one
 
   }
 });
 ```
 
-也可以通过"属性值+LCQuery"方式获取LCObject：
+Or, you can get LCObject with "paramater value + LCQuery": 
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("Comment");
@@ -96,12 +94,12 @@ query.whereMatches("isRead",false);
 LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
   @Override
   public void done(List<LCObject> list, LCException e) {
-    // list即为所查询的对象
+    // list is the target one
   }
 });
 ```
 
-如果您只需获取Query结果的第一条，您可以使用`LCQueryManager.getFirstInBackground()`方法：
+If you only need the first piece of data of Query results, please invoke `LCQueryManager.getFirstInBackground()` method: 
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("Comment");
@@ -110,14 +108,15 @@ query.whereMatches("pubUserId","USER_ID");
 LCQueryManager.getFirstInBackground(query, new GetCallback<LCObject>() {
   @Override
   public void done(LCObject LCObject, LCException e){
-    // LCObject即为所查询的对象
+    // LCObject is the target one
   }
 });
 ```
 
 
-#####查询LCObject属性值
-要从检索到的 LCObject 实例中获取值，可以使用相应的数据类型的 getType 方法：
+#####LCObject Parameter Value Query 
+LCObject Parameter Value Query
+You can invoke getType method in relative with the data type to get value from the LCObject instance:
 
 ```java
 int pubUserId = comment.getInt("pubUserId");
@@ -125,18 +124,18 @@ String content = comment.getString("content");
 boolean isRead = comment.getBoolean("isRead");
 ```
 
-###更新
-更新LCObject需要两步：首先获取需要更新的LCObject，然后修改并保存。
+###Update
+Two steps are required to update LCObject: the first is to get the target LCObject and the second is to edit and save. 
 
 ```java
-// 根据objectId获取LCObject
+// Get LCObject with objectId
 String objId="OBJECT_ID";
 LCQueryManager.getInBackground(query, objId, new GetCallback<LCObject>() {
 
   @Override
   public void done(LCObject comment, LCException e) {
     if (e == null) {
-      // 将该评论修改为“已读”
+      // Mark the comment as read
       comment.put("isRead", true);
       LCDataManager.saveInBackground(comment);
     }
@@ -144,66 +143,66 @@ LCQueryManager.getInBackground(query, objId, new GetCallback<LCObject>() {
 });
 ```
 
-###删除
-#####删除LCObject
-您可以使用`LCDataManager.deleteInBackground()` 方法删除LCObjcet。确认删除是否成功，您可以使用 DeleteCallback 回调来处理删除操作的结果。
+###Delete 
+#####Delete LCObject
+You can delete LCObject with `LCDataManager.deleteInBackground()` method. To ensure the delete, please use DeleteCallback to handle the delete results.
 
 ```java
 LCDataManager.deleteInBackground(comment);
 ```
 
-#####批量删除
-您可以使用`LCDataManager.deleteInBackground()` 方法删除LCObjcet - 一个`List<LCObject>`实例。
+#####Batch Delete 
+You can delete LCObject, a `List<LCObject>` instance, with `LCDataManager.deleteInBackground()` method. 
 
 ```java
 List<LCObject> objects = ...
 LCDataManager.deleteAllInBackground(objects);
 ```
 
-#####删除LCObject实例的某一属性
-除了完整删除一个对象实例外，您还可以只删除实例中的某些指定的值。请注意只有调用 saveInBackground() 之后，修改才会同步到云端。
+#####Delete a Property of LCObject Instance
+Except from deleting a whole object instance, you can delete any target value in the instance. Note that the edition can only be synchronized to cloud with invocation of saveInBackground().
 
 ```java
-// 移除该实例的isRead属性
+// Remove isRead property from the instance
 comment.remove("isRead");
-// 保存
+// Save 
 LCDataManager.saveInBackground(comment.remove);
 ```
 
-### 计数器
+### Counter
 
-计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
+Counter is one of the most regular functional requirements. When the property of a certain parameter value type is updated frequently and each update is about to add up a parameter value, then we can make use of Counter to complete the operation with more efficiency. This will also avoid the conflict and override caused by frequent data edition requirements.
 
-比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
+For example, the "score" in a game is modified frequently. If there are multiple clients request the modifications at the same time and we need to request the data from clients and save the modifications to the cloud, there may easily be some conflicts and override.
 
-#####递增计数器
-此时，我们可以利用`increment()`方法(默认增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
+#####Incremental Counter
+At this point, we may use `increment()` method (default increment will be 1) and update counter type properties more efficiently and securely. For example, we can invoke following method to update the "score" in a game: 
 
 ```java
 gameScore.increment("score");
 LCDataManager.saveInBackground(gameScore);
 ```
-#####指定增量
+#####Specified Increment 
 
 ```java
 gameScore.increment("score",1000);
 LCDataManager.saveInBackground(gameScore);
 ```
 
-注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
-#####递减计数器
+Note that increment doesn't need to be integer, value of a floating-point type is also acceptable. 
+#####Decremental Increment 
 
 ```java
 gameScore.decrement("score",1000);
 LCDataManager.saveInBackground(gameScore);
 ```
 
-###数组
+###Array
 
-您可以通过以下方式，将数组类型的值保存至LCObject的某字段(如下例中的skills字段)下：
+You can save the value of arry type to any parameter of LCObject (like the skills parameter in this instance):
 
-#####增加至数组尾部
-您可以使用`add()`或`addAll()`向`skills`属性的值的尾部，增加一个或多个值。
+#####Add To the End of the Array
+You can add one or more value to the end of the `skills` parameter value with `add()` and `addAll()`.
 
 ```java
 gameScore.add("skills", "driving");
@@ -211,59 +210,59 @@ gameScore.addAll("skills", Arrays.asList("flying", "kungfu"));
 LCDataManager.saveInBackground(gameScore);
 ```
 
-同时，您还可以通过`addUnique()` 及 `addAllUnique()`方法，仅增加与已有数组中所有item都不同的值。
+Meanwhile, you can only add values that is different from all current items with `addUnique()` and `addAllUnique()`. 
 
-#####使用新数组覆盖
-调用`put()`函数，`skills`字段下原有的数组值将被覆盖：
+#####Override with new Array
+The value of array under `skills` parameter will be overridden by invoking `put()` function: 
 
 ```java
 gameScore.put("skills", Arrays.asList("flying", "kungfu"));
 LCDataManager.saveInBackground(gameScore);
 ```
-#####删除某数组字段的值
-调用`removeAll()`函数，`skills`字段下原有的数组值将被清空：
+#####Delete the Value of Any Array Property
+The value of array under `skills` parameter will be cleared by invoking `removeAll()` function: 
 
 ```java
 gameScore.removeAll("skills");
 LCDataManager.saveInBackground(gameScore);
 ```
 
-注意：
+Notice: 
 
-* Remove和Add/Put必需分开调用保存函数，否则数据不能正常上传。
+* Remove and Add/Put must be seperated for invoking save function. Or, the data may fail to be saved.
 
-###关联数据
-对象可以与其他对象相联系。如前面所述，我们可以把一个 LCObject 的实例 a，当成另一个 LCObject 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
+###Associated Data
+An object can be associated to other objects. As mentioned before, we can save the instance A of a LCObject as the parameter value of instance B of another LCOject. This will easily solve the data relational mapping of one-to-one and one-to-many, like the relation between primary key & foreign key.
 
-注：LeapCloud 云端是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。 
+Notice: Leap Cloud handles this kind of data reference with Pointer type. For data consistency, it won't save another copy of data A in data B sheet.
 
-####一对一关联
-例如：一条微博信息可能会对应多条评论。创建一条微博信息并对应一条评论信息，您可以这样写：
+####One-to-one Association
+For example, a tweet may correspond to many comments. You can create a tweet and a corresponding comment with followign code: 
 
 ```JAVA
-// 创建微博信息
+// Create a Tweet
 LCObject myPost = new LCObject("Post");
-myPost.put("content", "这是我的第一条微博信息，请大家多多关照。");
+myPost.put("content", "This is my first tweet, nice meeting you guys.");
 
-// 创建评论信息
+// Create a Comment
 LCObject myComment = new LCObject("Comment");
-myComment.put("content", "期待您更多的微博信息。");
+myComment.put("content", "This is a good one.");
 
-// 添加一个关联的微博对象
+// Add a relative Tweet
 myComment.put("post", myWeibo);
 
-// 这将保存两条数据，分别为微博信息和评论信息
+// This will generate two pieces of data: tweet and comment
 LCDataManager.saveInBackground(myComment);
 ```
 
-您也可以通过 objectId 来关联已有的对象：
+Or, you can associate existing object with obejctId: 
 
 ```java
-// 把评论关联到 objectId 为 1zEcyElZ80 的这条微博上
+// Associate the comment with the tweet whose objectId is 1zEcyElZ80 
 myComment.put("parent", LCObject.createWithoutData("Post", "1zEcyElZ80"));
 ```
 
-默认情况下，当您获取一个对象的时候，关联的 LCObject 不会被获取。这些对象除了 objectId 之外，其他属性值都是空的，要得到关联对象的全部属性数据，需要再次调用 fetch 系方法（下面的例子假设已经通过 LCQuery 得到了 Comment 的实例）:
+The relative LCObject won't be got by defalut when you get a object. Aside from the objectId, other parameter values are all blank. You need to invoke fetch method if you want to get all parameter data of relative object (Suppose that Comment instance is already got with LCQuery in following case):
 
 ```java
 LCObject post = fetchedComment.getLCObject("post");
@@ -277,64 +276,65 @@ LCDataManager.fetchInBackground(post, new GetCallback<LCObject>() {
 });
 ```
 
-####一对多关联
-将两条评论分别关联至一条微博中：
+####One-to-many Association
+Associate two comments to one tweet ：
 
 ```java
-// 创建微博信息
+// Create a Tweet
 LCObject myPost = new LCObject("Post");
-myPost.put("content", "这是我的第一条微博信息，请大家多多关照。");
+myPost.put("content", "This is my first tweet, nice meeting you guys.");
 
-// 创建评论信息
+// Create a Comment
 LCObject myComment = new LCObject("Comment");
-myComment.put("content", "期待您更多的微博信息。");
+myComment.put("content", "This is a good one.");
 
-// 创建另一条评论信息
+// Create another Comment
 LCObject anotherComment = new LCObject("Comment");
-anotherComment.put("content", "期待您更多的微博信息。");
+anotherComment.put("content", "This is a good one.");
 
-// 将两条评论信息放至同一个List中
+// Put those two comments into a same list 
 List<LCObject> listComment = new ArrayList<>();
 listComment.add(myComment);
 listComment.add(anotherComment);
 
-// 在微博中关联这两条评论
+// Associate those two comments in a tweet
 myPost.put("comment", listComment);
 
-// 这将保存两条数据，分别为微博信息和评论信息
+// This will generate two piece of data: tweet and comment
 LCDataManager.saveInBackground(myComment);
 ```
 
-注意：
+Notice: 
 
-* Java 6及更低版本请使用`List<LCObject> listComment = new ArrayList<LCObject>()`创建listComment.
-* 您也可以选择使用`add()`方法，逐个添加LCObject至属性中：
+* For java 6 and earlier, please create listComment with `List<LCObject> listComment = new ArrayList<LCObject>()`. 
+* You can also add LCObject individually to properties with `add()` method: 
 
 	```java
 	myPost.add("comment", myComment);
 	myPost.add("comment", anotherComment);
 	```
 
-####使用LCRelation实现关联
+####Realize Association with LCRelation
 
-您可以使用 LCRelation 来建模多对多关系。这有点像 List 链表，但是区别之处在于，在获取附加属性的时候，LCRelation 不需要同步获取关联的所有 LCRelation 实例。这使得 LCRelation 比链表的方式可以支持更多实例，读取方式也更加灵活。例如，一个 User 可以赞很多 Post。这种情况下，就可以用`getRelation()`方法保存一个用户喜欢的所有 Post 集合。为了新增一个喜欢的 Post，您可以这样做：
+You can create many-to-many modeling with LCRelation. This is similar to chained list while LCRelation doesn't need to get all relative LCRelation instances when getting additional attributes. As a result, LCRelation can support more instances than chained list and the read is more flexible. For example, a user can like many posts. In this case, you can save all posts liked by this user with `getRelation()`. For creating a new liked post:
+
 
 ```java
 LCUser user = LCUser.getCurrentUser();
-//在user实例中，创建LCRelation实例 - likes
+//Create LCRelation instance, likes, in user instance
 LCRelation<LCObject> relation = user.getRelation("likes");
-//在likes中添加关联 - post
+//Adding association, post, in likes
 relation.add(post);
 LCUserManager.saveInBackground(user);
 ```
 
-您可以从 LCRelation 中移除一个 Post:
+You can remove a Post from LCRelation:
 
 ```java
 relation.remove(post);
 ```
 
-默认情况下，处于关系中的对象集合不会被同步获取到。您可以通过 getQuery 方法返回的 LCQuery 对象，使用它的 findInBackground() 方法来获取 Post 链表，像这样：
+The object collections in the relation won't be got by default. You can get post chained list with LCQuery objects acquired with get Query as well as its findInBackground() method, as shown below:
 
 ```java
 LCQueryManager.findAllInBackground(relation.getQuery(), new FindCallback<LCObject>() {
@@ -343,26 +343,29 @@ LCQueryManager.findAllInBackground(relation.getQuery(), new FindCallback<LCObjec
     public void done(List<LCObject> results, LCException e) {
          if (e != null) {
           } else {
-            // results包含relation中所有的关联对象
+            // results includes all relative objects in relation
           }
     }
 });
 ```
 
+If you only want to get a subset of the chained list, please add more constraints to getQuery 
 如果您只想获取链表的一个子集合，您可以添加更多的约束条件到 getQuery 返回 LCQuery 对象上（这一点是直接使用 List 作为属性值做不到的），例如：
 
 ```java
 LCQuery<LCObject> query = relation.getQuery();
-// 在 query 对象上可以添加更多查询约束
+// Add more query constraints to query object
 query.skip(10);
 query.limit(10);
 ```
 
-更多关于 LCQuery 的信息，请查看的[查询指南](..)。查询的时候，一个 LCRelation 对象运作起来像一个对象链表，因此任何您作用在链表上的查询（除了 include），都可以作用在 LCRelation上。
+Please check [Query Guide](..) for more LCQuery information. An operating LCRelation object is similar to the object chained list, so any queries towards the chained list can also be implemented to LCRelation.
 
-###数据类型
 
-目前为止，我们支持的数据类型有 String、Int、Boolean 以及 LCObject 对象类型。同时 LeapCloud 也支持 java.util.Date、byte[]数组、JSONObject、JSONArray 数据类型。 您可以在 JSONArray 对象中嵌套 JSONObject 对象存储在一个 LCObject 中。 以下是一些例子：
+###Data Type
+
+We support object type like String, Int, Boolean and LCObject by now; data type like java.util.Date、byte[] array、JSONObject、JSONArray. You can embed a JSONObject in  JSONArray object and save it to LCObject. For instance:
+
 
 ```java
 int myNumber = 42;
@@ -390,26 +393,26 @@ bigObject.put("myNull", JSONObject.NULL);
 LCDataManager.saveInBackground(bigObject);
 ```
 
-我们不建议存储较大的二进制数据，如图像或文件不应使用 LCObject 的 byte[] 字段类型。LCObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 LCFile 对象来存储，具体使用方法可见 [文件指南](..)。 关于处理数据的更多信息，可查看[数据安全指南](...)。
+Large binary data is not recommended, like the byte[] property type of LCObject is not suitable for images or files. The size limit for LCObject is 128KB. If you need to store large files like images, files and music, LCFile is highly recommended and here is the [Guide](..). Please check [Data Security Guide](...) for more informations on handling data.
 
-## 文件
-###LCFile的创建和上传
-LCFile 可以让您的应用程序将文件存储到服务器中，比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据都可以使用。 
+## Files
+###Creation and Upload of LCFile
+LCFile can help your app save the files to server, like the common image, video, audio and any other binary data.
 
-在这个例子中，我们将图片保存为LCFile并上传到服务器端：
+In this instance, we will save the image as LCFile and upload it to server:
 
 ```java
 public void UploadFile(Bitmap img){
-  // 将Bitmap转换为二进制数据byte[]
+  // transfer the Bitmap into binary data byte[]
   Bitmap bitmap = img;
   ByteArrayOutputStream stream = new ByteArrayOutputStream();
   bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
   byte[] image = stream.toByteArray();
   
-  // 创建LCFile对象
+  // Create LCFile Object
   LCFile myFile = new LCFile("myPic.png", image);
   
-  // 上传
+  // Upload
   LCFileManager.saveInBackground(myFile, new SaveCallback() {
     @Override
     public void done(LCException e) {
@@ -419,22 +422,22 @@ public void UploadFile(Bitmap img){
 }
 ```
 
-注意：
+Notice:
 
 * 	LCFile 构造函数的第一个参数指定文件名称，第二个构造函数接收一个 byte 数组，也就是将要上传文件的二进制。您可以通过以下代码，获取文件名：
 
 	```java
 	String fileName = myFile.getName();
 	```
-* 	可以将 LCFile 直接存储到其他对象的某个属性里，后续可以取出来继续使用。
- 
+* 	You can save LCFile to the property of other objects and bring it back later. 	 
+	
 	```java
-	//创建一个LCObject，包含ImageName，ImageFile字段
+	//Create a LCObject，including ImageName，ImageFile
 	LCObject imgupload = new LCObject("ImageUploaded");
 	imgupload.put("ImageName", "testpic");
 	imgupload.put("ImageFile", file);
 
-	//保存
+	//Save
 	LCDataManager.saveInBackground(imgupload, new SaveCallback() {
 		@Override
 		public void done(LCException e) {
@@ -442,8 +445,9 @@ public void UploadFile(Bitmap img){
 	});
 	```
 
-###上传进度
-LCFile的 saveInBackground() 方法除了可以传入一个 SaveCallback 回调来通知上传成功或者失败之外，还可以传入第二个参数 ProgressCallback 回调对象，通知上传进度：
+###Upload Process
+Aside from providing a SaveCallback to inform the upload failure or success, the saveInBackground() method of LCFile can also provide a second ProgressCallback object to inform the upload process:
+
 
 ```java
 LCFileManager.saveInBackground(file, new SaveCallback() {
@@ -454,17 +458,17 @@ LCFileManager.saveInBackground(file, new SaveCallback() {
 	},new ProgressCallback() {
 	@Override
 	public void done(int i) {
-			// 打印进度
+			// print process
           System.out.println("uploading: " + i);
         }
 });
 ```
 
-###下载文件
+###Download Files
 
-#####直接下载文件
-1. 通过LCObject，指定LCFile
-2. 调用 LCFileManager.getDataInBackground() 下载：
+#####Download Directly
+1. Assign LCFile with LCObject
+2. Invoke LCFileManager.getDataInBackground() to download：
 
 ```java
 LCFile myFile=imgupload.getLCFile("testpic");
@@ -476,19 +480,19 @@ LCFileManager.getDataInBackground(myFile, new GetDataCallback() {
 });
 ```
 
-#####获取文件的 url 自行处理下载：
+#####Get URL of a File for Auto Downlaod:
 
 ```java
 String url = myFile.getUrl();
 ```
 
-###删除文件
-到目前为止，文件的删除权限暂不开放。
+###Delete Files
+Deleting files is not available by now.
 
 
-## 查询
+## Query
 
-###基本查询
+###Basic Query
 
 使用LCQuery查询LCObject分三步：
 

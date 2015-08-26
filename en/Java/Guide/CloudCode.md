@@ -1,38 +1,38 @@
 
-# LeapCloud Cloud Code
-
+# Leap Cloud CloudCode
+Leap Cloud
 ## Introduction
 
-###What is Cloud Code
-Cloud Code refers to the code depolyed and executed on LeapCloud. It can be used to implement the complicated service logic which should be executed in cloud. It is similar to the traditional Web Service or RESTful API that runs in Web Server. It provides access to external data sources through the RESTFul API and is also invoked with the same way by mobile apps.  
+###What is CloudCode
+CloudCode refers to the code depolyed and executed on Leap Cloud. It can be used to implement the complicated service logic which should be executed in cloud. It is similar to the traditional Web Service or RESTful API that runs in Web Server. It provides access to external data sources through the RESTFul API and is also invoked with the same way by mobile apps.  
 
-###Why is Cloud Code Necessary 
+###Why is CloudCode Necessary 
 
-The service logic can be implemented in client if the app is simple, while if the app requires more complicated service logic, want to access more data or need a number of multiplication, then Cloud Code is required. The advantages of Cloud Code can be summarized as follows:
+The service logic can be implemented in client if the app is simple, while if the app requires more complicated service logic, want to access more data or need a number of multiplication, then CloudCode is required. The advantages of CloudCode can be summarized as follows:
 
-* Powerful Computing ability: Cloud Code executes in Docker of LeapCloud and supports multi-CPU and large memory.
+* Powerful Computing ability: CloudCode executes in Docker of Leap Cloud and supports multi-CPU and large memory.
 * More Effective: Able to require Cloud Data reepeatedly with high speed network services in an invocation. The efficiency will be much improved. 
 * The same set of code can provide services for iOS, Android, Website, etc. 
 
-###How Does Cloud Code Work
+###How Does CloudCode Work
 
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-A Cloud Code project contains Custom Cloud Code, Cloud Code SDK and 3rd Party Libaries. After the development, please package the project with maven and upload it to LeapCloud with Cloud Code command line tool lcc and LeapCloud will generate corresponding docker image. LeapCloud can start Docker container to operate the Docker image with lcc deploy.
+A CloudCode project contains Custom CloudCode, CloudCode SDK and 3rd Party Libaries. After the development, please package the project with maven and upload it to Leap Cloud with CloudCode command line tool lcc and Leap Cloud will generate corresponding docker image. Leap Cloud can start Docker container to operate the Docker image with lcc deploy.
 
-Cloud Code supports Java only currently, Python version is coming soon.
+CloudCode supports Java only currently, Python version is coming soon.
 	  
 ##Preperations
 ####Install JDK 
-Cloud Code supports JDK 6, 7, 8 and JDK 8 is recommended.
+CloudCode supports JDK 6, 7, 8 and JDK 8 is recommended.
 
 ####Install Maven
 ######Eclipse:	
 1.	Click "Help" >> "Install New Software.."
 2.	Enter `http://download.eclipse.org/technology/m2e/releases` in "Work with"，choose "Maven Integration for Eclipse" from the list and then install Maven extension.
 
-####Install Cloud Code Command Line Tools（Lcc）
+####Install CloudCode Command Line Tools（Lcc）
 ######Linux and Mac OSX
 Folliwng command will install "lcc" to `/usr/local/bin/lcc`. You can use lcc in Terminal directly after the installation. 
 *［！！待选择！！］*
@@ -53,8 +53,8 @@ Folliwng command will install "lcc" to `/usr/local/bin/lcc`. You can use lcc in 
 	```
 
 ## Quick Start 
-### Create Cloud Code Project
-Get LC Cloud Code Java Project Templates
+### Create CloudCode Project
+Get Leap Cloud CloudCode Java Project Templates
 
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
@@ -82,13 +82,13 @@ Modify following key values according to the key you got from creating the app:
 	
 Key|Value|
 ------------|-------|
-applicationName|LeapCloud app name
+applicationName|Leap Cloud app name
 applicationId|Application ID
 applicationKey|Master Key
 java-main|Name of the main function
 package-hook|Name of hook package
-package-entity|Name of CLeapClouds entity package
-version|Current Cloud Code version number
+package-entity|Name of CLeap Clouds entity package
+version|Current CloudCode version number
 
 ### Define a Simple Function
 
@@ -114,7 +114,7 @@ public class Main extends LoaderBase implements Loader {
 ```
 Notice:
 
-* The main method of main class is the startup entrance of Cloud Code (defined in global.json) and it needs to inherit LoaderBase and implement loader interface. All cloud functions and jobs should be registered in main method. 
+* The main method of main class is the startup entrance of CloudCode (defined in global.json) and it needs to inherit LoaderBase and implement loader interface. All cloud functions and jobs should be registered in main method. 
 ### Package 
 
 Run Maven command in root directory of current project:
@@ -123,16 +123,16 @@ Run Maven command in root directory of current project:
 
 We can find *xxx-1.0-SNAPSHOT-mod.zip* in target folder in root directory and this is the package we want. 
 
-### Upload and Deploy Cloud Code
+### Upload and Deploy CloudCode
 1. Login: lcc login <UserName>
 2. Select the target app to be deployed as the context of subsequent actions: lcc use <AppName>
 3. Upload Package： lcc upload <PackageLocation>
-4. Deploy Cloud Code：lcc deploy <VersionNumber>
+4. Deploy CloudCode：lcc deploy <VersionNumber>
 
 **Notice:** 
 
-*	The VersionNumber here is defined in global.json in your Cloud Code project (value of version parameter)
-* 	If you've already deployed Cloud Code of other versions once, please uninstall that version first before the deployment of the new one.
+*	The VersionNumber here is defined in global.json in your CloudCode project (value of version parameter)
+* 	If you've already deployed CloudCode of other versions once, please uninstall that version first before the deployment of the new one.
 *	Please check [lcc Guide](...) for more details about lcc.
 
 ### Test 
@@ -156,10 +156,10 @@ which indicates that the test is passed and the deployment is successful.
 
 Notice: 
 
-* The value of X-LC-APIKey is the API KEY of application, not the Master Key of Cloud Code project. 
+* The value of X-LC-APIKey is the API KEY of application, not the Master Key of CloudCode project. 
 
 ## Cloud Function
-Cloud Function is the code running in LeapCloud which could be used to implement complicated logic and use various 3rd Party Libs.
+Cloud Function is the code running in Leap Cloud which could be used to implement complicated logic and use various 3rd Party Libs.
 
 ###Define Cloud Function
 Every Cloud Function should implement as.leap.code.Handler interface and this interface is the typical Functional Interface. 
@@ -297,10 +297,10 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
 ```
 
 ## Background Job
-You can customize background jobs in Cloud Code to help you finish the repetitive or scheduled jobs, like database migration, discount push and etc. You can also accomplish some time-consuming mission with Job. 
+You can customize background jobs in CloudCode to help you finish the repetitive or scheduled jobs, like database migration, discount push and etc. You can also accomplish some time-consuming mission with Job. 
 
 ###Create and Observe Background Job
-####Define and Implement Job Handler in Cloud Code
+####Define and Implement Job Handler in CloudCode
 ``` java
 public class MyJobHandler implements Handler {
     public Response handle(Request request) {
@@ -339,7 +339,7 @@ Schedule Repeat|Time interval between repeated Jobs
 Parameter|Provide data for Backgroud Job
 
 ####Check Status in Management Console
-You can see the job plan list and their status in Dev Center>>Cloud Code>>Status. 
+You can see the job plan list and their status in Dev Center>>CloudCode>>Status. 
 Click on the job plan, then you can check its details. 
 img
 
@@ -393,7 +393,7 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 
 ### Type of Hook
 
-Cloud Code supports 6 different types of Hook:
+CloudCode supports 6 different types of Hook:
 #### beforeCreate
 Invoke before the corresponding Cloud Data is created, which could be used to test if the data entered is validate.
 For example: test if the list name is too long when creating a new friend list.
@@ -456,8 +456,8 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 #### afterDelete
 Invoke after the corresponding Cloud Data is deleted, which could be used to clear other relative data.
 ## Logging
-There is Logging function in Cloud Code to record the Function, Hook and Job info during the operations. Besides, the deployment of Cloud Code will also be recorded. You can check all logs in Management Console.
-###Record Log in Cloud Code
+There is Logging function in CloudCode to record the Function, Hook and Job info during the operations. Besides, the deployment of CloudCode will also be recorded. You can check all logs in Management Console.
+###Record Log in CloudCode
 You can record 3 types of log: Error, Warn and Info with logger instance.
 
 ```java
@@ -482,7 +482,7 @@ Except for the Logs manually recorded, there are some other neccessary Logs that
 
 * Deployment info of Cloud Function
 * Cache info of Hook Entities
-* API request info related to Cloud Code
+* API request info related to CloudCode
 	
 ###Check Log
 Check recent log with command line tool lcc
@@ -490,17 +490,17 @@ Check recent log with command line tool lcc
 ```shell
 lcc log -n 100
 ```
-Or you can check all logs of this app by entering Management Console －> Dev Center －> Cloud Code. 
+Or you can check all logs of this app by entering Management Console －> Dev Center －> CloudCode. 
 img
 
-## LCC － Cloud Code Command Line Tool
-LCC command line tool is designed for the upload, deployment, undeployment and version management of Cloud Code project. You can upload the package generated from Maven to LeapCloud with it and the package will be produced into Docker Image in cloud. As for the deployment, it is about activating the Image with Docker Container. Each version of Cloud Code uploaded to cloud will be saved, you can uninstall any version of Cloud Code and then deploy another one.
+## LCC － CloudCode Command Line Tool
+LCC command line tool is designed for the upload, deployment, undeployment and version management of CloudCode project. You can upload the package generated from Maven to Leap Cloud with it and the package will be produced into Docker Image in cloud. As for the deployment, it is about activating the Image with Docker Container. Each version of CloudCode uploaded to cloud will be saved, you can uninstall any version of CloudCode and then deploy another one.
 
 ###Login:
 ```shell
 lcc login <username>
 ```
-`<username>` is the account name of LeapCloud Management Console, please enter password then according to the tip.
+`<username>` is the account name of Leap Cloud Management Console, please enter password then according to the tip.
 ###Show All Apps：
 ```shell
 lcc apps
@@ -511,32 +511,32 @@ Check all apps in your account and show with AppId: AppName
 lcc use <App name>
 ```
 `<App name>` is the name of target app. After the selection, all the following operations (upload/deployment/undeployment/version management) will take this app as the context.
-###Upload Cloud Code:
+###Upload CloudCode:
 ```shell
 lcc upload <path of the file>
 ```
-`<path of the file>` is the Cloud Code package (zip file, generated by mvn package command) you are about to deploy, and it will be uploaded to the app targeted in step 3. 
-The code uploaded will be produced into Docker image and the version number is assigned in global.json in Cloud Code:
+`<path of the file>` is the CloudCode package (zip file, generated by mvn package command) you are about to deploy, and it will be uploaded to the app targeted in step 3. 
+The code uploaded will be produced into Docker image and the version number is assigned in global.json in CloudCode:
 ```
 "global": {
 	"version": "0.0.1"
 }
 ```
-###Show All Versions of Cloud Code
+###Show All Versions of CloudCode
 ```shell
 lcc lv
 ```
-Show all versions of Cloud Code uploaded under this app. 
-###Deploy Cloud Code：
+Show all versions of CloudCode uploaded under this app. 
+###Deploy CloudCode：
 ```shell
 lcc deploy <version number>
 ```
-`<version number>` is the Cloud Code version number you are about to deploy. For example, Cloud Code of version 0.0.1 will be deployed if lcc deploy 0.0.1 is required. There would be a eroor message "version of appId doesn't exist" if the version you are about to deploy is not available.
+`<version number>` is the CloudCode version number you are about to deploy. For example, CloudCode of version 0.0.1 will be deployed if lcc deploy 0.0.1 is required. There would be a eroor message "version of appId doesn't exist" if the version you are about to deploy is not available.
 ###Undeploy cloudcode：
 ```shell
 lcc undeploy
 ```
-Undeploy the Cloud Code of the app: If you need to deploy a new version while there's an old version, please undeploy the old one first. 
+Undeploy the CloudCode of the app: If you need to deploy a new version while there's an old version, please undeploy the old one first. 
 ###Export Recent Logs:
 ```shell
 lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
@@ -545,17 +545,17 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 -n Assign the log amount 
 -s Assign the log amount you want to skip ```
 
-## Advanced Cloud Code Usage
-### Add Cloud Code to Existing Project 
+## Advanced CloudCode Usage
+### Add CloudCode to Existing Project 
 ####Config pom.xml
 We'll config following items in pom: 
 
-* Get Cloud Code SDK
+* Get CloudCode SDK
 * Get plug-in of testing: JUnit
 * Get plug-in of building & packaging
 
 ```Java
-	//Add dependency, get Cloud Code SDK and JUnit(the plug-in of testing)
+	//Add dependency, get CloudCode SDK and JUnit(the plug-in of testing)
     <dependencies>
         <dependency>
             <groupId>com.ilegendsoft</groupId>

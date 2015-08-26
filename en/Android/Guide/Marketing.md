@@ -1,12 +1,12 @@
 # Marketing
 ##Introduction
-###What is LeapCloud Marketing
+###What is Leap Cloud Marketing
+s
+Marketing is a promotion and message issuance service provided by Leap Cloud. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
 
-Marketing is a promotion and message issuance service provided by LeapCloud. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
 
-
-###Why is LeapCloud Marketing Necessary 
-With data from Analytics and Segment provided by LeapCloud Users, you can make and implement marketing strategies with high efficiency. The advantages of LeapCloud Marketing can be summarized as follows: 
+###Why is Leap Cloud Marketing Necessary 
+With data from Analytics and Segment provided by Leap Cloud Users, you can make and implement marketing strategies with high efficiency. The advantages of Leap Cloud Marketing can be summarized as follows: 
 
 
 * **Improve Penetrance: **Issue marketing campaign at any time to improve the user engagement and penetrance
@@ -14,14 +14,14 @@ With data from Analytics and Segment provided by LeapCloud Users, you can make a
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
 
-### How Does LeapCloud Marketing Work
+### How Does Leap Cloud Marketing Work
 Pic
 
 ## Push Notification
 Push Notification helps you show messages to plenty of users. After you send the message, users can see it in status bar whether they open the app or not. You can customize message content in Console and send several properties (Key-Vaule) to clients. The application will determine the Target Activity according to the property after users tap on the push.
 
 ###Configuration
-LeapCloud Core SDK provides a whole set of push project based on GCM. GCM (Google Cloud Messaging) is a free service that helps developers send messages across multiple platforms. You need to complete following settings to use GCM: 
+Leap Cloud Core SDK provides a whole set of push project based on GCM. GCM (Google Cloud Messaging) is a free service that helps developers send messages across multiple platforms. You need to complete following settings to use GCM: 
 
 1. Provide **Sender ID** and **API key**. Please get those two keys in [Google Developer Center](..). 
 2. Add permission and Push Receiver (used to handle Push and show Notification) in `AndroidManifest.xml`:
