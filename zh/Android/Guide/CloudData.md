@@ -25,7 +25,7 @@ content|"我很喜欢这条分享"|字符
 pubUserId|1314520|数字
 isRead|false|布尔
 
-添加属性的方法与`Java`中的`Map`类似：
+我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。添加属性的方法与`Java`中的`Map`类似：
 
 ```java
 LCObject myComment = new LCObject("Comment");
@@ -33,6 +33,13 @@ myComment.put("content", "我很喜欢这条分享");
 myComment.put("pubUserId", 1314520);
 myComment.put("isRead", false);
 LCDataManager.saveInBackground(myComment);
+```
+
+该代码运行后，您可能想知道是否真的执行了相关操作。为确保数据正确保存，您可以在 Leap Cloud 开发中心查看应用中的数据浏览器。您应该会看到类似于以下的内容：
+
+```
+objectId: "xWMyZ4YEGZ", content: "我很喜欢这条分享", pubUserId: 1314520, isRead: false,
+createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 ```
 
 注意：
@@ -75,7 +82,7 @@ String objId="OBJECT_ID";
 LCQueryManager.getInBackground("Comment", objId, new GetCallback<LCObject>() {
 
   @Override
-  public void done(LCObject Object, LCException e) {
+  public void done(LCObject object, LCException e) {
     // Object即为所查询的对象
 
   }
@@ -104,7 +111,7 @@ query.whereMatches("pubUserId","USER_ID");
 
 LCQueryManager.getFirstInBackground(query, new GetCallback<LCObject>() {
   @Override
-  public void done(LCObject LCObject, LCException e){
+  public void done(LCObject object, LCException e){
     // LCObject即为所查询的对象
   }
 });
@@ -118,6 +125,17 @@ LCQueryManager.getFirstInBackground(query, new GetCallback<LCObject>() {
 int pubUserId = comment.getInt("pubUserId");
 String content = comment.getString("content");
 boolean isRead = comment.getBoolean("isRead");
+```
+
+若需要刷新已有对象，可以调用 `LCDataManager.fetchInBackground()` 方法：
+
+```java
+LCDataManager.fetchInBackground(object, new GetCallback<LCObject>() {
+  @Override
+  public void done(LCObject object, LCException e){
+    // object即为所更新后的对象
+  }
+});
 ```
 
 ###更新
@@ -138,6 +156,8 @@ LCQueryManager.getInBackground(query, objId, new GetCallback<LCObject>() {
   }
 });
 ```
+
+客户端会自动找出被修改的数据，所以只有 “dirty” 字段会被发送到服务器。您不需要担心其中会包含您不想更新的数据。
 
 ###删除
 #####删除LCObject
@@ -206,7 +226,7 @@ gameScore.addAll("skills", Arrays.asList("flying", "kungfu"));
 LCDataManager.saveInBackground(gameScore);
 ```
 
-同时，您还可以通过`addUnique()` 及 `addAllUnique()`方法，仅增加与已有数组中所有item都不同的值。
+同时，您还可以通过`addUnique()` 及 `addAllUnique()`方法，仅增加与已有数组中所有item都不同的值。插入位置是不确定的。
 
 #####使用新数组覆盖
 调用`put()`函数，`skills`字段下原有的数组值将被覆盖：
@@ -215,6 +235,7 @@ LCDataManager.saveInBackground(gameScore);
 gameScore.put("skills", Arrays.asList("flying", "kungfu"));
 LCDataManager.saveInBackground(gameScore);
 ```
+
 #####删除某数组字段的值
 调用`removeAll()`函数，`skills`字段下原有的数组值将被清空：
 
@@ -225,12 +246,12 @@ LCDataManager.saveInBackground(gameScore);
 
 注意：
 
-* Remove和Add/Put必需分开调用保存函数，否则数据不能正常上传。
+* Remove和Add/Put必需分开调用保存函数，否则数据不能正常上传和保存。
 
 ###关联数据
 对象可以与其他对象相联系。如前面所述，我们可以把一个 LCObject 的实例 a，当成另一个 LCObject 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
 
-注：Leap Cloud 云端是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。 
+注：Leap Cloud Services是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。 
 
 ####一对一关联
 例如：一条微博信息可能会对应多条评论。创建一条微博信息并对应一条评论信息，您可以这样写：
@@ -245,7 +266,7 @@ LCObject myComment = new LCObject("Comment");
 myComment.put("content", "期待您更多的微博信息。");
 
 // 添加一个关联的微博对象
-myComment.put("post", myWeibo);
+myComment.put("post", myPost);
 
 // 这将保存两条数据，分别为微博信息和评论信息
 LCDataManager.saveInBackground(myComment);
@@ -389,7 +410,7 @@ LCDataManager.saveInBackground(bigObject);
 
 ## 文件
 ###LCFile的创建和上传
-LCFile 可以让您的应用程序将文件存储到服务器中，比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据都可以使用。 
+LCFile 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `LCObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
 
 在这个例子中，我们将图片保存为LCFile并上传到服务器端：
 
@@ -437,7 +458,7 @@ public void UploadFile(Bitmap img){
 	});
 	```
 
-###上传进度
+### 上传进度
 LCFile的 saveInBackground() 方法除了可以传入一个 SaveCallback 回调来通知上传成功或者失败之外，还可以传入第二个参数 ProgressCallback 回调对象，通知上传进度：
 
 ```java
@@ -488,7 +509,7 @@ String url = myFile.getUrl();
 使用LCQuery查询LCObject分三步：
 
 1. 创建一个 LCQuery 对象，并指定对应的"LCObject class"；
-2. 为LCQuery添加不同的条件；
+2. 为LCQuery添加过滤条件；
 3. 执行LCQuery：使用 `LCQueryManager.findAllInBackground()` 方法结合FindCallback 回调类来查询与条件匹配的 LCObject 数据。
 
 例如，查询指定人员的信息，使用 whereEqualTo 方法来添加条件值：
@@ -928,7 +949,7 @@ public class App extends Application {
 }
 ```
  
-####字段的访问/修改
+####	属性的访问/修改
 
 添加方法到 LCObject 的子类有助于封装类的逻辑。您可以将所有跟子类有关的逻辑放到一个地方，而不是分成多个类来分别处理商业逻辑和存储/转换逻辑。
 
@@ -1144,6 +1165,13 @@ LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
 });
 ```
 #####自动创建匿名用户
+
+在主Application的onCreate()方法中添加：
+
+```java
+LCUser.enableAutomaticUser();
+```
+
 您可以通过注册或者登录，将当前的匿名用户转化为非您民用户，该匿名用户的所有的数据都将保留。您可以通过LCAnonymousUtils.isLinked()来判断当前用户是否为匿名用户。
 
 ```java
@@ -1152,19 +1180,12 @@ Boolean isAnonymous = LCAnonymousUtils.isLinked(LCUser.getCurrentUser());
 
 您可以选择让系统自动创建匿名用户（本地创建，无需网络连接）, 以便立即开始使用应用. 设置自动创建匿名用户后, LCUser.getCurrentUser()将永远不为null。 然而，当您在存储与该匿名用户相关的LCObject时，Leap Cloud会在云端创建该匿名用户。
 
-#####如何自动创建匿名用户
-在主Application的onCreate()方法中添加：
-
-```java
-LCUser.enableAutomaticUser();
-```
-
 ### 在Console中管理用户
 
 User 表是一个特殊的表，专门存储 LCUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL)中查看。
 
 ##用户角色
-随着用户数量的增长，使用角色进行权限管理将更有效。所有赋予某一角色的权限，将被该角色包含的用户所继承。用户角色是一组用户的集合，同时，一个用户角色也可以包含另一个用户角色。在Leap Cloud中有一个对应的`_Role` class来存储用户角色。
+随着应用程序使用范围和用户数量的不断壮大，对于各项数据的访问权限，您可能需要更强硬的控制权，与用户关联的 ACL 所提供的控制并不能符合要求。为满足这种需求，Leap Cloud 支持[基于角色的访问控制][role-based access control]。根据角色对拥有您 Leap Cloud 数据的公共访问权限的用户进行分组是一种合乎逻辑的方法。角色是包含用户和其他角色的命名对象。给某一角色授予的任何权限也意味着将权限授予拥有该角色的用户，以及授予拥有该角色所含角色的任何用户。在Leap Cloud中有一个对应的`_Role` class来存储用户角色。
 
 ###字段说明
 
@@ -1213,6 +1234,7 @@ LCRoleManager.saveInBackground(role);
 	wallPost.setACL(postACL);
 	LCDataManager.saveInBackground(wallPost);
 	```
+	
 2. 通过Query查找：
 
 	```JAVA
@@ -1375,6 +1397,7 @@ Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Face
 
 使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。
 ####准备工作
+
 1. 在[Facebook开发者中心](https://developers.facebook.com)创建Facebook应用。点击My Apps >> Add a New App
 2. 打开Leap Cloud Console >> App Settings >> User Authentication.勾选Allow Facebook Authentication. 并将步骤一中获取的Facebook Application ID 和 App Secret填写至相应位置。
 3. 集成Facebook SDK，添加Facebook Login按钮。详细步骤，请参考[Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4)
@@ -1383,6 +1406,7 @@ Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Face
 ```java
 LCFacebookUtils.initialize("YOUR FACEBOOK APP ID");
 ```
+
 5. 	在所有调用Login with Facebook的Activity中的onActivityResult()函数中添加如下代码，已完成验证。
 
 ```java
@@ -1542,11 +1566,12 @@ LCGeoPoint需要提供两个参数：第一个为纬度(正为北纬)，第二�
 LCGeoPoint point = new LCGeoPoint(40.0, -30.0);
 ```
 
-该LCGeoPoint对象可悲存储在LCObject中：
+该LCGeoPoint对象可被存储在LCObject中：
 
 ```java
 myShop.put("location", point);
 ```
+
 ####地理位置查询
 #####查询距离某地理位置最近的对象
 您可以通过whereNear方法获取A点附近的对象，该方法需要提供两个参数：第一个为目标对象存储地理位置的字段名，第二个参数为A点的地理位置。通过下面的例子，我们可以找到离某用户最近的十家店铺。
@@ -1570,3 +1595,8 @@ LCQuery<LCObject> query = LCQuery.getQuery("PizzaPlaceObject");
 query.whereWithinGeoBox("location", southwestOfSF, northeastOfSF);
 LCQueryManager.findAllInBackground(new FindCallback<LCObject>() { ... });
 ```
+
+请注意：
+
+1. 每个 `LCObject` 类仅可能有一个带 `LCGeoPoint` 对象的键。
+2. 点不应等于或大于最大范围值。纬度不能为 -90.0 或 90.0。经度不能为 -180.0 或 180.0。若纬度或经度设置超出边界，会引起错误。
