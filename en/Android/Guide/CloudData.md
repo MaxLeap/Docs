@@ -11,7 +11,7 @@ Cloud Data can help you build and maintain the facility of your database, thus f
 * Sort out the deployment and maintenance of hardware resourses.
 * Provide standard and complete data access API
 * Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
-* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](。。。) for more details.）（！！修改说法！！）
+* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](。。。) for more details.）
 
 ### How Does Cloud Data Run
 
@@ -37,7 +37,7 @@ myComment.put("isRead", false);
 LCDataManager.saveInBackground(myComment);
 ```
 
-Notice:
+Notices:
 
 * **When was "Comment" Class created:** If there is no Comment Class in Cloud(Leap Cloud Server, hereinafter referred to as Cloud) when you run the code above, then Leap Cloud will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
 * **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
@@ -227,14 +227,14 @@ gameScore.removeAll("skills");
 LCDataManager.saveInBackground(gameScore);
 ```
 
-Notice: 
+Notices: 
 
 * Remove and Add/Put must be seperated for invoking save function. Or, the data may fail to be saved.
 
 ###Associated Data
 An object can be associated to other objects. As mentioned before, we can save the instance A of a LCObject as the parameter value of instance B of another LCOject. This will easily solve the data relational mapping of one-to-one and one-to-many, like the relation between primary key & foreign key.
 
-Notice: Leap Cloud handles this kind of data reference with Pointer type. For data consistency, it won't save another copy of data A in data B sheet.
+Notices: Leap Cloud handles this kind of data reference with Pointer type. For data consistency, it won't save another copy of data A in data B sheet.
 
 ####One-to-one Association
 For example, a tweet may correspond to many comments. You can create a tweet and a corresponding comment with followign code: 
@@ -304,7 +304,7 @@ myPost.put("comment", listComment);
 LCDataManager.saveInBackground(myComment);
 ```
 
-Notice: 
+Notices: 
 
 * For java 6 and earlier, please create listComment with `List<LCObject> listComment = new ArrayList<LCObject>()`. 
 * You can also add LCObject individually to properties with `add()` method: 
@@ -349,8 +349,7 @@ LCQueryManager.findAllInBackground(relation.getQuery(), new FindCallback<LCObjec
 });
 ```
 
-If you only want to get a subset of the chained list, please add more constraints to getQuery 
-如果您只想获取链表的一个子集合，您可以添加更多的约束条件到 getQuery 返回 LCQuery 对象上（这一点是直接使用 List 作为属性值做不到的），例如：
+If what you need is just a subset of the list, you can add more constrains to the LCQuery object returned by getQuery, which will be impossible for taking `List` as property.e.g.
 
 ```java
 LCQuery<LCObject> query = relation.getQuery();
@@ -422,9 +421,9 @@ public void UploadFile(Bitmap img){
 }
 ```
 
-Notice:
+Notices:
 
-* 	LCFile 构造函数的第一个参数指定文件名称，第二个构造函数接收一个 byte 数组，也就是将要上传文件的二进制。您可以通过以下代码，获取文件名：
+* 	LCFile construct function use the first parameter to specify FileName, and the seconde parameter to accept a Byte Array, which is the binary format of the file to upload. You can get the file name via following code:
 
 	```java
 	String fileName = myFile.getName();
@@ -494,13 +493,13 @@ Deleting files is not available by now.
 
 ###Basic Query
 
-使用LCQuery查询LCObject分三步：
+LCQuery towards LCObject can be summarized as 3 steps:
 
-1. 创建一个 LCQuery 对象，并指定对应的"LCObject class"；
-2. 为LCQuery添加不同的条件；
-3. 执行LCQuery：使用 `LCQueryManager.findAllInBackground()` 方法结合FindCallback 回调类来查询与条件匹配的 LCObject 数据。
+1. Create a LCQuery and assign corresponding "LCObject class";
+2. Add different conditions for LCQuery;
+3. Execute LCQuery：Inquire matching LCQuery data with `LCQueryManager.findAllInBackground()` and FindCallback callback class.
 
-例如，查询指定人员的信息，使用 whereEqualTo 方法来添加条件值：
+For example, to inquire target personnel data, you can use whereEqualTo to add conditional values:
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
@@ -516,30 +515,29 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
 });
 ```
 
-###查询条件
+###Query Term
 
-#####设置过滤条件
-如果要过滤掉特定键的值时可以使用 whereNotEqualTo 方法。比如需要查询 isRead 不等于true的数据时可以这样写：
-
+#####Set Query Term
+You can use whereNotEqualTo method to filter values of specific keys. For example, you can invoking following code to inquire data whose isRead is not true:
 ```java
 query.whereNotEqualTo("isRead", true);
 ```
 
-当然，您可以在您的查询操作中添加多个约束条件（这些条件是 "与" 的关系），来查询符合您要求的数据。
+You can add multiple constraints in the query (the relation is "and") to filter data.
 
 ```java
 query.whereNotEqualTo("isRead", true);
 query.whereGreaterThan("userAge", 18);
 ```
 
-#####设置结果数量
-您可以使用 setLimit 方法来限制查询结果的数据条数。默认情况下 Limit 的值为 100，最大 1000，在 0 到 1000 范围之外的都强制转成默认的 100。
+#####Set Results Number Limit
+You can set the number of your query results using setLimit method. The limit is 100 by default and the maxmium number is 1,000. All number outside the scope of 0 to 1,000 will be forcibly set to 100.
 
 ```java
-query.setLimit(10); // 设置query结果不超过10条
+query.setLimit(10); // Set the max query results number as 10
 ```
 
-您也可以使用LCQueryManager.getFirstInBackground()来执行Query，以获取查询的第一条结果。
+You can execute Query with LCQueryManager.getFirstInBackground() to get the first result of the query.
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
@@ -555,8 +553,8 @@ LCQueryManager.getFirstInBackground(query, new GetCallback<LCObject>() {
 });
 ```
 
-#####对结果排序
-对于类型为数字或字符串的属性，您可以使用升序或降序的方式来控制查询数据的结果顺序：
+#####Sort the Results
+In regard to the number or string type, you can sort the query results in ascending or descending order:
 
 ```java
 // Sorts the results in ascending order by the score field
@@ -566,8 +564,8 @@ query.orderByAscending("score");
 query.orderByDescending("score");
 ```
 
-#####设置数值大小约束
-对于类型为数字的属性，您可以对其值的大小进行筛选：
+#####Set Numeric Value Limit
+In regard to the number type, you can filter the data based on the numeric value.
 
 ```java
 // Restricts to wins < 50
@@ -583,9 +581,9 @@ query.whereGreaterThan("wins", 50);
 query.whereGreaterThanOrEqualTo("wins", 50);
 ```
 
-#####设置返回数据包含的属性
+#####Set Properties of Data Returned
 
-您可以通过selectKeys设置返回的数据包含哪些属性(自动包含内建属性，如objectId, createdAt 及 updatedAt)：
+You can set the properties of data returned using selectKeys (stock properties are included automatically, like objectId, createdAt and updatedAt):
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
@@ -599,7 +597,7 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
 });
 ```
 
-随后对于返回的LCObject，您可以可通过LCDataManager.fetchInBackground()获取该数据其他属性。
+In regard to the LCObject returned, you can get the other properties using LCDataManager.fetchInBackground().
 
 ```java
 LCObject object = results.get(0);
@@ -612,44 +610,45 @@ LCDataManager.fetchInBackground(object, new GetCallback<LCObject>() {
 });
 ```
 
-#####设置更多约束
-在数据较多的情况下，分页显示数据是比较合理的解决办法，setSkip 方法可以做到跳过首次查询的多少条数据来实现分页的功能。
+#####Set More Constraints
+Paging display is an acceptable solution if there are too much data. setSkip can skip first part of data and realize the paging display.
 
 ```java
 query.setSkip(10); // skip the first 10 results
 ```
 
-如果您想查询匹配几个不同值的数据，如：要查询 "Jonathan Walsh", "Dario Wunsch", "Shawn Simon" 三个账号的信息时，您可以使用whereContainedIn（类似SQL中的in查询）方法来实现。
+If you want to inquire the data matching different values, like the account info of "Jonathan Walsh", "Dario Wunsch", "Shawn Simon" (similar to the in query in SQL), please use whereContainedIn method.
 
 ```java
 String[] names = {"Jonathan Walsh", "Dario Wunsch", "Shawn Simon"};
 query.whereContainedIn("playerName", Arrays.asList(names));
 ```
 
-相反，您想查询"Jonathan Walsh", "Dario Wunsch", "Shawn Simon"这三个账号**以外**的其他人的信息（类似 SQL 中的 not in 查询），您可以使用 whereNotContainedIn 方法来实现。
+Conversely, if you want to inquire the account info apart from "Jonathan Walsh", "Dario Wunsch" and "Shawn Simon" (similar to the not in query in SQL), please use the whereNotContainedIn method.
 
 ```java
 String[] names = {"Jonathan Walsh", "Dario Wunsch", "Shawn Simon"};
 query.whereNotContainedIn("playerName", Arrays.asList(names));
 ```
 
-您可以通过whereExists查询存在指定属性的数据。相应的，您可以通过whereDoesNotExist，查询不存在指定属性的数据。
+You can use whereExists to inquire data carrying certain properties and whereDoesNotExist to inquire data not carrying certian properties.
 
 ```java
-// 查询具有"score"属性的object
+// Inquire objects with "score" property 
 query.whereExists("score");
  
-// Finds objects that don't have the score set
+// Inquire objects without "score" property
 query.whereDoesNotExist("score");
 ```
 
-您可以使用whereMatchesKeyInQuery方法查询一个query中的某属性的值与另一个query中某属性的值相同的数据。 
+You can use the whereMatchesKeyInQuery method to get objects where a key matches the value of a key in a set of objects resulting from another query.
 
-如：现有一个名为"Team"的class存储篮球队的数据，有一个名为"User"的class存储用户数据。Team中使用"city"存储篮球队所在地，User中使用"hometown"存储其家乡。则您可以通过以下Query，查找家乡与**特定**篮球队所在地相同的用户。
+For example, there is a class named "Team" for storing the basketball team info and another class name "User" for storing user info. “city” in the Team is the location of the basketball team and the "hometown" in the User refers to their hometowns. Then you can search the users from the same place as the basketball team with following Query.
+
 
 ```java
 LCQuery<LCObject> teamQuery = LCQuery.getQuery("Team");
-//筛选篮球队：选择胜率超过50%的篮球队
+//Filter basketball team: winning percentage is no less than 50%
 teamQuery.whereGreaterThan("winPct", 0.5);
 LCQuery<LCUser> userQuery = LCUser.getQuery();
 userQuery.whereMatchesKeyInQuery("hometown", "city", teamQuery);
@@ -657,12 +656,12 @@ LCQueryManager.findAllInBackground(userQuery, new FindCallback<LCUser>() {
     
   @Override
   public void done(List<LCUser> results, LCException e) {
-    // results中包含胜率超过50%的篮球队所在地的用户
+    // Users from the same place as the basketball team whose winning percentage is no less than 50% in the results
   }
 });
 ```
 
-相应的，您可以通过whereDoesNotMatchKeyInQuery方法，获取家乡**不在**指定篮球队所在地的用户。
+Relatively, you can find users from other places with whereDoesNotMatchKeyInQuery.
 
 ```java
 LCQuery<LCUser> anotherUserQuery = LCUser.getQuery();
@@ -671,23 +670,23 @@ LCQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<LCUser>() 
     
   @Override
   public void done(List<LCUser> results, LCException e) {
-    // results中包含家乡不在指定篮球队所在地的用户 
+    // users from other places in the results 
   }
 });
 ```
 
-###不同属性值类型的查询
+###Query Towards Different Property Value Types
 
-####值类型为数组的查询
+####Query towards array value type
 
-如果一个 Key 对应的值是一个数组，您可以查询 Key 的数组包含了数字 208 的所有对象，通过：
+If the key value is an array, then you can inquire all objects containing "208" from the Key array with:
 
 ```java
 // Find objects where the array in arrayKey contains the number 2.
 query.whereEqualTo("arrayKey", 2);
 ```
 
-同样，您可以查询出 Key 的数组同时包含了 2，3 和 4 的所有对象：
+Similarly, you can inquire all objects containing 2, 3 and 4 from the Key array with:
 
 ```java
 // Find objects where the array in arrayKey contains all of the numbers 2, 3, and 4.
@@ -698,8 +697,8 @@ numbers.add(4);
 query.whereContainsAll("arrayKey", numbers);
 ```
 
-####值类型为字符串的查询
-使用 whereStartsWith 方法来限制字符串的值以另一个字符串开头。非常类似 MySQL 的 LIKE 查询，这样的查询会走索引，因此对于大数据集也一样高效：
+####Query towards String Value Type
+Use whereStartsWith method to add constrain that the string begins with another string. Much similar to LIKE query in MySQL. Query like this will be executed via indexing, so it will be highly efficient when it comes to big data.
 
 ```java
 // Finds barbecue sauces that start with "Big Daddy's".
@@ -707,14 +706,14 @@ LCQuery<LCObject> query = LCQuery.getQuery("BarbecueSauce");
 query.whereStartsWith("name", "Big Daddy's");
 ```
 
-####值类型为LCObject查询
+####Query towards LCObject Value Type
 
-#####LCObject类型字段匹配LCObject
+#####LCObject-type property matches another LCObject
 
-如果您想获取某个字段匹配特定 LCObject 的数据，您可以像查询其他数据类型那样使用 whereEqualTo 来查询。例如，如果每个 Comment 对象都包含一个 Post 对象（在 post 字段上），您可以获取特定 Post 的所有 Comment 列表：
+If you want to get the data whose certain property matches specific LCObject, you can inquire with whereEqualTo like others. For example, if every Comment object includes a Post object (in post property), then you can get all Comment lists of specific Post: 
 
 ```java
-// 假设 LCObject myPost 已经在前面创建
+// suppose that LCObject myPost is created before
 LCQuery<LCObject> query = LCQuery.getQuery("Comment");
 query.whereEqualTo("post", myPost);
 
@@ -724,8 +723,9 @@ public void done(List<LCObject> commentList, LCException e) {
 }
 });
 ```
-#####LCObject类型字段匹配Query
-如果您想查询的对象的某个字段包含了一个 LCObject，并且这个 LCObject 匹配一个不同的查询，您可以使用 whereMatchesQuery 嵌套查询方法。请注意，默认的 limit 限制 100 也同样作用在内部查询上。因此如果是大规模的数据查询，您可能需要仔细构造您的查询对象来获取想要的行为。例如，为了查询有图片附件的 Post 的评论列表：
+#####LCObject-type property matches Query
+If any property of the query object contains a LCObject and this LCObject matches a different query, then you can use the nested query, whereMatchesQuery. Please note that the default limit 100 works on inner query as well. Thus, you need to construct your query object well if there's massive data query. For example, inquire the comment list of post with images: 
+
 
 ```java
 LCQuery<LCObject> innerQuery = LCQuery.getQuery("Post");
@@ -739,7 +739,7 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
 });
 ```
 
-反之，不想匹配某个子查询，您可以使用 whereDoesNotMatchQuery 方法。 比如为了查询没有图片的 Post 的评论列表：
+Conversely, you can use whereDoesNotMatchQuery if you don't want to match some subquery. For example, inquire the comment list of post without images: 
 
 ```java
 LCQuery<LCObject> innerQuery = LCQuery.getQuery("Post");
@@ -752,8 +752,8 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
   }
 });
 ```
-#####返回指定LCObject类型的字段
-默认情况下，当您获取一个对象的时候，关联的 LCObject 不会被获取，但您可以使用 include 方法将其返回。例如。您想获取最近的 10 条评论，同时包括它们关联的 post：
+#####Return Property of Specified LCObject Type 
+The associated LCObject won't be got by default when you got a object, but you can choose to return it with include method. For example, if you want to get most recent 10 comments and the associated posts:
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("Comment");
@@ -780,14 +780,14 @@ public void done(List<LCObject> commentList, LCException e) {
 });
 ```
 
-您可以使用 dot（英语句号）操作符来多层 include 内嵌的对象。比如，您同时想 include 一个 Comment 的 post 里的 author（作者）对象（假设 author 对应的值是 LCUser 实例），您可以这样做：
+You can use dot operator to include multiple embedded objects. For example, if you want to include an author object of a comment (suppose that the corresponding value of the author is LCUser instance), you can do as shown below: 
 
 ```java
 query.include("post.author");
 ```
-###个数查询
+###Count Query
 
-如果您只是想统计有多少个对象满足查询，您并不需要获取所有匹配的对象，可以直接使用 count 替代 find。例如，查询一个账户发了多少微博：
+If you don't want to get all matching objects, but just the count, then you can replace the find with count. e.g. inquire how many tweets did an account post:
 
 ```java
 LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
@@ -804,9 +804,9 @@ LCQueryManager.countInBackground(query, new CountCallback() {
 });
 ```
 
-###复合查询
+###Compound Query
 
-您可以通过LCQuery.or方法查询匹配多个Query中一个的数据。如，您可以通过以下方式，获取胜场超过90场或低于10场的玩家名单：
+You can inquire data that matches multiple Query with LCQuery.or. For example, you can get the gamers who win more than 90 times or less than 10 times with following method: 
 
 ```java
 LCQuery<LCObject> lotsOfWins = LCQuery.getQuery("Player");
@@ -822,16 +822,14 @@ queries.add(fewWins);
 LCQuery<LCObject> mainQuery = LCQuery.or(queries);
 LCQueryManager.findAllInBackground(mainQuery, new FindCallback<LCObject>() {
   public void done(List<LCObject> results, LCException e) {
-    // results包含胜场超过90场或低于10场的玩家。
+    // win more than 90 times or less than 10 times
   }
 });
 ```
 
-###缓存查询
-经常需要缓存一些查询的结果到磁盘上，这可以让您在离线的时候，或者应用刚启动，网络请求还没有足够时间完成的时候可以展现一些数据给用户。LeapCloud 会自动清空缓存，当缓存占用了太多空间的时候。
-
-默认情况下的查询不会使用缓存，除非您使用 setCachePolicy 方法明确设置启用。例如，尝试从网络请求，如果网络不可用则从缓存数据中获取，可以这样设置：
-
+###Cache Query
+Some query results should be cached to the disk in order to show data to users while offline, like the app is just opened, netowrk request is not accomplished. Leap Cloud will clear cache autmatically if it takes too much space. 
+Query will not use cache by default unless you set the option with setCachePolicy. for example, you can do following settings if there's no network available for you to request:
 ```java
 query.setCachePolicy(LCQuery.CachePolicy.NETWORK_ELSE_CACHE);
 LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
@@ -846,45 +844,46 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
   }
 });
 ```
-LeapCloud 提供了几种不同的缓存策略：
+Leap Cloud provides several cache strategies:
 
-缓存策略|介绍
+Cache Strategy|Introduction
 ---|---
-IGNORE_CACHE | 默认的缓存策略，查询不走缓存，查询结果也不存储在缓存。
-CACHE_ONLY | 查询只从缓存获取，不走网络。如果缓存中没有结果，引发一个 LCException。
-NETWORK_ONLY | 查询不走缓存，从网路中获取，但是查询结果会写入缓存。
-CACHE\_ELSE_NETWORK | 查询首先尝试从缓存中获取，如果失败，则从网络获取，如果两者都失败，则引发一个 LCException。
-NETWORK\_ELSE_CACHE | 查询首先尝试从网络获取，如果失败，则从缓存中查找；如果两者都失败，则应发一个 LCException。
-CACHE\_THEN_NETWORK | 查询首先尝试从缓存中获取，然后再从网络获取。在这种情况下，FindCallback 会被实际调用两次 -- 首先是缓存的结果，其次是网络查询的结果。这个缓存策略只能用在异步的 findInBackground() 方法中。
+IGNORE_CACHE | default cache strategy. The query won't use cache and the query results won't be stored in cache.
+CACHE_ONLY | The query is only got from cache, not the network.If the cache has no results, then it will bring about a LCException.
+NETWORK_ONLY | The query is only got from network, not the cache, but the query results will be writen into cache.
+CACHE\_ELSE_NETWORK | The query is first got from cache, then the network if there's no cache. If both of them fail, then it will bring about a LCException.
+NETWORK\_ELSE_CACHE | The query is first got from network, then the cache if there's no network. If both of them fail, then it will bring about a LCException.
+CACHE\_THEN_NETWORK | The query is first got from cache, then the network. FindCallback will be invoked twice in this case: first the cache results, then the network query results. This strategy can only be used in asynchronous findInBackground().
 
-如果您想控制缓存的行为。您可以使用 LCQuery 提供的方法来操作缓存。您可以在缓存上做如下这些操作：
+You can operate cache with LCQuery if you want to control the cache and you can do following operations towards the cache:
 
-#####检查查询是否有缓存结果：
+#####Check if there's any cached results: 
 ```java
 boolean isInCache = query.hasCachedResult();
 ```
 
-#####删除查询的任何缓存结果：
+#####Delete cached results:
 
 ```java
 query.clearCachedResult();
 ```
 
-#####清空所有查询的缓存结果：
+#####Delete cached results of all queries:
 
 ```java
 LCQuery.clearAllCachedResults();
 ```
 
-#####控制缓存结果的最大存活时间（毫秒为单位）：
+#####Set Max Cache Age（in milliseconds）：
 
 ```java
 query.setMaxCacheAge(TimeUnit.DAYS.toMillis(1));
 ```
 
-##LCObject子类
+##LCObject Subclass
 
-LeapCloud 希望设计成能让人尽快上手并使用。您可以通过 LCDataManager.fetchInBackground() 方法访问所有的数据。但是在很多现有成熟的代码中，子类化能带来更多优点，诸如简洁、可扩展性以及 IDE 提供的代码自动完成的支持等等。子类化不是必须的，您可以将下列代码转化：
+Leap Cloud is easy to start up. You can use LCDataManager.fetchInBackground() to access all data. In lots of mature code, subclass can bring more advantages, like simplicity, expansibility, auto-complete feature supported by IDE, etc. Subclass is not necessary, you can transfer following code:
+
 
 ```java
 LCObject shield = new LCObject("Armor");
@@ -893,7 +892,7 @@ shield.put("fireproof", false);
 shield.put("rupees", 50);
 ```
 
-成这样：
+into:
 
 ```java
 Armor shield = new Armor();
@@ -902,16 +901,16 @@ shield.setFireproof(false);
 shield.setRupees(50);
 ```
 
-###创建LCObject子类
+###Create LCObject Subclass
 
-创建一个 LCObject 的子类很简单：
+It's easy to create a LCObject subclass: 
 
-1.   首先声明一个子类继承自 LCObject。
-2.   添加@LCclassName注解。它的值必须是一个字符串，也就是您过去传入 LCObject 构造函数的类名。这样以来，后续就不需要再在代码中出现这个字符串类名。
-3.   确保您的子类有一个 public 的默认（参数个数为 0）的构造函数。切记不要在构造函数里修改任何 LCObject 的字段。
-4.   在调用 LCConfig.initialize() 注册应用之前，注册子类 LCObject.registerSubclass(Yourclass.class).
+1.   Declare that the subclass is inherited from LCObject.
+2.   Add @LCclassName annotation. The value must be a string: the class name of the LCObject constructed function you passed in. Thus, this string class name doesn't need to appear in code again.
+3.   Make sure that your subclass has a public default (the parameter amount is 0) constructed function. Please don't modify any LCObject property in constructed function. 
+4.   Register subclass LCObject.registerSubclass(Yourclass.class) before invoking LCConfig.initialize() and registering the app.
 
-下列代码成功实现并注册了 LCObject 的子类 Armor:
+The following code can sucessfully realize and register the subclass Armor of LCObject:
 
 ```java
 // Armor.java
@@ -937,11 +936,11 @@ public class App extends Application {
 }
 ```
  
-####字段的访问/修改
+####Property Access/Modification
 
-添加方法到 LCObject 的子类有助于封装类的逻辑。您可以将所有跟子类有关的逻辑放到一个地方，而不是分成多个类来分别处理商业逻辑和存储/转换逻辑。
+Adding method to LCObject helps encapsulated class logic. You can put the logic that is related to subclass into one place rather than seperate them into multiple classes to process business logic and storage/transformation logic.
 
-您可以很容易地添加访问器和修改器到您的 LCObject 子类。像平常那样声明字段的 getter 和 setter 方法，但是通过 LCObject 的 get 和 put 方法来实现它们。下面是这个例子为 Post 类创建了一个 content 的字段：
+You can easily add accessor and modifier to your LCObject subclass, look similar to getter and setter in declared fields, but realized with get and put method of LEObject. Here is the instance of creating a content property for Post class:
 
 ```java
 // Armor.java
@@ -956,13 +955,13 @@ public class Armor extends LCObject {
 }
 ```
 
-现在您就可以使用 armor.getDisplayName()方法来访问 displayName 字段，并通过 armor.setDisplayName() 来修改它。这样就允许您的 IDE 提供代码自动完成功能，并且可以在编译时发现到类型错误。
+Now you can access displayName property with armor.getDisplayName() and modify it with armor.setDisplayName(). This enables auto-complete feature supported by IDE, as well as discovering exceptions while compling.
 
-各种数据类型的访问器和修改器都可以这样被定义，使用各种 get()方法的变种，例如 getInt()，getLCFile()或getMap().
+The accessors and modifiers of all data types can be defined like this, using variation of all kinds of get() methods, like getInt()，getLCFile() or getMap().
 
-####定义函数
+####Define Functions
 
-如果您不仅需要一个简单的访问器，而是有更复杂的逻辑，您可以实现自己的方法，例如：
+If you need more complicated logic but not just a simple accessor, you can define your own methods like shown as follows:
 
 ```java
 public void takeDamage(int amount) {
@@ -974,17 +973,17 @@ public void takeDamage(int amount) {
 }
 ```
 
-###创建子类的实例
-您可以使用您自定义的构造函数来创建您的子类对象。您的子类必须定义一个公开的默认构造函数，并且不修改任何父类 LCObject 中的字段，这个默认构造函数将会被 SDK 使用来创建子类的强类型的对象。
+###Create Subclass Instance
+You can create your subclass using your self-defined constructed function. Your subclass must define a public default constructed function and not modify any property in superclass LCObject. This default constructed function will be used to create strongly-typed object of subclass by SDK.
 
-要创建一个到现有对象的引用，可以使用 LCObject.createWithoutData():
+You can create a reference to current object using LCObject.createWithoutData():
 
 ```java
 Armor armorReference = LCObject.createWithoutData(Armor.class, armor.getObjectId());
 ```
 
-###子类的查询
-您可以通过静态方法静态方法LCQuery.getQuery()获取特定的子类的查询对象。下面的例子用以查询用户可购买的所有防具：
+###Subclass Query
+You can get query object of specific subclass with static method LCQuery.getQuery(). The following instance can inquire all boosters user can buy:
 
 ```java
 LCQuery<Armor> query = LCQuery.getQuery(Armor.class);
@@ -999,32 +998,32 @@ LCQueryManager.findAllInBackground(query, new FindCallback<Armor>() {
 });
 ```
 
-##用户
+##LCUser
 
-LCUser 是一个 LCObject 的子类，它继承了 LCObject 所有的方法，具有 LCObject 相同的功能。不同的是，LCUser 增加了一些特定的关于用户账户相关的功能。
+LCUser is a subclass of LCObject. It inherited all methods of LCObject and has the same features as LCObject. The different is LCUser adds some specific features of user account.
 
-###字段说明
-LCUser 除了从 LCObject 继承的属性外，还有几个特定的属性：
+###Property Description
+Apart from the properties inherited from LCObject, LCUser has some specific properties:
 
-属性名|类型|介绍|是否必需或唯一
+Property|Type|Introduction|If necessary
 ---|---|---|---
-    username|String|用户的用户名|必需
-    password|String| 用户的密码|必需
-    email|String| 用户的电子邮件地址|可选
-    emailVerified|Boolean|电子邮件是否验证|可选
-    masterKey| String | 用户注册应用的MasterKey|可选
-    installationIds| String | 用户完成的所有安装的InstallationId|可选
+    username|String|Username|Necessary
+    password|String|Password|Necessary
+    email|String| Email Address|Optional
+    emailVerified|Boolean|Verify email or not|Optional
+    masterKey| String | MasterKey for signup|Optional
+    installationIds| String | InstallationId of all installation|Optional
 
-注意：
+Notices:
 
-* 请确保用户名和电子邮件地址是独一无二的。
-* 和其他 LCObject 对象不同的是，在设置 LCUser 这些属性的时候不是使用的 put 方法，而是专门的 setXXX 方法。
-* 系统会自动收集masterKey，installationIds的值。
+* Please make sure that username and email is unique.
+* Unlike other LCObject, LCUser properties are not set by put, but the specific setXXX.
+* Leap Cloud will collect the value of masterKey，installationIds automatically.
 
-###注册用户
+###User Signup
 
-1. 创建LCUser对象，并提供必需的username和password
-2. 利用LCUserManager.signUpInBackground()保存至云端。
+1. Creare LCUser object and provide username and password.
+2. Save it to cloud with LCUserManager.signUpInBackground().
 
 ```java
 String mUsername ＝ "userName";
@@ -1036,38 +1035,38 @@ user.setPassword(mPassword);
 LCUserManager.signUpInBackground(user, new SignUpCallback() {
 	public void done(LCException e) {
 	        if (e == null) {
-	        // 注册成功
+	        // Signup success
 	        } else {
 	        }
 	}
 });
 ```
-注意：
+Notices:
 
-* 在注册过程中，服务器会进行注册用户信息的检查，以确保注册的用户名和电子邮件地址是独一无二的。此外，服务端还会对用户密码进行不可逆的加密处理，不会明文保存任何密码，应用切勿再次在客户端加密密码，这会导致重置密码等功能不可用。
-* 注册使用的是 signUpInBackground() 方法，而不是 saveInBackground() 方法。另外还有各种不同的 signUp 方法。像往常一样，我们建议在可能的情况下尽量使用异步版本的 signUp 方法，这样就不会影响到应用程序主 UI 线程的响应。您可以阅读 API 中更多的有关这些具体方法的使用。
-* 如果注册不成功，您可以查看返回的错误对象。最有可能的情况是，用户名或电子邮件已经被另一个用户注册。这种情况您可以提示用户，要求他们尝试使用不同的用户名进行注册。
-* 您也可以要求用户使用 Email 做为用户名注册，这样做的好处是，您在提交信息的时候可以将输入的“用户名“默认设置为用户的 Email 地址，以后在用户忘记密码的情况下可以使用 LeapCloud 提供的重置密码功能。
+* Leap Cloud servre will observe the user info during the signup to make sure that the username and email address is unique. Besides, server will process the password with non-reversible encryption rather than save it. Please don't encrypt the password in clients,it will result in the disorder and disable the password reset.
+* Signup uses the signUpInBackground() method rather than saveInBackground(). There are other signup methods as well. We recommend asynchronous signup method as usual and this will not affect the main UI thread. You can check more detailed info in API.
+* If the signup failed,you can check the returned error object. The mostly likely case is that the username or email is already taken. In this case, you can remind users to try another username or email.
+* You can also ask users to use Email address as username. The username will be taken as Email address and then used for password reset afterwards.
 
-###登录
-您可以通过LCUserManager.logInInBackground()方法登录。字段说明：第一个参数为用户名，第二个参数为密码，第三个参数为回调方法LogInCallback().
+###Signin
+You can sign in with LCUserManager.logInInBackground(). Property description: the first one is username, the second one is password and the third one is LogInCallback(), the callback method.
 
 ```java
 LCUserManager.logInInBackground("userName", "passWord", new LogInCallback<LCUser>() {
   public void done(LCUser user, LCException e) {
     if (user != null) {
-      // 登录成功
+      // Signin success
     } else {
-      // 登录失败
+      // Signin failure
     }
   }
 });
 ```
 
-###当前用户
-如果用户在每次打开您的应用程序时都要登录，这将会直接影响到您应用的用户体验。为了避免这种情况，您可以使用缓存的 currentUser 对象。
+###Current User 
+If the app required signin everytime, it will directly affect the user experience. You can use the cached currentUser object to avoid this situation.
 
-每当您注册成功或是第一次登录成功，都会在本地磁盘中有一个缓存的用户对象，您可以这样来获取这个缓存的用户对象来进行登录：
+There would be a cached user object in local disk when you register or signin. You can log in with the cached object with following method:
 
 ```java
 LCUser currentUser = LCUser.getCurrentUser();
@@ -1078,38 +1077,38 @@ if (currentUser != null) {
 }
 ```
 
-当然，您也可以使用如下方法清除缓存用户对象：
+You can clear cached object with following method:
 
 ```java
 LCUser.logOut();
-LCUser currentUser = LCUser.getCurrentUser(); //此时，crrentUser将为null
+LCUser currentUser = LCUser.getCurrentUser(); //crrentUser will be null now
 ```
 
-###重置密码
+###Password Reset
 
-如果用户忘记密码，LeapCloud提供了一种方法，让用户安全地重置起密码。 重置密码的流程很简单，开发者只要求用户输入注册的电子邮件地址即可：
+Leap Cloud provides a method for users to reset the password securely. The procedure is simple, only user's email address is required:
 
 ```java
 LCUserManager.requestPasswordResetInBackground(
         "myemail@example.com", new RequestPasswordResetCallback() {
     public void done(LCException e) {
         if (e == null) {
-            // 重置密码的邮件已发出
+            // Reset Email is Sent
         } else {
         }
     }
 });
 ```
-如果邮箱与用户注册时提供的邮箱匹配，系统将发出密码重置邮件。密码重置流程如下：
+If the email address is same as the email used for signup, then the system will send a reset email. The reset procedure is show as below:
 
-* 用户输入他们的电子邮件，请求重置自己的密码。
-* LeapCloud 向用户提供的邮箱发送一封电子邮件，该邮件提供密码重置链接。
-* 用户根据向导点击重置密码链接，打开一个LC的页面，输入一个新的密码。
-* LeapCloud 将用户的密码重置为新输入的密码。
+* Users enter their email address and require password reset.
+* Leap Cloud sends an email to the email address user just provided and this email contains the reset link.
+* User click on the reset lins, enter a LC page and set a new password.
+* Leap Cloud has reset user's password successfully.
 
-###查询用户
+###User Query
 
-您可以通过特殊的UserQuery查询用户数据。LeapCloud对用户数据安全性提供充分的保障，如需获取更多信息，请移步至[用户对象的安全性](..)。
+You can inquire user data with special UserQuery. Leap Cloud provides all round protection of user data. More details: [User Object Security](..).
 
 ```java
 LCQuery<LCUser> query = LCUser.getQuery();
@@ -1125,20 +1124,20 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCUser>() {
 });
 ```
 
-###邮箱验证
+###Email Verification
 
-LeapCloud提供强大的邮箱验证服务，您只需在Console >> App Settings >> Email Settings中Enable "Verify user's email address", 系统便会自动在LCUser中添加`emailVerified`字段。并且，当LCUser的email字段被赋值或者修改, 且`emailVerified`字 字段的值为false. LeapCloud便会自动向用户发送一个链接，用户点击链接后便会将`emailVerified`设置为true.
+Leap Cloud provides powerful email verification service, you just need to Enable "Verify user's email address" in Console >> App Settings >> Email Settings and system will add `emailVerified` property in LCUser automatically. When the email property of LCUser is assigned or modified and the value of `emailVerified` is false, then Leap Cloud will send a link to users automatically. `emailVerified` will be set as true once users click the link.
 
-`emailVerified`字段有三种状态:
+Three status of `emailVerified` property:
 
-* true - 用户通过点击系统发送的链接验证邮箱成功
-* false - 用户还未验证邮箱，或者验证失败
-* 空 - 邮箱验证功能未开，或者用户未提供邮箱
+* true - Successfully verify the email with the link sent by system
+* false - Not verify yet or failed to verify
+* null - Email verification is not enabled or no email address provided
 
-###匿名用户
-匿名用户是指提供用户名和密码，系统为您创建的一类特殊用户，它享有其他用户具备的相同功能。不过，一旦注销，匿名用户的所有数据都将无法访问。如果您的应用需要使用一个相对弱化的用户系统时，您可以考虑 LeapCloud 提供的匿名用户系统来实现您的功能。
+###Anonymous Users
+Anonymous users refers to a special set of users with username and password. They have the same features as other users while once deleted, all data will be no longer accessible. If your app requires a relatively weakened user system, then Anonymous Users of Leap Cloud is highly recommended. 
 
-您可以通过LCAnonymousUtils获取一个匿名的用户账号：
+You can get an anonymous user account with LCAnonymousUtils:
 
 ```java
 LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
@@ -1152,40 +1151,40 @@ LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
   }
 });
 ```
-#####自动创建匿名用户
-您可以通过注册或者登录，将当前的匿名用户转化为非您民用户，该匿名用户的所有的数据都将保留。您可以通过LCAnonymousUtils.isLinked()来判断当前用户是否为匿名用户。
+#####Create Anonymous Users Automatically
+You can transfer anonymous users into non-anonymous users by signup or signin and all data of this anonymous user will be saved. You can judge if the current user is anonymous with LCAnonymousUtils.isLinked():
 
 ```java
 Boolean isAnonymous = LCAnonymousUtils.isLinked(LCUser.getCurrentUser());
 ```
 
-您可以选择让系统自动创建匿名用户（本地创建，无需网络连接）, 以便立即开始使用应用. 设置自动创建匿名用户后, LCUser.getCurrentUser()将永远不为null。 然而，当您在存储与该匿名用户相关的LCObject时，LeapCloud会在云端创建该匿名用户。
+You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, LCUser.getCurrentUser() will no longer be null. Leap Cloud wil create anonymous user in the cloud if you are storing LCObject related to this anonymous user.
 
-#####如何自动创建匿名用户
-在主Application的onCreate()方法中添加：
+#####How to Create Anonymous Users Automatically
+Add following code in onCreate() in main Application.
 
 ```java
 LCUser.enableAutomaticUser();
 ```
 
-### 在Console中管理用户
+### Manage Users in Console
 
-User 表是一个特殊的表，专门存储 LCUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](...)中查看。
+User class is a specialized class for storing LCUser objects. You'll see a _User class in Console >> Users. More details: [Console UserManual](...).
 
-##用户角色
-随着用户数量的增长，使用角色进行权限管理将更有效。所有赋予某一角色的权限，将被该角色包含的用户所继承。用户角色是一组用户的集合，同时，一个用户角色也可以包含另一个用户角色。在LeapCloud中有一个对应的`_Role` class来存储用户角色。
+##User Role
+Setting user roles to manage permissions is more effective. The permission assigned to a role will be inherited by users contains in this role. User role is a user collection and a role can also contains another role. There is a corresponding `_Role` class in Leap Cloud for storing user roles.
 
-###字段说明
+###Property Description
 
-属性名|类型|介绍|是否必需或唯一
+Property Name|Type|Introduction|If Necessary
 ---|---|---|---
-    ACL|ACL|用户角色对象的访问权限|**必需** (需要显式设置)
-    roles|Relation|该LCRole包含的其他LCRole|可选
-    name|String| 角色名|必需
-    user|Relation|该角色包含的用户|可选
+    ACL|ACL|Permission of this Role|**Necessary** (Requires explicit set)
+    roles|Relation|LCRoles contained by this LCRole|Optional
+    name|String|Role name|Necessary
+    user|Relation|Users in this Role|Optional
 
-###创建角色
-创建Role的时候，您需要提供两个参数：第一个为Role的名字(对应name字段)，第二个参数为ACL.
+###Create Roles
+There are two parameters required on creating the Role: the first one is the Role name (name property) and the second one is ACL.
 
 ```java
 LCACL roleACL = new LCACL();
@@ -1194,8 +1193,8 @@ LCRole role = new LCRole("Administrator", roleACL);
 LCRoleManager.saveInBackground(role);
 ```
 
-###向角色中添加用户或角色
-您可以通过role.getUsers().add()或role.getRoles().add()方法，向角色中添加用户或其他角色。
+###Add Users or Roles to the Role
+You can add users or roles to the role with role.getUsers().add() or role.getRoles().add().
 
 ```java
 LCRole role = new LCRole(roleName, roleACL);
@@ -1208,21 +1207,21 @@ for (LCRole childRole : rolesToAddToRole) {
 LCRoleManager.saveInBackground(role);
 ```
 
-###获取角色对象
+###Get Role Object
 
-您有两种方式获取用户角色对象：
+Here is two ways to get role object:
 
-1. 通过角色名查找：
+1. Inquire with role name:
 
 	```java
 	LCObject wallPost = new LCObject("WallPost");
 	LCACL postACL = new LCACL();
-	//指定相应的Role的名字：
+	//assign corresponding Role name：
 	postACL.setRoleWriteAccess("Moderators", true);
 	wallPost.setACL(postACL);
 	LCDataManager.saveInBackground(wallPost);
 	```
-2. 通过Query查找：
+2. Inquire with Query:
 
 	```JAVA
 	LCQuery<LCRole> query = LCRole.getQuery();
@@ -1238,25 +1237,24 @@ LCRoleManager.saveInBackground(role);
 	});
 	```
 
-##数据安全
+##Data Security
 
-### LCObject的安全性
-用户在创建LCObject时都存在一个ACL字段，只有在ACL名单上的用户(LCUser)或者角色(LCRole)才能被允许访问。如果用户不显式地设置ACL，系统将自动为其分配默认的ACL.
+### Security of LCObject
+There is a ACL property when user create LCObject. Only LCUser and LCRole in this ACL list has the access. If a user doesn't explicitly set ACL, then system will assign default ACL automatically.
 
 #####ACL
-ACL相当于为每一个数据创建的允许访问的白名单列表。一个 User 必须拥有读权限（或者属于一个拥有读权限的 Role）才可以获取一个对象的数据，同时，一个 User 需要写权限（或者属于一个拥有写权限的 Role）才可以更改或者删除一个对象。 如，一条典型的ACL数据：
+ACL is a white list which contains users that are allowed the access to the data. A User must have the read permission (or belong to the Role that has the read permission) to get the data if an object. Meanwhile, a User must have the write permission (or belong to the Role that has the write permission) to modify or delete an object. e.g. a typical ACL data:
 
 ```{"553892e860b21a48a50c1f29":{"read":true,"write":true}}```
 
-表明ObjectId为"553892e860b21a48a50c1f29"的用户，可以读取和修改该LCObject.
+indicates that the user whose ObjectId is "553892e860b21a48a50c1f29" has the permission to read and modify the LCObject.
 
-#####默认访问权限
+#####Default Permission
 
-在没有显式指定的情况下，LeapCloud 中的每一个对象都会有一个默认的 ACL 值。这个值代表了，所有的用户，对这个对象都是可读可写的。此时您可以在数据管理的表中 ACL 属性中看到这样的值:
-
+Each object in Leap Cloud has a default ACL value when there's no explicit designation. This value means that all users have the read and write permission towards this object. You can see following value in ACL property in data manegement class:
 ```{"*":{"read":true,"write":true}}```
 
-您可以根据需要，修改默认ACL的值：
+You can modify the value of ACL if needed:
 
 ```java
 LCACL defaultACL = new LCACL();
@@ -1265,10 +1263,10 @@ defaultACL.setPublicWriteAccess(false);
 LCACL.setDefaultACL(defaultACL, true);
 ```
 
-`LCACL.setDefaultACL()`的第二个参数设置为true，代表默认将该用户的读取和访问权限添加到该defaultACL上。反之则否。
+The second parameter of `LCACL.setDefaultACL()` is set as true, which means that the read and access permission is added to defaultACL by default, not vice versa.
 
-#####设置仅创建用户可见
-您可以将一个LCObject设置为仅创建用户可读取或修改：首先，用户需要登录后创建LCObject，并且为其添加如下ACL属性：
+#####Only Available to Create User
+You can set the LCObject as only be read or modified by create users: users need to create LCObject after the signin and then add following ACL properties:
 
 ```java
 LCObject privateNote = new LCObject("Note");
@@ -1276,18 +1274,18 @@ privateNote.put("content", "This note is private!");
 privateNote.setACL(new LCACL(LCUser.getCurrentUser()));
 LCDataManager.saveInBackground(privateNote);
 ```
-此时，该LCObject - "privateNote"仅该用户可见。且该用户在任何设备上登录，都可以读取或修改该对象。
+Now, the LCObject - "privateNote" is only available to this user and can be read and modified on any devices signed in by this user.
 
-#####为其他用户设置访问权限
-您可以使用setReadAccess 和 setWriteAccess将**指定用户**的读写权限添加到LCObject的ACL中。
+#####Set Access Permission for Other Users
+You can add the read and write permission of **target user** to ACL of LCObject with setReadAccess and setWriteAccess.
 
-如，为一组用户添加读取和修改的权限：
+For example, add read and modify access for a group of users: 
 
 ```java
 LCObject groupMessage = new LCObject("Message");
 LCACL groupACL = new LCACL();
      
-// userList 为 Iterable<LCUser>，包含一组LCUser对象.
+// userList is Iterable<LCUser>, containing a group of LCUser object.
 for (LCUser user : userList) {
   groupACL.setReadAccess(user, true);
   groupACL.setWriteAccess(user, true);  
@@ -1297,10 +1295,10 @@ groupMessage.setACL(groupACL);
 LCDataManager.saveInBackground(groupMessage);
 ```
 
-#####为角色设置访问权限
-您可以使用setRoleWriteAccess 和 setRoleWriteAccess将**指定角色**的读写权限添加到LCObject的ACL中。
+#####Set Access Permission for Roles
+You can add the read and write permission of **target Role** to ACL of LCObject with setRoleWriteAccess and setRoleWriteAccess.
 
-如，为一组用户添加读取和修改的权限：
+For example, add read and modify access for a group of users:
 
 ```java
 LCRole moderators = /* Query for some LCRole */;
@@ -1311,21 +1309,22 @@ wallPost.setACL(postACL);
 LCDataManager.saveInBackground(wallPost);
 ```
 
-#####同时为用户和角色设置访问权限
-LCObject的ACL是可以叠加的。如，在给某一个LCObjcet设置ACL时，您可以为所有用户添加读取权限的同时，为某一个角色添加修改权限：
+#####Set Access Permission for Users and Roles
+The ACL of LCObject can be overlapped. For example, when you set ACL for a LCObject, you can add modify permission for a role while adding read permission for all users:
+
 
 ```java
 LCObject myMessage = new LCObject("Message");
 LCACL myACL = new LCACL();
-// 为所有用户添加读取权限
+// add read permission for all users
 myACL.setPublicReadAccess(true);
-// 为Moderators 角色添加修改权限
+// add modify permission for Moderators
 myACL.setRoleWriteAccess("Moderators");
 myMessage.setACL(myACL);
 ```	
 
-#####为所有用户设置访问权限
-您可以使用setPublicReadAccess 和 setPublicWriteAccess将**所有用户**的读写权限添加到LCObject的ACL中
+#####Set Access Permission for All Users
+You can add the read and write permission of **All Users** to ACL of LCObject with setPublicReadAccess and setPublicWriteAccess.
 ```java
 LCObject publicPost = new LCObject("Post");
 LCACL postACL = new LCACL();
@@ -1335,38 +1334,38 @@ publicPost.setACL(postACL);
 LCDataManager.saveInBackground(publicPost);
 ```
 
-### 用户对象的安全性
+### User Object Security
 
-LeapCloud对用户对象的安全性进行了规范。默认情况下，存储在用户对象中的数据，只能被该用户本身修改。客户端可以读取其他用户的数据，但无权限修改或删除。所以，只有用户登录后所获取的用户对象，才能被修改。
+Leap Cloud has normalized the user object security. The data saved in the user object can only be self-modified by default. Clients can read the data but it has no right to modify or delete them. Thus, only the user object got after the signin can be modified. 
 
-以下例子很好的描绘了用户对象的安全性:
+This instance is a good example of user obejct security:
 
 ```java
 LCUserManager.logInInBackground("my_username", "my_password", new LogInCallback<LCUser>() {
     
     @Override
     public void done(LCUser user, LCException exception) {
-        user.setUserName("my_new_username"); // 修改用户名
-        LCUserManager.saveInBackground(user); // 能成功保存，因为成功登录并获取该用户对象。
+        user.setUserName("my_new_username"); // Modify Username
+        LCUserManager.saveInBackground(user); // Save successfully because of the signin
          
-        // 非登录方式，获取的用户对象，将无法被修改
+        // not signed in, failed to be modified
         LCQuery<LCUser> query = LCUser.getQuery();
         LCQueryManager.getInBackground(query, user.getObjectId(), new GetCallback<LCUser>() {
           public void done(LCUser object, LCException e) {
             object.setUserName("another_username");
          
-            // 将抛出异常：用户未被授权
+            // Error: not authorized
             LCDataManager.saveInBackground(object);
           }
         });
     }
 });
 ```
-### 角色对象的安全性
+### Role Object Security
 
-与其他LCObject一样，LCRole对象也使用ACL来控制其访问权限。不同的是，LCRole需要显示地设置ACL. 通常，只有系统管理人员，或其他高权限人员可以有权限创建或修改角色，所以在创建LCRole的同时，您需要设置其访问权限。
+Similar to other LCObjects, LCRole object uses ACL to control the access permission. The different is that LCRole need to set ACL explicitly. Generally speaking, only the admin or other users with elevated permission can create or modify roles, so you need to set access permission when creating LCRole.  
 
-如:
+e.g.
 
 ```java
 LCACL roleACL = new LCACL();
@@ -1375,24 +1374,25 @@ LCRole role = new LCRole("Administrator", roleACL);
 LCRoleManager.saveInBackground(role);
 ```
 
-##第三方登录
+##Third Party Login
 
-为简化用户的注册及登录流程，并且集成LC应用与Facebook, Twitter等应用，LeapCloud提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与LC SDK，并将LCUser与第三方应用的用户ID进行连接。
+Leap Cloud provides 3rd party login service to simplify the signup and signin and integrate LC app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and LC SDK at the same time and connect LCUser and UserId of 3rd party app.
 
-###使用Facebook账号登录
-Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Facebook应用的设备，LC应用可通过设备上的Facebook用户凭据，直接实现用户登录。对于未安装Facebook应用的设备，用户可以通过一个标准化的Facebook登录页面，提供相应的登录信息。
+###Log in with Facebook Account
+The Android SDK of Facebook helps app optimize the signin experience. As for the devices installed with Facebook app, LC app can realize direct login with Facebook user credential. If there's no Facebook app installed, users can provide signin info in a standard Facebook login page.
 
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。
-####准备工作
-1. 在[Facebook开发者中心](https://developers.facebook.com)创建Facebook应用。点击My Apps >> Add a New App
-2. 打开LeapCloud Console >> App Settings >> User Authentication.勾选Allow Facebook Authentication. 并将步骤一中获取的Facebook Application ID 和 App Secret填写至相应位置。
-3. 集成Facebook SDK，添加Facebook Login按钮。详细步骤，请参考[Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4)
-4. 在项目的Application.onCreate()函数中，于LCConfig.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
+If the Facebook UserId is not bound to any LCUser after the Facebook login, Leap Cloud will create an account for the user and bind the two.
+####Preparations
+1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App
+2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
+3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
+4. Add following code after LCConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
 ```java
 LCFacebookUtils.initialize("YOUR FACEBOOK APP ID");
 ```
-5. 	在所有调用Login with Facebook的Activity中的onActivityResult()函数中添加如下代码，已完成验证。
+5. 	Add following code into onActivityResult() function in all Activites invoked Login with Facebook to finish verification.
+
 
 ```java
 @Override
@@ -1401,33 +1401,33 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
   LCFacebookUtils.finishAuthentication(requestCode, resultCode, data);
 }
 ```
-####登录并注册新LCUser
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。如：
+####Sign in and Register New LCUser
+If the Facebook UserId is not bound to any LCUser after the Facebook login, Leap Cloud will create an account for the user and bind the two. e.g.
 
 ```java
 LCFacebookUtils.logInInBackground(this, new LogInCallback<LCUser>() {
   @Override
   public void done(LCUser user, LCException err) {
     if (user == null) {
-      //用户取消了使用Facebook账号登录
+      //Facebook login is canceled
     } else if (user.isNew()) {
-      //用户第一次使用Facebook账号登录，成功注册并绑定user用户
+      //Facebook login for the first time, registered and bound successfully
     } else {
-      //用户使用Facebook账号登录成功。
+      //Facebook login succeeded
     }
   }
 });
 ```
 
-详细登录流程为：
+Detailed login process:
 
-* 用户通过Facebook SDK提供的Login with Facebook界面登录Facebook
-* Facebook验证登录信息，并返回结果.
-* LeapCloud SDK接受结果，并保存至LCUser. 如果该Facebook用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户.
-* 调用LC的LogInCallback登录该LCUser.
+* Login Facebook in Login with Facebook page provided by Facebook SDK.
+* Facebook verifies the login info, then return.
+* Leap Cloud SDK accept the result and save it to LCUser. If the Facebook UserId is not bound to any LCUser, then Leap Cloud will create an account for the user automatically.
+* Invoke LogInCallbackof LC and log in LCUser.
 
-####绑定LCUser与Facebook账号
-您可以通过以下方式，绑定已有的LC账号和Facebook账号：
+####Bind LCUser and Facebook Account
+You can bind LC account and Facebook account with following method:
 
 ```java
 if (!LCFacebookUtils.isLinked(user)) {
@@ -1435,16 +1435,16 @@ if (!LCFacebookUtils.isLinked(user)) {
         @Override
         public void done(LCException ex) {
           if (LCFacebookUtils.isLinked(user)) {
-            //绑定成功
+            //Bind Successfully
       }
     }
   });
 }
 ```
 
-绑定成功后，LeapCloud将会把该Facebook账号的信息更新至该LCUser中。下次再使用该Facebook账号登录应用时，LeapCloud将检测到其已绑定LCUser，便不会为该Facebook账号添加新的LCUser.
+Leap Cloud will update the Facebook account info to the LCUser after the bind. The next time user logs in with Facebook account, Leap Cloud will detect the bind and don't need to add new LCUser to this Facebook account again. 
 
-####解除绑定
+####Unbind
 
 ```java
 LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
@@ -1456,22 +1456,22 @@ LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-解除绑定成功后，LeapCloud将会把该Facebook账号的信息从该LCUser中移除。下次再使用该Facebook账号登录应用时，LeapCloud将检测到其未绑定LCUser，便会为该Facebook账号添加新的LCUser.
+Leap Cloud will remove all Facebook account info from the LCUser after the unbind. The next time user logs in with Facebook account, Leap Cloud will detect there's no bind and then add new LCUser to this Facebook account.
 
-###使用Twitter账号登录
-与Facebook类似，Twitter的Android SDK，也能帮助应用优化登录体验。对于已经安装Twitter应用的设备，LC应用可通过设备上的Twitter用户凭据，直接实现用户登录。对于未安装Twitter应用的设备，用户可以通过一个标准化的Twitter登录页面，提供相应的登录信息。
+###Log in with Twitter Account
+Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Facebook app, LC app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
 
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。
-####准备工作
-1. 在[Twitter开发者中心](...)创建Twitter应用。点击My Apps >> Add a New App
-2. 打开LeapCloud Console >> App Settings >> User Authentication.勾选Allow Twitter Authentication. 并将步骤一中获取的Twitter consumer Key填写至相应位置。
-3. 集成Twitter SDK，添加Twitter Login按钮。详细步骤，请参考[Add Twitter Login to Your App or Website](...)
-4. 在项目的Application.onCreate()函数中，于LCConfig.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
+If the Twitter UserId is not bound to any LCUser after the Twitter login, Leap Cloud will create an account for the user and bind the two.
+####Preparations
+1. Create Twitter app in [Twitter Dev Center](...). Click My Apps >> Add a New App
+2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Twitter Authentication and fill the Twitter consumer Key got from step 1 into relative location.
+3. Integrate Twitter SDK, add Twitter Login button. Please check [Add Twitter Login to Your App or Website](...) for more details.
+4. Add following code after LCConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
 ```java
 LCTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
 ```
-5. 	在所有调用Login with Twitter的Activity中的onActivityResult()函数中添加如下代码，已完成验证。
+5. 	Add following code into onActivityResult() function in all Activites invoked Login with Twitter to finish verification.
 
 ```java
 @Override
@@ -1480,33 +1480,33 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
   LCTwitterUtils.finishAuthentication(requestCode, resultCode, data);
 }
 ```
-####登录并注册新LCUser
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户，并与其绑定。如：
+####Sign in and Register New LCUser
+If the Twitter UserId is not bound to any LCUser after the Twitter login, Leap Cloud will create an account for the user and bind the two. e.g.
 
 ```java
 LCTwitterUtils.logInInBackground(this, new LogInCallback<LCUser>() {
   @Override
   public void done(LCUser user, LCException err) {
     if (user == null) {
-      //用户取消了使用Twitter账号登录
+      //Twitter login is canceled
     } else if (user.isNew()) {
-      //用户第一次使用Twitter账号登录，成功注册并绑定user用户
+      //Twitter login for the first time, registered and bound successfully
     } else {
-      //用户使用Twitter账号登录成功。
+      //Twitter login succeeded
     }
   }
 });
 ```
+Detailed login process:
 
-详细登录流程为：
+* Login Twitter in Login with Twitter page provided by Twitter SDK.
+* Twitter verifies the login info, then return.
+* Leap Cloud SDK accept the result and save it to LCUser. If the Twitter UserId is not bound to any LCUser, then Leap Cloud will create an account for the user automatically.
+* Invoke LogInCallbackof LC and log in LCUser.
 
-* 用户通过Twitter SDK提供的Login with Twitter界面登录Twitter
-* Twitter验证登录信息，并返回结果.
-* LeapCloud SDK接受结果，并保存至LCUser. 如果该Twitter用户Id并未与任何LCUser绑定，LeapCloud将自动为该创建一个用户.
-* 调用LC的LogInCallback登录该LCUser.
 
-####绑定LCUser与Twitter账号
-您可以通过以下方式，绑定已有的LC账号和Twitter账号：
+####Bind LCUser and Twitter Account
+You can bind LC account and Twitter account with following method:
 
 ```java
 if (!LCTwitterUtils.isLinked(user)) {
@@ -1514,16 +1514,17 @@ if (!LCTwitterUtils.isLinked(user)) {
         @Override
         public void done(LCException ex) {
           if (LCTwitterUtils.isLinked(user)) {
-            //绑定成功
+            //Bind Successfully
       }
     }
   });
 }
 ```
 
-绑定成功后，LeapCloud将会把该Twitter账号的信息更新至该LCUser中。下次再使用该Twitter账号登录应用时，LeapCloud将检测到其已绑定LCUser，便不会为该Twitter账号添加新的LCUser.
+Leap Cloud will update the Twitter account info to the LCUser after the bind. The next time user logs in with Twitter account, Leap Cloud will detect the bind and don't need to add new LCUser to this Twitter account again. 
 
-####解除绑定
+
+####Unbind
 
 ```java
 LCTwitterUtils.unlinkInBackground(user, new SaveCallback() {
@@ -1535,30 +1536,31 @@ LCTwitterUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-解除绑定成功后，LeapCloud将会把该Twitter账号的信息从该LCUser中移除。下次再使用该Twitter账号登录应用时，LeapCloud将检测到其未绑定LCUser，便会为该Twitter账号添加新的LCUser.
+Leap Cloud will remove all Twitter account info from the LCUser after the unbind. The next time user logs in with Twitter account, Leap Cloud will detect there's no bind and then add new LCUser to this Twitter account.
 
-##地理位置
 
-LeapCloud提供LCGeoPoint对象，帮助用户根据地球的经度和纬度坐标进行基于地理位置的信息查询。
+##GeoPoint
 
-####LCGeoPoint字段说明
+Leap Cloud provides LCGeoPoint object to help users do location query based on longitude and latitude.
 
-####创建LCGeoPoint
-LCGeoPoint需要提供两个参数：第一个为纬度(正为北纬)，第二个参数为经度(正为东经)。
+####LCGeoPoint Overview
+
+####Create LCGeoPoint
+LCGeoPoint requires two parameters: the first one is Latitude (positive is northern) and the second one is longitude (positive is eastern).
 
 ```java
-//创建北纬40度，西经30度的LCGeoPoint
+//Create new LCGeoPoint (40.0, -30.0)
 LCGeoPoint point = new LCGeoPoint(40.0, -30.0);
 ```
 
-该LCGeoPoint对象可悲存储在LCObject中：
+The LCGeoPoint object can be stored in LCObject：
 
 ```java
 myShop.put("location", point);
 ```
-####地理位置查询
-#####查询距离某地理位置最近的对象
-您可以通过whereNear方法获取A点附近的对象，该方法需要提供两个参数：第一个为目标对象存储地理位置的字段名，第二个参数为A点的地理位置。通过下面的例子，我们可以找到离某用户最近的十家店铺。
+####Geolocation Query
+#####Inquire the nearest place to target object
+You can get adjacent object around A with whereNear method and it requires two parameters: the first one is the property name for storing location of target object and the second one is the location of A. We can find the nearest 10 shops around A with following instance.
 
 ```java
 LCGeoPoint userLocation = (LCGeoPoint) userObject.get("location");
@@ -1567,10 +1569,10 @@ shopQuery.whereNear("location", userLocation);
 query.setLimit(10);
 LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() { ... });
 ```
-#####查询某地理位置一定距离内的对象
-您可以使用whereWithinKilometers, whereWithinMiles方法查找某地理位置一定距离内的对象。其用法与上述例子类似。
-#####查询一定地理位置范围内对象
-您可以通过whereWithinGeoBox方法获取一定地理位置范围内的对象，该方法需要提供三个参数：第一个为目标对象存储地理位置的字段名，后两个参数为LCGeoPoint对象，以这两个点连成的线段为直径的圆，便是whereWithinGeoBox将查询的范围。通过下面的例子，我们可以找到一定地理位置范围内所有店铺。
+#####Inquire objects around a certain location
+You can inquire objects within a certain range with whereWithinKilometers and whereWithinMiles. The method is similar to the aforementioned one.
+#####Inquire objects within a certain range
+You can inquire objects within a certain range with whereWithinGeoBox and it requires three parameters: the first one is the property name for storing location of target object and the next two are LCGeoPoint objects. The circle built with two LCGeoPoints as the endpoints of the diameter is the query range of whereWithinGeoBox. We can find all shops with the certain range with the following instance. 
 
 ```java
 LCGeoPoint southwestOfSF = new LCGeoPoint(37.708813, -122.526398);
