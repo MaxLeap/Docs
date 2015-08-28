@@ -919,7 +919,7 @@ shield.setRupees(50);
 创建一个 LCObject 的子类很简单：
 
 1.   首先声明一个子类继承自 LCObject。
-2.   添加@LCclassName注解。它的值必须是一个字符串，也就是您过去传入 LCObject 构造函数的类名。这样以来，后续就不需要再在代码中出现这个字符串类名。
+2.   添加@LCclassName注解。它的值必须是一个字符串，也就是您过去传入 LCObject 构造函数的类名。这样一来，后续就不需要再在代码中出现这个字符串类名。
 3.   确保您的子类有一个 public 的默认（参数个数为 0）的构造函数。切记不要在构造函数里修改任何 LCObject 的字段。
 4.   在调用 LCConfig.initialize() 注册应用之前，注册子类 LCObject.registerSubclass(Yourclass.class).
 
@@ -996,7 +996,7 @@ Armor armorReference = LCObject.createWithoutData(Armor.class, armor.getObjectId
 ```
 
 ###子类的查询
-您可以通过静态方法静态方法LCQuery.getQuery()获取特定的子类的查询对象。下面的例子用以查询用户可购买的所有防具：
+您可以通过静态方法LCQuery.getQuery()获取特定的子类的查询对象。下面的例子用以查询用户可购买的所有防具：
 
 ```java
 LCQuery<Armor> query = LCQuery.getQuery(Armor.class);
@@ -1172,7 +1172,7 @@ LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
 LCUser.enableAutomaticUser();
 ```
 
-您可以通过注册或者登录，将当前的匿名用户转化为非您民用户，该匿名用户的所有的数据都将保留。您可以通过LCAnonymousUtils.isLinked()来判断当前用户是否为匿名用户。
+您可以通过注册或者登录，将当前的匿名用户转化为非匿名用户，该匿名用户的所有的数据都将保留。您可以通过LCAnonymousUtils.isLinked()来判断当前用户是否为匿名用户。
 
 ```java
 Boolean isAnonymous = LCAnonymousUtils.isLinked(LCUser.getCurrentUser());
@@ -1395,7 +1395,7 @@ LCRoleManager.saveInBackground(role);
 ###使用Facebook账号登录
 Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Facebook应用的设备，LC应用可通过设备上的Facebook用户凭据，直接实现用户登录。对于未安装Facebook应用的设备，用户可以通过一个标准化的Facebook登录页面，提供相应的登录信息。
 
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。
+使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该用户创建一个账号，并与其绑定。
 ####准备工作
 
 1. 在[Facebook开发者中心](https://developers.facebook.com)创建Facebook应用。点击My Apps >> Add a New App
@@ -1407,7 +1407,7 @@ Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Face
 LCFacebookUtils.initialize("YOUR FACEBOOK APP ID");
 ```
 
-5. 	在所有调用Login with Facebook的Activity中的onActivityResult()函数中添加如下代码，已完成验证。
+5. 	在所有调用Login with Facebook的Activity中的onActivityResult()函数中添加如下代码，以完成验证。
 
 ```java
 @Override
@@ -1417,7 +1417,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ####登录并注册新LCUser
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。如：
+使用Facebook账号登录后，如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该用户创建一个账号，并与其绑定。如：
 
 ```java
 LCFacebookUtils.logInInBackground(this, new LogInCallback<LCUser>() {
@@ -1438,7 +1438,7 @@ LCFacebookUtils.logInInBackground(this, new LogInCallback<LCUser>() {
 
 * 用户通过Facebook SDK提供的Login with Facebook界面登录Facebook
 * Facebook验证登录信息，并返回结果.
-* Leap Cloud SDK接受结果，并保存至LCUser. 如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户.
+* Leap Cloud SDK接受结果，并保存至LCUser. 如果该Facebook用户Id并未与任何LCUser绑定，Leap Cloud将自动为该用户创建一个账号.
 * 调用LC的LogInCallback登录该LCUser.
 
 ####绑定LCUser与Facebook账号
@@ -1476,7 +1476,7 @@ LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
 ###使用Twitter账号登录
 与Facebook类似，Twitter的Android SDK，也能帮助应用优化登录体验。对于已经安装Twitter应用的设备，LC应用可通过设备上的Twitter用户凭据，直接实现用户登录。对于未安装Twitter应用的设备，用户可以通过一个标准化的Twitter登录页面，提供相应的登录信息。
 
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。
+使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该用户创建一个账号，并与其绑定。
 ####准备工作
 1. 在*Twitter开发者中心*创建Twitter应用。点击My Apps >> Add a New App
 2. 打开Leap Cloud Console >> App Settings >> User Authentication.勾选Allow Twitter Authentication. 并将步骤一中获取的Twitter consumer Key填写至相应位置。
@@ -1486,7 +1486,7 @@ LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
 ```java
 LCTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
 ```
-5. 	在所有调用Login with Twitter的Activity中的onActivityResult()函数中添加如下代码，已完成验证。
+5. 	在所有调用Login with Twitter的Activity中的onActivityResult()函数中添加如下代码，以完成验证。
 
 ```java
 @Override
@@ -1496,7 +1496,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ####登录并注册新LCUser
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户，并与其绑定。如：
+使用Twitter账号登录后，如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该用户创建一个账号，并与其绑定。如：
 
 ```java
 LCTwitterUtils.logInInBackground(this, new LogInCallback<LCUser>() {
@@ -1517,7 +1517,7 @@ LCTwitterUtils.logInInBackground(this, new LogInCallback<LCUser>() {
 
 * 用户通过Twitter SDK提供的Login with Twitter界面登录Twitter
 * Twitter验证登录信息，并返回结果.
-* Leap Cloud SDK接受结果，并保存至LCUser. 如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该创建一个用户.
+* Leap Cloud SDK接受结果，并保存至LCUser. 如果该Twitter用户Id并未与任何LCUser绑定，Leap Cloud将自动为该用户创建一个账号.
 * 调用LC的LogInCallback登录该LCUser.
 
 ####绑定LCUser与Twitter账号
