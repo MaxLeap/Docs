@@ -1,51 +1,85 @@
 # Install the SDK
 
 1. Download & unzip the SDK
-    Make sure you are targeting Gingerbread (android-9) or higher.
-
+ 
     <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/las-sdk-all.zip">Download the SDK</a>
 
-2. Add the SDK to your app
-    ### Android Studio
+2. Add the SDK to your project
 
-    Drag the LAS-*.jar you downloaded into your existing app's "libs" folder and add the following to your `build.gradle`
-
-    ```groovy
+    Import the zip file's contents into your existing Android project by extracting it into your "libs" folder. If your project does not already have a "libs" folder, create one at the root of the project by right-clicking the Project and choosing "New" and then "Folder".
+    
+    Android Studio
+    
+    Adding following dependency in "build.gradle":
+    
+    ```java
     dependencies {
-        compile fileTree(dir: 'libs', include: 'LAS-*.jar')
+        compile fileTree(dir: 'libs', include: 'Leap Cloud-*.jar')
     }
     ```
-
-    ### Eclipse
+#	Config Leap Cloud Project
     
-    Import the zip file's contents into your existing Android project by extracting it into your "libs" folder. If your project does not already have a "libs" folder, create one at the root of the project by right-clicking the project and choosing "New" and then "Folder".
-    
-# Connect your app to LAS
-Before continuing, select your LAS app from the menu at the right. These steps are for your "TestLAS" app.
+ 1. Connect project to Leap Cloud app
 
-Call `LASConfig.initialize` from the `onCreate` method of your Application class to set your application id and client key:
+Call `LASConfig.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 
 ```java
-public void onCreate() {
-  LASConfig.initialize(this, "552747b460b287299ce86caa", "dndaRjhyNDEwZkhyNzc2UXFqWEtBdw");
-}
-```
+ 	import android.app.Application;
+ 	import as.leap.LCConfig;
+ 
+ 	public class MyApplication extends Application {
+ 	    @Override
+ 	    public void onCreate() {
+ 	        super.onCreate();
+ 	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+ 	    }
+ 	}
+ 	```
+ 2. Config Permission
+ 
+ 	Give app following permissions in AndroidManifest:
+ 	
+ 	```java
+ 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    	<uses-permission android:name="android.permission.INTERNET" />
+     ```
+ 	
+ 	Permission|Purpose|If Necessary
+ 	---|---|---
+ 	`ACCESS_NETWORK_STATE`|		Check the network access, 2G, 3G or WiFi| Necessary
+ 	`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI and mac| Necessary
+ 	`INTERNET`| 	Allow network access to send data to our server| Necessary
+ 	
+ 3. Quick Test Project Configuration
+ 
+ We can add following code in onCreate() method in Application to test if the project is already registered to Leap Cloud：
+ ```java
+ import android.app.Application;
+ import as.leap.LCConfig;
+ import as.leap.LCDataManager;
+ import as.leap.LCObject;
+ 
+ public class MyApplication extends Application {
+     @Override
+     public void onCreate() {
+         super.onCreate();
+         LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+         
+         //Test Project Configuration:
+         LCObject testObject = new LCObject("People");
+         testObject.put("Name", "David Wang");
+         LCDataManager.saveInBackground(testObject);
+     }
+ }
+ ```
+ 
+ This piece of data is trying to create a “class” － “People” in Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
 
-Your app must request the INTERNET and ACCESS_NETWORK_STATE permissions, if it isn't doing so already. Add these lines before the `<application>` tag in your `AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-```
-
-# Test the SDK
-After installing the SDK, copy and paste this code into your app, for example in `Application.onCreate()`:
-
-```java
-LASObject testObject = new LASObject("TestObject");
-testObject.put("foo", "bar");
-LASDataManager.saveInBackground(testObject);
-```
-
-Run your app. A new object of class `TestObject` will be sent to the LAS Cloud and saved. When you're ready, click the button below to test if your data was sent.
+ 
+ ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+ 
+It indicates that saving data to Cloud Data in the app with client is completed. 
+ 
+# Next Step
+At this point, you have completed the installation and configuration of Leap SDK. Please check [iOS SDK Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about Leap Cloud.
