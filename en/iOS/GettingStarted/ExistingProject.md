@@ -1,28 +1,17 @@
----
-title: Quick Start | LAS
-
-language_tabs:
-  - objc
-  - swift
-
-search: true
----
-
 # Install the SDK
 
 1. Download & unzip the SDK
 
-		Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
+	Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
 
-		<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip">Download the SDK</a>
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/Leap Cloud-SDK-Release/master/iOS/v1.5.0/Leap CloudAll-v1.5.0.zip">Download SDK</a>
 
 2. Add the SDK to your app
 
-	Drag the LAS.framework you downloaded into your Xcode project folder target.</br>
-	Make sure the "Copy items to destination's group folder" checkbox is checked.
+	Drag the `Leap Cloud.framework` you downloaded into your Xcode project folder target. Make sure the "Copy items to destination's group folder" checkbox is checked.
 	
 	<p class="image-wrapper">
-	![](/images/drag_sdk_to_project.png)
+	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
 
 3. Add the dependencies
 
@@ -30,12 +19,12 @@ search: true
 	Expand 'Link Binary With Libraries' as shown.
 	
 	<p class="image-wrapper">
-	![](/images/add_dependencies.png)
+	![add_dependencies](../../../images/add_dependencies.png)
 	
     Make sure "Enable Modules (C and Objective-C)" and "Link Frameworks Automatically" build settings are YES.
     
     <p class="image-wrapper">
-    ![](/images/enable_modules.png)
+    ![enable_modules](../../../images/enable_modules.png)
     
 	Click the + button in the bottom left of the 'Link Binary With Libraries' section and add the following libraries:
 	
@@ -43,42 +32,46 @@ search: true
 	CoreTelephony.framework</br>
 	SystemConfiguration.framework</br>
 	libsqlite3.dylib</br>
+	libz.dylib</br>
 
-# Connect your app to LAS servers
+# Connect Your App to Leap Cloud Server
 
 Open up your `AppDelegate.m` file and add the following import to the top of the file:
 
 ```objc
-#import <LAS/LAS.h>
+#import <Leap Cloud/Leap Cloud.h>
 ```
-
-Before continuing, select your LAS app from the menu at the right. These steps are for your "Test" app.
-
-Then paste the following inside the `application:didFinishLaunchingWithOptions:` function:
+Then copy following code into `application:didFinishLaunchingWithOptions:` method:
 
 ```objc
-[LAS setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
+[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
 ```
+
+Replace `your_application_id` and `your_client_id ` with the one of your Leap Cloud app.
+
 
 Compile and run!
 
 
-# Test the SDK
+# Test the Connection to Leap Cloud
+We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect Leap Cloud Services with the app:
 
-First make sure to include our SDK libraries from your .h file:
-
-```objc
-#import <LAS/LAS.h>
-```
-
-Then copy and paste this code into your app, for example in the `viewDidLoad` method (or inside another method that gets called when you run your app):
 
 ```objc
-LASObject *testObject = [LASObject objectWithClassName:@"TestObject"];
-testObject[@"foo"] = @"bar";
-[LASDataManager saveObjectInBackground:testObject block:nil];
+#import <Leap Cloud/Leap Cloud.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+
+// Create a piece of data
+LCObject *testObject = [LCObject objectWithClassName:@"Person"];
+testObject[@"Name"] = @"David Wang";
+[LCDataManager saveObjectInBackground:testObject block:nil];
 ```
 
-Run your app. A new object of class `TestObject` will be sent to the LAS servers and saved. When you're ready, click the button below to test if your data was sent.
+This code is used to create a piece of `Person` data. If there is no `Person` class in cloud, then it will create the class first and then insert data. 
 
-When you finish all of these steps above, you should see new data that we just defined appearing in the Cloud Data tab of the *Dashboard*.
+Run you app and you can see the data just created in Dev Center -> Data.
+
+![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
