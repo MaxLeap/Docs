@@ -38,7 +38,7 @@
 	libsqlite3.dylib</br>
 	libz.dylib</br>
 
-# Connect Your App to Leap Cloud Server
+# Connect Leap Cloud App
 
 Open up your `AppDelegate.m` file and add the following import to the top of the file:
 
@@ -70,7 +70,7 @@ Compile and run!
 
 # Quick Test
 
-1. Test the Connection to Leap Cloud
+1. Test the Connection to Leap Cloud App
 
 	We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect Leap Cloud Services with the app:
 

@@ -53,7 +53,7 @@ Replace `your_application_id` and `your_client_id ` with the one of your Leap Cl
 Compile and run!
 
 
-# Test the Connection to Leap Cloud
+# Test the Connection to Leap Cloud App
 We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect Leap Cloud Services with the app:
 
 

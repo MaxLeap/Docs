@@ -1,46 +1,46 @@
----
-title: Quick Start | LAS
-
-language_tabs:
-  - objective_c
-  - Swift
-
-search: true
----
-
 # Install the SDK
 
-1. Download & unzip the Project
+1. Download & unzip the Template Project
 
-    Make sure you are using the latest version of Xcode (v5.0+) and targeting iOS 6.0 or higher.
+	Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
 
-    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">Download the blank Xcode project</a>
+    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
 
-2. Add the SDK to your app
+2. Config Project
 
-    Before continuing, select your LAS app from the menu at the right. These steps are for your "Test" app.</br>
-    Open up the `AppDelegate.m` file and uncomment and edit the first line in `application:didFinishLaunchingWithOptions:` to be like so:
+Some configurations should be made before the operation:
+	
+	Open `AppDelegate.m` file in template project, and cancel annotations in `application:didFinishLaunchingWithOptions:` as shown below:
     
-    ```objective_c
-    [LAS setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+    ```objc
+    [Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
     ```
-3. Compile and run
+    
+     Replace `your_application_id` and `your_client_id ` with the one of your Leap Cloud app.
+    
+3. Then you can run it.
     
     
-# Test the SDK
+# Test Project Configuration
 
-First make sure to include our SDK libraries from your `ViewController.h` file:
+We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect Leap Cloud Services with the app:
 
-```objective_c
-#import <LAS/LAS.h>
-```
 
-Then copy and paste this code into your app, for example in the `viewDidLoad` method of `ViewController.m`.
+```objc
+#import <Leap Cloud/Leap Cloud.h>
 
-```objective_c
-LASObject *testObject = [LASObject objectWithClassName:@"TestObject"];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+
+// Create a piece of data
+LCObject *testObject = [LCObject objectWithClassName:@"Person"];
 testObject[@"foo"] = @"bar";
-[LASDataManager saveObjectInBackground:testObject block:nil];
+[LCDataManager saveObjectInBackground:testObject block:nil];
 ```
 
-Run your app. A new object of class `TestObject` will be sent to the LAS and saved. When you're ready, click the button below to test if your data was sent.
+This code is used to create a piece of `Person` data. If there is no `Person` class in cloud, then it will create the class first and then insert data. 
+
+Run you app and you can see the data just created in Dev Center -> Data.
+
+![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
