@@ -14,7 +14,7 @@ The service logic can be realized in client if the app is simple, while if the a
 
 In App Management page, you can check, create and manage the cloud code and the relevant logs of each version.
 
-**If you want to learn more about LC Cloud Code Service SDK, please check[Java Guide － Cloud Code](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.**
+**If you want to learn more about Leap Cloud Code Service SDK, please check[Java Guide － Cloud Code](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.**
 
 ##Version Status
 In Status report, we can check all cloud code that uploaded to the app. The report contains:
@@ -73,4 +73,4 @@ Once a job is added into the whitelist, Leap Cloud will not perform verification
 
 ## Next
 
-**If you want to learn more about LC Cloud Code Service SDK, please check [Java Guide － Cloud Code](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.**
+**If you want to learn more about Leap Cloud Code Service SDK, please check [Java Guide － Cloud Code](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.**
