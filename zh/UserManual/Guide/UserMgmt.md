@@ -1,7 +1,7 @@
 # 用户管理
 在用户管理中，您可以实现用户，角色以及用户分群的管理。同时您还可以查看并维护所有安装纪录。通过用户管理，您可以方便地管理用户，并对不同类型的用户进行分群，实现精细化管理。
 
-**如果您希望进一步了解Leap Cloud用户服务服务SDK，请参考[iOS开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH)或[Android开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH)。**
+**如果您希望进一步了解Leap Cloud用户服务SDK，请参考[iOS开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH)或[Android开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH)。**
 
 ##用户
 当用户在应用中注册账号之后，Leap Cloud 将生成该用户的`LCUser`实例，并显示在用户管理中心。
@@ -66,4 +66,4 @@
 此外，您还可以在这里，直接向该用户分群发送推送消息或应用内消息。
 
 ## 下一步
-**如果您希望进一步了解Leap Cloud用户服务服务SDK，请参考[iOS开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH)或[Android开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH)。**
+**如果您希望进一步了解Leap Cloud用户服务SDK，请参考[iOS开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH)或[Android开发指南 － 用户管理](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH)。**
