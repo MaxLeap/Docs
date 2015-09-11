@@ -4,7 +4,7 @@
 
 1.	Get project template and unzip it to your Workspace
 		
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LC-SDK-Release/master/Android/v0.6/LCStarterProject.zip">Download Android Template</a>
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip">Download Android Template</a>
 	
 2.	Open Project Template
 

@@ -4,7 +4,7 @@
 
 	Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
 
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/Leap Cloud-SDK-Release/master/iOS/v1.5.0/Leap CloudAll-v1.5.0.zip">Download SDK</a>
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip">Download SDK</a>
 
 2. Add the SDK to your app
 

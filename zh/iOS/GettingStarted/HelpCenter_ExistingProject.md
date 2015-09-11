@@ -5,7 +5,7 @@
 
 	请确认您使用的是Xcode最新版本（5.0+），目标平台为iOS 6.0 或者更高版本。
 
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/Leap Cloud-SDK-Release/master/iOS/v1.5.0/Leap CloudAll-v1.5.0.zip">下载SDK</a>
+	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip">下载SDK</a>
 
 2. 添加SDK到您的应用
 
