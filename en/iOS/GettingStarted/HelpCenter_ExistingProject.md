@@ -9,12 +9,12 @@
 
 2. Add the SDK to your app
 
-	Drag the `Leap Cloud.framework` you downloaded into your Xcode project folder target. Make sure the "Copy items to destination's group folder" checkbox is checked.
+	Drag the `MaxLeap.framework` you downloaded into your Xcode project folder target. Make sure the "Copy items to destination's group folder" checkbox is checked.
 	
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
 
-	Drag `LCHelpCenter.embeddedframework` into Xcode project with the same method.
+	Drag `MLHelpCenter.embeddedframework` into Xcode project with the same method.
 
 3. Add the dependencies
 
@@ -38,31 +38,31 @@
 	libsqlite3.dylib</br>
 	libz.dylib</br>
 
-# Connect Leap Cloud App
+# Connect MaxLeap App
 
 Open up your `AppDelegate.m` file and add the following import to the top of the file:
 
 ```objc
-#import <Leap Cloud/Leap Cloud.h>
+#import <MaxLeap/MaxLeap.h>
 ```
 
 Then copy following code into `application:didFinishLaunchingWithOptions:` method:
 
 ```objc
-[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
 ```
 
-Replace `your_application_id` and `your_client_id ` with the one of your Leap Cloud app.
+Replace `your_application_id` and `your_client_id ` with the one of your MaxLeap app.
 
 Then enable HelpCenter module:
 
 ```
-#import <LCHelpCenter/LCHelpCenter.h>
+#import <MLHelpCenter/MLHelpCenter.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
-	[LCHelpCenter install];
+	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+	[MLHelpCenter install];
 }
 ```
 
@@ -70,22 +70,22 @@ Compile and run!
 
 # Quick Test
 
-1. Test the Connection to Leap Cloud App
+1. Test the Connection to MaxLeap App
 
-	We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect Leap Cloud Services with the app:
+	We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect MaxLeap Services with the app:
 
 
 	```objc
-	#import <Leap Cloud/Leap Cloud.h>
+	#import <MaxLeap/MaxLeap.h>
 
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-		[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+		[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 		// Create a piece of data
-		LCObject *testObject = [LCObject objectWithClassName:@"Person"];
+		MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 		testObject[@"foo"] = @"bar";
-		[LCDataManager saveObjectInBackground:testObject block:nil];
+		[MLDataManager saveObjectInBackground:testObject block:nil];
 	}
 	```
 
@@ -100,7 +100,7 @@ Run you app and you can see the data just created in Dev Center -> Data.
 	Add following code in `viewDidAppear:` in `ViewController.m`:
 	
 	```
-	[[LCHelpCenter sharedInstance] showFAQs:self];
+	[[MLHelpCenter sharedInstance] showFAQs:self];
 	```
 	
 	Run the template project just configured, and you can see the following interface:
@@ -117,4 +117,4 @@ Run you app and you can see the data just created in Dev Center -> Data.
 	
 	![ios_issue_message_view](../../../images/ios_issue_message_view.png)
 	
-	You can see this feedback in Support -> App Issues -> New Issues in Leap Cloud website.
+	You can see this feedback in Support -> App Issues -> New Issues in MaxLeap website.

@@ -1,16 +1,16 @@
 
-# Leap Cloud CloudCode
-Leap Cloud
+# MaxLeap CloudCode
+
 ## Introduction
 
 ###What is CloudCode
-CloudCode refers to the code depolyed and executed on Leap Cloud. It can be used to implement the complicated service logic which should be executed in cloud. It is similar to the traditional Web Service or RESTful API that runs in Web Server. It provides access to external data sources through the RESTFul API and is also invoked with the same way by mobile apps.  
+CloudCode refers to the code depolyed and executed on MaxLeap. It can be used to implement the complicated service logic which should be executed in cloud. It is similar to the traditional Web Service or RESTful API that runs in Web Server. It provides access to external data sources through the RESTFul API and is also invoked with the same way by mobile apps.  
 
 ###Why is CloudCode Necessary 
 
 The service logic can be implemented in client if the app is simple, while if the app requires more complicated service logic, want to access more data or need a number of multiplication, then CloudCode is required. The advantages of CloudCode can be summarized as follows:
 
-* Powerful Computing ability: CloudCode executes in Docker of Leap Cloud and supports multi-CPU and large memory.
+* Powerful Computing ability: CloudCode executes in Docker of MaxLeap and supports multi-CPU and large memory.
 * More Effective: Able to require Cloud Data reepeatedly with high speed network services in an invocation. The efficiency will be much improved. 
 * The same set of code can provide services for iOS, Android, Website, etc. 
 
@@ -19,7 +19,7 @@ The service logic can be implemented in client if the app is simple, while if th
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-A CloudCode project contains Custom CloudCode, CloudCode SDK and 3rd Party Libaries. After the development, please package the project with maven and upload it to Leap Cloud with CloudCode command line tool lcc and Leap Cloud will generate corresponding docker image. Leap Cloud can start Docker container to operate the Docker image with lcc deploy.
+A CloudCode project contains Custom CloudCode, CloudCode SDK and 3rd Party Libaries. After the development, please package the project with maven and upload it to MaxLeap with CloudCode command line tool lcc and MaxLeap will generate corresponding docker image. MaxLeap can start Docker container to operate the Docker image with lcc deploy.
 
 CloudCode supports Java only currently, Python version is coming soon.
 	  
@@ -54,7 +54,7 @@ Folliwng command will install "lcc" to `/usr/local/bin/lcc`. You can use lcc in 
 
 ## Quick Start 
 ### Create CloudCode Project
-Get Leap Cloud CloudCode Java Project Templates
+Get MaxLeap CloudCode Java Project Templates
 
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
@@ -82,22 +82,22 @@ Modify following key values according to the key you got from creating the app:
 	
 Key|Value|
 ------------|-------|
-applicationName|Leap Cloud app name
+applicationName|MaxLeap app name
 applicationId|Application ID
 applicationKey|Master Key
 java-main|Name of the main function
 package-hook|Name of hook package
-package-entity|Name of CLeap Clouds entity package
+package-entity|Name of Class entity package
 version|Current CloudCode version number
 
 ### Define a Simple Function
 
 ```Java
-import as.leap.code.LCLoader;
-import as.leap.code.Response;
-import as.leap.code.impl.GlobalConfig;
-import as.leap.code.impl.LoaderBase;
-import as.leap.code.impl.Response;
+import com.maxleap.code.MLLoader;
+import com.maxleap.code.Response;
+import com.maxleap.code.impl.GlobalConfig;
+import com.maxleap.code.impl.LoaderBase;
+import com.maxleap.code.impl.Response;
 
 public class Main extends LoaderBase implements Loader {
     @Override
@@ -141,8 +141,8 @@ Send following POST request towards Cloud Function which is already deployed wit
 
 ```shell
 curl -X POST \
--H "X-LC-AppId: YOUR_APPID" \
--H "X-LC-APIKey: YOUR_APIKEY" \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
@@ -156,16 +156,16 @@ which indicates that the test is passed and the deployment is successful.
 
 Notice: 
 
-* The value of X-LC-APIKey is the API KEY of application, not the Master Key of CloudCode project. 
+* The value of X-ML-APIKey is the API KEY of application, not the Master Key of CloudCode project. 
 
 ## Cloud Function
-Cloud Function is the code running in Leap Cloud which could be used to implement complicated logic and use various 3rd Party Libs.
+Cloud Function is the code running in MaxLeap which could be used to implement complicated logic and use various 3rd Party Libs.
 
 ###Define Cloud Function
-Every Cloud Function should implement as.leap.code.Handler interface and this interface is the typical Functional Interface. 
+Every Cloud Function should implement com.maxleap.code.Handler interface and this interface is the typical Functional Interface. 
 
 ```Java
-public interface Handler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
+public interface Handler <T extends com.maxleap.code.Request, R extends com.maxleap.code.Response> {
     R handle(T t);
 }
 ```
@@ -261,8 +261,8 @@ The request format is shown as follows:
 
 ```shell
 curl -X POST \
--H "X-LC-AppId: YOUR_APPID" \
--H "X-LC-APIKey: YOUR_APIKEY" \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
@@ -287,7 +287,7 @@ In iOS SDK：
 
 ```objective-c
 NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
-    [LCCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
+    [MLCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
         if (error) {
             // an error occured
         } else {
@@ -494,13 +494,13 @@ Or you can check all logs of this app by entering Management Console －> Dev Ce
 img
 
 ## LCC － CloudCode Command Line Tool
-LCC command line tool is designed for the upload, deployment, undeployment and version management of CloudCode project. You can upload the package generated from Maven to Leap Cloud with it and the package will be produced into Docker Image in cloud. As for the deployment, it is about activating the Image with Docker Container. Each version of CloudCode uploaded to cloud will be saved, you can uninstall any version of CloudCode and then deploy another one.
+LCC command line tool is designed for the upload, deployment, undeployment and version management of CloudCode project. You can upload the package generated from Maven to MaxLeap with it and the package will be produced into Docker Image in cloud. As for the deployment, it is about activating the Image with Docker Container. Each version of CloudCode uploaded to cloud will be saved, you can uninstall any version of CloudCode and then deploy another one.
 
 ###Login:
 ```shell
 lcc login <username>
 ```
-`<username>` is the account name of Leap Cloud Management Console, please enter password then according to the tip.
+`<username>` is the account name of MaxLeap Management Console, please enter password then according to the tip.
 ###Show All Apps：
 ```shell
 lcc apps
