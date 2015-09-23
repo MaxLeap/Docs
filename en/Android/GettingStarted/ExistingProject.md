@@ -25,7 +25,7 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
 
 ```java
  	import android.app.Application;
- 	import as.leap.MLConfig;
+ 	import com.maxleap.MLConfig;
  
  	public class MyApplication extends Application {
  	    @Override
@@ -56,9 +56,9 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
  We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
  ```java
  import android.app.Application;
- import as.leap.MLConfig;
- import as.leap.MLDataManager;
- import as.leap.MLObject;
+ import com.maxleap.MLConfig;
+ import com.maxleap.MLDataManager;
+ import com.maxleap.MLObject;
  
  public class MyApplication extends Application {
      @Override

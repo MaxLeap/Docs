@@ -26,7 +26,7 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 	
 	```java
 		import android.app.Application;
-		import as.leap.MLConfig;
+		import com.maxleap.MLConfig;
 	
 		public class MyApplication extends Application {
 			@Override
@@ -62,9 +62,9 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 	
 	```java
 	import android.app.Application;
-	import as.leap.MLConfig;
-	import as.leap.MLDataManager;
-	import as.leap.MLObject;
+	import com.maxleap.MLConfig;
+	import com.maxleap.MLDataManager;
+	import com.maxleap.MLObject;
 	
 	public class MyApplication extends Application {
 		@Override
