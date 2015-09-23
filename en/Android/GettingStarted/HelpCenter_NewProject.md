@@ -1,10 +1,10 @@
 #	Install the SDK
 
-HelpCenter relies on Leap Cloud Core SDK, please check if your project has installed Leap Cloud Core SDK already before install and use HelpCenter SDK. You can check more details in [Leap Cloud Core SDK Guide](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID).
+HelpCenter relies on MaxLeap Core SDK, please check if your project has installed MaxLeap Core SDK already before install and use HelpCenter SDK. You can check more details in [MaxLeap Core SDK Guide](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID).
 
 1.	Get project template:
 
-	<a class="download-sdk" href="...">Download Leap Cloud HelpCenter project template</a>
+	<a class="download-sdk" href="...">Download MaxLeap HelpCenter project template</a>
 	
 2.	Open project template
 	
@@ -18,21 +18,21 @@ HelpCenter relies on Leap Cloud Core SDK, please check if your project has insta
 		
 	1.	Open Eclipse and click "File" -> "Import..." 
 	2. 	Choose "General"-> "Existing Projects into Workspace"
-	3. 	Select “Select root directory”, enter workspace directory and choose LCStarterProject in project list.
+	3. 	Select “Select root directory”, enter workspace directory and choose MLStarterProject in project list.
 
-#	Connect project to Leap Cloud app
+#	Connect project to MaxLeap app
 	
 	Call `LASConfig.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 	
 	```java
 		import android.app.Application;
-		import as.leap.LCConfig;
+		import as.leap.MLConfig;
 	
 		public class MyApplication extends Application {
 			@Override
 			public void onCreate() {
 				super.onCreate();
-				LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+				MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 			}
 		}
 	```
@@ -56,26 +56,26 @@ HelpCenter relies on Leap Cloud Core SDK, please check if your project has insta
 	
 #	Quick Test
 
-1. Test Leap Cloud Core SDK
+1. Test MaxLeap Core SDK
 
-	We can add following code in onCreate() method in Application to test if the project is already registered to Leap Cloud：
+	We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
 	
 	```java
 	import android.app.Application;
-	import as.leap.LCConfig;
-	import as.leap.LCDataManager;
-	import as.leap.LCObject;
+	import as.leap.MLConfig;
+	import as.leap.MLDataManager;
+	import as.leap.MLObject;
 	
 	public class MyApplication extends Application {
 		@Override
 		public void onCreate() {
 			super.onCreate();
-			LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+			MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
 			
 			//Test Project Configuration：
-			LCObject testObject = new LCObject("People");
+			MLObject testObject = new MLObject("People");
 			testObject.put("Name", "David Wang");
-			LCDataManager.saveInBackground(testObject);
+			MLDataManager.saveInBackground(testObject);
 		}
 	}
 	```
@@ -84,13 +84,13 @@ This piece of data is trying to create a “class” － “People” in Cloud D
 	
 	![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 	
-	It indicates that saving data to Cloud Data in the app with client is completed, so does the installation and configuration of Leap Cloud SDK.
+	It indicates that saving data to Cloud Data in the app with client is completed, so does the installation and configuration of MaxLeap SDK.
 
-2. Test Leap Cloud HelpCenter SDK
-	 We can add following code in onCreate() method in Application to test if Leap Cloud HelpCenter works in the project:
+2. Test MaxLeap HelpCenter SDK
+	 We can add following code in onCreate() method in Application to test if MaxLeap HelpCenter works in the project:
 	
 	```java
-	LCHelpCenter.openFaqs(MainActivity.this);
+	MLHelpCenter.openFaqs(MainActivity.this);
 	```
 	
 	Run it and you can see this in Andriod test device:
@@ -101,12 +101,12 @@ This piece of data is trying to create a “class” － “People” in Cloud D
 	
 	![imgSupportAddMsg](../../../images/imgSupportAddMsg.png)
 	
-	At last, click the top right "send" button and you can receive a message from Leap Cloud: 
+	At last, click the top right "send" button and you can receive a message from MaxLeap: 
 	
 	![imgSupportConversation](../../../images/imgSupportConversation.png)
 	
-	It indicates that Leap Cloud has received your feedback message. Test succeeded.
+	It indicates that MaxLeap has received your feedback message. Test succeeded.
 
 #Next Step
 
-At this point, you have completed the installation and configuration of HelpCenter SDK. Please check [HelpCenter SDK Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH) to find more details about Leap Cloud.
+At this point, you have completed the installation and configuration of HelpCenter SDK. Please check [HelpCenter SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH) to find more details about MaxLeap.

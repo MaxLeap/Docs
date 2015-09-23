@@ -1,9 +1,9 @@
 # Cloud Config
 ## Introduction
 ###What is Cloud Config
-Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in Leap Cloud with Console and read cloud parameter with iOS/Android SDK.
+Every app has a `LASCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in MaxLeap with Console and read cloud parameter with iOS/Android SDK.
 ###Why is Cloud Config Necessary
-The advantages of putting part of Leap Cloud configuration in cloud can be summarized as follows:
+The advantages of putting part of MaxLeap configuration in cloud can be summarized as follows:
 
 * **dynamic configuration: **
 * **Personalized User Experience: **You can config parameters based on Segment in cloud and customize different experience for different users.
@@ -20,15 +20,15 @@ Value|Parameter Value
 
 You can config different parameter value for different Segments. Please check [Console Guide - Cloud Config](..) for more details about add new Cloud Config Parameter. 
 
-##Get LC Cloud Config Object
-You can get latest Cloud Config with `LCCloudConfig.getCurrentCloudConfig()`.
+##Get MaxLeap Object
+You can get latest Cloud Config with `MaxLeap.getCurrentCloudConfig()`.
 
 ```java
-LCCloudConfig currentConfig = LCCloudConfig.getCurrentCloudConfig();
+MaxLeap currentConfig = MaxLeap.getCurrentCloudConfig();
 ```
 
-##Get LC Cloud Config Parameter Value
-For getting a cloud parameter value, you need to know type of the value and then invoke `getType()` method in LC Cloud Config instance. There are two parameters required in this method: the first one is cloud parameter name and the second one is the default value. If there is no cloud parameter, then the default value will be assigned to the parameter. 
+##Get MaxLeap Parameter Value
+For getting a cloud parameter value, you need to know type of the value and then invoke `getType()` method in MaxLeap instance. There are two parameters required in this method: the first one is cloud parameter name and the second one is the default value. If there is no cloud parameter, then the default value will be assigned to the parameter. 
 
 ```java
 currentConfig.getString(key, defaultValue)
@@ -45,12 +45,12 @@ currentConfig.getDate(key, defaultValue)
 
 ## Modify Cloud Config
 
-You can get `LCCloudConfig` object with `LCCloudConfigManager.getInBackground()` and then invoke `currentConfig.getInt()` to refresh parameter value. There are two parameters in this method: one is cloud parameter name and the other is new parameter name.
+You can get `MaxLeap` object with `MaxLeapManager.getInBackground()` and then invoke `currentConfig.getInt()` to refresh parameter value. There are two parameters in this method: one is cloud parameter name and the other is new parameter name.
 
 ```java
-LCCloudConfigManager.getInBackground(new ConfigCallback() {
+MaxLeapManager.getInBackground(new ConfigCallback() {
     @Override
-    public void done(LCCloudConfig cloudConfig, LCException exception) {
+    public void done(MaxLeap cloudConfig, MLException exception) {
         if (exception == null) {
             int y = currentConfig.getInt("y", 100);
         } else{}
@@ -66,18 +66,18 @@ After the observer is added and any Activity started or resumed, application wil
 @Override
 protected void onResume() {
     super.onResume();
-    LCCloudConfigManager.refereshKeysInBackground();
+    MaxLeapManager.refereshKeysInBackground();
 }
 ```
 
 ###Add Observer
 
-You can observe cloud paramter change with `LCCloudConfigManager.observeKeyInBackground()` and get latest parameter value in time. There are two parameters in this method: one is cloud parameter name and the other is an instance of the callback class "ValueChangedCallback".
+You can observe cloud paramter change with `MaxLeapManager.observeKeyInBackground()` and get latest parameter value in time. There are two parameters in this method: one is cloud parameter name and the other is an instance of the callback class "ValueChangedCallback".
 
 ```java
-LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
+MaxLeapManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
     @Override
-    public void done(LCCloudConfig cloudConfig) {
+    public void done(MaxLeap cloudConfig) {
        int newKeyX = cloudConfig.get("keyX", null);
     }
 });
@@ -91,18 +91,18 @@ A cloud parameter supports multiple observers.
 You can add following code to remove the observer:
 
 ```java
-LCCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
+MaxLeapManager.removeObserver("keyX",  previousValueChangedCallback);
 ```
 
 Remove all observers of a cloud parameter:
 
 ```java
-LCCloudConfigManager.removeObserver("x");
+MaxLeapManager.removeObserver("x");
 ```
 
 Remove all observers of all cloud parameters:
 
 ```java
-LCCloudConfigManager.removeAllObservers();
+MaxLeapManager.removeAllObservers();
 ```
 

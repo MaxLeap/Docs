@@ -1,12 +1,12 @@
 # Marketing
 ##Introduction
-###What is Leap Cloud Marketing
+###What is MaxLeap Marketing
 s
-Marketing is a promotion and message issuance service provided by Leap Cloud. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
+Marketing is a promotion and message issuance service provided by MaxLeap. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
 
 
-###Why is Leap Cloud Marketing Necessary 
-With data from Analytics and Segment provided by Leap Cloud Users, you can make and implement marketing strategies with high efficiency. The advantages of Leap Cloud Marketing can be summarized as follows: 
+###Why is MaxLeap Marketing Necessary 
+With data from Analytics and Segment provided by MaxLeap Users, you can make and implement marketing strategies with high efficiency. The advantages of MaxLeap Marketing can be summarized as follows: 
 
 
 * **Improve Penetrance: **Issue marketing campaign at any time to improve the user engagement and penetrance
@@ -14,14 +14,14 @@ With data from Analytics and Segment provided by Leap Cloud Users, you can make 
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
 
-### How Does Leap Cloud Marketing Work
+### How Does MaxLeap Marketing Work
 Pic
 
 ## Push Notification
 Push Notification helps you show messages to plenty of users. After you send the message, users can see it in status bar whether they open the app or not. You can customize message content in Console and send several properties (Key-Vaule) to clients. The application will determine the Target Activity according to the property after users tap on the push.
 
 ###Configuration
-Leap Cloud Core SDK provides a whole set of push project based on GCM. GCM (Google Cloud Messaging) is a free service that helps developers send messages across multiple platforms. You need to complete following settings to use GCM: 
+MaxLeap Core SDK provides a whole set of push project based on GCM. GCM (Google Cloud Messaging) is a free service that helps developers send messages across multiple platforms. You need to complete following settings to use GCM: 
 
 1. Provide **Sender ID** and **API key**. Please get those two keys in [Google Developer Center](..). 
 2. Add permission and Push Receiver (used to handle Push and show Notification) in `AndroidManifest.xml`:
@@ -47,7 +47,7 @@ Leap Cloud Core SDK provides a whole set of push project based on GCM. GCM (Goog
 	        android:value="@integer/google_play_services_version" />
 
 	    <receiver
-	    android:name="as.leap.push.GcmBroadcastReceiver"
+	    android:name="com.maxleap.push.GcmBroadcastReceiver"
 	    android:permission="com.google.android.c2dm.permission.SEND">
 	    <intent-filter>
 	        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -57,10 +57,10 @@ Leap Cloud Core SDK provides a whole set of push project based on GCM. GCM (Goog
 	    </intent-filter>
 	    </receiver>
 	    
-	    <receiver android:name="as.leap.LCPushBroadcastReceiver" android:exported="false">
+	    <receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
 	    <intent-filter>
-	        <action android:name="as.leap.push.intent.RECEIVE"/>
-	        <action android:name="as.leap.push.intent.OPEN"/>
+	        <action android:name="com.maxleap.push.intent.RECEIVE"/>
+	        <action android:name="com.maxleap.push.intent.OPEN"/>
 	    </intent-filter>
 		</receiver>
 	</application>
@@ -69,7 +69,7 @@ Leap Cloud Core SDK provides a whole set of push project based on GCM. GCM (Goog
 
 	```xml
 	<meta-data
-	    android:name="as.leap.push.gcm_sender_id"
+	    android:name="com.maxleap.push.gcm_sender_id"
 	    android:value="id:YOUR_SENDER_ID" />
 	```
 
@@ -77,13 +77,13 @@ Leap Cloud Core SDK provides a whole set of push project based on GCM. GCM (Goog
 
 	```xml
 	<meta-data
-	    android:name="as.leap.push.notification_icon"
+	    android:name="com.maxleap.push.notification_icon"
 	    android:resource="@android:drawable/ic_dialog_alert" />
 	```
-5. **Enable Marketing Service：**Add following code **Before** `LCConfig.initialize()` in `Application.onCreate()`: 
+5. **Enable Marketing Service：**Add following code **Before** `MLConfig.initialize()` in `Application.onCreate()`: 
 
 	```java
-	LCConfig.setMarketingEnabled(true);
+	MLConfig.setMarketingEnabled(true);
 	```
 
 Notice:
@@ -94,14 +94,14 @@ Notice:
 
 You can customize the display and processing with following steps:
 
-1. Add new CustomPushReceiver class and inherit LCPushBroadcastReceiver 
+1. Add new CustomPushReceiver class and inherit MLPushBroadcastReceiver 
 2. Customize CustomPushReceiver, including Target Activity, icon, etc.
 3. Config CustomPushReceiver in `AndroidManifest.xml` 
 
 #####Add New Receiver
 
 ```java
-public class CustomPushReceiver extends LCPushBroadcastReceiver {
+public class CustomPushReceiver extends MLPushBroadcastReceiver {
 	@Override
 	protected Class<? extends Activity> getActivity(Intent intent) {
 		return YOUR_ACTIVITY.class;
@@ -125,7 +125,7 @@ After returns with a non-null value, it will enter Target Activity automatically
 Intent intent = getIntent();
 if (intent != null && intent.getExtras() != null) {
     for (String key : intent.getExtras().keySet()) {
-        LCLog.i(TAG, key + " = " + intent.getStringExtra(key));
+        MLLog.i(TAG, key + " = " + intent.getStringExtra(key));
     }
 }
 ```
@@ -157,7 +157,7 @@ Or, you can config in `AndroidManifest.xml` as aforementioned
 
 ```xml
 <meta-data
-    android:name="as.leap.push.notification_icon"
+    android:name="com.maxleap.push.notification_icon"
     android:resource="@android:drawable/ic_dialog_alert" />
 ```
 
@@ -179,15 +179,15 @@ protected Notification getNotification(Context context, Intent intent)
 ```
 
 #####Config CustomPushReceiver
-Replace default `as.leap.LCPushBroadcastReceiver` with following Receiver：
+Replace default `com.maxleap.MLPushBroadcastReceiver` with following Receiver：
 
 ```xml
 <receiver
     android:name=".CustomPushReceiver"
     android:exported="false">
     <intent-filter>
-        <action android:name="as.leap.push.intent.RECEIVE" />
-        <action android:name="as.leap.push.intent.OPEN" />
+        <action android:name="com.maxleap.push.intent.RECEIVE" />
+        <action android:name="com.maxleap.push.intent.OPEN" />
     </intent-filter>
 </receiver>
 ```
@@ -195,10 +195,10 @@ Replace default `as.leap.LCPushBroadcastReceiver` with following Receiver：
 ## In-app Message
 
 ###Configuration
-In order to user in-app message, you need to **enable Marketing service：** add following code before `LCConfig.initialize()` in `Application.onCreate()` :
+In order to user in-app message, you need to **enable Marketing service：** add following code before `MLConfig.initialize()` in `Application.onCreate()` :
 
 ```java
-LCConfig.setMarketingEnabled(true);
+MLConfig.setMarketingEnabled(true);
 ```
 
 ###Define Target Activity
@@ -211,7 +211,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	Intent intent = getIntent();
 	if (intent != null && intent.getExtras() != null) {
 		for (String key : intent.getExtras().keySet()) {
-			LCLog.i(TAG, key + " = " + intent.getStringExtra(key));
+			MLLog.i(TAG, key + " = " + intent.getStringExtra(key));
 		}
 	}
 }
@@ -223,15 +223,15 @@ and add code in `onResume()` and `onPause()`
 @Override
 protected void onResume() {
 		super.onResume();
-	LCMarketing.setInAppMessageDisplayActivity(this);
-	LCAnalytics.onResume(this);
+	MLMarketing.setInAppMessageDisplayActivity(this);
+	MLAnalytics.onResume(this);
 }
 
 @Override
 protected void onPause() {
 		super.onPause();
-	LCMarketing.dismissCurrentInAppMessage();
-	LCMarketing.clearInAppMessageDisplayActivity();
-	LCAnalytics.onPause(this);
+	MLMarketing.dismissCurrentInAppMessage();
+	MLMarketing.clearInAppMessageDisplayActivity();
+	MLAnalytics.onPause(this);
 }
 ```

@@ -17,21 +17,21 @@
         compile fileTree(dir: 'libs', include: 'Leap Cloud-*.jar')
     }
     ```
-#	Config Leap Cloud Project
+#	Config MaxLeap Project
     
- 1. Connect project to Leap Cloud app
+ 1. Connect project to MaxLeap app
 
 Call `LASConfig.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 
 ```java
  	import android.app.Application;
- 	import as.leap.LCConfig;
+ 	import as.leap.MLConfig;
  
  	public class MyApplication extends Application {
  	    @Override
  	    public void onCreate() {
  	        super.onCreate();
- 	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+ 	        MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
  	    }
  	}
  	```
@@ -53,23 +53,23 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
  	
  3. Quick Test Project Configuration
  
- We can add following code in onCreate() method in Application to test if the project is already registered to Leap Cloud：
+ We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
  ```java
  import android.app.Application;
- import as.leap.LCConfig;
- import as.leap.LCDataManager;
- import as.leap.LCObject;
+ import as.leap.MLConfig;
+ import as.leap.MLDataManager;
+ import as.leap.MLObject;
  
  public class MyApplication extends Application {
      @Override
      public void onCreate() {
          super.onCreate();
-         LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+         MLConfig.initialize(this, "{{appid}}", "{{restkey}}");
          
          //Test Project Configuration:
-         LCObject testObject = new LCObject("People");
+         MLObject testObject = new MLObject("People");
          testObject.put("Name", "David Wang");
-         LCDataManager.saveInBackground(testObject);
+         MLDataManager.saveInBackground(testObject);
      }
  }
  ```
@@ -82,4 +82,4 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
 It indicates that saving data to Cloud Data in the app with client is completed. 
  
 # Next Step
-At this point, you have completed the installation and configuration of Leap SDK. Please check [iOS SDK Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about Leap Cloud.
+At this point, you have completed the installation and configuration of MaxLeap SDK. Please check [iOS SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about MaxLeap.

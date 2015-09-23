@@ -2,7 +2,7 @@
 ## Introduction
 
 ### What is Cloud Data
-Cloud Data is the data storage service provided by Leap Cloud. It is based on the `LCObject` and each `LCObject` contains several key-values. All `LCObject` are stored in Leap Cloud, you can perform operations towards them with iOS/Android Core SDK. Besides, Leap Cloud  provides some special objects, like `LCUser`, `LCRole`, `LCFile` and `LCGeoPoint`. They are all based on `LCObject`.
+Cloud Data is the data storage service provided by Leap Cloud. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in Leap Cloud, you can perform operations towards them with iOS/Android Core SDK. Besides, Leap Cloud  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
 
 
 ### Why is Cloud Data Nccessary
@@ -16,7 +16,7 @@ Cloud Data can help you build and maintain the facility of your database, thus f
 ### How Does Cloud Data Run
 
 ## Cloud Object
-The object that stored in Cloud Data is called `LCObject` and every `LCObject` is planned in different `class`(like table in database). `LCObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by LCObject package, neither does the type of property value. You can add new property and value to `LCObject` at anytime, which could be stored in cloud by Cloud Data service.
+The object that stored in Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by Cloud Data service.
 
 ###Create New
 Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 
@@ -30,19 +30,19 @@ isRead|false|Boolean
 The method of adding property is similar to `Map` in `Java`: 
 
 ```java
-LCObject myComment = new LCObject("Comment");
+MLObject myComment = new MLObject("Comment");
 myComment.put("content", "kind of funny");
 myComment.put("pubUserId", 1314520);
 myComment.put("isRead", false);
-LCDataManager.saveInBackground(myComment);
+MLDataManager.saveInBackground(myComment);
 ```
 
 Notices:
 
 * **When was "Comment" Class created:** If there is no Comment Class in Cloud(Leap Cloud Server, hereinafter referred to as Cloud) when you run the code above, then Leap Cloud will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
 * **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
-* **LCObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `LCObject` ahead of time.
-* **Property Created Automatically:** Every LCObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by Leap Cloud backend system automatically, please don't save data with those properties in the code.
+* **MLObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `MLObject` ahead of time.
+* **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by Leap Cloud backend system automatically, please don't save data with those properties in the code.
 
 	Property Name|Value|
 	-------|-------|
@@ -50,15 +50,15 @@ Notices:
 	createdAt|Date Created of the Object 
 	updatedAt|Date Last Modified of the Object 
 
-* **Size Limit:** The size limit for LC Object is 128K.
+* **Size Limit:** The size limit for ML Object is 128K.
 * **synchronous/asynchronous operation:** Most of the code in Android platform works on the main thread while if there is any time-consuming blocking operation, like access to the network, your code may not be working properly. To avoid this, you can change the synchronous operation that may cause blocking into asynchronous operation and run it in a background thread, e.g. saveInBackground() is the asynchronous version of save(), and it requires a parameter - a callback instance - which will be executed once the asynchronous operation is done. There are also corresponding asynchronous versions for operations like query, update and delete. 
-* The name of the key should be alphabetic characters while the type can be letters, numbers, Boolean, arrays, LCObject and any other types that support JSON. 
-* You can provide the second parameter, SaveCallback instance, when invoking `LCDataManager.saveInBackground()` to check if the creation is succeeded. 
+* The name of the key should be alphabetic characters while the type can be letters, numbers, Boolean, arrays, MLObject and any other types that support JSON. 
+* You can provide the second parameter, SaveCallback instance, when invoking `MLDataManager.saveInBackground()` to check if the creation is succeeded. 
 
 	```java
-	LCDataManager.saveInBackground(myComment, new SaveCallback() {
+	MLDataManager.saveInBackground(myComment, new SaveCallback() {
 	  @Override
-	  public void done(LCException e) {
+	  public void done(MLException e) {
 	    if(e==null){
 	      // Succeeded
 	    } else{
@@ -69,54 +69,54 @@ Notices:
 ```
 
 ###Query
-#####LCObject Query
-You can get the complete `LCObject` with the ObjectId of any piece of data. There are three required parameters for invoking `LCQueryManager.getInBackground()`: class name of the object, ObjectId and callback function, which would be invoked in getInBackground() method.
+#####MLObject Query
+You can get the complete `MLObject` with the ObjectId of any piece of data. There are three required parameters for invoking `MLQueryManager.getInBackground()`: class name of the object, ObjectId and callback function, which would be invoked in getInBackground() method.
 
 
 ```java
 String objId="OBJECT_ID";
-LCQueryManager.getInBackground("Comment", objId, new GetCallback<LCObject>() {
+MLQueryManager.getInBackground("Comment", objId, new GetCallback<MLObject>() {
 
   @Override
-  public void done(LCObject Object, LCException e) {
+  public void done(MLObject Object, MLException e) {
     // Object is the target one
 
   }
 });
 ```
 
-Or, you can get LCObject with "paramater value + LCQuery": 
+Or, you can get MLObject with "paramater value + MLQuery": 
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("Comment");
+MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 query.whereMatches("isRead",false);
 
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
   @Override
-  public void done(List<LCObject> list, LCException e) {
+  public void done(List<MLObject> list, MLException e) {
     // list is the target one
   }
 });
 ```
 
-If you only need the first piece of data of Query results, please invoke `LCQueryManager.getFirstInBackground()` method: 
+If you only need the first piece of data of Query results, please invoke `MLQueryManager.getFirstInBackground()` method: 
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("Comment");
+MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 query.whereMatches("pubUserId","USER_ID");
 
-LCQueryManager.getFirstInBackground(query, new GetCallback<LCObject>() {
+MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
   @Override
-  public void done(LCObject LCObject, LCException e){
-    // LCObject is the target one
+  public void done(MLObject MLObject, MLException e){
+    // MLObject is the target one
   }
 });
 ```
 
 
-#####LCObject Parameter Value Query 
-LCObject Parameter Value Query
-You can invoke getType method in relative with the data type to get value from the LCObject instance:
+#####MLObject Parameter Value Query 
+MLObject Parameter Value Query
+You can invoke getType method in relative with the data type to get value from the MLObject instance:
 
 ```java
 int pubUserId = comment.getInt("pubUserId");
@@ -125,48 +125,48 @@ boolean isRead = comment.getBoolean("isRead");
 ```
 
 ###Update
-Two steps are required to update LCObject: the first is to get the target LCObject and the second is to edit and save. 
+Two steps are required to update MLObject: the first is to get the target MLObject and the second is to edit and save. 
 
 ```java
-// Get LCObject with objectId
+// Get MLObject with objectId
 String objId="OBJECT_ID";
-LCQueryManager.getInBackground(query, objId, new GetCallback<LCObject>() {
+MLQueryManager.getInBackground(query, objId, new GetCallback<MLObject>() {
 
   @Override
-  public void done(LCObject comment, LCException e) {
+  public void done(MLObject comment, MLException e) {
     if (e == null) {
       // Mark the comment as read
       comment.put("isRead", true);
-      LCDataManager.saveInBackground(comment);
+      MLDataManager.saveInBackground(comment);
     }
   }
 });
 ```
 
 ###Delete 
-#####Delete LCObject
-You can delete LCObject with `LCDataManager.deleteInBackground()` method. To ensure the delete, please use DeleteCallback to handle the delete results.
+#####Delete MLObject
+You can delete MLObject with `MLDataManager.deleteInBackground()` method. To ensure the delete, please use DeleteCallback to handle the delete results.
 
 ```java
-LCDataManager.deleteInBackground(comment);
+MLDataManager.deleteInBackground(comment);
 ```
 
 #####Batch Delete 
-You can delete LCObject, a `List<LCObject>` instance, with `LCDataManager.deleteInBackground()` method. 
+You can delete MLObject, a `List<MLObject>` instance, with `MLDataManager.deleteInBackground()` method. 
 
 ```java
-List<LCObject> objects = ...
-LCDataManager.deleteAllInBackground(objects);
+List<MLObject> objects = ...
+MLDataManager.deleteAllInBackground(objects);
 ```
 
-#####Delete a Property of LCObject Instance
+#####Delete a Property of MLObject Instance
 Except from deleting a whole object instance, you can delete any target value in the instance. Note that the edition can only be synchronized to cloud with invocation of saveInBackground().
 
 ```java
 // Remove isRead property from the instance
 comment.remove("isRead");
 // Save 
-LCDataManager.saveInBackground(comment.remove);
+MLDataManager.saveInBackground(comment.remove);
 ```
 
 ### Counter
@@ -180,13 +180,13 @@ At this point, we may use `increment()` method (default increment will be 1) and
 
 ```java
 gameScore.increment("score");
-LCDataManager.saveInBackground(gameScore);
+MLDataManager.saveInBackground(gameScore);
 ```
 #####Specified Increment 
 
 ```java
 gameScore.increment("score",1000);
-LCDataManager.saveInBackground(gameScore);
+MLDataManager.saveInBackground(gameScore);
 ```
 
 Note that increment doesn't need to be integer, value of a floating-point type is also acceptable. 
@@ -194,12 +194,12 @@ Note that increment doesn't need to be integer, value of a floating-point type i
 
 ```java
 gameScore.decrement("score",1000);
-LCDataManager.saveInBackground(gameScore);
+MLDataManager.saveInBackground(gameScore);
 ```
 
 ###Array
 
-You can save the value of arry type to any parameter of LCObject (like the skills parameter in this instance):
+You can save the value of arry type to any parameter of MLObject (like the skills parameter in this instance):
 
 #####Add To the End of the Array
 You can add one or more value to the end of the `skills` parameter value with `add()` and `addAll()`.
@@ -207,7 +207,7 @@ You can add one or more value to the end of the `skills` parameter value with `a
 ```java
 gameScore.add("skills", "driving");
 gameScore.addAll("skills", Arrays.asList("flying", "kungfu"));
-LCDataManager.saveInBackground(gameScore);
+MLDataManager.saveInBackground(gameScore);
 ```
 
 Meanwhile, you can only add values that is different from all current items with `addUnique()` and `addAllUnique()`. 
@@ -217,14 +217,14 @@ The value of array under `skills` parameter will be overridden by invoking `put(
 
 ```java
 gameScore.put("skills", Arrays.asList("flying", "kungfu"));
-LCDataManager.saveInBackground(gameScore);
+MLDataManager.saveInBackground(gameScore);
 ```
 #####Delete the Value of Any Array Property
 The value of array under `skills` parameter will be cleared by invoking `removeAll()` function: 
 
 ```java
 gameScore.removeAll("skills");
-LCDataManager.saveInBackground(gameScore);
+MLDataManager.saveInBackground(gameScore);
 ```
 
 Notices: 
@@ -232,7 +232,7 @@ Notices:
 * Remove and Add/Put must be seperated for invoking save function. Or, the data may fail to be saved.
 
 ###Associated Data
-An object can be associated to other objects. As mentioned before, we can save the instance A of a LCObject as the parameter value of instance B of another LCOject. This will easily solve the data relational mapping of one-to-one and one-to-many, like the relation between primary key & foreign key.
+An object can be associated to other objects. As mentioned before, we can save the instance A of a MLObject as the parameter value of instance B of another MLOject. This will easily solve the data relational mapping of one-to-one and one-to-many, like the relation between primary key & foreign key.
 
 Notices: Leap Cloud handles this kind of data reference with Pointer type. For data consistency, it won't save another copy of data A in data B sheet.
 
@@ -241,35 +241,35 @@ For example, a tweet may correspond to many comments. You can create a tweet and
 
 ```JAVA
 // Create a Tweet
-LCObject myPost = new LCObject("Post");
+MLObject myPost = new MLObject("Post");
 myPost.put("content", "This is my first tweet, nice meeting you guys.");
 
 // Create a Comment
-LCObject myComment = new LCObject("Comment");
+MLObject myComment = new MLObject("Comment");
 myComment.put("content", "This is a good one.");
 
 // Add a relative Tweet
 myComment.put("post", myWeibo);
 
 // This will generate two pieces of data: tweet and comment
-LCDataManager.saveInBackground(myComment);
+MLDataManager.saveInBackground(myComment);
 ```
 
 Or, you can associate existing object with obejctId: 
 
 ```java
 // Associate the comment with the tweet whose objectId is 1zEcyElZ80 
-myComment.put("parent", LCObject.createWithoutData("Post", "1zEcyElZ80"));
+myComment.put("parent", MLObject.createWithoutData("Post", "1zEcyElZ80"));
 ```
 
-The relative LCObject won't be got by defalut when you get a object. Aside from the objectId, other parameter values are all blank. You need to invoke fetch method if you want to get all parameter data of relative object (Suppose that Comment instance is already got with LCQuery in following case):
+The relative MLObject won't be got by defalut when you get a object. Aside from the objectId, other parameter values are all blank. You need to invoke fetch method if you want to get all parameter data of relative object (Suppose that Comment instance is already got with MLQuery in following case):
 
 ```java
-LCObject post = fetchedComment.getLCObject("post");
-LCDataManager.fetchInBackground(post, new GetCallback<LCObject>() {
+MLObject post = fetchedComment.getMLObject("post");
+MLDataManager.fetchInBackground(post, new GetCallback<MLObject>() {
 
     @Override
-    public void done(LCObject post, LCException e) {
+    public void done(MLObject post, MLException e) {
           String title = post.getString("title");
           // Do something with your new title variable
         }
@@ -281,19 +281,19 @@ Associate two comments to one tweet ：
 
 ```java
 // Create a Tweet
-LCObject myPost = new LCObject("Post");
+MLObject myPost = new MLObject("Post");
 myPost.put("content", "This is my first tweet, nice meeting you guys.");
 
 // Create a Comment
-LCObject myComment = new LCObject("Comment");
+MLObject myComment = new MLObject("Comment");
 myComment.put("content", "This is a good one.");
 
 // Create another Comment
-LCObject anotherComment = new LCObject("Comment");
+MLObject anotherComment = new MLObject("Comment");
 anotherComment.put("content", "This is a good one.");
 
 // Put those two comments into a same list 
-List<LCObject> listComment = new ArrayList<>();
+List<MLObject> listComment = new ArrayList<>();
 listComment.add(myComment);
 listComment.add(anotherComment);
 
@@ -301,46 +301,46 @@ listComment.add(anotherComment);
 myPost.put("comment", listComment);
 
 // This will generate two piece of data: tweet and comment
-LCDataManager.saveInBackground(myComment);
+MLDataManager.saveInBackground(myComment);
 ```
 
 Notices: 
 
-* For java 6 and earlier, please create listComment with `List<LCObject> listComment = new ArrayList<LCObject>()`. 
-* You can also add LCObject individually to properties with `add()` method: 
+* For java 6 and earlier, please create listComment with `List<MLObject> listComment = new ArrayList<MLObject>()`. 
+* You can also add MLObject individually to properties with `add()` method: 
 
 	```java
 	myPost.add("comment", myComment);
 	myPost.add("comment", anotherComment);
 	```
 
-####Realize Association with LCRelation
+####Realize Association with MLRelation
 
-You can create many-to-many modeling with LCRelation. This is similar to chained list while LCRelation doesn't need to get all relative LCRelation instances when getting additional attributes. As a result, LCRelation can support more instances than chained list and the read is more flexible. For example, a user can like many posts. In this case, you can save all posts liked by this user with `getRelation()`. For creating a new liked post:
+You can create many-to-many modeling with MLRelation. This is similar to chained list while MLRelation doesn't need to get all relative MLRelation instances when getting additional attributes. As a result, MLRelation can support more instances than chained list and the read is more flexible. For example, a user can like many posts. In this case, you can save all posts liked by this user with `getRelation()`. For creating a new liked post:
 
 
 ```java
-LCUser user = LCUser.getCurrentUser();
-//Create LCRelation instance, likes, in user instance
-LCRelation<LCObject> relation = user.getRelation("likes");
+MLUser user = MLUser.getCurrentUser();
+//Create MLRelation instance, likes, in user instance
+MLRelation<MLObject> relation = user.getRelation("likes");
 //Adding association, post, in likes
 relation.add(post);
-LCUserManager.saveInBackground(user);
+MLUserManager.saveInBackground(user);
 ```
 
-You can remove a Post from LCRelation:
+You can remove a Post from MLRelation:
 
 ```java
 relation.remove(post);
 ```
 
-The object collections in the relation won't be got by default. You can get post chained list with LCQuery objects acquired with get Query as well as its findInBackground() method, as shown below:
+The object collections in the relation won't be got by default. You can get post chained list with MLQuery objects acquired with get Query as well as its findInBackground() method, as shown below:
 
 ```java
-LCQueryManager.findAllInBackground(relation.getQuery(), new FindCallback<LCObject>() {
+MLQueryManager.findAllInBackground(relation.getQuery(), new FindCallback<MLObject>() {
 
     @Override
-    public void done(List<LCObject> results, LCException e) {
+    public void done(List<MLObject> results, MLException e) {
          if (e != null) {
           } else {
             // results includes all relative objects in relation
@@ -349,21 +349,21 @@ LCQueryManager.findAllInBackground(relation.getQuery(), new FindCallback<LCObjec
 });
 ```
 
-If what you need is just a subset of the list, you can add more constrains to the LCQuery object returned by getQuery, which will be impossible for taking `List` as property.e.g.
+If what you need is just a subset of the list, you can add more constrains to the MLQuery object returned by getQuery, which will be impossible for taking `List` as property.e.g.
 
 ```java
-LCQuery<LCObject> query = relation.getQuery();
+MLQuery<MLObject> query = relation.getQuery();
 // Add more query constraints to query object
 query.skip(10);
 query.limit(10);
 ```
 
-Please check [Query Guide](..) for more LCQuery information. An operating LCRelation object is similar to the object chained list, so any queries towards the chained list can also be implemented to LCRelation.
+Please check [Query Guide](..) for more MLQuery information. An operating MLRelation object is similar to the object chained list, so any queries towards the chained list can also be implemented to MLRelation.
 
 
 ###Data Type
 
-We support object type like String, Int, Boolean and LCObject by now; data type like java.util.Date、byte[] array、JSONObject、JSONArray. You can embed a JSONObject in  JSONArray object and save it to LCObject. For instance:
+We support object type like String, Int, Boolean and MLObject by now; data type like java.util.Date、byte[] array、JSONObject、JSONArray. You can embed a JSONObject in  JSONArray object and save it to MLObject. For instance:
 
 
 ```java
@@ -381,7 +381,7 @@ myObject.put("string", myString);
  
 byte[] myData = { 4, 8, 16, 32 };
  
-LCObject bigObject = new LCObject("BigObject");
+MLObject bigObject = new MLObject("BigObject");
 bigObject.put("myNumber", myNumber);
 bigObject.put("myString", myString);
 bigObject.put("myDate", myDate);
@@ -389,16 +389,16 @@ bigObject.put("myData", myData);
 bigObject.put("myArray", myArray);
 bigObject.put("myObject", myObject);
 bigObject.put("myNull", JSONObject.NULL);
-LCDataManager.saveInBackground(bigObject);
+MLDataManager.saveInBackground(bigObject);
 ```
 
-Large binary data is not recommended, like the byte[] property type of LCObject is not suitable for images or files. The size limit for LCObject is 128KB. If you need to store large files like images, files and music, LCFile is highly recommended and here is the [Guide](..). Please check [Data Security Guide](...) for more informations on handling data.
+Large binary data is not recommended, like the byte[] property type of MLObject is not suitable for images or files. The size limit for MLObject is 128KB. If you need to store large files like images, files and music, MLFile is highly recommended and here is the [Guide](..). Please check [Data Security Guide](...) for more informations on handling data.
 
 ## Files
-###Creation and Upload of LCFile
-LCFile can help your app save the files to server, like the common image, video, audio and any other binary data.
+###Creation and Upload of MLFile
+MLFile can help your app save the files to server, like the common image, video, audio and any other binary data.
 
-In this instance, we will save the image as LCFile and upload it to server:
+In this instance, we will save the image as MLFile and upload it to server:
 
 ```java
 public void UploadFile(Bitmap img){
@@ -408,13 +408,13 @@ public void UploadFile(Bitmap img){
   bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
   byte[] image = stream.toByteArray();
   
-  // Create LCFile Object
-  LCFile myFile = new LCFile("myPic.png", image);
+  // Create MLFile Object
+  MLFile myFile = new MLFile("myPic.png", image);
   
   // Upload
-  LCFileManager.saveInBackground(myFile, new SaveCallback() {
+  MLFileManager.saveInBackground(myFile, new SaveCallback() {
     @Override
-    public void done(LCException e) {
+    public void done(MLException e) {
 
     }
   });
@@ -423,35 +423,35 @@ public void UploadFile(Bitmap img){
 
 Notices:
 
-* 	LCFile construct function use the first parameter to specify FileName, and the seconde parameter to accept a Byte Array, which is the binary format of the file to upload. You can get the file name via following code:
+* 	MLFile construct function use the first parameter to specify FileName, and the seconde parameter to accept a Byte Array, which is the binary format of the file to upload. You can get the file name via following code:
 
 	```java
 	String fileName = myFile.getName();
 	```
-* 	You can save LCFile to the property of other objects and bring it back later. 	 
+* 	You can save MLFile to the property of other objects and bring it back later. 	 
 	
 	```java
-	//Create a LCObject，including ImageName，ImageFile
-	LCObject imgupload = new LCObject("ImageUploaded");
+	//Create a MLObject，including ImageName，ImageFile
+	MLObject imgupload = new MLObject("ImageUploaded");
 	imgupload.put("ImageName", "testpic");
 	imgupload.put("ImageFile", file);
 
 	//Save
-	LCDataManager.saveInBackground(imgupload, new SaveCallback() {
+	MLDataManager.saveInBackground(imgupload, new SaveCallback() {
 		@Override
-		public void done(LCException e) {
+		public void done(MLException e) {
 		}
 	});
 	```
 
 ###Upload Process
-Aside from providing a SaveCallback to inform the upload failure or success, the saveInBackground() method of LCFile can also provide a second ProgressCallback object to inform the upload process:
+Aside from providing a SaveCallback to inform the upload failure or success, the saveInBackground() method of MLFile can also provide a second ProgressCallback object to inform the upload process:
 
 
 ```java
-LCFileManager.saveInBackground(file, new SaveCallback() {
+MLFileManager.saveInBackground(file, new SaveCallback() {
 	@Override
-	public void done(LCException e) {
+	public void done(MLException e) {
 			
         }
 	},new ProgressCallback() {
@@ -466,14 +466,14 @@ LCFileManager.saveInBackground(file, new SaveCallback() {
 ###Download Files
 
 #####Download Directly
-1. Assign LCFile with LCObject
-2. Invoke LCFileManager.getDataInBackground() to download：
+1. Assign MLFile with MLObject
+2. Invoke MLFileManager.getDataInBackground() to download：
 
 ```java
-LCFile myFile=imgupload.getLCFile("testpic");
-LCFileManager.getDataInBackground(myFile, new GetDataCallback() {
+MLFile myFile=imgupload.getMLFile("testpic");
+MLFileManager.getDataInBackground(myFile, new GetDataCallback() {
 	@Override
-	public void done(byte[] bytes, LCException e) {
+	public void done(byte[] bytes, MLException e) {
 
         }
 });
@@ -493,19 +493,19 @@ Deleting files is not available by now.
 
 ###Basic Query
 
-LCQuery towards LCObject can be summarized as 3 steps:
+MLQuery towards MLObject can be summarized as 3 steps:
 
-1. Create a LCQuery and assign corresponding "LCObject class";
-2. Add different conditions for LCQuery;
-3. Execute LCQuery：Inquire matching LCQuery data with `LCQueryManager.findAllInBackground()` and FindCallback callback class.
+1. Create a MLQuery and assign corresponding "MLObject class";
+2. Add different conditions for MLQuery;
+3. Execute MLQuery：Inquire matching MLQuery data with `MLQueryManager.findAllInBackground()` and FindCallback callback class.
 
 For example, to inquire target personnel data, you can use whereEqualTo to add conditional values:
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
+MLQuery<MLObject> query = MLQuery.getQuery("GameScore");
 query.whereEqualTo("playerName", "Dan Stemkoski");
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
-    public void done(List<LCObject> scoreList, LCException e) {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
+    public void done(List<MLObject> scoreList, MLException e) {
         if (e == null) {
             Log.d("score", "Retrieved " + scoreList.size() + " scores");
         } else {
@@ -537,13 +537,13 @@ You can set the number of your query results using setLimit method. The limit is
 query.setLimit(10); // Set the max query results number as 10
 ```
 
-You can execute Query with LCQueryManager.getFirstInBackground() to get the first result of the query.
+You can execute Query with MLQueryManager.getFirstInBackground() to get the first result of the query.
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
+MLQuery<MLObject> query = MLQuery.getQuery("GameScore");
 query.whereEqualTo("playerEmail", "dstemkoski@example.com");
-LCQueryManager.getFirstInBackground(query, new GetCallback<LCObject>() {
-  public void done(LCObject object, LCException e) {
+MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
+  public void done(MLObject object, MLException e) {
     if (object == null) {
       Log.d("score", "The getFirst request failed.");
     } else {
@@ -586,25 +586,25 @@ query.whereGreaterThanOrEqualTo("wins", 50);
 You can set the properties of data returned using selectKeys (stock properties are included automatically, like objectId, createdAt and updatedAt):
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
+MLQuery<MLObject> query = MLQuery.getQuery("GameScore");
 query.selectKeys(Arrays.asList("playerName", "score"));
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
 
     @Override
-    public void done(List<LCObject> objects, LCException exception) {
+    public void done(List<MLObject> objects, MLException exception) {
          // results has the list of objects
     }
 });
 ```
 
-In regard to the LCObject returned, you can get the other properties using LCDataManager.fetchInBackground().
+In regard to the MLObject returned, you can get the other properties using MLDataManager.fetchInBackground().
 
 ```java
-LCObject object = results.get(0);
-LCDataManager.fetchInBackground(object, new GetCallback<LCObject>() {
+MLObject object = results.get(0);
+MLDataManager.fetchInBackground(object, new GetCallback<MLObject>() {
 
     @Override
-    public void done(LCObject object, LCException exception) {
+    public void done(MLObject object, MLException exception) {
         // all fields of the object will now be available here.
     }
 });
@@ -647,15 +647,15 @@ For example, there is a class named "Team" for storing the basketball team info 
 
 
 ```java
-LCQuery<LCObject> teamQuery = LCQuery.getQuery("Team");
+MLQuery<MLObject> teamQuery = MLQuery.getQuery("Team");
 //Filter basketball team: winning percentage is no less than 50%
 teamQuery.whereGreaterThan("winPct", 0.5);
-LCQuery<LCUser> userQuery = LCUser.getQuery();
+MLQuery<MLUser> userQuery = MLUser.getQuery();
 userQuery.whereMatchesKeyInQuery("hometown", "city", teamQuery);
-LCQueryManager.findAllInBackground(userQuery, new FindCallback<LCUser>() {
+MLQueryManager.findAllInBackground(userQuery, new FindCallback<MLUser>() {
     
   @Override
-  public void done(List<LCUser> results, LCException e) {
+  public void done(List<MLUser> results, MLException e) {
     // Users from the same place as the basketball team whose winning percentage is no less than 50% in the results
   }
 });
@@ -664,12 +664,12 @@ LCQueryManager.findAllInBackground(userQuery, new FindCallback<LCUser>() {
 Relatively, you can find users from other places with whereDoesNotMatchKeyInQuery.
 
 ```java
-LCQuery<LCUser> anotherUserQuery = LCUser.getQuery();
+MLQuery<MLUser> anotherUserQuery = MLUser.getQuery();
 losingUserQuery.whereDoesNotMatchKeyInQuery("hometown", "city", teamQuery);
-LCQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<LCUser>() {
+MLQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<MLUser>() {
     
   @Override
-  public void done(List<LCUser> results, LCException e) {
+  public void done(List<MLUser> results, MLException e) {
     // users from other places in the results 
   }
 });
@@ -702,38 +702,38 @@ Use whereStartsWith method to add constrain that the string begins with another 
 
 ```java
 // Finds barbecue sauces that start with "Big Daddy's".
-LCQuery<LCObject> query = LCQuery.getQuery("BarbecueSauce");
+MLQuery<MLObject> query = MLQuery.getQuery("BarbecueSauce");
 query.whereStartsWith("name", "Big Daddy's");
 ```
 
-####Query towards LCObject Value Type
+####Query towards MLObject Value Type
 
-#####LCObject-type property matches another LCObject
+#####MLObject-type property matches another MLObject
 
-If you want to get the data whose certain property matches specific LCObject, you can inquire with whereEqualTo like others. For example, if every Comment object includes a Post object (in post property), then you can get all Comment lists of specific Post: 
+If you want to get the data whose certain property matches specific MLObject, you can inquire with whereEqualTo like others. For example, if every Comment object includes a Post object (in post property), then you can get all Comment lists of specific Post: 
 
 ```java
-// suppose that LCObject myPost is created before
-LCQuery<LCObject> query = LCQuery.getQuery("Comment");
+// suppose that MLObject myPost is created before
+MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 query.whereEqualTo("post", myPost);
 
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
-public void done(List<LCObject> commentList, LCException e) {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
+public void done(List<MLObject> commentList, MLException e) {
  // commentList now has the comments for myPost
 }
 });
 ```
-#####LCObject-type property matches Query
-If any property of the query object contains a LCObject and this LCObject matches a different query, then you can use the nested query, whereMatchesQuery. Please note that the default limit 100 works on inner query as well. Thus, you need to construct your query object well if there's massive data query. For example, inquire the comment list of post with images: 
+#####MLObject-type property matches Query
+If any property of the query object contains a MLObject and this MLObject matches a different query, then you can use the nested query, whereMatchesQuery. Please note that the default limit 100 works on inner query as well. Thus, you need to construct your query object well if there's massive data query. For example, inquire the comment list of post with images: 
 
 
 ```java
-LCQuery<LCObject> innerQuery = LCQuery.getQuery("Post");
+MLQuery<MLObject> innerQuery = MLQuery.getQuery("Post");
 innerQuery.whereExists("image");
-LCQuery<LCObject> query = LCQuery.getQuery("Comment");
+MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 query.whereMatchesQuery("post", innerQuery);
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
-  public void done(List<LCObject> commentList, LCException e) {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
+  public void done(List<MLObject> commentList, MLException e) {
     // comments now contains the comments for posts with images.
   }
 });
@@ -742,45 +742,45 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
 Conversely, you can use whereDoesNotMatchQuery if you don't want to match some subquery. For example, inquire the comment list of post without images: 
 
 ```java
-LCQuery<LCObject> innerQuery = LCQuery.getQuery("Post");
+MLQuery<MLObject> innerQuery = MLQuery.getQuery("Post");
 innerQuery.whereExists("image");
-LCQuery<LCObject> query = LCQuery.getQuery("Comment");
+MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 query.whereDoesNotMatchQuery("post", innerQuery);
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
-  public void done(List<LCObject> commentList, LCException e) {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
+  public void done(List<MLObject> commentList, MLException e) {
     // comments now contains the comments for posts without images.
   }
 });
 ```
-#####Return Property of Specified LCObject Type 
-The associated LCObject won't be got by default when you got a object, but you can choose to return it with include method. For example, if you want to get most recent 10 comments and the associated posts:
+#####Return Property of Specified MLObject Type 
+The associated MLObject won't be got by default when you got a object, but you can choose to return it with include method. For example, if you want to get most recent 10 comments and the associated posts:
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("Comment");
+MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 
 //Retrieve the most recent ones
 query.orderByDescending("createdAt");
 
-//Only retrieve the LCt ten
+//Only retrieve the MLt ten
 query.setLimit(10);
 
 //Include the post data with each comment
 query.include("post");
 
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
-public void done(List<LCObject> commentList, LCException e) {
- // commentList now contains the LCt ten comments, and the "post"
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
+public void done(List<MLObject> commentList, MLException e) {
+ // commentList now contains the MLt ten comments, and the "post"
  // field has been populated. For example:
- for (LCObject comment : commentList) {
+ for (MLObject comment : commentList) {
    // This does not require a network access.
-   LCObject post = comment.getLCObject("post");
+   MLObject post = comment.getMLObject("post");
    Log.d("post", "retrieved a related post");
  }
 }
 });
 ```
 
-You can use dot operator to include multiple embedded objects. For example, if you want to include an author object of a comment (suppose that the corresponding value of the author is LCUser instance), you can do as shown below: 
+You can use dot operator to include multiple embedded objects. For example, if you want to include an author object of a comment (suppose that the corresponding value of the author is MLUser instance), you can do as shown below: 
 
 ```java
 query.include("post.author");
@@ -790,10 +790,10 @@ query.include("post.author");
 If you don't want to get all matching objects, but just the count, then you can replace the find with count. e.g. inquire how many tweets did an account post:
 
 ```java
-LCQuery<LCObject> query = LCQuery.getQuery("GameScore");
+MLQuery<MLObject> query = MLQuery.getQuery("GameScore");
 query.whereEqualTo("playerName", "Sean Plott");
-LCQueryManager.countInBackground(query, new CountCallback() {
-  public void done(int count, LCException e) {
+MLQueryManager.countInBackground(query, new CountCallback() {
+  public void done(int count, MLException e) {
     if (e == null) {
       // The count request succeeded. Log the count
       Log.d("score", "Sean has played " + count + " games");
@@ -806,22 +806,22 @@ LCQueryManager.countInBackground(query, new CountCallback() {
 
 ###Compound Query
 
-You can inquire data that matches multiple Query with LCQuery.or. For example, you can get the gamers who win more than 90 times or less than 10 times with following method: 
+You can inquire data that matches multiple Query with MLQuery.or. For example, you can get the gamers who win more than 90 times or less than 10 times with following method: 
 
 ```java
-LCQuery<LCObject> lotsOfWins = LCQuery.getQuery("Player");
+MLQuery<MLObject> lotsOfWins = MLQuery.getQuery("Player");
 lotsOfWins.whereGreaterThan("score", 90);
  
-LCQuery<LCObject> fewWins = LCQuery.getQuery("Player");
+MLQuery<MLObject> fewWins = MLQuery.getQuery("Player");
 fewWins.whereLessThan("score", 10);
  
-List<LCQuery<LCObject>> queries = new ArrayList<LCQuery<LCObject>>();
+List<MLQuery<MLObject>> queries = new ArrayList<MLQuery<MLObject>>();
 queries.add(lotsOfWins);
 queries.add(fewWins);
  
-LCQuery<LCObject> mainQuery = LCQuery.or(queries);
-LCQueryManager.findAllInBackground(mainQuery, new FindCallback<LCObject>() {
-  public void done(List<LCObject> results, LCException e) {
+MLQuery<MLObject> mainQuery = MLQuery.or(queries);
+MLQueryManager.findAllInBackground(mainQuery, new FindCallback<MLObject>() {
+  public void done(List<MLObject> results, MLException e) {
     // win more than 90 times or less than 10 times
   }
 });
@@ -831,9 +831,9 @@ LCQueryManager.findAllInBackground(mainQuery, new FindCallback<LCObject>() {
 Some query results should be cached to the disk in order to show data to users while offline, like the app is just opened, netowrk request is not accomplished. Leap Cloud will clear cache autmatically if it takes too much space. 
 Query will not use cache by default unless you set the option with setCachePolicy. for example, you can do following settings if there's no network available for you to request:
 ```java
-query.setCachePolicy(LCQuery.CachePolicy.NETWORK_ELSE_CACHE);
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() {
-  public void done(List<LCObject> scoreList, LCException e) {
+query.setCachePolicy(MLQuery.CachePolicy.NETWORK_ELSE_CACHE);
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
+  public void done(List<MLObject> scoreList, MLException e) {
     if (e == null) {
       // Results were successfully found, looking first on the
       // network and then on disk.
@@ -849,13 +849,13 @@ Leap Cloud provides several cache strategies:
 Cache Strategy|Introduction
 ---|---
 IGNORE_CACHE | default cache strategy. The query won't use cache and the query results won't be stored in cache.
-CACHE_ONLY | The query is only got from cache, not the network.If the cache has no results, then it will bring about a LCException.
+CACHE_ONLY | The query is only got from cache, not the network.If the cache has no results, then it will bring about a MLException.
 NETWORK_ONLY | The query is only got from network, not the cache, but the query results will be writen into cache.
-CACHE\_ELSE_NETWORK | The query is first got from cache, then the network if there's no cache. If both of them fail, then it will bring about a LCException.
-NETWORK\_ELSE_CACHE | The query is first got from network, then the cache if there's no network. If both of them fail, then it will bring about a LCException.
+CACHE\_ELSE_NETWORK | The query is first got from cache, then the network if there's no cache. If both of them fail, then it will bring about a MLException.
+NETWORK\_ELSE_CACHE | The query is first got from network, then the cache if there's no network. If both of them fail, then it will bring about a MLException.
 CACHE\_THEN_NETWORK | The query is first got from cache, then the network. FindCallback will be invoked twice in this case: first the cache results, then the network query results. This strategy can only be used in asynchronous findInBackground().
 
-You can operate cache with LCQuery if you want to control the cache and you can do following operations towards the cache:
+You can operate cache with MLQuery if you want to control the cache and you can do following operations towards the cache:
 
 #####Check if there's any cached results: 
 ```java
@@ -871,7 +871,7 @@ query.clearCachedResult();
 #####Delete cached results of all queries:
 
 ```java
-LCQuery.clearAllCachedResults();
+MLQuery.clearAlMLachedResults();
 ```
 
 #####Set Max Cache Age（in milliseconds）：
@@ -880,13 +880,13 @@ LCQuery.clearAllCachedResults();
 query.setMaxCacheAge(TimeUnit.DAYS.toMillis(1));
 ```
 
-##LCObject Subclass
+##MLObject Subclass
 
-Leap Cloud is easy to start up. You can use LCDataManager.fetchInBackground() to access all data. In lots of mature code, subclass can bring more advantages, like simplicity, expansibility, auto-complete feature supported by IDE, etc. Subclass is not necessary, you can transfer following code:
+Leap Cloud is easy to start up. You can use MLDataManager.fetchInBackground() to access all data. In lots of mature code, subclass can bring more advantages, like simplicity, expansibility, auto-complete feature supported by IDE, etc. Subclass is not necessary, you can transfer following code:
 
 
 ```java
-LCObject shield = new LCObject("Armor");
+MLObject shield = new MLObject("Armor");
 shield.put("displayName", "Wooden Shield");
 shield.put("fireproof", false);
 shield.put("rupees", 50);
@@ -901,28 +901,28 @@ shield.setFireproof(false);
 shield.setRupees(50);
 ```
 
-###Create LCObject Subclass
+###Create MLObject Subclass
 
-It's easy to create a LCObject subclass: 
+It's easy to create a MLObject subclass: 
 
-1.   Declare that the subclass is inherited from LCObject.
-2.   Add @LCclassName annotation. The value must be a string: the class name of the LCObject constructed function you passed in. Thus, this string class name doesn't need to appear in code again.
-3.   Make sure that your subclass has a public default (the parameter amount is 0) constructed function. Please don't modify any LCObject property in constructed function. 
-4.   Register subclass LCObject.registerSubclass(Yourclass.class) before invoking LCConfig.initialize() and registering the app.
+1.   Declare that the subclass is inherited from MLObject.
+2.   Add @MLclassName annotation. The value must be a string: the class name of the MLObject constructed function you passed in. Thus, this string class name doesn't need to appear in code again.
+3.   Make sure that your subclass has a public default (the parameter amount is 0) constructed function. Please don't modify any MLObject property in constructed function. 
+4.   Register subclass MLObject.registerSubclass(Yourclass.class) before invoking MLConfig.initialize() and registering the app.
 
-The following code can sucessfully realize and register the subclass Armor of LCObject:
+The following code can sucessfully realize and register the subclass Armor of MLObject:
 
 ```java
 // Armor.java
-import com.LC.LCObject;
-import com.LC.LCclassName;
+import com.ML.MLObject;
+import com.ML.MLclassName;
 
-@LCclassName("Armor")
-public class Armor extends LCObject {
+@MLclassName("Armor")
+public class Armor extends MLObject {
 }
 
 // App.java
-import com.LC.LCConfig;
+import com.ML.MLConfig;
 import android.app.Application;
 
 public class App extends Application {
@@ -930,22 +930,22 @@ public class App extends Application {
   public void onCreate() {
     super.onCreate();
 
-    LCObject.registerSubclass(Armor.class);
-    LCConfig.initialize(this, LC_APPLICATION_ID, LC_CLIENT_KEY);
+    MLObject.registerSubclass(Armor.class);
+    MLConfig.initialize(this, ML_APPLICATION_ID, ML_CLIENT_KEY);
   }
 }
 ```
  
 ####Property Access/Modification
 
-Adding method to LCObject helps encapsulated class logic. You can put the logic that is related to subclass into one place rather than seperate them into multiple classes to process business logic and storage/transformation logic.
+Adding method to MLObject helps encapsulated class logic. You can put the logic that is related to subclass into one place rather than seperate them into multiple classes to process business logic and storage/transformation logic.
 
-You can easily add accessor and modifier to your LCObject subclass, look similar to getter and setter in declared fields, but realized with get and put method of LEObject. Here is the instance of creating a content property for Post class:
+You can easily add accessor and modifier to your MLObject subclass, look similar to getter and setter in declared fields, but realized with get and put method of LEObject. Here is the instance of creating a content property for Post class:
 
 ```java
 // Armor.java
-@LCclassName("Armor")
-public class Armor extends LCObject {
+@MLclassName("Armor")
+public class Armor extends MLObject {
   public String getDisplayName() {
     return getString("displayName");
   }
@@ -957,7 +957,7 @@ public class Armor extends LCObject {
 
 Now you can access displayName property with armor.getDisplayName() and modify it with armor.setDisplayName(). This enables auto-complete feature supported by IDE, as well as discovering exceptions while compling.
 
-The accessors and modifiers of all data types can be defined like this, using variation of all kinds of get() methods, like getInt()，getLCFile() or getMap().
+The accessors and modifiers of all data types can be defined like this, using variation of all kinds of get() methods, like getInt()，getMLFile() or getMap().
 
 ####Define Functions
 
@@ -974,36 +974,36 @@ public void takeDamage(int amount) {
 ```
 
 ###Create Subclass Instance
-You can create your subclass using your self-defined constructed function. Your subclass must define a public default constructed function and not modify any property in superclass LCObject. This default constructed function will be used to create strongly-typed object of subclass by SDK.
+You can create your subclass using your self-defined constructed function. Your subclass must define a public default constructed function and not modify any property in superclass MLObject. This default constructed function will be used to create strongly-typed object of subclass by SDK.
 
-You can create a reference to current object using LCObject.createWithoutData():
+You can create a reference to current object using MLObject.createWithoutData():
 
 ```java
-Armor armorReference = LCObject.createWithoutData(Armor.class, armor.getObjectId());
+Armor armorReference = MLObject.createWithoutData(Armor.class, armor.getObjectId());
 ```
 
 ###Subclass Query
-You can get query object of specific subclass with static method LCQuery.getQuery(). The following instance can inquire all boosters user can buy:
+You can get query object of specific subclass with static method MLQuery.getQuery(). The following instance can inquire all boosters user can buy:
 
 ```java
-LCQuery<Armor> query = LCQuery.getQuery(Armor.class);
-query.whereLessThanOrEqualTo("rupees", LCUser.getCurrentUser().get("rupees"));
-LCQueryManager.findAllInBackground(query, new FindCallback<Armor>() {
+MLQuery<Armor> query = MLQuery.getQuery(Armor.class);
+query.whereLessThanOrEqualTo("rupees", MLUser.getCurrentUser().get("rupees"));
+MLQueryManager.findAllInBackground(query, new FindCallback<Armor>() {
   @Override
-  public void done(List<Armor> results, LCException e) {
+  public void done(List<Armor> results, MLException e) {
     for (Armor a : results) {
       // ...
     }
-  }LCUser
+  }MLUser
 });
 ```
 
-##LCUser
+##MLUser
 
-LCUser is a subclass of LCObject. It inherited all methods of LCObject and has the same features as LCObject. The different is LCUser adds some specific features of user account.
+MLUser is a subclass of MLObject. It inherited all methods of MLObject and has the same features as MLObject. The different is MLUser adds some specific features of user account.
 
 ###Property Description
-Apart from the properties inherited from LCObject, LCUser has some specific properties:
+Apart from the properties inherited from MLObject, MLUser has some specific properties:
 
 Property|Type|Introduction|If necessary
 ---|---|---|---
@@ -1017,23 +1017,23 @@ Property|Type|Introduction|If necessary
 Notices:
 
 * Please make sure that username and email is unique.
-* Unlike other LCObject, LCUser properties are not set by put, but the specific setXXX.
+* Unlike other MLObject, MLUser properties are not set by put, but the specific setXXX.
 * Leap Cloud will collect the value of masterKey，installationIds automatically.
 
 ###User Signup
 
-1. Creare LCUser object and provide username and password.
-2. Save it to cloud with LCUserManager.signUpInBackground().
+1. Creare MLUser object and provide username and password.
+2. Save it to cloud with MLUserManager.signUpInBackground().
 
 ```java
 String mUsername ＝ "userName";
 String mPassword = "passWord";
-LCUser user = new LCUser();
+MLUser user = new MLUser();
 user.setUserName(mUsername);
 user.setPassword(mPassword);
 
-LCUserManager.signUpInBackground(user, new SignUpCallback() {
-	public void done(LCException e) {
+MLUserManager.signUpInBackground(user, new SignUpCallback() {
+	public void done(MLException e) {
 	        if (e == null) {
 	        // Signup success
 	        } else {
@@ -1049,11 +1049,11 @@ Notices:
 * You can also ask users to use Email address as username. The username will be taken as Email address and then used for password reset afterwards.
 
 ###Signin
-You can sign in with LCUserManager.logInInBackground(). Property description: the first one is username, the second one is password and the third one is LogInCallback(), the callback method.
+You can sign in with MLUserManager.logInInBackground(). Property description: the first one is username, the second one is password and the third one is LogInCallback(), the callback method.
 
 ```java
-LCUserManager.logInInBackground("userName", "passWord", new LogInCallback<LCUser>() {
-  public void done(LCUser user, LCException e) {
+MLUserManager.logInInBackground("userName", "passWord", new LogInCallback<MLUser>() {
+  public void done(MLUser user, MLException e) {
     if (user != null) {
       // Signin success
     } else {
@@ -1069,7 +1069,7 @@ If the app required signin everytime, it will directly affect the user experienc
 There would be a cached user object in local disk when you register or signin. You can log in with the cached object with following method:
 
 ```java
-LCUser currentUser = LCUser.getCurrentUser();
+MLUser currentUser = MLUser.getCurrentUser();
 if (currentUser != null) {
   // do stuff with the user
 } else {
@@ -1080,8 +1080,8 @@ if (currentUser != null) {
 You can clear cached object with following method:
 
 ```java
-LCUser.logOut();
-LCUser currentUser = LCUser.getCurrentUser(); //crrentUser will be null now
+MLUser.logOut();
+MLUser currentUser = MLUser.getCurrentUser(); //crrentUser will be null now
 ```
 
 ###Password Reset
@@ -1089,9 +1089,9 @@ LCUser currentUser = LCUser.getCurrentUser(); //crrentUser will be null now
 Leap Cloud provides a method for users to reset the password securely. The procedure is simple, only user's email address is required:
 
 ```java
-LCUserManager.requestPasswordResetInBackground(
+MLUserManager.requestPasswordResetInBackground(
         "myemail@example.com", new RequestPasswordResetCallback() {
-    public void done(LCException e) {
+    public void done(MLException e) {
         if (e == null) {
             // Reset Email is Sent
         } else {
@@ -1103,7 +1103,7 @@ If the email address is same as the email used for signup, then the system will 
 
 * Users enter their email address and require password reset.
 * Leap Cloud sends an email to the email address user just provided and this email contains the reset link.
-* User click on the reset lins, enter a LC page and set a new password.
+* User click on the reset lins, enter a ML page and set a new password.
 * Leap Cloud has reset user's password successfully.
 
 ###User Query
@@ -1111,10 +1111,10 @@ If the email address is same as the email used for signup, then the system will 
 You can inquire user data with special UserQuery. Leap Cloud provides all round protection of user data. More details: [User Object Security](..).
 
 ```java
-LCQuery<LCUser> query = LCUser.getQuery();
+MLQuery<MLUser> query = MLUser.getQuery();
 query.whereEqualTo("gender", "female");
-LCQueryManager.findAllInBackground(query, new FindCallback<LCUser>() {
-  public void done(List<LCUser> objects, LCException e) {
+MLQueryManager.findAllInBackground(query, new FindCallback<MLUser>() {
+  public void done(List<MLUser> objects, MLException e) {
     if (e == null) {
         // The query was successful.
     } else {
@@ -1126,7 +1126,7 @@ LCQueryManager.findAllInBackground(query, new FindCallback<LCUser>() {
 
 ###Email Verification
 
-Leap Cloud provides powerful email verification service, you just need to Enable "Verify user's email address" in Console >> App Settings >> Email Settings and system will add `emailVerified` property in LCUser automatically. When the email property of LCUser is assigned or modified and the value of `emailVerified` is false, then Leap Cloud will send a link to users automatically. `emailVerified` will be set as true once users click the link.
+Leap Cloud provides powerful email verification service, you just need to Enable "Verify user's email address" in Console >> App Settings >> Email Settings and system will add `emailVerified` property in MLUser automatically. When the email property of MLUser is assigned or modified and the value of `emailVerified` is false, then Leap Cloud will send a link to users automatically. `emailVerified` will be set as true once users click the link.
 
 Three status of `emailVerified` property:
 
@@ -1137,12 +1137,12 @@ Three status of `emailVerified` property:
 ###Anonymous Users
 Anonymous users refers to a special set of users with username and password. They have the same features as other users while once deleted, all data will be no longer accessible. If your app requires a relatively weakened user system, then Anonymous Users of Leap Cloud is highly recommended. 
 
-You can get an anonymous user account with LCAnonymousUtils:
+You can get an anonymous user account with MLAnonymousUtils:
 
 ```java
-LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
+MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
       @Override
-      public void done(LCUser user, LCException e) {
+      public void done(MLUser user, MLException e) {
         if (e != null) {
           Log.d("MyApp", "Anonymous login failed.");
     } else {
@@ -1152,24 +1152,24 @@ LCAnonymousUtils.logIn(new LogInCallback<LCUser>() {
 });
 ```
 #####Create Anonymous Users Automatically
-You can transfer anonymous users into non-anonymous users by signup or signin and all data of this anonymous user will be saved. You can judge if the current user is anonymous with LCAnonymousUtils.isLinked():
+You can transfer anonymous users into non-anonymous users by signup or signin and all data of this anonymous user will be saved. You can judge if the current user is anonymous with MLAnonymousUtils.isLinked():
 
 ```java
-Boolean isAnonymous = LCAnonymousUtils.isLinked(LCUser.getCurrentUser());
+Boolean isAnonymous = MLAnonymousUtils.isLinked(MLUser.getCurrentUser());
 ```
 
-You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, LCUser.getCurrentUser() will no longer be null. Leap Cloud wil create anonymous user in the cloud if you are storing LCObject related to this anonymous user.
+You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, MLUser.getCurrentUser() will no longer be null. Leap Cloud wil create anonymous user in the cloud if you are storing MLObject related to this anonymous user.
 
 #####How to Create Anonymous Users Automatically
 Add following code in onCreate() in main Application.
 
 ```java
-LCUser.enableAutomaticUser();
+MLUser.enableAutomaticUser();
 ```
 
 ### Manage Users in Console
 
-User class is a specialized class for storing LCUser objects. You'll see a _User class in Console >> Users. More details: [Console UserManual](...).
+User class is a specialized class for storing MLUser objects. You'll see a _User class in Console >> Users. More details: [Console UserManual](...).
 
 ##User Role
 Setting user roles to manage permissions is more effective. The permission assigned to a role will be inherited by users contains in this role. User role is a user collection and a role can also contains another role. There is a corresponding `_Role` class in Leap Cloud for storing user roles.
@@ -1179,7 +1179,7 @@ Setting user roles to manage permissions is more effective. The permission assig
 Property Name|Type|Introduction|If Necessary
 ---|---|---|---
     ACL|ACL|Permission of this Role|**Necessary** (Requires explicit set)
-    roles|Relation|LCRoles contained by this LCRole|Optional
+    roles|Relation|MLRoles contained by this MLRole|Optional
     name|String|Role name|Necessary
     user|Relation|Users in this Role|Optional
 
@@ -1187,24 +1187,24 @@ Property Name|Type|Introduction|If Necessary
 There are two parameters required on creating the Role: the first one is the Role name (name property) and the second one is ACL.
 
 ```java
-LCACL roleACL = new LCACL();
+MLACL roleACL = new MLACL();
 roleACL.setPublicReadAccess(true);
-LCRole role = new LCRole("Administrator", roleACL);
-LCRoleManager.saveInBackground(role);
+MLRole role = new MLRole("Administrator", roleACL);
+MLRoleManager.saveInBackground(role);
 ```
 
 ###Add Users or Roles to the Role
 You can add users or roles to the role with role.getUsers().add() or role.getRoles().add().
 
 ```java
-LCRole role = new LCRole(roleName, roleACL);
-for (LCUser user : usersToAddToRole) {
+MLRole role = new MLRole(roleName, roleACL);
+for (MLUser user : usersToAddToRole) {
   role.getUsers().add(user)
 }
-for (LCRole childRole : rolesToAddToRole) {
+for (MLRole childRole : rolesToAddToRole) {
   role.getRoles().add(childRole);
 }
-LCRoleManager.saveInBackground(role);
+MLRoleManager.saveInBackground(role);
 ```
 
 ###Get Role Object
@@ -1214,20 +1214,20 @@ Here is two ways to get role object:
 1. Inquire with role name:
 
 	```java
-	LCObject wallPost = new LCObject("WallPost");
-	LCACL postACL = new LCACL();
+	MLObject wallPost = new MLObject("WallPost");
+	MLACL postACL = new MLACL();
 	//assign corresponding Role name：
 	postACL.setRoleWriteAccess("Moderators", true);
 	wallPost.setACL(postACL);
-	LCDataManager.saveInBackground(wallPost);
+	MLDataManager.saveInBackground(wallPost);
 	```
 2. Inquire with Query:
 
 	```JAVA
-	LCQuery<LCRole> query = LCRole.getQuery();
+	MLQuery<MLRole> query = MLRole.getQuery();
 	query.whereEqualTo("name", "roleName");
-	LCQueryManager.findAllInBackground(query, new FindCallback<LCRole>() {
-		public void done(List<LCRole> roleList, LCException e) {
+	MLQueryManager.findAllInBackground(query, new FindCallback<MLRole>() {
+		public void done(List<MLRole> roleList, MLException e) {
 			if (e == null) {
 			
 			} else {
@@ -1239,15 +1239,15 @@ Here is two ways to get role object:
 
 ##Data Security
 
-### Security of LCObject
-There is a ACL property when user create LCObject. Only LCUser and LCRole in this ACL list has the access. If a user doesn't explicitly set ACL, then system will assign default ACL automatically.
+### Security of MLObject
+There is a ACL property when user create MLObject. Only MLUser and MLRole in this ACL list has the access. If a user doesn't explicitly set ACL, then system will assign default ACL automatically.
 
 #####ACL
 ACL is a white list which contains users that are allowed the access to the data. A User must have the read permission (or belong to the Role that has the read permission) to get the data if an object. Meanwhile, a User must have the write permission (or belong to the Role that has the write permission) to modify or delete an object. e.g. a typical ACL data:
 
 ```{"553892e860b21a48a50c1f29":{"read":true,"write":true}}```
 
-indicates that the user whose ObjectId is "553892e860b21a48a50c1f29" has the permission to read and modify the LCObject.
+indicates that the user whose ObjectId is "553892e860b21a48a50c1f29" has the permission to read and modify the MLObject.
 
 #####Default Permission
 
@@ -1257,65 +1257,65 @@ Each object in Leap Cloud has a default ACL value when there's no explicit desig
 You can modify the value of ACL if needed:
 
 ```java
-LCACL defaultACL = new LCACL();
+MLACL defaultACL = new MLACL();
 defaultACL.setPublicReadAccess(true);
 defaultACL.setPublicWriteAccess(false);
-LCACL.setDefaultACL(defaultACL, true);
+MLACL.setDefaultACL(defaultACL, true);
 ```
 
-The second parameter of `LCACL.setDefaultACL()` is set as true, which means that the read and access permission is added to defaultACL by default, not vice versa.
+The second parameter of `MLACL.setDefaultACL()` is set as true, which means that the read and access permission is added to defaultACL by default, not vice versa.
 
 #####Only Available to Create User
-You can set the LCObject as only be read or modified by create users: users need to create LCObject after the signin and then add following ACL properties:
+You can set the MLObject as only be read or modified by create users: users need to create MLObject after the signin and then add following ACL properties:
 
 ```java
-LCObject privateNote = new LCObject("Note");
+MLObject privateNote = new MLObject("Note");
 privateNote.put("content", "This note is private!");
-privateNote.setACL(new LCACL(LCUser.getCurrentUser()));
-LCDataManager.saveInBackground(privateNote);
+privateNote.setACL(new MLACL(MLUser.getCurrentUser()));
+MLDataManager.saveInBackground(privateNote);
 ```
-Now, the LCObject - "privateNote" is only available to this user and can be read and modified on any devices signed in by this user.
+Now, the MLObject - "privateNote" is only available to this user and can be read and modified on any devices signed in by this user.
 
 #####Set Access Permission for Other Users
-You can add the read and write permission of **target user** to ACL of LCObject with setReadAccess and setWriteAccess.
+You can add the read and write permission of **target user** to ACL of MLObject with setReadAccess and setWriteAccess.
 
 For example, add read and modify access for a group of users: 
 
 ```java
-LCObject groupMessage = new LCObject("Message");
-LCACL groupACL = new LCACL();
+MLObject groupMessage = new MLObject("Message");
+MLACL groupACL = new MLACL();
      
-// userList is Iterable<LCUser>, containing a group of LCUser object.
-for (LCUser user : userList) {
+// userList is Iterable<MLUser>, containing a group of MLUser object.
+for (MLUser user : userList) {
   groupACL.setReadAccess(user, true);
   groupACL.setWriteAccess(user, true);  
 }
  
 groupMessage.setACL(groupACL);
-LCDataManager.saveInBackground(groupMessage);
+MLDataManager.saveInBackground(groupMessage);
 ```
 
 #####Set Access Permission for Roles
-You can add the read and write permission of **target Role** to ACL of LCObject with setRoleWriteAccess and setRoleWriteAccess.
+You can add the read and write permission of **target Role** to ACL of MLObject with setRoleWriteAccess and setRoleWriteAccess.
 
 For example, add read and modify access for a group of users:
 
 ```java
-LCRole moderators = /* Query for some LCRole */;
-LCObject wallPost = new LCObject("WallPost");
-LCACL postACL = new LCACL();
+MLRole moderators = /* Query for some MLRole */;
+MLObject wallPost = new MLObject("WallPost");
+MLACL postACL = new MLACL();
 postACL.setRoleWriteAccess(moderators);
 wallPost.setACL(postACL);
-LCDataManager.saveInBackground(wallPost);
+MLDataManager.saveInBackground(wallPost);
 ```
 
 #####Set Access Permission for Users and Roles
-The ACL of LCObject can be overlapped. For example, when you set ACL for a LCObject, you can add modify permission for a role while adding read permission for all users:
+The ACL of MLObject can be overlapped. For example, when you set ACL for a MLObject, you can add modify permission for a role while adding read permission for all users:
 
 
 ```java
-LCObject myMessage = new LCObject("Message");
-LCACL myACL = new LCACL();
+MLObject myMessage = new MLObject("Message");
+MLACL myACL = new MLACL();
 // add read permission for all users
 myACL.setPublicReadAccess(true);
 // add modify permission for Moderators
@@ -1324,14 +1324,14 @@ myMessage.setACL(myACL);
 ```	
 
 #####Set Access Permission for All Users
-You can add the read and write permission of **All Users** to ACL of LCObject with setPublicReadAccess and setPublicWriteAccess.
+You can add the read and write permission of **All Users** to ACL of MLObject with setPublicReadAccess and setPublicWriteAccess.
 ```java
-LCObject publicPost = new LCObject("Post");
-LCACL postACL = new LCACL();
+MLObject publicPost = new MLObject("Post");
+MLACL postACL = new MLACL();
 postACL.setPublicReadAccess(true);
 postACL.setPublicWriteAccess(false);
 publicPost.setACL(postACL);
-LCDataManager.saveInBackground(publicPost);
+MLDataManager.saveInBackground(publicPost);
 ```
 
 ### User Object Security
@@ -1341,21 +1341,21 @@ Leap Cloud has normalized the user object security. The data saved in the user o
 This instance is a good example of user obejct security:
 
 ```java
-LCUserManager.logInInBackground("my_username", "my_password", new LogInCallback<LCUser>() {
+MLUserManager.logInInBackground("my_username", "my_password", new LogInCallback<MLUser>() {
     
     @Override
-    public void done(LCUser user, LCException exception) {
+    public void done(MLUser user, MLException exception) {
         user.setUserName("my_new_username"); // Modify Username
-        LCUserManager.saveInBackground(user); // Save successfully because of the signin
+        MLUserManager.saveInBackground(user); // Save successfully because of the signin
          
         // not signed in, failed to be modified
-        LCQuery<LCUser> query = LCUser.getQuery();
-        LCQueryManager.getInBackground(query, user.getObjectId(), new GetCallback<LCUser>() {
-          public void done(LCUser object, LCException e) {
+        MLQuery<MLUser> query = MLUser.getQuery();
+        MLQueryManager.getInBackground(query, user.getObjectId(), new GetCallback<MLUser>() {
+          public void done(MLUser object, MLException e) {
             object.setUserName("another_username");
          
             // Error: not authorized
-            LCDataManager.saveInBackground(object);
+            MLDataManager.saveInBackground(object);
           }
         });
     }
@@ -1363,33 +1363,33 @@ LCUserManager.logInInBackground("my_username", "my_password", new LogInCallback<
 ```
 ### Role Object Security
 
-Similar to other LCObjects, LCRole object uses ACL to control the access permission. The different is that LCRole need to set ACL explicitly. Generally speaking, only the admin or other users with elevated permission can create or modify roles, so you need to set access permission when creating LCRole.  
+Similar to other MLObjects, MLRole object uses ACL to control the access permission. The different is that MLRole need to set ACL explicitly. Generally speaking, only the admin or other users with elevated permission can create or modify roles, so you need to set access permission when creating MLRole.  
 
 e.g.
 
 ```java
-LCACL roleACL = new LCACL();
+MLACL roleACL = new MLACL();
 roleACL.setPublicReadAccess(true);
-LCRole role = new LCRole("Administrator", roleACL);
-LCRoleManager.saveInBackground(role);
+MLRole role = new MLRole("Administrator", roleACL);
+MLRoleManager.saveInBackground(role);
 ```
 
 ##Third Party Login
 
-Leap Cloud provides 3rd party login service to simplify the signup and signin and integrate LC app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and LC SDK at the same time and connect LCUser and UserId of 3rd party app.
+Leap Cloud provides 3rd party login service to simplify the signup and signin and integrate ML app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and ML SDK at the same time and connect MLUser and UserId of 3rd party app.
 
 ###Log in with Facebook Account
-The Android SDK of Facebook helps app optimize the signin experience. As for the devices installed with Facebook app, LC app can realize direct login with Facebook user credential. If there's no Facebook app installed, users can provide signin info in a standard Facebook login page.
+The Android SDK of Facebook helps app optimize the signin experience. As for the devices installed with Facebook app, ML app can realize direct login with Facebook user credential. If there's no Facebook app installed, users can provide signin info in a standard Facebook login page.
 
-If the Facebook UserId is not bound to any LCUser after the Facebook login, Leap Cloud will create an account for the user and bind the two.
+If the Facebook UserId is not bound to any MLUser after the Facebook login, Leap Cloud will create an account for the user and bind the two.
 ####Preparations
 1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App
 2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
 3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
-4. Add following code after LCConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
+4. Add following code after MLConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
 ```java
-LCFacebookUtils.initialize("YOUR FACEBOOK APP ID");
+MLFacebookUtils.initialize("YOUR FACEBOOK APP ID");
 ```
 5. 	Add following code into onActivityResult() function in all Activites invoked Login with Facebook to finish verification.
 
@@ -1398,16 +1398,16 @@ LCFacebookUtils.initialize("YOUR FACEBOOK APP ID");
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
   super.onActivityResult(requestCode, resultCode, data);
-  LCFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+  MLFacebookUtils.finishAuthentication(requestCode, resultCode, data);
 }
 ```
-####Sign in and Register New LCUser
-If the Facebook UserId is not bound to any LCUser after the Facebook login, Leap Cloud will create an account for the user and bind the two. e.g.
+####Sign in and Register New MLUser
+If the Facebook UserId is not bound to any MLUser after the Facebook login, Leap Cloud will create an account for the user and bind the two. e.g.
 
 ```java
-LCFacebookUtils.logInInBackground(this, new LogInCallback<LCUser>() {
+MLFacebookUtils.logInInBackground(this, new LogInCallback<MLUser>() {
   @Override
-  public void done(LCUser user, LCException err) {
+  public void done(MLUser user, MLException err) {
     if (user == null) {
       //Facebook login is canceled
     } else if (user.isNew()) {
@@ -1423,18 +1423,18 @@ Detailed login process:
 
 * Login Facebook in Login with Facebook page provided by Facebook SDK.
 * Facebook verifies the login info, then return.
-* Leap Cloud SDK accept the result and save it to LCUser. If the Facebook UserId is not bound to any LCUser, then Leap Cloud will create an account for the user automatically.
-* Invoke LogInCallbackof LC and log in LCUser.
+* Leap Cloud SDK accept the result and save it to MLUser. If the Facebook UserId is not bound to any MLUser, then Leap Cloud will create an account for the user automatically.
+* Invoke LogInCallbackof ML and log in MLUser.
 
-####Bind LCUser and Facebook Account
-You can bind LC account and Facebook account with following method:
+####Bind MLUser and Facebook Account
+You can bind ML account and Facebook account with following method:
 
 ```java
-if (!LCFacebookUtils.isLinked(user)) {
-    LCFacebookUtils.linkInBackground(user, this, new SaveCallback() {
+if (!MLFacebookUtils.isLinked(user)) {
+    MLFacebookUtils.linkInBackground(user, this, new SaveCallback() {
         @Override
-        public void done(LCException ex) {
-          if (LCFacebookUtils.isLinked(user)) {
+        public void done(MLException ex) {
+          if (MLFacebookUtils.isLinked(user)) {
             //Bind Successfully
       }
     }
@@ -1442,34 +1442,34 @@ if (!LCFacebookUtils.isLinked(user)) {
 }
 ```
 
-Leap Cloud will update the Facebook account info to the LCUser after the bind. The next time user logs in with Facebook account, Leap Cloud will detect the bind and don't need to add new LCUser to this Facebook account again. 
+Leap Cloud will update the Facebook account info to the MLUser after the bind. The next time user logs in with Facebook account, Leap Cloud will detect the bind and don't need to add new MLUser to this Facebook account again. 
 
 ####Unbind
 
 ```java
-LCFacebookUtils.unlinkInBackground(user, new SaveCallback() {
+MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
   @Override
-  public void done(LCException ex) {
+  public void done(MLException ex) {
     if (ex == null) {
       Log.d("MyApp", "The user is no longer associated with their Facebook account.");
     }
   }
 });
 ```
-Leap Cloud will remove all Facebook account info from the LCUser after the unbind. The next time user logs in with Facebook account, Leap Cloud will detect there's no bind and then add new LCUser to this Facebook account.
+Leap Cloud will remove all Facebook account info from the MLUser after the unbind. The next time user logs in with Facebook account, Leap Cloud will detect there's no bind and then add new MLUser to this Facebook account.
 
 ###Log in with Twitter Account
-Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Facebook app, LC app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
+Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Facebook app, ML app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
 
-If the Twitter UserId is not bound to any LCUser after the Twitter login, Leap Cloud will create an account for the user and bind the two.
+If the Twitter UserId is not bound to any MLUser after the Twitter login, Leap Cloud will create an account for the user and bind the two.
 ####Preparations
 1. Create Twitter app in [Twitter Dev Center](...). Click My Apps >> Add a New App
 2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Twitter Authentication and fill the Twitter consumer Key got from step 1 into relative location.
 3. Integrate Twitter SDK, add Twitter Login button. Please check [Add Twitter Login to Your App or Website](...) for more details.
-4. Add following code after LCConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
+4. Add following code after MLConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
 ```java
-LCTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
+MLTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
 ```
 5. 	Add following code into onActivityResult() function in all Activites invoked Login with Twitter to finish verification.
 
@@ -1477,16 +1477,16 @@ LCTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
   super.onActivityResult(requestCode, resultCode, data);
-  LCTwitterUtils.finishAuthentication(requestCode, resultCode, data);
+  MLTwitterUtils.finishAuthentication(requestCode, resultCode, data);
 }
 ```
-####Sign in and Register New LCUser
-If the Twitter UserId is not bound to any LCUser after the Twitter login, Leap Cloud will create an account for the user and bind the two. e.g.
+####Sign in and Register New MLUser
+If the Twitter UserId is not bound to any MLUser after the Twitter login, Leap Cloud will create an account for the user and bind the two. e.g.
 
 ```java
-LCTwitterUtils.logInInBackground(this, new LogInCallback<LCUser>() {
+MLTwitterUtils.logInInBackground(this, new LogInCallback<MLUser>() {
   @Override
-  public void done(LCUser user, LCException err) {
+  public void done(MLUser user, MLException err) {
     if (user == null) {
       //Twitter login is canceled
     } else if (user.isNew()) {
@@ -1501,19 +1501,19 @@ Detailed login process:
 
 * Login Twitter in Login with Twitter page provided by Twitter SDK.
 * Twitter verifies the login info, then return.
-* Leap Cloud SDK accept the result and save it to LCUser. If the Twitter UserId is not bound to any LCUser, then Leap Cloud will create an account for the user automatically.
-* Invoke LogInCallbackof LC and log in LCUser.
+* Leap Cloud SDK accept the result and save it to MLUser. If the Twitter UserId is not bound to any MLUser, then Leap Cloud will create an account for the user automatically.
+* Invoke LogInCallbackof ML and log in MLUser.
 
 
-####Bind LCUser and Twitter Account
-You can bind LC account and Twitter account with following method:
+####Bind MLUser and Twitter Account
+You can bind ML account and Twitter account with following method:
 
 ```java
-if (!LCTwitterUtils.isLinked(user)) {
-    LCTwitterUtils.linkInBackground(user, this, new SaveCallback() {
+if (!MLTwitterUtils.isLinked(user)) {
+    MLTwitterUtils.linkInBackground(user, this, new SaveCallback() {
         @Override
-        public void done(LCException ex) {
-          if (LCTwitterUtils.isLinked(user)) {
+        public void done(MLException ex) {
+          if (MLTwitterUtils.isLinked(user)) {
             //Bind Successfully
       }
     }
@@ -1521,39 +1521,39 @@ if (!LCTwitterUtils.isLinked(user)) {
 }
 ```
 
-Leap Cloud will update the Twitter account info to the LCUser after the bind. The next time user logs in with Twitter account, Leap Cloud will detect the bind and don't need to add new LCUser to this Twitter account again. 
+Leap Cloud will update the Twitter account info to the MLUser after the bind. The next time user logs in with Twitter account, Leap Cloud will detect the bind and don't need to add new MLUser to this Twitter account again. 
 
 
 ####Unbind
 
 ```java
-LCTwitterUtils.unlinkInBackground(user, new SaveCallback() {
+MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
   @Override
-  public void done(LCException ex) {
+  public void done(MLException ex) {
     if (ex == null) {
       Log.d("MyApp", "The user is no longer associated with their Twitter account.");
     }
   }
 });
 ```
-Leap Cloud will remove all Twitter account info from the LCUser after the unbind. The next time user logs in with Twitter account, Leap Cloud will detect there's no bind and then add new LCUser to this Twitter account.
+Leap Cloud will remove all Twitter account info from the MLUser after the unbind. The next time user logs in with Twitter account, Leap Cloud will detect there's no bind and then add new MLUser to this Twitter account.
 
 
 ##GeoPoint
 
-Leap Cloud provides LCGeoPoint object to help users do location query based on longitude and latitude.
+Leap Cloud provides MLGeoPoint object to help users do location query based on longitude and latitude.
 
-####LCGeoPoint Overview
+####MLGeoPoint Overview
 
-####Create LCGeoPoint
-LCGeoPoint requires two parameters: the first one is Latitude (positive is northern) and the second one is longitude (positive is eastern).
+####Create MLGeoPoint
+MLGeoPoint requires two parameters: the first one is Latitude (positive is northern) and the second one is longitude (positive is eastern).
 
 ```java
-//Create new LCGeoPoint (40.0, -30.0)
-LCGeoPoint point = new LCGeoPoint(40.0, -30.0);
+//Create new MLGeoPoint (40.0, -30.0)
+MLGeoPoint point = new MLGeoPoint(40.0, -30.0);
 ```
 
-The LCGeoPoint object can be stored in LCObject：
+The MLGeoPoint object can be stored in MLObject：
 
 ```java
 myShop.put("location", point);
@@ -1563,21 +1563,21 @@ myShop.put("location", point);
 You can get adjacent object around A with whereNear method and it requires two parameters: the first one is the property name for storing location of target object and the second one is the location of A. We can find the nearest 10 shops around A with following instance.
 
 ```java
-LCGeoPoint userLocation = (LCGeoPoint) userObject.get("location");
-LCQuery<LCObject> shopQuery = LCQuery.getQuery("Shop");
+MLGeoPoint userLocation = (MLGeoPoint) userObject.get("location");
+MLQuery<MLObject> shopQuery = MLQuery.getQuery("Shop");
 shopQuery.whereNear("location", userLocation);
 query.setLimit(10);
-LCQueryManager.findAllInBackground(query, new FindCallback<LCObject>() { ... });
+MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() { ... });
 ```
 #####Inquire objects around a certain location
 You can inquire objects within a certain range with whereWithinKilometers and whereWithinMiles. The method is similar to the aforementioned one.
 #####Inquire objects within a certain range
-You can inquire objects within a certain range with whereWithinGeoBox and it requires three parameters: the first one is the property name for storing location of target object and the next two are LCGeoPoint objects. The circle built with two LCGeoPoints as the endpoints of the diameter is the query range of whereWithinGeoBox. We can find all shops with the certain range with the following instance. 
+You can inquire objects within a certain range with whereWithinGeoBox and it requires three parameters: the first one is the property name for storing location of target object and the next two are MLGeoPoint objects. The circle built with two MLGeoPoints as the endpoints of the diameter is the query range of whereWithinGeoBox. We can find all shops with the certain range with the following instance. 
 
 ```java
-LCGeoPoint southwestOfSF = new LCGeoPoint(37.708813, -122.526398);
-LCGeoPoint northeastOfSF = new LCGeoPoint(37.822802, -122.373962);
-LCQuery<LCObject> query = LCQuery.getQuery("PizzaPlaceObject");
+MLGeoPoint southwestOfSF = new MLGeoPoint(37.708813, -122.526398);
+MLGeoPoint northeastOfSF = new MLGeoPoint(37.822802, -122.373962);
+MLQuery<MLObject> query = MLQuery.getQuery("PizzaPlaceObject");
 query.whereWithinGeoBox("location", southwestOfSF, northeastOfSF);
-LCQueryManager.findAllInBackground(new FindCallback<LCObject>() { ... });
+MLQueryManager.findAllInBackground(new FindCallback<MLObject>() { ... });
 ```
