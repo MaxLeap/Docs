@@ -5,8 +5,8 @@ Support服务是MaxLeap为开发者提供的一套标准应用客服方案。在
 
 ## 准备工作
 
-1. 安装并配置MaxLeap Core SDK. 详细步骤，请查看[QuickStart - Core SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
-2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
+1. 安装并配置 MaxLeap Core SDK. 详细步骤，请查看[QuickStart - Core SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
+2. 安装并配置 HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
 
 ## 展示 FAQ 页面
 
@@ -117,7 +117,7 @@ SDK 的 UI 自定义是通过编辑 LASHCThemes.bundle/HelpCenterTheme.plist 文
 
 ### Using custom image bundle
 
-**Image bundle name**: 自定义的图片包的相对于 main bundle 的相对路径，例如: LASHCImages.bundle。
+**Image bundle name**: 自定义的图片包的相对于 main bundle 的相对路径，例如: MLHelpCenterImages.bundle。
 
 部分图片名字对照图：
 
@@ -132,7 +132,7 @@ SDK 的 UI 自定义是通过编辑 LASHCThemes.bundle/HelpCenterTheme.plist 文
 2. 复制字体全名。字体全名可以在字体文件简介中获取。选中字体文件，按下 <kbd>COMMAND ⌘</kbd>+<kbd>I</kbd>(查看简介) 可以打开字体简介面板。
     ![fontsinfoview](../../../images/fontsinfoview.png)
 
-3. 把字体名字粘贴到 LASHCThemes.bundle/HelpCenterTheme.plist 需要的地方。
+3. 把字体名字粘贴到 MLHelpCenterThemes.bundle/HelpCenterTheme.plist 需要的地方。
     ![setfonts](../../../images/setfonts.png)
 
 4. 在模拟器中测试字体。错误的字体名字将被 SDK 忽略。

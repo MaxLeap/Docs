@@ -42,7 +42,7 @@
 	// 创建一条数据
 	MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 	testObject[@"foo"] = @"bar";
-	[MLDataManager saveObjectInBackground:testObject block:nil];
+	[testObject saveInBackgroundWithBlock:nil];
 	```
 
 	这段代码试图在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
