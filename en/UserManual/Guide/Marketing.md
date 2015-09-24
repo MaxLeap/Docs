@@ -1,19 +1,19 @@
 # Marketing
 ##Introduction
-###What is Leap Cloud Marketing
+###What is MaxLeap Marketing
 
-Marketing is a promotion and message issuance service provided by Leap Cloud. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the jump on user's click. The creation, settings and sending are all done in Console.
+Marketing is a promotion and message issuance service provided by MaxLeap. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the jump on user's click. The creation, settings and sending are all done in Console.
 
 
-###Why is Leap Cloud Marketing Necessary 
-With data from Analytics and Segment provided by Leap Cloud Users, you can make and implement marketing strategies with high efficiency. The advantages of Leap Cloud Marketing can be summarized as follows: 
+###Why is MaxLeap Marketing Necessary 
+With data from Analytics and Segment provided by MaxLeap Users, you can make and implement marketing strategies with high efficiency. The advantages of MaxLeap Marketing can be summarized as follows: 
 
 
 * **Improve Penetrance: **Issue marketing campaign at any time to improve the user engagement and penetrance
 * **Ensure the user experience: **More targeted to send messages to certain Segment 
 * **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
 
-**If you want to learn more about Leap Cloud Marketing Service SDK, please check [iOS Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
+**If you want to learn more about MaxLeap Marketing Service SDK, please check [iOS Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
 ##Marketing Campaign List
 
 In Marketing Campaign list, you can check all campaign（including**In-app Messages**and**Push Notifications**）details of an app:
@@ -28,7 +28,7 @@ Click "New Campaign + " >> Push, and then you can enter the create new Push page
 The target users can be divided into 3 types:
 
 * All users
-* Users from certain Segments （Please check [UserManual of Segment](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
+* Users from certain Segments （Please check [UserManual of Segment](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN) for more information about creating new **Segment** ）
 * Users using certain devices
 
 ![imgMAddPush1.png](../../../images/imgMAddPush1.png)
@@ -87,4 +87,4 @@ The default status of a new campaign is Draft. You can select a push and click "
 
 ## Next
 
-**If you want to learn more about Leap Cloud Marketing Service SDK, please check [iOS Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**
+**If you want to learn more about MaxLeap Marketing Service SDK, please check [iOS Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more details.**

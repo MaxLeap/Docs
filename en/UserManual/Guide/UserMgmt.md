@@ -1,10 +1,10 @@
 # User Management
 In User Management, you can manage users, roles and segments as well as check and maintain all installation records. You can manage your users with ease and realize meticulous management with user segments.
 
-**If you want to learn more about Leap Cloud User Management Service SDK, please check [iOS Guide － User Management](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH) or [Android Guide － User Management](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH).**
+**If you want to learn more about MaxLeap User Management Service SDK, please check [iOS Guide － User Management](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH) or [Android Guide － User Management](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH).**
 
 ##Users
-Leap Cloud will generate the `LCUser` instance and show it in User management after user's signup.
+MaxLeap will generate the `MLUser` instance and show it in User management after user's signup.
 ####Check User List
 
 ![imgUMUserList.png](../../../images/imgUMUserList.png)
@@ -44,7 +44,7 @@ You can enter the Edit Role page by clicking on role name and add more users the
 
 ![imgUMSegmentList.png](../../../images/imgUMSegmentList.png)
 
-Leap Cloud provides you 5 default user segments:
+MaxLeap provides you 5 default user segments:
 
 ####Create a Segment
 
@@ -56,7 +56,7 @@ You need to set filters which define the user catagory they may belong to before
 * Behavior: Usage, Payment, Events.
 * User Info: Country, Language, Created Time, Last Access Time, Channel, App Version.
 
-After the filter setup ("and" relation), Leap Cloud will add all eligible users to the segment.
+After the filter setup ("and" relation), MaxLeap will add all eligible users to the segment.
 
 ####Check/Edit Segment
 You can enter the Edit Segment page by clicking on segment name and edit the content. You can also check the user quantity and other analytics of this segment:
@@ -66,4 +66,4 @@ You can enter the Edit Segment page by clicking on segment name and edit the con
 Besides, you can send push notifications or in-app messages to certain segment in here.
 
 ## Next
-**If you want to learn more about Leap Cloud User Management Service SDK, please check [iOS Guide － User Management](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH) or [Android Guide － User Management](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH).**
+**If you want to learn more about MaxLeap User Management Service SDK, please check [iOS Guide － User Management](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH) or [Android Guide － User Management](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH).**

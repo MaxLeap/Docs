@@ -10,7 +10,7 @@ You can get and modify the relative settings of your app in App Settings:
 You can config following information of an app in General Settings:
 
 ####Basic Info
-* Leap Cloud App Name
+* MaxLeap App Name
 * URL
 * Default language
 * Description
@@ -42,7 +42,7 @@ Fill GCM Push Credentials:
 ![imgSTPush.png](../../../images/imgSTPush.png)
 
 
-Please check [iOS Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more detailed information of Push Notification.
+Please check [iOS Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more detailed information of Push Notification.
 
 ##User Authentication
 You can turn on/off the authentications below:
@@ -53,10 +53,10 @@ You can turn on/off the authentications below:
 
 ![imgSTAuth.png](../../../images/imgSTAuth.png)
 
-Please check [iOS Guide － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more detailed information of User Authentication.
+Please check [iOS Guide － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN) or [Android Guide － Cloud Config](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN) for more detailed information of User Authentication.
 
 ##Email Settings 
-Leap Cloud can send emails automatically in following conditions: 
+MaxLeap can send emails automatically in following conditions: 
 * **Email Verification**: You can decide whether your users need to verfiy their email when sign up or change email address by turning on/off "Verify user's email address".
 * Password Reset
 
