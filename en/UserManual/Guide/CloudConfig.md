@@ -2,7 +2,7 @@
 ## Introduction
 ###What is Cloud Config
 
-Every app has a `LCCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config  app parameter in Leap Cloud with Console and read cloud parameter with iOS/Android SDK.
+Every app has a `MLCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config  app parameter in MaxLeap with Console and read cloud parameter with iOS/Android SDK.
 ###Why is Cloud Config Necessary
 The advantages of putting part of configuration in cloud can be summarized as follows:
 
@@ -11,7 +11,7 @@ The advantages of putting part of configuration in cloud can be summarized as fo
 
 ## Next
 
-**If you want to learn more about Leap Cloud Config Service SDK, please check [iOS Guide － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**
+**If you want to learn more about MaxLeap Cloud Config Service SDK, please check [iOS Guide － Cloud Config](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**
 
 ##Cloud Parameter List
 In Cloud Config of Dev Center, we can check all cloud parameter list of your app. The table includes following cloumns:
@@ -35,4 +35,4 @@ You can delete the cloud parameter by clicking Delete button in column Detail.
 
 ## Next
 
-**If you want to learn more about Leap Cloud Config Service SDK, please check [iOS Guide － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**
+**If you want to learn more about MaxLeap Cloud Config Service SDK, please check [iOS Guide － Cloud Config](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN) or [Android Guide － Cloud Config](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN) for more details.**

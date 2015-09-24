@@ -85,7 +85,7 @@
 		// 创建一条数据
 		MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 		testObject[@"foo"] = @"bar";
-		[MLDataManager saveObjectInBackground:testObject block:nil];
+		[testObject saveInBackgroundWithBlock:nil];
 	}
 	```
 

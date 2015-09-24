@@ -58,7 +58,7 @@
 获取MaxLeap 云代码 Java项目模板
 
 ```shell
-git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
+git clone https://github.com/LeapCloud/Demo-CloudCode-Java.git
 ```
 
 ### 修改配置
@@ -70,12 +70,10 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 	"applicationId": "YOUR_APPLICATION_ID",
 	"applicationKey": "YOUR_MASTER_KEY",
 	"lang" : "java",
-	"java-main": "Main",
-	"package-hook" : "YOUR_HOOK_PACKAGE_NAME",
-	"package-entity" : "YOUR_ENTITY_PACKAGE_NAME",
-	"global": {
-		"version": "0.0.1"
-	}
+	"javaMain": "Main",
+	"packageHook" : "YOUR_HOOK_PACKAGE_NAME",
+	"packageClasses" : "YOUR_ENTITY_PACKAGE_NAME",
+	"version": "0.0.1"
 }
 ```
 
@@ -86,9 +84,9 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 applicationName|MaxLeap应用名称
 applicationId|Application ID
 applicationKey|Master Key
-java-main|入口函数名
-package-hook|Hook包名
-package-entity|Class实体包名
+javaMain|入口函数名
+packageHook|Hook包名
+packageClasses|Class实体包名
 version|当前云代码项目版本号
 
 ### 定义一个简单的function
@@ -165,10 +163,10 @@ Hello, David Wang!
 Cloud Function是运行在MaxLeap上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
 
 ###定义Cloud Function
-每个Cloud Function需要实现 com.maxleap.code.Handler interface，该interface是典型的Functional Interface。
+每个Cloud Function需要实现 as.leap.code.LASHandler interface，该interface是典型的Functional Interface。
 
 ```Java
-public interface Handler <T extends com.maxleap.code.Request, R extends com.maxleap.code.Response> {
+public interface LASHandler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
     R handle(T t);
 }
 ```
@@ -184,7 +182,7 @@ request -> {
 JDK6和7可以如下定义:
 
 ```Java
-public class HelloWorldHandler implements Handler {
+public class HelloWorldHandler implements LASHandler {
     public Response handle(Request request) {
         Response<String> response = new ResponseImpl<String>(String.class);
         response.setResult("Hello, world!");
@@ -200,10 +198,10 @@ defineFunction("helloWorld", new HelloWorldHandler());
 ###通过Cloud Function访问Cloud Data
 
 ####定义Cloud Data Object（在管理中心中，称之为“Class”）
-新建一个Cloud Data Object，并继承CloudObject类
+新建一个Cloud Data Object，并继承LASObject类
 
 ```java
-public class MyObject extends CloudObject {
+public class MyObject extends LASObject {
     private String name;
     
     public String getName() {
@@ -220,15 +218,15 @@ public class MyObject extends CloudObject {
 
 * 一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理中心中创建的 class 名字一样
 * 须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
-* 须配置global.json文件以识别该package，如：`"package-entity" : "data"`
+* 须配置global.json文件以识别该package，如：`"packageClasses" : "data"`
 
 ####Cloud Data Object的CRUD
 
-我们可以通过 EntityManager 操作 Cloud Data：
+我们可以通过 LASClassManager 操作 Cloud Data：
 
 ```java
 public void doSomethingToCloudData(){
-	EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+	LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
 	MyObject obj = new MyObject();
 	obj.setName("Awesome");
 	String name = obj.getName();
@@ -305,7 +303,7 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
 ###创建和监控Background Job
 ####在云代码中定义并实现Job Handler
 ``` java
-public class MyJobHandler implements Handler {
+public class MyJobHandler implements LASHandler {
     public Response handle(Request request) {
         Response<String> response = new ResponseImpl<String>(String.class);
         response.setResult("Job done!");
@@ -350,16 +348,16 @@ img
 Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
 ###创建和使用Hook
-实现EntityManagerHook接口(建议直接继承EntityManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
+实现LASClassManagerHook接口(建议直接继承LASClassManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
 
 ```java
-@EntityManager("MyObject")
-public class MyObjectHook extends EntityManagerHookBase<MyObject> {
+@ClassManager("MyObject")
+public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
 	@Override
 	public BeforeResult<MyObject> beforeCreate(MyObject obj) {
-		EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+		LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
 		//创建obj前验证是否重名了
-		Query sunQuery = Query.instance();
+		LASQuery sunQuery = LASQuery.instance();
 		sunQuery.equalTo("name", obj.getName());
 		FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
 		if (findMsg.results() != null && findMsg.results().size() > 0)
@@ -369,14 +367,14 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 	
 	@Override
 	public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage) {
-		EntityManager<MyObject> myObjectEntityManager = EntityManagerFactory.getManager(MyObject.class);
+		LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
 		//创建完obj后修改这个obj的ACL权限
 		Map<String,Map<String,Boolean>> acl = new HashMap<>();
 		Map<String,Boolean> value = new HashMap<>();
 		value.put("read", true);
 		value.put("write", true);
 		acl.put(saveMessage.objectId().toString(), value);
-		Update update = new Update().set("ACL", acl);
+		LASUpdate update = new LASUpdate().set("ACL", acl);
 		myObjectEntityManager.update(saveMessage.objectId().toString(), update);
 		AfterResult afterResult = new AfterResult(saveMessage);
 		return afterResult;
@@ -387,9 +385,9 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 #####定义Hook需注意：
 
 * 确保目标Cloud Data Object对应的class存在
-* Hook类上需要添加`@EntityManager`注解，以便服务器能够识别该Hook是针对哪个实体的
+* Hook类上需要添加`@ClassManager`注解，以便服务器能够识别该Hook是针对哪个实体的
 * 须将所有的Hook类放入同一个package中，推荐在/src/main/java下新建一个package，如：“myHooks”
-* 须配置global.json文件以识别该package，如：`"package-hook" : "myHooks"`
+* 须配置global.json文件以识别该package，如：`"packageHook" : "myHooks"`
 * 内建class和自定义class均支持Hook，内建class原有的限制（ _User用户名和密码必填， _Installation的deviceToken和installationId二选一）依然有效。
 
 ### Hook类型
@@ -422,10 +420,10 @@ public BeforeResult<FriendList> beforeCreate(FriendList list) {
 @Override
 public BeforeResult<FriendList> beforeUpdate(FriendList list) {
 	//定义查询条件：
-	Query sunQuery = Query.instance();
+	LASQuery sunQuery = LASQuery.instance();
 	sunQuery.equalTo("Name", list.getName());
 	//在“好友”表中执行查询
-	EntityManager<Friend> friendEntityManager = EntityManagerFactory.getManager(Friend.class);
+	LASClassManager<Friend> friendEntityManager = LASClassManagerFactory.getManager(Friend.class);
 	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);	
 	if (findMsg.results() != null && findMsg.results().size() > 0)
 		return new BeforeResult<>(list, false, "Update failed because the name of the friend list already exists!");
@@ -445,10 +443,10 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list) {
 @Override
 public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 	//定义查询条件：
-	Query sunQuery = Query.instance();
+	LASQuery sunQuery = LASQuery.instance();
 	sunQuery.equalTo("listName", list.Name);
 	//在“好友”表中执行查询
-	EntityManager<Friend> friendEntityManager = EntityManagerFactory.getManager(Friend.class);
+	LASClassManager<Friend> friendEntityManager = LASClassManagerFactory.getManager(Friend.class);
 	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);
 	
 	if (findMsg.results() != null && findMsg.results().size() > 0)
@@ -467,7 +465,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 
 ```java
 public class MyClass {
-	Logger logger = LoggerFactory.getLogger(myclass.class);
+	Logger logger = as.leap.code.LoggerFactory.getLogger(myclass.class);
 
 	public void myMethod(){
 		logger.error("Oops! Error, caught you!");
@@ -521,9 +519,7 @@ lcc upload <文件路径>
 `<文件路径>`为你将部署的云代码 package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
 上传的的代码会被制作成Docker镜像，版本号在云代码项目里的global.json文件中指定：
 ```
-"global": {
-	"version": "0.0.1"
-}
+"version": "0.0.1"
 ```
 ###显示所有云端云代码版本:
 ```shell
@@ -562,9 +558,9 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 	//添加依赖，获取云代码 SDK及JUnit测试插件
     <dependencies>
         <dependency>
-            <groupId>com.ilegendsoft</groupId>
-            <artifactId>cloud-code-test-framework</artifactId>
-            <version>2.2.1-SNAPSHOT</version>
+            <groupId>as.leap</groupId>
+            <artifactId>cloud-code-test</artifactId>
+            <version>2.3.7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -665,20 +661,13 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 	            <outputDirectory>/cloud/lib</outputDirectory>
 	            <directory>target/lib</directory>
 	            <excludes>
-	                <exclude>jackson-*.jar</exclude>
-	                <exclude>vertx-*.jar</exclude>
-	                <exclude>log4j-*.jar</exclude>
-	                <exclude>slf4j-*.jar</exclude>
-	                <exclude>cloud-code-base-*.jar</exclude>
-	                <exclude>cloud-code-sdk-client-*.jar</exclude>
-	                <exclude>cloud-code-test-framework-*.jar</exclude>
-	                <exclude>netty-*.jar</exclude>
-	                <exclude>rxBus-*.jar</exclude>
-	                <exclude>rxjava-*.jar</exclude>
-	                <exclude>sun-client-api-*.jar</exclude>
-	                <exclude>hazelcast-*.jar</exclude>
-	                <exclude>junit-*.jar</exclude>
-	            </excludes>
+                    <exclude>jackson-*.jar</exclude>
+                    <exclude>log4j-*.jar</exclude>
+                    <exclude>slf4j-*.jar</exclude>
+                    <exclude>cloud-code-*.jar</exclude>
+                    <exclude>sdk-data-api*.jar</exclude>
+                    <exclude>junit-*.jar</exclude>
+                </excludes>
 	        </fileSet>
 	    </fileSets>
 	</assembly>

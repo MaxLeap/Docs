@@ -2,7 +2,7 @@
 
 ## 简介
 ###什么是云配置
-每个应用在云端都有一个对应的`MLCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在MaxLeap中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`MLConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过 Console 在 MaxLeap 中配置应用参数，并且使用 iOS/Android SDK 读取云端的参数。
 ###为何需要云配置
 将应用的部分配置放置在云端的优势在于：
 
@@ -20,10 +20,10 @@ Value|参数的值
 
 您还可以为不同的Segment设置不同的参数值。新建云配置中参数的详细步骤，请查看[Console使用指南 - 云配置](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL).
 
-## 获取MaxLeap对象
+## 获取 MLConfig 对象
 
 ```objective_c
-MaxLeap *currentConfig = [MaxLeapManager currentConfig];
+MLConfig *currentConfig = [MLConfig currentConfig];
 ```
 
 ## 获取MaxLeap中的参数值
@@ -37,16 +37,17 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 ```
 
  跟上面类似的方法还有：
-– dateForKey:defaultValue:
-– arrayForKey:defaultValue:
-– dictionaryForKey:defaultValue:
-– fileForKey:defaultValue:
-– geoPointForKey:defaultValue:
-– boolForKey:defaultValue:
-– numberForKey:defaultValue:
-– integerForKey:defaultValue:
-– floatForKey:defaultValue:
-– doubleForKey:defaultValue:
+ 
+`– dateForKey:defaultValue:`<br>
+`– arrayForKey:defaultValue:`<br>
+`– dictionaryForKey:defaultValue:`<br>
+`– fileForKey:defaultValue:`<br>
+`– geoPointForKey:defaultValue:`<br>
+`– boolForKey:defaultValue:`<br>
+`– numberForKey:defaultValue:`<br>
+`– integerForKey:defaultValue:`<br>
+`– floatForKey:defaultValue:`<br>
+`– doubleForKey:defaultValue:`
 
 
 ## 更新云配置
@@ -56,7 +57,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 也可以调用以下代码手动刷新所有云参数
 
 ```objective_c
-[MaxLeapManager getConfigInBackgroundWithBlock:^(LASConfig *config, NSError *error) {
+[MLConfig getConfigInBackgroundWithBlock:^(MLConfig *config, NSError *error) {
     // this config is currentConfig
 }];
 ```
@@ -65,19 +66,19 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 ```objective_c
 // keys 传入 nil 等同于上面的方法，刷新全部参数的值
-[MaxLeapManager getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(LASConfig *config, NSError *error) {
+[MLConfig getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(MLConfig *config, NSError *error) {
     // this config is currentConfig
 }];
 ```
 
-更新后，如果有参数的值发生变化，就会在主线程调用相应的 valueChangedHandler()
+更新后，如果有参数的值发生变化，就会在主线程调用相应的 `valueChangedHandler()`
 
 ### 监听
 
 ###添加监听
 
 	```objective_c
-	[MaxLeapManager addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
+	[MLConfig addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
 	    // the value changed
 	}];
 	```
@@ -85,18 +86,18 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 ###移除监听
 
 	```objective_c
-	[MaxLeapManager removeObserver:anObserver forKey:@"configname"];
+	[MLConfig removeObserver:anObserver forKey:@"configname"];
 	```
 
 在 `anObserver` 销毁之前必须移除监听者
 
 	```objective_c
-	[MaxLeapManager removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
+	[MLConfig removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
 	```
 
 ## 云参数值类型
 
-`MaxLeap` supports most of the data types supported by `MLObject`:
+`MLConfig` 支持大部分 `MLObject` 支持的数据类型:
 
 - `NSString`
 - `NSNumber`
