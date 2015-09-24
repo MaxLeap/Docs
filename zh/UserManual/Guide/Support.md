@@ -1,8 +1,8 @@
 #支持 
 ##简介
-Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ列表的管理及用户反馈的处理界面。
+Support服务是MaxLeap为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ列表的管理及用户反馈的处理界面。
 
-**如果您希望进一步了解Leap Cloud Support服务SDK，请参考[iOS开发指南 － 支持](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)或[Android开发指南 － 支持](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
+**如果您希望进一步了解MaxLeap Support服务SDK，请参考[iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)或[Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
 
 ##用户反馈
 
@@ -41,7 +41,7 @@ Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。
 
 ##FAQ
 ###查看FAQ列表
-所有的FAQ都会被存放在不同的分类中，并且分类数据会在客户端与Console之间自动同步，默认的，Leap Cloud将为您创建三个分类：通用，支付及隐私。
+所有的FAQ都会被存放在不同的分类中，并且分类数据会在客户端与Console之间自动同步，默认的，MaxLeap将为您创建三个分类：通用，支付及隐私。
 
 ![imgSPFAQList.png](../../../images/imgSPFAQList.png)
 
@@ -54,4 +54,4 @@ Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。
 
 ## 下一步
 
-**如果您希望进一步了解Leap Cloud Support服务SDK，请参考[iOS开发指南 － 支持](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)或[Android开发指南 － 支持](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
+**如果您希望进一步了解MaxLeap Support服务SDK，请参考[iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)或[Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**

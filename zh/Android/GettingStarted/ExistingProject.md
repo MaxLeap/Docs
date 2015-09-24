@@ -2,7 +2,7 @@
 
 1.	获取SDK，并解压缩
 
-    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip">下载Leap Cloud SDK</a>
+    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip">下载MaxLeap SDK</a>
 2.	将SDK添加至项目
     将解压后的所有"Leap-*.jar"文件，拖拽至项目的libs目录中。如果你们的项目没有 libs 目录，那么就在项目的根目录下创建一个：通过右键点击项目 Project，选择 New，接下来点击 Folder 菜单即可创建新目录。
 
@@ -12,25 +12,25 @@
     
     ```java
     dependencies {
-        compile fileTree(dir: 'libs', include: 'Leap Cloud-*.jar')
+        compile fileTree(dir: 'libs', include: 'MaxLeap-*.jar')
     }
     ```
 	
-#	配置Leap Cloud项目
+#	配置MaxLeap项目
  
- 1. 连接项目与Leap Cloud应用
+ 1. 连接项目与MaxLeap应用
  	
- 	在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+ 	在Application的onCreate()方法中，调用`MaxLeap.initialize`来设置您应用的Application ID 和 REST API Key：
  	
  	```java
  	import android.app.Application;
- 	import as.leap.LCConfig;
+ 	import com.maxleap.MaxLeap;
  
  	public class MyApplication extends Application {
  	    @Override
  	    public void onCreate() {
  	        super.onCreate();
- 	        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+ 	        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
  	    }
  	}
  	```
@@ -53,24 +53,24 @@
  	
  3. 快速测试项目配置
  
- 为了测试项目是否已经注册至Leap Cloud，我们可以向Application的onCreate()方法中添加以下代码：
+ 为了测试项目是否已经注册至MaxLeap，我们可以向Application的onCreate()方法中添加以下代码：
  
  ```java
  import android.app.Application;
- import as.leap.LCConfig;
- import as.leap.LCDataManager;
- import as.leap.LCObject;
+ import com.maxleap.MaxLeap;
+ import com.maxleap.MLDataManager;
+ import com.maxleap.MLObject;
  
  public class MyApplication extends Application {
      @Override
      public void onCreate() {
          super.onCreate();
-         LCConfig.initialize(this, "{{appid}}", "{{restkey}}");
+         MaxLeap.initialize(this, "{{appid}}", "{{restkey}}");
          
          //测试项目配置：
-         LCObject testObject = new LCObject("People");
+         MLObject testObject = new MLObject("People");
          testObject.put("Name", "David Wang");
-         LCDataManager.saveInBackground(testObject);
+         MLDataManager.saveInBackground(testObject);
      }
  }
  ```
@@ -82,4 +82,4 @@
  表明通过客户端，向应用下的Cloud Data存入数据成功。
  
  # 下一步
- 至此，您已经完成Leap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取Leap Cloud的详细功能介绍以及使用方法，开启Leap云服务之旅。
+ 至此，您已经完成Leap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取MaxLeap的详细功能介绍以及使用方法，开启Leap云服务之旅。

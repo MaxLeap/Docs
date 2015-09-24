@@ -9,12 +9,12 @@
 
 2. 添加SDK到您的应用
 
-	将下载的 `Leap Cloud.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
+	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
 
-	按照同样的方法把 `LCHelpCenter.embeddedframework` 拖到 Xcode 项目中。
+	按照同样的方法把 `MLHelpCenter.embeddedframework` 拖到 Xcode 项目中。
 
 3. 添加依赖
 
@@ -43,26 +43,26 @@
 打开AppDelegate.m文件，并将如下import添加到文件顶部：
 
 ```objc
-#import <Leap Cloud/Leap Cloud.h>
+#import <MaxLeap/MaxLeap.h>
 ```
 
 然后将以下代码复制到 `application:didFinishLaunchingWithOptions:` 方法中：
 
 ```objc
-[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
 ```
 
-把 `your_application_id` 和 `your_client_id ` 替换成您自己的 Leap Cloud 应用的。
+把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。
 
 接下来启用 HelpCenter 模块:
 
 ```
-#import <LCHelpCenter/LCHelpCenter.h>
+#import <MLHelpCenter/MLHelpCenter.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
-	[LCHelpCenter install];
+	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+	[MLHelpCenter install];
 }
 ```
 
@@ -70,22 +70,22 @@
 
 # 快速测试
 
-1. 测试是否可以连接到 Leap Cloud 服务器
+1. 测试是否可以连接到 MaxLeap 服务器
 
 	在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 
 	```objc
-	#import <Leap Cloud/Leap Cloud.h>
+	#import <MaxLeap/MaxLeap.h>
 
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-		[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+		[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 		// 创建一条数据
-		LCObject *testObject = [LCObject objectWithClassName:@"Person"];
+		MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 		testObject[@"foo"] = @"bar";
-		[LCDataManager saveObjectInBackground:testObject block:nil];
+		[MLDataManager saveObjectInBackground:testObject block:nil];
 	}
 	```
 
@@ -100,7 +100,7 @@
 	在 `ViewController.m` 的 `viewDidAppear:` 方法中添加以下代码：
 	
 	```
-	[[LCHelpCenter sharedInstance] showFAQs:self];
+	[[MLHelpCenter sharedInstance] showFAQs:self];
 	```
 	
 	运行配置好的模板项目，您会看到以下界面：
@@ -117,4 +117,4 @@
 	
 	![ios_issue_message_view](../../../images/ios_issue_message_view.png)
 	
-	在 Leap Cloud 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
+	在 MaxLeap 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。

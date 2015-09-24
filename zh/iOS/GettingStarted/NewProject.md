@@ -14,7 +14,7 @@
 	打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面这行的注释:
     
     ```objc
-    [Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+    [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
     ```
     
     把 `your_application_id` 和 `your_client_key` 替换成您自己 app 的。
@@ -24,20 +24,20 @@
     
 # 测试项目配置
 
-为了检测是否可以连接 Leap Cloud 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
+为了检测是否可以连接 MaxLeap 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 
 ```objc
-#import <Leap Cloud/Leap Cloud.h>
+#import <MaxLeap/MaxLeap.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 // 创建一条数据
-LCObject *testObject = [LCObject objectWithClassName:@"Person"];
+MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 testObject[@"foo"] = @"bar";
-[LCDataManager saveObjectInBackground:testObject block:nil];
+[MLDataManager saveObjectInBackground:testObject block:nil];
 ```
 
 这段代码试图在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。

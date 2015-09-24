@@ -2,7 +2,7 @@
 
 ##	安装SDK
 
-####	使用项目模板，快速使用Leap Cloud SDK
+####	使用项目模板，快速使用MaxLeap SDK
 
 #####	1.	获取项目模板
 
@@ -20,23 +20,23 @@
 	
 1.	打开Eclipse，点击 "File" -> "Import.." 
 2. 	选择 "General"-> "Existing Projects into Workspace"
-3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择LCStarterProject
+3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择MLStarterProject
 
-##	配置Leap Cloud项目
+##	配置MaxLeap项目
 
-###	连接项目与Leap Cloud应用
+###	连接项目与MaxLeap应用
 	
-如果您还没有在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+如果您还没有在Application的onCreate()方法中，调用`MaxLeap.initialize`来设置您应用的Application ID 和 REST API Key：
 	
 ```java
 import android.app.Application;
-import as.leap.LCConfig;
+import com.maxleap.MaxLeap;
 
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
     }
 }
 ```
@@ -59,24 +59,24 @@ public class MyApplication extends Application {
 
 ##	快速测试项目配置
 
-为了测试项目是否已经注连接上Leap Cloud应用及其Leap Cloud云服务，我们可以向Application的onCreate()方法中添加以下代码：
+为了测试项目是否已经注连接上MaxLeap应用及其MaxLeap云服务，我们可以向Application的onCreate()方法中添加以下代码：
 
 ```java
 import android.app.Application;
-import as.leap.LCConfig;
-import as.leap.LCDataManager;
-import as.leap.LCObject;
+import com.maxleap.MaxLeap;
+import com.maxleap.MLDataManager;
+import com.maxleap.MLObject;
 
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
         
         //测试项目配置：
-        LCObject testObject = new LCObject("People");
+        MLObject testObject = new MLObject("People");
         testObject.put("Name", "David Wang");
-        LCDataManager.saveInBackground(testObject);
+        MLDataManager.saveInBackground(testObject);
     }
 }
 ```
@@ -87,4 +87,4 @@ public class MyApplication extends Application {
 
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
-至此，恭喜您已经完成Leap Cloud SDK的安装与必要的配置。请移步至[SDK使用教程](LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS)以获取Leap Cloud的详细功能介绍以及使用方法，开启Leap Cloud云服务使用之旅。
+至此，恭喜您已经完成MaxLeap SDK的安装与必要的配置。请移步至[SDK使用教程](ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

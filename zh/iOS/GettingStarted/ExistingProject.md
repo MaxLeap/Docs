@@ -8,7 +8,7 @@
 
 2. 添加SDK到您的应用
 
-	将下载的 `Leap Cloud.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
+	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
@@ -39,36 +39,36 @@
 打开AppDelegate.m文件，并将如下import添加到文件顶部：
 
 ```objc
-#import <Leap Cloud/Leap Cloud.h>
+#import <MaxLeap/MaxLeap.h>
 ```
 
 然后将以下代码复制到 `application:didFinishLaunchingWithOptions:` 方法中：
 
 ```objc
-[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
 ```
 
-把 `your_application_id` 和 `your_client_id ` 替换成您自己的 Leap Cloud 应用的。
+把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。
 
 编译并运行！
 
 
-# 测试是否可以连接到 Leap Cloud 服务器
+# 测试是否可以连接到 MaxLeap 服务器
 
-为了检测是否可以连接 Leap Cloud 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
+为了检测是否可以连接 MaxLeap 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 
 ```objc
-#import <Leap Cloud/Leap Cloud.h>
+#import <MaxLeap/MaxLeap.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 // 创建一条数据
-LCObject *testObject = [LCObject objectWithClassName:@"Person"];
+MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 testObject[@"Name"] = @"David Wang";
-[LCDataManager saveObjectInBackground:testObject block:nil];
+[MLDataManager saveObjectInBackground:testObject block:nil];
 ```
 
 这段代码目的是在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。

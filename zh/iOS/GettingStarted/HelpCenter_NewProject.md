@@ -7,15 +7,15 @@
 
     <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
 
-2. 连接 Leap Cloud 云端应用
+2. 连接 MaxLeap 云端应用
 
 	在运行之前，还要进行一些配置：
 	
 	打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面几行的注释:
     
     ```objc
-    [Leap Cloud setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
-    [LCHelpCenter install];
+    [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+    [MLHelpCenter install];
     ```
     
     把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。
@@ -25,24 +25,24 @@
     
 # 测试项目配置
 
-1. 检测是否可以连接到 Leap Cloud 云端应用
+1. 检测是否可以连接到 MaxLeap 云端应用
 
 	在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 
 	```objc
-	#import <Leap Cloud/Leap Cloud.h>
-	#import <LCHelpCenter/LCHelpCenter.h>
+	#import <MaxLeap/MaxLeap.h>
+	#import <MLHelpCenter/MLHelpCenter.h>
 	
 	- (BOOL)application:(UIApplication *)application 	didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-	[Leap Cloud setApplicationId:@"your_application_id" 	clientKey:@"your_client_key"];
-	[LCHelpCenter install];
+	[MaxLeap setApplicationId:@"your_application_id" 	clientKey:@"your_client_key"];
+	[MLHelpCenter install];
 	
 	// 创建一条数据
-	LCObject *testObject = [LCObject objectWithClassName:@"Person"];
+	MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 	testObject[@"foo"] = @"bar";
-	[LCDataManager saveObjectInBackground:testObject block:nil];
+	[MLDataManager saveObjectInBackground:testObject block:nil];
 	```
 
 	这段代码试图在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
@@ -56,7 +56,7 @@
 	在 `ViewController.m` 的 `viewDidAppear:` 方法中添加以下代码：
 	
 	```
-	[[LCHelpCenter sharedInstance] showFAQs:self];
+	[[MLHelpCenter sharedInstance] showFAQs:self];
 	```
 	
 	运行配置好的模板项目，您会看到以下界面：
@@ -73,5 +73,5 @@
 	
 	![ios_issue_message_view](../../../images/ios_issue_message_view.png)
 	
-	在 Leap Cloud 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
+	在 MaxLeap 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
 

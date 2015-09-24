@@ -1,37 +1,37 @@
 #	安装SDK
 
-HelpCenter是依赖于Leap Cloud Core SDK之上的服务，在安装和使用HelpCenter SDK之前，请确保您的项目已经安装Leap Cloud Core SDK. 您可以在 [Leap Cloud Core SDK安装向导](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)中获取更多信息。
+HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCenter SDK之前，请确保您的项目已经安装MaxLeap Core SDK. 您可以在 [MaxLeap Core SDK安装向导](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)中获取更多信息。
 
 1. 获取SDK
 
-	<a class="download-sdk" href="...">下载Leap Cloud HelpCenter Android SDK</a>
+	<a class="download-sdk" href="...">下载MaxLeap HelpCenter Android SDK</a>
 	
 2. 添加SDK
 
 	Android Studio 
 
-	1. 	打开Android Studio，点击“File” >> "New.." >> "Import Module"，选择所下载SDK的"Leap Cloud HelpCenter"目录
+	1. 	打开Android Studio，点击“File” >> "New.." >> "Import Module"，选择所下载SDK的"MaxLeap HelpCenter"目录
 	2. 	打开需要使用HelpCenter的Module，在其build.gradle中添加如下依赖：
 	
 		```java
 		dependencies {
-			compile project(':LC Helpcenter')
+			compile project(':ML Helpcenter')
 		}
 		```
 
-#	连接项目与Leap Cloud应用
+#	连接项目与MaxLeap应用
 	
-	如果您还没有在Application的onCreate()方法中，调用`LCConfig.initialize`来设置您应用的Application ID 和 REST API Key：
+	如果您还没有在Application的onCreate()方法中，调用`MaxLeap.initialize`来设置您应用的Application ID 和 REST API Key：
 	
 	```java
 		import android.app.Application;
-		import as.leap.LCConfig;
+		import com.maxleap.MaxLeap;
 	
 		public class MyApplication extends Application {
 			@Override
 			public void onCreate() {
 				super.onCreate();
-				LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+				MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 			}
 		}
 	```
@@ -54,26 +54,26 @@ HelpCenter是依赖于Leap Cloud Core SDK之上的服务，在安装和使用Hel
 	
 #	快速测试
 
-1. 测试Leap Cloud Core SDK
+1. 测试MaxLeap Core SDK
 
-	为了测试项目是否已经注册至Leap Cloud，我们可以向Application的onCreate()方法中添加以下代码：
+	为了测试项目是否已经注册至MaxLeap，我们可以向Application的onCreate()方法中添加以下代码：
 	
 	```java
 	import android.app.Application;
-	import as.leap.LCConfig;
-	import as.leap.LCDataManager;
-	import as.leap.LCObject;
+	import com.maxleap.MaxLeap;
+	import com.maxleap.MLDataManager;
+	import com.maxleap.MLObject;
 	
 	public class MyApplication extends Application {
 		@Override
 		public void onCreate() {
 			super.onCreate();
-			LCConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+			MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 			
 			//测试项目配置：
-			LCObject testObject = new LCObject("People");
+			MLObject testObject = new MLObject("People");
 			testObject.put("Name", "David Wang");
-			LCDataManager.saveInBackground(testObject);
+			MLDataManager.saveInBackground(testObject);
 		}
 	}
 	```
@@ -82,13 +82,13 @@ HelpCenter是依赖于Leap Cloud Core SDK之上的服务，在安装和使用Hel
 	
 	![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 	
-	表明通过客户端，向应用下的Cloud Data存入数据成功。至此，Leap Cloud SDK的安装与配置完成。
+	表明通过客户端，向应用下的Cloud Data存入数据成功。至此，MaxLeap SDK的安装与配置完成。
 
-2. 测试Leap Cloud HelpCenter SDK
-	为了测试项目能否使用Leap Cloud HelpCenter服务，我们可以向Application的onCreate()方法中添加以下代码：
+2. 测试MaxLeap HelpCenter SDK
+	为了测试项目能否使用MaxLeap HelpCenter服务，我们可以向Application的onCreate()方法中添加以下代码：
 	
 	```java
-	LCHelpCenter.openFaqs(MainActivity.this);
+	MLHelpCenter.openFaqs(MainActivity.this);
 	```
 	
 	运行后，您将在安卓测试设备中看见：
@@ -99,12 +99,12 @@ HelpCenter是依赖于Leap Cloud Core SDK之上的服务，在安装和使用Hel
 	
 	![imgSupportAddMsg](../../../images/imgSupportAddMsg.png)
 	
-	最后，点击右上角“发送”按钮，您将收到来自Leap Cloud的回应消息：
+	最后，点击右上角“发送”按钮，您将收到来自MaxLeap的回应消息：
 	
 	![imgSupportConversation](../../../images/imgSupportConversation.png)
 	
-	表明，Leap Cloud已经成功接受您的反馈信息。测试成功。
+	表明，MaxLeap已经成功接受您的反馈信息。测试成功。
 
 #下一步
 
-至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)以获取HelpCenter的详细功能介绍以及使用方法，开启Leap Cloud云服务使用之旅。
+至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)以获取HelpCenter的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

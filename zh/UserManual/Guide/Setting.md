@@ -10,7 +10,7 @@
 在常规设置中，您可以配置应用的以下信息：
 
 ####应用基本信息
-* Leap Cloud应用名，应用类型（App或Game），操作系统（Android或iOS）
+* MaxLeap应用名，应用类型（App或Game），操作系统（Android或iOS）
 * URL：应用主页
 * 默认语言：该应用管理页面使用的默认语言
 * 描述
@@ -55,7 +55,7 @@ iOS：
 ![imgSTPush.png](../../../images/imgSTPush.png)
 
 
-推送服务的详细介绍，请查看[iOS开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) or [Android开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
+推送服务的详细介绍，请查看[iOS开发指南 － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) or [Android开发指南 － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
 
 ##用户验证
 您可以打开或关闭以下用户认证方式：
@@ -66,10 +66,10 @@ iOS：
 
 ![imgSTAuth.png](../../../images/imgSTAuth.png)
 
-有关用户认证的详细介绍，请查看[iOS开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) or [Android开发指南 － Marketing](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
+有关用户认证的详细介绍，请查看[iOS开发指南 － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) or [Android开发指南 － Marketing](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
 
 ##电子邮件设置
-Leap Cloud可以在以下场景，帮助您自动发送邮件：
+MaxLeap可以在以下场景，帮助您自动发送邮件：
 * **验证邮箱**：您可以通过打开或关闭“验证电子邮箱”，设置新用户注册或修改邮箱时是否需要验证。
 * 重置密码
 

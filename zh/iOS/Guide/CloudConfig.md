@@ -2,7 +2,7 @@
 
 ## 简介
 ###什么是云配置
-每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在Leap Cloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`MLCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在MaxLeap中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
 ###为何需要云配置
 将应用的部分配置放置在云端的优势在于：
 
@@ -18,15 +18,15 @@ Parameter|参数名
 Type|参数类型
 Value|参数的值
 
-您还可以为不同的Segment设置不同的参数值。新建云配置中参数的详细步骤，请查看[Console使用指南 - 云配置](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL).
+您还可以为不同的Segment设置不同的参数值。新建云配置中参数的详细步骤，请查看[Console使用指南 - 云配置](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL).
 
-## 获取LCConfig对象
+## 获取MaxLeap对象
 
 ```objective_c
-LCConfig *currentConfig = [LCConfigManager currentConfig];
+MaxLeap *currentConfig = [MaxLeapManager currentConfig];
 ```
 
-## 获取LCConfig中的参数值
+## 获取MaxLeap中的参数值
 
 ```objective_c
 // 获取 configname 对应的云参数，可能为 nil
@@ -56,7 +56,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 也可以调用以下代码手动刷新所有云参数
 
 ```objective_c
-[LCConfigManager getConfigInBackgroundWithBlock:^(LASConfig *config, NSError *error) {
+[MaxLeapManager getConfigInBackgroundWithBlock:^(LASConfig *config, NSError *error) {
     // this config is currentConfig
 }];
 ```
@@ -65,7 +65,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 ```objective_c
 // keys 传入 nil 等同于上面的方法，刷新全部参数的值
-[LCConfigManager getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(LASConfig *config, NSError *error) {
+[MaxLeapManager getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(LASConfig *config, NSError *error) {
     // this config is currentConfig
 }];
 ```
@@ -77,7 +77,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 ###添加监听
 
 	```objective_c
-	[LCConfigManager addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
+	[MaxLeapManager addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
 	    // the value changed
 	}];
 	```
@@ -85,18 +85,18 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 ###移除监听
 
 	```objective_c
-	[LCConfigManager removeObserver:anObserver forKey:@"configname"];
+	[MaxLeapManager removeObserver:anObserver forKey:@"configname"];
 	```
 
 在 `anObserver` 销毁之前必须移除监听者
 
 	```objective_c
-	[LCConfigManager removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
+	[MaxLeapManager removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
 	```
 
 ## 云参数值类型
 
-`LCConfig` supports most of the data types supported by `LCObject`:
+`MaxLeap` supports most of the data types supported by `MLObject`:
 
 - `NSString`
 - `NSNumber`

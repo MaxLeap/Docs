@@ -2,7 +2,7 @@
 
 ## 简介
 ###什么是云配置
-每个应用在云端都有一个对应的`LCCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在Leap Cloud中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`MLCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在MaxLeap中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
 ###为何需要云配置
 将应用的部分配置放置在云端的优势在于：
 
@@ -18,17 +18,17 @@ Parameter|参数名
 Type|参数类型
 Value|参数的值
 
-您还可以为不同的Segment设置不同的参数值。新建云配置中参数的详细步骤，请查看[Console使用指南 - 云配置](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL).
+您还可以为不同的Segment设置不同的参数值。新建云配置中参数的详细步骤，请查看[Console使用指南 - 云配置](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL).
 
-##获取LCCloudConfig对象
-您可以通过`LCCloudConfig.getCurrentCloudConfig()`方法获取最新的Cloud Config.
+##获取MLCloudConfig对象
+您可以通过`MLCloudConfig.getCurrentCloudConfig()`方法获取最新的Cloud Config.
 
 ```java
-LCCloudConfig currentConfig = LCCloudConfig.getCurrentCloudConfig();
+MLCloudConfig currentConfig = MLCloudConfig.getCurrentCloudConfig();
 ```
 
-##获取LCCloudConfig中的参数值
-在获取一个云端参数的值时，您需要知道该参数的值类型，然后通过对LCCloudConfig实例调用`getType()`方法获取对应参数的值。该方法需要传入两个参数：第一个为云端参数名，第二个为默认值。当云端不存在响应的参数时，系统将会把默认值赋值给该参数。
+##获取MLCloudConfig中的参数值
+在获取一个云端参数的值时，您需要知道该参数的值类型，然后通过对MLCloudConfig实例调用`getType()`方法获取对应参数的值。该方法需要传入两个参数：第一个为云端参数名，第二个为默认值。当云端不存在响应的参数时，系统将会把默认值赋值给该参数。
 
 ```java
 currentConfig.getString(key, defaultValue)
@@ -47,12 +47,12 @@ currentConfig.getDate(key, defaultValue)
 
 在每次 app 进入前台时，SDK 会自动更新上述方法获取的 currentConfig. 您也可以调用以下代码手动刷新所有云参数：
 
-您可以通过`LCCloudConfigManager.getInBackground()`获取`LCCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为默认值。
+您可以通过`MLCloudConfigManager.getInBackground()`获取`MLCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为默认值。
 
 ```java
-LCCloudConfigManager.getInBackground(new ConfigCallback() {
+MLCloudConfigManager.getInBackground(new ConfigCallback() {
     @Override
-    public void done(LCCloudConfig cloudConfig, LCException exception) {
+    public void done(MLCloudConfig cloudConfig, MLException exception) {
         if (exception == null) {
             int y = currentConfig.getInt("y", 100);
         } else{}
@@ -67,18 +67,18 @@ LCCloudConfigManager.getInBackground(new ConfigCallback() {
 @Override
 protected void onResume() {
     super.onResume();
-    LCCloudConfigManager.refereshKeysInBackground();
+    MLCloudConfigManager.refereshKeysInBackground();
 }
 ```
 
 ###添加监听
 
-您可以通过`LCCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
+您可以通过`MLCloudConfigManager.observeKeyInBackground()`跟踪云端参数的变化，并且及时获取新的参数值。该函数包含两个参数：第一个为云端参数名，第二个为`ValueChangedCallback`回调类实例。
 
 ```java
-LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
+MLCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
     @Override
-    public void done(LCCloudConfig cloudConfig) {
+    public void done(MLCloudConfig cloudConfig) {
        int newKeyX = cloudConfig.get("keyX", null);
     }
 });
@@ -91,24 +91,24 @@ LCCloudConfigManager.observeKeyInBackground("keyX", new ValueChangedCallback() {
 移除的办法很简单，您只需添加如下代码：
 
 ```java
-LCCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
+MLCloudConfigManager.removeObserver("keyX",  previousValueChangedCallback);
 ```
 
 移除一个云端参数的所有跟踪：
 
 ```java
-LCCloudConfigManager.removeObserver("x");
+MLCloudConfigManager.removeObserver("x");
 ```
 
 移除所有参数的所有跟踪：
 
 ```java
-LCCloudConfigManager.removeAllObservers();
+MLCloudConfigManager.removeAllObservers();
 ```
 
 ## 云参数值类型
 
-`LCConfig` 支持绝大多数 `LCObject`支持的值类型:
+`MaxLeap` 支持绝大多数 `MLObject`支持的值类型:
 
 - `String`
 - `Number`

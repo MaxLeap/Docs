@@ -39,56 +39,56 @@ If you only want to modify your last commit message, it's very simple:
 
 We provide several path-maps here, you can compile links of other pages with those paths:
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '/guide/docs.html',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME': '/guide/docs.html',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS': '/guide/devguide/ios.html',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN': '/guide/devguide/ios.html#cloud-data',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN': '/guide/devguide/ios.html#analytics',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN': '/guide/devguide/ios.html#cloud-config',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN': '/guide/devguide/ios.html#marketing',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN': '/guide/devguide/ios.html#support',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN': '/guide/devguide/ios.html#user',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS': '/guide/devguide/ios.html',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN': '/guide/devguide/ios.html#cloud-data',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN': '/guide/devguide/ios.html#analytics',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN': '/guide/devguide/ios.html#cloud-config',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN': '/guide/devguide/ios.html#marketing',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN': '/guide/devguide/ios.html#support',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN': '/guide/devguide/ios.html#user',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '/guide/devguide/ios.html#云数据',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '/guide/devguide/ios.html#分析',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '/guide/devguide/ios.html#营销',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '/guide/devguide/ios.html#云数据',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '/guide/devguide/ios.html#分析',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '/guide/devguide/ios.html#营销',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '/guide/devguide/android.html',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '/guide/devguide/android.html#cloud-data',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN': '/guide/devguide/android.html#analytics',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN': '/guide/devguide/android.html#cloud-config',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN': '/guide/devguide/android.html#marketing',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN': '/guide/devguide/android.html#support',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN': '/guide/devguide/android.html#user',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '/guide/devguide/android.html',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '/guide/devguide/android.html#cloud-data',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN': '/guide/devguide/android.html#analytics',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN': '/guide/devguide/android.html#cloud-config',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN': '/guide/devguide/android.html#marketing',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN': '/guide/devguide/android.html#support',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN': '/guide/devguide/android.html#user',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH': '/guide/devguide/android.html#云数据',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH': '/guide/devguide/android.html#分析',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH': '/guide/devguide/android.html#云配置',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH': '/guide/devguide/android.html#营销',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH': '/guide/devguide/android.html#支持',
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH': '/guide/devguide/android.html#用户',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH': '/guide/devguide/android.html#云数据',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH': '/guide/devguide/android.html#分析',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH': '/guide/devguide/android.html#云配置',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH': '/guide/devguide/android.html#营销',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH': '/guide/devguide/android.html#支持',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH': '/guide/devguide/android.html#用户',
 
-        'LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '/guide/devguide/java.html',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '/guide/devguide/java.html',
 
-        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL': '/guide/usermanual',
-        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',
-        'LC_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '/guide/usermanual/usermgmt.html',
-
-
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS': '/tutorials/ios.html',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '/tutorials/android.html',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS': '/quickstart/ios/core/existing.html',
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
-        'LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
-        'LC_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html',
-
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip',        
-        'LC_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip',
-        'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip',
-        'LC_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip'
+        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL': '/guide/usermanual',
+        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',
+        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '/guide/usermanual/usermgmt.html',
 
 
-    For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS': '/tutorials/ios.html',
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '/tutorials/android.html',
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS': '/quickstart/ios/core/existing.html',
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
+        'ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
+        'ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html',
+
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip',
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip',
+        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip',
+        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip'
+
+
+    For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 
 ### See also:
 [Git Book Chapter 7.6: Git Tools - Rewriting History](http://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)

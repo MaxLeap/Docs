@@ -1,16 +1,16 @@
 
-# Leap Cloud云代码使用指南
+# MaxLeap云代码使用指南
 
 ## 云代码简介
 
 ###什么是云代码服务
-云代码是部署运行在Leap Cloud上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
+云代码是部署运行在MaxLeap上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
 ###为什么需要云代码服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
-* 强大的运算能力：云代码运行在Leap Cloud的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
 * 同一套代码可以为iOS，Android，web site等提供服务
 
@@ -19,7 +19,7 @@
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到Leap Cloud，Leap Cloud会生成对应的docker image。用lcc deploy可以让Leap Cloud启动Docker container运行该Docker image。
+一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到MaxLeap，MaxLeap会生成对应的docker image。用lcc deploy可以让MaxLeap启动Docker container运行该Docker image。
 
 目前云代码支持Java环境，我们在近期会推出Python版本。
 	  
@@ -55,7 +55,7 @@
 
 ## 快速入门
 ### 创建云代码项目
-获取Leap Cloud 云代码 Java项目模板
+获取MaxLeap 云代码 Java项目模板
 
 ```shell
 git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
@@ -83,7 +83,7 @@ git clone https://gitlab.ilegendsoft.com/zcloudsdk/cloud-code-template-java.git
 	
 键|值|
 ------------|-------|
-applicationName|Leap Cloud应用名称
+applicationName|MaxLeap应用名称
 applicationId|Application ID
 applicationKey|Master Key
 java-main|入口函数名
@@ -94,11 +94,11 @@ version|当前云代码项目版本号
 ### 定义一个简单的function
 
 ```Java
-import as.leap.code.LCLoader;
-import as.leap.code.Response;
-import as.leap.code.impl.GlobalConfig;
-import as.leap.code.impl.LoaderBase;
-import as.leap.code.impl.Response;
+import com.maxleap.code.MLLoader;
+import com.maxleap.code.Response;
+import com.maxleap.code.impl.GlobalConfig;
+import com.maxleap.code.impl.LoaderBase;
+import com.maxleap.code.impl.Response;
 
 public class Main extends LoaderBase implements Loader {
     @Override
@@ -136,7 +136,7 @@ public class Main extends LoaderBase implements Loader {
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	请查看[lcc使用向导](LC_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
+*	请查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
 
 ### 测试
 
@@ -144,8 +144,8 @@ public class Main extends LoaderBase implements Loader {
 
 ```shell
 curl -X POST \
--H "X-LC-AppId: YOUR_APPID" \
--H "X-LC-APIKey: YOUR_APIKEY" \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
@@ -159,16 +159,16 @@ Hello, David Wang!
 
 注意:
 
-* X-LC-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
+* X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
 ## Cloud Function
-Cloud Function是运行在Leap Cloud上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
+Cloud Function是运行在MaxLeap上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
 
 ###定义Cloud Function
-每个Cloud Function需要实现 as.leap.code.Handler interface，该interface是典型的Functional Interface。
+每个Cloud Function需要实现 com.maxleap.code.Handler interface，该interface是典型的Functional Interface。
 
 ```Java
-public interface Handler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
+public interface Handler <T extends com.maxleap.code.Request, R extends com.maxleap.code.Response> {
     R handle(T t);
 }
 ```
@@ -264,8 +264,8 @@ public void doSomethingToCloudData(){
 
 ```shell
 curl -X POST \
--H "X-LC-AppId: YOUR_APPID" \
--H "X-LC-APIKey: YOUR_APIKEY" \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
 https://api.leap.as/functions/hello
@@ -290,7 +290,7 @@ iOS SDK中：
 
 ```objective-c
 NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
-    [LCCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
+    [MLCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
         if (error) {
             // 出现异常
         } else {
@@ -497,13 +497,13 @@ lcc log -n 100
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 img
 
-## LCC － 云代码命令行工具
-LCC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到Leap Cloud，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
+## MLC － 云代码命令行工具
+MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
 ###登录:
 ```shell
 lcc login <用户名>
 ```
-`<用户名>` 为您登录Leap Cloud管理中心的账号，然后根据提示输入密码
+`<用户名>` 为您登录MaxLeap管理中心的账号，然后根据提示输入密码
 ###显示所有app：
 ```shell
 lcc apps

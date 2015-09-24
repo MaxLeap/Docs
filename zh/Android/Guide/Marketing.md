@@ -1,12 +1,12 @@
 #营销
 ##简介
-###什么是Leap Cloud Marketing服务
+###什么是MaxLeap Marketing服务
 
-Marketing服务是Leap Cloud提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标Activity。消息的创建，设置和发送均在Console中完成。
+Marketing服务是MaxLeap提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标Activity。消息的创建，设置和发送均在Console中完成。
 
-###为何需要Leap Cloud Marketing服务
+###为何需要MaxLeap Marketing服务
 
-结合Leap Cloud分析服务提供的分析数据，以及Leap Cloud Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。Leap Cloud Marketing服务的优势在于：
+结合MaxLeap分析服务提供的分析数据，以及MaxLeap Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。MaxLeap Marketing服务的优势在于：
 
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
@@ -17,7 +17,7 @@ Marketing服务是Leap Cloud提供的营销和信息发布功能。目前提供�
 推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标Activity。
 
 ###配置
-Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
+MaxLeap Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
 
 1. 提供 **Sender ID** 和 **API key**. 请在*Google开发者中心*获取这两个Key.
 2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
@@ -43,7 +43,7 @@ Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Googl
 	        android:value="@integer/google_play_services_version" />
 
 	    <receiver
-	    android:name="as.leap.push.GcmBroadcastReceiver"
+	    android:name="com.maxleap.push.GcmBroadcastReceiver"
 	    android:permission="com.google.android.c2dm.permission.SEND">
 	    <intent-filter>
 	        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -53,10 +53,10 @@ Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Googl
 	    </intent-filter>
 	    </receiver>
 	    
-	    <receiver android:name="as.leap.LCPushBroadcastReceiver" android:exported="false">
+	    <receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
 	    <intent-filter>
-	        <action android:name="as.leap.push.intent.RECEIVE"/>
-	        <action android:name="as.leap.push.intent.OPEN"/>
+	        <action android:name="com.maxleap.push.intent.RECEIVE"/>
+	        <action android:name="com.maxleap.push.intent.OPEN"/>
 	    </intent-filter>
 		</receiver>
 	</application>
@@ -65,7 +65,7 @@ Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Googl
 
 	```xml
 	<meta-data
-	    android:name="as.leap.push.gcm_sender_id"
+	    android:name="com.maxleap.push.gcm_sender_id"
 	    android:value="id:YOUR_SENDER_ID" />
 	```
 
@@ -73,13 +73,13 @@ Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Googl
 
 	```xml
 	<meta-data
-	    android:name="as.leap.push.notification_icon"
+	    android:name="com.maxleap.push.notification_icon"
 	    android:resource="@android:drawable/ic_dialog_alert" />
 	```
-5. **启用Marketing服务：**在`Application.onCreate()`中的`LCConfig.initialize()`方法**之前**添加：
+5. **启用Marketing服务：**在`Application.onCreate()`中的`MaxLeap.initialize()`方法**之前**添加：
 
 	```java
-	LCConfig.setMarketingEnabled(true);
+	MaxLeap.setMarketingEnabled(true);
 	```
 
 注意：
@@ -90,14 +90,14 @@ Leap Cloud Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Googl
 
 您可以通过以下步骤自定义推送消息的显示和处理。
 
-1. 新建CustomPushReceiver类，并继承LCPushBroadcastReceiver
+1. 新建CustomPushReceiver类，并继承MLPushBroadcastReceiver
 2. 在CustomPushReceiver类中完成一系列自定义：点击后的目标Activity，图标等
 3. 在`AndroidManifest.xml`中配置CustomPushReceiver
 
 #####新建Receiver
 
 ```java
-public class CustomPushReceiver extends LCPushBroadcastReceiver {
+public class CustomPushReceiver extends MLPushBroadcastReceiver {
 	@Override
 	protected class<? extends Activity> getActivity(Intent intent) {
 		return YOUR_ACTIVITY.class;
@@ -120,7 +120,7 @@ protected class<? extends Activity> getActivity(Intent intent)
 Intent intent = getIntent();
 if (intent != null && intent.getExtras() != null) {
     for (String key : intent.getExtras().keySet()) {
-        LCLog.i(TAG, key + " = " + intent.getStringExtra(key));
+        MLLog.i(TAG, key + " = " + intent.getStringExtra(key));
     }
 }
 ```
@@ -151,7 +151,7 @@ protected int getSmallIconId(Context context)
 
 ```xml
 <meta-data
-    android:name="as.leap.push.notification_icon"
+    android:name="com.maxleap.push.notification_icon"
     android:resource="@android:drawable/ic_dialog_alert" />
 ```
 
@@ -173,15 +173,15 @@ protected Notification getNotification(Context context, Intent intent)
 ```
 
 #####配置CustomPushReceiver
-用下列Receiver替换默认的`as.leap.LCPushBroadcastReceiver`：
+用下列Receiver替换默认的`com.maxleap.MLPushBroadcastReceiver`：
 
 ```xml
 <receiver
     android:name=".CustomPushReceiver"
     android:exported="false">
     <intent-filter>
-        <action android:name="as.leap.push.intent.RECEIVE" />
-        <action android:name="as.leap.push.intent.OPEN" />
+        <action android:name="com.maxleap.push.intent.RECEIVE" />
+        <action android:name="com.maxleap.push.intent.OPEN" />
     </intent-filter>
 </receiver>
 ```
@@ -189,14 +189,14 @@ protected Notification getNotification(Context context, Intent intent)
 ## 应用内消息
 
 ###配置
-为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`LCConfig.initialize()`方法**之前**添加：
+为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`MaxLeap.initialize()`方法**之前**添加：
 
 ```java
-LCConfig.setMarketingEnabled(true);
+MaxLeap.setMarketingEnabled(true);
 ```
 
 ###定义目标Activity
-您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](LC_DOCS_LINK_PLACEHOLDER_USERMANUAL))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
+您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
 
 在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
 
@@ -205,7 +205,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	Intent intent = getIntent();
 	if (intent != null && intent.getExtras() != null) {
 		for (String key : intent.getExtras().keySet()) {
-			LCLog.i(TAG, key + " = " + intent.getStringExtra(key));
+			MLLog.i(TAG, key + " = " + intent.getStringExtra(key));
 		}
 	}
 }
@@ -217,15 +217,15 @@ protected void onCreate(Bundle savedInstanceState) {
 @Override
 protected void onResume() {
 		super.onResume();
-	LCMarketing.setInAppMessageDisplayActivity(this);
-	LCAnalytics.onResume(this);
+	MLMarketing.setInAppMessageDisplayActivity(this);
+	MLAnalytics.onResume(this);
 }
 
 @Override
 protected void onPause() {
 		super.onPause();
-	LCMarketing.dismissCurrentInAppMessage();
-	LCMarketing.clearInAppMessageDisplayActivity();
-	LCAnalytics.onPause(this);
+	MLMarketing.dismissCurrentInAppMessage();
+	MLMarketing.clearInAppMessageDisplayActivity();
+	MLAnalytics.onPause(this);
 }
 ```

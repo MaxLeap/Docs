@@ -1,19 +1,19 @@
 
 #支持
 ##简介
-Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ的管理及用户反馈的处理界面。
+Support服务是MaxLeap为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ的管理及用户反馈的处理界面。
 
 ## 准备工作
 
-1. 安装并配置Leap Cloud Core SDK. 详细步骤，请查看[QuickStart - Core SDK](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
-2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
+1. 安装并配置MaxLeap Core SDK. 详细步骤，请查看[QuickStart - Core SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
+2. 安装并配置HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
 
 ## 展示 FAQ 页面
 
 1. 调用下面的方法展示 FAQ 界面
 	
 	```
-	[[LCHelpCenter sharedInstance] showFAQs:self]; // self 为弹出 App Issues 界面的 ViewController
+	[[MLHelpCenter sharedInstance] showFAQs:self]; // self 为弹出 App Issues 界面的 ViewController
 	```
 
 2. 调出问题反馈界面
@@ -23,7 +23,7 @@ Support服务是Leap Cloud为开发者提供的一套标准应用客服方案。
 	你也可以在任何有需要的地方调用下面的代码直接进入问题反馈界面：
 
 	```
-	[[LCHelpCenter sharedInstance] showConversation:self]; // self 为弹出 App Issues 界面的 ViewController
+	[[MLHelpCenter sharedInstance] showConversation:self]; // self 为弹出 App Issues 界面的 ViewController
 	```
 
 ## 自定义 UI

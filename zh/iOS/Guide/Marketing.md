@@ -2,13 +2,13 @@
 
 ## 简介
 
-### 什么是Leap Cloud Marketing服务
+### 什么是MaxLeap Marketing服务
 
-Marketing 服务是 Leap Cloud 提供的营销和信息发布功能。目前提供两种 Marketing 形式：Push Notification和 In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过 In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标。消息的创建，设置和发送均在 Console 中完成。
+Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种 Marketing 形式：Push Notification和 In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过 In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标。消息的创建，设置和发送均在 Console 中完成。
 
-### 为何需要Leap Cloud Marketing服务
+### 为何需要MaxLeap Marketing服务
 
-结合Leap Cloud分析服务提供的分析数据，以及Leap Cloud Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。Leap Cloud Marketing服务的优势在于：
+结合MaxLeap分析服务提供的分析数据，以及MaxLeap Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。MaxLeap Marketing服务的优势在于：
 
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
@@ -26,7 +26,7 @@ Marketing 服务是 Leap Cloud 提供的营销和信息发布功能。目前提�
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [Leap Cloud setApplicationId:@"your_application_id" clientKey:@"yout_client_key"];
+    [MaxLeap setApplicationId:@"your_application_id" clientKey:@"yout_client_key"];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -47,10 +47,10 @@ Marketing 服务是 Leap Cloud 提供的营销和信息发布功能。目前提�
     return YES;
 }
 
-// 把 deviceToken 保存到 Leap Cloud 服务器, 以便服务器能向这台设备推送消息
+// 把 deviceToken 保存到 MaxLeap 服务器, 以便服务器能向这台设备推送消息
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[LCInstallation currentInstallation] setDeviceTokenFromData:deviceToken];
-    [LCDataManager saveObjectInBackground:[LCInstallation currentInstallation] block:nil];
+    [[MLInstallation currentInstallation] setDeviceTokenFromData:deviceToken];
+    [MLDataManager saveObjectInBackground:[MLInstallation currentInstallation] block:nil];
 }
 ```
 
@@ -59,13 +59,13 @@ Marketing 服务是 Leap Cloud 提供的营销和信息发布功能。目前提�
 1. 在 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 	```
-	[LCMarketingManager handlePushNotificationOpened:launchOptions];
+	[MLMarketingManager handlePushNotificationOpened:launchOptions];
 	```
 
 2. 在 `application:didReceiveRemoteNotification:` 或者 `application:didReceiveRemoteNotification:fetchCompletionHandler:` 代理方法中加入以下代码：
 
 	```
-	[LCMarketingManager handlePushNotificationOpened:userInfo];
+	[MLMarketingManager handlePushNotificationOpened:userInfo];
 	```
 
 ## 应用内消息
@@ -74,8 +74,8 @@ Marketing 服务是 Leap Cloud 提供的营销和信息发布功能。目前提�
 
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	[Leap Cloud setApplicationId:@"your_application_id" clientKey:@"yout_client_key"];
-	[LCMarketingManager enable];
+	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"yout_client_key"];
+	[MLMarketingManager enable];
 }
 ```
 
