@@ -908,7 +908,7 @@ It's easy to create a MLObject subclass:
 1.   Declare that the subclass is inherited from MLObject.
 2.   Add @MLclassName annotation. The value must be a string: the class name of the MLObject constructed function you passed in. Thus, this string class name doesn't need to appear in code again.
 3.   Make sure that your subclass has a public default (the parameter amount is 0) constructed function. Please don't modify any MLObject property in constructed function. 
-4.   Register subclass MLObject.registerSubclass(Yourclass.class) before invoking MLConfig.initialize() and registering the app.
+4.   Register subclass MLObject.registerSubclass(Yourclass.class) before invoking MaxLeap.initialize() and registering the app.
 
 The following code can sucessfully realize and register the subclass Armor of MLObject:
 
@@ -922,7 +922,7 @@ public class Armor extends MLObject {
 }
 
 // App.java
-import com.ML.MLConfig;
+import com.ML.MaxLeap;
 import android.app.Application;
 
 public class App extends Application {
@@ -931,7 +931,7 @@ public class App extends Application {
     super.onCreate();
 
     MLObject.registerSubclass(Armor.class);
-    MLConfig.initialize(this, ML_APPLICATION_ID, ML_CLIENT_KEY);
+    MaxLeap.initialize(this, ML_APPLICATION_ID, ML_CLIENT_KEY);
   }
 }
 ```
@@ -1386,7 +1386,7 @@ If the Facebook UserId is not bound to any MLUser after the Facebook login, Leap
 1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App
 2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
 3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
-4. Add following code after MLConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
+4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
 ```java
 MLFacebookUtils.initialize("YOUR FACEBOOK APP ID");
@@ -1466,7 +1466,7 @@ If the Twitter UserId is not bound to any MLUser after the Twitter login, Leap C
 1. Create Twitter app in [Twitter Dev Center](...). Click My Apps >> Add a New App
 2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Twitter Authentication and fill the Twitter consumer Key got from step 1 into relative location.
 3. Integrate Twitter SDK, add Twitter Login button. Please check [Add Twitter Login to Your App or Website](...) for more details.
-4. Add following code after MLConfig.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
+4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
 ```java
 MLTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");

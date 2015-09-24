@@ -9,7 +9,7 @@ language_tabs:
 
 # Cloud Data
 
-If you haven't installed the SDK yet, please head over to the [QuickStart guide](LC_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS) to get our SDK up and running in Xcode. Note that we support iOS 6.0 and higher. You can also check out our [API Reference](LC_DOCS_LINK_PLACEHOLDER_API_REF_IOS) for more detailed information about our SDK.
+If you haven't installed the SDK yet, please head over to the [QuickStart guide](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS) to get our SDK up and running in Xcode. Note that we support iOS 6.0 and higher. You can also check out our [API Reference](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS) for more detailed information about our SDK.
 
 ## Introduction
 	

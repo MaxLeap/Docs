@@ -80,10 +80,10 @@ MaxLeap Core SDK provides a whole set of push project based on GCM. GCM (Google 
 	    android:name="com.maxleap.push.notification_icon"
 	    android:resource="@android:drawable/ic_dialog_alert" />
 	```
-5. **Enable Marketing Service：**Add following code **Before** `MLConfig.initialize()` in `Application.onCreate()`: 
+5. **Enable Marketing Service：**Add following code **Before** `MaxLeap.initialize()` in `Application.onCreate()`: 
 
 	```java
-	MLConfig.setMarketingEnabled(true);
+	MaxLeap.setMarketingEnabled(true);
 	```
 
 Notice:
@@ -195,10 +195,10 @@ Replace default `com.maxleap.MLPushBroadcastReceiver` with following Receiver：
 ## In-app Message
 
 ###Configuration
-In order to user in-app message, you need to **enable Marketing service：** add following code before `MLConfig.initialize()` in `Application.onCreate()` :
+In order to user in-app message, you need to **enable Marketing service：** add following code before `MaxLeap.initialize()` in `Application.onCreate()` :
 
 ```java
-MLConfig.setMarketingEnabled(true);
+MaxLeap.setMarketingEnabled(true);
 ```
 
 ###Define Target Activity
