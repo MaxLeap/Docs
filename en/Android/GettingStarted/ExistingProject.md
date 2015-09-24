@@ -14,7 +14,7 @@
     
     ```java
     dependencies {
-        compile fileTree(dir: 'libs', include: 'Leap Cloud-*.jar')
+        compile fileTree(dir: 'libs', include: 'MaxLeap-*.jar')
     }
     ```
 #	Config MaxLeap Project
@@ -25,13 +25,13 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
 
 ```java
  	import android.app.Application;
- 	import com.maxleap.MLConfig;
+ 	import com.maxleap.MaxLeap;
  
  	public class MyApplication extends Application {
  	    @Override
  	    public void onCreate() {
  	        super.onCreate();
- 	        MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+ 	        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
  	    }
  	}
  	```
@@ -56,7 +56,7 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
  We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
  ```java
  import android.app.Application;
- import com.maxleap.MLConfig;
+ import com.maxleap.MaxLeap;
  import com.maxleap.MLDataManager;
  import com.maxleap.MLObject;
  
@@ -64,7 +64,7 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
      @Override
      public void onCreate() {
          super.onCreate();
-         MLConfig.initialize(this, "{{appid}}", "{{restkey}}");
+         MaxLeap.initialize(this, "{{appid}}", "{{restkey}}");
          
          //Test Project Configuration:
          MLObject testObject = new MLObject("People");

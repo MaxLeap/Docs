@@ -25,13 +25,13 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
 	
 	```java
 		import android.app.Application;
-		import com.maxleap.MLConfig;
+		import com.maxleap.MaxLeap;
 	
 		public class MyApplication extends Application {
 			@Override
 			public void onCreate() {
 				super.onCreate();
-				MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+				MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 			}
 		}
 	```
@@ -60,7 +60,7 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
 	
 	```java
 	import android.app.Application;
-	import com.maxleap.MLConfig;
+	import com.maxleap.MaxLeap;
 	import com.maxleap.MLDataManager;
 	import com.maxleap.MLObject;
 	
@@ -68,7 +68,7 @@ Call `LASConfig.initialize` from the `onCreate` method of your Application class
 		@Override
 		public void onCreate() {
 			super.onCreate();
-			MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+			MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 			
 			//Test Project Configuration:
 			MLObject testObject = new MLObject("People");

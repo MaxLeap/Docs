@@ -28,13 +28,13 @@ Eclipse
 	
 	```java
 	import android.app.Application;
-	import com.maxleap.MLConfig;
+	import com.maxleap.MaxLeap;
 
 	public class MyApplication extends Application {
 	    @Override
 	    public void onCreate() {
 	        super.onCreate();
-	        MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+	        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 	    }
 	}
 	```
@@ -62,7 +62,7 @@ Eclipse
 
 ```java
 import android.app.Application;
-import com.maxleap.MLConfig;
+import com.maxleap.MaxLeap;
 import com.maxleap.MLDataManager;
 import com.maxleap.MLObject;
 
@@ -70,7 +70,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
         
         //Test Project Configuration：
         MLObject testObject = new MLObject("People");

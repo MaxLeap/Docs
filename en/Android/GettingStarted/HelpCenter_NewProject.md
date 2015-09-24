@@ -26,13 +26,13 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 	
 	```java
 		import android.app.Application;
-		import com.maxleap.MLConfig;
+		import com.maxleap.MaxLeap;
 	
 		public class MyApplication extends Application {
 			@Override
 			public void onCreate() {
 				super.onCreate();
-				MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+				MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 			}
 		}
 	```
@@ -62,7 +62,7 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 	
 	```java
 	import android.app.Application;
-	import com.maxleap.MLConfig;
+	import com.maxleap.MaxLeap;
 	import com.maxleap.MLDataManager;
 	import com.maxleap.MLObject;
 	
@@ -70,7 +70,7 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 		@Override
 		public void onCreate() {
 			super.onCreate();
-			MLConfig.initialize(this, "{{appid}}", "{{restapikey}}");
+			MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 			
 			//Test Project Configuration：
 			MLObject testObject = new MLObject("People");
