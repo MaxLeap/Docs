@@ -2,16 +2,16 @@
 
 ## 简介
 
-### 什么是Cloud Data服务
-Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+### 什么是 Cloud Data 服务
+Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint` (地理位置)，他们都是基于 `MLObject` 的对象。
 
-### 为何需要Cloud Data服务
-Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### 为何需要 Cloud Data 服务
+Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
 * 不同于传统关系型数据库，向云端存储数据无需提前建表，数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
+* 可结合 Cloud Code 服务，实现云端数据的 Hook（详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
 存储在Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
@@ -30,11 +30,11 @@ isRead|false|布尔
 `MLObject` 接口与 `NSMutableDictionary` 类似。我们有一个类 `MLDataManager`保存、删除 `MLObject`, 和拉取数据。现在我们使用 `MLDataManager` 来保存 `Comment`:
 
 ```objective_c
-MLObject *myComment = [MLObject objectWithclassName:@"Comment"];
+MLObject *myComment = [MLObject objectWithClassName:@"Comment"];
 myComment[@"content"] = @"我很喜欢这条分享";
 myComment[@"pubUserId"] = @1314520;
 myComment[@"isRead"] = @NO;
-[MLDataManager saveObjectInBackground:myComment block:^(BOOL succeeded, NSError *error) {
+[myComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         // myComment save succeed
     } else {
@@ -53,26 +53,29 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 注意：
 
 * **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 Comment 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
-* **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
+* **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 `Comment` 的数据表，而且也包括 `content`、`pubUserId`、`isRead` 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
 * **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
 
 	属性名|值|
 	-------|-------|
-	objectId|对象的唯一标识符
-	createdAt|对象的创建时间
-	updatedAt|对象的最后修改时间
+	`objectId`|对象的唯一标识符
+	`createdAt`|对象的创建时间
+	`updatedAt`|对象的最后修改时间
 
-* **大小限制：** ML Object的大小被限制在128K以内。
-* **同步操作/异步操作：** 在 Android 平台上，大部分的代码是在主线程上运行的，如果在主线程上进行耗时的阻塞性操作，如访问网络等，您的代码可能会无法正常运行，避免这个问题的方法是把会导致阻塞的同步操作改为异步，在一个后台线程运行，例如 save() 还有一个异步的版本 saveInBackground()，需要传入一个在异步操作完成后运行的回调函数。查询、更新、删除操作也都有对应的异步版本。
-* 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
+* **大小限制：** `MLObject` 的大小被限制在128K以内。
+* **同步操作/异步操作：** MaxLeap iOS SDK 大部分接口都是异步的
+* 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是 `MLObject`，为支持JSON编码的类型即可.
 
-###查询
-#####查询MLObject
-您可以通过某条数据的`objectId`，获取完整的`MLObject`。调用`MLQueryManager`方法需要提供三个参数：第一个为查询对象所属的class名，第二个参数为ObjectId，第三个参数为回调函数，将在getInBackground()方法完成后调用。
+### 检索
+
+##### 获取 `MLObject`
+
+您可以通过某条数据的 `objectId`, 获取这条数据的完整内容:
 
 ```objective_c
-[MLDataManager getObjectInBackgroundWithclass:@"Comment" objectId:@"OBJECT_ID" block:^(MLObject *myComment, NSError *error) {
+MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
+[query getObjectInBackgroundWithId:@"objectId" block:^(MLObject *object, NSError *error) {
     // Do something with the returned MLObject in the myComment variable.
     NSLog(@"%@", myComment);
 }];
@@ -81,8 +84,9 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 // inside the completion block above.
 ```
 
-#####查询MLObject属性值
-要从检索到的 MLObject 实例中获取值，您可以使用 `objectForKey:` 方法或 `[]` 操作符：
+##### 获取 `MLObject` 属性值
+
+要从检索到的 `MLObject` 实例中获取值，您可以使用 `objectForKey:` 方法或 `[]` 操作符：
 
 ```objective_c
 int pubUserId = [[myComment objectForKey:@"pubUserId"] intValue];
@@ -98,24 +102,25 @@ NSDate *updatedAt = myComment.updatedAt;
 NSDate *createdAt = myComment.createdAt;
 ```
 
-若需要刷新已有对象，可以调用 `-[MLDataManager fetchDataOfObjectInBackground:block:]` 方法：
+若需要刷新已有对象，可以调用 `-fetchInBackgroundWithBlock:` 方法：
 
 ```
-[MLDataManager fetchDataOfObjectInBackground:myObject block:^(MLObject *object, NSError *error) {
+[myObject fetchInBackgroundWithBlock:^(MLObject *object, NSError *error) {
     // object 就是使用服务器数据填充后的 myObject
 }];
 ```
 
 ### 更新
 
-更新MLObject需要两步：首先获取需要更新的MLObject，然后修改并保存。
+更新 `MLObject` 需要两步：首先获取需要更新的 `MLObject`，然后修改并保存。
 
 ```objective_c
-// 根据objectId获取MLObject
-[MLQueryManager getObjectInBackgroundWithclass:@"Comment" objectId:@"xWMyZ4YEGZ" block:^(MLObject *myComment, NSError *error) {
-	// Now let's update it with some new data. In this case only isRead will get sent to the cloud
-	gameScore[@"isRead"] = @YES;
-   [MLDataManager saveObjectInBackground:myComment block:nil];
+// 根据 objectId 获取 MLObject
+MLObject *object = [MLObject objectWithClassName:@"Comment"];
+[object fetchInBackgroundWithBlock:^(MLObject *myComment, NSError *error) {
+    // Now let's update it with some new data. In this case only isRead will get sent to the cloud
+    myComment[@"isRead"] = @YES;
+    [myComment saveInBackgroundWithBlock:nil];
 }];
 // The InBackground methods are asynchronous, so any code after this will run
 // immediately.  Any code that depends on the query result should be moved
@@ -126,28 +131,38 @@ NSDate *createdAt = myComment.createdAt;
 
 ### 删除对象
 
-#####删除MLObject
+##### 删除 `MLObject`
 
 ```objective_c
-[MLDataManager deleteObjectInBackground:gameScore block:^(BOOL succeeded, NSError *error) {
+[myComment deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
     } else {
-        // there was an error
+ 	     // there was an error
+	}
+}];
+```
+##### 批量删除 `MLObject`
+
+```
+[MLObject deleteAllInBackground:objectsToDelete block:^(BOOL succeeded, NSError *error) {
+	 if (succeeded) {
+    	//
+    } else {
+   	   // there was an error
     }
 }];
 ```
-#####批量删除MLObject
 
+##### 删除 `MLObject` 实例的某一属性
 
-#####删除MLObject实例的某一属性
-除了完整删除一个对象实例外，您还可以只删除实例中的某些指定的值。请注意只有调用 `saveObjectInBackground` 之后，修改才会同步到云端。
+除了完整删除一个对象实例外，您还可以只删除实例中的某些指定的值。请注意只有调用 `-saveInBackgroundWithBlock:` 之后，修改才会同步到云端。
 
 ```objective_c
 // After this, the content field will be empty
 [myComment removeObjectForKey:@"content"];
 // Saves the field deletion to the MaxLeap
-[MLDataManager saveObjectInBackground:myComment block:^(BOOL succeeded, NSError *error) {
+[myComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
     } else {
@@ -161,69 +176,80 @@ NSDate *createdAt = myComment.createdAt;
 
 比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
 
-#####递增计数器
-此时，我们可以利用`incrementKey`(默认增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
+##### 递增计数器
+此时，我们可以利用`-incrementKey:`(增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录某帖子的阅读次数字段 `readCount`，我们可以使用如下方式：
 
 ```objective_c
-[gameScore incrementKey:@"score"];
-[MLDataManager saveObjectInBackground:gameScore block:nil];
+[myPost incrementKey:@"readCount"];
+[myPost saveInBackgroundWithBlock:nil];
 ```
 
-#####指定增量
-您还可以使用 `incrementKey:byAmount:` 实现任何数量的递增。注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
+##### 指定增量
+您还可以使用 `-incrementKey:byAmount:` 实现任何数量的递增。注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
 
-#####递减计数器
+##### 递减计数器
+
+要实现递减计数器，只需要向 `-incrementKey:byAmount:` 接口传入一个负数即可：
 
 ```objective_c
-[gameScore decrementKey:@"score"];
-[MLDataManager saveObjectInBackground:gameScore block:nil];
+[myPost incrementKey:@"readCount" byAmount:@(-1)];
+[myPost saveInBackgroundWithBlock:nil];
 ```
 
 ### 数组
 
-您可以通过以下方式，将数组类型的值保存至MLObject的某字段(如下例中的skills字段)下：
+您可以通过以下方式，将数组类型的值保存至 `MLObject` 的某字段(如下例中的 `tags` 字段)下：
 
-#####增加至数组尾部
-您可以使用 `addObject:forKey:` 和 `addObjectsFromArray:forKey:`向`skills`属性的值的尾部，增加一个或多个值。
+##### 增加至数组尾部
+您可以使用 `addObject:forKey:` 和 `addObjectsFromArray:forKey:`向`tags`属性的值的尾部，增加一个或多个值。
 
 ```objective_c
-[gameScore addUniqueObjectsFromArray:@[@"flying", @"kungfu"] forKey:@"skills"];
-[MLDataManager saveObjectInBackground:gameScore block:nil];
+[myPost addUniqueObjectsFromArray:@[@"flying", @"kungfu"] forKey:@"tags"];
+[myPost saveInBackgroundWithBlock:nil]
 ```
 
-同时，您还可以通过`addUniqueObject:forKey:` 和 `addUniqueObjectsFromArray:forKey:`，仅增加与已有数组中所有item都不同的值。插入位置是不确定的。
+同时，您还可以通过`-addUniqueObject:forKey:` 和 `addUniqueObjectsFromArray:forKey:`，仅增加与已有数组中所有 item 都不同的值。插入位置是不确定的。
 
-#####使用新数组覆盖
-调用`put()`函数，`skills`字段下原有的数组值将被覆盖：
+##### 使用新数组覆盖
 
-#####删除某数组字段的值
-`removeObject:forKey:` 和 `removeObjectsInArray:forKey:` 会从数组字段中删除每个给定对象的所有实例。
+可以通过 `setObject:forKey:` 方法使用一个新数组覆盖 `tags` 中原有数组：
 
-注意：
+```
+[myPost setObject:@[] forKey:@"tags"]
+```
 
-* Remove和Add/Put必需分开调用保存函数，否则数据不能正常上传和保存。
+##### 删除某数组字段的值
 
-### 关联数据
+`-removeObject:forKey:` 和 `-removeObjectsInArray:forKey:` 会从数组字段中删除每个给定对象的所有实例。
 
-对象可以与其他对象相联系。如前面所述，我们可以把一个 MLObject 的实例 a，当成另一个 MLObject 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
+请注意 `removeObject:forKey` 与 `removeObjectForKey:` 的区别。 
 
-注：MaxLeap Services是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。
+**注意：Remove 和 Add/AddUnique 必需分开调用保存函数，否则数据不能正常上传和保存。**
 
-####一对一关联
-例如：一条微博信息可能会对应多条评论。创建一条微博信息并对应一条评论信息，您可以这样写：
+### 关系数据
+
+对象可以与其他对象相联系。如前面所述，我们可以把一个 `MLObject` 的实例 a，当成另一个 `MLObject` 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
+
+注：MaxLeap Services 是通过 `Pointer` 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。
+
+#### 一对多关系
+
+##### 使用 `Pointer` 实现
+
+例如：一条微博信息会有多条评论。创建一条微博，并添加一条评论，您可以这样写：
 
 ```objective_c
 // Create the post
-MLObject *myPost = [MLObject objectWithclassName:@"Post"];
+MLObject *myPost = [MLObject objectWithClassName:@"Post"];
 myPost[@"title"] = @"I'm Hungry";
 myPost[@"content"] = @"Where should we go for lunch?";
 // Create the comment
-MLObject *myComment = [MLObject objectWithclassName:@"Comment"];
+MLObject *myComment = [MLObject objectWithClassName:@"Comment"];
 myComment[@"content"] = @"Let's do Sushirrito.";
 // Add a relation between the Post and Comment
 myComment[@"parent"] = myPost;
 // This will save both myPost and myComment
-[MLDataManager saveObjectInBackground:myComment block:^(BOOL succeeded, NSError *error) {
+[myComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
     } else {
@@ -232,27 +258,39 @@ myComment[@"parent"] = myPost;
 }];
 ```
 
-您也可以通过 objectId 来关联已有的对象：
+我们可以使用 `query` 来获取这条微博所有的评论：
+
+```
+MLObject *myPost = ...
+MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
+[query whereKey:@"parent" equalTo:myPost];
+[query findObjectsInBackgroundWithBlock:^(NSArray *allComments, NSError *error) {
+    // do something with all the comments of myPost
+}];
+```
+
+您也可以通过 `objectId` 来关联已有的对象：
 
 ```objective_c
 // Add a relation between the Post with objectId "1zEcyElZ80" and the comment
 myComment[@"parent"] = [MLObject objectWithoutDataWithclassName:@"Post" objectId:@"1zEcyElZ80"];
 ```
 
-默认情况下，当您获取一个对象的时候，关联的 MLObject 不会被获取。这些对象除了 objectId 之外，其他属性值都是空的，要得到关联对象的全部属性数据，需要再次调用 fetch 系方法（下面的例子假设已经通过 MLQuery 得到了 Comment 的实例）:
+默认情况下，当您获取一个对象的时候，关联的 `MLObject` 不会被获取。这些对象除了 `objectId` 之外，其他属性值都是空的，要得到关联对象的全部属性数据，需要再次调用 `fetch` 系方法（下面的例子假设已经通过 `MLQuery` 得到了 `Comment` 的实例）:
 
 ```objective_c
 MLObject *post = fetchedComment[@"parent"];
-[MLDataManager fetchDataOfObjectIfNeededInBackground:post block:^(MLObject *object, NSError *error) {
+[post fetchInBackgroundWithBlock:^(MLObject *post, NSError *error) {
     NSString *title = post[@"title"];
     // do something with your title variable
 }];
 ```
 
-####一对多关联
-将两条评论分别关联至一条微博中：
+##### 使用数组实现
 
-####使用MLRelation实现关联
+
+
+#### 使用MLRelation实现关联
 您可以使用 MLRelation 来建模多对多关系。这有点像 List 链表，但是区别之处在于，在获取附加属性的时候，MLRelation 不需要同步获取关联的所有 MLRelation 实例。这使得 MLRelation 比链表的方式可以支持更多实例，读取方式也更加灵活。例如，一个 User 可以赞很多 Post。这种情况下，就可以用`getRelation()`方法保存一个用户喜欢的所有 Post 集合。为了新增一个喜欢的 Post，您可以这样做：
 
 ```objective_c
