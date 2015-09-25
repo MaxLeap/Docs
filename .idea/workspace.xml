@@ -2,47 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7415dacf-2dcc-4733-9b83-3bc892fbe345" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/imgMAddMsg1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAAOverview3.png" afterPath="$PROJECT_DIR$/images/imgAAOverview3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAATerminal.png" afterPath="$PROJECT_DIR$/images/imgAATerminal.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAATrendAV.png" afterPath="$PROJECT_DIR$/images/imgAATrendAV.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAATrendNU.png" afterPath="$PROJECT_DIR$/images/imgAATrendNU.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAATrendRT.png" afterPath="$PROJECT_DIR$/images/imgAATrendRT.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAAUE.png" afterPath="$PROJECT_DIR$/images/imgAAUE.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCDAddClass.png" afterPath="$PROJECT_DIR$/images/imgCDAddClass.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCDClassList.png" afterPath="$PROJECT_DIR$/images/imgCDClassList.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCDDeleteClass.png" afterPath="$PROJECT_DIR$/images/imgCDDeleteClass.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCDShowRelation.png" afterPath="$PROJECT_DIR$/images/imgCDShowRelation.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCFAddConfig.png" afterPath="$PROJECT_DIR$/images/imgCFAddConfig.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCFAddConfigPopup.png" afterPath="$PROJECT_DIR$/images/imgCFAddConfigPopup.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCFAddSegment.png" afterPath="$PROJECT_DIR$/images/imgCFAddSegment.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCFModify.png" afterPath="$PROJECT_DIR$/images/imgCFModify.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgCFSegmentDone.png" afterPath="$PROJECT_DIR$/images/imgCFSegmentDone.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMActivatePush.png" afterPath="$PROJECT_DIR$/images/imgMActivatePush.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMAddMsg2.png" afterPath="$PROJECT_DIR$/images/imgMAddMsg2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMAddMsg3.png" afterPath="$PROJECT_DIR$/images/imgMAddMsg3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMAddPush1.png" afterPath="$PROJECT_DIR$/images/imgMAddPush1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMAddPush2.png" afterPath="$PROJECT_DIR$/images/imgMAddPush2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMAddPush3.png" afterPath="$PROJECT_DIR$/images/imgMAddPush3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgMCampaignList.png" afterPath="$PROJECT_DIR$/images/imgMCampaignList.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSDKQSTestAddObj.png" afterPath="$PROJECT_DIR$/images/imgSDKQSTestAddObj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSPFAQAddFAQ.png" afterPath="$PROJECT_DIR$/images/imgSPFAQAddFAQ.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSPFAQList.png" afterPath="$PROJECT_DIR$/images/imgSPFAQList.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSPFeedbackList.png" afterPath="$PROJECT_DIR$/images/imgSPFeedbackList.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSPHandleFeedback.png" afterPath="$PROJECT_DIR$/images/imgSPHandleFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSTAuth.png" afterPath="$PROJECT_DIR$/images/imgSTAuth.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSTEmail.png" afterPath="$PROJECT_DIR$/images/imgSTEmail.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSTEmailTemplate.png" afterPath="$PROJECT_DIR$/images/imgSTEmailTemplate.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSTGeneral1.png" afterPath="$PROJECT_DIR$/images/imgSTGeneral1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSTGeneral2.png" afterPath="$PROJECT_DIR$/images/imgSTGeneral2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgSTPush.png" afterPath="$PROJECT_DIR$/images/imgSTPush.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMAddSegment.png" afterPath="$PROJECT_DIR$/images/imgUMAddSegment.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMAddUser.png" afterPath="$PROJECT_DIR$/images/imgUMAddUser.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMRoleAddUser.png" afterPath="$PROJECT_DIR$/images/imgUMRoleAddUser.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMRoleList.png" afterPath="$PROJECT_DIR$/images/imgUMRoleList.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMSegmentEdit.png" afterPath="$PROJECT_DIR$/images/imgUMSegmentEdit.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMSegmentList.png" afterPath="$PROJECT_DIR$/images/imgUMSegmentList.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgUMUserList.png" afterPath="$PROJECT_DIR$/images/imgUMUserList.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md" afterPath="$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md" afterPath="$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md" afterPath="$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="LAS-Docs.iws" />
@@ -70,73 +32,99 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+            <state vertical-scroll-proportion="-6.9459457">
+              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Analytics.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/en/Android/Guide/Analytics.md">
+      <file leaf-file-name="CloudData.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudData.md">
           <provider editor-type-id="markdown-preview-editor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.5">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HelpCenter_NewProject.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/en/Android/GettingStarted/HelpCenter_NewProject.md">
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExistingProject.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/en/Android/GettingStarted/ExistingProject.md">
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31918657">
-              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Marketing.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/en/Android/Guide/Marketing.md">
+        <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Marketing.md">
           <provider editor-type-id="markdown-preview-editor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.5">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Support.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Support.md">
+          <provider editor-type-id="markdown-preview-editor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExistingProject.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/ExistingProject.md">
+          <provider editor-type-id="markdown-preview-editor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewProject.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/NewProject.md">
+          <provider editor-type-id="markdown-preview-editor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Analytics.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
+          <provider editor-type-id="markdown-preview-editor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-23.621622">
+              <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CloudCode.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/zh/Java/Guide/CloudCode.md">
+        <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudCode.md">
           <provider editor-type-id="markdown-preview-editor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="292" column="6" selection-start-line="292" selection-start-column="6" selection-end-line="292" selection-end-column="6" />
+            <state vertical-scroll-proportion="10.783784">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -148,47 +136,21 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-1.5405406">
               <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CloudConfig.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/zh/iOS/Guide/CloudConfig.md">
+      <file leaf-file-name="CloudData.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md">
           <provider editor-type-id="markdown-preview-editor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CloudData.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/zh/iOS/Guide/CloudData.md">
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1208" column="49" selection-start-line="1208" selection-start-column="49" selection-end-line="1208" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CONTRIBUTING.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CONTRIBUTING.md">
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.06890299">
+              <caret line="4" column="244" selection-start-line="4" selection-start-column="244" selection-end-line="4" selection-end-column="244" />
               <folding />
             </state>
           </provider>
@@ -214,7 +176,6 @@
         <option value="$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_ExistingProject.md" />
         <option value="$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_NewProject.md" />
         <option value="$PROJECT_DIR$/zh/Android/GettingStarted/NewProject.md" />
-        <option value="$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md" />
         <option value="$PROJECT_DIR$/en/UserManual/Guide/Overview.md" />
         <option value="$PROJECT_DIR$/en/UserManual/Guide/QuickStart.md" />
         <option value="$PROJECT_DIR$/en/UserManual/Guide/Setting.md" />
@@ -223,6 +184,9 @@
         <option value="$PROJECT_DIR$/en/iOS/Guide/CloudData.md" />
         <option value="$PROJECT_DIR$/en/iOS/Guide/Marketing.md" />
         <option value="$PROJECT_DIR$/CONTRIBUTING.md" />
+        <option value="$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md" />
+        <option value="$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md" />
+        <option value="$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md" />
       </list>
     </option>
   </component>
@@ -234,10 +198,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-61" />
-    <option name="y" value="38" />
-    <option name="width" value="2894" />
-    <option name="height" value="1754" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="2902" />
+    <option name="height" value="1766" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -290,7 +254,95 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="zh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserManual" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Javascript" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GettingStarted" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GettingStarted" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -407,18 +459,24 @@
       <option name="project" value="LOCAL" />
       <updated>1443062920689</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update  img part 1">
+      <created>1443091490915</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1443091490915</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-61" y="38" width="2894" height="1754" extended-state="0" />
-    <editor active="false" />
+    <frame x="-11" y="-11" width="2902" height="1766" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18312325" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18239215" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26678988" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2631579" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -449,100 +507,14 @@
     <MESSAGE value="update usermgmt" />
     <MESSAGE value="update download link" />
     <MESSAGE value="renaming" />
-    <option name="LAST_COMMIT_MESSAGE" value="renaming" />
+    <MESSAGE value="update  img part 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="update  img part 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Overview.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Overview.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/imgCCScheduleJob.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/enable_modules.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Overview.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/UserMgmt.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/iOS/GettingStarted/ExistingProject.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.0">
-          <caret line="10" column="100" selection-start-line="10" selection-start-column="100" selection-end-line="10" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/zh/iOS/GettingStarted/HelpCenter_ExistingProject.md">
       <provider editor-type-id="markdown-preview-editor">
         <state />
@@ -550,16 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.6">
           <caret line="7" column="121" selection-start-line="7" selection-start-column="121" selection-end-line="7" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/iOS/GettingStarted/HelpCenter_NewProject.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -630,46 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_ExistingProject.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.644444">
-          <caret line="109" column="51" selection-start-line="109" selection-start-column="51" selection-end-line="109" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_NewProject.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.644444">
-          <caret line="110" column="51" selection-start-line="110" selection-start-column="51" selection-end-line="110" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/NewProject.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.4">
-          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.066668">
-          <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -750,16 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8">
           <caret line="16" column="101" selection-start-line="16" selection-start-column="101" selection-end-line="16" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/CloudConfig.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -859,19 +771,7 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="292" column="6" selection-start-line="292" selection-start-column="6" selection-end-line="292" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudConfig.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
+          <caret line="290" column="6" selection-start-line="290" selection-start-column="6" selection-end-line="290" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -882,7 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -904,17 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudConfig.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -957,8 +845,206 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31918657">
+        <state vertical-scroll-proportion="0.0">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/en/iOS/Guide/CloudConfig.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/CloudConfig.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/iOS/GettingStarted/HelpCenter_NewProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.405405">
+          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.864865">
+          <caret line="84" column="174" selection-start-line="84" selection-start-column="174" selection-end-line="84" selection-end-column="174" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_ExistingProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.864865">
+          <caret line="109" column="137" selection-start-line="109" selection-start-column="133" selection-end-line="109" selection-end-column="137" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_NewProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-56.48649">
+          <caret line="110" column="51" selection-start-line="110" selection-start-column="51" selection-end-line="110" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/NewProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.864865">
+          <caret line="88" column="173" selection-start-line="88" selection-start-column="169" selection-end-line="88" selection-end-column="173" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Analytics.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7972972">
+          <caret line="7" column="15" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudConfig.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9459457">
+          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudData.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Marketing.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Support.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/ExistingProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/NewProject.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.621622">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudCode.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="10.783784">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudConfig.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5405406">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md">
+      <provider editor-type-id="markdown-preview-editor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06890299">
+          <caret line="4" column="244" selection-start-line="4" selection-start-column="244" selection-end-line="4" selection-end-column="244" />
           <folding />
         </state>
       </provider>

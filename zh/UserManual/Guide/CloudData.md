@@ -14,7 +14,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 
 **如果您希望进一步了解MaxLeap Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
 
-class##列表
+## Class列表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
 
 ![imgCDclassList.png](../../../images/imgCDclassList.png)
@@ -23,7 +23,7 @@ class##列表
 
 ![imgCDShowRelation.png](../../../images/imgCDShowRelation.png)
 
-###新建/修改class
+###新建/修改 Class
 点击"＋添加类"按钮，输入class名，便可以完成class的新建：
 
 ![imgCDAddclass.png](../../../images/imgCDAddclass.png)
@@ -35,7 +35,7 @@ class##列表
 * 筛选表格数据显示：点击沙漏图标
 * 选择表格显示列：点击右上角表格图标
 
-###删除class
+###删除 Class
 在Claas列表中选中要删除的class，在右侧选择 更多 >> 删除类，确认即可。
 
 ![imgCDDeleteclass](../../../images/imgCDDeleteclass.png)
