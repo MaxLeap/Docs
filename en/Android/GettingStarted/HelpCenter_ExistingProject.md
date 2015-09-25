@@ -21,7 +21,7 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 
 #	Connect project to MaxLeap app
 	
-Call `LASConfig.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
+Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 	
 	```java
 		import android.app.Application;

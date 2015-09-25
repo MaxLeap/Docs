@@ -4,7 +4,7 @@
 
 	Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
 
-    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
+    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">Download Template Project</a>
 
 2. Config Project
 
