@@ -286,18 +286,15 @@ MLObject *post = fetchedComment[@"parent"];
 }];
 ```
 
-##### 使用数组实现
+#### 使用 `MLRelation` 实现关联
 
-
-
-#### 使用MLRelation实现关联
-您可以使用 MLRelation 来建模多对多关系。这有点像 List 链表，但是区别之处在于，在获取附加属性的时候，MLRelation 不需要同步获取关联的所有 MLRelation 实例。这使得 MLRelation 比链表的方式可以支持更多实例，读取方式也更加灵活。例如，一个 User 可以赞很多 Post。这种情况下，就可以用`getRelation()`方法保存一个用户喜欢的所有 Post 集合。为了新增一个喜欢的 Post，您可以这样做：
+您可以使用 `MLRelation` 来建模多对多关系。这有点像 List 链表，但是区别之处在于，在获取附加属性的时候，`MLRelation` 不需要同步获取关联的所有 `MLRelation` 实例。这使得 `MLRelation` 比链表的方式可以支持更多实例，读取方式也更加灵活。例如，一个 `User` 可以赞很多 `Post`。这种情况下，就可以用`getRelation()`方法保存一个用户喜欢的所有 Post 集合。为了新增一个喜欢的 `Post`，您可以这样做：
 
 ```objective_c
 MLUser *user = [MLUser currentUser];
 MLRelation *relation = [user relationForKey:@"likes"];
 [relation addObject:post];
-[MLDataManager saveObjectInBackground:user block:^(BOOL succeeded, NSError *error) {
+[post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
     } else {
@@ -312,11 +309,11 @@ MLRelation *relation = [user relationForKey:@"likes"];
 [relation removeObject:post];
 ```
 
-默认情况下，这种关系中的对象列表不会被下载。您可以将 `[relation query]` 返回的 `MLQuery` 传入 `+[MLQueryManager findObjectsInBackgroundWithBlock:]` 获取 `Post` 列表。代码应如下所示：
+默认情况下，这种关系中的对象列表不会被下载。您可以将 `[relation query]` 返回的 `MLQuery` 传入 `-[query findObjectsInBackgroundWithBlock:]` 获取 `Post` 列表。代码应如下所示：
 
 ```objective_c
 MLQuery *query = [relation query];
-[MLDataManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (error) {
         // There was an error
     } else {
@@ -325,7 +322,7 @@ MLQuery *query = [relation query];
 }];
 ```
 
-若您只想要 Post 的一个子集，可以对 `-[MLRelation query]` 返回的 `MLQuery` 添加额外限制条件：
+若您只想要 `Post` 的一个子集，可以对 `-[MLRelation query]` 返回的 `MLQuery` 添加额外限制条件：
 
 ```objective_c
 MLQuery *query = [relation query];
@@ -362,7 +359,7 @@ bigObject[@"myData"] = data;
 bigObject[@"myArray"] = array;
 bigObject[@"myDictionary"] = dictionary;
 bigObject[@"myNull"] = null;
-[MLDataManager saveObjectInBackground:bigObject block:^(BOOL succeeded, NSError *error) {
+[bigObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (error) {
         // There was an error
     } else {
@@ -375,9 +372,9 @@ bigObject[@"myNull"] = null;
 
 ## 文件
 
-### MLFile的创建和上传
+### MLFile 的创建和上传
 
-MLFile 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `MLObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
+`MLFile` 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `MLObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
 
 `MLFile` 上手很容易。首先，你要由 `NSData` 类型的数据，然后创建一个 `MLFile` 实例。下面的例子中，我们只是使用一个字符串：
 
@@ -386,15 +383,15 @@ NSData *data = [@"Working at MaxLeap is great!" dataUsingEncoding:NSUTF8StringEn
 MLFile *file = [MLFile fileWithName:@"resume.txt" data:data];
 ```
 
-**注意**，在这个例子中，我们把文件命名为 resume.txt。这里要注意两点：
+**注意**，在这个例子中，我们把文件命名为 `resume.txt`。这里要注意两点：
 
-- 您不需要担心文件名冲突。每次上传都会获得一个唯一标识符，所以上传多个文件名为 resume.txt 的文件不同出现任何问题。
+- 您不需要担心文件名冲突。每次上传都会获得一个唯一标识符，所以上传多个文件名为 `resume.txt` 的文件不同出现任何问题。
 - 重要的是，您要提供一个带扩展名的文件名。这样 MaxLeap 就能够判断文件类型，并对文件进行相应的处理。所以，若您要储存 PNG 图片，务必使文件名以 .png 结尾。
 
-然后，您可以把文件保存到云中。与 `MLObject` 相同，使用 `MLFileManager` 上的 save 方法。
+然后，您可以把文件保存到云中。与 `MLObject` 相同，使用 `-save` 方法。
 
 ```objective_c
-[MLFileManager saveFileInBackground:file block:^(BOOL succeeded, NSError *error) {
+[file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     // Handle success or failure here ...
 }];
 ```
@@ -405,16 +402,16 @@ MLFile *file = [MLFile fileWithName:@"resume.txt" data:data];
 MLObject *jobApplication = [MLObject objectWithclassName:@"JobApplication"]
 jobApplication[@"applicantName"] = @"Joe Smith";
 jobApplication[@"applicantResumeFile"] = file;
-[MLDataManager saveObjectInBackground:jobApplication block:^(BOOL succeeded, NSError *error) {
+[jobApplication saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     // Handle success or failure here ...
 }];
 ```
 
-您可以调用 `MLFileManager` 上的 `getDataOfFileInBackground:block:` 重新获取此数据。这里我们从另一 `JobApplication` 对象获取恢复文件：
+您可以调用 `-getDataInBackgroundWithBlock:` 重新获取此数据。这里我们从另一 `JobApplication` 对象获取恢复文件：
 
 ```objective_c
 MLFile *applicantResume = anotherApplication[@"applicantResumeFile"];
-[MLFileManager getDataOfFileInBackground:file block:^(NSData *data, NSError *err) {
+[applicationResume getDataInBackgroundWithBlock:^(NSData *data, NSError *err) {
     if (!error) {
         NSData *resumeData = data;
     }
@@ -423,74 +420,75 @@ MLFile *applicantResume = anotherApplication[@"applicantResumeFile"];
 
 ##### 图像
 
-通过将图片转换成 `NSData` 然后使用 `MLFile` 就可以轻松地储存图片。假设您有一个文件名为 image 的 `UIImage`，并想把它另存为 `MLFile`：
+通过将图片转换成 `NSData` 然后使用 `MLFile` 就可以轻松地储存图片。假设您有一个名为 `image` 的 `UIImage`，并想把它另存为 `MLFile`：
 
 ```objective_c
+UIImage *image = ...;
 NSData *imageData = UIImagePNGRepresentation(image);
 MLFile *imageFile = [MLFile fileWithName:@"image.png" data:imageData];
- 
-MLObject *userPhoto = [MLObject objectWithclassName:@"UserPhoto"];
+
+MLObject *userPhoto = [MLObject objectWithClassName:@"UserPhoto"];
 userPhoto[@"imageName"] = @"My trip to Hawaii!";
 userPhoto[@"imageFile"] = imageFile;
-[userPhoto saveInBackground];
-[MLDataManager saveObjectInBackground:userPhoto block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
+[userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    // ...
 }];
 ```
 
 您的 `MLFile` 将作为保存操作的一部分被上传到 `userPhoto` 对象。还可以跟踪 `MLFile` 的*上传和下载进度*。
 
-您可以调用 `+[MLFileManager getDataOfFileInBackground:block:]` 重新获取此图像。这里我们从另一个名为 `anotherPhoto` 的 `UserPhoto` 获取图像文件：
+您可以调用 `-getDataInBackgroundWithBlock:` 重新获取此图像。这里我们从另一个名为 `anotherPhoto` 的 `UserPhoto` 获取图像文件：
 
 ```objective_c
 MLFile *userImageFile = anotherPhoto[@"imageFile"];
-[MLFileManager getDataOfFileInBackground:userImageFile block:^(NSData *imageData, NSError *error) {
+[userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
     if (!error) {
         UIImage *image = [UIImage imageWithData:imageData];
     }
 }];
 ```
 
-### 上传进度
+### 进度
 
-使用 `+[MLFileManager saveInBackgroundWithBlock:progressBlock:]` 和 `+[MLFileManager getDataInBackgroundWithBlock:progressBlock:]` 可以分别轻松了解 `MLFile` 的上传和下载进度。例如：
+使用 `saveInBackgroundWithBlock:progressBlock:` 和 `getDataInBackgroundWithBlock:progressBlock::` 可以分别轻松了解 `MLFile` 的上传和下载进度。例如：
+
+```
+NSData *data = [@"MaxLeap is great!" dataUsingEncoding:NSUTF8StringEncoding];
+MLFile *file = [MLFile fileWithName:@"resume.txt" data:data];
+[file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+  // 成功或失败处理...
+} progressBlock:^(int percentDone) {
+  // 更新进度数据，percentDone 介于 0 和 100。
+}];
+```
 
 您可以用 [REST API](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS) 删除对象引用的文件。您需要提供主密钥才能删除文件。
 
 如果您的文件未被应用中的任何对象引用，则不能通过 [REST API](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS) 删除它们。您可以在应用的“设置”页面请求清理未使用的文件。请记住，该操作可能会破坏依赖于访问未被引用文件（通过其地址属性）的功能。当前与对象关联的文件将不会受到影响。
 
-###下载文件
-
-#####直接下载文件
-
-#####获取文件的 url 自行处理下载：
-
-###删除文件
-到目前为止，文件的删除权限暂不开放。
-
 ## 查询
 
-我们已经知道如何使用 `+[MLQueryManager getObjectInBackgroundWithclass:objectId:block:]` 从 MaxLeap 中检索单个 `MLObject`。使用 `MLQuery`，还有其他多种检索数据的方法 —— 您可以一次检索多个对象，设置检索对象的条件等。
+我们已经知道如何使用 `getObjectInBackgroundWithId:block:]` 从 MaxLeap 中检索单个 `MLObject`。使用 `MLQuery`，还有其他多种检索数据的方法 —— 您可以一次检索多个对象，设置检索对象的条件等。
 
 ### 基本查询
 
-使用MLQuery查询MLObject分三步：
+使用 `MLQuery` 查询 `MLObject` 分三步：
 
-1. 创建一个 MLQuery 对象，并指定对应的"MLObject class"；
-2. 为MLQuery添加过滤条件；
-3. 执行MLQuery：使用 `+[MLQueryManger findObjectsInBackgroundWithQuery:block:]` 来查询与条件匹配的 MLObject 数据。
+1. 创建一个 `MLQuery` 对象，并指定对应的 MLObject class；
+2. 为 `MLQuery` 添加过滤条件；
+3. 执行 `MLQuery`：调用 `findObjectsInBackgroundWithBlock:` 来查询与条件匹配的 `MLObject` 数据。
 
-例如，查询指定人员的信息，可以使用 `whereKey:equalTo:` 方法限定键值：
+例如，查询指定人员所发的微博，可以使用 `whereKey:equalTo:` 方法限定键值：
 
 ```objective_c
-MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
-[query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+MLQuery *query = [MLQuery queryWithclassName:@"Post"];
+[query whereKey:@"publisher" equalTo:@"MaxLeap"];
+[query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
     if (!error) {
         // The find succeeded.
-        NSLog(@"Successfully retrieved %d scores.", objects.count);
+        NSLog(@"Successfully retrieved %d posts.", psots.count);
         // Do something with the found objects
-        for (MLObject *object in objects) {
+        for (MLObject *object in posts) {
             NSLog(@"%@", object.objectId);
         }
     } else {
@@ -500,16 +498,16 @@ MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
 }];
 ```
 
-`+[MLQueryManager findObjectsInBackgroundWithQuery:block:]` 方法确保不阻塞当前线程并完成网络请求，然后在主线程执行 block。
+`findObjectsInBackgroundWithBlock:` 方法确保不阻塞当前线程并完成网络请求，然后在主线程执行 `block`。
 
-###查询条件
+### 查询约束
 
-为了充分利用 MLQuery，我们建议使用下列方法添加限制条件。但是，若您更喜欢用 NSPredicate，创建 MLQuery 时提供 NSPredicate 即可指定一系列的限制条件。
+为了充分利用 `MLQuery`，我们建议使用下列方法添加限制条件。但是，若您更喜欢用 `NSPredicate`，创建 `MLQuery` 时提供 `NSPredicate` 即可指定一系列的限制条件。
 
 ```objective_c
 NSPredicate *predicate = [NSPredicate predicateWithFormat:
-@"playerName = 'Dan Stemkosk'"];
-MLQuery *query = [MLQuery queryWithclassName:@"GameScore" predicate:predicate];
+@"publisher = 'MaxLeap'"];
+MLQuery *query = [MLQuery queryWithclassName:@"Post" predicate:predicate];
 ```
 
 支持以下特性：
@@ -528,34 +526,39 @@ MLQuery *query = [MLQuery queryWithclassName:@"GameScore" predicate:predicate];
 - 将一个键与另一个键比较的谓语。
 - 带多个 `OR` 子句的复杂谓语。
 
-#####设置过滤条件
+##### 设置过滤条件
 
 有几种方法可以对 `MLQuery` 可以查到的对象设置限制条件。您可以用 `whereKey:notEqualTo:` 将具有特定键值对的对象过滤出来：
 
 ```objective_c
-[query whereKey:@"playerName" notEqualTo:@"Michael Yabuti"];
+[query whereKey:@"publisher" notEqualTo:@"xiaoming"];
 ```
 
 您可以给定多个限制条件，只有满足所有限制条件的对象才会出现在结果中。换句话说，这类似于 AND 类型的限制条件。
 
 ```objective_c
-[query whereKey:@"playerName" notEqualTo:@"Michael Yabuti"];
-[query whereKey:@"playerAge" greaterThan:@18];
+[query whereKey:@"publisher" notEqualTo:@"xiaoming"];
+[query whereKey:@"createdAt" greaterThan:[NSDate dateWithTimeIntervalSinceNow:-3600]];
 ```
 
-#####设置结果数量
 您可以通过设置 `limit` 来限制结果数量。默认结果数量限制为 100，但是 1 到 1000 之间的任意值都有效：
 
 ```objective_c
 query.limit = 10; // limit to at most 10 results
 ```
 
-如果您想要确切的一个结果，更加方便的方法是使用 `[MLQueryManager getFirstObjectInBackgroundWithQuery:block:]` 而不是 `[MLQueryManager findObjectsInBackgroundWithQuery:block:]`。
+`skip` 用来跳过返回结果中开头的一些条目，配合 `limit` 可以对结果分页：
+
+```
+query.skip = 10; // 跳过前 10 条结果
+```
+
+如果您想要确切的一个结果，更加方便的方法是使用 `getFirstObjectInBackgroundWithBlock:` 而不是 `findObjectsInBackgroundWithBlock:`。
 
 ```objective_c
-MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
-[query whereKey:@"playerEmail" equalTo:@"dstemkoski@example.com"];
-[MLQueryManager getFirstObjectInBackgroundWithQuery:query block:^(MLObject *object, NSError *error) {
+MLQuery *query = [MLQuery queryWithclassName:@"Post"];
+[query whereKey:@"playerEmail" equalTo:@"xiaoming@example.com"];
+[query getFirstObjectInBackgroundWithBlock:^(MLObject *object, NSError *error) {
     if (!object) {
         NSLog(@"The getFirstObject request failed.");
     } else {
@@ -565,26 +568,28 @@ MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
 }];
 ```
 
-#####对结果排序
+##### 对结果排序
+
 对于可排序的数据，如数字和字符串，您可以控制结果返回的顺序：
 
 ```objective_c
-// Sorts the results in ascending order by the score field
-[query orderByAscending:@"score"];
-// Sorts the results in descending order by the score field
-[query orderByDescending:@"score"];
+// Sorts the results in ascending order by the createdAt field
+[query orderByAscending:@"createdAt"];
+// Sorts the results in descending order by the createdAt field
+[query orderByDescending:@"createdAt"];
 ```
 
-您可以在查询中添加更多排序键，如下：
+一个查询可以使用多个排序键，如下：
 
 ```objective_c
 // Sorts the results in ascending order by the score field if the previous sort keys are equal.
-[query addAscendingOrder:@"score"];
+[query orderByAscending:@"score"];
 // Sorts the results in descending order by the score field if the previous sort keys are equal.
-[query addDescendingOrder:@"score"];
+[query orderByDescending:@"username"];
 ```
 
-#####设置数值大小约束
+##### 设置数值大小约束
+
 对于可排序的数据，你还可以在查询中使用对比：
 
 ```objective_c
@@ -598,81 +603,64 @@ MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
 [query whereKey:@"wins" greaterThanOrEqualTo:@50];
 ```
 
-#####设置返回数据包含的属性
+##### 设置返回数据包含的属性
+
 您可以限制返回的字段，通过调用 `selectKeys:` 并传入一个字段数组来实现。若要检索只包含 `score` 和 `playerName` 字段（以及特殊内建字段，如 `objectId`、`createdAt` 和 `updatedAt`）的对象：
 
 ```objective_c
-MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
-[query selectKeys:@[@"playerName", @"score"]];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
-    // objects in results will only contain the playerName and score fields
+MLQuery *query = [MLQuery queryWithclassName:@"Post"];
+[query selectKeys:@[@"contents", @"publisher"]];
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    // objects in results will only contain the contents and publisher fields
 }];
 ```
 
-稍后，可以通过对返回的对象调用  `[MLDataManager fetchDataOfObjectIfNeededInBackground:block:]` 提取其余的字段：
+稍后，可以通过对返回的对象调用  `fetchIfNeededInBackgroundWithBlock:` 提取其余的字段：
 
 ```objective_c
 MLObject *object = (MLObject*)results[0];
-[MLDataManager fetchDataOfObjectIfNeededInBackground:object block:^(MLObject *object, NSError *error) {
+[object fetchIfNeededInBackgroundWithBlock::^(MLObject *object, NSError *error) {
     // all fields of the object will now be available here.
 }];
 ```
 
-#####设置更多约束
+##### 设置更多约束
 
-您可以通过设置 `skip` 跳过前面的结果。这可以用来分页：
+若您想要检索与几个不同值匹配的对象，您可以使用 `whereKey:containedIn:`，并提供一组可接受的值。这通常在用单一查询替代多个查询时比较有用。例如，如果您检索某几个用户发的微博：
 
 ```objective_c
-query.skip = 10; // skip the first 10 results
+// Finds posts from any of Jonathan, Dario, or Shawn
+NSArray *names = @[@"Jonathan Walsh", @"Dario Wunsch", @"Shawn Simon"];
+[query whereKey:@"publisher" containedIn:names];
 ```
 
-若您想要检索与几个不同值匹配的对象，您可以使用 `whereKey:containedIn:`，并提供一组可接受的值。这通常在用单一查询替代多个查询时比较有用。例如，如果您检索某个列表中玩家的得分：
+若您想要检索与几个值都不匹配的对象，您可以使用 `whereKey:notContainedIn:`，并提供一组可接受的值。例如，如果您想检索不在某个列表里的用户发的微博：
 
 ```objective_c
-// Finds scores from any of Jonathan, Dario, or Shawn
-NSArray *names = @[@"Jonathan Walsh",
-@"Dario Wunsch",
-@"Shawn Simon"];
-[query whereKey:@"playerName" containedIn:names];
-```
-
-若您想要检索与几个值都不匹配的对象，您可以使用 `whereKey:notContainedIn:`，并提供一组可接受的值。例如，如果您想检索不在某个列表里的玩家的得分：
-
-```objective_c
-// Finds scores from anyone who is neither Jonathan, Dario, nor Shawn
-NSArray *names = @[@"Jonathan Walsh",
-@"Dario Wunsch",
-@"Shawn Simon"];
+// Finds posts from anyone who is neither Jonathan, Dario, nor Shawn
+NSArray *names = @[@"Jonathan Walsh", @"Dario Wunsch", @"Shawn Simon"];
 [query whereKey:@"playerName" notContainedIn:names];
 ```
 
-若您想要检索有某一特定键集的对象，可以使用 whereKeyExists。相反，若您想要检索没有某一特定键集的对象，可以使用 whereKeyDoesNotExist。
+若您想要检索有某一特定键集的对象，可以使用 `whereKeyExists:`。相反，若您想要检索没有某一特定键集的对象，可以使用 `whereKeyDoesNotExist:`。
 
-您可以使用 `whereKey:matchesKey:inQuery:` 方法获取符合以下要求的对象：对象中的一个键值与另一查询所得结果的对象集中的某一键值匹配。例如，如果您的一个类包含体育团队，而且您在用户类中储存了用户的家乡，那么您可以查询其家乡团队获奖的用户列表。该查询类似于：
+您可以使用 `whereKey:matchesKey:inQuery:` 方法获取符合以下要求的对象：对象中的一个键值与另一查询所得结果的对象集中的某一键值匹配。例如，获取用户所有粉丝发的微博：
 
 ```objective_c
-MLQuery *teamQuery = [MLQuery queryWithclassName:@"Team"];
-[teamQuery whereKey:@"winPct" greaterThan:@(0.5)];
-MLQuery *userQuery = [MLUser query];
-[userQuery whereKey:@"hometown" matchesKey:@"city" inQuery:teamQuery];
-[MLQueryManager findObjectsInBackgroundWithQuery:userQuery block:^(NSArray *objects, NSError *error) {
-    // results will contain users with a hometown team with a winning record
+MLQuery *commentQuery = [MLQuery queryWithClassName:@"Comment"];
+[commentQuery whereKey:@"parent" equalTo:post];
+MLQuery *postsQuery = [MLQuery queryWithClassName:@"Post"];
+[postsQuery whereKey:@"author" matchesKey:@"author" inQuery:postsQuery];
+[postsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    // ...
 }];
 ```
 
-类似地，您可以使用 `whereKey:doesNotMatchKey:inQuery:` 获取不符合以下要求的对象：对象中的一个键值与另一查询所得结果的对象集中的某一键值匹配。例如，要查找其家乡团队失利的用户：
+类似地，您可以使用 `whereKey:doesNotMatchKey:inQuery:` 获取不符合以下要求的对象，对象中的一个键值与另一查询所得结果的对象集中的某一键值匹配。
 
-```objective_c
-MLQuery *losingUserQuery = [MLUser query];
-[losingUserQuery whereKey:@"hometown" doesNotMatchKey:@"city" inQuery:teamQuery];
-[MLQueryManager findObjectsInBackgroundWithQuery:losingUserQuery block:^(NSArray *objects, NSError *error) {
-    // results will contain users with a hometown team with a losing record
-}];
-```
+### 不同属性值类型的查询
 
-###不同属性值类型的查询
-
-####值类型为数组的查询
+#### 值类型为数组的查询
 
 对于数组类型的键，您可以查找键的数组值包含 2 的对象，如下所示：
 
@@ -695,21 +683,21 @@ MLQuery *losingUserQuery = [MLUser query];
 
 ```objective_c
 // Finds barbecue sauces that start with "Big Daddy's".
-MLQuery *query = [MLQuery queryWithclassName:@"BarbecueSauce"];
-[query whereKey:@"name" hasPrefix:@"Big Daddy's"];
+MLQuery *query = [MLQuery queryWithclassName:@"Post"];
+[query whereKey:@"title" hasPrefix:@"Big Daddy's"];
 ```
 
-####值类型为MLObject查询
+#### 值类型为 `MLObject` 查询
 
-#####MLObject类型字段匹配MLObject
+##### `MLObject` 类型字段匹配 `MLObject`
 
-有几种方法可以用于关系型数据查询。如果您想检索有字段与某一特定 `MLObject` 匹配的对象，可以像检索其他类型的数据一样使用 `whereKey:equalTo:`。例如，如果每个 `Comment` 在 `post` 字段中有一个 `Post` 对象，您可以提取某一特定 `Post` 的评论：
+有几种方法可以用于关系型数据查询。如果您想检索有字段与某一特定 `MLObject` 匹配的对象，可以像检索其他类型的数据一样使用 `whereKey:equalTo:`。例如，如果每个 `Comment` 在 `parent` 字段中有一个 `Post` 对象，您可以提取某一特定 `Post` 的评论：
 
 ```objective_c
 // Assume MLObject *myPost was previously created.
-MLQuery *query = [MLQuery queryWithclassName:@"Comment"];
+MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
 [query whereKey:@"post" equalTo:myPost];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     // comments now contains the comments for myPost
 }];
 ```
@@ -717,19 +705,20 @@ MLQuery *query = [MLQuery queryWithclassName:@"Comment"];
 您还可以用 `objectId` 进行关系型查询：
 
 ```objective_c
-[query whereKey:@"post"
-equalTo:[MLObject objectWithoutDataWithclassName:@"Post" objectId:@"1zEcyElZ80"]];
+MLObject *object = [MLObject objectWithoutDataWithClassName:@"Post" objectId:@"1zEcyElZ80"];
+[query whereKey:@"parent" equalTo:object];
 ```
 
-#####MLObject类型字段匹配Query
+##### `MLObject` 类型字段匹配 `Query`
+
 如果想要检索的对象中，有字段包含与其他查询匹配的 `MLObject`，您可以使用 `whereKey:matchesQuery:`。**注意**，默认限值 100 和最大限值 1000 也适用于内部查询，因此在大型数据集中进行查询时，您可能需要谨慎构建查询条件才能按需要进行查询。为了查找包含图像的帖子的评论，您可以这样：
 
 ```objective_c
-MLQuery *innerQuery = [MLQuery queryWithclassName:@"Post"];
+MLQuery *innerQuery = [MLQuery queryWithClassName:@"Post"];
 [innerQuery whereKeyExists:@"image"];
-MLQuery *query = [MLQuery queryWithclassName:@"Comment"];
+MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
 [query whereKey:@"post" matchesQuery:innerQuery];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     // comments now contains the comments for posts with images
 }];
 ```
@@ -737,27 +726,27 @@ MLQuery *query = [MLQuery queryWithclassName:@"Comment"];
 如果想要检索的对象中，有字段包含与其他查询不匹配的 `MLObject`，您可以使用 `whereKey:doesNotMatchQuery:`。为了查找不包含图像的帖子的评论，您可以这样：
 
 ```objective_c
-MLQuery *innerQuery = [MLQuery queryWithclassName:@"Post"];
+MLQuery *innerQuery = [MLQuery queryWithClassName:@"Post"];
 [innerQuery whereKeyExists:@"image"];
-MLQuery *query = [MLQuery queryWithclassName:@"Comment"];
+MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
 [query whereKey:@"post" doesNotMatchQuery:innerQuery];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     // comments now contains the comments for posts without images
 }];
 ```
 
-#####返回指定MLObject类型的字段
+##### 返回指定 `MLObject` 类型的字段
 在一些情况下，您可能想要在一个查询中返回多种类型的相关对象。您可以用 `includeKey:` 方法达到这个目的。例如，假设您要检索最新的十条评论，并且想要同时检索这些评论的相关帖子：
 
 ```objective_c
-MLQuery *query = [MLQuery queryWithclassName:@"Comment"];
+MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
 // Retrieve the most recent ones
 [query orderByDescending:@"createdAt"];
 // Only retrieve the MLt ten
 query.limit = 10;
 // Include the post data with each comment
 [query includeKey:@"post"];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *comments, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
     // Comments now contains the MLt ten comments, and the "post" field
     // has been populated. For example:
     for (MLObject *comment in comments) {
@@ -774,16 +763,16 @@ query.limit = 10;
 [query includeKey:@"post.author"];
 ```
 
-您可以通过多次调用 `includeKey:`，进行包含多个字段的查询。此功能也适用于 `[MLQueryManager getFirstObjectInBackgroundWithQuery:block:]` 和 `[MLQueryManager getObjectInBackgroundWithclass:objectId:block:]` 等 MLQuery 辅助方法。
+您可以通过多次调用 `includeKey:`，进行包含多个字段的查询。此功能也适用于 `getFirstObjectInBackgroundWithBlock:` 和 `getObjectInBackgroundWithId:block:` 等 `MLQuery` 辅助方法。
 
 ### 个数查询
 
 计数查询可以对拥有 1000 条以上数据的类返回大概结果。如果您只需要计算符合查询的对象数量，不需要检索匹配的对象，可以使用 `countObjects`，而不是 `findObjects`。例如，要计算某一特定玩家玩过多少种游戏：
 
 ```objective_c
-MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
-[query whereKey:@"playername" equalTo:@"Sean Plott"];
-[MLQueryManager countObjectsInBackgroundWithQuery:query block:^(int count, NSError *error) {
+MLQuery *query = [MLQuery queryWithclassName:@"Post"];
+[query whereKey:@"publisher" equalTo:@"Sean"];
+[query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
     if (!error) {
         // The count request succeeded. Log the count
         NSLog(@"Sean has played %d games", count);
@@ -800,12 +789,12 @@ MLQuery *query = [MLQuery queryWithclassName:@"GameScore"];
 如果想要查找与几个查询中的其中一个匹配的对象，您可以使用 `orQueryWithSubqueries:` 方法。例如，如果您想要查找赢得多场胜利或几场胜利的玩家，您可以：
 
 ```objective_c
-MLQuery *lotsOfWins = [MLQuery queryWithclassName:@"Player"];
-[lotsOfWins whereKey:@"wins" greaterThan:@150];
-MLQuery *fewWins = [MLQuery queryWithclassName:@"Player"];
-[fewWins whereKey:@"wins" lessThan:@5];
-MLQuery *query = [MLQuery orQueryWithSubqueries:@[fewWins,lotsOfWins]];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+MLQuery *fewReader = [MLQuery queryWithClassName:@"Post"];
+[fewReader whereKey:@"readCount" lessThan:@10];
+MLQuery *lotsOfReader = [MLQuery queryWithClassName:@"Post"];
+[lotsOfReader whereKey:@"readCount" greaterThan:@100];
+MLQuery *query = [MLQuery orQueryWithSubqueries:@[fewReader, lotsOfReader]];
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     // results contains players with lots of wins or only a few wins.
 }];
 ```
@@ -816,24 +805,24 @@ MLQuery *query = [MLQuery orQueryWithSubqueries:@[fewWins,lotsOfWins]];
 
 ###缓存查询
 
-##  MLObject子类
+##  `MLObject` 子类
 
 MaxLeap 的设计能让您尽快上手使用。您可以使用 `MLObject` 类访问所有数据，以及通过 `objectForKey:` 或 `[]` 操作符访问任何字段。在成熟的代码库中，子类具有许多优势，包括简洁性、可扩展性和支持自动完成。子类化纯属可选操作，但它会将以下代码：
 
 ```objective_c
-MLObject *shield = [MLObject objectWithclassName:@"Armor"];
-shield[@"displayName"] = @"Wooden Shield";
-shield[@"fireProof"] = @NO;
-shield[@"rupees"] = @50;
+MLObject *game = [MLObject objectWithclassName:@"Game"];
+game[@"displayName"] = @"Bird";
+game[@"multiplayer"] = @YES;
+game[@"price"] = @0.99;
 ```
 
 转换为：
 
 ```objective_c
-Armor *shield = [Armor object];
-shield.displayName = @"Wooden Shield";
-shield.fireProof = NO;
-shield.rupees = 50;
+Game *game = [Game object];
+game.displayName = @"Bird";
+game.multiplayer = @YES;
+game.price = @0.99;
 ```
 
 ###创建MLObject子类
@@ -843,26 +832,26 @@ shield.rupees = 50;
 1. 声明符合 `MLSubclassing` 协议的子类。
 2. 实现子类方法 `MLclassName`。这是您传给 `-initWithclassName:` 方法的字符串，这样以后就不必再传类名了。
 3. 将 `MLObject+Subclass.h` 导入您的 .m 文件。该操作导入了 `MLSubclassing` 协议中的所有方法的实现。其中 `MLclassName` 的默认实现是返回类名(指 Objective C 中的类)。
-4. 在 `+[ML setApplicationId:clientKey:]` 之前调用 `+[Yourclass registerSubclass]`。一个简单的方法是在类的 [+load][+load api reference] (Obj-C only) 或者 [+initialize][+initialize api reference] (both Obj-C and Swift) 方法中做这个事情。
+4. 在 `+[MaxLeap setApplicationId:clientKey:]` 之前调用 `+[Yourclass registerSubclass]`。一个简单的方法是在类的 [+load][+load api reference] (Obj-C only) 或者 [+initialize][+initialize api reference] (both Obj-C and Swift) 方法中做这个事情。
 
-下面的代码成功地声明、实现和注册了 `MLObject` 的 `Armor` 子类：
+下面的代码成功地声明、实现和注册了 `MLObject` 的 `Game` 子类：
 
 ```objective_c
-// Armor.h
-@interface Armor : MLObject<MLSubclassing>
-+ (NSString *)MLclassName;
+// Game.h
+@interface Game : MLObject <MLSubclassing>
++ (NSString *)leapClassName;
 @end
 
-// Armor.m
+// Game.m
 // Import this header to let Armor know that MLObject privately provides most
 // of the methods for MLSubclassing.
-#import <ML/MLObject+Subclass.h>
-@implementation Armor
+#import <MaxLeap/MLObject+Subclass.h>
+@implementation Game
 + (void)load {
     [self registerSubclass];
 }
-+ (NSString *)MLclassName {
-    return @"Armor";
++ (NSString *)leapClassName {
+    return @"Game";
 }
 @end
 ```
@@ -871,34 +860,36 @@ shield.rupees = 50;
 
 向 `MLObject` 子类添加自定义属性和方法有助于封装关于这个类的逻辑。借助 `MLSubclassing`，您可以将与同一个主题的所有相关逻辑放在一起，而不必分别针对事务逻辑和存储/传输逻辑使用单独的类。
 
-`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `Armor` 类中创建了 `displayName` 属性：
+`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `Game` 类中创建了 `displayName` 属性：
 
 ```objective_c
-// Armor.h
-@interface Armor : MLObject<MLSubclassing>
-+ (NSString *)MLclassName;
+// Game.h
+@interface Game : MLObject <MLSubclassing>
++ (NSString *)leapClassName;
 @property (retain) NSString *displayName;
 @end
 
-// Armor.m
+// Game.m
 @dynamic displayName;
 ```
 
-现在，您可以使用 `armor.displayName` 或 `[armor displayName]` 访问 `displayName` 属性，并使用 `armor.displayName = @"Wooden Shield"` 或 `[armor setDisplayName:@"Wooden Sword"]` 对其进行赋值。动态属性可以让 Xcode 提供自动完成功能和简单的纠错。
+现在，您可以使用 `game.displayName` 或 `[game displayName]` 访问 `displayName` 属性，并使用 `game.displayName = @"Bird"` 或 `[game setDisplayName:@"Bird"]` 对其进行赋值。动态属性可以让 Xcode 提供自动完成功能和简单的纠错。
 
 `NSNumber` 属性可使用 `NSNumber` 或其相应的基本类型来实现。请看下例：
 
 ```objective_c
-@property BOOL fireProof;
-@property int rupees;
+@property BOOL multiplayer;
+@property float price;
 ```
 
-这种情况下，`game[@"fireProof"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"rupees"]` 将返回一个 `NSNumber`，可以使用 `intValue` 访问。但是，`fireProof` 属性实际上是 `BOOL`，`rupees` 属性实际上是 `int`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。您可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
+这种情况下，`game[@"multiplayer"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"price"]` 将返回一个 `NSNumber`，可以使用 `floatValue` 访问。但是，`fireProof` 属性实际上是 `BOOL`，`rupees` 属性实际上是 `float`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。您可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
 
 ###定义函数
+
 如果您需要比简单属性访问更加复杂的逻辑，您也可以声明自己的方法：
 
 ```objective_c
+
 @dynamic iconFile;
 
 - (UIImageView *)iconView {
@@ -918,11 +909,11 @@ shield.rupees = 50;
 您可以使用类方法 `query` 获取对特定子类对象的查询。下面的示例查询了用户可购买的装备：
 
 ```objective_c
-MLQuery *query = [Armor query];
-[query whereKey:@"rupees" lessThanOrEqualTo:MLUser.currentUser.rupees];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *objects, NSError *error) {
+MLQuery *query = [Game query];
+[query whereKey:@"rupees" lessThanOrEqualTo:@0.99];
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (!error) {
-        Armor *firstArmor = objects[0];
+        Game *firstArmor = objects[0];
         // ...
     }
 }];
@@ -930,7 +921,7 @@ MLQuery *query = [Armor query];
 
 ## 用户
 
-许多应用的核心理念是，用户帐户保护应能让用户安全访问他们的信息。我们专门用于用户管理的类，叫做 `MLUser` 和 `MLUserManager`，可自动处理用户帐户管理需要的很多功能。
+许多应用的核心理念是，用户帐户保护应能让用户安全访问他们的信息。我们专门用于用户管理的类，叫做 `MLUser`，可自动处理用户帐户管理需要的很多功能。
 
 您可以使用这个类在您的应用程序中添加用户帐户功能。
 
@@ -958,7 +949,7 @@ MLQuery *query = [Armor query];
     user.email = @"email@example.com";
     // other fields can be set just like with MLObject
     user[@"phone"] = @"415-392-0202";
-    [MLUserManager signUpInBackground:user block:^(BOOL succeeded, NSError *error) {
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             // Hooray! Let them use the app now.
         } else {
@@ -969,9 +960,9 @@ MLQuery *query = [Armor query];
 }
 ```
 
-这个调用将在您的 MaxLeap 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，它还将密码安全散列在云中。我们从来不明文储存密码，也不会将密码明文传输回客户端。
+这个调用将在您的 MaxLeap 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，MaxLeap 只保存密码的密文。我们从来不明文储存密码，也不会将密码明文传输回客户端。
 
-**注意**，我们使用的是 `+[MLUserManager signUpInBackground:block:]` 方法，而不是 `+[MLDataManager saveObjectInBackground:block:]` 方法。应始终使用 `+[MLUserManager signUpInBackground:block:]` 方法创建新的 `MLUser`。调用 `+[MLUserManager signUpInBackground:block:]` 可以完成用户的后续更新。
+**注意**，我们使用的是 `-[user signUpInBackgroundWithBlock:]` 方法，而不是 `-[user saveInBackgroundWithBlock:]` 方法。应始终使用 `-[user signUpInBackgroundWithBlock:]` 方法创建新的 `MLUser`。调用 `-[user saveInBackgroundWithBlock:]` 可以完成用户的后续更新。
 
 若注册不成功，您应该查看返回的错误对象。最可能的情况就是该用户名或邮箱已被其他用户使用。你应该将这种情况清楚地告诉用户，并要求他们尝试不同的用户名。
 
@@ -979,10 +970,10 @@ MLQuery *query = [Armor query];
 
 ### 登录
 
-当然，您让用户注册后，需要让他们以后登录到他们的帐户。为此，您可以使用类方法 `+[MLUserManager logInWithUsernameInBackground:password:block:]`。
+当然，您让用户注册后，需要让他们以后登录到他们的帐户。为此，您可以使用类方法 `+[MLUser logInWithUsernameInBackground:password:block:]`。
 
 ```objective_c
-[MLUserManager logInWithUsernameInBackground:@"myname" password:@"mypass" block:^(MLUser *user, NSError *error) {
+[MLUser logInWithUsernameInBackground:@"myname" password:@"mypass" block:^(MLUser *user, NSError *error) {
     if (user) {
         // Do stuff after successful login.
     } else {
@@ -1009,7 +1000,7 @@ if (currentUser) {
 您可以通过注销来清除他们的当前登录状态：
 
 ```objective_c
-[MLUserManager logOut];
+[MLUser logOut];
 MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```
 
@@ -1020,7 +1011,7 @@ MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 若要开始密码重置流程，让用户填写电子邮箱地址，并调用：
 
 ```objective_c
-[MLUserManager requestPasswordResetForEmailInBackground:@"email@example.com"];
+[MLUser requestPasswordResetForEmailInBackground:@"email@example.com"];
 ```
 
 该操作将尝试将给定的电子邮箱与用户电子邮箱或用户名字段进行匹配，并向用户发送密码重置邮件。这样，您可以选择让用户使用其电子邮箱作为用户名，或者您可以单独收集它并把它储存在电子邮箱字段。
@@ -1041,12 +1032,10 @@ MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```objective_c
 MLQuery *query = [MLUser query];
 [query whereKey:@"gender" equalTo:@"female"]; // find all the women
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *girls, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *girls, NSError *error) {
     NSLog(@"%@", girls);
 }];
 ```
-
-此外，您可以使用 `+[MLUserManager getUserObjectWithId:block:]` 通过 id 找到 `MLUser`。
 
 ### 邮箱验证
 
@@ -1083,12 +1072,13 @@ MLQuery *query = [MLUser query];
 ```objective_c
 [MLUser enableAutomaticUser];
 [[MLUser currentUser] incrementKey:@"RunCount"];
-[MLDataManager saveObjectInBackground:[MLUser currentUser] block:^(BOOL succeeded, NSError *error) {
+[]
+[[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     // Handle success or failure here ...
 }];
 ```
 
-您可以通过设置用户名和密码，然后调用 `+[MLUserManager signUpInBackground:block:]` 的方式，或者通过登录或关联 *Facebook* 或 *Twitter* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以试试 `+[MLAnonymousUtils isLinkedWithUser:]`:
+您可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *Facebook* 或 *Twitter* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以试试 `+[MLAnonymousUtils isLinkedWithUser:]`:
 
 ```objective_c
 if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
@@ -1098,133 +1088,15 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 }
 ```
 
-## 用户角色
-
-随着应用程序使用范围和用户数量的不断壮大，对于各项数据的访问权限，您可能需要更强硬的控制权，与用户关联的 ACL 所提供的控制并不能符合要求。为满足这种需求，MaxLeap 支持[基于角色的访问控制][role-based access control]。根据角色对拥有您 MaxLeap 数据的公共访问权限的用户进行分组是一种合乎逻辑的方法。角色是包含用户和其他角色的命名对象。给某一角色授予的任何权限也意味着将权限授予拥有该角色的用户，以及授予拥有该角色所含角色的任何用户。
-
-例如，在含有分类内容的应用程序中，有些用户被设定为“版主”，他们可以修改和删除其他用户创建的内容。还有一些用户是“管理员”，他们与版主拥有相同的权利，但是还可以修改应用程序的全局设置。通过将用户添加到这些角色中，您可以让新用户成为版主或管理员，而不必手动向各用户授予每个资源的权限。
-
-我们提供一个类名为 `MLRole` 的专业类，代表客户端代码中的角色对象。`MLRole` 是 `MLObject` 的一个子类，两者具有完全相同的特性，例如灵活架构(flexible schema)和键值接口。`MLObject` 上的所有方法也存在于 `MLRole` 中。区别是 `MLRole` 有一些专门用于角色管理的附加特性。
-
-### 字段说明
-
-属性名|类型|介绍|是否必需或唯一
----|---|---|---
-    ACL|ACL|用户角色对象的访问权限|**必需** (需要显式设置)
-    roles|Relation|该MLRole包含的其他MLRole|可选
-    name|String| 角色名|必需
-    user|Relation|该角色包含的用户|可选
-
-###创建角色
-创建Role的时候，您需要提供两个参数：第一个为Role的名字(对应name字段)，第二个参数为ACL.
-
-```objective_c
-// By specifying no write privileges for the ACL, we can ensure the role cannot be altered.
-MLACL *roleACL = [MLACL ACL];
-[roleACL setPublicReadAccess:YES];
-MLRole *role = [MLRole roleWithName:@"Administrator" acl:roleACL];
-[MLDataManager saveObjectInBackground:role block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-###向角色中添加用户或角色
-您可以通过 `MLRole` 上的“用户”和“角色”关系，添加应该继承新角色权限的用户和角色：
-
-```objective_c
-MLRole *role = [MLRole roleWithName:roleName acl:roleACL];
-for (MLUser *user in usersToAddToRole) {
-    [role.users addObject:user];
-}
-for (MLRole *childRole in rolesToAddToRole) {
-    [role.roles addObject:childRole];
-}
-[MLDataManager saveObjectInBackground:role block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-如上所述，一个角色可能包含其他角色，两个角色之间可能存在母子关系。这种关系的结果是，授予给母级角色的任何权限实际上也授予给其包含的所有子角色。
-
-##数据安全
-
-### MLObject的安全性
-用户在创建MLObject时都存在一个ACL字段，只有在ACL名单上的用户(MLUser)或者角色(MLRole)才能被允许访问。如果用户不显式地设置ACL，系统将自动为其分配默认的ACL.
-
-#####ACL
-ACL相当于为每一个数据创建的允许访问的白名单列表。一个 User 必须拥有读权限（或者属于一个拥有读权限的 Role）才可以获取一个对象的数据，同时，一个 User 需要写权限（或者属于一个拥有写权限的 Role）才可以更改或者删除一个对象。 如，一条典型的ACL数据：
-
-```{"553892e860b21a48a50c1f29":{"read":true,"write":true}}```
-
-表明ObjectId为"553892e860b21a48a50c1f29"的用户，可以读取和修改该MLObject.
-
-#####默认访问权限
-
-在没有显式指定的情况下，MaxLeap 中的每一个对象都会有一个默认的 ACL 值。这个值代表了，所有的用户，对这个对象都是可读可写的。此时您可以在数据管理的表中 ACL 属性中看到这样的值:
-
-```{"*":{"read":true,"write":true}}```
-
-您可以根据需要，修改默认ACL的值：
-
-```objective_c
-MLACL *defaultACL = [MLACL ACL];
-// Everybody can read objects created by this user
-[defaultACL setPublicReadAccess:YES];
-// Moderators can also modify these objects
-[defaultACL setWriteAccess:YES forRoleWithName:@"Moderators"];
-// And the user can read and modify its own objects
-[MLACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
-```
-
-#####设置仅创建用户可见
-
-#####为其他用户设置访问权限
-
-#####为角色设置访问权限
-向对象授予角色读写权限非常简单。您可以使用 `MLRole`：
-
-```objective_c
-MLRole *moderators = /* Query for some MLRole */;
-MLObject *wallPost = [MLObject objectWithclassName:@"WallPost"];
-MLACL *postACL = [MLACL ACL];
-[postACL setWriteAccess:YES forRole:moderators];
-wallPost.ACL = postACL;
-[MLDataManager saveObjectInBackground:wallPost block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-#####同时为用户和角色设置访问权限
-MLObject的ACL是可以叠加的。如，在给某一个MLObjcet设置ACL时，您可以为所有用户添加读取权限的同时，为某一个角色添加修改权限：
-
-```objective_c
-MLObject *wallPost = [MLObject objectWithclassName:@"WallPost"];
-MLACL *postACL = [MLACL ACL];
-[postACL setWriteAccess:YES forRoleWithName:@"Moderators"];
-wallPost.ACL = postACL;
-[MLDataManager saveObjectInBackground:wallPost block:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-#####为所有用户设置访问权限
-
-### 用户对象的安全性
-
-### 角色对象的安全性
-
-`MLRole` 使用与 MaxLeap 上的所有其他对象相同的安全方案 (ACL)，除非它要求特别设置一个 ACL。一般情况下，只有拥有高级权限的用户（如，主用户或管理员）才能创建或修改角色，因此您应该相应地定义其 ACL。请注意，如果您授予用户对 `MLRole` 的写入权，那么该用户可以将其他用户添加到角色中，甚至可以完全删除该角色。
-
-注意，给角色指定 ACL 时要格外小心，确保只有拥有相关权限的人才能对它们进行修改。
-
 ##第三方登录
-为简化用户的注册及登录流程，并且集成ML应用与Facebook, Twitter等应用，MaxLeap提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与ML SDK，并将MLUser与第三方应用的用户ID进行连接。
 
-###使用Facebook账号登录
+为简化用户的注册及登录流程，并且集成ML应用与 Facebook, Twitter 等应用，MaxLeap 提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与 MaxLeap SDK，并将 `MLUser` 与第三方应用的用户ID进行连接。
 
-Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Facebook应用的设备，ML应用可通过设备上的Facebook用户凭据，直接实现用户登录。对于未安装Facebook应用的设备，用户可以通过一个标准化的Facebook登录页面，提供相应的登录信息。
+###使用 Facebook 账号登录c
 
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何MLUser绑定，MaxLeap将自动为该创建一个用户，并与其绑定。
+对于已经安装Facebook应用的设备，ML应用可通过设备上的 Facebook 用户凭据，直接实现用户登录。对于未安装 Facebook 应用的设备，用户可以通过浏览器，提供相应的登录信息。
+
+使用 Facebook 账号登录后，如果该 Facebook 用户Id并未与任何 `MLUser` 绑定，MaxLeap将自动为该创建一个用户，并与其绑定。
 
 #### 准备工作
 
@@ -1244,7 +1116,7 @@ Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Face
 @implementation AppDelegate
 
 - (void)application:(UIApplication *)application didFinishLaunchWithOptions:(NSDictionary *)options {
-   	[ML setApplicationId:@"MLAppId" clientKey:@"MLClientKey"];
+   	[MaxLeap setApplicationId:@"MaxLeapAppId" clientKey:@"MaxLeapClientKey"];
    	[MLFacebookUtils initializeFacebook];
 }
 
@@ -1311,7 +1183,7 @@ MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Faceboo
 
 您可以自行决定在用户验证后记录从 Facebook 用户处获取的所需的任何数据。要完成这一操作，您需要通过 Facebook SDK 进行一项图表查询。
 
-####    绑定MLUser与Facebook账号
+#### 绑定 `MLUser` 与 Facebook 账号
 
 若您想要将已有的 `MLUser` 与 Facebook 帐户关联起来，您可以按以下方式进行关联：
 
@@ -1343,9 +1215,11 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 我们的库为您管理 `FBSession` 对象。您只需调用 `[MLFacebookUtils session]` 来访问会话实例，其随后能传给 `FBRequest`。
 
 ###使用Twitter账号登录
-与Facebook类似，Twitter的Android SDK，也能帮助应用优化登录体验。对于已经安装Twitter应用的设备，ML应用可通过设备上的Twitter用户凭据，直接实现用户登录。对于未安装Twitter应用的设备，用户可以通过一个标准化的Twitter登录页面，提供相应的登录信息。
 
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何MLUser绑定，MaxLeap将自动为该创建一个用户，并与其绑定。
+与Facebook类似，Twitter 的 iOS SDK，也能帮助应用优化登录体验。SDK 会优先读取系统设置里面的 twitter 账户，询问用户选择账户登录，如果系统设置里面没有 twitter 账户，会弹出一个标准化的 Twitter 登录页面，提供相应的登录信息。
+
+使用 Twitter 账号登录后，如果该 Twitter 用户Id并未与任何MLUser绑定，MaxLeap 将自动为该创建一个用户，并与其绑定。
+
 ####准备工作
 
 若要通过 MaxLeap 使用 Twitter，您需要：
@@ -1357,8 +1231,7 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 5. 在初始化 MaxLeap SDK 的地方加入以下代码，比如在 `application:didFinishLaunchingWithOptions:` 方法中。
 
 ```objective_c
-[MLTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY"
-consumerSecret:@"YOUR CONSUMER SECRET"];
+[MLTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY" consumerSecret:@"YOUR CONSUMER SECRET"];
 ```
 
 若您遇到与 Twitter 相关的任何问题，请查阅 [Twitter 官方文档][twitter documentation]。
@@ -1389,7 +1262,8 @@ MaxLeap 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 
 3. 我们的 SDK 会收到 Twitter 数据并将其保存在 `MLUser` 中。如果是基于 Twitter 句柄的新用户，那么该用户随后会被创建。
 4. 您的 `block` 被调用并带回这个用户对象(user)。
 
-####绑定MLUser与Twitter账号
+#### 绑定 `MLUser` 与 Twitter 账号
+
 若您想要将已有的 `MLUser` 与 Twitter 帐户关联起来，您可以按以下方式进行关联：
 
 ```objective_c
@@ -1434,9 +1308,9 @@ NSData *data = [NSURMLonnection sendSynchronousRequest:request
 
 MaxLeap 让您可以把真实的纬度和经度坐标与对象关联起来。通过在 `MLObject` 中添加 MLGeoPoint，可以在查询时实现将对象与参考点的距离临近性纳入考虑。这可以让您轻松某些事情，如找出距离与某个用户最近的其他用户或者距离某个用户最近的地标。
 
-####MLGeoPoint字段说明
+#### MLGeoPoint 字段说明
 
-####创建MLGeoPoint
+#### 创建 MLGeoPoint
 
 要将某个地点与对象联系起来，您首先要创建一个 `MLGeoPoint`。例如，要创建一个纬度为 40.0 度，经度为 -30.0 的点：
 
@@ -1452,17 +1326,19 @@ placeObject[@"location"] = point;
 
 **注意：**目前，一个类中只有一个键可以是 `MLGeoPoint`。
 
-####地理位置查询
-#####查询距离某地理位置最近的对象
+#### 地理位置查询
 
-有了一些具有空间坐标的对象后，找到哪些对象距离某个点最近将会产生很好的效应。这可以通过使用 whereKey:nearGeoPoint: 对 MLQuery 添加另一限制条件完成。举例而言，找出距离某个用户最近的十个地点的方法如下：
+##### 查询距离某地理位置最近的对象
+
+有了一些具有空间坐标的对象后，找到哪些对象距离某个点最近将会产生很好的效应。这可以通过使用 `whereKey:nearGeoPoint:` 对 `MLQuery` 添加另一限制条件完成。举例而言，找出距离某个用户最近的十个地点的方法如下：
 
 ```objective_c
 // User's location
+MLUser *userObject;
 MLGeoPoint *userGeoPoint = userObject[@"location"];
 
 // Create a query for places
-MLQuery *query = [MLQuery queryWithclassName:@"PlaceObject"];
+MLQuery *query = [MLQuery queryWithClassName:@"PlaceObject"];
 
 // Interested in locations near user.
 [query whereKey:@"location" nearGeoPoint:userGeoPoint];
@@ -1471,7 +1347,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"PlaceObject"];
 query.limit = 10;
 
 // Final list of objects
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *placesObjects, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *placesObjects, NSError *error) {
     if (error) {
         // there was an error
     } else {
@@ -1492,7 +1368,7 @@ MLGeoPoint *swOfSF = [MLGeoPoint geoPointWithLatitude:37.708813 longitude:-122.5
 MLGeoPoint *neOfSF = [MLGeoPoint geoPointWithLatitude:37.822802 longitude:-122.373962];
 MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 [query whereKey:@"location" withinGeoBoxFromSouthwest:swOfSF toNortheast:neOfSF];
-[MLQueryManager findObjectsInBackgroundWithQuery:query block:^(NSArray *pizzaPlacesInSF, NSError *error) {
+[query findObjectsInBackgroundWithBlock:^(NSArray *pizzaPlacesInSF, NSError *error) {
     if (error) {
         // there was an error
     } else {
