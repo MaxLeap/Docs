@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7415dacf-2dcc-4733-9b83-3bc892fbe345" name="Default" comment="update  image part 2">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/imgUEConversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/imgUEScreenflow.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAAOverview2.png" afterPath="$PROJECT_DIR$/images/imgAAOverview2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/imgAARetention.png" afterPath="$PROJECT_DIR$/images/imgAARetention.png" />
+    <list default="true" id="7415dacf-2dcc-4733-9b83-3bc892fbe345" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Users\Leo\Documents\WebstormProjects\Docs\images\imgAAOverview2.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="LAS-Docs.iws" />
@@ -27,133 +24,120 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CloudData.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudData.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Marketing.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Marketing.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Support.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Support.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ExistingProject.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/ExistingProject.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="NewProject.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/NewProject.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Analytics.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Analytics.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.51282054">
+                <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CloudCode.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudCode.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CloudConfig.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudConfig.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CloudData.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="57" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Overview.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Overview.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Overview.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6925373">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.6837607">
+                <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
-          </provider>
-          <provider editor-type-id="markdown-preview-editor">
-            <state />
           </provider>
         </entry>
       </file>
@@ -186,8 +170,8 @@
         <option value="$PROJECT_DIR$/en/iOS/Guide/Marketing.md" />
         <option value="$PROJECT_DIR$/CONTRIBUTING.md" />
         <option value="$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md" />
-        <option value="$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md" />
         <option value="$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md" />
+        <option value="$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md" />
       </list>
     </option>
   </component>
@@ -227,6 +211,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -357,6 +343,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="en" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -381,8 +381,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -478,18 +476,24 @@
       <option name="project" value="LOCAL" />
       <updated>1443176455326</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update  image part 2">
+      <created>1443409174311</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1443409174311</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2906" height="1754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18152979" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2730897" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2725464" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -530,24 +534,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/zh/iOS/GettingStarted/NewProject.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.8">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/QuickStart.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.0">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/GettingStarted/ExistingProject.md">
@@ -556,18 +547,12 @@
           <caret line="6" column="121" selection-start-line="6" selection-start-column="121" selection-end-line="6" selection-end-column="121" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/GettingStarted/HelpCenter_ExistingProject.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="121" selection-start-line="6" selection-start-column="121" selection-end-line="6" selection-end-column="121" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/GettingStarted/HelpCenter_NewProject.md">
@@ -576,18 +561,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/GettingStarted/NewProject.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Javascript/GettingStarted/ExistingProject.md">
@@ -596,18 +575,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/GettingStarted/HelpCenter_ExistingProject.md">
@@ -616,18 +589,12 @@
           <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/GettingStarted/NewProject.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8">
           <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/Guide/CloudData.md">
@@ -636,18 +603,12 @@
           <caret line="910" column="83" selection-start-line="910" selection-start-column="83" selection-end-line="910" selection-end-column="83" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/Guide/Support.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Java/Guide/CloudCode.md">
@@ -656,18 +617,12 @@
           <caret line="289" column="6" selection-start-line="289" selection-start-column="6" selection-end-line="289" selection-end-column="6" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/Analytics.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8">
           <caret line="47" column="109" selection-start-line="47" selection-start-column="109" selection-end-line="47" selection-end-column="109" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/CloudCode.md">
@@ -676,18 +631,12 @@
           <caret line="16" column="101" selection-start-line="16" selection-start-column="101" selection-end-line="16" selection-end-column="101" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/CloudData.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2">
           <caret line="4" column="83" selection-start-line="4" selection-start-column="83" selection-end-line="4" selection-end-column="83" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/Marketing.md">
@@ -696,18 +645,12 @@
           <caret line="15" column="105" selection-start-line="15" selection-start-column="105" selection-end-line="15" selection-end-column="105" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/Overview.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.444445">
           <caret line="67" column="32" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="32" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/QuickStart.md">
@@ -716,18 +659,12 @@
           <caret line="20" column="186" selection-start-line="20" selection-start-column="186" selection-end-line="20" selection-end-column="186" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/Setting.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8">
           <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/Support.md">
@@ -736,18 +673,12 @@
           <caret line="5" column="101" selection-start-line="5" selection-start-column="101" selection-end-line="5" selection-end-column="101" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/UserMgmt.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.4">
           <caret line="3" column="117" selection-start-line="3" selection-start-column="117" selection-end-line="3" selection-end-column="117" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/Guide/CloudData.md">
@@ -756,18 +687,12 @@
           <caret line="11" column="81" selection-start-line="11" selection-start-column="81" selection-end-line="11" selection-end-column="81" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/Guide/Marketing.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8">
           <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Java/Guide/CloudCode.md">
@@ -776,18 +701,12 @@
           <caret line="290" column="6" selection-start-line="290" selection-start-column="6" selection-end-line="290" selection-end-column="6" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/iOS/Guide/CloudConfig.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/iOS/Guide/CloudData.md">
@@ -796,18 +715,12 @@
           <caret line="1208" column="49" selection-start-line="1208" selection-start-column="49" selection-end-line="1208" selection-end-column="49" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CONTRIBUTING.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/Guide/Marketing.md">
@@ -816,18 +729,12 @@
           <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/Guide/Analytics.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/GettingStarted/HelpCenter_NewProject.md">
@@ -836,18 +743,12 @@
           <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/Android/GettingStarted/ExistingProject.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/iOS/Guide/CloudConfig.md">
@@ -856,18 +757,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/en/UserManual/Guide/CloudConfig.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/iOS/GettingStarted/HelpCenter_NewProject.md">
@@ -876,18 +771,12 @@
           <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/ExistingProject.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.864865">
           <caret line="84" column="174" selection-start-line="84" selection-start-column="174" selection-end-line="84" selection-end-column="174" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_ExistingProject.md">
@@ -896,18 +785,12 @@
           <caret line="109" column="137" selection-start-line="109" selection-start-column="133" selection-end-line="109" selection-end-column="137" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/HelpCenter_NewProject.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-56.48649">
           <caret line="110" column="51" selection-start-line="110" selection-start-column="51" selection-end-line="110" selection-end-column="51" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/GettingStarted/NewProject.md">
@@ -916,18 +799,12 @@
           <caret line="88" column="173" selection-start-line="88" selection-start-column="169" selection-end-line="88" selection-end-column="173" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Analytics.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7972972">
           <caret line="7" column="15" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="15" />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudConfig.md">
@@ -936,118 +813,175 @@
           <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/Guide/CloudData.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Marketing.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Android/Guide/Support.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/ExistingProject.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/Javascript/GettingStarted/NewProject.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
-          <folding />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
-      </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudCode.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudConfig.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/CloudData.md">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="57" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Overview.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6925373">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.011940299">
+          <caret line="19" column="48" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.6837607">
+            <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zh/UserManual/Guide/Analytics.md">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.51282054">
+            <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
   </component>
