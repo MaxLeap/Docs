@@ -1,5 +1,5 @@
 
-# Install the SDK
+## Install the SDK
 
 1. Download & unzip the Template Project
 
@@ -23,7 +23,7 @@
 3. Then you can run it.
     
     
-# Test Project Configuration
+## Test Project Configuration
 
 1. Test the Connection to MaxLeap App
 

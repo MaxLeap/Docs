@@ -1,4 +1,4 @@
-# Install the SDK
+## Install the SDK
 
 1. Download & unzip the SDK
 
@@ -34,7 +34,7 @@
 	libsqlite3.dylib</br>
 	libz.dylib</br>
 
-# Connect Your App to MaxLeap Server
+## Connect Your App to MaxLeap Server
 
 Open up your `AppDelegate.m` file and add the following import to the top of the file:
 
@@ -53,7 +53,7 @@ Replace `your_application_id` and `your_client_id ` with the one of your MaxLeap
 Compile and run!
 
 
-# Test the Connection to MaxLeap App
+## Test the Connection to MaxLeap App
 We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect MaxLeap Services with the app:
 
 

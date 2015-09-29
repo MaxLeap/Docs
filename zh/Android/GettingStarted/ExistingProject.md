@@ -1,4 +1,4 @@
-#	安装SDK
+##	安装SDK
 
 1.	获取SDK，并解压缩
 
@@ -16,7 +16,7 @@
     }
     ```
 	
-#	配置MaxLeap项目
+##	配置MaxLeap项目
  
  1. 连接项目与MaxLeap应用
  	
@@ -81,5 +81,5 @@
  
  表明通过客户端，向应用下的Cloud Data存入数据成功。
  
- # 下一步
+## 下一步
  至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务之旅。

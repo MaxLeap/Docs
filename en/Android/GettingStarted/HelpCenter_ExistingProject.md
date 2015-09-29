@@ -1,4 +1,4 @@
-#	Install the SDK
+##	Install the SDK
 
 HelpCenter relies on MaxLeap Core SDK, please check if your project has installed MaxLeap Core SDK already before install and use HelpCenter SDK. You can check more details in [MaxLeap Core SDK installation Guide](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID).
 
@@ -19,7 +19,7 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 		}
 		```
 
-#	Connect project to MaxLeap app
+##	Connect project to MaxLeap app
 	
 Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 	
@@ -36,7 +36,7 @@ Call `MaxLeap.initialize` from the `onCreate` method of your Application class t
 		}
 	```
 	
-#	Config Permission
+##	Config Permission
 
 	Give app following permissions in AndroidManifest:
 		
@@ -52,7 +52,7 @@ Call `MaxLeap.initialize` from the `onCreate` method of your Application class t
  	`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI and mac| Necessary
  	`INTERNET`| 	Allow network access to send data to our server| Necessary
 
-#	Quick Test 
+##	Quick Test 
 
 1. Test MaxLeap Core SDK
 
@@ -105,6 +105,6 @@ Call `MaxLeap.initialize` from the `onCreate` method of your Application class t
 	
 	It indicates that MaxLeap has received your feedback message. Test succeeded.
 
-#Next Step
+## Next Step
 
 At this point, you have completed the installation and configuration of HelpCenter SDK. Please check [HelpCenter SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH) to find more details about MaxLeap.

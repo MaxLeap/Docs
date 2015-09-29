@@ -1,4 +1,4 @@
-# Install the SDK
+## Install the SDK
 
 1. Download & unzip the SDK
  
@@ -17,24 +17,26 @@
         compile fileTree(dir: 'libs', include: 'MaxLeap-*.jar')
     }
     ```
-#	Config MaxLeap Project
+    
+##	Config MaxLeap Project
     
  1. Connect project to MaxLeap app
 
-Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
-
-```java
- 	import android.app.Application;
- 	import com.maxleap.MaxLeap;
- 
- 	public class MyApplication extends Application {
- 	    @Override
- 	    public void onCreate() {
- 	        super.onCreate();
- 	        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
- 	    }
- 	}
- 	```
+    Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
+    
+    ```java
+    import android.app.Application;
+    import com.maxleap.MaxLeap;
+        
+    public class MyApplication extends Application {
+          @Override
+          public void onCreate() {
+              super.onCreate();
+              MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+          }
+        }
+    ```
+ 	
  2. Config Permission
  
  	Give app following permissions in AndroidManifest:
@@ -53,33 +55,34 @@ Call `MaxLeap.initialize` from the `onCreate` method of your Application class t
  	
  3. Quick Test Project Configuration
  
- We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
- ```java
- import android.app.Application;
- import com.maxleap.MaxLeap;
- import com.maxleap.MLDataManager;
- import com.maxleap.MLObject;
+   We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
+   
+   ```java
+   import android.app.Application;
+   import com.maxleap.MaxLeap;
+   import com.maxleap.MLDataManager;
+   import com.maxleap.MLObject;
+   
+   public class MyApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           MaxLeap.initialize(this, "{{appid}}", "{{restkey}}");
+           
+           //Test Project Configuration:
+           MLObject testObject = new MLObject("People");
+           testObject.put("Name", "David Wang");
+           MLDataManager.saveInBackground(testObject);
+       }
+   }
+   ```
+   
+   This piece of data is trying to create a “class” － “People” in Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
+  
+   
+   ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+   
+  It indicates that saving data to Cloud Data in the app with client is completed. 
  
- public class MyApplication extends Application {
-     @Override
-     public void onCreate() {
-         super.onCreate();
-         MaxLeap.initialize(this, "{{appid}}", "{{restkey}}");
-         
-         //Test Project Configuration:
-         MLObject testObject = new MLObject("People");
-         testObject.put("Name", "David Wang");
-         MLDataManager.saveInBackground(testObject);
-     }
- }
- ```
- 
- This piece of data is trying to create a “class” － “People” in Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
-
- 
- ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
- 
-It indicates that saving data to Cloud Data in the app with client is completed. 
- 
-# Next Step
+## Next Step
 At this point, you have completed the installation and configuration of MaxLeap SDK. Please check [iOS SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about MaxLeap.

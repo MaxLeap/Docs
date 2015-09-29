@@ -1,4 +1,4 @@
-#	安装SDK
+##	安装SDK
 
 HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCenter SDK之前，请确保您的项目已经安装MaxLeap Core SDK. 您可以在 [MaxLeap Core SDK安装向导](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)中获取更多信息。
 
@@ -20,7 +20,7 @@ HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCe
 	2. 	选择 "General"-> "Existing Projects into Workspace"
 	3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择MLStarterProject
 
-#	连接项目与MaxLeap应用
+##	连接项目与MaxLeap应用
 	
 	如果您还没有在Application的onCreate()方法中，调用`MaxLeap.initialize`来设置您应用的Application ID 和 REST API Key：
 	
@@ -37,7 +37,7 @@ HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCe
 		}
 	```
 	
-#	权限配置
+##	权限配置
 
 	在AndroidManifest中，给予应用以下权限：
 		
@@ -53,7 +53,7 @@ HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCe
 		`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
 		`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
 	
-#	快速测试
+##	快速测试
 
 1. 测试MaxLeap Core SDK
 
@@ -106,6 +106,6 @@ HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCe
 	
 	表明，MaxLeap已经成功接受您的反馈信息。测试成功。
 
-#下一步
+## 下一步
 
 至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)以获取HelpCenter的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

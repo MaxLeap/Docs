@@ -1,4 +1,4 @@
-# Install the SDK
+## Install the SDK
 
 1. Download & unzip the SDK
 
@@ -38,7 +38,7 @@
 	libsqlite3.dylib</br>
 	libz.dylib</br>
 
-# Connect MaxLeap App
+## Connect MaxLeap App
 
 Open up your `AppDelegate.m` file and add the following import to the top of the file:
 
@@ -68,7 +68,7 @@ Then enable HelpCenter module:
 
 Compile and run!
 
-# Quick Test
+## Quick Test
 
 1. Test the Connection to MaxLeap App
 

@@ -1,4 +1,4 @@
-# Install the SDK
+## Install the SDK
 
 1. Download & unzip the Template Project
 
@@ -21,7 +21,7 @@ Some configurations should be made before the operation:
 3. Then you can run it.
     
     
-# Test Project Configuration
+## Test Project Configuration
 
 We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect MaxLeap Services with the app:
 

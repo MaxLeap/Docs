@@ -1,4 +1,4 @@
-#	Install the SDK
+##	Install the SDK
 
 ##	Create MaxLeap ProMaxLeapject with Template
 
@@ -20,7 +20,7 @@ Eclipse
 2. 	Choose "General"-> "Existing Projects into Workspace"
 3. 	Select “Select root directory”, enter workspace directory and choose MLStarterProject in project list.
 	
-#	Config MaxLeap Project
+##	Config MaxLeap Project
 
 1. Connect project to MaxLeap app
 	
@@ -46,9 +46,9 @@ Eclipse
 	
 	```java
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   	<uses-permission android:name="android.permission.INTERNET" />
-    ```
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  ```
 	
 	Permission|Purpose|If Necessary
 	---|---|---
@@ -58,33 +58,33 @@ Eclipse
 	
 3. Quick Test Project Configuration
  
- We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
+ 	We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
 
-```java
-import android.app.Application;
-import com.maxleap.MaxLeap;
-import com.maxleap.MLDataManager;
-import com.maxleap.MLObject;
+	```java
+	import android.app.Application;
+	import com.maxleap.MaxLeap;
+	import com.maxleap.MLDataManager;
+	import com.maxleap.MLObject;
+	
+	public class MyApplication extends Application {
+			@Override
+			public void onCreate() {
+					super.onCreate();
+					MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+					
+					//Test Project Configuration：
+					MLObject testObject = new MLObject("People");
+					testObject.put("Name", "David Wang");
+					MLDataManager.saveInBackground(testObject);
+			}
+	}
+	```
 
-public class MyApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
-        
-        //Test Project Configuration：
-        MLObject testObject = new MLObject("People");
-        testObject.put("Name", "David Wang");
-        MLDataManager.saveInBackground(testObject);
-    }
-}
-```
+	This piece of data is trying to create a “class” － “People” in Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
+	
+	![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+	
+	It indicates that saving data to Cloud Data in the app with client is completed. 
 
-This piece of data is trying to create a “class” － “People” in Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
-
-![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
-
-It indicates that saving data to Cloud Data in the app with client is completed. 
-
-# Next Step
-At this point, you have completed the installation and configuration of Leap SDK. Please check [iOS SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about MaxLeap.
+## Next Step
+	At this point, you have completed the installation and configuration of Leap SDK. Please check [iOS SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about MaxLeap.

@@ -1,5 +1,5 @@
 
-# 安装SDK
+## 安装SDK
 
 1. 下载模板项目并解压
 
@@ -22,7 +22,7 @@
 3. 现在可以运行了。
     
     
-# 测试项目配置
+## 测试项目配置
 
 为了检测是否可以连接 MaxLeap 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 

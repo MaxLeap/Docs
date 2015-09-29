@@ -1,5 +1,5 @@
 
-# 安装SDK
+## 安装SDK
 
 1. 下载并解压缩 SDK
 
@@ -38,7 +38,7 @@
 	libsqlite3.dylib</br>
 	libz.dylib</br>
 
-# 连接云端应用
+## 连接云端应用
 
 打开AppDelegate.m文件，并将如下import添加到文件顶部：
 
@@ -68,7 +68,7 @@
 
 编译并运行！
 
-# 快速测试
+## 快速测试
 
 1. 测试是否可以连接到 MaxLeap 服务器
 
