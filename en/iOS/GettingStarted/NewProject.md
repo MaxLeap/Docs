@@ -2,25 +2,25 @@
 
 1. Download & unzip the Template Project
 
-	Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
+Make sure you are using the latest version of Xcode (5.0+) and targeting iOS 6.0 or higher.
 
-    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">Download Template Project</a>
+<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">Download Template Project</a>
 
 2. Config Project
 
 Some configurations should be made before the operation:
 	
-	Open `AppDelegate.m` file in template project, and cancel annotations in `application:didFinishLaunchingWithOptions:` as shown below:
-    
-    ```objc
-    [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
-    ```
-    
-     Replace `your_application_id` and `your_client_id ` with the one of your MaxLeap app.
-    
+Open `AppDelegate.m` file in template project, and cancel annotations in `application:didFinishLaunchingWithOptions:` as shown below:
+
+```objc
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+```
+
+ Replace `your_application_id` and `your_client_id ` with the one of your MaxLeap app.
+
 3. Then you can run it.
-    
-    
+
+
 ## Test Project Configuration
 
 We can add following code in `application:didFinishLaunchingWithOptions:` in `appDelegate.m` to test if we can connect MaxLeap Services with the app:

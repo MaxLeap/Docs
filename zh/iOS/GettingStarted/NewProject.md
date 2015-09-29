@@ -3,25 +3,25 @@
 
 1. 下载模板项目并解压
 
-	请确保您使用的是最新的 Xcode (v5.0+), 并且目标平台版本为 iOS 6.0 或者更高。
+请确保您使用的是最新的 Xcode (v5.0+), 并且目标平台版本为 iOS 6.0 或者更高。
 
-    <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
+<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
 
 2. 配置项目
 
-	在运行之前，还要进行一些配置：
-	
-	打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面这行的注释:
-    
-    ```objc
-    [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
-    ```
-    
-    把 `your_application_id` 和 `your_client_key` 替换成您自己 app 的。
-    
+在运行之前，还要进行一些配置：
+
+打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面这行的注释:
+
+```objc
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+```
+
+把 `your_application_id` 和 `your_client_key` 替换成您自己 app 的。
+
 3. 现在可以运行了。
-    
-    
+
+
 ## 测试项目配置
 
 为了检测是否可以连接 MaxLeap 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：

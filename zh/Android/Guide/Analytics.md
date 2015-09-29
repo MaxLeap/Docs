@@ -55,24 +55,25 @@ MLAnalytics.setAnalyticsEnabled(false);
 * 当用户登录时，会话（session）将自动生成。
 * 登录后，用户在不同Activity中切换时，我们需要在所有Activity中的`onPause()`和`onResume()`中添加如下代码，以实现会话的暂停和继续，并判断用户是否开始新的会话。(Tips?)
 
-	```java
-	@Override
-	protected void onPause() {
-	  super.onPause();
-	  MLAnalytics.onPause(this);
-	}
-	@Override
-	protected void onResume() {
-	  super.onResume();
-	  MLAnalytics.onResume(this);
-	}
-	```
+```java
+@Override
+protected void onPause() {
+  super.onPause();
+  MLAnalytics.onPause(this);
+}
+@Override
+protected void onResume() {
+  super.onResume();
+  MLAnalytics.onResume(this);
+}
+```
 
 * 离开应用后，在特定时间内，用户重返应用，系统将继续上一个会话。该时间长度可自定义（单位：秒）：在主Activity的`onCreate()`函数中添加：
 
-	```java
-	MLAnalytics.setSessionContinueSecond(30)
-	```
+```java
+MLAnalytics.setSessionContinueSecond(30)
+```
+
 * 当用户注销或离开应用超过特定时间，会话结束。用户重返应用时，将开始新的会话。
 
 ## 自定义页面
@@ -86,7 +87,7 @@ MLAnalytics.setAnalyticsEnabled(false);
 pageName|String|应用页面的名称
 
 
-###追踪自定义页面
+### 追踪自定义页面
 在页面开始处，添加：
 
 ```java
@@ -126,6 +127,7 @@ value| String|事件参数的值
 请注意, 自定义事件名 (event_id) 请尽量保持其为静态值, 否则可能出现数目庞大的自定义事件列表, 而无法达到了解与分析用户行为的目的.
 
 ###统计自定义事件发生次数
+
 ```java
 MLAnalytics.logEvent(eventId);
 ```

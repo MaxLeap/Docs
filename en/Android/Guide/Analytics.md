@@ -58,23 +58,23 @@ Session is the period of time a user interfaces with an application. Session can
 * Session will be generated automatically on user's login.
 * When users switch among Activities after the login, we need to add following code in `onPause()` and `onResume()` of all Acitivities to realize Pause, Resume and decide whether users have started a new session. (Tips?)
 
-	```java
-	@Override
-	protected void onPause() {
-	  super.onPause();
-	  MLAnalytics.onPause(this);
-	}
-	@Override
-	protected void onResume() {
-	  super.onResume();
-	  MLAnalytics.onResume(this);
-	}
-	```
+```java
+@Override
+protected void onPause() {
+  super.onPause();
+  MLAnalytics.onPause(this);
+}
+@Override
+protected void onResume() {
+  super.onResume();
+  MLAnalytics.onResume(this);
+}
+```
 
 * If users go back to the app within a certain time after they left the app, it will be considered as resuming session. The time range can be defined (specified in seconds) by adding following code in `onCreate()` in Main Activity: 
-	```java
-	MLAnalytics.setSessionContinueSecond(30)
-	```
+```java
+MLAnalytics.setSessionContinueSecond(30)
+```
 * If a user leaves your application and returns after a certain time, then it counts as a new start and the old session is over. 
 
 ## Page Customization 

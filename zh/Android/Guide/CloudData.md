@@ -60,17 +60,17 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 * 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
 * 您可以在调用 `MLDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
 
-	```java
-	MLDataManager.saveInBackground(myComment, new SaveCallback() {
-	  @Override
-	  public void done(MLException e) {
-	    if(e==null){
-	      // 新建成功
-	    } else{
-	      // 新建失败
-	    }
-	  }
-	});
+```java
+MLDataManager.saveInBackground(myComment, new SaveCallback() {
+  @Override
+  public void done(MLException e) {
+    if(e==null){
+      // 新建成功
+    } else{
+      // 新建失败
+    }
+  }
+});
 ```
 
 ###查询
@@ -326,10 +326,10 @@ MLDataManager.saveInBackground(myComment);
 * Java 6及更低版本请使用`List<MLObject> listComment = new ArrayList<MLObject>()`创建listComment.
 * 您也可以选择使用`add()`方法，逐个添加MLObject至属性中：
 
-	```java
-	myPost.add("comment", myComment);
-	myPost.add("comment", anotherComment);
-	```
+```java
+myPost.add("comment", myComment);
+myPost.add("comment", anotherComment);
+```
 
 ####使用MLRelation实现关联
 
@@ -439,24 +439,25 @@ public void UploadFile(Bitmap img){
 
 * 	MLFile 构造函数的第一个参数指定文件名称，第二个构造函数接收一个 byte 数组，也就是将要上传文件的二进制。您可以通过以下代码，获取文件名：
 
-	```java
-	String fileName = myFile.getName();
-	```
+```java
+String fileName = myFile.getName();
+```
+
 * 	可以将 MLFile 直接存储到其他对象的某个属性里，后续可以取出来继续使用。
  
-	```java
-	//创建一个MLObject，包含ImageName，ImageFile字段
-	MLObject imgupload = new MLObject("ImageUploaded");
-	imgupload.put("ImageName", "testpic");
-	imgupload.put("ImageFile", file);
+```java
+//创建一个MLObject，包含ImageName，ImageFile字段
+MLObject imgupload = new MLObject("ImageUploaded");
+imgupload.put("ImageName", "testpic");
+imgupload.put("ImageFile", file);
 
-	//保存
-	MLDataManager.saveInBackground(imgupload, new SaveCallback() {
-		@Override
-		public void done(MLException e) {
-		}
-	});
-	```
+//保存
+MLDataManager.saveInBackground(imgupload, new SaveCallback() {
+    @Override
+    public void done(MLException e) {
+    }
+});
+```
 
 ### 上传进度
 MLFile的 saveInBackground() 方法除了可以传入一个 SaveCallback 回调来通知上传成功或者失败之外，还可以传入第二个参数 ProgressCallback 回调对象，通知上传进度：
@@ -1226,30 +1227,30 @@ MLRoleManager.saveInBackground(role);
 
 1. 通过角色名查找：
 
-	```java
-	MLObject wallPost = new MLObject("WallPost");
-	MLACL postACL = new MLACL();
-	//指定相应的Role的名字：
-	postACL.setRoleWriteAccess("Moderators", true);
-	wallPost.setACL(postACL);
-	MLDataManager.saveInBackground(wallPost);
-	```
+```java
+MLObject wallPost = new MLObject("WallPost");
+MLACL postACL = new MLACL();
+//指定相应的Role的名字：
+postACL.setRoleWriteAccess("Moderators", true);
+wallPost.setACL(postACL);
+MLDataManager.saveInBackground(wallPost);
+```
 	
 2. 通过Query查找：
 
-	```JAVA
-	MLQuery<MLRole> query = MLRole.getQuery();
-	query.whereEqualTo("name", "roleName");
-	MLQueryManager.findAllInBackground(query, new FindCallback<MLRole>() {
-		public void done(List<MLRole> roleList, MLException e) {
-			if (e == null) {
-			
-			} else {
-			
-			}
-		}
-	});
-	```
+```JAVA
+MLQuery<MLRole> query = MLRole.getQuery();
+query.whereEqualTo("name", "roleName");
+MLQueryManager.findAllInBackground(query, new FindCallback<MLRole>() {
+    public void done(List<MLRole> roleList, MLException e) {
+        if (e == null) {
+
+        } else {
+
+        }
+    }
+});
+```
 
 ##数据安全
 
@@ -1335,10 +1336,11 @@ myACL.setPublicReadAccess(true);
 // 为Moderators 角色添加修改权限
 myACL.setRoleWriteAccess("Moderators");
 myMessage.setACL(myACL);
-```	
+```
 
-#####为所有用户设置访问权限
+##### 为所有用户设置访问权限
 您可以使用setPublicReadAccess 和 setPublicWriteAccess将**所有用户**的读写权限添加到MLObject的ACL中
+
 ```java
 MLObject publicPost = new MLObject("Post");
 MLACL postACL = new MLACL();
