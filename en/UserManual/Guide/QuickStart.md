@@ -2,11 +2,11 @@
 
 ##	Install SDK
 
-####	Quick Start with LeapCloud SDK Using Project Template
+####	Quick Start with Leap Cloud SDK Using Project Template
 
 #####	1.	Get Project Template
 
-[Download Android Project Template](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，and decompress it to your Workspace. LeapCloud 
+[Download Android Project Template](https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip)，and decompress it to your Workspace. Leap Cloud 
 	
 ####	2.	Open Project Template
 
@@ -20,9 +20,9 @@
 	
 	1.	Open Eclipse，and click "File" -> "Import.."  	2. 	Select "General"-> "Existing Projects into Workspace" 	3. 	Check “Select root directory”，enter workspace directory and select LCStarterProject in project list. 
 	
-##	Config LeapCloud Project
+##	Config Leap Cloud Project
 
-###	Connect Project with LeapCloud App 
+###	Connect Project with Leap Cloud App 
 	
 Invoke `LCConfig.initialize` in onCreate() method of Application to set your app's Application ID and REST API Key：
 	
@@ -56,7 +56,7 @@ Give following permissions to the app in AndroidManifest:
 	`INTERNET`| 	Allow network conenction to send data to our server| Neccessary
 	
 ##	Quick Test Project Configuration
-In order to test whether the project is connected to LeapCloud app and its cloud service, you can add following code to onCreate() method of Application:
+In order to test whether the project is connected to Leap Cloud app and its cloud service, you can add following code to onCreate() method of Application:
 
 ```java
 import android.app.Application;
@@ -84,4 +84,4 @@ The test code is tryig to create a “CLASS” － “People” in Cloud Data an
 
 It indicates that the data storage in Cloud Data is successfully completed with client.
 
-Congratulations on the LeapCloud SDK installtion and configuration. Please click [SDK Tutorial](LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of LeapCloud, and start your LeapCloud Service now.
+Congratulations on the Leap Cloud SDK installtion and configuration. Please click [SDK Tutorial](LC_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of Leap Cloud, and start your Leap Cloud Service now.

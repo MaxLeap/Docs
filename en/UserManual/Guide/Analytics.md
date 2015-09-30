@@ -1,14 +1,14 @@
-# LeapCloud Analytics
+# Leap Cloud Analytics
 
 ## Introduction
 
-###	What is LeapCloud Analytics
+###	What is Leap Cloud Analytics
 
-LeapCloud Analytics collects all kinds of data of apps and users with clients and Cloud Data. With professional analytics in LeapCloud, there would be a final operator-oriented report. 
+Leap Cloud Analytics collects all kinds of data of apps and users with clients and Cloud Data. With professional analytics in Leap Cloud, there would be a final operator-oriented report. 
 
-###	Why is LeapCloud Analytics Necessary
+###	Why is Leap Cloud Analytics Necessary
 
-LeapCloud Analytics is a real-time free and professional mobile apps Analytics Service. It provides multi-analysis of operation status, deep knowledge of typical users and advice on optimizing operating strategies, which will finally realize：
+Leap Cloud Analytics is a real-time free and professional mobile apps Analytics Service. It provides multi-analysis of operation status, deep knowledge of typical users and advice on optimizing operating strategies, which will finally realize：
 
 *	Comprehend the operation status and trend: from New Users, Active Users, Sessions and App Versions to User bahevior, User properties and behavioral features, we provide all kinds of properties to help you understand your app's operation and iteration effect. 
 *	Fully perceive user bahevior: Reproduce the behavior of each user and keep abreast of their engagement, retention and conversion.
@@ -16,9 +16,9 @@ LeapCloud Analytics is a real-time free and professional mobile apps Analytics S
 *	Promote app revenue: Track consumer behavior, make marketing strategies and maximize the marketing effect.
 
 
-###	How does LeapCloud Analytics Work
+###	How does Leap Cloud Analytics Work
 
-LeapCloud Anaylytics SDK helps us track user behavoir and provides data for cloud analytics service, which includes:
+Leap Cloud Anaylytics SDK helps us track user behavoir and provides data for cloud analytics service, which includes:
 
 1.  Collect information automatically(like terminal info, etc.)
 2.  Track Sessions
@@ -27,7 +27,7 @@ LeapCloud Anaylytics SDK helps us track user behavoir and provides data for clou
 4.  Track page view
 5.  Collect installation information
 
-LeapCloud Analytics helps you learn about your users and their behavoir, thus make more effective marketing strategies with functions as summarized as below:
+Leap Cloud Analytics helps you learn about your users and their behavoir, thus make more effective marketing strategies with functions as summarized as below:
 
 1. **User Analytics: ** incluing tread, retention, terminal, and etc.
 2. **User Behavior Analytics: ** including user engagement, user actions, etc. 
@@ -35,9 +35,9 @@ LeapCloud Analytics helps you learn about your users and their behavoir, thus ma
 
 #### Advantages: 
 
-1.    Best practice: LeapCloud provides you with the most competitive analytics parameters and model, and is verified by apps with billions of users. 
+1.    Best practice: Leap Cloud provides you with the most competitive analytics parameters and model, and is verified by apps with billions of users. 
 2.    Precise Segment: analyze the properties and behavoir of your segments. 
-3.    Plenty Reports: LeapCloud provides a whole set of complete and intuitive reports through operator's eyes:
+3.    Plenty Reports: Leap Cloud provides a whole set of complete and intuitive reports through operator's eyes:
 
     We can also customize the data displayed in reports with filters below:
 
@@ -45,7 +45,7 @@ LeapCloud Analytics helps you learn about your users and their behavoir, thus ma
     * Filters: for specific app versions and channels.
     * Timeframe: choose the specifc time span.	
 
-**If you want to learn more about LeapCloud Analytics Service SDK, please check [Android Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) or [iOS Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN)。**
+**If you want to learn more about Leap Cloud Analytics Service SDK, please check [Android Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) or [iOS Guide - Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN)。**
 
 ## Overview
 
@@ -223,7 +223,7 @@ The information of user's mobile terminal.
 
 ## API Usage
 
-API Usage shows the usage of LeapCloud cloud service of your app.
+API Usage shows the usage of Leap Cloud cloud service of your app.
 
 1.  Cloud Data
 
@@ -239,6 +239,6 @@ API Usage shows the usage of LeapCloud cloud service of your app.
     
 ## Next
 
-**If you want to learn more about LeapCloud Analytics Service SDK, please check [iOS Guide － Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN) or [Android Guide － Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) for more details.**
+**If you want to learn more about Leap Cloud Analytics Service SDK, please check [iOS Guide － Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN) or [Android Guide － Analytics](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN) for more details.**
     
     

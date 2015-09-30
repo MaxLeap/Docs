@@ -1,9 +1,9 @@
 #Support
 ##Introduction
-Support is a comprehensive customer service project provided by LeapCloud for developers.This project provides complete FAQ page and feedback chat window in clients. Support service also provides FAQ list management and feedback handling interface in Console.
+Support is a comprehensive customer service project provided by Leap Cloud for developers.This project provides complete FAQ page and feedback chat window in clients. Support service also provides FAQ list management and feedback handling interface in Console.
 
 
-**If you want to learn more about LeapCloud Support Service SDK, please check [iOS Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN) or [Android Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN) for more detail.**
+**If you want to learn more about Leap Cloud Support Service SDK, please check [iOS Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN) or [Android Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN) for more detail.**
 
 ##App Issues
 
@@ -42,7 +42,7 @@ You can send images or existing FAQs when communicating with users or handling i
 
 ##FAQ
 ###Check FAQ List
-All FAQs will be stored in different sections and synchorized between client and Console. LeapCloud will create 3 default sections for you: General, Billing and Privacy.
+All FAQs will be stored in different sections and synchorized between client and Console. Leap Cloud will create 3 default sections for you: General, Billing and Privacy.
 
 ![imgSPFAQList.png](../../../images/imgSPFAQList.png)
 
@@ -55,4 +55,4 @@ You can add FAQ in any section by clicking the "+ FAQ" button.
 
 ## Next 
 
-**If you want to learn more about LeapCloud Support Service SDK, please check [iOS Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN) or [Android Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN) for more detail.**
+**If you want to learn more about Leap Cloud Support Service SDK, please check [iOS Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN) or [Android Guide － Support](LC_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN) for more detail.**
