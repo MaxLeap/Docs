@@ -1,21 +1,15 @@
 # Marketing
 ##Introduction
 ###What is MaxLeap Marketing
-s
-Marketing is a promotion and message issuance service provided by MaxLeap. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
 
+Marketing is a promotion and message issuance service provided by MaxLeap. There are two marketing types for you to choose: Push Notification and In-app Message. You can send Push Notifications to a certain group of people and show specific messages to a segment with In-app Message. You can even set the Target Activity on user's click. The creation, settings and sending are all done in Console.
 
 ###Why is MaxLeap Marketing Necessary 
 With data from Analytics and Segment provided by MaxLeap Users, you can make and implement marketing strategies with high efficiency. The advantages of MaxLeap Marketing can be summarized as follows: 
 
-
 * **Improve Penetrance: **Issue marketing campaign at any time to improve the user engagement and penetrance
 * **Ensure the user experience: **More targeted to send messages to certain Segment 
-* **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console. 
-
-
-### How Does MaxLeap Marketing Work
-Pic
+* **Dynamic Content Management: **The content of Push Notifications and In-app Messages can be modified and updated in real time in Console.
 
 ## Push Notification
 Push Notification helps you show messages to plenty of users. After you send the message, users can see it in status bar whether they open the app or not. You can customize message content in Console and send several properties (Key-Vaule) to clients. The application will determine the Target Activity according to the property after users tap on the push.
@@ -26,65 +20,65 @@ MaxLeap Core SDK provides a whole set of push project based on GCM. GCM (Google 
 1. Provide **Sender ID** and **API key**. Please get those two keys in [Google Developer Center](..). 
 2. Add permission and Push Receiver (used to handle Push and show Notification) in `AndroidManifest.xml`:
 
-	```xml
-	<!-- your package -->
-	<permission
-	    android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
-	    android:protectionLevel="signature" />
-	<uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
+```xml
+<!-- your package -->
+<permission
+	android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
+	android:protectionLevel="signature" />
+<uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
 
-	<!-- App receives GCM messages. -->
-	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-	<!-- GCM requires a Google account. -->
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<!-- Keeps the processor from sleeping when a message is received. -->
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
+<!-- App receives GCM messages. -->
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<!-- GCM requires a Google account. -->
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<!-- Keeps the processor from sleeping when a message is received. -->
+<uses-permission android:name="android.permission.WAKE_LOCK" />
 
-	<application ...>
-	    <!-- play services -->
-	    <meta-data
-	        android:name="com.google.android.gms.version"
-	        android:value="@integer/google_play_services_version" />
+<application ...>
+	<!-- play services -->
+	<meta-data
+		android:name="com.google.android.gms.version"
+		android:value="@integer/google_play_services_version" />
 
-	    <receiver
-	    android:name="com.maxleap.push.GcmBroadcastReceiver"
-	    android:permission="com.google.android.c2dm.permission.SEND">
-	    <intent-filter>
-	        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-	        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+	<receiver
+	android:name="com.maxleap.push.GcmBroadcastReceiver"
+	android:permission="com.google.android.c2dm.permission.SEND">
+	<intent-filter>
+		<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+		<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-	        <category android:name="YOUR_PACKAGE_NAME" />
-	    </intent-filter>
-	    </receiver>
-	    
-	    <receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
-	    <intent-filter>
-	        <action android:name="com.maxleap.push.intent.RECEIVE"/>
-	        <action android:name="com.maxleap.push.intent.OPEN"/>
-	    </intent-filter>
-		</receiver>
-	</application>
-	```
+		<category android:name="YOUR_PACKAGE_NAME" />
+	</intent-filter>
+	</receiver>
+
+	<receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
+	<intent-filter>
+		<action android:name="com.maxleap.push.intent.RECEIVE"/>
+		<action android:name="com.maxleap.push.intent.OPEN"/>
+	</intent-filter>
+	</receiver>
+</application>
+```
 3. **Config Sender ID：** Adding following code in `<application ...> </application>` in `AndroidManifest.xml`:
 
-	```xml
-	<meta-data
-	    android:name="com.maxleap.push.gcm_sender_id"
-	    android:value="id:YOUR_SENDER_ID" />
-	```
+```xml
+<meta-data
+	android:name="com.maxleap.push.gcm_sender_id"
+	android:value="id:YOUR_SENDER_ID" />
+```
 
 4. **Config Push Icon：** It will use the app icon as the notification icon by default if there's no configuration.
 
-	```xml
-	<meta-data
-	    android:name="com.maxleap.push.notification_icon"
-	    android:resource="@android:drawable/ic_dialog_alert" />
-	```
+```xml
+<meta-data
+	android:name="com.maxleap.push.notification_icon"
+	android:resource="@android:drawable/ic_dialog_alert" />
+```
 5. **Enable Marketing Service：**Add following code **Before** `MaxLeap.initialize()` in `Application.onCreate()`: 
 
-	```java
-	MaxLeap.setMarketingEnabled(true);
-	```
+```java
+MaxLeap.setMarketingEnabled(true);
+```
 
 Notice:
 

@@ -22,65 +22,66 @@ MaxLeap Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google C
 1. 提供 **Sender ID** 和 **API key**. 请在*Google开发者中心*获取这两个Key.
 2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
 
-	```xml
-	<!-- your package -->
-	<permission
-	    android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
-	    android:protectionLevel="signature" />
-	<uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
+```xml
+<!-- your package -->
+<permission
+	android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
+	android:protectionLevel="signature" />
+<uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
 
-	<!-- App receives GCM messages. -->
-	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-	<!-- GCM requires a Google account. -->
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<!-- Keeps the processor from sleeping when a message is received. -->
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
+<!-- App receives GCM messages. -->
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<!-- GCM requires a Google account. -->
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<!-- Keeps the processor from sleeping when a message is received. -->
+<uses-permission android:name="android.permission.WAKE_LOCK" />
 
-	<application ...>
-	    <!-- play services -->
-	    <meta-data
-	        android:name="com.google.android.gms.version"
-	        android:value="@integer/google_play_services_version" />
+<application ...>
+	<!-- play services -->
+	<meta-data
+		android:name="com.google.android.gms.version"
+		android:value="@integer/google_play_services_version" />
 
-	    <receiver
-	    android:name="com.maxleap.push.GcmBroadcastReceiver"
-	    android:permission="com.google.android.c2dm.permission.SEND">
-	    <intent-filter>
-	        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-	        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+	<receiver
+	android:name="com.maxleap.push.GcmBroadcastReceiver"
+	android:permission="com.google.android.c2dm.permission.SEND">
+	<intent-filter>
+		<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+		<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-	        <category android:name="YOUR_PACKAGE_NAME" />
-	    </intent-filter>
-	    </receiver>
-	    
-	    <receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
-	    <intent-filter>
-	        <action android:name="com.maxleap.push.intent.RECEIVE"/>
-	        <action android:name="com.maxleap.push.intent.OPEN"/>
-	    </intent-filter>
-		</receiver>
-	</application>
-	```
+		<category android:name="YOUR_PACKAGE_NAME" />
+	</intent-filter>
+	</receiver>
+
+	<receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
+	<intent-filter>
+		<action android:name="com.maxleap.push.intent.RECEIVE"/>
+		<action android:name="com.maxleap.push.intent.OPEN"/>
+	</intent-filter>
+	</receiver>
+</application>
+```
+
 3. **配置Sender ID：**在 `AndroidManifest.xml`的`<application ...> </application>`中添加：
 
-	```xml
-	<meta-data
-	    android:name="com.maxleap.push.gcm_sender_id"
-	    android:value="id:YOUR_SENDER_ID" />
-	```
+```xml
+<meta-data
+	android:name="com.maxleap.push.gcm_sender_id"
+	android:value="id:YOUR_SENDER_ID" />
+```
 
 4. **配置推送消息图标：**若不配置，将默认采用应用的图标作为推送消息图标进行显示。
 
-	```xml
-	<meta-data
-	    android:name="com.maxleap.push.notification_icon"
-	    android:resource="@android:drawable/ic_dialog_alert" />
-	```
+```xml
+<meta-data
+	android:name="com.maxleap.push.notification_icon"
+	android:resource="@android:drawable/ic_dialog_alert" />
+```
 5. **启用Marketing服务：**在`Application.onCreate()`中的`MaxLeap.initialize()`方法**之前**添加：
 
-	```java
-	MaxLeap.setMarketingEnabled(true);
-	```
+```java
+MaxLeap.setMarketingEnabled(true);
+```
 
 注意：
 

@@ -77,23 +77,23 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 ###添加监听
 
-	```objective_c
-	[MLConfig addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
-	    // the value changed
-	}];
-	```
+```objective_c
+[MLConfig addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
+	// the value changed
+}];
+```
 
 ###移除监听
 
-	```objective_c
-	[MLConfig removeObserver:anObserver forKey:@"configname"];
-	```
+```objective_c
+[MLConfig removeObserver:anObserver forKey:@"configname"];
+```
 
 在 `anObserver` 销毁之前必须移除监听者
 
-	```objective_c
-	[MLConfig removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
-	```
+```objective_c
+[MLConfig removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
+```
 
 ## 云参数值类型
 

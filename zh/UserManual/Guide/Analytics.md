@@ -44,7 +44,7 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 * 过滤器：指定应用版本和渠道
 * 时间段：指定特定的时间跨度
 	
-**如果您希望进一步了解MaxLeap分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
+**如果您希望进一步了解 MaxLeap 分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
 
 ## 概览
 

@@ -17,7 +17,7 @@ If not, then go back to defaultValue
 NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@"default"];
 ```
 
- There are some similar methods：
+There are some similar methods：
 – dateForKey:defaultValue:
 – arrayForKey:defaultValue:
 – dictionaryForKey:defaultValue:
@@ -28,28 +28,28 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 – integerForKey:defaultValue:
 – floatForKey:defaultValue:
 – doubleForKey:defaultValue:
- 
+
 ### Observer
 
 1. Observe the cloud parameter value change：
 
-    ```objective_c
-    [MLConfigManager addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
-        // the value changed
-    }];
-    ```
+```objective_c
+[MLConfigManager addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
+    // the value changed
+}];
+```
 
 2. Execute following code to remove observer:
 
-    ```objective_c
-    [MLConfigManager removeObserver:anObserver forKey:@"configname"];
-    ```
+```objective_c
+[MLConfigManager removeObserver:anObserver forKey:@"configname"];
+```
 
 3. Observer must be removed before `anObserver` vanishes
 
-    ```objective_c
-    [MLConfigManager removeObserver:anObserver]; // Remove all observe callback related to anObserver once and for all
-    ```
+```objective_c
+[MLConfigManager removeObserver:anObserver]; // Remove all observe callback related to anObserver once and for all
+```
 
 ## Update Current Config
 
@@ -59,7 +59,7 @@ Or, you can invoke following code to manually refresh all cloud parameter
 
 ```objective_c
 [MLConfigManager getConfigInBackgroundWithBlock:^(MLConfig *config, NSError *error) {
-    // this config is currentConfig
+// this config is currentConfig
 }];
 ```
 
@@ -68,7 +68,7 @@ Manually refresh certain parameters
 ```objective_c
 // Pass nil keys to get all config values.
 [MLConfigManager getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(MLConfig *config, NSError *error) {
-    // this config is currentConfig
+// this config is currentConfig
 }];
 ```
 

@@ -1,4 +1,4 @@
-#	Install the SDK
+##	Install the SDK
 
 ##	Create MaxLeap ProMaxLeapject with Template
 
@@ -20,45 +20,45 @@ Eclipse
 2. 	Choose "General"-> "Existing Projects into Workspace"
 3. 	Select “Select root directory”, enter workspace directory and choose MLStarterProject in project list.
 	
-#	Config MaxLeap Project
+##	Config MaxLeap Project
 
 1. Connect project to MaxLeap app
 	
-	Call `LASConfig.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
+	Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 	
-	```java
-	import android.app.Application;
-	import com.maxleap.MaxLeap;
+```java
+import android.app.Application;
+import com.maxleap.MaxLeap;
 
-	public class MyApplication extends Application {
-	    @Override
-	    public void onCreate() {
-	        super.onCreate();
-	        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
-	    }
+public class MyApplication extends Application {
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 	}
-	```
+}
+```
 	
 2. Config Permission
  
  	Give app following permissions in AndroidManifest:
 
 	
-	```java
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   	<uses-permission android:name="android.permission.INTERNET" />
-    ```
-	
-	Permission|Purpose|If Necessary
-	---|---|---
-	`ACCESS_NETWORK_STATE`|		Check the network access, 2G, 3G or WiFi| Necessary
-	`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI and mac| Necessary
-	`INTERNET`| 	Allow network access to send data to our server| Necessary
-	
+```java
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+Permission|Purpose|If Necessary
+---|---|---
+`ACCESS_NETWORK_STATE`|		Check the network access, 2G, 3G or WiFi| Necessary
+`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI and mac| Necessary
+`INTERNET`| 	Allow network access to send data to our server| Necessary
+
 3. Quick Test Project Configuration
  
- We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
+ 	We can add following code in onCreate() method in Application to test if the project is already registered to MaxLeap：
 
 ```java
 import android.app.Application;
@@ -67,16 +67,16 @@ import com.maxleap.MLDataManager;
 import com.maxleap.MLObject;
 
 public class MyApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
-        
-        //Test Project Configuration：
-        MLObject testObject = new MLObject("People");
-        testObject.put("Name", "David Wang");
-        MLDataManager.saveInBackground(testObject);
-    }
+		@Override
+		public void onCreate() {
+				super.onCreate();
+				MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+
+				//Test Project Configuration：
+				MLObject testObject = new MLObject("People");
+				testObject.put("Name", "David Wang");
+				MLDataManager.saveInBackground(testObject);
+		}
 }
 ```
 
@@ -84,7 +84,7 @@ This piece of data is trying to create a “class” － “People” in Cloud D
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 
-It indicates that saving data to Cloud Data in the app with client is completed. 
+It indicates that saving data to Cloud Data in the app with client is completed.
 
-# Next Step
+## Next Step
 At this point, you have completed the installation and configuration of Leap SDK. Please check [iOS SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS) or [Android SDK Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID) to find more details about MaxLeap.

@@ -1,4 +1,4 @@
-#	安装SDK
+##	安装SDK
 
 ##	使用模板创建MaxLeap项目
 
@@ -20,40 +20,40 @@ Eclipse
 2. 	选择 "General"-> "Existing Projects into Workspace"
 3. 	勾选“Select root directory”，进入workspace目录，在项目列表中，选择MLStarterProject
 	
-#	配置MaxLeap项目
+##	配置MaxLeap项目
 
 1. 连接项目与MaxLeap应用
 	
 	在Application的onCreate()方法中，调用`MaxLeap.initialize`来设置您应用的Application ID 和 REST API Key：
 	
-	```java
-	import android.app.Application;
-	import com.maxleap.MaxLeap;
+```java
+import android.app.Application;
+import com.maxleap.MaxLeap;
 
-	public class MyApplication extends Application {
-	    @Override
-	    public void onCreate() {
-	        super.onCreate();
-	        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
-	    }
+public class MyApplication extends Application {
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 	}
-	```
+}
+```
 	
 2. 权限配置
 
 	在AndroidManifest中，给予应用以下权限：
 	
-	```java
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   	<uses-permission android:name="android.permission.INTERNET" />
-    ```
+```java
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
 	
-	权限|用途|是否必需
-	---|---|---
-	`ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
-	`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
-	`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
+权限|用途|是否必需
+---|---|---
+`ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
+`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
+`INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
 	
 3. 快速测试项目配置
 
@@ -85,5 +85,5 @@ public class MyApplication extends Application {
 
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
-# 下一步
+## 下一步
 至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

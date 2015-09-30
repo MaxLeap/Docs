@@ -55,17 +55,17 @@ Notices:
 * The name of the key should be alphabetic characters while the type can be letters, numbers, Boolean, arrays, MLObject and any other types that support JSON. 
 * You can provide the second parameter, SaveCallback instance, when invoking `MLDataManager.saveInBackground()` to check if the creation is succeeded. 
 
-	```java
-	MLDataManager.saveInBackground(myComment, new SaveCallback() {
-	  @Override
-	  public void done(MLException e) {
-	    if(e==null){
-	      // Succeeded
-	    } else{
-	      // Failed
-	    }
-	  }
-	});
+```java
+MLDataManager.saveInBackground(myComment, new SaveCallback() {
+  @Override
+  public void done(MLException e) {
+    if(e==null){
+      // Succeeded
+    } else{
+      // Failed
+    }
+  }
+});
 ```
 
 ###Query
@@ -309,10 +309,10 @@ Notices:
 * For java 6 and earlier, please create listComment with `List<MLObject> listComment = new ArrayList<MLObject>()`. 
 * You can also add MLObject individually to properties with `add()` method: 
 
-	```java
-	myPost.add("comment", myComment);
-	myPost.add("comment", anotherComment);
-	```
+```java
+myPost.add("comment", myComment);
+myPost.add("comment", anotherComment);
+```
 
 ####Realize Association with MLRelation
 
