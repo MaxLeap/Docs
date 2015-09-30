@@ -465,7 +465,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 
 ```java
 public class MyClass {
-	Logger logger = as.leap.code.LoggerFactory.getLogger(myclass.class);
+	as.leap.code.Logger logger = as.leap.code.LoggerFactory.getLogger(myclass.class);
 
 	public void myMethod(){
 		logger.error("Oops! Error, caught you!");
@@ -476,6 +476,7 @@ public class MyClass {
 ```
 使用Log需注意:
 
+* 如果你想持久化日志以便后台管理中心可以看到，你需要引用SDK里`as.leap.code`包下的Logger，而普遍的slf4j或log4j产生的日志将不会被持久化
 * 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
 * 如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
 	
@@ -493,7 +494,29 @@ public class MyClass {
 lcc log -n 100
 ```
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
-img
+
+## 使用UserPrincipal保证秘钥安全
+SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样在数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
+
+###使用UserPrincipal
+SDK在处理hook请求时会默认使用UserPrincipal，在function中你可以通过获取Request对象的UserPrincipal来完成你的数据访问
+
+```java
+new LASHandler<Request, Response>() {
+      @Override
+      public Response handle(Request request) {
+            UserPrincipal userPrincipal = request.getUserPrincipal();
+            LASClassManager<Ninja> ninjaZEntityManager = LASClassManagerFactory.getManager(Ninja.class);
+            SaveResult<Ninja> saveResult = ninjaZEntityManager.create(request.parameter(Ninja.class), userPrincipal);
+            Response<SaveMsg> response = new LASResponse<SaveMsg>(SaveMsg.class);
+            response.setResult(saveResult.getSaveMessage());
+            return response;
+      }
+}
+```
+
+* 如果你不使用UserPrincipal来访问数据，SDK会默认使用master-key（即配置文件global.json中的applicationKey）来访问数据
+* 所有SDK的api都提供了使用UserPrincipal方式来访问数据，我们建议你使用这种方式来保证你的秘钥安全
 
 ## MLC － 云代码命令行工具
 MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
