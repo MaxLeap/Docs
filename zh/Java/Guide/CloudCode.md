@@ -495,7 +495,7 @@ lcc log -n 100
 ```
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 
-## 使用UserPrincipal保证秘钥安全
+## UserPrincipal
 SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样在数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
 
 ###使用UserPrincipal
