@@ -507,9 +507,10 @@ new LASHandler<Request, Response>() {
       public Response handle(Request request) {
             UserPrincipal userPrincipal = request.getUserPrincipal();
             LASClassManager<Ninja> ninjaZEntityManager = LASClassManagerFactory.getManager(Ninja.class);
-            SaveResult<Ninja> saveResult = ninjaZEntityManager.create(request.parameter(Ninja.class), userPrincipal);
-            Response<SaveMsg> response = new LASResponse<SaveMsg>(SaveMsg.class);
-            response.setResult(saveResult.getSaveMessage());
+            LASQuery lasQuery = LASQuery.instance().equalTo("name", "123");
+            FindMsg<Ninja> findMsg = ninjaZEntityManager.find(lasQuery, userPrincipal);
+            Response<FindMsg> response = new LASResponse<FindMsg>(FindMsg.class);
+            response.setResult(findMsg);
             return response;
       }
 }
