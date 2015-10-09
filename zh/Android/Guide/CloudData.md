@@ -56,7 +56,6 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 	updatedAt|对象的最后修改时间
 
 * **大小限制：** ML Object的大小被限制在128K以内。
-* **同步操作/异步操作：** 在 Android 平台上，大部分的代码是在主线程上运行的，如果在主线程上进行耗时的阻塞性操作，如访问网络等，您的代码可能会无法正常运行，避免这个问题的方法是把会导致阻塞的同步操作改为异步，在一个后台线程运行，例如 save() 还有一个异步的版本 saveInBackground()，需要传入一个在异步操作完成后运行的回调函数。查询、更新、删除操作也都有对应的异步版本。
 * 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
 * 您可以在调用 `MLDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
 
@@ -168,7 +167,7 @@ MLDataManager.deleteInBackground(comment);
 ```
 
 #####批量删除
-您可以使用`MLDataManager.deleteInBackground()` 方法删除MLObjcet - 一个`List<MLObject>`实例。
+您可以使用`MLDataManager.deleteAllInBackground()` 方法删除多个MLObjcet。
 
 ```java
 List<MLObject> objects = ...
@@ -189,7 +188,7 @@ MLDataManager.saveInBackground(comment.remove);
 
 计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
 
-比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
+比如记录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
 
 #####递增计数器
 此时，我们可以利用`increment()`方法(默认增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
@@ -209,7 +208,7 @@ MLDataManager.saveInBackground(gameScore);
 #####递减计数器
 
 ```java
-gameScore.decrement("score",1000);
+gameScore.increment("score",-1000);
 MLDataManager.saveInBackground(gameScore);
 ```
 
@@ -229,7 +228,7 @@ MLDataManager.saveInBackground(gameScore);
 同时，您还可以通过`addUnique()` 及 `addAllUnique()`方法，仅增加与已有数组中所有item都不同的值。插入位置是不确定的。
 
 #####使用新数组覆盖
-调用`put()`函数，`skills`字段下原有的数组值将被覆盖：
+调用`put()`函数，`skills`字段下原有的数组将被覆盖：
 
 ```java
 gameScore.put("skills", Arrays.asList("flying", "kungfu"));
@@ -237,7 +236,7 @@ MLDataManager.saveInBackground(gameScore);
 ```
 
 #####删除某数组字段的值
-调用`removeAll()`函数，`skills`字段下原有的数组值将被清空：
+调用`removeAll()`函数，`skills`字段下原有的数组将被清空：
 
 ```java
 gameScore.removeAll("skills");
@@ -279,7 +278,7 @@ MLDataManager.saveInBackground(myComment);
 myComment.put("parent", MLObject.createWithoutData("Post", "1zEcyElZ80"));
 ```
 
-默认情况下，当您获取一个对象的时候，关联的 MLObject 不会被获取。这些对象除了 objectId 之外，其他属性值都是空的，要得到关联对象的全部属性数据，需要再次调用 fetch 系方法（下面的例子假设已经通过 MLQuery 得到了 Comment 的实例）:
+默认情况下，当您获取一个对象的时候，关联的 MLObject 不会被获取。这些对象除了 objectId 之外，其他属性值都是空的，要得到关联对象的全部属性数据，需要再次调用 fetch 方法（下面的例子假设已经通过 MLQuery 得到了 Comment 的实例）:
 
 ```java
 MLObject post = fetchedComment.getMLObject("post");
@@ -471,9 +470,9 @@ MLFileManager.saveInBackground(file, new SaveCallback() {
 	},new ProgressCallback() {
 	@Override
 	public void done(int i) {
-			// 打印进度
-          System.out.println("uploading: " + i);
-        }
+      // 打印进度
+      System.out.println("uploading: " + i);
+    }
 });
 ```
 
@@ -489,7 +488,7 @@ MLFileManager.getDataInBackground(myFile, new GetDataCallback() {
 	@Override
 	public void done(byte[] bytes, MLException e) {
 
-        }
+    }
 });
 ```
 
@@ -513,7 +512,7 @@ String url = myFile.getUrl();
 2. 为MLQuery添加过滤条件；
 3. 执行MLQuery：使用 `MLQueryManager.findAllInBackground()` 方法结合FindCallback 回调类来查询与条件匹配的 MLObject 数据。
 
-例如，查询指定人员的信息，使用 whereEqualTo 方法来添加条件值：
+例如，查询指定人员的信息，使用 whereEqualTo 方法来添加条件：
 
 ```java
 MLQuery<MLObject> query = MLQuery.getQuery("GameScore");
@@ -538,7 +537,7 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
 query.whereNotEqualTo("isRead", true);
 ```
 
-当然，您可以在您的查询操作中添加多个约束条件（这些条件是 "与" 的关系），来查询符合您要求的数据。
+当然，您可以在您的查询操作中添加多个约束条件（这些条件是 "and" 的关系），来查询符合您要求的数据。
 
 ```java
 query.whereNotEqualTo("isRead", true);
@@ -579,7 +578,7 @@ query.orderByAscending("score");
 query.orderByDescending("score");
 ```
 
-#####设置数值大小约束
+#####设置数值范围
 对于类型为数字的属性，您可以对其值的大小进行筛选：
 
 ```java
@@ -649,10 +648,10 @@ query.whereNotContainedIn("playerName", Arrays.asList(names));
 您可以通过whereExists查询存在指定属性的数据。相应的，您可以通过whereDoesNotExist，查询不存在指定属性的数据。
 
 ```java
-// 查询具有"score"属性的object
+// 查询包含"score"属性的对象
 query.whereExists("score");
  
-// Finds objects that don't have the score set
+// 查询不包含"score"属性的对象
 query.whereDoesNotExist("score");
 ```
 
@@ -693,7 +692,7 @@ MLQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<MLUser>() 
 
 ####值类型为数组的查询
 
-如果一个 Key 对应的值是一个数组，您可以查询 Key 的数组包含了数字 208 的所有对象，通过：
+如果一个 Key 对应的值是一个数组，您可以查询 Key 的数组包含了数字 2 的所有对象，通过：
 
 ```java
 // Find objects where the array in arrayKey contains the number 2.

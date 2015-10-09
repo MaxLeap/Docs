@@ -41,18 +41,19 @@ public class MyApplication extends Application {
 
 Give app following permissions in AndroidManifest:
 
-
-```java
+```xml
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET" />
-```
+ ```
 
 Permission|Purpose|If Necessary
 ---|---|---
 `ACCESS_NETWORK_STATE`|		Check the network access, 2G, 3G or WiFi| Necessary
-`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI and mac| Necessary
 `INTERNET`| 	Allow network access to send data to our server| Necessary
+`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI | Optional
+`ACCESS_WIFI_STATE`| 	Check mac of device and identify user with unique mac| Optional
 
 ##	Quick Test
 
