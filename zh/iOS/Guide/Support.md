@@ -1,6 +1,8 @@
 
-#支持
-##简介
+# 支持
+
+## 简介
+
 Support服务是MaxLeap为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，Support服务提供FAQ的管理及用户反馈的处理界面。
 
 ## 准备工作
@@ -34,19 +36,19 @@ Support服务是MaxLeap为开发者提供的一套标准应用客服方案。在
 
 ### 开始自定义
 
-在 HelpCenter.emmbeddedframework 中有三个 bundle: 
+在 MLHelpCenter.emmbeddedframework 中有三个 bundle: 
 
-**LASHCThemes.bundle**        | 字体、颜色、图片等设置
+**MLHelpCenterThemes.bundle**        | 字体、颜色、图片等设置
 :-----------------------------|:----------------------------------
-**LASHCImages.bundle**        | 图片资源
-**LASHCLocalization.bundle**  | SDK 界面使用的 strings 文件，用于本地化
+**MLHelpCenterImages.bundle**        | 图片资源
+**MLHelpCenterLocalizable.bundle**  | SDK 界面使用的 strings 文件，用于本地化
 
-SDK 的 UI 自定义是通过编辑 LASHCThemes.bundle/HelpCenterTheme.plist 文件来完成的. <br>
-请确保项目中加入了 LASHCThemes.bundle 并且存在 HelpCenterTheme.plist 这个文件。<br>
+SDK 的 UI 自定义是通过编辑 MLHelpCenterThemes.bundle/HelpCenterTheme.plist 文件来完成的. <br>
+请确保项目中加入了 MLHelpCenterThemes.bundle 并且存在 HelpCenterTheme.plist 这个文件。<br>
 
 **颜色** | 颜色以十六进制的格式指定，例如：FF0000 是红色
 :--------|:----------
-**图片** | 图片需要在 LASHCImages.bundle 里面，你可以通过图片的文件名来指定。<br> LASHelpCenter 支持 iOS image naming convention(例如：在 retina 屏幕上使用 @2x 的图片，如果能找到的话)。
+**图片** | 图片需要在 MLHelpCenterImages.bundle 里面，你可以通过图片的文件名来指定。<br> MLHelpCenter 支持 iOS image naming convention(例如：在 retina 屏幕上使用 @2x 的图片，如果能找到的话)。
 **字体** | 你可以通过查阅 [iosfons.com](http://iosfonts.com/) 来获取不同版本 iOS 上可用的字体。
 
 [using custom fonts]: #using_custom_fonts
@@ -99,7 +101,7 @@ SDK 的 UI 自定义是通过编辑 LASHCThemes.bundle/HelpCenterTheme.plist 文
 
 ![titleimage](../../../images/titleimage.png)
 
-### Conversation View
+### 用户反馈界面
 
 可以设置会话界面的消息框背景和消息字体、颜色等。
 
@@ -115,7 +117,7 @@ SDK 的 UI 自定义是通过编辑 LASHCThemes.bundle/HelpCenterTheme.plist 文
 
 ![chatview](../../../images/chatview.png)
 
-### Using custom image bundle
+### 使用自定义图片包
 
 **Image bundle name**: 自定义的图片包的相对于 main bundle 的相对路径，例如: MLHelpCenterImages.bundle。
 
@@ -129,7 +131,7 @@ SDK 的 UI 自定义是通过编辑 LASHCThemes.bundle/HelpCenterTheme.plist 文
 1. 把字体文件添加到项目中。在应用 info.plist 文件中添加一个键 "Fonts provided by application"。在这个键下面，列出你想要在应用中使用的所有的字体的名字。
     ![registercustomfont](../../../images/registercustomfont.png)
 
-2. 复制字体全名。字体全名可以在字体文件简介中获取。选中字体文件，按下 <kbd>COMMAND ⌘</kbd>+<kbd>I</kbd>(查看简介) 可以打开字体简介面板。
+2. 复制字体全名。字体全名可以在字体文件简介中获取。选中字体文件，按下 <kbd>COMMAND ⌘</kbd> + <kbd>I</kbd>(查看简介) 可以打开字体简介面板。
     ![fontsinfoview](../../../images/fontsinfoview.png)
 
 3. 把字体名字粘贴到 MLHelpCenterThemes.bundle/HelpCenterTheme.plist 需要的地方。
