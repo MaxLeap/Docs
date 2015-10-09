@@ -3,7 +3,7 @@
 
 1. 下载并解压缩 SDK
 
-	请确认您使用的是Xcode最新版本（5.0+），目标平台为iOS 6.0 或者更高版本。
+	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
 
 	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip">下载SDK</a>
 
@@ -18,18 +18,18 @@
 
 3. 添加依赖
 
-	点击Targets→应用名→“Build Phases”栏。</br>
-	将“Link Binary With Libraries”如下图展开。
-	
-	<p class="image-wrapper">
-	![add_dependencies](../../../images//add_dependencies.png)
-	
-    确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为Yes。
+	确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为Yes。
     
     <p class="image-wrapper">
     ![enable_modules](../../../images//enable_modules.png)
+
+	点击 Targets → 应用名 → “Build Phases” 栏。</br>
+	将 “Link Binary With Libraries” 如下图展开。
+	
+	<p class="image-wrapper">
+	![add_dependencies](../../../images//add_dependencies.png)
     
-	点击“Link Binary With Libraries”左下角+号按钮，添加下列框架：
+	点击 “Link Binary With Libraries” 左下角 + 号按钮，添加下列框架：
 	
 	StoreKit.framework</br>
 	MobileCoreServices.framework</br>
@@ -89,9 +89,9 @@
 	}
 	```
 
-	这段代码目的是在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
+	这段代码目的是在云端创建一条类名为 `People` 的数据。如果云端还没有 `People` 这个类，则会先创建这个类，然后再插入数据。
 
-	运行您的应用。然后可以在 Dev Center -> Data 中看到刚创建的数据。
+	运行您的应用，然后可以在 Dev Center -> Data 中看到刚创建的数据。
 
 	![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 

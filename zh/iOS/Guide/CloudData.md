@@ -1,4 +1,4 @@
-#云数据
+# 云数据
 
 ## 简介
 
@@ -14,7 +14,7 @@ Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专
 * 可结合 Cloud Code 服务，实现云端数据的 Hook（详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
-存储在Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
+存储在 Cloud Data 的对象称为`MLObject`，而每个 `MLObject` 被规划至不同的 `class` 中（类似“表”的概念)。`MLObject` 包含若干键值对，且值为兼容 JSON 格式的数据。您无需预先指定每个 `MLObject` 包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data 服务会将其存储至云端。
 
 ### 新建
 假设我们要保存一条数据到`Comment`class，它包含以下属性：
@@ -27,7 +27,7 @@ isRead|false|布尔
 
 我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。
 
-`MLObject` 接口与 `NSMutableDictionary` 类似。我们有一个类 `MLDataManager`保存、删除 `MLObject`, 和拉取数据。现在我们使用 `MLDataManager` 来保存 `Comment`:
+`MLObject` 接口与 `NSMutableDictionary` 类似，但多了 `saveInBackground` 方法。现在我们保存一条 `Comment`:
 
 ```objective_c
 MLObject *myComment = [MLObject objectWithClassName:@"Comment"];
@@ -52,7 +52,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 注意：
 
-* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 Comment 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
+* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 `Comment` 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
 * **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 `Comment` 的数据表，而且也包括 `content`、`pubUserId`、`isRead` 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
 * **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
@@ -232,9 +232,7 @@ MLObject *object = [MLObject objectWithClassName:@"Comment"];
 
 注：MaxLeap Services 是通过 `Pointer` 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。
 
-#### 一对多关系
-
-##### 使用 `Pointer` 实现
+#### 使用 `Pointer` 实现
 
 例如：一条微博信息会有多条评论。创建一条微博，并添加一条评论，您可以这样写：
 
@@ -1104,12 +1102,11 @@ MLQuery *query = [MLUser query];
 ```
 
 #####自动创建匿名用户
-在无网络请求的情况下，也可以自动为您创建匿名用户，以便您能在应用程序开启之后立即与您的用户互动。如果您启用在应用程序开启时自动创建匿名用户的功能，则 `[MLUser currentUser]` 将不会为 `nil`。首次保存用户或与该用户相关的任何对象时，将在云中自动创建用户。在此之前，该用户的对象 ID 为 nil。启用自动创建用户功能将使得把数据与您的用户关联变得简单。例如，在您的 `application:didFinishLaunchingWithOptions:` 函数中，您可以写：
+在无网络请求的情况下，也可以自动为您创建匿名用户，以便您能在应用程序开启之后立即与您的用户互动。如果您启用在应用程序开启时自动创建匿名用户的功能，则 `[MLUser currentUser]` 将不会为 `nil`。首次保存用户或与该用户相关的任何对象时，将在云中自动创建用户。在此之前，该用户的对象 ID 为 `nil`。启用自动创建用户功能将使得把数据与您的用户关联变得简单。例如，在您的 `application:didFinishLaunchingWithOptions:` 函数中，您可以写：
 
 ```objective_c
 [MLUser enableAutomaticUser];
 [[MLUser currentUser] incrementKey:@"RunCount"];
-[]
 [[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     // Handle success or failure here ...
 }];
@@ -1218,7 +1215,7 @@ FacebookSDK v4.x
 
 MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Facebook 用户身份登录（注册），并创建 `MLUser`，或者 (2) 将 Facebook 与已有的 `MLUser` 关联。
 
-####    登录并注册新 MLUser
+#### 登录并注册新 MLUser
 
 `MLUser` 提供一种方法让您的用户可以通过 Facebook 登录或注册。这可以通过采用 `logInWithPermissions:` 方法来完成，例如：
 

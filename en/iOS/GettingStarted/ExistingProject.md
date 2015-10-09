@@ -14,17 +14,17 @@
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
 
 3. Add the dependencies
+	
+	Make sure "Enable Modules (C and Objective-C)" and "Link Frameworks Automatically" build settings are YES.
+    
+    <p class="image-wrapper">
+    ![enable_modules](../../../images/enable_modules.png)
 
 	Click on Targets → Your app name → and then the 'Build Phases' tab.</br>
 	Expand 'Link Binary With Libraries' as shown.
 	
 	<p class="image-wrapper">
 	![add_dependencies](../../../images/add_dependencies.png)
-	
-    Make sure "Enable Modules (C and Objective-C)" and "Link Frameworks Automatically" build settings are YES.
-    
-    <p class="image-wrapper">
-    ![enable_modules](../../../images/enable_modules.png)
     
 	Click the + button in the bottom left of the 'Link Binary With Libraries' section and add the following libraries:
 	
