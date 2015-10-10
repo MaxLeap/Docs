@@ -21,7 +21,7 @@
 
 一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到MaxLeap，MaxLeap会生成对应的docker image。用lcc deploy可以让MaxLeap启动Docker container运行该Docker image。
 
-目前云代码支持Java环境，我们在近期会推出Python版本。
+目前云代码支持Java环境和Python环境，我们在近期会推出其他开发语言版本。
 	  
 ##准备工作
 ####安装JDK
@@ -84,7 +84,7 @@ git clone https://github.com/LeapCloud/Demo-CloudCode-Java.git
 applicationName|MaxLeap应用名称
 applicationId|Application ID
 applicationKey|Master Key
-javaMain|入口函数名
+javaMain|入口main函数类名
 packageHook|Hook包名
 packageClasses|Class实体包名
 version|当前云代码项目版本号
@@ -134,7 +134,7 @@ public class Main extends LoaderBase implements Loader {
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	请查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
+*	使用lcc help来获取所有相关命令帮助，你也可以查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
 
 ### 测试
 
@@ -163,10 +163,10 @@ Hello, David Wang!
 Cloud Function是运行在MaxLeap上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种3rd Party Libs。
 
 ###定义Cloud Function
-每个Cloud Function需要实现 as.leap.code.LASHandler interface，该interface是典型的Functional Interface。
+每个Cloud Function需要实现 com.maxleap.code.LASHandler interface，该interface是典型的Functional Interface。
 
 ```Java
-public interface LASHandler <T extends as.leap.code.Request, R extends as.leap.code.Response> {
+public interface LASHandler <T extends com.maxleap.code.Request, R extends com.maxleap.code.Response> {
     R handle(T t);
 }
 ```
@@ -354,7 +354,7 @@ Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修�
 @ClassManager("MyObject")
 public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
 	@Override
-	public BeforeResult<MyObject> beforeCreate(MyObject obj) {
+	public BeforeResult<MyObject> beforeCreate(MyObject obj, UserPrincipal userPrincipal) {
 		LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
 		//创建obj前验证是否重名了
 		LASQuery sunQuery = LASQuery.instance();
@@ -366,7 +366,7 @@ public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
 	}
 	
 	@Override
-	public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage) {
+	public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage, UserPrincipal userPrincipal) {
 		LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
 		//创建完obj后修改这个obj的ACL权限
 		Map<String,Map<String,Boolean>> acl = new HashMap<>();
@@ -400,7 +400,7 @@ public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
 
 ```java
 @Override
-public BeforeResult<FriendList> beforeCreate(FriendList list) {
+public BeforeResult<FriendList> beforeCreate(FriendList list, UserPrincipal userPrincipal) {
 	String name = list.getName();
 	if (name.length() > 10)
 		return new BeforeResult<>(list, false, "Cannot create a friend list with name longer than 10!");
@@ -418,7 +418,7 @@ public BeforeResult<FriendList> beforeCreate(FriendList list) {
 
 ```java
 @Override
-public BeforeResult<FriendList> beforeUpdate(FriendList list) {
+public BeforeResult<FriendList> beforeUpdate(FriendList list, UserPrincipal userPrincipal) {
 	//定义查询条件：
 	LASQuery sunQuery = LASQuery.instance();
 	sunQuery.equalTo("Name", list.getName());
@@ -441,7 +441,7 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list) {
 
 ```java
 @Override
-public BeforeResult<FriendList> beforeDelelte(FriendList list) {
+public BeforeResult<FriendList> beforeDelelte(FriendList list, UserPrincipal userPrincipal) {
 	//定义查询条件：
 	LASQuery sunQuery = LASQuery.instance();
 	sunQuery.equalTo("listName", list.Name);
@@ -465,7 +465,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 
 ```java
 public class MyClass {
-	as.leap.code.Logger logger = as.leap.code.LoggerFactory.getLogger(myclass.class);
+	com.maxleap.code.Logger logger = com.maxleap.code.LoggerFactory.getLogger(myclass.class);
 
 	public void myMethod(){
 		logger.error("Oops! Error, caught you!");
@@ -476,8 +476,8 @@ public class MyClass {
 ```
 使用Log需注意:
 
-* 如果你想持久化日志以便后台管理中心可以看到，你需要引用SDK里`as.leap.code`包下的Logger，而普遍的slf4j或log4j产生的日志将不会被持久化
-* 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息
+* 如果你想持久化日志以便后台管理中心可以看到，你需要引用SDK里`com.maxleap.code`包下的Logger，而普遍的slf4j或log4j产生的日志将不会被持久化
+* 本地测试不会产生数据库记录，但发布后调用会产生记录，你可以在后端界面查看你的日志信息
 * 如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
 	
 ###系统自动记录的Log
@@ -496,10 +496,10 @@ lcc log -n 100
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 
 ## UserPrincipal
-SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样在数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
+SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
 
 ###使用UserPrincipal
-SDK在处理hook请求时会默认使用UserPrincipal，在function中你可以通过获取Request对象的UserPrincipal来完成你的数据访问
+SDK在处理hook请求时会默认使用UserPrincipal，在function/job中你可以通过获取Request对象的UserPrincipal来完成你的数据访问
 
 ```java
 new LASHandler<Request, Response>() {
@@ -517,7 +517,7 @@ new LASHandler<Request, Response>() {
 ```
 
 * 如果你不使用UserPrincipal来访问数据，SDK会默认使用master-key（即配置文件global.json中的applicationKey）来访问数据
-* 所有SDK的api都提供了使用UserPrincipal方式来访问数据，我们建议你使用这种方式来保证你的秘钥安全
+* 所有SDK的api都提供了使用UserPrincipal方式来访问数据，除了cloudcode云代码自身发起的请求必须使用masterKey来访问外，其他所有请求我们建议你使用UserPrincipal这种方式来保证你的秘钥安全
 
 ## MLC － 云代码命令行工具
 MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
@@ -582,9 +582,9 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 	//添加依赖，获取云代码 SDK及JUnit测试插件
     <dependencies>
         <dependency>
-            <groupId>as.leap</groupId>
+            <groupId>com.maxleap</groupId>
             <artifactId>cloud-code-test</artifactId>
-            <version>2.3.7-SNAPSHOT</version>
+            <version>2.4.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -709,3 +709,6 @@ lcc log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 		</configuration>
 	</plugin>	
 ```
+
+当然你也可以自己打包zip，只需按照我们的目录结构来打包你的应用即可
+![imgCloudCodeStructure](../../../images/imgCloudcodeZipStructure.png)
