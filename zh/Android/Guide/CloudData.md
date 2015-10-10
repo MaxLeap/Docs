@@ -840,7 +840,7 @@ MLQueryManager.findAllInBackground(mainQuery, new FindCallback<MLObject>() {
 ```
 
 ###缓存查询
-经常需要缓存一些查询的结果到磁盘上，这可以让您在离线的时候，或者应用刚启动，网络请求还没有足够时间完成的时候可以展现一些数据给用户。MaxLeap 会自动清空缓存，当缓存占用了太多空间的时候。
+经常需要缓存一些查询的结果到磁盘上，这可以让您在离线的时候，或者应用刚启动，网络请求还没有足够时间完成的时候可以展现一些数据给用户。当缓存占用了太多空间的时候，MaxLeap 会自动清空缓存。
 
 默认情况下的查询不会使用缓存，除非您使用 setCachePolicy 方法明确设置启用。例如，尝试从网络请求，如果网络不可用则从缓存数据中获取，可以这样设置：
 
@@ -919,7 +919,7 @@ shield.setRupees(50);
 创建一个 MLObject 的子类很简单：
 
 1.   首先声明一个子类继承自 MLObject。
-2.   添加@MLclassName注解。它的值必须是一个字符串，也就是您过去传入 MLObject 构造函数的类名。这样一来，后续就不需要再在代码中出现这个字符串类名。
+2.   添加@MLClassName注解。它的值必须是一个字符串，也就是您过去传入 MLObject 构造函数的类名。这样一来，后续就不需要再在代码中出现这个字符串类名。
 3.   确保您的子类有一个 public 的默认（参数个数为 0）的构造函数。切记不要在构造函数里修改任何 MLObject 的字段。
 4.   在调用 MaxLeap.initialize() 注册应用之前，注册子类 MLObject.registerSubclass(Yourclass.class).
 
