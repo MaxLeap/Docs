@@ -13,7 +13,7 @@ Android Studio
 1. 	Open Android Studio, click “File” >> "New.." >> "Import Module" and choose "MaxLeap HelpCenter" directory.
 2. 	Open the Module that requires HelpCenter and add following dependencies in build.gradle:
 
-	```java
+	```gradle
 	dependencies {
 		compile project(':ML Helpcenter')
 	}
@@ -24,33 +24,35 @@ Android Studio
 Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
 
 ```java
-	import android.app.Application;
-	import com.maxleap.MaxLeap;
+import android.app.Application;
+import com.maxleap.MaxLeap;
 
-	public class MyApplication extends Application {
-		@Override
-		public void onCreate() {
-			super.onCreate();
-			MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
-		}
-	}
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+    }
+}
 ```
 
 ##	Config Permission
 
 Give app following permissions in AndroidManifest:
 
-```java
+```xml
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET" />
-```
+ ```
 
 Permission|Purpose|If Necessary
 ---|---|---
 `ACCESS_NETWORK_STATE`|		Check the network access, 2G, 3G or WiFi| Necessary
-`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI and mac| Necessary
 `INTERNET`| 	Allow network access to send data to our server| Necessary
+`READ_PHONE_STATE`| 	Check IMEI of device and identify user with unique IMEI | Optional
+`ACCESS_WIFI_STATE`| 	Check mac of device and identify user with unique mac| Optional
 
 ##	Quick Test 
 

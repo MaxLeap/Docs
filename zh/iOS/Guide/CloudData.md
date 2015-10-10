@@ -1,4 +1,4 @@
-#云数据
+# 云数据
 
 ## 简介
 
@@ -14,7 +14,7 @@ Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专
 * 可结合 Cloud Code 服务，实现云端数据的 Hook（详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
-存储在Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
+存储在 Cloud Data 的对象称为`MLObject`，而每个 `MLObject` 被规划至不同的 `class` 中（类似“表”的概念)。`MLObject` 包含若干键值对，且值为兼容 JSON 格式的数据。您无需预先指定每个 `MLObject` 包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data 服务会将其存储至云端。
 
 ### 新建
 假设我们要保存一条数据到`Comment`class，它包含以下属性：
@@ -27,7 +27,7 @@ isRead|false|布尔
 
 我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。
 
-`MLObject` 接口与 `NSMutableDictionary` 类似。我们有一个类 `MLDataManager`保存、删除 `MLObject`, 和拉取数据。现在我们使用 `MLDataManager` 来保存 `Comment`:
+`MLObject` 接口与 `NSMutableDictionary` 类似，但多了 `saveInBackground` 方法。现在我们保存一条 `Comment`:
 
 ```objective_c
 MLObject *myComment = [MLObject objectWithClassName:@"Comment"];
@@ -52,7 +52,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 注意：
 
-* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 Comment 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
+* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 `Comment` 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
 * **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 `Comment` 的数据表，而且也包括 `content`、`pubUserId`、`isRead` 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
 * **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
@@ -232,9 +232,7 @@ MLObject *object = [MLObject objectWithClassName:@"Comment"];
 
 注：MaxLeap Services 是通过 `Pointer` 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。
 
-#### 一对多关系
-
-##### 使用 `Pointer` 实现
+#### 使用 `Pointer` 实现
 
 例如：一条微博信息会有多条评论。创建一条微博，并添加一条评论，您可以这样写：
 
@@ -1004,6 +1002,43 @@ if (currentUser) {
 MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```
 
+### 修改密码
+
+可以通过更新 `password` 字段来更改密码：
+
+```
+[MLUser currentUser].password = @"the new password";
+[[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    if (succeeded) {
+        // ...
+    } else {
+        // handle the error
+    }
+}];
+```
+
+为了安全起见，在更改密码前需要让用户输入旧密码并验证是否与当前账户匹配：
+
+```
+NSString *theOldPassword;
+NSString *theNewPassword;
+
+[[MLUser currentUser] checkIsPasswordMatchInBackground:theOldPassword block:^(BOOL isMatch, NSError *error) {
+    if (isMatch) {
+        [MLUser currentUser].password = theNewPassword;
+        [[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                // ...
+            } else {
+                // handle the error
+            }
+        }];
+    } else {
+        // handle the error
+    }
+}];
+```
+
 ### 重置密码
 
 您刚刚将密码录入系统时就忘记密码的情况是存在的。这种情况下，我们的库提供一种方法让用户安全地重置密码。
@@ -1067,12 +1102,11 @@ MLQuery *query = [MLUser query];
 ```
 
 #####自动创建匿名用户
-在无网络请求的情况下，也可以自动为您创建匿名用户，以便您能在应用程序开启之后立即与您的用户互动。如果您启用在应用程序开启时自动创建匿名用户的功能，则 `[MLUser currentUser]` 将不会为 `nil`。首次保存用户或与该用户相关的任何对象时，将在云中自动创建用户。在此之前，该用户的对象 ID 为 nil。启用自动创建用户功能将使得把数据与您的用户关联变得简单。例如，在您的 `application:didFinishLaunchingWithOptions:` 函数中，您可以写：
+在无网络请求的情况下，也可以自动为您创建匿名用户，以便您能在应用程序开启之后立即与您的用户互动。如果您启用在应用程序开启时自动创建匿名用户的功能，则 `[MLUser currentUser]` 将不会为 `nil`。首次保存用户或与该用户相关的任何对象时，将在云中自动创建用户。在此之前，该用户的对象 ID 为 `nil`。启用自动创建用户功能将使得把数据与您的用户关联变得简单。例如，在您的 `application:didFinishLaunchingWithOptions:` 函数中，您可以写：
 
 ```objective_c
 [MLUser enableAutomaticUser];
 [[MLUser currentUser] incrementKey:@"RunCount"];
-[]
 [[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     // Handle success or failure here ...
 }];
@@ -1106,16 +1140,18 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 2. 在您的 MaxLeap 应用设置页面添加应用程序的 Facebook 应用 ID。
 3. 按照 Facebook 的 [Facebook SDK 入门][getting started with the facebook sdk]提供的说明，创建与 Facebook SDK 关联的应用程序。仔细检查并确认您已经把 FacebookAppID 和 URL Scheme 添加至应用程序的 .plist 文件。
 4. 下载解压 [MaxLeap iOS SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS)，如果您还没有。
-5. 把 `MLFacebookUtils.framework` 添加到您的 Xcode 项目中。
+5. 如果使用 FacebookSDK v3.x, 把 `MLFacebookUtils.framework` 添加到您的 Xcode 项目中;<br> 如果使用 FacebookSDK v4.x, 把 `MLFacebookUtilsV4.framework` 添加到您的 Xcode 项目中。
 
 还有两步。首先，把下面的代码添加到您引用的 `application:didFinishLaunchingWithOptions:` 方法中。
+
+FacebookSDK v3.x 
 
 ```objective_c
 #import <MLFacebookUtils/MLFacebookUtils.h>
 
 @implementation AppDelegate
 
-- (void)application:(UIApplication *)application didFinishLaunchWithOptions:(NSDictionary *)options {
+- (void)application:(UIApplication *)application didFinishLaunchWithOptions:(NSDictionary *)launchOptions {
    	[MaxLeap setApplicationId:@"MaxLeapAppId" clientKey:@"MaxLeapClientKey"];
    	[MLFacebookUtils initializeFacebook];
 }
@@ -1123,7 +1159,43 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 @end
 ```
 
+FacebookSDK v4.x
+
+```
+#import <MLFacebookUtils/MLFacebookUtils.h>
+
+@implementation AppDelegate
+
+- (void)application:(UIApplication *)application didFinishLaunchWithOptions:(NSDictionary *)launchOptions {
+   	[MaxLeap setApplicationId:@"MaxLeapAppId" clientKey:@"MaxLeapClientKey"];
+   	[MLFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+}
+
+@end
+```
+
 然后，在 app delegate 中添加以下处理器。
+
+FacebookSDK v3.x 
+
+```
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
+{
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[MLFacebookUtils session]];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [FBAppCall handleDidBecomeActiveWithSession:[MLFacebookUtils session]];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[MLFacebookUtils session] close];
+}
+```
+
+FacebookSDK v4.x 
 
 ```objective_c
 - (BOOL)application:(UIApplication *)application
@@ -1141,14 +1213,30 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 }
 ```
 
-MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Facebook 用户身份登录（注册），并创建 MLUser，或者 (2) 将 Facebook 与已有的 MLUser 关联。
+MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Facebook 用户身份登录（注册），并创建 `MLUser`，或者 (2) 将 Facebook 与已有的 `MLUser` 关联。
 
-####    登录并注册新MLUser
+#### 登录并注册新 MLUser
 
 `MLUser` 提供一种方法让您的用户可以通过 Facebook 登录或注册。这可以通过采用 `logInWithPermissions:` 方法来完成，例如：
 
+FacebookSDK v3.x
+
 ```objective_c
 [MLFacebookUtils logInWithPermissions:permissions block:^(MLUser *user, NSError *error) {
+    if (!user) {
+        NSLog(@"Uh oh. The user cancelled the Facebook login.");
+    } else if (user.isNew) {
+        NSLog(@"User signed up and logged in through Facebook!");
+    } else {
+        NSLog(@"User logged in through Facebook!");
+    }
+}];
+```
+
+FacebookSDK v4.x
+
+```
+[MLFacebookUtils logInInBackgroundWithReadPermissions:readPermissions block:^(MLUser *user, NSError *error) {
     if (!user) {
         NSLog(@"Uh oh. The user cancelled the Facebook login.");
     } else if (user.isNew) {
@@ -1163,12 +1251,14 @@ MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Faceboo
 
 1. 用户会看到 Facebook 登录对话框。
 2. 用户通过 Facebook 验证，您的应用程序会使用 `handleOpenURL` 收到回调。
-3. 我们的 SDK 会收到 Facebook 数据并将其保存在 MLUser 中。如果是基于 Facebook ID 的新用户，那么该用户随后会被创建。
+3. 我们的 SDK 会收到 Facebook 数据并将其保存在 `MLUser` 中。如果是基于 Facebook ID 的新用户，那么该用户随后会被创建。
 4. 您的代码块(block)被调用，并传回这个用户对象。
 
 权限(permissions)参数是指定您的应用程序向 Facebook 用户要求什么读取权限的一系列字符串。这些权限必须只能包括读取权限。`MLUser` 整合不要求权限即时可用。[在 Facebook 开发人员指南上阅读关于权限的更多信息][facebook permissions]。
 
-要想获得用户发布权限，以便您的应用程序能执行类似代表用户发布状态更新帖的操作，您必须调用 `+[MLFacebookUtils reauthorizeUser:withPublishPermissions:audience:block]`：
+要想获得用户发布权限，以便您的应用程序能执行类似代表用户发布状态更新帖的操作:
+
+在 Facebook SDk 3.x 中，您必须调用 `+[MLFacebookUtils reauthorizeUser:withPublishPermissions:audience:block]`:
 
 ```objective_c
 [MLFacebookUtils reauthorizeUser:[MLUser currentUser]
@@ -1181,15 +1271,41 @@ MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Faceboo
                                }];
 ```
 
+在 Facebook SDK 4.x 中，调用 `[MLFacebookUtils logInInBackgroundWithPublishPermissions:]`:
+
+```
+[MLFacebookUtils logInInBackgroundWithPublishPermissions:@[@"publish_actions"] block:^(MLUser *user, NSError *error) {
+    if (!user) {
+        // ...
+    } else {
+    	 NSLog("user now has publish permissions");
+    }
+}];
+```
+
 您可以自行决定在用户验证后记录从 Facebook 用户处获取的所需的任何数据。要完成这一操作，您需要通过 Facebook SDK 进行一项图表查询。
 
 #### 绑定 `MLUser` 与 Facebook 账号
 
 若您想要将已有的 `MLUser` 与 Facebook 帐户关联起来，您可以按以下方式进行关联：
 
+Facebook SDK 3.x
+
 ```objective_c
 if (![MLFacebookUtils isLinkedWithUser:user]) {
-    [MLFacebookUtils linkUser:user permissions:nil block:^(BOOL succeeded, NSError *error) {
+    [MLFacebookUtils linkUser:user permissions:permissions block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Woohoo, user logged in with Facebook!");
+        }
+    }];
+}
+```
+
+Facebook SDK 4.x
+
+```
+if (![MLFacebookUtils isLinkedWithUser:user]) {
+    [MLFacebookUtils linkUserInBackground:user withReadPermissions:permissions block:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Woohoo, user logged in with Facebook!");
         }
@@ -1199,7 +1315,8 @@ if (![MLFacebookUtils isLinkedWithUser:user]) {
 
 关联步骤与登录非常类似。区别在于，成功登陆以后，将会使用来自 Facebook 的信息更新当前的 `MLUser`。今后通过 Facebook 进行登录会使用已有账户。
 
-####解除绑定
+#### 解除绑定
+
 若您想要取消用户与 Facebook 的关联，操作如下：
 
 ```objective_c
@@ -1214,9 +1331,9 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 
 我们的库为您管理 `FBSession` 对象。您只需调用 `[MLFacebookUtils session]` 来访问会话实例，其随后能传给 `FBRequest`。
 
-###使用Twitter账号登录
+### 使用 Twitter 账号登录
 
-与Facebook类似，Twitter 的 iOS SDK，也能帮助应用优化登录体验。SDK 会优先读取系统设置里面的 twitter 账户，询问用户选择账户登录，如果系统设置里面没有 twitter 账户，会弹出一个标准化的 Twitter 登录页面，提供相应的登录信息。
+与 Facebook 类似，Twitter 的 iOS SDK，也能帮助应用优化登录体验。SDK 会优先读取系统设置里面的 twitter 账户，询问用户选择账户登录，如果系统设置里面没有 twitter 账户，会弹出一个标准化的 Twitter 登录页面，提供相应的登录信息。
 
 使用 Twitter 账号登录后，如果该 Twitter 用户Id并未与任何MLUser绑定，MaxLeap 将自动为该创建一个用户，并与其绑定。
 
@@ -1324,8 +1441,6 @@ MLGeoPoint *point = [MLGeoPoint geoPointWithLatitude:40.0 longitude:-30.0];
 placeObject[@"location"] = point;
 ```
 
-**注意：**目前，一个类中只有一个键可以是 `MLGeoPoint`。
-
 #### 地理位置查询
 
 ##### 查询距离某地理位置最近的对象
@@ -1358,9 +1473,12 @@ query.limit = 10;
 
 此时，`placesObjects` 是按照与 `userGeoPoint` 的距离（由近及远）排列的一组对象。注意，若应用另一个 `orderByAscending:`/`orderByDescending:` 限制条件，该限制条件将优先于距离顺序。
 
-#####查询某地理位置一定距离内的对象
+##### 查询某地理位置一定距离内的对象
+
 若要用距离来限定获得哪些结果，请使用 `whereKey:nearGeoPoint:withinMiles:`、`whereKey:nearGeoPoint:withinKilometers:` 和 `whereKey:nearGeoPoint:withinRadians:`。
-#####查询一定地理位置范围内对象
+
+##### 查询一定地理位置范围内对象
+
 您还可以查询包含在特定区域内的对象集合。若要查找位于某个矩形区域内的对象，请将 `whereKey:withinGeoBoxFromSouthwest:toNortheast:` 限制条件添加至您的 `MLQuery`。
 
 ```objective_c

@@ -43,7 +43,7 @@ MLAnalytics.setAnalyticsEnabled(false);
 ```java
 <application>
 	<meta-data
-		android:name="ML_channel"
+		android:name="ml_channel"
 		android:value="YOUR_CHANNEL_NAME">
 	</meta-data>
 </application>

@@ -114,4 +114,5 @@ MLCloudConfigManager.removeAllObservers();
 - `Number`
 - `Date`
 - `Array`
-- `Dictionary`
+- `Boolean`
+- `Object`

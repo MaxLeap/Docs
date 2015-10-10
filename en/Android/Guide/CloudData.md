@@ -2,7 +2,7 @@
 ## Introduction
 
 ### What is Cloud Data
-Cloud Data is the data storage service provided by Leap Cloud. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in Leap Cloud, you can perform operations towards them with iOS/Android Core SDK. Besides, Leap Cloud  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
+Cloud Data is the data storage service provided by MaxLeap. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in MaxLeap, you can perform operations towards them with iOS/Android Core SDK. Besides, MaxLeap  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
 
 
 ### Why is Cloud Data Nccessary
@@ -39,10 +39,10 @@ MLDataManager.saveInBackground(myComment);
 
 Notices:
 
-* **When was "Comment" Class created:** If there is no Comment Class in Cloud(Leap Cloud Server, hereinafter referred to as Cloud) when you run the code above, then Leap Cloud will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
+* **When was "Comment" Class created:** If there is no Comment Class in Cloud(MaxLeap Server, hereinafter referred to as Cloud) when you run the code above, then MaxLeap will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
 * **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
 * **MLObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `MLObject` ahead of time.
-* **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by Leap Cloud backend system automatically, please don't save data with those properties in the code.
+* **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by MaxLeap backend system automatically, please don't save data with those properties in the code.
 
 	Property Name|Value|
 	-------|-------|
@@ -152,7 +152,7 @@ MLDataManager.deleteInBackground(comment);
 ```
 
 #####Batch Delete 
-You can delete MLObject, a `List<MLObject>` instance, with `MLDataManager.deleteInBackground()` method. 
+You can delete MLObject, a `List<MLObject>` instance, with `MLDataManager.deleteAllInBackground()` method. 
 
 ```java
 List<MLObject> objects = ...
@@ -193,7 +193,7 @@ Note that increment doesn't need to be integer, value of a floating-point type i
 #####Decremental Increment 
 
 ```java
-gameScore.decrement("score",1000);
+gameScore.increment("score",-1000);
 MLDataManager.saveInBackground(gameScore);
 ```
 
@@ -234,7 +234,7 @@ Notices:
 ###Associated Data
 An object can be associated to other objects. As mentioned before, we can save the instance A of a MLObject as the parameter value of instance B of another MLOject. This will easily solve the data relational mapping of one-to-one and one-to-many, like the relation between primary key & foreign key.
 
-Notices: Leap Cloud handles this kind of data reference with Pointer type. For data consistency, it won't save another copy of data A in data B sheet.
+Notices: MaxLeap handles this kind of data reference with Pointer type. For data consistency, it won't save another copy of data A in data B sheet.
 
 ####One-to-one Association
 For example, a tweet may correspond to many comments. You can create a tweet and a corresponding comment with followign code: 
@@ -679,7 +679,7 @@ MLQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<MLUser>() 
 
 ####Query towards array value type
 
-If the key value is an array, then you can inquire all objects containing "208" from the Key array with:
+If the key value is an array, then you can inquire all objects containing "2" from the Key array with:
 
 ```java
 // Find objects where the array in arrayKey contains the number 2.
@@ -828,7 +828,7 @@ MLQueryManager.findAllInBackground(mainQuery, new FindCallback<MLObject>() {
 ```
 
 ###Cache Query
-Some query results should be cached to the disk in order to show data to users while offline, like the app is just opened, netowrk request is not accomplished. Leap Cloud will clear cache autmatically if it takes too much space. 
+Some query results should be cached to the disk in order to show data to users while offline, like the app is just opened, netowrk request is not accomplished. MaxLeap will clear cache autmatically if it takes too much space. 
 Query will not use cache by default unless you set the option with setCachePolicy. for example, you can do following settings if there's no network available for you to request:
 ```java
 query.setCachePolicy(MLQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -844,7 +844,7 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
   }
 });
 ```
-Leap Cloud provides several cache strategies:
+MaxLeap provides several cache strategies:
 
 Cache Strategy|Introduction
 ---|---
@@ -882,7 +882,7 @@ query.setMaxCacheAge(TimeUnit.DAYS.toMillis(1));
 
 ##MLObject Subclass
 
-Leap Cloud is easy to start up. You can use MLDataManager.fetchInBackground() to access all data. In lots of mature code, subclass can bring more advantages, like simplicity, expansibility, auto-complete feature supported by IDE, etc. Subclass is not necessary, you can transfer following code:
+MaxLeap is easy to start up. You can use MLDataManager.fetchInBackground() to access all data. In lots of mature code, subclass can bring more advantages, like simplicity, expansibility, auto-complete feature supported by IDE, etc. Subclass is not necessary, you can transfer following code:
 
 
 ```java
@@ -1018,7 +1018,7 @@ Notices:
 
 * Please make sure that username and email is unique.
 * Unlike other MLObject, MLUser properties are not set by put, but the specific setXXX.
-* Leap Cloud will collect the value of masterKey，installationIds automatically.
+* MaxLeap will collect the value of masterKey，installationIds automatically.
 
 ###User Signup
 
@@ -1043,7 +1043,7 @@ MLUserManager.signUpInBackground(user, new SignUpCallback() {
 ```
 Notices:
 
-* Leap Cloud servre will observe the user info during the signup to make sure that the username and email address is unique. Besides, server will process the password with non-reversible encryption rather than save it. Please don't encrypt the password in clients,it will result in the disorder and disable the password reset.
+* MaxLeap servre will observe the user info during the signup to make sure that the username and email address is unique. Besides, server will process the password with non-reversible encryption rather than save it. Please don't encrypt the password in clients,it will result in the disorder and disable the password reset.
 * Signup uses the signUpInBackground() method rather than saveInBackground(). There are other signup methods as well. We recommend asynchronous signup method as usual and this will not affect the main UI thread. You can check more detailed info in API.
 * If the signup failed,you can check the returned error object. The mostly likely case is that the username or email is already taken. In this case, you can remind users to try another username or email.
 * You can also ask users to use Email address as username. The username will be taken as Email address and then used for password reset afterwards.
@@ -1086,7 +1086,7 @@ MLUser currentUser = MLUser.getCurrentUser(); //crrentUser will be null now
 
 ###Password Reset
 
-Leap Cloud provides a method for users to reset the password securely. The procedure is simple, only user's email address is required:
+MaxLeap provides a method for users to reset the password securely. The procedure is simple, only user's email address is required:
 
 ```java
 MLUserManager.requestPasswordResetInBackground(
@@ -1102,13 +1102,13 @@ MLUserManager.requestPasswordResetInBackground(
 If the email address is same as the email used for signup, then the system will send a reset email. The reset procedure is show as below:
 
 * Users enter their email address and require password reset.
-* Leap Cloud sends an email to the email address user just provided and this email contains the reset link.
+* MaxLeap sends an email to the email address user just provided and this email contains the reset link.
 * User click on the reset lins, enter a ML page and set a new password.
-* Leap Cloud has reset user's password successfully.
+* MaxLeap has reset user's password successfully.
 
 ###User Query
 
-You can inquire user data with special UserQuery. Leap Cloud provides all round protection of user data. More details: [User Object Security](..).
+You can inquire user data with special UserQuery. MaxLeap provides all round protection of user data. More details: [User Object Security](..).
 
 ```java
 MLQuery<MLUser> query = MLUser.getQuery();
@@ -1126,7 +1126,7 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLUser>() {
 
 ###Email Verification
 
-Leap Cloud provides powerful email verification service, you just need to Enable "Verify user's email address" in Console >> App Settings >> Email Settings and system will add `emailVerified` property in MLUser automatically. When the email property of MLUser is assigned or modified and the value of `emailVerified` is false, then Leap Cloud will send a link to users automatically. `emailVerified` will be set as true once users click the link.
+MaxLeap provides powerful email verification service, you just need to Enable "Verify user's email address" in Console >> App Settings >> Email Settings and system will add `emailVerified` property in MLUser automatically. When the email property of MLUser is assigned or modified and the value of `emailVerified` is false, then MaxLeap will send a link to users automatically. `emailVerified` will be set as true once users click the link.
 
 Three status of `emailVerified` property:
 
@@ -1135,7 +1135,7 @@ Three status of `emailVerified` property:
 * null - Email verification is not enabled or no email address provided
 
 ###Anonymous Users
-Anonymous users refers to a special set of users with username and password. They have the same features as other users while once deleted, all data will be no longer accessible. If your app requires a relatively weakened user system, then Anonymous Users of Leap Cloud is highly recommended. 
+Anonymous users refers to a special set of users with username and password. They have the same features as other users while once deleted, all data will be no longer accessible. If your app requires a relatively weakened user system, then Anonymous Users of MaxLeap is highly recommended. 
 
 You can get an anonymous user account with MLAnonymousUtils:
 
@@ -1158,7 +1158,7 @@ You can transfer anonymous users into non-anonymous users by signup or signin an
 Boolean isAnonymous = MLAnonymousUtils.isLinked(MLUser.getCurrentUser());
 ```
 
-You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, MLUser.getCurrentUser() will no longer be null. Leap Cloud wil create anonymous user in the cloud if you are storing MLObject related to this anonymous user.
+You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, MLUser.getCurrentUser() will no longer be null. MaxLeap wil create anonymous user in the cloud if you are storing MLObject related to this anonymous user.
 
 #####How to Create Anonymous Users Automatically
 Add following code in onCreate() in main Application.
@@ -1172,7 +1172,7 @@ MLUser.enableAutomaticUser();
 User class is a specialized class for storing MLUser objects. You'll see a _User class in Console >> Users. More details: [Console UserManual](...).
 
 ##User Role
-Setting user roles to manage permissions is more effective. The permission assigned to a role will be inherited by users contains in this role. User role is a user collection and a role can also contains another role. There is a corresponding `_Role` class in Leap Cloud for storing user roles.
+Setting user roles to manage permissions is more effective. The permission assigned to a role will be inherited by users contains in this role. User role is a user collection and a role can also contains another role. There is a corresponding `_Role` class in MaxLeap for storing user roles.
 
 ###Property Description
 
@@ -1251,7 +1251,7 @@ indicates that the user whose ObjectId is "553892e860b21a48a50c1f29" has the per
 
 #####Default Permission
 
-Each object in Leap Cloud has a default ACL value when there's no explicit designation. This value means that all users have the read and write permission towards this object. You can see following value in ACL property in data manegement class:
+Each object in MaxLeap has a default ACL value when there's no explicit designation. This value means that all users have the read and write permission towards this object. You can see following value in ACL property in data manegement class:
 ```{"*":{"read":true,"write":true}}```
 
 You can modify the value of ACL if needed:
@@ -1336,7 +1336,7 @@ MLDataManager.saveInBackground(publicPost);
 
 ### User Object Security
 
-Leap Cloud has normalized the user object security. The data saved in the user object can only be self-modified by default. Clients can read the data but it has no right to modify or delete them. Thus, only the user object got after the signin can be modified. 
+MaxLeap has normalized the user object security. The data saved in the user object can only be self-modified by default. Clients can read the data but it has no right to modify or delete them. Thus, only the user object got after the signin can be modified. 
 
 This instance is a good example of user obejct security:
 
@@ -1376,15 +1376,15 @@ MLRoleManager.saveInBackground(role);
 
 ##Third Party Login
 
-Leap Cloud provides 3rd party login service to simplify the signup and signin and integrate ML app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and ML SDK at the same time and connect MLUser and UserId of 3rd party app.
+MaxLeap provides 3rd party login service to simplify the signup and signin and integrate ML app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and ML SDK at the same time and connect MLUser and UserId of 3rd party app.
 
 ###Log in with Facebook Account
 The Android SDK of Facebook helps app optimize the signin experience. As for the devices installed with Facebook app, ML app can realize direct login with Facebook user credential. If there's no Facebook app installed, users can provide signin info in a standard Facebook login page.
 
-If the Facebook UserId is not bound to any MLUser after the Facebook login, Leap Cloud will create an account for the user and bind the two.
+If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two.
 ####Preparations
 1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App
-2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
+2. Open MaxLeap Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
 3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
 4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
@@ -1402,7 +1402,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ####Sign in and Register New MLUser
-If the Facebook UserId is not bound to any MLUser after the Facebook login, Leap Cloud will create an account for the user and bind the two. e.g.
+If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two. e.g.
 
 ```java
 MLFacebookUtils.logInInBackground(this, new LogInCallback<MLUser>() {
@@ -1423,7 +1423,7 @@ Detailed login process:
 
 * Login Facebook in Login with Facebook page provided by Facebook SDK.
 * Facebook verifies the login info, then return.
-* Leap Cloud SDK accept the result and save it to MLUser. If the Facebook UserId is not bound to any MLUser, then Leap Cloud will create an account for the user automatically.
+* MaxLeap SDK accept the result and save it to MLUser. If the Facebook UserId is not bound to any MLUser, then MaxLeap will create an account for the user automatically.
 * Invoke LogInCallbackof ML and log in MLUser.
 
 ####Bind MLUser and Facebook Account
@@ -1442,7 +1442,7 @@ if (!MLFacebookUtils.isLinked(user)) {
 }
 ```
 
-Leap Cloud will update the Facebook account info to the MLUser after the bind. The next time user logs in with Facebook account, Leap Cloud will detect the bind and don't need to add new MLUser to this Facebook account again. 
+MaxLeap will update the Facebook account info to the MLUser after the bind. The next time user logs in with Facebook account, MaxLeap will detect the bind and don't need to add new MLUser to this Facebook account again. 
 
 ####Unbind
 
@@ -1456,15 +1456,15 @@ MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-Leap Cloud will remove all Facebook account info from the MLUser after the unbind. The next time user logs in with Facebook account, Leap Cloud will detect there's no bind and then add new MLUser to this Facebook account.
+MaxLeap will remove all Facebook account info from the MLUser after the unbind. The next time user logs in with Facebook account, MaxLeap will detect there's no bind and then add new MLUser to this Facebook account.
 
 ###Log in with Twitter Account
 Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Facebook app, ML app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
 
-If the Twitter UserId is not bound to any MLUser after the Twitter login, Leap Cloud will create an account for the user and bind the two.
+If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLeap will create an account for the user and bind the two.
 ####Preparations
 1. Create Twitter app in [Twitter Dev Center](...). Click My Apps >> Add a New App
-2. Open Leap Cloud Console >> App Settings >> User Authentication. Check Allow Twitter Authentication and fill the Twitter consumer Key got from step 1 into relative location.
+2. Open MaxLeap Console >> App Settings >> User Authentication. Check Allow Twitter Authentication and fill the Twitter consumer Key got from step 1 into relative location.
 3. Integrate Twitter SDK, add Twitter Login button. Please check [Add Twitter Login to Your App or Website](...) for more details.
 4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
 
@@ -1481,7 +1481,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ####Sign in and Register New MLUser
-If the Twitter UserId is not bound to any MLUser after the Twitter login, Leap Cloud will create an account for the user and bind the two. e.g.
+If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLeap will create an account for the user and bind the two. e.g.
 
 ```java
 MLTwitterUtils.logInInBackground(this, new LogInCallback<MLUser>() {
@@ -1501,7 +1501,7 @@ Detailed login process:
 
 * Login Twitter in Login with Twitter page provided by Twitter SDK.
 * Twitter verifies the login info, then return.
-* Leap Cloud SDK accept the result and save it to MLUser. If the Twitter UserId is not bound to any MLUser, then Leap Cloud will create an account for the user automatically.
+* MaxLeap SDK accept the result and save it to MLUser. If the Twitter UserId is not bound to any MLUser, then MaxLeap will create an account for the user automatically.
 * Invoke LogInCallbackof ML and log in MLUser.
 
 
@@ -1521,7 +1521,7 @@ if (!MLTwitterUtils.isLinked(user)) {
 }
 ```
 
-Leap Cloud will update the Twitter account info to the MLUser after the bind. The next time user logs in with Twitter account, Leap Cloud will detect the bind and don't need to add new MLUser to this Twitter account again. 
+MaxLeap will update the Twitter account info to the MLUser after the bind. The next time user logs in with Twitter account, MaxLeap will detect the bind and don't need to add new MLUser to this Twitter account again. 
 
 
 ####Unbind
@@ -1536,12 +1536,12 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-Leap Cloud will remove all Twitter account info from the MLUser after the unbind. The next time user logs in with Twitter account, Leap Cloud will detect there's no bind and then add new MLUser to this Twitter account.
+MaxLeap will remove all Twitter account info from the MLUser after the unbind. The next time user logs in with Twitter account, MaxLeap will detect there's no bind and then add new MLUser to this Twitter account.
 
 
 ##GeoPoint
 
-Leap Cloud provides MLGeoPoint object to help users do location query based on longitude and latitude.
+MaxLeap provides MLGeoPoint object to help users do location query based on longitude and latitude.
 
 ####MLGeoPoint Overview
 

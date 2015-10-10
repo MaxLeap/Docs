@@ -15,17 +15,17 @@
 
 3. 添加依赖
 
-	点击Targets→应用名→“Build Phases”栏。</br>
-	将“Link Binary With Libraries”如下图展开。
+	确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为Yes。
+    
+    <p class="image-wrapper">
+    ![enable_modules](../../../images/enable_modules.png)
+
+	点击 Targets → YourAppName → "Build Phases" 栏。</br>
+	展开 “Link Binary With Libraries”，如下图：
 	
 	<p class="image-wrapper">
 	![add_dependencies](../../../images/add_dependencies.png)
 	
-    确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为Yes。
-    
-    <p class="image-wrapper">
-    ![enable_modules](../../../images/enable_modules.png)
-    
 	点击“Link Binary With Libraries”左下角+号按钮，添加下列框架：
 	
 	MobileCoreServices.framework</br>
@@ -36,7 +36,7 @@
 
 ## 连接云端应用
 
-打开AppDelegate.m文件，并将如下import添加到文件顶部：
+打开 `AppDelegate.m` 文件，并将如下import添加到文件顶部：
 
 ```objc
 #import <MaxLeap/MaxLeap.h>
@@ -66,12 +66,12 @@
 [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 // 创建一条数据
-MLObject *testObject = [MLObject objectWithClassName:@"Person"];
+MLObject *testObject = [MLObject objectWithClassName:@"People"];
 testObject[@"Name"] = @"David Wang";
 [testObject saveInBackgroundWithBlock:nil];
 ```
 
-这段代码目的是在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
+这段代码目的是在云端创建一条类名为 `People` 的数据。如果云端还没有 `People` 这个类，则会先创建这个类，然后再插入数据。
 
 运行您的应用。然后可以在 开发者中心 -> 云存储 中看到刚创建的数据。
 

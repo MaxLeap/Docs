@@ -3,7 +3,7 @@
 
 1. 下载模板项目并解压
 
-请确保您使用的是最新的 Xcode (v5.0+), 并且目标平台版本为 iOS 6.0 或者更高。
+请确保您使用的是最新的 Xcode (v7.0+), 并且目标平台版本为 iOS 6.0 或者更高。
 
 <a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip">下载模板项目</a>
 
@@ -17,7 +17,7 @@
 [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 ```
 
-把 `your_application_id` 和 `your_client_key` 替换成您自己 app 的。
+把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。
 
 3. 现在可以运行了。
 
@@ -35,12 +35,12 @@
 [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
 
 // 创建一条数据
-MLObject *testObject = [MLObject objectWithClassName:@"Person"];
+MLObject *testObject = [MLObject objectWithClassName:@"People"];
 testObject[@"foo"] = @"bar";
 [testObject saveInBackgroundWithBlock:nil];
 ```
 
-这段代码试图在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
+这段代码试图在云端创建一条类名为 `People` 的数据。如果云端还没有 `People` 这个类，则会先创建这个类，然后再插入数据。
 
 运行您的应用。然后可以在 Dev Center -> Data 中看到刚创建的数据。
 

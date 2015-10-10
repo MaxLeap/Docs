@@ -46,7 +46,7 @@ Channel represents the store users download the app from, like GooglePlay, App S
 ```java
 <application>
 	<meta-data
-		android:name="ML_channel"
+		android:name="ml_channel"
 		android:value="YOUR_CHANNEL_NAME">
 	</meta-data>
 </application>

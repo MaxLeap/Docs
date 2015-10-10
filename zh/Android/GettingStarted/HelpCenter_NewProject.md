@@ -41,8 +41,9 @@ public class MyApplication extends Application {
 
 在AndroidManifest中，给予应用以下权限：
 
-```java
+```xml
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET" />
 ```
@@ -50,8 +51,9 @@ public class MyApplication extends Application {
 权限|用途|是否必需
 ---|---|---
 `ACCESS_NETWORK_STATE`|		检测联网方式，区分用户设备使用的是2G、3G或是WiFi| 必需
-`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI和mac来唯一的标识用户| 必需
 `INTERNET`| 	允许应用程序联网，以便向我们的服务器端发送数据| 必需
+`READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI来唯一的标识用户| 可选
+`ACCESS_WIFI_STATE`| 	获取用户设备的MAC地址，通过MAC地址来唯一的标识用户| 可选
 
 ##	快速测试
 
