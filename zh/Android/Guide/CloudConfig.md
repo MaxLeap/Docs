@@ -45,7 +45,7 @@ currentConfig.getDate(key, defaultValue)
 
 ## 更新云配置
 
-在每次 app 进入前台时，SDK 会自动更新上述方法获取的 currentConfig. 您也可以调用以下代码手动刷新所有云参数：
+在每次 App 进入前台时，SDK 会自动更新上述方法获取的 currentConfig. 您也可以调用以下代码手动刷新所有云参数：
 
 您可以通过`MLCloudConfigManager.getInBackground()`获取`MLCloudConfig`对象，然后调用`currentConfig.getInt()`更新参数的值。该方法包含两个参数：第一个为云端参数名，第二个为默认值。
 
