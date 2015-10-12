@@ -70,6 +70,15 @@
 ![imgCCFunctionList.png](../../../images/imgCCFunctionList.png)
 
 ##实例
+为了确保云代码健康运行，MaxLeap 将会自动为每个版本的云代码分别一个或多个实例。您可以查看每个实例的运行状况，包括：
+
+* 请求队列
+* 拒绝次数
+* CPU/内存使用率
+* 内存使用及上限
+* 网络IO输入及输出
+
+![imgCCInstance.png](../../../images/imgCCInstance.png)
 
 ##白名单
 将任务添加至白名单后，请求调用该任务时，将不进行Http请求头中X-ML-AppId和X-ML-APIKey的校验。
