@@ -70,6 +70,8 @@ We provide several path-maps here, you can compile links of other pages with tho
 
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '/guide/devguide/java.html',
 
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON': '/guide/devguide/java.html',
+
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL': '/guide/usermanual',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '/guide/usermanual/usermgmt.html',
@@ -79,6 +81,7 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID': '/tutorials/android.html',
         'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS': '/quickstart/ios/core/existing.html',
         'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
+        'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA': '/quickstart/java/core/existing.html',
         'ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
         'ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html',
 
