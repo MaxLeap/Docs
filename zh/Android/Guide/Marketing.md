@@ -142,7 +142,7 @@ protected Uri getUri(Intent intent)
  protected Bitmap getLargeIcon(Context context)
 ```
 
-自定义 Notificatioin 的 SmallIcon
+自定义 Notification 的 SmallIcon
 
 ```java
 protected int getSmallIconId(Context context)
