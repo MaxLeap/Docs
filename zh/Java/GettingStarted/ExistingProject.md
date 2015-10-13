@@ -9,14 +9,14 @@ Eclipse:
 
 ##安装 MaxLeap命令行工具（MaxLeap-CLI）
 ####下载MaxLeap-CLI
-下载地址：<https://github.com/LeapCloud/MaxLeap-CLI/releases />
+下载地址：[https://github.com/LeapCloud/MaxLeap-CLI/releases](https://github.com/LeapCloud/MaxLeap-CLI/releases)
 
 根据平台选择对应的客户端：
 
 1.  Windows：[maxleap.exe](https://github.com/LeapCloud/MaxLeap-CLI/releases/download/v0.1/maxleap.exe)
 2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/LeapCloud/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar)
 
-下载完成后，您可直接在Terminal中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
+下载完成后，您可直接在终端中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
 
 ```shell
 ./maxleap -v
@@ -26,22 +26,22 @@ Eclipse:
 
 *	maxleap命令添加到环境变量
 
-    每次执行maxleap命令都需要进入下载安装目录才能执行命令，你可以将maxleap添加到环境变量，这样你可以随时随地使用maxleap了
+每次执行maxleap命令都需要进入下载安装目录才能执行命令，你可以将maxleap添加到环境变量，这样你可以随时随地使用maxleap了
 
-	1.  LINUX和MAC：
-	
-	```
-	vim ~/.bash_profile
-	```
-	
-	编辑profile文件，将MaxLeap安装目录追加到PATH中，比如你的MaxLeap安装目录为`/usr/local/maxleap-cli`
-    	
+1.  LINUX和MAC：
+
+    ```
+    vim ~/.bash_profile
+    ```
+    
+    编辑profile文件，将MaxLeap安装目录追加到PATH中，比如你的MaxLeap安装目录为`/usr/local/maxleap-cli`
+        
     `export PATH=/usr/local/maxleap-cli:$PATH`
     
     最后让profile生效：`source ~/.bash_profile`
-    
-    2.  WINDOWS：
-    
+
+2.  WINDOWS：
+
     //TODO:
 
 ##	安装SDK
