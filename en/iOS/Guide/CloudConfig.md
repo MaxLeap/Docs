@@ -51,7 +51,7 @@ There are some similar methods：
 [MLConfigManager removeObserver:anObserver]; // Remove all observe callback related to anObserver once and for all
 ```
 
-## Update Current Config
+### Update Current Config
 
 SDK will update currentConfig automatically everytime the app enters foreground
 
