@@ -53,13 +53,26 @@ Eclipse:
 * 获取测试插件JUnit
 * 获取编译打包插件
 
-```Java
-	//添加依赖，获取云代码 SDK及JUnit测试插件
+```xml
+	//添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.0，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
     <dependencies>
         <dependency>
             <groupId>com.maxleap</groupId>
+            <artifactId>cloud-code-base</artifactId>
+            <version>${sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.maxleap</groupId>
+            <artifactId>cloud-code-sdk</artifactId>
+            <version>${sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.maxleap</groupId>
             <artifactId>cloud-code-test</artifactId>
-            <version>2.4.0</version>
+            <version>${sdk.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
