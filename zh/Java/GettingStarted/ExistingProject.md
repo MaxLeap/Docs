@@ -53,8 +53,9 @@ Eclipse:
 * 获取测试插件JUnit
 * 获取编译打包插件
 
+添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.0，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
+
 ```xml
-	//添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.0，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
     <dependencies>
         <dependency>
             <groupId>com.maxleap</groupId>
@@ -136,7 +137,7 @@ Eclipse:
 
 在/src/main/assembly中新建mod.xml文件，并在其中添加如下配置：
 
-```Java
+```xml
 	<?xml version="1.0" encoding="UTF-8"?>
 	<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
 	          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -187,7 +188,7 @@ Eclipse:
 
 请注意：如果您选择将打包配置文件放在其他路径下，您则需要更新pom.xml文件中的以下部分，将`src/main/assembly/mod.xml`替换为您自定义的路径：
 
-```java
+```xml
 	<plugin>
 		<artifactId>maven-assembly-plugin</artifactId>
 		<configuration>
