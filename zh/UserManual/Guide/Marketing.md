@@ -72,6 +72,8 @@
 
 ![imgMAddMsg2.png](../../../images/imgMAddMsg2.png)
 
+![imgMAddMsg2-2.png](../../../images/imgMAddMsg2-2.png)
+
 注意：
 
 * 您可以同一个活动中中同时创建多条应用内消息，点击该页面左侧的"＋"号即可
