@@ -1,14 +1,10 @@
-云代码 SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
-##安装Maven
+### 兼容性
 
-Eclipse:
+目前 MaxLeap Python SDK 基于 Python 2.x 开发，在 Python 3.x 环境下使用仍然有一些兼容性问题。我们会尽快改善这一问题的。
 
-1.	点击"Help" >> "Install New Software.."
-2.	在"Work with"中输入：`http://download.eclipse.org/technology/m2e/releases`，在列表中选择"Maven Integration for Eclipse"，即可安装Maven插件。
-
-##安装 MaxLeap命令行工具（MaxLeap-CLI）
-####下载MaxLeap-CLI
+### 安装 MaxLeap命令行工具（MaxLeap-CLI）
+#### 下载MaxLeap-CLI
 下载地址：[https://github.com/LeapCloud/MaxLeap-CLI/releases](https://github.com/LeapCloud/MaxLeap-CLI/releases)
 
 根据平台选择对应的客户端：
@@ -21,7 +17,7 @@ Eclipse:
 ```shell
 ./maxleap -v
 ```
-    
+
 显示`zcc version 0.1`表示MaxLeap客户端安装成功
 
 *	maxleap命令添加到环境变量
@@ -33,94 +29,118 @@ Eclipse:
     ```
     vim ~/.bash_profile
     ```
-    
+
     编辑profile文件，将MaxLeap安装目录追加到PATH中，比如你的MaxLeap安装目录为`/usr/local/maxleap-cli`
-        
+
     `export PATH=/usr/local/maxleap-cli:$PATH`
-    
+
     最后让profile生效：`source ~/.bash_profile`
 
 2.  WINDOWS：
 
     //TODO:
-	
+
 ##	安装SDK
+
+你可以使用 `pip` 或者 `easy_install` 安装 Python SDK
+
+```sh
+pip install maxleap-sdk
+```
+
+or
+
+```sh
+easy_install maxleap-sdk
+```
+
+根据你的环境，命令之前可能还需要加上 `sudo` 。
+
+**注意**：如果您的 Python 版本低于 2.7.9，您可能会遇到如下的 Warning：ML
+
+```
+/usr/lib/python2.7/site-packages/requests-2.6.0-py2.7.egg/requests/packages/urllib3/util/ssl_.py:79: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+InsecurePlatformWarning
+```
+
+建议您升级您的 Python 版本，或者通过安装 PyOpenSSL 来解决：
+
+```sh
+pip install pyopenssl ndg-httpsclient pyasn1
+```
 
 ### 使用模板创建 MaxLeap 云代码项目
 
-获取 MaxLeap 云代码 Java项目模板
+获取 MaxLeap 云代码 Python项目模板
 
 ```shell
-git clone https://github.com/LeapCloud/Demo-CloudCode-Java.git
+git clone https://github.com/MaxLeap/Demo-CloudCode-Python.git
 ```
 
-### 修改配置
-在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
+### 一个python cloudcode项目的目录树应该如下：
 
-```java
+    ├── app                     #cloudcode主目录 (必备)
+    │   ├── requirements.txt    #cloudcode所依赖的pip库（可选）
+    │   ├── function            #function目录（可选）
+    │   │   └── demo.py
+    │   ├── hook                #hook目录（可选）
+    │   ├── job                 #job目录（可选）
+    |   └── tests               #tests目录（可选）
+    ├── config                  #cloudcode配置文件目录（必备）
+    │   └── global.json         #cloudcode配置文件（必备）
+    └── lib                     #cloudcode所依赖的lib（可选）
+
+### 目录加载顺序
+
+1. 拷贝lib依赖
+2. pip安装requirements.txt
+3. 加载程序文件，顺序为：config -> hook -> job -> function
+
+### 修改配置
+在/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
+
+```python
 {
 	"applicationName" : "HelloWorld",
 	"applicationId": "YOUR_APPLICATION_ID",
 	"applicationKey": "YOUR_MASTER_KEY",
-	"lang" : "java",
-	"javaMain": "Main",
-	"packageHook" : "YOUR_HOOK_PACKAGE_NAME",
-	"packageClasses" : "YOUR_ENTITY_PACKAGE_NAME",
+	"lang" : "python",
 	"version": "0.0.1"
 }
 ```
 
 根据创建应用时获取的key，修改下列键的值：
-	
+
 键|值|
 ------------|-------|
 applicationName|MaxLeap应用名称
 applicationId|Application ID
 applicationKey|Master Key
-javaMain|入口main函数类名
-packageHook|Hook包名
-packageClasses|Class实体包名
 version|当前云代码项目版本号
 
 ### 定义一个简单的function
+在`/function`目录下新建文件demo.py中
+```python
+from ML import Server
+from ML import Response
+@Server.Function
+def helloword(request):
+    return Response("hello world")
 
-```Java
-import com.maxleap.code.MLLoader;
-import com.maxleap.code.Response;
-import com.maxleap.code.impl.GlobalConfig;
-import com.maxleap.code.impl.LoaderBase;
-import com.maxleap.code.impl.Response;
-
-public class Main extends LoaderBase implements Loader {
-    @Override
-    public void main(GlobalConfig globalConfig) {
-
-    	//定义Cloud Function
-        defineFunction("hello", request -> {
-            Response<String> response = new Response<String>(String.class);
-            response.setResult("Hello, " + request.parameter(Map.class).get("name") + "!");
-            return response;
-        });
-    }
-}
 ```
-
-注意：
-
-* Main class的main method是云代码项目启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
 
 ### 打包
 
-在当前项目根目录下运行Maven命令：
+在当前项目根目录下运行zip命令：
 
-`mvn package`
+`zip -r <ProjectLocation> ./*`
 
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
 ## 云代码的上传及部署
 1. 登录：`maxleap login <UserName> -region <CN or US ...>`
 2. 选择所要部署的目标应用，作为后续操作的上下文：`maxleap use <AppName>` ,如果你不记得你的AppName，可以通过`maxleap apps`来枚举你的所有应用列表
-3. 上传Package： `maxleap upload <PackageLocation>`
+3. 上传Package： `maxleap upload <ProjectLocation>`
 4. 部署云代码：`maxleap deploy <VersionNumber>`
 
 **注意：**
@@ -138,13 +158,12 @@ curl -X POST \
 -H "X-ML-AppId: YOUR_APPID" \
 -H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
--d '{"name":"David Wang"}' \
-https://api.leap.as/functions/hello
+https://api.leap.as/functions/helloword
 ```
 此时，我们将得到如下结果：
 
 ```shell
-Hello, David Wang!
+hello world
 ```
 表明测试通过，部署成功。
 
