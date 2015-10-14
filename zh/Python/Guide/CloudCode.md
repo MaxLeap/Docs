@@ -1,55 +1,19 @@
-# Python 指南
 
+# MaxLeap云代码使用指南
 
-## 介绍
-MaxLeap 是一个完整的平台解决方案，为你的应用提供全方位的后端服务。我们的目标是让你不需要进行后端开发及服务器运维等工作就可以开发和发布成熟的应用。
+## 云代码简介
 
-对于熟悉 Python 的用户，我们提供了 Python 语言版本的 SDK ，方便开发。
+### 什么是云代码服务
+云代码是部署运行在MaxLeap上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
-### 兼容性
+### 为什么需要云代码服务
 
-目前 MaxLeap Python SDK 基于 Python 2.x 开发，在 Python 3.x 环境下使用仍然有一些兼容性问题。我们会尽快改善这一问题的。
+如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
-### 安装
+* 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
+* 同一套代码可以为iOS，Android，web site等提供服务
 
-你可以使用 `pip` 或者 `easy_install` 安装 Python SDK
-
-```sh
-pip install maxleap-sdk
-```
-
-or
-
-```sh
-easy_install maxleap-sdk
-```
-
-根据你的环境，命令之前可能还需要加上 `sudo` 。
-
-**注意**：如果您的 Python 版本低于 2.7.9，您可能会遇到如下的 Warning：ML
-
-```
-/usr/lib/python2.7/site-packages/requests-2.6.0-py2.7.egg/requests/packages/urllib3/util/ssl_.py:79: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
-InsecurePlatformWarning
-```
-
-建议您升级您的 Python 版本，或者通过安装 PyOpenSSL 来解决：
-
-```sh
-pip install pyopenssl ndg-httpsclient pyasn1
-```
-
-## 初始化
-在调用 SDK 前，需要进行初始化。
-
-```python
-import ML
-
-ML.init('APP_ID', 'APP_KEY')
-
-# 或者您现在需要使用 master key 的权限
-ML.init('APP_ID', master_key='MASTER_KEY')
-```
 ## 对象
 
 你可以通过子类化 `ML.Object` 来创建自己的类，使用此类生成对象再保存，将会将数据保存到 MaxLeap 数据服务上，类名对应的表中。
@@ -585,7 +549,7 @@ results = mainQuery.find()
 
 ##### *cloudcode 的运行环境内置最新版本的leap-sdk*
 
-### 使用leap-sdk
+### 使用maxleap-sdk
 
 - 定义你的第一个function
 
@@ -618,7 +582,7 @@ results = mainQuery.find()
   使用Server.Job来定义你的job，job一般用于定时执行或者需要花费较长时间运行的程序。同样，
 Job也必须返回一个`Response`对象
 
-# 使用leap-sdk实现一个复杂点的业务
+# 使用maxleap-sdk实现一个复杂点的业务
 
 1. 这里我们简单实现一个业务逻辑，提交一个忍者名称，生成一个忍者本体和它的50个影分身，找出其中第50个分身，击杀其余分身和本体，让它成为新的本体
 
@@ -680,7 +644,7 @@ Job也必须返回一个`Response`对象
 
     ```
 
-# 使用leap-sdk实现HOOK操作
+# 使用maxleap-sdk实现HOOK操作
 支持before_save、after_save、after_update、before_delete、after_delete
 样例如下：
 
@@ -726,12 +690,46 @@ from ML import Log
 Log.info("test log!")
 ```
 
-*目前有log，warn，error，debug四个级别*
+* 目前有log，warn，error，debug四个级别*
 
-*本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息*
+* 本地测试不会产生数据库记录，但发布后会产生记录，你可以在后端界面查看你的日志信息*
 
-*如果你的function调用频率很高请在发布前尽量去掉调试测试日志以便不必要的日志存储*
+* 如果你的function调用频率很高请在发布前尽量去掉调试测试日志以便不必要的日志存储*
 
+# 查看日志
+可以使用命令行工具MaxLeap-CLI查看最近的log
+
+```shell
+maxleap log -n 100
+```
+也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
+
+## Principal
+SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
+
+#### 获取用户请求原始信息UserPrincipal
+
+```python
+principal = ML.get_principal()
+```
+
+#### 获取MasterPrincipal
+
+```python
+principal = ML.get_master_principal()
+```
+
+#### 使用Principal
+你可以在创建对象和创建查询的时候指定需要使用的Principal
+
+```python
+principal = ML.get_master_principal()
+
+GameScore = ML.Object.extend("GameScore")
+game_score = GameScore.create_without_data("55d1480960b2430132e9b19e",principal=principal)
+game_score = ML.Object.create("GameScore",principal=principal)
+query = Query(GameScore，principal=principal)
+```
 # 本地单元测试
 
 Server实例提供了callFunction 和callJob 来测试你的程序。
@@ -766,3 +764,53 @@ def test_helloNinja():
 ```
 
 *在测试用例里面你需要把你所有的function、job、hook文件全部import进来*
+
+## MLC － 云代码命令行工具
+MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
+### 登录:
+```shell
+maxleap login <用户名> -region <CN or US ...>
+```
+`<用户名>` 为您登录MaxLeap管理中心的账号，`<CN or US ...>` 为选择中国区账号还是美国区账号，然后根据提示输入密码
+### 显示所有app：
+```shell
+maxleap apps
+```
+查询账号下的所有应用，显示的信息为：AppId ：AppName
+### 选择应用:
+```shell
+maxleap use <应用名>
+```
+`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
+### 上传云代码:
+```shell
+maxleap upload <文件路径>
+```
+`<文件路径>`为你将部署的云代码 package（zip文件），它将被上传到步骤3指定的应用下。
+上传的的代码会被制作成Docker镜像，版本号在云代码项目里的global.json文件中指定：
+```
+"version": "0.0.1"
+```
+### 显示所有云端云代码版本:
+```shell
+maxleap lv
+```
+即显示所有该应用下，用户上传过的云代码的所有版本。
+### 部署云代码：
+```shell
+maxleap deploy <版本号>
+```
+`<版本号>`为想要部署的云代码版本号：如执行maxleap deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码。如果部署不存在的版本，会提示错误："version of appId not exists"
+### 停止cloudcode：
+```shell
+maxleap undeploy <版本号>
+```
+停止该应用的指定版本云代码：如果之前已经部署过一个版本，需要先停止，再部署新的版本。
+### 输出最近的日志：
+```shell
+maxleap log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
+
+-l 指定输出日志的级别：info或是error
+-n 指定log的数量
+-s 指定跳过最近的log数量
+```
