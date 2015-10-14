@@ -235,17 +235,9 @@ public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
 	
 	@Override
 	public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage, UserPrincipal userPrincipal) {
-		LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
-		//创建完obj后修改这个obj的ACL权限
-		Map<String,Map<String,Boolean>> acl = new HashMap<>();
-		Map<String,Boolean> value = new HashMap<>();
-		value.put("read", true);
-		value.put("write", true);
-		acl.put(saveMessage.objectId().toString(), value);
-		LASUpdate update = new LASUpdate().set("ACL", acl);
-		myObjectEntityManager.update(saveMessage.objectId().toString(), update);
-		AfterResult afterResult = new AfterResult(saveMessage);
-		return afterResult;
+		//创建完obj后在服务器上记录日志，这条日志可以通过console后台查看到
+        logger.info("create Ninja complete use " + LASJsonParser.asJson(userPrincipal) + ",saveMsg:"+LASJsonParser.asJson(saveMessage));
+        return new AfterResult(saveMessage);
 	}
 }
 ```
@@ -329,7 +321,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list, UserPrincipal use
 ## Logging
 云代码提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，云代码的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。
 ###在云代码中记录Log
-您可以使用logger实例，记录3种级别的日志：Error，Warn和Info.
+您可以使用logger实例，记录4种级别的日志：Error，Warn，Info和Debug.
 
 ```java
 public class MyClass {
@@ -344,9 +336,9 @@ public class MyClass {
 ```
 使用Log需注意:
 
-* 如果你想持久化日志以便后台管理中心可以看到，你需要引用SDK里`com.maxleap.code`包下的Logger，而普遍的slf4j或log4j产生的日志将不会被持久化
-* 本地测试不会产生数据库记录，但发布后调用会产生记录，你可以在后端界面查看你的日志信息
-* 如果您的Function调用频率很高，请在发布前尽量去掉调试测试日志，以避免不必要的日志存储
+* 你可以在Main, Hook, Handler等任意地方中使用日志功能，只需使用com.maxleap.code包下的日志类即可，而正常的log4j或slf4j日志将不会被远程服务器记录，但可以在本地使用*
+* 本地测试不会产生远程数据库记录，但发布后调用会产生记录，你可以在后端界面查看你的日志信息
+* 服务器上只会记录info、warn和error级别的日志，如果您的Function调用频率很高，请在发布前尽量去掉不必要的Info级别日志，以避免不必要的日志存储
 	
 ###系统自动记录的Log
 除了手动记录的Log外，系统还将自动为您收集一些必要的日志，包括：
@@ -356,10 +348,10 @@ public class MyClass {
 * 云代码相关的API request信息
 	
 ###查看Log
-可以使用命令行工具lcc查看最近的log
+可以使用命令行工具MaxLeap-CLI查看最近的log
 
 ```shell
-lcc log -n 100
+maxleap log -n 100
 ```
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 
