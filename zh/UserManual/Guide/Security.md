@@ -12,9 +12,10 @@ MaxLeap对不同客户端提供不同的安全认证方式。
 客户端类型|认证方式
 ---|---
 支持账号系统的移动应用|用户账号认证后对生成session token
-不使用账号系统的移动应用|用App ID和client key生成security token
+不使用账号系统的移动应用|用App ID和client key生成app security token
 web console|公司账号认证后生成session token
 Restful直接访问|通过restful key认证
+CloudCode|使用session token或app security token
 
 ##安全授权
 
