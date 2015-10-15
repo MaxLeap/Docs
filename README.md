@@ -1,6 +1,6 @@
 # MaxLeap Docs
 
-These are the markdown sources for all of the [platform docs](https://leap.as/en_us/docs/overview.html) of LAS. The content for the docs is stored in this repo.
+These are the markdown sources for all of the [platform docs](https://leap.as/en_us/docs/overview.html) of MaxLeap. The content for the docs is stored in this repo.
 
 ## Repository Structure
 
