@@ -40,7 +40,7 @@
 
     //TODO:
 
-##	安装SDK
+### 安装SDK
 
 你可以使用 `pip` 或者 `easy_install` 安装 Python SDK
 
@@ -120,6 +120,7 @@ version|当前云代码项目版本号
 
 ### 定义一个简单的function
 在`/function`目录下新建文件demo.py中
+
 ```python
 from ML import Server
 from ML import Response

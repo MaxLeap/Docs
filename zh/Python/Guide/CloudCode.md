@@ -510,13 +510,41 @@ results = mainQuery.find()
 请注意 **我们不会在组合查询的子查询中支持非过滤型的条件**（比如:limit, skip, ascending/descending, include）。
 
 
+## Principal
+SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
+
+### 获取用户请求原始信息UserPrincipal
+
+```python
+principal = ML.get_principal()
+```
+
+### 获取MasterPrincipal
+
+```python
+principal = ML.get_master_principal()
+```
+
+### 使用Principal
+你可以在创建对象和创建查询的时候指定需要使用的Principal
+
+```python
+principal = ML.get_master_principal()
+
+GameScore = ML.Object.extend("GameScore")
+game_score = GameScore.create_without_data("55d1480960b2430132e9b19e",principal=principal)
+game_score = ML.Object.create("GameScore",principal=principal)
+query = Query(GameScore，principal=principal)
+```
 
 
-## Python CloudCode
 
-### 新建一个python cloudcode项目
+## CloudCode
+
+### 新建一个项目
 
 ##### 一个python cloudcode项目的目录树应该如下：
+
 
     ├── app                     #cloudcode主目录 (必备)
     │   ├── requirements.txt    #cloudcode所依赖的pip库（可选）
@@ -549,7 +577,7 @@ results = mainQuery.find()
 
 ##### *cloudcode 的运行环境内置最新版本的leap-sdk*
 
-### 使用maxleap-sdk
+### 使用sdk
 
 - 定义你的第一个function
 
@@ -582,69 +610,69 @@ results = mainQuery.find()
   使用Server.Job来定义你的job，job一般用于定时执行或者需要花费较长时间运行的程序。同样，
 Job也必须返回一个`Response`对象
 
-# 使用maxleap-sdk实现一个复杂点的业务
+### 实现复杂点的Fuction
 
-1. 这里我们简单实现一个业务逻辑，提交一个忍者名称，生成一个忍者本体和它的50个影分身，找出其中第50个分身，击杀其余分身和本体，让它成为新的本体
+这里我们简单实现一个业务逻辑，提交一个忍者名称，生成一个忍者本体和它的50个影分身，找出其中第50个分身，击杀其余分身和本体，让它成为新的本体
 
-    ```python
-    #coding:utf-8
-    from ML import Object
-    from ML import Server
-    from ML import Log
-    from ML import Query
-    from ML import Response
+```python
+#coding:utf-8
+from ML import Object
+from ML import Server
+from ML import Log
+from ML import Query
+from ML import Response
 
-    Ninja = Object.extend('Ninja')
+Ninja = Object.extend('Ninja')
 
-    @Server.Function
-    def helloNinja(request):
-        #获取param:name
-        name = request.json.get('name')
+@Server.Function
+def helloNinja(request):
+    #获取param:name
+    name = request.json.get('name')
 
-        #产生本体
-        ninja = Ninja()
-        ninja.set('name',name)
-        ninja.save()
-        Log.info(u"生成本体，ID为:{}".format(ninja.id))
+    #产生本体
+    ninja = Ninja()
+    ninja.set('name',name)
+    ninja.save()
+    Log.info(u"生成本体，ID为:{}".format(ninja.id))
 
-        #产生50个分身
-        clone_ninja_ids = []
-        for idx in range(50):
-            clone_ninja = Ninja()
-            clone_ninja.set('name',u'{0}_{1}'.format(name,idx))
-            clone_ninja.save()
-            clone_ninja_ids.append(clone_ninja.id)
-            Log.info(u"多重影分身:{}".format(clone_ninja.id))
+    #产生50个分身
+    clone_ninja_ids = []
+    for idx in range(50):
+        clone_ninja = Ninja()
+        clone_ninja.set('name',u'{0}_{1}'.format(name,idx))
+        clone_ninja.save()
+        clone_ninja_ids.append(clone_ninja.id)
+        Log.info(u"多重影分身:{}".format(clone_ninja.id))
 
-        #找出第50个分身
-        query = Query(Ninja)
-        query.equal_to('name',u'{}_49'.format(name))
-        ninja_50 = query.first()
-        clone_ninja_ids.remove(ninja_50.id)
-        Log.info(u"找到第50个分身:{}".format(ninja_50.dump()))
+    #找出第50个分身
+    query = Query(Ninja)
+    query.equal_to('name',u'{}_49'.format(name))
+    ninja_50 = query.first()
+    clone_ninja_ids.remove(ninja_50.id)
+    Log.info(u"找到第50个分身:{}".format(ninja_50.dump()))
 
-        #击杀其余49个分身
-        query = Query(Ninja)
-        query.contained_in('ObjectId',clone_ninja_ids)
-        for item in query.find():
-            item.destroy()
-        Log.info(u"完成分身击杀数目:{}".format(query.count()))
+    #击杀其余49个分身
+    query = Query(Ninja)
+    query.contained_in('ObjectId',clone_ninja_ids)
+    for item in query.find():
+        item.destroy()
+    Log.info(u"完成分身击杀数目:{}".format(query.count()))
 
-        #击杀本体
-        ninja.destroy()
-        Log.info(u"完成本体击杀")
+    #击杀本体
+    ninja.destroy()
+    Log.info(u"完成本体击杀")
 
-        #让第50分身成为新的本体
-        ninja_50.set('name',u'{}_new'.format(name))
-        ninja_50.save()
-        Log.info(u"第50个分身在{}成为新的本体".format(ninja_50.updated_at));
+    #让第50分身成为新的本体
+    ninja_50.set('name',u'{}_new'.format(name))
+    ninja_50.save()
+    Log.info(u"第50个分身在{}成为新的本体".format(ninja_50.updated_at));
 
-        #返回新的本体名称
-        return Response(ninja_50.get('name'))
+    #返回新的本体名称
+    return Response(ninja_50.get('name'))
 
-    ```
+```
 
-# 使用maxleap-sdk实现HOOK操作
+### 实现HOOK操作
 支持before_save、after_save、after_update、before_delete、after_delete
 样例如下：
 
@@ -681,7 +709,8 @@ hook的执行顺序为：before hook -> original behavior -> after hook
 
 hook方法可以选择返回一个Response对象，如果hook返回了一个Response对象之后，在这个hook之后的操作都不会执行，这个Response将直接返回给请求者。
 
-# 使用日志
+## 日志
+### 使用日志
 
 *Log类用来记录日志*
 
@@ -696,7 +725,7 @@ Log.info("test log!")
 
 * 如果你的function调用频率很高请在发布前尽量去掉调试测试日志以便不必要的日志存储*
 
-# 查看日志
+### 查看日志
 可以使用命令行工具MaxLeap-CLI查看最近的log
 
 ```shell
@@ -704,33 +733,7 @@ maxleap log -n 100
 ```
 也进入“管理网站”，点击“开发者中心”－>“日志”，您便可查看该应用的所有日志。
 
-## Principal
-SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是通过cloudcode的masterKey来实现，这样数据在访问流通过程中可以有效保证key的安全性，而不被人拦截请求截获masterKey信息。
-
-#### 获取用户请求原始信息UserPrincipal
-
-```python
-principal = ML.get_principal()
-```
-
-#### 获取MasterPrincipal
-
-```python
-principal = ML.get_master_principal()
-```
-
-#### 使用Principal
-你可以在创建对象和创建查询的时候指定需要使用的Principal
-
-```python
-principal = ML.get_master_principal()
-
-GameScore = ML.Object.extend("GameScore")
-game_score = GameScore.create_without_data("55d1480960b2430132e9b19e",principal=principal)
-game_score = ML.Object.create("GameScore",principal=principal)
-query = Query(GameScore，principal=principal)
-```
-# 本地单元测试
+## 本地单元测试
 
 Server实例提供了callFunction 和callJob 来测试你的程序。
 
