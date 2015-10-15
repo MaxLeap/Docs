@@ -27,10 +27,10 @@
 云函数是运行在MaxLeap上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种第三方类库。
 
 ###定义云函数
-每个云函数需要实现 com.maxleap.code.LASHandler interface，该interface是典型的Functional Interface。
+每个云函数需要实现 com.maxleap.code.MLHandler interface，该interface是典型的Functional Interface。
 
 ```Java
-public interface LASHandler <T extends com.maxleap.code.Request, R extends com.maxleap.code.Response> {
+public interface MLHandler <T extends com.maxleap.code.Request, R extends com.maxleap.code.Response> {
     R handle(T t);
 }
 ```
@@ -48,7 +48,7 @@ request -> {
 JDK6和7可以如下定义:
 
 ```Java
-public class HelloWorldHandler implements LASHandler {
+public class HelloWorldHandler implements MLHandler {
     public Response handle(Request request) {
         Response<String> response = new ResponseImpl<String>(String.class);
         response.setResult("Hello, world!");
@@ -66,10 +66,10 @@ defineFunction("helloWorld", new HelloWorldHandler());
 ### 通过云函数访问Cloud Data
 
 #### 定义Cloud Data Object（在管理中心中，称之为“Class”）
-新建一个Cloud Data Object，并继承LASObject类
+新建一个Cloud Data Object，并继承MLObject类
 
 ```java
-public class MyObject extends LASObject {
+public class MyObject extends MLObject {
     private String name;
     
     public String getName() {
@@ -90,11 +90,11 @@ public class MyObject extends LASObject {
 
 #### Cloud Data Object的CRUD
 
-我们可以通过 LASClassManager 操作 Cloud Data：
+我们可以通过 MLClassManager 操作 Cloud Data：
 
 ```java
 public void doSomethingToCloudData(){
-	LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
+	MLClassManager<MyObject> myObjectEntityManager = MLClassManagerFactory.getManager(MyObject.class);
 	MyObject obj = new MyObject();
 	obj.setName("Awesome");
 	String name = obj.getName();
@@ -171,7 +171,7 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
 ###创建和监控Background Job
 ####在云代码中定义并实现Job Handler
 ``` java
-public class MyJobHandler implements LASHandler {
+public class MyJobHandler implements MLHandler {
     public Response handle(Request request) {
         Response<String> response = new ResponseImpl<String>(String.class);
         response.setResult("Job done!");
@@ -216,16 +216,16 @@ img
 Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
 ###创建和使用Hook
-实现LASClassManagerHook接口(建议直接继承LASClassManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
+实现MLClassManagerHook接口(建议直接继承MLClassManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
 
 ```java
 @ClassManager("MyObject")
-public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
+public class MyObjectHook extends MLClassManagerHookBase<MyObject> {
 	@Override
 	public BeforeResult<MyObject> beforeCreate(MyObject obj, UserPrincipal userPrincipal) {
-		LASClassManager<MyObject> myObjectEntityManager = LASClassManagerFactory.getManager(MyObject.class);
+		MLClassManager<MyObject> myObjectEntityManager = MLClassManagerFactory.getManager(MyObject.class);
 		//创建obj前验证是否重名了
-		LASQuery sunQuery = LASQuery.instance();
+		MLQuery sunQuery = MLQuery.instance();
 		sunQuery.equalTo("name", obj.getName());
 		FindMsg<MyObject> findMsg = myObjectEntityManager.find(sunQuery);
 		if (findMsg.results() != null && findMsg.results().size() > 0)
@@ -236,7 +236,7 @@ public class MyObjectHook extends LASClassManagerHookBase<MyObject> {
 	@Override
 	public AfterResult afterCreate(BeforeResult<MyObject> beforeResult, SaveMsg saveMessage, UserPrincipal userPrincipal) {
 		//创建完obj后在服务器上记录日志，这条日志可以通过console后台查看到
-        logger.info("create Ninja complete use " + LASJsonParser.asJson(userPrincipal) + ",saveMsg:"+LASJsonParser.asJson(saveMessage));
+        logger.info("create Ninja complete use " + MLJsonParser.asJson(userPrincipal) + ",saveMsg:"+MLJsonParser.asJson(saveMessage));
         return new AfterResult(saveMessage);
 	}
 }
@@ -280,10 +280,10 @@ public BeforeResult<FriendList> beforeCreate(FriendList list, UserPrincipal user
 @Override
 public BeforeResult<FriendList> beforeUpdate(FriendList list, UserPrincipal userPrincipal) {
 	//定义查询条件：
-	LASQuery sunQuery = LASQuery.instance();
+	MLQuery sunQuery = MLQuery.instance();
 	sunQuery.equalTo("Name", list.getName());
 	//在“好友”表中执行查询
-	LASClassManager<Friend> friendEntityManager = LASClassManagerFactory.getManager(Friend.class);
+	MLClassManager<Friend> friendEntityManager = MLClassManagerFactory.getManager(Friend.class);
 	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);	
 	if (findMsg.results() != null && findMsg.results().size() > 0)
 		return new BeforeResult<>(list, false, "Update failed because the name of the friend list already exists!");
@@ -303,10 +303,10 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list, UserPrincipal user
 @Override
 public BeforeResult<FriendList> beforeDelelte(FriendList list, UserPrincipal userPrincipal) {
 	//定义查询条件：
-	LASQuery sunQuery = LASQuery.instance();
+	MLQuery sunQuery = MLQuery.instance();
 	sunQuery.equalTo("listName", list.Name);
 	//在“好友”表中执行查询
-	LASClassManager<Friend> friendEntityManager = LASClassManagerFactory.getManager(Friend.class);
+	MLClassManager<Friend> friendEntityManager = MLClassManagerFactory.getManager(Friend.class);
 	FindMsg<Friend> findMsg = friendEntityManager.find(sunQuery);
 	
 	if (findMsg.results() != null && findMsg.results().size() > 0)
@@ -362,14 +362,14 @@ SDK提供使用用户请求原始信息UserPrincipal来访问数据，而不是�
 SDK在处理hook请求时会默认使用UserPrincipal，在function/job中你可以通过获取Request对象的UserPrincipal来完成你的数据访问
 
 ```java
-new LASHandler<Request, Response>() {
+new MLHandler<Request, Response>() {
       @Override
       public Response handle(Request request) {
             UserPrincipal userPrincipal = request.getUserPrincipal();
-            LASClassManager<Ninja> ninjaZEntityManager = LASClassManagerFactory.getManager(Ninja.class);
-            LASQuery lasQuery = LASQuery.instance().equalTo("name", "123");
+            MLClassManager<Ninja> ninjaZEntityManager = MLClassManagerFactory.getManager(Ninja.class);
+            MLQuery lasQuery = MLQuery.instance().equalTo("name", "123");
             FindMsg<Ninja> findMsg = ninjaZEntityManager.find(lasQuery, userPrincipal);
-            Response<FindMsg> response = new LASResponse<FindMsg>(FindMsg.class);
+            Response<FindMsg> response = new MLResponse<FindMsg>(FindMsg.class);
             response.setResult(findMsg);
             return response;
       }
