@@ -1,4 +1,4 @@
-# LAS Docs
+# MaxLeap Docs
 
 These are the markdown sources for all of the [platform docs](https://leap.as/en_us/docs/overview.html) of LAS. The content for the docs is stored in this repo.
 
@@ -22,7 +22,7 @@ For example, `/en/iOS/` contains all of sections for the iOS guide in English. Y
 
 ## How Do I Contribute?
 
-If you have any fixes or suggestions, simply send us a pull request! The [documentation](https://leap.as/en_us/docs/overview.html) will be regenerated from master as needed.Please refer to [Contributing to LAS Docs](https://github.com/LeapAppServices/LAS-Docs/blob/master/CONTRIBUTING.md).
+If you have any fixes or suggestions, simply send us a pull request! The [documentation](https://leap.as/en_us/docs/overview.html) will be regenerated from master as needed.Please refer to [Contributing to MaxLeap Docs](https://github.com/MaxLeap/Docs/blob/master/CONTRIBUTING.md).
 
 ## Can I Access The Docs Offline?
 
