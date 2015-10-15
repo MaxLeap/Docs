@@ -287,7 +287,7 @@ curl -X POST \
 -H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
-https://api.maxleap.com/2.0/functions/hello
+https://api.maxleap.cn/2.0/functions/hello
 ```
 此时，我们将得到如下结果：
 
