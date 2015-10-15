@@ -79,16 +79,18 @@ git clone https://github.com/MaxLeap/Demo-CloudCode-Python.git
 
 ### 一个python cloudcode项目的目录树应该如下：
 
-    ├── app                     #cloudcode主目录 (必备)
-    │   ├── requirements.txt    #cloudcode所依赖的pip库（可选）
-    │   ├── function            #function目录（可选）
-    │   │   └── demo.py
-    │   ├── hook                #hook目录（可选）
-    │   ├── job                 #job目录（可选）
-    |   └── tests               #tests目录（可选）
-    ├── config                  #cloudcode配置文件目录（必备）
-    │   └── global.json         #cloudcode配置文件（必备）
-    └── lib                     #cloudcode所依赖的lib（可选）
+```
+├── app                     #cloudcode主目录 (必备)
+│   ├── requirements.txt    #cloudcode所依赖的pip库（可选）
+│   ├── function            #function目录（可选）
+│   │   └── demo.py
+│   ├── hook                #hook目录（可选）
+│   ├── job                 #job目录（可选）
+|   └── tests               #tests目录（可选）
+├── config                  #cloudcode配置文件目录（必备）
+│   └── global.json         #cloudcode配置文件（必备）
+└── lib                     #cloudcode所依赖的lib（可选）
+```
 
 ### 目录加载顺序
 
