@@ -81,7 +81,7 @@
 ![imgCCInstance.png](../../../images/imgCCInstance.png)
 
 ##白名单
-将任务添加至白名单后，请求调用该任务时，将不进行Http请求头中X-ML-AppId和X-ML-APIKey的校验。
+可以将函数的某个调用方法添加至白名单，添加后，当请求调用该函数时，将不进行Http请求头中X-ML-AppId和X-ML-APIKey的校验。
 
 ## 下一步
 
