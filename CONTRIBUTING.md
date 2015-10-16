@@ -52,6 +52,9 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '/guide/devguide/ios.html#云数据',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '/guide/devguide/ios.html#分析',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '/guide/devguide/ios.html#营销',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH': '/guide/devguide/ios.html#支持',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH': '/guide/devguide/ios.html#云配置',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH': '/guide/devguide/ios.html#用户',
 
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '/guide/devguide/android.html',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '/guide/devguide/android.html#cloud-data',
