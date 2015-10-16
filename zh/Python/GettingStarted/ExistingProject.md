@@ -5,12 +5,12 @@
 
 ### 安装 MaxLeap命令行工具（MaxLeap-CLI）
 #### 下载MaxLeap-CLI
-下载地址：[https://github.com/LeapCloud/MaxLeap-CLI/releases](https://github.com/LeapCloud/MaxLeap-CLI/releases)
+下载地址：[https://github.com/MaxLeap/MaxLeap-CLI/releases](https://github.com/MaxLeap/MaxLeap-CLI/releases)
 
 根据平台选择对应的客户端：
 
-1.  Windows：[maxleap.exe](https://github.com/LeapCloud/MaxLeap-CLI/releases/download/v0.1/maxleap.exe)
-2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/LeapCloud/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar)
+1.  Windows：[maxleap.exe](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleap.exe)
+2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar)
 
 下载完成后，您可直接在终端中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
 
@@ -172,4 +172,4 @@ hello world
 * X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
 ## 下一步
- 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
+ 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
