@@ -5,7 +5,7 @@
 
 	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
 
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip">下载SDK</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS" target="_blank">下载 SDK</a>
 
 2. 添加SDK到您的应用
 
@@ -118,3 +118,7 @@
 	![ios_issue_message_view](../../../images/ios_issue_message_view.png)
 	
 	在 MaxLeap 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
+
+	## 下一步
+
+    至此，HelpCenter SDK的安装与配置完成。请移步至[HelpCenter SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)以获取HelpCenter的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

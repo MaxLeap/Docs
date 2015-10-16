@@ -52,6 +52,9 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH': '/guide/devguide/ios.html#云数据',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH': '/guide/devguide/ios.html#分析',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH': '/guide/devguide/ios.html#营销',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH': '/guide/devguide/ios.html#支持',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH': '/guide/devguide/ios.html#云配置',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH': '/guide/devguide/ios.html#用户',
 
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID': '/guide/devguide/android.html',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN': '/guide/devguide/android.html#cloud-data',
@@ -70,9 +73,9 @@ We provide several path-maps here, you can compile links of other pages with tho
 
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '/guide/devguide/java.html',
 
-        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON': '/guide/devguide/java.html',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON': '/guide/devguide/python.html',
 
-        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL': '/guide/usermanual',
+        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING': '/guide/usermanual/marketing.html',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '/guide/usermanual/usermgmt.html',
 
@@ -83,13 +86,7 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
         'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA': '/quickstart/java/core/existing.html',
         'ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
-        'ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html',
-
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LAS-sdk-all.zip',
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASStarterProject.zip',
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip'
-
+        'ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html'
 
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 

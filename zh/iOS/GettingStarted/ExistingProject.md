@@ -4,7 +4,7 @@
 
 	请确认您使用的是Xcode最新版本（5.0+），目标平台为iOS 6.0 或者更高版本。
 
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/iOS/v1.5.0/LASAll-v1.5.0.zip">下载SDK</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 SDK</a>
 
 2. 添加SDK到您的应用
 
@@ -76,3 +76,6 @@ testObject[@"Name"] = @"David Wang";
 运行您的应用。然后可以在 开发者中心 -> 云存储 中看到刚创建的数据。
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+
+## 下一步
+ 至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务之旅。

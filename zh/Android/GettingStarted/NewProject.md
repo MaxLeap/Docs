@@ -4,7 +4,7 @@
 
 1.	获取项目模板，并解压缩至您的Workspace
 		
-	<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/LASStarterProject.zip">下载Android项目模板</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-Android" target="_blank">下载 Android 项目模板</a>
 	
 2.	打开项目模板
 
@@ -88,4 +88,4 @@ public class MyApplication extends Application {
 表明通过客户端，向应用下的Cloud Data存入数据成功。
 
 ## 下一步
-至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)或[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。
+至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

@@ -4,7 +4,7 @@ HelpCenter是依赖于MaxLeap Core SDK之上的服务，在安装和使用HelpCe
 
 1. 获取SDK
 
-<a class="download-sdk" href="...">下载MaxLeap HelpCenter Android SDK</a>
+<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-Android" target="_blank">下载 MaxLeap HelpCenter SDK</a>
 
 2. 添加SDK
 

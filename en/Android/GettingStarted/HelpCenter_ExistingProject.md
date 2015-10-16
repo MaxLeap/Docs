@@ -4,7 +4,7 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 
 1. Get SDK
 
-<a class="download-sdk" href="...">Download MaxLeap HelpCenter Android SDK</a>
+<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-Android" target="_blank">Download MaxLeap HelpCenter Android SDK</a>
 
 2. Add SDK
 
