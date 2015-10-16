@@ -134,7 +134,7 @@ curl -X POST \
 -H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
 -d '{"name":"David Wang"}' \
-https://api.leap.as/functions/hello
+https://api.maxleap.cn/2.0/functions/hello
 ```
 	
 ##### 通过Android/iOS SDK调用：
@@ -190,10 +190,10 @@ defineJob("myJob", new MyJobHandler());
 
 ```shell
 curl -X POST \
--H "X-ZCloud-AppId: YOUR_APPID" \		
--H "X-ZCloud-APIKey: YOUR_APIKEY" \
+-H "X-ML-AppId: YOUR_APPID" \		
+-H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
-https://api.leap.as/jobs/YOUR_JOBNAME
+https://api.maxleap.cn/2.0/jobs/YOUR_JOBNAME
 ```
 
 ####在管理中心中Schedule Job Plan
