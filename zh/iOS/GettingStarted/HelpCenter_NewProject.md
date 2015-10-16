@@ -5,7 +5,7 @@
 
 请确保您使用的是最新的 Xcode (v5.0+), 并且目标平台版本为 iOS 6.0 或者更高。
 
-<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS">下载模板项目</a>
+<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS" target="_blank">下载模板项目</a>
 
 2. 连接 MaxLeap 云端应用
 

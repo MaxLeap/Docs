@@ -4,7 +4,7 @@
 
 1.	获取项目模板，并解压缩至您的Workspace
 		
-	<a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-Android">下载 Android 项目模板</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-Android" target="_blank">下载 Android 项目模板</a>
 	
 2.	打开项目模板
 

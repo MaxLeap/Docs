@@ -86,22 +86,7 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID': '/quickstart/android/core/existing.html',
         'ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA': '/quickstart/java/core/existing.html',
         'ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS': '/api/ios/index.html',
-        'ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html',
-
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_IOS': 'https://github.com/MaxLeap/SDK-iOS/releases',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/SDK-Android/releases',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_HELPCENTER_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/Demo-Support-Android',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_HELPCENTER_DOWNLOAD_IOS': 'https://github.com/MaxLeap/Demo-Support-iOS',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_CLOUDCODE_DOWNLOAD_PYTHON': 'https://github.com/MaxLeap/SDK-Python/releases',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_CLOUDCODE_DOWNLOAD_JAVA': 'https://github.com/MaxLeap/SDK-CloudCode-Java/releases',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_ALL_DOWNLOAD_IOS': 'https://github.com/MaxLeap/SDK-iOS/releases',
-        'ML_DOCS_LINK_PLACEHOLDER_SDK_ALL_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/SDK-Android/releases',
-
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': 'https://github.com/MaxLeap/StarterProject-iOS',
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/StarterProject-Android',
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_HELPCENTER_DOWNLOAD_IOS': 'https://github.com/MaxLeap/Demo-Support-iOS',
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_HELPCENTER_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/Demo-Support-Android'
-
+        'ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID': '/api/android/index.html'
 
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
 
