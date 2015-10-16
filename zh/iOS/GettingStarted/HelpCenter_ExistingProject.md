@@ -5,7 +5,7 @@
 
 	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
 
-	<a class="download-sdk" href="ML_DOCS_LINK_PLACEHOLDER_SDK_HELPCENTER_DOWNLOAD_IOS">下载 SDK</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS">下载 SDK</a>
 
 2. 添加SDK到您的应用
 
