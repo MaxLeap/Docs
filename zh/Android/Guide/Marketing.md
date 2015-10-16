@@ -197,7 +197,7 @@ MaxLeap.setMarketingEnabled(true);
 ```
 
 ###定义目标Activity
-您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
+您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
 
 在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
 
