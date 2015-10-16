@@ -714,7 +714,7 @@ hook方法可以选择返回一个Response对象，如果hook返回了一个Resp
 ## 日志
 ### 使用日志
 
-*Log类用来记录日志*
+*Log实例用来记录日志*
 
 ```python
 from ML import Log
@@ -737,11 +737,11 @@ maxleap log -n 100
 
 ## 本地单元测试
 
-Server实例提供了callFunction 和callJob 来测试你的程序。
+`Server`实例提供了`callFunction` 和`callJob` 来测试你的程序。
 
-使用nose来测试你的代码：
+使用`nose`来测试你的代码：
 
-tests/test_ninja.py
+`nosetests tests/test_ninja.py`
 
 ```python
 #coding:utf-8
