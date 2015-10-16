@@ -73,7 +73,7 @@ We provide several path-maps here, you can compile links of other pages with tho
 
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA': '/guide/devguide/java.html',
 
-        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON': '/guide/devguide/java.html',
+        'ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON': '/guide/devguide/python.html',
 
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL': '/guide/usermanual',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',

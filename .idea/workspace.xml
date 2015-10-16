@@ -28,8 +28,8 @@
         <entry file="file://$PROJECT_DIR$/CONTRIBUTING.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state>
-              <first_editor vertical-scroll-proportion="0.5329218">
-                <caret line="94" column="38" selection-start-line="94" selection-start-column="38" selection-end-line="94" selection-end-column="38" />
+              <first_editor vertical-scroll-proportion="0.27366254">
+                <caret line="75" column="72" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -499,14 +499,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/imgAAOverview1.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/imgAAOverview2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/imgAARevenue.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/zh/Java/GettingStarted/ExistingProject.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/zh/Java/GettingStarted/NewProject.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/zh/Java/Guide/CloudCode.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/CONTRIBUTING.md</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/zh/Python/GettingStarted/ExistingProject.md</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/zh/Python/GettingStarted/NewProject.md</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/zh/Python/Guide/CloudCode.md</PATH>
@@ -758,7 +751,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444964389065</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="update links">
+      <created>1444966964474</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1444966964474</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1493,8 +1492,8 @@
     <entry file="file://$PROJECT_DIR$/CONTRIBUTING.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state>
-          <first_editor vertical-scroll-proportion="0.5329218">
-            <caret line="94" column="38" selection-start-line="94" selection-start-column="38" selection-end-line="94" selection-end-column="38" />
+          <first_editor vertical-scroll-proportion="0.27366254">
+            <caret line="75" column="72" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
             <folding />
           </first_editor>
           <second_editor />
