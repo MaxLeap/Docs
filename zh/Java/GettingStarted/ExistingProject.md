@@ -9,12 +9,12 @@ Eclipse:
 
 ##安装 MaxLeap命令行工具（MaxLeap-CLI）
 ####下载MaxLeap-CLI
-下载地址：[https://github.com/LeapCloud/MaxLeap-CLI/releases](https://github.com/LeapCloud/MaxLeap-CLI/releases)
+下载地址：[https://github.com/MaxLeap/MaxLeap-CLI/releases](https://github.com/MaxLeap/MaxLeap-CLI/releases)
 
 根据平台选择对应的客户端：
 
-1.  Windows：[maxleap.exe](https://github.com/LeapCloud/MaxLeap-CLI/releases/download/v0.1/maxleap.exe)
-2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/LeapCloud/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar)
+1.  Windows：[maxleap.exe](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleap.exe)
+2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar)
 
 下载完成后，您可直接在终端中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
 
@@ -275,7 +275,7 @@ public class Main extends LoaderBase implements Loader {
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
+*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[mlc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取mlc的更多信息。
 
 ### 测试
 

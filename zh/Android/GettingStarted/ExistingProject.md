@@ -2,7 +2,7 @@
 
 1.	获取SDK，并解压缩
 
-    <a class="download-sdk" href="ML_DOCS_LINK_PLACEHOLDER_SDK_CORE_DOWNLOAD_ANDROID">下载 MaxLeap SDK</a>
+    <a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">下载 MaxLeap SDK</a>
 2.	将SDK添加至项目
 
 将解压后的所有"MaxLeap-*.jar"文件，拖拽至项目的libs目录中。如果你们的项目没有 libs 目录，那么就在项目的根目录下创建一个：通过右键点击项目 Project，选择 New，接下来点击 Folder 菜单即可创建新目录。

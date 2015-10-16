@@ -2,9 +2,9 @@
 
 1. Download & unzip the SDK
 
-<a class="download-sdk" href="https://raw.githubusercontent.com/LeapAppServices/LAS-SDK-Release/master/Android/v0.6/las-sdk-all.zip">Download the SDK</a>
+   	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">Download Android Template</a>
 
-2. Add the SDK to your project
+2.	Add the SDK to your project
 
 Import the zip file's contents into your existing Android project by extracting it into your "libs" folder. If your project does not already have a "libs" folder, create one at the root of the project by right-clicking the Project and choosing "New" and then "Folder".
 

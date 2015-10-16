@@ -5,7 +5,7 @@
 
 请确保您使用的是最新的 Xcode (v7.0+), 并且目标平台版本为 iOS 6.0 或者更高。
 
-<a class="download-sdk" href="ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS">下载模板项目</a>
+<a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-iOS" target="_blank">下载模板项目</a>
 
 2. 配置项目
 
