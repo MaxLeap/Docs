@@ -22,7 +22,7 @@ Eclipse:
 ./maxleap -v
 ```
     
-显示`zcc version 0.1`表示MaxLeap客户端安装成功
+显示`axleap version 0.1`表示MaxLeap客户端安装成功
 
 *	maxleap命令添加到环境变量
 

@@ -19,7 +19,7 @@
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具lcc上传到MaxLeap，MaxLeap会生成对应的docker image。用lcc deploy可以让MaxLeap启动Docker container运行该Docker image。
+一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具MaxLeap-CLI上传到MaxLeap，MaxLeap会生成对应的docker image。用maxleap deploy命令可以让MaxLeap启动Docker container运行该Docker image。
 
 目前云代码支持Java环境和Python环境，我们在近期会推出其他开发语言版本。
 

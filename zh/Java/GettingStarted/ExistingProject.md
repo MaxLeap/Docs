@@ -22,7 +22,7 @@ Eclipse:
 ./maxleap -v
 ```
     
-显示`zcc version 0.1`表示MaxLeap客户端安装成功
+显示`axleap version 0.1`表示MaxLeap客户端安装成功
 
 *	maxleap命令添加到环境变量
 
@@ -53,7 +53,7 @@ Eclipse:
 * 获取测试插件JUnit
 * 获取编译打包插件
 
-添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.0，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
+添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.1，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
 
 ```xml
     <dependencies>
