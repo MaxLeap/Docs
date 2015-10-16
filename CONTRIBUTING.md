@@ -98,8 +98,8 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_LINK_PLACEHOLDER_SDK_ALL_DOWNLOAD_ANDROID': 'https://github.com/LeapCloud/SDK-Android/releases',
 
         'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_IOS': 'https://github.com/MaxLeap/StarterProject-iOS',
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/StarterProject-Android'
-        'ML_DOCS_LINK_PLACEHOLDER_STARTER_HELPCENTER_DOWNLOAD_IOS': 'https://github.com/MaxLeap/Demo-Support-iOS'
+        'ML_DOCS_LINK_PLACEHOLDER_STARTER_CORE_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/StarterProject-Android',
+        'ML_DOCS_LINK_PLACEHOLDER_STARTER_HELPCENTER_DOWNLOAD_IOS': 'https://github.com/MaxLeap/Demo-Support-iOS',
         'ML_DOCS_LINK_PLACEHOLDER_STARTER_HELPCENTER_DOWNLOAD_ANDROID': 'https://github.com/MaxLeap/Demo-Support-Android'
 
     For example, if you want to insert /devguide/ios.htm#Marketing in a file,it can be written as ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#Marketing
