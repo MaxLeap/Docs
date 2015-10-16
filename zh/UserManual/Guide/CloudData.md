@@ -17,7 +17,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 ## Class列表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
 
-![imgCDclassList.png](../../../images/imgCDclassList.png)
+![imgCDclassList.png](../../../images/imgCDClassList.png)
 
 若某个字段的类型为MLRelation，即关联了其他MLObject，该列的值会显示为"View Relations".点击后，便可查看该属性关联的所有MLObject.
 
@@ -26,7 +26,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 ###新建/修改 Class
 点击"＋添加类"按钮，输入class名，便可以完成class的新建：
 
-![imgCDAddclass.png](../../../images/imgCDAddclass.png)
+![imgCDAddclass.png](../../../images/imgCDAddClass.png)
 
 新建class完毕后，您可以选中改class后，对其进行如下修改：
 
@@ -38,7 +38,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 ###删除 Class
 在Claas列表中选中要删除的class，在右侧选择 更多 >> 删除类，确认即可。
 
-![imgCDDeleteclass](../../../images/imgCDDeleteclass.png)
+![imgCDDeleteclass](../../../images/imgCDDeleteClass.png)
 
 ## 下一步
 **如果您希望进一步了解MaxLeap Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
