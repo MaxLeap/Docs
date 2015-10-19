@@ -1,4 +1,4 @@
-#云数据
+# 云数据
 
 ## 简介
 
@@ -44,7 +44,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 注意：
 
-* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 Comment 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
+* **Comment表合何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端创建表，所以在使用前必须先登录 MaxLeap 的控制台并手动创建 Comment 表。这样在运行代码后这条数据才会被成功插入。
 * **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
 * **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
@@ -56,7 +56,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 	updatedAt|对象的最后修改时间
 
 * **大小限制：** ML Object的大小被限制在128K以内。
-* 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
+* 键的名称可以包含英文字母，数字和下划线，但是必须以字母开头。值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
 * 您可以在调用 `MLDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
 
 ```java
@@ -1153,7 +1153,7 @@ MaxLeap提供强大的邮箱验证服务，您只需在Console >> App Settings >
 您可以通过MLAnonymousUtils获取一个匿名的用户账号：
 
 ```java
-MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
+MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
       @Override
       public void done(MLUser user, MLException e) {
         if (e != null) {
@@ -1164,21 +1164,6 @@ MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
   }
 });
 ```
-#####自动创建匿名用户
-
-在主Application的onCreate()方法中添加：
-
-```java
-MLUser.enableAutomaticUser();
-```
-
-您可以通过注册或者登录，将当前的匿名用户转化为非匿名用户，该匿名用户的所有的数据都将保留。您可以通过MLAnonymousUtils.isLinked()来判断当前用户是否为匿名用户。
-
-```java
-Boolean isAnonymous = MLAnonymousUtils.isLinked(MLUser.getCurrentUser());
-```
-
-您可以选择让系统自动创建匿名用户（本地创建，无需网络连接）, 以便立即开始使用应用. 设置自动创建匿名用户后, MLUser.getCurrentUser()将永远不为null。 然而，当您在存储与该匿名用户相关的MLObject时，MaxLeap会在云端创建该匿名用户。
 
 ### 在Console中管理用户
 
