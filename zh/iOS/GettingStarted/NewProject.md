@@ -14,10 +14,10 @@
 打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面这行的注释:
 
 ```objc
-[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 ```
 
-把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。
+请把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。同时根据您应用平台的地区，设置服务器位置（`MLSiteUS`, `MLSiteCN`）。
 
 3. 现在可以运行了。
 
@@ -32,7 +32,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 
 // 创建一条数据
 MLObject *testObject = [MLObject objectWithClassName:@"People"];

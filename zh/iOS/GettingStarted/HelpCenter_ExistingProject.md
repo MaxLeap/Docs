@@ -5,7 +5,7 @@
 
 	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
 
-	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS" target="_blank">下载 SDK</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS" target="_blank">下载模板项目</a>
 
 2. 添加SDK到您的应用
 
@@ -14,11 +14,11 @@
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
 
-	按照同样的方法把 `MLHelpCenter.embeddedframework` 拖到 Xcode 项目中。
+	按照同样的方法把 `MLHelpCenter.embeddedframework` 拖到 Xcode 项目中，这样做的目的是为了把 MLHelpCenter.framework 和相关的资源同时添加到项目中。**注意：不要**使用 `Link Binary With Libraris >> Add Others` 来添加这个框架。
 
 3. 添加依赖
 
-	确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为Yes。
+	确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为 YES。
     
     <p class="image-wrapper">
     ![enable_modules](../../../images//enable_modules.png)
@@ -40,7 +40,7 @@
 
 ## 连接云端应用
 
-打开AppDelegate.m文件，并将如下import添加到文件顶部：
+打开 `AppDelegate.m` 文件，并添加如下头部：
 
 ```objc
 #import <MaxLeap/MaxLeap.h>
@@ -54,17 +54,19 @@
 
 把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。
 
-接下来启用 HelpCenter 模块:
+接下来启用 `HelpCenter` 模块:
 
 ```
 #import <MLHelpCenter/MLHelpCenter.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 	[MLHelpCenter install];
 }
 ```
+
+请把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。同时根据您应用平台的地区，设置服务器位置（`MLSiteUS`, `MLSiteCN`）。
 
 编译并运行！
 
@@ -80,7 +82,7 @@
 
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-		[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+		[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 
 		// 创建一条数据
 		MLObject *testObject = [MLObject objectWithClassName:@"Person"];
