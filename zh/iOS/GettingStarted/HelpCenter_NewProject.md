@@ -39,17 +39,19 @@
 	[MaxLeap setApplicationId:@"your_application_id" 	clientKey:@"your_client_key" site:MLSiteCN];
 	[MLHelpCenter install];
 
-	// 创建一条数据
-	MLObject *testObject = [MLObject objectWithClassName:@"Person"];
-	testObject[@"foo"] = @"bar";
-	[testObject saveInBackgroundWithBlock:nil];
+	MLQuery *que = [MLQuery queryWithClassName:@"Test"];
+	[que whereKey:@"objectId" equalTo:@"561c83c0226"];
+	[que findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	   if (error.code == 90000) {
+    		// 返回错误代码为 90000 说明 appid, clientKey, site 配置正确。
+	     	NSLog(@"已经能够正确连接上您的云端应用");
+   	    } else {
+	       NSLog(@"应用访问凭证不正确，请检查。");
+   		 }
+	}];
 	```
 
-	这段代码试图在云端创建一条类名为 `Person` 的数据。如果云端还没有 `Person` 这个类，则会先创建这个类，然后再插入数据。
-
-	运行您的应用。然后可以在 Dev Center -> Data 中看到刚创建的数据。
-
-	![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+	运行您的应用。然后查看 Xcode console 中打印的日志。
 
 2. 检测 HelpCenter 模块是否可以正常使用：
 	

@@ -55,8 +55,6 @@
 
 ## 测试是否可以连接到 MaxLeap 服务器
 
-
-
 为了检测是否可以连接 MaxLeap 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
 ```objc
@@ -66,17 +64,19 @@
 {
 [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 
-// 创建一条数据
-MLObject *testObject = [MLObject objectWithClassName:@"People"];
-testObject[@"Name"] = @"David Wang";
-[testObject saveInBackgroundWithBlock:nil];
+MLQuery *que = [MLQuery queryWithClassName:@"Test"];
+[que whereKey:@"objectId" equalTo:@"561c83c0226"];
+[que findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error.code == 90000) {
+    	 // 返回错误代码为 90000 说明 appid, clientKey, site 配置正确。
+        NSLog(@"已经能够正确连接上您的云端应用");
+    } else {
+        NSLog(@"应用访问凭证不正确，请检查。");
+    }
+}];
 ```
 
-这段代码目的是在云端创建一条类名为 `People` 的数据。
-
-运行您的应用。然后可以在 [MaxLeap 开发者平台](https://maxleap.cn) 上的 `开发者中心 >> 数据` 中看到刚创建的数据。
-
-![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+运行您的应用。然后查看 Xcode console 中打印的日志。
 
 ## 下一步
  至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务之旅。
