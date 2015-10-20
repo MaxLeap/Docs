@@ -64,7 +64,8 @@ public class MyApplication extends Application {
     ```java
     import android.app.Application;
     import com.maxleap.MaxLeap;
-    import com.maxleap.MLDataManager;
+    import com.maxleap.MLQueryManager;
+    import com.maxleap.MLQuery
     import com.maxleap.MLObject;
 
     public class MyApplication extends Application {
@@ -74,18 +75,23 @@ public class MyApplication extends Application {
             MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
 
             //测试项目配置：
-            MLObject testObject = new MLObject("People");
-            testObject.put("Name", "David Wang");
-            MLDataManager.saveInBackground(testObject);
+    		MLQuery<MLObject> query = MLQuery.getQuery("foo");
+            query.whereEqualTo(MLObject.KEY_OBJECT_ID, "bar");
+            MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
+                @Override
+                public void done(final MLObject object, final MLException e) {
+                    if (e != null && e.getCode() == 90000) {
+                        Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
+                    } else {
+                        Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
+                    }
+                }
+            });
         }
     }
     ```
 
-    该段测试代码试图向 Cloud Data 中插入一条 `class` 为 `People` 的数据。我们将在管理中心的“开发者中心” -> “云存储” 中发现：
-
-    ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
-
-    表明通过客户端已经向应用下的 Cloud Data 成功插入数据。至此，MaxLeap SDK的安装与配置完成。
+    运行应用，查看 Logcat 的输出日志。
 
 2. 测试MaxLeap HelpCenter SDK
 
