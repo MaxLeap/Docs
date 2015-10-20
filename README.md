@@ -22,6 +22,6 @@ The SDK guide docs are categorized by language - platform, which can be shown as
 
 ## What can I do with the Repository?
 
-* You can read and refer to the content
+* You can read and refer to the docs' content
 * You can make your [contribution](https://github.com/MaxLeap/Docs/blob/master/CONTRIBUTING.md) to the doc if you have any fixes or good ideas!
 * You can keep the documentation locally by cloning or downloading.
