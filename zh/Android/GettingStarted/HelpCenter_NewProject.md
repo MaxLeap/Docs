@@ -8,7 +8,7 @@ HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 He
 
 2.	打开项目模板
 
-**Android Studio**
+	**Android Studio**
 
     1. 	打开 Android Studio，点击 “Import project”
     2. 	进入项目模板根目录，选择 `build.gradle`
@@ -32,7 +32,7 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+		MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
 	}
 }
 ```
@@ -72,7 +72,7 @@ public class MyApplication extends Application {
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
 
             //测试项目配置：
     		MLQuery<MLObject> query = MLQuery.getQuery("foo");

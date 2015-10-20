@@ -34,7 +34,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
         }
     }
     ```
@@ -72,7 +72,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
 
             //测试项目配置：
     		MLQuery<MLObject> query = MLQuery.getQuery("foo");
