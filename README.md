@@ -7,17 +7,17 @@ MaxLeap provides detailed [documentation](https://maxleap.cn/zh_cn/guide/docs.ht
 This repository contains three parts: SDK guide, Console user-manual, and ScreenShots.
 The SDK guide docs are categorized by language - platform, which can be shown as:
 
-	 .
+	.
 	│-- {language}
 	│   │-- {platform}
 	│   │   │-- {catgory}
-	│   │       │-- {section}	# SDK guide
+	│   │       │-- {section}      # SDK guide
 	│   │-- usermanual
-	│       │-- {section}			# Console user-manual
+	│       │-- {section}          # Console user-manual
 	│-- images
-	│	 │-- {section}				# ScreenShots referred in all docs
+	│	 │-- {section}                # ScreenShots referred in all docs
 	│-- .gitignore
-	│-- CONTRIBUTING.md			# Introduce how to make contribution
+	│-- CONTRIBUTING.md            # Introduce how to make contribution
 	│-- README.md
 
 ## What can I do with the Repository?
