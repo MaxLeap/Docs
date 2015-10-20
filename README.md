@@ -15,7 +15,7 @@ The SDK guide docs are categorized by language - platform, which can be shown as
 	│   │-- usermanual
 	│       │-- {section}          # Console user-manual
 	│-- images
-	│	 │-- {section}               # ScreenShots referred in all docs
+	│   │-- {section}               # ScreenShots referred in all docs
 	│-- .gitignore
 	│-- CONTRIBUTING.md            # Introduce how to make contribution
 	│-- README.md
