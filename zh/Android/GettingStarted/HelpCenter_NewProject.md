@@ -55,6 +55,18 @@ public class MyApplication extends Application {
 `READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI来唯一的标识用户| 可选
 `ACCESS_WIFI_STATE`| 	获取用户设备的MAC地址，通过MAC地址来唯一的标识用户| 可选
 
+## 配置用户渠道
+
+在 `AndroidManifest.xml` 中配置用户渠道，渠道名可以是 `google_play` 之类的任意字符串。
+
+```xml
+<application>
+   <meta-data
+        android:name="ml_channel"
+        android:value="google_play"/>
+</application>
+```
+
 ##	快速测试
 
 1. 测试MaxLeap Core SDK

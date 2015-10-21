@@ -57,7 +57,19 @@
     `READ_PHONE_STATE`| 	获取用户设备的IMEI，通过IMEI来唯一的标识用户| 可选
     `ACCESS_WIFI_STATE`| 	获取用户设备的MAC地址，通过MAC地址来唯一的标识用户| 可选
 
-3. 快速测试项目配置
+3. 配置用户渠道
+
+	在 `AndroidManifest.xml` 中配置用户渠道，渠道名可以是 `google_play` 之类的任意字符串。
+
+    ```xml
+	<application>
+       <meta-data
+            android:name="ml_channel"
+            android:value="google_play"/>
+    </application>
+	```
+
+4. 快速测试项目配置
 
     为了测试项目是否已经注册至 MaxLeap，我们可以向 `Application` 的 `onCreate()` 方法中添加以下代码：
 
