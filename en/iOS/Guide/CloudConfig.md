@@ -1,82 +1,105 @@
-# Config
+# Cloud Config
+## Introduction
+###What is Cloud Config
+Every app has a `MLCloudConfig` object in the cloud to store the parameters of that app. Cloud Config can help you access and operate the cloud parameter, config app parameter in MaxLeap with Console and read cloud parameter with iOS/Android SDK.
+###Why is Cloud Config Necessary
+The advantages of putting part of MaxLeap configuration in cloud can be summarized as follows:
 
-### ML Cloud Config
+* **dynamic configuration: **
+* **Personalized User Experience: **You can config parameters based on Segment in cloud and customize different experience for different users.
 
-With online parameter, you can control your app behavior without re-publishing. You can set up customized online parameters in Config Settings and once the SDK is on, the online parameters will be got from the data table in background automatically.
 
-### Get Value of Cloud Parameter
+##Add Parameters in Cloud Config
+You can add parameters in Cloud Config with Console. You need to define following properties of parameter when you add a new cloud parameter: 
+
+Property|Value
+-------|-------
+Parameter|Parameter Name
+Type|Parameter Type
+Value|Parameter Value
+
+You can config different parameter value for different Segments. Please check [Console Guide - Cloud Config](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL) for more details about add new Cloud Config Parameter. 
+
+##Get MLConfig Object
 
 ```objective_c
-MLConfig *currentConfig = [MLConfigManager currentConfig];
+MLConfig *currentConfig = [MLConfig currentConfig];
+```
+##Get MaxLeap Parameter Value
 
+```objective_c
 // Get cloud parameter of configname，which might be nil
 id value1 = [currentConfig objectForKey:@"configname"];
-
+     
 // Get cloud parameter value of configname and return as NSString.
 If not, then go back to defaultValue
 NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@"default"];
 ```
 
-There are some similar methods：
-– dateForKey:defaultValue:
-– arrayForKey:defaultValue:
-– dictionaryForKey:defaultValue:
-– fileForKey:defaultValue:
-– geoPointForKey:defaultValue:
-– boolForKey:defaultValue:
-– numberForKey:defaultValue:
-– integerForKey:defaultValue:
-– floatForKey:defaultValue:
-– doubleForKey:defaultValue:
+Similarly:
+ 
+`– dateForKey:defaultValue:`<br>
+`– arrayForKey:defaultValue:`<br>
+`– dictionaryForKey:defaultValue:`<br>
+`– fileForKey:defaultValue:`<br>
+`– geoPointForKey:defaultValue:`<br>
+`– boolForKey:defaultValue:`<br>
+`– numberForKey:defaultValue:`<br>
+`– integerForKey:defaultValue:`<br>
+`– floatForKey:defaultValue:`<br>
+`– doubleForKey:defaultValue:`
+
+
+## Modify Cloud Config
+
+SDK will update currentConfig automatically everytime the app enters foreground. 
+
+Or, you can invoke following code to refresh all cloud parameters:
+
+```objective_c
+[MLConfig getConfigInBackgroundWithBlock:^(MLConfig *config, NSError *error) {
+    // this config is currentConfig
+}];
+```
+
+Or, to refresh some of the parameters
+
+```objective_c
+// It will be refreshing all the keys as the method mentioned above, if you pass 'nil' to 'keys'
+[MLConfig getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(MLConfig *config, NSError *error) {
+    // this config is currentConfig
+}];
+```
+
+If there's any parameter value change after the update, then it will invoke relative `valueChangedHandler()` in main thread.
+
+
 
 ### Observer
 
-1. Observe the cloud parameter value change：
+###Add Observer
 
 ```objective_c
-[MLConfigManager addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
-    // the value changed
+[MLConfig addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
+	// the value changed
 }];
 ```
 
-2. Execute following code to remove observer:
+###Remove Observer
 
 ```objective_c
-[MLConfigManager removeObserver:anObserver forKey:@"configname"];
+[MLConfig removeObserver:anObserver forKey:@"configname"];
 ```
 
-3. Observer must be removed before `anObserver` vanishes
+Remove all observers before the destruction of `anObserver`
 
 ```objective_c
-[MLConfigManager removeObserver:anObserver]; // Remove all observe callback related to anObserver once and for all
+[MLConfig removeObserver:anObserver]; // Remove all observer callbacks related to anObserver once and for all
 ```
 
-### Update Current Config
+## Type of Cloud Parameter Value
 
-SDK will update currentConfig automatically everytime the app enters foreground
-
-Or, you can invoke following code to manually refresh all cloud parameter
-
-```objective_c
-[MLConfigManager getConfigInBackgroundWithBlock:^(MLConfig *config, NSError *error) {
-// this config is currentConfig
-}];
-```
-
-Manually refresh certain parameters
-
-```objective_c
-// Pass nil keys to get all config values.
-[MLConfigManager getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(MLConfig *config, NSError *error) {
-// this config is currentConfig
-}];
-```
-
-MLConfigManager will invoke reletaive valueChangedHandler() in main thread if any cloud parameter value changes after the update
-
-### Type of Cloud Parameter Value
-
-`MLConfig` supports most of the data types supported by `MLObject`:
+`MLConfig` supports most parameter value types that is upported by `MLObject`:
 
 - `NSString`
 - `NSNumber`
