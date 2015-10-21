@@ -1,61 +1,80 @@
----
-title: iOS Developer Guide
+# Analytics
 
-language_tabs:
-  - objective_c
-  - Swift
+## Introduction
 
----
+###	What is MaxLeap Analytics
 
-# Statistics
+MaxLeap Analytics collects all kinds of data of apps and users with clients and Cloud Data. With professional analytics in MaxLeap, there would be a final operator-oriented report. 
 
-If you haven't installed LAS SDK yet, please check [QuickStart][ios_quick_start_guide] to get LAS SDK up and running.
-It should be noted that we only support iOS 6.0 and later. You can check our [API Reference][api_reference] to learn more detailed information about LAS SDk.
+###	Why is MaxLeap Analytics Necessary
 
-## Send Statistics
+MaxLeap Analytics is a real-time free and professional mobile apps Analytics Service. It provides multi-analysis of operation status, deep knowledge of typical users and advice on optimizing operating strategies, which will finally realize：
 
-### Collect Data Automatically
+*	**Comprehend the operation status and trend**: from New Users, Active Users, Sessions and App Versions to User bahevior, User properties and behavioral features, we provide all kinds of properties to help you understand your app's operation and iteration effect. 
+*	**Fully perceive user bahevior**: Reproduce the behavior of each user and keep abreast of their engagement, retention and conversion.
+*	**Improve user experience**: Define user segments and customize user experience for differenct segments.
+*	**Promote app revenue**: Track consumer behavior, make marketing strategies and maximize the marketing effect.
 
-After SDK's integration according to [QuickStart][ios_quick_start_guide], you can start using some basic functions of Statistics .
-LAS SDK wil collect the data of New User Amount, frequency and duration of sessions. You can check the results in Dashboard-> App-> Analytics.
 
-### UIViewController
+###	How Does MaxLeap Analytics Work
 
-This function can check the Duration of each View. Please make sure that each View is matched and without any nested relations:
+MaxLeap Analytics SDK helps us track user behavoir and provides data for cloud Analytics service, which includes:
+
+*  Collect information automatically (like terminal info, installation info, etc.)
+*  Track sessions and page view
+*  Track customized events
+*  Track comsuption
+
+The data collected will be saved to cloud. MaxLeap will analyze users in each time zone as well as the overview of all users. Moreover, you can customize filters and generate relative reports.
+
+
+## Enable Service
+After the installation of SDK, MaxLeap will track app data automatically, including:
+1.	Terminal
+2.	Start and exit
+3.	App crash and other exception message
+
+MaxLeap Analytics Service is **Enabled** by default. 
+
+## Track Access Path
+
+It can do a census about the View length. Please make sure that there is no nest relation among the Views.
 
 ```objective_c
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [LASAnalytics beginLogPageView:@"PageOne"];
+    [MLAnalytics beginLogPageView:@"PageOne"];
 }
  
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [LASAnalytics endLogPageView:@"PageOne"];
+    [MLAnalytics endLogPageView:@"PageOne"];
 }
 ```
  
-### Customized Events
+## Event Customization
 
-LAS only supports Count Event right now.
+Event Customization can set tracking point in app and take records of users action and collect data.
 
-Customized Events can help you analyze user behaviour and check the real-time data in Console.
-It should be noted that the name of cuntomized events (event_id) should be set as quiescent value. Otherwise, the event list might turn out to be too large to be analyzed about user behaviour and purpose. 
+###Property Description
+Property Name|Type|Description
+---|---|---|---
+eventId|String|Event ID
+key| String |Parameter
+value| String|Parameter Value
+
+Notice that the event_id should be static in case of the huge amount of event lists and the failure of user analysis.
  
-#### Frequency of Certain Event
+### Track Number of Occurrence
 
 ```
-[LASAnalytics trackEvent:@"event_id"];
+[MLAnalytics trackEvent:@"event_id"];
 ```
 
-#### Count Attributes of Certain Event
-
-For example,
-For counting the purchase amount, product type and product amount in E-Commence app, you can invoke such code in the purchase function:
+### Track Number of Certain Property
+Instance: You can invoke following method in purchase function to track the purchase amount, type and count of product in an e-commerce app:
 
 ```objective_c
 NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
-[LASAnalytics trackEvent:@"purchase" dimensions:dict];
+[MLAnalytics trackEvent:@"purchase" dimensions:dict];
 ```
-
-[ios_quick_start_guide]: ../../quickstart/ios/core/existing.html

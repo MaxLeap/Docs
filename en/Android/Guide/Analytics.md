@@ -10,10 +10,10 @@ MaxLeap Analytics collects all kinds of data of apps and users with clients and 
 
 MaxLeap Analytics is a real-time free and professional mobile apps Analytics Service. It provides multi-analysis of operation status, deep knowledge of typical users and advice on optimizing operating strategies, which will finally realize：
 
-*	Comprehend the operation status and trend: from New Users, Active Users, Sessions and App Versions to User bahevior, User properties and behavioral features, we provide all kinds of properties to help you understand your app's operation and iteration effect. 
-*	Fully perceive user bahevior: Reproduce the behavior of each user and keep abreast of their engagement, retention and conversion.
-*	Improve user experience: Define user segments and customize user experience for differenct segments.
-*	Promote app revenue: Track consumer behavior, make marketing strategies and maximize the marketing effect.
+*	**Comprehend the operation status and trend**: from New Users, Active Users, Sessions and App Versions to User bahevior, User properties and behavioral features, we provide all kinds of properties to help you understand your app's operation and iteration effect. 
+*	**Fully perceive user bahevior**: Reproduce the behavior of each user and keep abreast of their engagement, retention and conversion.
+*	**Improve user experience**: Define user segments and customize user experience for differenct segments.
+*	**Promote app revenue**: Track consumer behavior, make marketing strategies and maximize the marketing effect.
 
 
 ###	How Does MaxLeap Analytics Work

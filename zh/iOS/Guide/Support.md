@@ -94,7 +94,7 @@ SDK 的 UI 自定义是通过编辑 MLHelpCenterThemes.bundle/HelpCenterTheme.pl
 1. **FAQ section list view**:      FAQ section 列表界面
 2. **FAQ item list view**:         FAQ item 列表界面，就是进入一个 section 之后的界面
 3. **FAQ item content view**:      显示一条 FAQ 内容的界面
-4. **New conversation view**:      新建回话界面
+4. **New conversation view**:      新建会话界面
 5. **Conversation view**:          会话界面
 
 在 .plist 文件中相应条目下都有 **Title image** 这个字段，对其指定一个图片名字就可以将相应的界面的标题文字换成图片。
