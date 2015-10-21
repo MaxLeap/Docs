@@ -49,4 +49,4 @@ MLQuery *que = [MLQuery queryWithClassName:@"Test"];
 运行您的应用。然后查看 Xcode console 中打印的日志。
 
 ## 下一步
-至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。
+至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。
