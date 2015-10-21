@@ -1167,7 +1167,7 @@ MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
 
 ### 在Console中管理用户
 
-User 表是一个特殊的表，专门存储 MLUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL)中查看。
+User 表是一个特殊的表，专门存储 MLUser 对象。在Console >> Users中，您会看到一个 _User 表。
 
 ##第三方登录
 
