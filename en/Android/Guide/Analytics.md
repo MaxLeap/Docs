@@ -4,7 +4,7 @@
 
 ###	What is MaxLeap Analytics
 
-MaxLeap Analytics collects all kinds of data of apps and users with clients and Cloud Data. With professional analytics in MaxLeap, there would be a final operator-oriented report. 
+MaxLeap Analytics collects all kinds of data of apps and users with clients and  Cloud Data. With professional analytics in MaxLeap, there would be a final operator-oriented report.
 
 ###	Why is MaxLeap Analytics Necessary
 

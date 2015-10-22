@@ -11,7 +11,7 @@
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
 * 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
-* 更高效：可以在一次调用中通过高速网络多次请求Cloud Data，大大提升效率
+* 更高效：可以在一次调用中通过高速网络多次请求 Cloud Data，大大提升效率
 * 同一套代码可以为iOS，Android，web site等提供服务
 
 ###云代码如何工作
@@ -63,10 +63,10 @@ public class HelloWorldHandler implements MLHandler {
 defineFunction("helloWorld", new HelloWorldHandler());
 ```
 
-### 通过云函数访问Cloud Data
+### 通过云函数访问 Cloud Data
 
-#### 定义Cloud Data Object（在管理中心中，称之为“Class”）
-新建一个Cloud Data Object，并继承MLObject类
+#### 定义 Cloud Data Object（在管理中心中，称之为“Class”）
+新建一个 Cloud Data Object，并继承MLObject类
 
 ```java
 public class MyObject extends MLObject {
@@ -82,15 +82,15 @@ public class MyObject extends MLObject {
     
 }
 ```
-定义Cloud Data Object需注意：
+定义 Cloud Data Object需注意：
 
-* 一个 Cloud Data Object 对应一个 Cloud Data class，Cloud Data Object 的类名必须和管理中心中创建的 class 名字一样
-* 须将所有的 Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
+* 一个  Cloud Data Object 对应一个  Cloud Data class， Cloud Data Object 的类名必须和管理中心中创建的 class 名字一样
+* 须将所有的  Cloud Data Object 放入同一个package中，推荐在/src/main/java下新建一个package，如：“data”
 * 须配置global.json文件以识别该package，如：`"packageClasses" : "data"`
 
-#### Cloud Data Object的CRUD
+####  Cloud Data Object的CRUD
 
-我们可以通过 MLClassManager 操作 Cloud Data：
+我们可以通过 MLClassManager 操作  Cloud Data：
 
 ```java
 public void doSomethingToCloudData(){
@@ -212,8 +212,8 @@ img
 选中您想要查看的任务，便可以查看任务详情。
 img
 
-## Hook for Cloud Data
-Hook用于在对 Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
+## Hook for  Cloud Data
+Hook用于在对  Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
 ###创建和使用Hook
 实现MLClassManagerHook接口(建议直接继承MLClassManagerHookBase类，它默认为我们做了实现，我们想要hook操作，只需直接重载对应的方法即可)
@@ -244,7 +244,7 @@ public class MyObjectHook extends MLClassManagerHookBase<MyObject> {
 
 #####定义Hook需注意：
 
-* 确保目标Cloud Data Object对应的class存在
+* 确保目标 Cloud Data Object对应的class存在
 * Hook类上需要添加`@ClassManager`注解，以便服务器能够识别该Hook是针对哪个实体的
 * 须将所有的Hook类放入同一个package中，推荐在/src/main/java下新建一个package，如：“myHooks”
 * 须配置global.json文件以识别该package，如：`"packageHook" : "myHooks"`
@@ -254,7 +254,7 @@ public class MyObjectHook extends MLClassManagerHookBase<MyObject> {
 
 云代码支持六种类型的Hook：
 #### beforeCreate
-在对应的 Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
+在对应的  Cloud Data 被创建之前调用，可以用于验证输入的数据是否合法。
 
 例如：在新建好友分组的时候，需要检查组名是否太长。
 
@@ -269,10 +269,10 @@ public BeforeResult<FriendList> beforeCreate(FriendList list, UserPrincipal user
 ```
 
 #### afterCreate
-在对应的 Cloud Data 被创建后调用，可以用于执行如 User 创建后给客户经理发封邮件这样的逻辑。
+在对应的  Cloud Data 被创建后调用，可以用于执行如 User 创建后给客户经理发封邮件这样的逻辑。
 
 #### beforeUpdate
-在对应的 Cloud Data 被更新之前调用，可以用于验证输入的数据是否合法。
+在对应的  Cloud Data 被更新之前调用，可以用于验证输入的数据是否合法。
 
 例如：在修改好友分组的时候，需要检查组名是否已经存在。
 
@@ -292,10 +292,10 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list, UserPrincipal user
 ```
 
 #### afterUpdate
-在对应的 Cloud Data 被更新之后调用，可以用于如用户更新密码后，给用户邮箱发封提醒邮件。
+在对应的  Cloud Data 被更新之后调用，可以用于如用户更新密码后，给用户邮箱发封提醒邮件。
 
 #### beforeDelete
-在对应的 Cloud Data 被删除之前调用，可以用于验证删除是否合法。
+在对应的  Cloud Data 被删除之前调用，可以用于验证删除是否合法。
 
 例如：用户的每位好友都在某个分组下，在删除一个好友分组之前，需要检查这个分组内是否还存在好友。
 
@@ -316,7 +316,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list, UserPrincipal use
 ```
 
 #### afterDelete
-在对应的 Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
+在对应的  Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
 
 ## Logging
 云代码提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，云代码的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。

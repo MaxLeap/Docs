@@ -1,18 +1,18 @@
 # 云数据
 ## 简介
 
-### 什么是Cloud Data服务
-Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+### 什么是 Cloud Data服务
+ Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
-### 为何需要Cloud Data服务
-Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### 为何需要 Cloud Data服务
+ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
 * 不同于传统关系型数据库，向云端存储数据无需提前建表，JSON 格式的对象随存随取，高并发访问轻松无压力
 * 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Java开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
-**如果您希望进一步了解MaxLeap Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
+**如果您希望进一步了解MaxLeap  Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
 
 ## Class列表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
@@ -41,4 +41,4 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 ![imgCDDeleteclass](../../../images/imgCDDeleteClass.png)
 
 ## 下一步
-**如果您希望进一步了解MaxLeap Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
+**如果您希望进一步了解MaxLeap  Cloud Data服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**

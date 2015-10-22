@@ -9,7 +9,7 @@ Cloud Code refers to the code depolyed and executed on MaxLeap. It can be used t
 The service logic can be realized in client if the app is simple, while if the app requires more complicated service logic, want to access more data or need a number of multiplication, then Cloud Code is required. The advantages of Cloud Code can be summarized as follows:
 
 * Powerful Computing ability: Cloud Code executes in Docker of MaxLeap and supports multi-CPU and large memory.
-* More Effective: Able to require Cloud Data reepeatedly with high speed network services in an invocation. The efficiency will be much improved. 
+* More Effective: Able to require  Cloud Data reepeatedly with high speed network services in an invocation. The efficiency will be much improved.
 * The same set of code can provide services for iOS, Android, Website, etc. 
 
 In App Management page, you can check, create and manage the cloud code and the relevant logs of each version.

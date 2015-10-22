@@ -6,7 +6,7 @@
 
 ###为何需要MaxLeap营销服务
 
-结合MaxLeap分析服务提供的分析数据，以及MaxLeap Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。使用MaxLeap营销服务的优势在于：
+结合 MaxLeap 分析服务提供的分析数据，以及MaxLeap Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。使用MaxLeap营销服务的优势在于：
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
 * **保障用户体验：**选择向指定Segment发送消息，更具有针对性

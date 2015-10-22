@@ -78,10 +78,10 @@ public class MyApplication extends Application {
 }
 ```
 
-The test code is tryig to create a “CLASS” － “People” in Cloud Data and save a piece of code. We will spot this in Dev Center -> CLoud Storage:
+The test code is tryig to create a “CLASS” － “People” in  Cloud Data and save a piece of code. We will spot this in Dev Center -> CLoud Storage:
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 
-It indicates that the data storage in Cloud Data is successfully completed with client.
+It indicates that the data storage in  Cloud Data is successfully completed with client.
 
 Congratulations on the MaxLeap SDK installtion and configuration. Please click [SDK Tutorial](ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS) to check more detailed introduction and usage of MaxLeap, and start your MaxLeap Service now.

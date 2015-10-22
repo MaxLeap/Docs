@@ -1,22 +1,22 @@
-# Cloud Data
+#  Cloud Data
 ## Introduction
 
-### What is Cloud Data
-Cloud Data is the data storage service provided by MaxLeap. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in MaxLeap, you can perform operations towards them with iOS/Android Core SDK. Besides, MaxLeap  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
+### What is  Cloud Data
+ Cloud Data is the data storage service provided by MaxLeap. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in MaxLeap, you can perform operations towards them with iOS/Android Core SDK. Besides, MaxLeap  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
 
 
-### Why is Cloud Data Nccessary
-Cloud Data can help you build and maintain the facility of your database, thus focus on the app service logic that brings real value.  The advantages can be summarized as follows:
+### Why is  Cloud Data Nccessary
+ Cloud Data can help you build and maintain the facility of your database, thus focus on the app service logic that brings real value.  The advantages can be summarized as follows:
 
 * Sort out the deployment and maintenance of hardware resourses.
 * Provide standard and complete data access API
 * Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
 * Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](。。。) for more details.）
 
-### How Does Cloud Data Run
+### How Does  Cloud Data Run
 
 ## Cloud Object
-The object that stored in Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by Cloud Data service.
+The object that stored in  Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by  Cloud Data service.
 
 ###Create New
 Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 

@@ -61,7 +61,7 @@ MLCloudConfigManager.getInBackground(new ConfigCallback() {
 ```
 
 ## 监听
-为参数添加跟踪后，系统将在Activity开始或继续时，遍历所有被跟踪的云端参数是否有更新，若存在更新，则会执行相应的逻辑。添加跟踪之前，您需要在Activity的`onResume()`函数中添加如下代码，以确保参数与云端同步：
+为参数添加跟踪后，系统将在 Activity 开始或继续时，遍历所有被跟踪的云端参数是否有更新，若存在更新，则会执行相应的逻辑。添加跟踪之前，您需要在Activity的`onResume()`函数中添加如下代码，以确保参数与云端同步：
 
 ```java
 @Override

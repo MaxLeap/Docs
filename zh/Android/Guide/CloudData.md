@@ -2,11 +2,11 @@
 
 ## 简介
 
-### 什么是Cloud Data服务
-Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+### 什么是 Cloud Data服务
+ Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
-### 为何需要Cloud Data服务
-Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### 为何需要 Cloud Data服务
+ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
@@ -14,7 +14,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 * 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
-存储在Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
+存储在 Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值， Cloud Data服务会将其存储至云端。
 
 ###新建
 假设我们要保存一条数据到`Comment`class，它包含以下属性：

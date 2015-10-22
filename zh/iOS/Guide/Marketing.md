@@ -8,7 +8,7 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
 
 ### 为何需要 MaxLeap Marketing 服务
 
-结合 MaxLeap 分析服务提供的分析数据，以及 MaxLeap Users 服务提供的 Segment，您可以高效地制定营销策略，并且通过 Marketing 服务实施您的策略。MaxLeap Marketing 服务的优势在于：
+结合  MaxLeap 分析服务提供的分析数据，以及 MaxLeap Users 服务提供的 Segment，您可以高效地制定营销策略，并且通过 Marketing 服务实施您的策略。MaxLeap Marketing 服务的优势在于：
 
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
