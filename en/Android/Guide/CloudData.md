@@ -11,9 +11,8 @@
 * Sort out the deployment and maintenance of hardware resourses.
 * Provide standard and complete data access API
 * Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
-* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](。。。) for more details.）
+* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.）
 
-### How Does  Cloud Data Run
 
 ## Cloud Object
 The object that stored in  Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by  Cloud Data service.
@@ -39,7 +38,7 @@ MLDataManager.saveInBackground(myComment);
 
 Notices:
 
-* **When was "Comment" Class created:** If there is no Comment Class in Cloud(MaxLeap Server, hereinafter referred to as Cloud) when you run the code above, then MaxLeap will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
+* **When was "Comment" Class created:** For data security, creating sheet by client is prohibited in MaxLeap. You need to log in MaxLeap Console and create a Comment sheet by yourself, then the data will be inserted successfully after running the code.
 * **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
 * **MLObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `MLObject` ahead of time.
 * **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by MaxLeap backend system automatically, please don't save data with those properties in the code.
@@ -52,7 +51,7 @@ Notices:
 
 * **Size Limit:** The size limit for ML Object is 128K.
 * **synchronous/asynchronous operation:** Most of the code in Android platform works on the main thread while if there is any time-consuming blocking operation, like access to the network, your code may not be working properly. To avoid this, you can change the synchronous operation that may cause blocking into asynchronous operation and run it in a background thread, e.g. saveInBackground() is the asynchronous version of save(), and it requires a parameter - a callback instance - which will be executed once the asynchronous operation is done. There are also corresponding asynchronous versions for operations like query, update and delete. 
-* The name of the key should be alphabetic characters while the type can be letters, numbers, Boolean, arrays, MLObject and any other types that support JSON. 
+* The name of the key can include alphabetic character, number and underline while must be started with a letter. The type of the key can be letters, numbers, Boolean, arrays, MLObject and any other types that support JSON. 
 * You can provide the second parameter, SaveCallback instance, when invoking `MLDataManager.saveInBackground()` to check if the creation is succeeded. 
 
 ```java
@@ -1140,7 +1139,7 @@ Anonymous users refers to a special set of users with username and password. The
 You can get an anonymous user account with MLAnonymousUtils:
 
 ```java
-MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
+MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
       @Override
       public void done(MLUser user, MLException e) {
         if (e != null) {
@@ -1150,21 +1149,6 @@ MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
     }
   }
 });
-```
-#####Create Anonymous Users Automatically
-You can transfer anonymous users into non-anonymous users by signup or signin and all data of this anonymous user will be saved. You can judge if the current user is anonymous with MLAnonymousUtils.isLinked():
-
-```java
-Boolean isAnonymous = MLAnonymousUtils.isLinked(MLUser.getCurrentUser());
-```
-
-You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, MLUser.getCurrentUser() will no longer be null. MaxLeap wil create anonymous user in the cloud if you are storing MLObject related to this anonymous user.
-
-#####How to Create Anonymous Users Automatically
-Add following code in onCreate() in main Application.
-
-```java
-MLUser.enableAutomaticUser();
 ```
 
 ### Manage Users in Console
