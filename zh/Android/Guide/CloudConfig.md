@@ -2,15 +2,15 @@
 
 ## 简介
 ###什么是云配置
-每个应用在云端都有一个对应的`MLCloudConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过Console在MaxLeap中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
+每个应用在云端都有一个对应的`MLCloudConfig`对象，用以存储该应用的参数。Cloud Config 服务帮助您访问和操作云端参数。您可以通过 Console 在 MaxLeap 中配置应用参数，并且使用iOS/Android SDK读取云端的参数。
 ###为何需要云配置
 将应用的部分配置放置在云端的优势在于：
 
 * **动态配置：**
-* **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
+* **个性化用户体验：**在云端，您可以根据 Segment 配置参数，使不同用户群有不同的用户体验
 
 ##在云配置中添加参数
-您可以通过Console向Cloud Config中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
+您可以通过 Console 向 Cloud Config 中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
 
 属性名|值
 -------|-------
@@ -18,17 +18,17 @@ Parameter|参数名
 Type|参数类型
 Value|参数的值
 
-您还可以为不同的Segment设置不同的参数值。
+您还可以为不同的 Segment 设置不同的参数值。
 
-##获取MLCloudConfig对象
-您可以通过`MLCloudConfig.getCurrentCloudConfig()`方法获取最新的Cloud Config.
+##获取 MLCloudConfig 对象
+您可以通过`MLCloudConfig.getCurrentCloudConfig()`方法获取最新的 Cloud Config.
 
 ```java
 MLCloudConfig currentConfig = MLCloudConfig.getCurrentCloudConfig();
 ```
 
-##获取MLCloudConfig中的参数值
-在获取一个云端参数的值时，您需要知道该参数的值类型，然后通过对MLCloudConfig实例调用`getType()`方法获取对应参数的值。该方法需要传入两个参数：第一个为云端参数名，第二个为默认值。当云端不存在响应的参数时，系统将会把默认值赋值给该参数。
+##获取 MLCloudConfig 中的参数值
+在获取一个云端参数的值时，您需要知道该参数的值类型，然后通过对 MLCloudConfig 实例调用`getType()`方法获取对应参数的值。该方法需要传入两个参数：第一个为云端参数名，第二个为默认值。当云端不存在响应的参数时，系统将会把默认值赋值给该参数。
 
 ```java
 currentConfig.getString(key, defaultValue)
@@ -61,7 +61,7 @@ MLCloudConfigManager.getInBackground(new ConfigCallback() {
 ```
 
 ## 监听
-为参数添加跟踪后，系统将在 Activity 开始或继续时，遍历所有被跟踪的云端参数是否有更新，若存在更新，则会执行相应的逻辑。添加跟踪之前，您需要在Activity的`onResume()`函数中添加如下代码，以确保参数与云端同步：
+为参数添加跟踪后，系统将在 Activity 开始或继续时，遍历所有被跟踪的云端参数是否有更新，若存在更新，则会执行相应的逻辑。添加跟踪之前，您需要在 Activity 的`onResume()`函数中添加如下代码，以确保参数与云端同步：
 
 ```java
 @Override

@@ -818,7 +818,7 @@ MLQueryManager.countInBackground(query, new CountCallback() {
 
 ###复合查询
 
-您可以通过MLQuery.or方法查询匹配多个Query中一个的数据。如，您可以通过以下方式，获取胜场超过90场或低于10场的玩家名单：
+您可以通过 MLQuery.or 方法查询匹配多个 Query 中一个的数据。如，您可以通过以下方式，获取胜场超过90场或低于10场的玩家名单：
 
 ```java
 MLQuery<MLObject> lotsOfWins = MLQuery.getQuery("Player");
@@ -914,7 +914,7 @@ shield.setFireproof(false);
 shield.setRupees(50);
 ```
 
-###创建MLObject子类
+###创建 MLObject 子类
 
 创建一个 MLObject 的子类很简单：
 

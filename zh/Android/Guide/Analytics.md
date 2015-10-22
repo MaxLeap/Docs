@@ -3,7 +3,7 @@
 ## 简介
 
 ### 什么是 MaxLeap 分析服务
-MaxLeap 分析服务通过客户端及 Cloud Data，收集应用及用户的各种数据，并在 MaxLeap中进行专业分析，最终生成面向运营者的报表。
+MaxLeap 分析服务通过客户端及 Cloud Data，收集应用及用户的各种数据，并在 MaxLeap 中进行专业分析，最终生成面向运营者的报表。
 
 ### 为何需要 MaxLeap 分析服务
 MaxLeap 分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
@@ -22,7 +22,7 @@ MaxLeap 分析服务是实时、免费、专业的移动应用统计分析服务
 *  追踪自定义事件
 *  追踪消费
 
-收集到的数据会被保存至云端，MaxLeap将针对不同时间的数据，对每个用户进行分析，也会将所有用户的数据汇总，进行全局分析。此外，您还可以自定义筛选条件，借助 MaxLeap 生成相应的分析报表。
+收集到的数据会被保存至云端，MaxLeap 将针对不同时间的数据，对每个用户进行分析，也会将所有用户的数据汇总，进行全局分析。此外，您还可以自定义筛选条件，借助 MaxLeap 生成相应的分析报表。
 
 ## 启用服务
 安装SDK完成后，MaxLeap 服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
@@ -31,7 +31,7 @@ MaxLeap 分析服务是实时、免费、专业的移动应用统计分析服务
 2.	应用启动和退出
 3.	应用崩溃等异常信息
 
- MaxLeap 分析服务的默认状态为**开启**，如果您希望**关闭**分析服务，您可以在主`Activity`的`onCreate()`中添加如下代码。
+MaxLeap 分析服务的默认状态为**开启**，如果您希望**关闭**分析服务，您可以在主`Activity`的`onCreate()`中添加如下代码。
 
 ```Java
 MLAnalytics.setAnalyticsEnabled(false);
@@ -112,7 +112,7 @@ protected void onPause() {
 注意：
 
 * 每个页面都必须同时指定`onPageStart()`和`onPageEnd()`. 并且，不同页面之间须相互独立，无交叉。
-* 若页面通过Activity + Fragment实现，我们需要在Fragment中的`onResume()`和`onPause()`中添加上述代码，以纪录对该Fragment界面的访问。
+* 若页面通过 Activity + Fragment 实现，我们需要在 Fragment 中的`onResume()`和`onPause()`中添加上述代码，以纪录对该 Fragment 界面的访问。
 
 ## 自定义事件
 
