@@ -1481,11 +1481,11 @@ query.limit = 10;
 
 此时，`placesObjects` 是按照与 `userGeoPoint` 的距离（由近及远）排列的一组对象。注意，若应用另一个 `orderByAscending:`/`orderByDescending:` 限制条件，该限制条件将优先于距离顺序。
 
-##### 查询某地理位置一定距离内的对象
+#####Inquire objects around a certain location
 
 若要用距离来限定获得哪些结果，请使用 `whereKey:nearGeoPoint:withinMiles:`、`whereKey:nearGeoPoint:withinKilometers:` 和 `whereKey:nearGeoPoint:withinRadians:`。
 
-##### 查询一定地理位置范围内对象
+#####Inquire objects within a certain range
 
 您还可以查询包含在特定区域内的对象集合。若要查找位于某个矩形区域内的对象，请将 `whereKey:withinGeoBoxFromSouthwest:toNortheast:` 限制条件添加至您的 `MLQuery`。
 

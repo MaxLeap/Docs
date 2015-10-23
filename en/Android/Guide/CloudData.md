@@ -1374,7 +1374,7 @@ The Android SDK of Facebook helps app optimize the signin experience. As for the
 
 If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two.
 ####Preparations
-1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App
+1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App.
 2. Open MaxLeap Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
 3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
 4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
