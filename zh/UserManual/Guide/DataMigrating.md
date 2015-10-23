@@ -68,7 +68,13 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 # ![imgCDImport](../../../images/imgCDImport.png)
 
+导入数据：
 
+  ![X1{L_AAOWX@X0N1{XUBZ3](/Users/ben/Library/Containers/com.tencent.eimmac/Data/Library/Application Support/QQ/2853368674/Image/X1]{L_A]AOWX@X0N1{XUBZ3.jpg)
+
+
+
+如果 Class 类型为Relation,在目标列中可以填入已有的字段类型为relation的名称。如果不存在，系统则会自动创建对应字段名称。
 
 
 
@@ -106,4 +112,3 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 您还可以进入 数据迁移 >> 操作历史 查看导入或者导出的历史纪录：
 
 ![imgCDHandleHistory](../../../images/imgCDHandleHistory.png)
-
