@@ -62,9 +62,13 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 ##### 导入流程
 
+
+
 在云数据中点击 数据迁移 >> 导入数据，选择您所要导入的 JSON 文件：
 
 # ![imgCDImport](../../../images/imgCDImport.png)
+
+
 
 
 
@@ -80,11 +84,11 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 ##### 导出流程
 
-
-
 点击 数据迁移 >> 导出数据，所选的 Class 就会被导出为 JSON 格式的文件，并发送至您的邮箱：
 
 ![imgCDExport](../../../images/imgCDExport.png)
+
+
 
 
 
