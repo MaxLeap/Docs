@@ -70,7 +70,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 导入数据：
 
-  ![ import_relation](../../../images/ import_relation.png)
+  ![ import_relation](../../../images/import_relation.png)
 
 
 
