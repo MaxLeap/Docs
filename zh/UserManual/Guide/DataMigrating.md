@@ -74,7 +74,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 
 
-如果 Class 类型为Relation,在目标列中可以填入已有的字段类型为relation的名称。如果不存在，系统则会自动创建对应字段名称。
+如果 Class 类型为Relation,在目标列中可以填入已有的字段类型为relation的名称。如果不存在，系统则会自动创建。
 
 
 
