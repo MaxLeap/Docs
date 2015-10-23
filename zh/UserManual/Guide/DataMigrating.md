@@ -70,7 +70,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 导入数据：
 
-  ![X1{L_AAOWX@X0N1{XUBZ3](/Users/ben/Library/Containers/com.tencent.eimmac/Data/Library/Application Support/QQ/2853368674/Image/X1]{L_A]AOWX@X0N1{XUBZ3.jpg)
+  ![ import_relation](../../../images/ import_relation.png)
 
 
 
