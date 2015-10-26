@@ -181,7 +181,7 @@ Counter is one of the most regular functional requirements. When the property of
 
 For example, the "score" in a game is modified frequently. If there are multiple clients request the modifications at the same time and we need to request the data from clients and save the modifications to the cloud, there may easily be some conflicts and override.
 
-#####Incremental Counter
+#####Increment Counter
 At this point, we may use `increment()` method (default increment will be 1) and update counter type properties more efficiently and securely. For example, we can invoke following method to update the "score" in a game: 
 
 ```java
@@ -196,7 +196,7 @@ MLDataManager.saveInBackground(gameScore);
 ```
 
 Note that increment doesn't need to be integer, value of a floating-point type is also acceptable. 
-#####Decremental Increment 
+#####Decrement Counter 
 
 ```java
 gameScore.increment("score",-1000);
@@ -812,7 +812,7 @@ MLQueryManager.countInBackground(query, new CountCallback() {
 
 ###Compound Query
 
-You can inquire data that matches multiple Query with MLQuery.or. For example, you can get the gamers who win more than 90 times or less than 10 times with following method: 
+You can inquire data that matches multiple Query with MLQuery.or. For example, you can get the gamers who won more than 90 times or less than 10 times with following method: 
 
 ```java
 MLQuery<MLObject> lotsOfWins = MLQuery.getQuery("Player");
