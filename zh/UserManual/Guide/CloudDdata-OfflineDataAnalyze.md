@@ -24,9 +24,6 @@
 文档可参考leancloud
 https://leancloud.cn/docs/leaninsight_guide.html#类似_SQL_的查询分析语法
 
-#### DSL 查询语言 LeapQL
-文档参考leancloud
-
 #### 查询样例
 进入 云数据 >> 离线数据分析，你可以在此处输入自定义 SQL 语句，对所有云数据进行查询：
 
