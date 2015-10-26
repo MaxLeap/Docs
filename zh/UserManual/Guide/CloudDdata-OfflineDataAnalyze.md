@@ -13,6 +13,17 @@
 
 ### 功能介绍
 
+#### 查询结果
+描述两种结果大概情况及原因
+##### 实时结果
+详细描述实时结果原因，流程
+##### 离线结果
+详细描述离线结果原因，流程，邮件相关
+
+#### DSL 查询语言 LeapQL
+文档可参考leancloud
+https://leancloud.cn/docs/leaninsight_guide.html#类似_SQL_的查询分析语法
+
 #### DSL 查询语言 LeapQL
 文档参考leancloud
 
