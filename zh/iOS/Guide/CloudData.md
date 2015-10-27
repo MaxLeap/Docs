@@ -2,11 +2,11 @@
 
 ## 简介
 
-### 什么是 Cloud Data 服务
-Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint` (地理位置)，他们都是基于 `MLObject` 的对象。
+### 什么是  Cloud Data 服务
+ Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint` (地理位置)，他们都是基于 `MLObject` 的对象。
 
-### 为何需要 Cloud Data 服务
-Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### 为何需要  Cloud Data 服务
+ Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
@@ -14,7 +14,7 @@ Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专
 * 可结合 Cloud Code 服务，实现云端数据的 Hook（详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
-存储在 Cloud Data 的对象称为`MLObject`，而每个 `MLObject` 被规划至不同的 `class` 中（类似“表”的概念)。`MLObject` 包含若干键值对，且值为兼容 JSON 格式的数据。您无需预先指定每个 `MLObject` 包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data 服务会将其存储至云端。
+存储在  Cloud Data 的对象称为 `MLObject`，而每个 `MLObject` 被规划至不同的 `class` 中（类似“表”的概念)。`MLObject` 包含若干键值对，且值为兼容 JSON 格式的数据。考虑到数据安全，MaxLeap 禁止客户端修改数据仓库的结构。您需要预先在 MaxLeap 开发者平台上创建需要用到的表，然后仔细定义每个表中的字段和其值类型。
 
 ### 新建
 假设我们要保存一条数据到`Comment`class，它包含以下属性：
@@ -52,10 +52,10 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 注意：
 
-* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 `Comment` 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
-* **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 `Comment` 的数据表，而且也包括 `content`、`pubUserId`、`isRead` 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
-* **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
+* **Comment表何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端建表，所以在保存这条数据之前，必须先在开发者中心创建 Comment 这个表。
+* **表中同一属性值类型一致:** 新建 comment 对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
+* **客户端无法修改后端数据结构：** 例如，如果 Comment 表中没有 `isRead` 这个字段，那么保存将会失败
+* **内建的属性:** 每个 MLObject 对象有以下几个字段是不需要开发者指定的。这些字段的创建和更新是由系统自动完成的，请不要在代码里使用这些字段来保存数据。
 
 属性名|值|
 -------|-------|
@@ -64,8 +64,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 `updatedAt`|对象的最后修改时间
 
 * **大小限制：** `MLObject` 的大小被限制在128K以内。
-* **同步操作/异步操作：** MaxLeap iOS SDK 大部分接口都是异步的
-* 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是 `MLObject`，为支持JSON编码的类型即可.
+* 键的名称可以由英文字母、数字和下划线组成，但必须以字母开头，值的类型可为字符, 数字, 布尔, 数组或是 `MLObject`，为支持 JSON 编码的类型即可.
 
 ### 检索
 
@@ -823,7 +822,7 @@ game.multiplayer = @YES;
 game.price = @0.99;
 ```
 
-###创建MLObject子类
+###创建 `MLObject` 子类
 
 创建 `MLObject` 子类的步骤：
 

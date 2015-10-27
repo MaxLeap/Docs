@@ -80,11 +80,11 @@ public class MyApplication extends Application {
 }
 ```
 
-This piece of data is trying to create a “class” － “People” in Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
+This piece of data is trying to create a “class” － “People” in  Cloud Data and save a data to it. We can check "Dev Center" -> "Data" and find:
 
 ![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
 
-It indicates that saving data to Cloud Data in the app with client is completed.
+It indicates that saving data to  Cloud Data in the app with client is completed.
 
 2. Test MaxLeap HelpCenter SDK
  We can add following code in onCreate() method in Application to test if MaxLeap HelpCenter works in the project:

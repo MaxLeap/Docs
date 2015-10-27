@@ -1,22 +1,21 @@
-# Cloud Data
+#  Cloud Data
 ## Introduction
 
-### What is Cloud Data
-Cloud Data is the data storage service provided by MaxLeap. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in MaxLeap, you can perform operations towards them with iOS/Android Core SDK. Besides, MaxLeap  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
+### What is  Cloud Data
+ Cloud Data is the data storage service provided by MaxLeap. It is based on the `MLObject` and each `MLObject` contains several key-values. All `MLObject` are stored in MaxLeap, you can perform operations towards them with iOS/Android Core SDK. Besides, MaxLeap  provides some special objects, like `MLUser`, `MLRole`, `MLFile` and `MLGeoPoint`. They are all based on `MLObject`.
 
 
-### Why is Cloud Data Nccessary
-Cloud Data can help you build and maintain the facility of your database, thus focus on the app service logic that brings real value.  The advantages can be summarized as follows:
+### Why is  Cloud Data Nccessary
+ Cloud Data can help you build and maintain the facility of your database, thus focus on the app service logic that brings real value.  The advantages can be summarized as follows:
 
 * Sort out the deployment and maintenance of hardware resourses.
 * Provide standard and complete data access API
 * Unlike the traditional relational database, there's no class to be created ahead of time before storing data in cloud. Data objects in JSON format can be stored and retrieved easily as you wish.
-* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](。。。) for more details.）
+* Realize the Hook of cloud data with the Cloud Code service.（Please check [Cloud Code Guide](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA) for more details.）
 
-### How Does Cloud Data Run
 
 ## Cloud Object
-The object that stored in Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by Cloud Data service.
+The object that stored in  Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by  Cloud Data service.
 
 ###Create New
 Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 
@@ -27,7 +26,7 @@ content|"kind of funny"|Character
 pubUserId|1314520|Digit
 isRead|false|Boolean
 
-The method of adding property is similar to `Map` in `Java`: 
+We recommend the neat CamelCase for naming class and key (e.g. NameYourclassesLikeThis, nameYourKeysLikeThis). The method of adding property is similar to `Map` in `Java`: 
 
 ```java
 MLObject myComment = new MLObject("Comment");
@@ -36,13 +35,20 @@ myComment.put("pubUserId", 1314520);
 myComment.put("isRead", false);
 MLDataManager.saveInBackground(myComment);
 ```
+You may wonder if the operation is completed after running the code. You can check the metadata browser in the app in MaxLeap Dev Center and find similar info as shown below:
+
+```
+objectId: "xWMyZ4YEGZ", content: "我很喜欢这条分享", pubUserId: 1314520, isRead: false,
+createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
+```
+
 
 Notices:
 
-* **When was "Comment" Class created:** If there is no Comment Class in Cloud(MaxLeap Server, hereinafter referred to as Cloud) when you run the code above, then MaxLeap will create a data sheet for you according to the Comment object created in the first place(run the code above) and insert relative data.
+* **When was "Comment" Class created:** For data security, creating sheet by client is prohibited in MaxLeap. You need to log in MaxLeap Console and create a Comment sheet by yourself, then the data will be inserted successfully after running the code.
 * **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
 * **MLObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `MLObject` ahead of time.
-* **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need requiring. Their creation and update are accomplished by MaxLeap backend system automatically, please don't save data with those properties in the code.
+* **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need specifying. Their creation and update are accomplished by MaxLeap backend system automatically, please don't save data with those properties in the code.
 
 	Property Name|Value|
 	-------|-------|
@@ -51,8 +57,7 @@ Notices:
 	updatedAt|Date Last Modified of the Object 
 
 * **Size Limit:** The size limit for ML Object is 128K.
-* **synchronous/asynchronous operation:** Most of the code in Android platform works on the main thread while if there is any time-consuming blocking operation, like access to the network, your code may not be working properly. To avoid this, you can change the synchronous operation that may cause blocking into asynchronous operation and run it in a background thread, e.g. saveInBackground() is the asynchronous version of save(), and it requires a parameter - a callback instance - which will be executed once the asynchronous operation is done. There are also corresponding asynchronous versions for operations like query, update and delete. 
-* The name of the key should be alphabetic characters while the type can be letters, numbers, Boolean, arrays, MLObject and any other types that support JSON. 
+* The name of the key can include alphabetic character, number and underline while must be started with a letter. The type of the key can be letters, numbers, Boolean, arrays, MLObject and any other types that support JSON. 
 * You can provide the second parameter, SaveCallback instance, when invoking `MLDataManager.saveInBackground()` to check if the creation is succeeded. 
 
 ```java
@@ -142,6 +147,7 @@ MLQueryManager.getInBackground(query, objId, new GetCallback<MLObject>() {
   }
 });
 ```
+Client will spot the modified data for you. Only the "dirty" field will be sent to server. No extra data included.
 
 ###Delete 
 #####Delete MLObject
@@ -175,7 +181,7 @@ Counter is one of the most regular functional requirements. When the property of
 
 For example, the "score" in a game is modified frequently. If there are multiple clients request the modifications at the same time and we need to request the data from clients and save the modifications to the cloud, there may easily be some conflicts and override.
 
-#####Incremental Counter
+#####Increment Counter
 At this point, we may use `increment()` method (default increment will be 1) and update counter type properties more efficiently and securely. For example, we can invoke following method to update the "score" in a game: 
 
 ```java
@@ -190,7 +196,7 @@ MLDataManager.saveInBackground(gameScore);
 ```
 
 Note that increment doesn't need to be integer, value of a floating-point type is also acceptable. 
-#####Decremental Increment 
+#####Decrement Counter 
 
 ```java
 gameScore.increment("score",-1000);
@@ -210,7 +216,7 @@ gameScore.addAll("skills", Arrays.asList("flying", "kungfu"));
 MLDataManager.saveInBackground(gameScore);
 ```
 
-Meanwhile, you can only add values that is different from all current items with `addUnique()` and `addAllUnique()`. 
+Meanwhile, you can only add values that is different from all current items with `addUnique()` and `addAllUnique()`. The insertion position is uncertain.
 
 #####Override with new Array
 The value of array under `skills` parameter will be overridden by invoking `put()` function: 
@@ -227,7 +233,7 @@ gameScore.removeAll("skills");
 MLDataManager.saveInBackground(gameScore);
 ```
 
-Notices: 
+Notice: 
 
 * Remove and Add/Put must be seperated for invoking save function. Or, the data may fail to be saved.
 
@@ -358,7 +364,7 @@ query.skip(10);
 query.limit(10);
 ```
 
-Please check [Query Guide](..) for more MLQuery information. An operating MLRelation object is similar to the object chained list, so any queries towards the chained list can also be implemented to MLRelation.
+Please check *Query Guide* for more MLQuery information. An operating MLRelation object is similar to the object chained list, so any queries towards the chained list, except include, can also be implemented to MLRelation.
 
 
 ###Data Type
@@ -396,7 +402,7 @@ Large binary data is not recommended, like the byte[] property type of MLObject 
 
 ## Files
 ###Creation and Upload of MLFile
-MLFile can help your app save the files to server, like the common image, video, audio and any other binary data.
+MLFile can help your app save the files to server, like the common image, video, audio and any other binary data (cannot exceed 100MB). It helps you deal with the situation that there's too many files or the file is too large to be stored in regular `MLObject`.
 
 In this instance, we will save the image as MLFile and upload it to server:
 
@@ -806,7 +812,7 @@ MLQueryManager.countInBackground(query, new CountCallback() {
 
 ###Compound Query
 
-You can inquire data that matches multiple Query with MLQuery.or. For example, you can get the gamers who win more than 90 times or less than 10 times with following method: 
+You can inquire data that matches multiple Query with MLQuery.or. For example, you can get the gamers who won more than 90 times or less than 10 times with following method: 
 
 ```java
 MLQuery<MLObject> lotsOfWins = MLQuery.getQuery("Player");
@@ -1135,12 +1141,12 @@ Three status of `emailVerified` property:
 * null - Email verification is not enabled or no email address provided
 
 ###Anonymous Users
-Anonymous users refers to a special set of users with username and password. They have the same features as other users while once deleted, all data will be no longer accessible. If your app requires a relatively weakened user system, then Anonymous Users of MaxLeap is highly recommended. 
+Anonymous users refers to a special set of users with username and password. They have the same features as other users while all data will be no longer accessible once deleted. If your app requires a relatively weakened user system, then Anonymous Users of MaxLeap is highly recommended. 
 
 You can get an anonymous user account with MLAnonymousUtils:
 
 ```java
-MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
+MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
       @Override
       public void done(MLUser user, MLException e) {
         if (e != null) {
@@ -1150,21 +1156,6 @@ MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
     }
   }
 });
-```
-#####Create Anonymous Users Automatically
-You can transfer anonymous users into non-anonymous users by signup or signin and all data of this anonymous user will be saved. You can judge if the current user is anonymous with MLAnonymousUtils.isLinked():
-
-```java
-Boolean isAnonymous = MLAnonymousUtils.isLinked(MLUser.getCurrentUser());
-```
-
-You can choose to create anonymous users automaticall by system (locally, no network needed) and use app immediately. After the anonymous users auto creation, MLUser.getCurrentUser() will no longer be null. MaxLeap wil create anonymous user in the cloud if you are storing MLObject related to this anonymous user.
-
-#####How to Create Anonymous Users Automatically
-Add following code in onCreate() in main Application.
-
-```java
-MLUser.enableAutomaticUser();
 ```
 
 ### Manage Users in Console
@@ -1383,7 +1374,7 @@ The Android SDK of Facebook helps app optimize the signin experience. As for the
 
 If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two.
 ####Preparations
-1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App
+1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App.
 2. Open MaxLeap Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
 3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
 4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
@@ -1459,7 +1450,7 @@ MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
 MaxLeap will remove all Facebook account info from the MLUser after the unbind. The next time user logs in with Facebook account, MaxLeap will detect there's no bind and then add new MLUser to this Facebook account.
 
 ###Log in with Twitter Account
-Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Facebook app, ML app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
+Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Twitter app, ML app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
 
 If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLeap will create an account for the user and bind the two.
 ####Preparations
@@ -1581,3 +1572,8 @@ MLQuery<MLObject> query = MLQuery.getQuery("PizzaPlaceObject");
 query.whereWithinGeoBox("location", southwestOfSF, northeastOfSF);
 MLQueryManager.findAllInBackground(new FindCallback<MLObject>() { ... });
 ```
+
+Notices:
+
+1. Every `MLObject` class can only have one key with `MLGeoPoint` object.
+2. The point should not be below the range. The latitude shouldn't be -90.0 or 90.0, the longitude shouldn't be -180.0 or 180.0. Or, it will return with error.

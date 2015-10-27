@@ -1,13 +1,13 @@
 # 分析
 ## 简介
 
-###	什么是MaxLeap分析服务
+###	什么是  MaxLeap 分析服务
 
-MaxLeap分析服务通过客户端及Cloud Data服务，收集应用及用户的各种数据，并在MaxLeap中进行专业分析，最终生成面向运营者的报表。
+ MaxLeap 分析服务通过客户端及  Cloud Data 服务，收集应用及用户的各种数据，并在 MaxLeap 中进行专业分析，最终生成面向运营者的报表。
 
-###	为何需要MaxLeap分析服务
+###	为何需要  MaxLeap 分析服务
 
-MaxLeap分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
+ MaxLeap 分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
 
 *	洞察运营概况及趋势：从产品新增用户、活跃用户、应用启动次数、版本分布，到用户的使用细节、用户属性以及行为特征，你可以洞察到各类数据指标，全面了解产品运营情况和迭代效果。
 *	洞察用户行为：还原每位用户的使用行为链条，并掌握其活跃度，留存率及转化率。
@@ -15,9 +15,9 @@ MaxLeap分析服务是实时、免费、专业的移动应用统计分析服务�
 *	提升应用营收：跟踪消费行为，制定营销策略，最大化的提升营销效果。
 
 
-###	MaxLeap分析如何工作
+###	 MaxLeap 分析如何工作
 
-MaxLeap分析服务，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
+ MaxLeap 分析服务，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
 
 1.  自动收集信息（如终端信息等）
 2.  追踪会话
@@ -44,7 +44,7 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 * 过滤器：指定应用版本和渠道
 * 时间段：指定特定的时间跨度
 	
-**如果您希望进一步了解 MaxLeap 分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
+**如果您希望进一步了解  MaxLeap 分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
 
 ## 概览
 
@@ -223,6 +223,6 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
     
 ## 下一步
 
-**如果您希望进一步了解MaxLeap分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
+**如果您希望进一步了解 MaxLeap 分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
     
     

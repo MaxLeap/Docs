@@ -2,11 +2,11 @@
 
 1. 下载并解压缩 SDK
 
-	请确认您使用的是Xcode最新版本（5.0+），目标平台为iOS 6.0 或者更高版本。
+	请确认您使用的是Xcode最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
 
 	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 SDK</a>
 
-2. 添加SDK到您的应用
+2. 添加 SDK 到您的应用
 
 	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
@@ -45,10 +45,10 @@
 然后将以下代码复制到 `application:didFinishLaunchingWithOptions:` 方法中：
 
 ```objc
-[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id" site:MLSiteCN];
 ```
 
-把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。
+请把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。同时根据您应用平台的地区，设置服务器位置（`MLSiteUS`, `MLSiteCN`）。
 
 编译并运行！
 
@@ -57,25 +57,26 @@
 
 为了检测是否可以连接 MaxLeap 云服务和目标应用，我们可以在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
-
 ```objc
 #import <MaxLeap/MaxLeap.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 
-// 创建一条数据
-MLObject *testObject = [MLObject objectWithClassName:@"People"];
-testObject[@"Name"] = @"David Wang";
-[testObject saveInBackgroundWithBlock:nil];
+MLQuery *que = [MLQuery queryWithClassName:@"Test"];
+[que whereKey:@"objectId" equalTo:@"561c83c0226"];
+[que findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error.code == 90000) {
+    	 // 返回错误代码为 90000 说明 appid, clientKey, site 配置正确。
+        NSLog(@"已经能够正确连接上您的云端应用");
+    } else {
+        NSLog(@"应用访问凭证不正确，请检查。");
+    }
+}];
 ```
 
-这段代码目的是在云端创建一条类名为 `People` 的数据。如果云端还没有 `People` 这个类，则会先创建这个类，然后再插入数据。
-
-运行您的应用。然后可以在 开发者中心 -> 云存储 中看到刚创建的数据。
-
-![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+运行您的应用。然后查看 Xcode console 中打印的日志。
 
 ## 下一步
  至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务之旅。

@@ -11,7 +11,7 @@ CloudCode refers to the code depolyed and executed on MaxLeap. It can be used to
 The service logic can be implemented in client if the app is simple, while if the app requires more complicated service logic, want to access more data or need a number of multiplication, then CloudCode is required. The advantages of CloudCode can be summarized as follows:
 
 * Powerful Computing ability: CloudCode executes in Docker of MaxLeap and supports multi-CPU and large memory.
-* More Effective: Able to require Cloud Data reepeatedly with high speed network services in an invocation. The efficiency will be much improved. 
+* More Effective: Able to require  Cloud Data reepeatedly with high speed network services in an invocation. The efficiency will be much improved.
 * The same set of code can provide services for iOS, Android, Website, etc. 
 
 ###How Does CloudCode Work
@@ -194,10 +194,10 @@ At last, you need to register the function in main class.
 ```Java
 defineFunction("helloWorld", new HelloWorldHandler());
 ```
-###Access Cloud Data with Cloud Function
+###Access  Cloud Data with Cloud Function
 
-####Define Cloud Data Object（ Called “Class” in Management Interface ）
-Create a new Cloud Data Object and inherit CloudObject class 
+####Define  Cloud Data Object（ Called “Class” in Management Interface ）
+Create a new  Cloud Data Object and inherit CloudObject class
 
 ```java
 public class MyObject extends CloudObject {
@@ -213,15 +213,15 @@ public class MyObject extends CloudObject {
     
 }
 ```
-Notice for defining Cloud Data Object:
+Notice for defining  Cloud Data Object:
 
-* Every Cloud Data Object corresponds to a Cloud Data class and the class name of Cloud Data Object should be the same as the class name created in Management Console.
-* All Cloud Data Objects should be put in one package. Creating a new package in /src/main/java is recommended, such as "data" 
+* Every  Cloud Data Object corresponds to a  Cloud Data class and the class name of  Cloud Data Object should be the same as the class name created in Management Console.
+* All  Cloud Data Objects should be put in one package. Creating a new package in /src/main/java is recommended, such as "data"
 * global.json file configuration is required to identify the package. e.g. `"package-entity" : "data"` 
 
-####CRUD of Cloud Data Object
+####CRUD of  Cloud Data Object
 
-We can operate Cloud Data with EntityManager: 
+We can operate  Cloud Data with EntityManager:
 
 ```java
 public void doSomethingToCloudData(){
@@ -343,8 +343,8 @@ You can see the job plan list and their status in Dev Center>>CloudCode>>Status.
 Click on the job plan, then you can check its details. 
 img
 
-## Hook for Cloud Data
-Hook is used to implement certain operations when there are operations towards Cloud Data (including creating, deleting and editing). For example, we can check if the username is taken with beforeCreate Hook when the user is signing up; or we can send a welcome message with afterCreateHook when the user finished registration. Hook can implement data-related business logic well and all services can be implemented in cloud and shared among different apps/platforms.
+## Hook for  Cloud Data
+Hook is used to implement certain operations when there are operations towards  Cloud Data (including creating, deleting and editing). For example, we can check if the username is taken with beforeCreate Hook when the user is signing up; or we can send a welcome message with afterCreateHook when the user finished registration. Hook can implement data-related business logic well and all services can be implemented in cloud and shared among different apps/platforms.
 
 
 ###Create and Use Hook
@@ -385,7 +385,7 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 
 #####Notice for defining Hook:
 
-* Make sure the corresponding class of target Cloud Data Object exists
+* Make sure the corresponding class of target  Cloud Data Object exists
 * `@EntityManager` annotation is required in Hook class for server to identify which entity is this Hook targeting
 * All Hook class should be put in the same package. Creating a new package under /src/main/java is recommended, like “myHooks” 
 * global.json file configuration is required to identify the package, like `"package-hook" : "myHooks"` 
@@ -395,7 +395,7 @@ public class MyObjectHook extends EntityManagerHookBase<MyObject> {
 
 CloudCode supports 6 different types of Hook:
 #### beforeCreate
-Invoke before the corresponding Cloud Data is created, which could be used to test if the data entered is validate.
+Invoke before the corresponding  Cloud Data is created, which could be used to test if the data entered is validate.
 For example: test if the list name is too long when creating a new friend list.
 
 ```java
@@ -409,10 +409,10 @@ public BeforeResult<FriendList> beforeCreate(FriendList list) {
 ```
 
 #### afterCreate
-Invoke after the corresponding Cloud Data is created, which could be used to perform logic like sending an email to product manager after User creation. 
+Invoke after the corresponding  Cloud Data is created, which could be used to perform logic like sending an email to product manager after User creation.
 
 #### beforeUpdate
-Invoke before the corresponding Cloud Data is updated, which could be used to test if the data entered is validate.
+Invoke before the corresponding  Cloud Data is updated, which could be used to test if the data entered is validate.
 For example: test if the list name is already taken when editing a friend list.
 
 
@@ -432,9 +432,9 @@ public BeforeResult<FriendList> beforeUpdate(FriendList list) {
 ```
 
 #### afterUpdate
-Invoke after the corresponding Cloud Data is updated, which could be used to send emails to users when they changed their password.
+Invoke after the corresponding  Cloud Data is updated, which could be used to send emails to users when they changed their password.
 #### beforeDelete
-Invoke before the corresponding Cloud Data is deleted, which could be used test if the delete is validate.
+Invoke before the corresponding  Cloud Data is deleted, which could be used test if the delete is validate.
 For example, test if there's any friend in this list before deleting a list.
 
 ```java
@@ -454,7 +454,7 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list) {
 ```
 
 #### afterDelete
-Invoke after the corresponding Cloud Data is deleted, which could be used to clear other relative data.
+Invoke after the corresponding  Cloud Data is deleted, which could be used to clear other relative data.
 ## Logging
 There is Logging function in CloudCode to record the Function, Hook and Job info during the operations. Besides, the deployment of CloudCode will also be recorded. You can check all logs in Management Console.
 ###Record Log in CloudCode

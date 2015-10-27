@@ -18,7 +18,7 @@ Parameter|参数名
 Type|参数类型
 Value|参数的值
 
-您还可以为不同的Segment设置不同的参数值。新建云配置中参数的详细步骤，请查看[Console使用指南 - 云配置](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL).
+您还可以为不同的Segment设置不同的参数值。
 
 ## 获取 MLConfig 对象
 

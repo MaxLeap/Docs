@@ -1,29 +1,27 @@
-# MaxLeap Docs
+# MaxLeap Doc Center
 
-These are the markdown sources for all of the [platform docs](https://leap.as/en_us/docs/overview.html) of MaxLeap. The content for the docs is stored in this repo.
+MaxLeap provides detailed [documentation](https://maxleap.cn/zh_cn/guide/docs.html) for the whole platform. Here are the markdown sources for all of them, which you can read and make contribution to.
 
-## Repository Structure
+## What's inside the Repository?
 
-The docs are organized first by language, then by platform. Each platform directory contains a set of markdown files, one for each main section in the guide.
-	
+This repository contains three parts: SDK guide, Console user-manual, and ScreenShots.
+The SDK guide docs are categorized by language - platform, which can be shown as:
+
 	.
-	├── {language}
-	│   └── {platform}
-	│   │   └── {catgory}
-	│   │   │   └── {section}
-	│   └── Common
-	│       └── {catgory}
-	│           └── {section}
-	├── {images}
-	├── .gitignore
-	└── README.md
+	│-- {language}
+	│   │-- {platform}
+	│   │   │-- {catgory}
+	│   │       │-- {section}      # SDK guide
+	│   │-- usermanual
+	│       │-- {section}          # Console user-manual
+	│-- images
+	│   │-- {section}              # ScreenShots referred in all docs
+	│-- .gitignore
+	│-- CONTRIBUTING.md            # Introduce how to make contribution
+	│-- README.md
 
-For example, `/en/iOS/` contains all of sections for the iOS guide in English. You'll notice a `common` folder in each language. This folder contains content that is shared amongst all of the platforms. That helps us avoid duplicating content unnecessarily.
+## What can I do with the Repository?
 
-## How Do I Contribute?
-
-If you have any fixes or suggestions, simply send us a pull request! The [documentation](https://leap.as/en_us/docs/overview.html) will be regenerated from master as needed.Please refer to [Contributing to MaxLeap Docs](https://github.com/MaxLeap/Docs/blob/master/CONTRIBUTING.md).
-
-## Can I Access The Docs Offline?
-
-This repository is public and all the files are in markdown. If you'd like to keep a copy locally, please do!
+* You can read and refer to the docs' content
+* You can make your [contribution](https://github.com/MaxLeap/Docs/blob/master/CONTRIBUTING.md) to the doc if you have any fixes or good ideas!
+* You can keep the documentation locally by cloning or downloading.

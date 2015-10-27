@@ -14,10 +14,10 @@
 打开模板项目的 `AppDelegate.m` 文件，取消 `application:didFinishLaunchingWithOptions:` 中像下面这行的注释:
 
 ```objc
-[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 ```
 
-把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。
+请把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。同时根据您应用平台的地区，设置服务器位置（`MLSiteUS`, `MLSiteCN`）。
 
 3. 现在可以运行了。
 
@@ -32,19 +32,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
+[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 
-// 创建一条数据
-MLObject *testObject = [MLObject objectWithClassName:@"People"];
-testObject[@"foo"] = @"bar";
-[testObject saveInBackgroundWithBlock:nil];
+MLQuery *que = [MLQuery queryWithClassName:@"Test"];
+[que whereKey:@"objectId" equalTo:@"561c83c0226"];
+[que findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error.code == 90000) {
+    	 // 返回错误代码为 90000 说明 appid, clientKey, site 配置正确。
+        NSLog(@"已经能够正确连接上您的云端应用");
+    } else {
+        NSLog(@"应用访问凭证不正确，请检查。");
+    }
+}];
 ```
 
-这段代码试图在云端创建一条类名为 `People` 的数据。如果云端还没有 `People` 这个类，则会先创建这个类，然后再插入数据。
-
-运行您的应用。然后可以在 Dev Center -> Data 中看到刚创建的数据。
-
-![imgSDKQSTestAddObj](../../../images/imgSDKQSTestAddObj.png)
+运行您的应用。然后查看 Xcode console 中打印的日志。
 
 ## 下一步
-至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[Android SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。
+至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至[iOS SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。

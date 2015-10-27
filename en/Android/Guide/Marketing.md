@@ -189,7 +189,7 @@ Replace default `com.maxleap.MLPushBroadcastReceiver` with following Receiver：
 ## In-app Message
 
 ###Configuration
-In order to user in-app message, you need to **enable Marketing service：** add following code before `MaxLeap.initialize()` in `Application.onCreate()` :
+In order to use in-app message, you need to **enable Marketing service：** add following code before `MaxLeap.initialize()` in `Application.onCreate()` :
 
 ```java
 MaxLeap.setMarketingEnabled(true);

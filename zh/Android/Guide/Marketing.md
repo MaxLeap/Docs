@@ -1,12 +1,14 @@
-#营销
-##简介
-###什么是MaxLeap Marketing服务
+# 营销推广
 
-Marketing服务是MaxLeap提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标Activity。消息的创建，设置和发送均在Console中完成。
+## 简介
 
-###为何需要MaxLeap Marketing服务
+### 什么是 MaxLeap Marketing 服务
 
-结合MaxLeap分析服务提供的分析数据，以及MaxLeap Users服务提供的Segment，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。MaxLeap Marketing服务的优势在于：
+Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种 Marketing 形式：Push Notification 和 In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标Activity。消息的创建，设置和发送均在Console中完成。
+
+### 为何需要 MaxLeap Marketing 服务
+
+结合 MaxLeap 分析服务提供的分析数据，以及 MaxLeap Users 服务提供的 Segment，您可以高效地制定营销策略，并且通过 Marketing 服务实施您的策略。MaxLeap Marketing 服务的优势在于：
 
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
@@ -14,13 +16,15 @@ Marketing服务是MaxLeap提供的营销和信息发布功能。目前提供两�
 * **动态内容管理：**Push Notification和In-App Message中的内容均在Console中设置，用户所见内容可实时更新
 
 ## 推送消息
-推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在Console中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标Activity。
 
-###配置
+推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在 Console 中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标Activity。
+
+### 配置
+
 MaxLeap Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
 
 1. 提供 **Sender ID** 和 **API key**. 请在*Google开发者中心*获取这两个Key.
-2. 在 `AndroidManifest.xml` 中添加权限和Push Receiver(用于处理 Push 消息及显示 Notification)：
+2. 在 `AndroidManifest.xml` 中添加权限和 Push Receiver(用于处理 Push 消息及显示 Notification)：
 
 ```xml
 <!-- your package -->
@@ -85,17 +89,17 @@ MaxLeap.setMarketingEnabled(true);
 
 注意：
 
-* 请将上述YOUR\_PACKAGE\_NAME字段替换成项目的Package名。将YOUR\_SENDER\_ID替换成您的GCM Sender ID.
+* 请将上述 YOUR\_PACKAGE\_NAME 字段替换成项目的 Package 名。将 YOUR\_SENDER\_ID 替换成您的 GCM Sender ID.
 
-###自定义推送消息的处理
+### 自定义推送消息的处理
 
 您可以通过以下步骤自定义推送消息的显示和处理。
 
-1. 新建CustomPushReceiver类，并继承MLPushBroadcastReceiver
-2. 在CustomPushReceiver类中完成一系列自定义：点击后的目标Activity，图标等
-3. 在`AndroidManifest.xml`中配置CustomPushReceiver
+1. 新建 CustomPushReceiver 类，并继承 MLPushBroadcastReceiver
+2. 在 CustomPushReceiver 类中完成一系列自定义：点击后的目标 Activity，图标等
+3. 在`AndroidManifest.xml`中配置 CustomPushReceiver
 
-#####新建Receiver
+##### 新建 Receiver
 
 ```java
 public class CustomPushReceiver extends MLPushBroadcastReceiver {
@@ -110,7 +114,7 @@ public class CustomPushReceiver extends MLPushBroadcastReceiver {
 }
 ```
 
-#####自定义：目标Activity
+##### 自定义：目标 Activity
 ```java
 protected class<? extends Activity> getActivity(Intent intent)
 ```
@@ -126,7 +130,7 @@ if (intent != null && intent.getExtras() != null) {
 }
 ```
 
-#####自定义：目标Uri
+##### 自定义：目标 Uri
 ```java
 protected Uri getUri(Intent intent)
 ```
@@ -173,7 +177,7 @@ protected void startIntent(Context context, Intent intent) {
 protected Notification getNotification(Context context, Intent intent)
 ```
 
-#####配置CustomPushReceiver
+#####配置 CustomPushReceiver
 用下列Receiver替换默认的`com.maxleap.MLPushBroadcastReceiver`：
 
 ```xml
@@ -189,7 +193,7 @@ protected Notification getNotification(Context context, Intent intent)
 
 ## 应用内消息
 
-###配置
+### 配置
 为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`MaxLeap.initialize()`方法**之前**添加：
 
 ```java
@@ -197,7 +201,7 @@ MaxLeap.setMarketingEnabled(true);
 ```
 
 ###定义目标Activity
-您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity(详细步骤，请查看[Console使用指南－Marketing](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING))。假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
+您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity. 假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
 
 在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
 

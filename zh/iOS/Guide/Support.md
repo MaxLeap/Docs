@@ -49,7 +49,7 @@ SDK 的 UI 自定义是通过编辑 MLHelpCenterThemes.bundle/HelpCenterTheme.pl
 **颜色** | 颜色以十六进制的格式指定，例如：FF0000 是红色
 :--------|:----------
 **图片** | 图片需要在 MLHelpCenterImages.bundle 里面，你可以通过图片的文件名来指定。<br> MLHelpCenter 支持 iOS image naming convention(例如：在 retina 屏幕上使用 @2x 的图片，如果能找到的话)。
-**字体** | 你可以通过查阅 [iosfons.com](http://iosfonts.com/) 来获取不同版本 iOS 上可用的字体。
+**字体** | 你可以通过查阅 [iosfonts.com](http://iosfonts.com/) 来获取不同版本 iOS 上可用的字体。
 
 [using custom fonts]: #using_custom_fonts
 
@@ -94,7 +94,7 @@ SDK 的 UI 自定义是通过编辑 MLHelpCenterThemes.bundle/HelpCenterTheme.pl
 1. **FAQ section list view**:      FAQ section 列表界面
 2. **FAQ item list view**:         FAQ item 列表界面，就是进入一个 section 之后的界面
 3. **FAQ item content view**:      显示一条 FAQ 内容的界面
-4. **New conversation view**:      新建回话界面
+4. **New conversation view**:      新建会话界面
 5. **Conversation view**:          会话界面
 
 在 .plist 文件中相应条目下都有 **Title image** 这个字段，对其指定一个图片名字就可以将相应的界面的标题文字换成图片。

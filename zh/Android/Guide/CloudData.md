@@ -1,12 +1,12 @@
-#云数据
+# 云数据
 
 ## 简介
 
-### 什么是Cloud Data服务
-Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+### 什么是 Cloud Data服务
+ Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
-### 为何需要Cloud Data服务
-Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### 为何需要 Cloud Data服务
+ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
@@ -14,7 +14,7 @@ Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专�
 * 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
-存储在Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值，Cloud Data服务会将其存储至云端。
+存储在 Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值， Cloud Data服务会将其存储至云端。
 
 ###新建
 假设我们要保存一条数据到`Comment`class，它包含以下属性：
@@ -44,7 +44,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 注意：
 
-* **Comment表合何时创建:** 在运行以上代码时，如果云端（MaxLeap 的服务器，以下简称云端）不存在 Comment 数据表，那么 MaxLeap 将根据您第一次（也就是运行的以上代码）新建的 Comment 对象来创建数据表，并且插入相应数据。
+* **Comment表合何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端创建表，所以在使用前必须先登录 MaxLeap 的控制台并手动创建 Comment 表。这样在运行代码后这条数据才会被成功插入。
 * **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
 * **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
@@ -56,7 +56,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 	updatedAt|对象的最后修改时间
 
 * **大小限制：** ML Object的大小被限制在128K以内。
-* 键的名称必须为英文字母，值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
+* 键的名称可以包含英文字母，数字和下划线，但是必须以字母开头。值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
 * 您可以在调用 `MLDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
 
 ```java
@@ -818,7 +818,7 @@ MLQueryManager.countInBackground(query, new CountCallback() {
 
 ###复合查询
 
-您可以通过MLQuery.or方法查询匹配多个Query中一个的数据。如，您可以通过以下方式，获取胜场超过90场或低于10场的玩家名单：
+您可以通过 MLQuery.or 方法查询匹配多个 Query 中一个的数据。如，您可以通过以下方式，获取胜场超过90场或低于10场的玩家名单：
 
 ```java
 MLQuery<MLObject> lotsOfWins = MLQuery.getQuery("Player");
@@ -914,7 +914,7 @@ shield.setFireproof(false);
 shield.setRupees(50);
 ```
 
-###创建MLObject子类
+###创建 MLObject 子类
 
 创建一个 MLObject 的子类很简单：
 
@@ -1153,7 +1153,7 @@ MaxLeap提供强大的邮箱验证服务，您只需在Console >> App Settings >
 您可以通过MLAnonymousUtils获取一个匿名的用户账号：
 
 ```java
-MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
+MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
       @Override
       public void done(MLUser user, MLException e) {
         if (e != null) {
@@ -1164,230 +1164,10 @@ MLAnonymousUtils.logIn(new LogInCallback<MLUser>() {
   }
 });
 ```
-#####自动创建匿名用户
-
-在主Application的onCreate()方法中添加：
-
-```java
-MLUser.enableAutomaticUser();
-```
-
-您可以通过注册或者登录，将当前的匿名用户转化为非匿名用户，该匿名用户的所有的数据都将保留。您可以通过MLAnonymousUtils.isLinked()来判断当前用户是否为匿名用户。
-
-```java
-Boolean isAnonymous = MLAnonymousUtils.isLinked(MLUser.getCurrentUser());
-```
-
-您可以选择让系统自动创建匿名用户（本地创建，无需网络连接）, 以便立即开始使用应用. 设置自动创建匿名用户后, MLUser.getCurrentUser()将永远不为null。 然而，当您在存储与该匿名用户相关的MLObject时，MaxLeap会在云端创建该匿名用户。
 
 ### 在Console中管理用户
 
-User 表是一个特殊的表，专门存储 MLUser 对象。在Console >> Users中，您会看到一个 _User 表。更多信息，请移步至[Console用户手册](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL)中查看。
-
-##用户角色
-随着应用程序使用范围和用户数量的不断壮大，对于各项数据的访问权限，您可能需要更强硬的控制权，与用户关联的 ACL 所提供的控制并不能符合要求。为满足这种需求，MaxLeap 支持[基于角色的访问控制][role-based access control]。根据角色对拥有您 MaxLeap 数据的公共访问权限的用户进行分组是一种合乎逻辑的方法。角色是包含用户和其他角色的命名对象。给某一角色授予的任何权限也意味着将权限授予拥有该角色的用户，以及授予拥有该角色所含角色的任何用户。在MaxLeap中有一个对应的`_Role` class来存储用户角色。
-
-###字段说明
-
-属性名|类型|介绍|是否必需或唯一
----|---|---|---
-    ACL|ACL|用户角色对象的访问权限|**必需** (需要显式设置)
-    roles|Relation|该MLRole包含的其他MLRole|可选
-    name|String| 角色名|必需
-    user|Relation|该角色包含的用户|可选
-
-###创建角色
-创建Role的时候，您需要提供两个参数：第一个为Role的名字(对应name字段)，第二个参数为ACL.
-
-```java
-MLACL roleACL = new MLACL();
-roleACL.setPublicReadAccess(true);
-MLRole role = new MLRole("Administrator", roleACL);
-MLRoleManager.saveInBackground(role);
-```
-
-###向角色中添加用户或角色
-您可以通过role.getUsers().add()或role.getRoles().add()方法，向角色中添加用户或其他角色。
-
-```java
-MLRole role = new MLRole(roleName, roleACL);
-for (MLUser user : usersToAddToRole) {
-  role.getUsers().add(user)
-}
-for (MLRole childRole : rolesToAddToRole) {
-  role.getRoles().add(childRole);
-}
-MLRoleManager.saveInBackground(role);
-```
-
-###获取角色对象
-
-您有两种方式获取用户角色对象：
-
-1. 通过角色名查找：
-
-```java
-MLObject wallPost = new MLObject("WallPost");
-MLACL postACL = new MLACL();
-//指定相应的Role的名字：
-postACL.setRoleWriteAccess("Moderators", true);
-wallPost.setACL(postACL);
-MLDataManager.saveInBackground(wallPost);
-```
-	
-2. 通过Query查找：
-
-```JAVA
-MLQuery<MLRole> query = MLRole.getQuery();
-query.whereEqualTo("name", "roleName");
-MLQueryManager.findAllInBackground(query, new FindCallback<MLRole>() {
-    public void done(List<MLRole> roleList, MLException e) {
-        if (e == null) {
-
-        } else {
-
-        }
-    }
-});
-```
-
-##数据安全
-
-### MLObject的安全性
-用户在创建MLObject时都存在一个ACL字段，只有在ACL名单上的用户(MLUser)或者角色(MLRole)才能被允许访问。如果用户不显式地设置ACL，系统将自动为其分配默认的ACL.
-
-#####ACL
-ACL相当于为每一个数据创建的允许访问的白名单列表。一个 User 必须拥有读权限（或者属于一个拥有读权限的 Role）才可以获取一个对象的数据，同时，一个 User 需要写权限（或者属于一个拥有写权限的 Role）才可以更改或者删除一个对象。 如，一条典型的ACL数据：
-
-```{"553892e860b21a48a50c1f29":{"read":true,"write":true}}```
-
-表明ObjectId为"553892e860b21a48a50c1f29"的用户，可以读取和修改该MLObject.
-
-#####默认访问权限
-
-在没有显式指定的情况下，MaxLeap 中的每一个对象都会有一个默认的 ACL 值。这个值代表了，所有的用户，对这个对象都是可读可写的。此时您可以在数据管理的表中 ACL 属性中看到这样的值:
-
-```{"*":{"read":true,"write":true}}```
-
-您可以根据需要，修改默认ACL的值：
-
-```java
-MLACL defaultACL = new MLACL();
-defaultACL.setPublicReadAccess(true);
-defaultACL.setPublicWriteAccess(false);
-MLACL.setDefaultACL(defaultACL, true);
-```
-
-`MLACL.setDefaultACL()`的第二个参数设置为true，代表默认将该用户的读取和访问权限添加到该defaultACL上。反之则否。
-
-#####设置仅创建用户可见
-您可以将一个MLObject设置为仅创建用户可读取或修改：首先，用户需要登录后创建MLObject，并且为其添加如下ACL属性：
-
-```java
-MLObject privateNote = new MLObject("Note");
-privateNote.put("content", "This note is private!");
-privateNote.setACL(new MLACL(MLUser.getCurrentUser()));
-MLDataManager.saveInBackground(privateNote);
-```
-此时，该MLObject - "privateNote"仅该用户可见。且该用户在任何设备上登录，都可以读取或修改该对象。
-
-#####为其他用户设置访问权限
-您可以使用setReadAccess 和 setWriteAccess将**指定用户**的读写权限添加到MLObject的ACL中。
-
-如，为一组用户添加读取和修改的权限：
-
-```java
-MLObject groupMessage = new MLObject("Message");
-MLACL groupACL = new MLACL();
-     
-// userList 为 Iterable<MLUser>，包含一组MLUser对象.
-for (MLUser user : userList) {
-  groupACL.setReadAccess(user, true);
-  groupACL.setWriteAccess(user, true);  
-}
- 
-groupMessage.setACL(groupACL);
-MLDataManager.saveInBackground(groupMessage);
-```
-
-#####为角色设置访问权限
-您可以使用setRoleWriteAccess 和 setRoleWriteAccess将**指定角色**的读写权限添加到MLObject的ACL中。
-
-如，为一组用户添加读取和修改的权限：
-
-```java
-MLRole moderators = /* Query for some MLRole */;
-MLObject wallPost = new MLObject("WallPost");
-MLACL postACL = new MLACL();
-postACL.setRoleWriteAccess(moderators);
-wallPost.setACL(postACL);
-MLDataManager.saveInBackground(wallPost);
-```
-
-#####同时为用户和角色设置访问权限
-MLObject的ACL是可以叠加的。如，在给某一个MLObjcet设置ACL时，您可以为所有用户添加读取权限的同时，为某一个角色添加修改权限：
-
-```java
-MLObject myMessage = new MLObject("Message");
-MLACL myACL = new MLACL();
-// 为所有用户添加读取权限
-myACL.setPublicReadAccess(true);
-// 为Moderators 角色添加修改权限
-myACL.setRoleWriteAccess("Moderators");
-myMessage.setACL(myACL);
-```
-
-##### 为所有用户设置访问权限
-您可以使用setPublicReadAccess 和 setPublicWriteAccess将**所有用户**的读写权限添加到MLObject的ACL中
-
-```java
-MLObject publicPost = new MLObject("Post");
-MLACL postACL = new MLACL();
-postACL.setPublicReadAccess(true);
-postACL.setPublicWriteAccess(false);
-publicPost.setACL(postACL);
-MLDataManager.saveInBackground(publicPost);
-```
-
-### 用户对象的安全性
-
-MaxLeap对用户对象的安全性进行了规范。默认情况下，存储在用户对象中的数据，只能被该用户本身修改。客户端可以读取其他用户的数据，但无权限修改或删除。所以，只有用户登录后所获取的用户对象，才能被修改。
-
-以下例子很好的描绘了用户对象的安全性:
-
-```java
-MLUserManager.logInInBackground("my_username", "my_password", new LogInCallback<MLUser>() {
-    
-    @Override
-    public void done(MLUser user, MLException exception) {
-        user.setUserName("my_new_username"); // 修改用户名
-        MLUserManager.saveInBackground(user); // 能成功保存，因为成功登录并获取该用户对象。
-         
-        // 非登录方式，获取的用户对象，将无法被修改
-        MLQuery<MLUser> query = MLUser.getQuery();
-        MLQueryManager.getInBackground(query, user.getObjectId(), new GetCallback<MLUser>() {
-          public void done(MLUser object, MLException e) {
-            object.setUserName("another_username");
-         
-            // 将抛出异常：用户未被授权
-            MLDataManager.saveInBackground(object);
-          }
-        });
-    }
-});
-```
-### 角色对象的安全性
-
-与其他MLObject一样，MLRole对象也使用ACL来控制其访问权限。不同的是，MLRole需要显示地设置ACL. 通常，只有系统管理人员，或其他高权限人员可以有权限创建或修改角色，所以在创建MLRole的同时，您需要设置其访问权限。
-
-如:
-
-```java
-MLACL roleACL = new MLACL();
-roleACL.setPublicReadAccess(true);
-MLRole role = new MLRole("Administrator", roleACL);
-MLRoleManager.saveInBackground(role);
-```
+User 表是一个特殊的表，专门存储 MLUser 对象。在Console >> Users中，您会看到一个 _User 表。
 
 ##第三方登录
 
