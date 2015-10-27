@@ -22,7 +22,7 @@ Eclipse:
 ./maxleap -v
 ```
     
-显示`axleap version 0.1`表示MaxLeap客户端安装成功
+显示`axleap version 0.2`表示MaxLeap客户端安装成功
 
 *	maxleap命令添加到环境变量
 
@@ -118,16 +118,16 @@ public class Main extends LoaderBase implements Loader {
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
 ## 云代码的上传及部署
-1. 登录：`maxleap login <UserName> -region <CN or US ...>`
-2. 选择所要部署的目标应用，作为后续操作的上下文：`maxleap use <AppName>` ,如果你不记得你的AppName，可以通过`maxleap apps`来枚举你的所有应用列表
-3. 上传Package： `maxleap upload <PackageLocation>`
-4. 部署云代码：`maxleap deploy <VersionNumber>`
+1. 登录：`maxleap 或者maxleap -username <email> -region <CN or US ...>`
+2. 选择所要部署的目标应用，作为后续操作的上下文：`use <AppName>` ,如果你不记得你的AppName，可以通过` apps`来枚举你的所有应用列表
+3. 上传Package： `upload <PackageLocation>`
+4. 部署云代码：`deploy <VersionNumber>`
 
 **注意：**
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
+*	使用`help`来获取所有相关命令帮助，你也可以查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，以获取lcc的更多信息。
 
 ### 测试
 
