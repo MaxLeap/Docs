@@ -383,9 +383,9 @@ new MLHandler<Request, Response>() {
 MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
 ###登录:
 ```shell
-maxleap login <用户名> -region <CN or US ...>
+maxleap login <用户邮箱> -region <CN or US ...>
 ```
-`<用户名>` 为您登录MaxLeap管理中心的账号，`<CN or US ...>` 为选择中国区账号还是美国区账号，然后根据提示输入密码
+`<用户邮箱>` 为您登录MaxLeap管理中心的账号邮箱，`<CN or US ...>` 为选择中国区账号还是美国区账号，然后根据提示输入密码
 ###显示所有app：
 ```shell
 maxleap apps
@@ -395,7 +395,7 @@ maxleap apps
 ```shell
 maxleap use <应用名>
 ```
-`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
+`<应用名>`为目标应用名，如果应用名包含空格，你可以用`maxleap use "应用名"`即使用引号来切换应用。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
 ###上传云代码:
 ```shell
 maxleap upload <文件路径>
