@@ -1,4 +1,4 @@
-#  Cloud Data
+# Cloud Data
 ## Introduction
 
 ### What is  Cloud Data
