@@ -1,35 +1,100 @@
 ## 云数据离线分析
 
 ### 简介
-xxx
-这里说明什么是 MaxLeap 云数据离线分析，可参考需求文档
+MaxLeap云数据离线分析旨在为用户提供一种处理自有应用数据的方式，用户可以使用类SQL的查询语句对自己的数据进行高效的查询和导出。该功能的数据源为截止今日凌晨的历史数据。
 ### 背景及目标
-可参考需求文档
+现有的云数据功能无法完成一些超大规模数据量下的聚合统计型的查询，不同的表之间也是相互隔离，无法相互连接。很多用户渴望能以一种熟悉的查询方式来分析自己的数据，比如：一个音乐类的应用，想查询最火热的歌手Top10，其在我们的云数据离线分析平台上可以轻松快捷地获取。
+为了达到易用和高效的平衡，我们致力于实现以下目标：
+
+1. 提供类SQL的业界通用查询方式
+1. 鲁棒性，确保我们的系统是稳定健壮的
+1. 查询结果的优雅展示
+1. 丰富的文件格式导出
+1. 人性化的服务 （比如耗时长的任务我们会邮件通知，避免您不必要的等待）
+ 
 ### 技术架构
-描述技术架构优势
+- 基于业界比较成熟的解决方案，核心SQL采用SparkSQL，SparkSQL对比Hive拥有巨大的性能优势，我们在小型的测试环境中对千万级数据的聚合查询仅2分钟。
+- 我们的攻城狮实现了一套自有的ETL工具用于数据的转换，通过tail数据库的日志到Kafka，再入库到HBase形成全量数据，最后dump成高效的列式存储格式文件。
+- 对于SQL的请求和响应，我们基于Redis的PubSub定制了一套小型的消息系统。
+- 以下是我们大致的架构图
+
+
+![Offline Arch](../../../images/imgOfflineArch.png "Offline Arch")
+
 ### 启用设置
-启用设置流程
+1. 第一次使用，请进入应用设置页面，打开“云数据离线分析”开关，系统会在后台导入您的云数据，泡杯咖啡，耐心等待
+![Offline Arch](../../../images/imgOfflineStep1.png "Offline Arch")
+
+2. 打开“开发者中心”-“云数据离线分析”页面，如果您的数据已经导入完成，页面会在左侧列出当前的所有表结构
+![Offline Arch](../../../images/imgOfflineStep2.png "Offline Arch")
+
+3. 在右侧的编辑器中撰写您的SQL语句，点击执行，等待片刻后，页面将会返回执行结果。
+
+![Offline Arch](../../../images/imgOfflineStep3.png "Offline Arch")
 
 ### 功能介绍
 
 #### 查询结果
-描述两种结果大概情况及原因
+查询结果包含实时和离线查询
+
+- 实时：页面上直接渲染
+- 离线：系统会自动在完成查询后将查询结果以邮件方式发送到您的邮箱。（当然您也可以重复提交您的查询直至页面返回查询结果）
+
 ##### 实时结果
-详细描述实时结果原因，流程
+当您的查询表数据规模比较小，或者您的数据已经被预热，此时您的查询速度快速，会在几秒至几十秒内返回响应。
 ##### 离线结果
-详细描述离线结果原因，流程，邮件相关
+当您的查询表数据规模比较大，或者您的数据为第一次加载的冷数据，此时您的查询有可能会需要几分钟的处理时间，为了避免浪费您宝贵的时间，我们推荐耐心等待系统将查询结果发送到您的邮箱。
 
 #### LeapQL 支持语法
-文档可参考leancloud，主要描述支持关键字，函数，以及使用等，注意事项，与传统SQL语法区别
-https://leancloud.cn/docs/leaninsight_guide.html#类似_SQL_的查询分析语法
+请参考Spark官网的SQL部分：[http://spark.apache.org/docs/latest/sql-programming-guide.html](http://spark.apache.org/docs/latest/sql-programming-guide.html)
 
 #### 查询样例
 ##### 简单样例
-需求场景，以及对应 LeapQL
+查询位于上海市区的用户
+
+```
+    select
+        * 
+    from
+        _User 
+    where
+        timezone='Asia/Shanghai'
+
+```
 
 ##### 一般样例
-需求场景，以及对应 LeapQL
+查询Top10的安装语言
+
+```
+    select
+        language,
+        count(1) as totals 
+    from
+        _Installation 
+    group by
+        language 
+    order by
+        totals limit 10
+
+```
 
 ##### 复杂样例
+查询Top50的最受欢迎的艺人（假设已经存在艺人和歌曲两张表）
 
-需求场景，以及对应 LeapQL
+```
+    select
+        Artist.name as artist_name,
+        count(1) as track_num 
+    from
+        Artist 
+    left join
+        Track 
+            on Track.artist=Artist.name 
+    group by
+        Artist.name 
+    order by
+        track_num desc,
+        artist_name asc limit 50
+        
+
+```
