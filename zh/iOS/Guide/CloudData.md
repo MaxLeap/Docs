@@ -1499,6 +1499,11 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 1. 每个 `MLObject` 类仅可能有一个带 `MLGeoPoint` 对象的键。
 2. 点不应等于或大于最大范围值。纬度不能为 -90.0 或 90.0。经度不能为 -180.0 或 180.0。若纬度或经度设置超出边界，会引起错误。
 
+## 数据安全
+
+每个到达 MaxLeap 云服务的请求是由移动端SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
+具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)
+
 
 [+load api reference]: https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/classes/NSObject_class/#//apple_ref/occ/clm/NSObject/load
 
