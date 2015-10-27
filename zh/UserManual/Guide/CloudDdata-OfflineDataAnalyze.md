@@ -23,9 +23,11 @@ MaxLeap云数据离线分析旨在为用户提供一种处理自有应用数据�
 
 ### 启用设置
 1. 第一次使用，请进入应用设置页面，打开“云数据离线分析”开关，系统会在后台导入您的云数据，泡杯咖啡，耐心等待
+
 ![Offline Arch](../../../images/imgOfflineStep1.png "Offline Arch")
 
 2. 打开“开发者中心”-“云数据离线分析”页面，如果您的数据已经导入完成，页面会在左侧列出当前的所有表结构
+
 ![Offline Arch](../../../images/imgOfflineStep2.png "Offline Arch")
 
 3. 在右侧的编辑器中撰写您的SQL语句，点击执行，等待片刻后，页面将会返回执行结果。
@@ -52,7 +54,7 @@ MaxLeap云数据离线分析旨在为用户提供一种处理自有应用数据�
 ##### 简单样例
 查询位于上海市区的用户
 
-```
+```sql
     select
         * 
     from
@@ -65,7 +67,7 @@ MaxLeap云数据离线分析旨在为用户提供一种处理自有应用数据�
 ##### 一般样例
 查询Top10的安装语言
 
-```
+```sql
     select
         language,
         count(1) as totals 
@@ -81,7 +83,7 @@ MaxLeap云数据离线分析旨在为用户提供一种处理自有应用数据�
 ##### 复杂样例
 查询Top50的最受欢迎的艺人（假设已经存在艺人和歌曲两张表）
 
-```
+```sql
     select
         Artist.name as artist_name,
         count(1) as track_num 
