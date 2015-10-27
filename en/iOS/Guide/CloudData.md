@@ -1,4 +1,4 @@
-#  Cloud Data
+# Cloud Data
 ## Introduction
 
 ### What is  Cloud Data
@@ -868,7 +868,7 @@ The following code can sucessfully declare, realize and register the subclass `G
 
 Adding method to `MLObject` helps encapsulated class logic. With `MLSubclassing`, you can put the logic that is related to subclass into one place rather than seperate them into multiple classes to process business logic and storage/transformation logic.
 
-`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `Game` 类中创建了 `displayName` 属性：
+`MLObject` supports dynamic synthesizers just like `NSManagedObject`. Declare a property as you normally would, but use `@dynamic` rather than `@synthesize` in your .m file. The following example creates a `displayName` property in the `Game` class:
 
 ```objective_c
 // Game.h
@@ -881,16 +881,18 @@ Adding method to `MLObject` helps encapsulated class logic. With `MLSubclassing`
 @dynamic displayName;
 ```
 
-现在，您可以使用 `game.displayName` 或 `[game displayName]` 访问 `displayName` 属性，并使用 `game.displayName = @"Bird"` 或 `[game setDisplayName:@"Bird"]` 对其进行赋值。动态属性可以让 Xcode 提供自动完成功能和简单的纠错。
+You can access the `displayName` property using `game.displayName` or `[game displayName]` and assign to it using `game.displayName = @"Bird"` or `[game setDisplayName:@"Bird"]`. Dynamic properties allow Xcode to provide autocomplete and catch typos.
 
-`NSNumber` 属性可使用 `NSNumber` 或其相应的基本类型来实现。请看下例：
+
+`NSNumber` properties can be implemented either as `NSNumber`s or as their relative basic type. Consider the following example:
 
 ```objective_c
 @property BOOL multiplayer;
 @property float price;
 ```
 
-这种情况下，`game[@"multiplayer"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"price"]` 将返回一个 `NSNumber`，可以使用 `floatValue` 访问。但是，`fireProof` 属性实际上是 `BOOL`，`rupees` 属性实际上是 `float`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。您可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
+
+In this case, `game[@"multiplayer"]` will return an `NSNumber` which is accessed using `boolValue` and `game[@"price"]` will return an `NSNumber` which is accessed using `floatValue`, but the `fireProof` property is an actual `BOOL` and the `rupees` property is an actual `float`. The dynamic `getter` will automatically extract the `BOOL` or `int` value and the dynamic `setter` will automatically wrap the value in an `NSNumber`. You are free to use either format. Primitive property types are easier to use but `NSNumber` property types support `nil` values more clearly.
 
 ###Define Functions
 
@@ -910,7 +912,7 @@ If you need more complicated logic but not just a simple accessor, you can defin
 
 ###Create Subclass Instance
 
-您应该使用类方法 `object` 创建新的对象。这样可以构建一个您定义的类型的实例，并正确处理子类化。要创建现有对象的引用，使用 `objectWithoutDataWithObjectId:`。
+You should create new object with class method `object`. This will build an instance defined by yourself and result in right processing on subclassing. You can create reference of existing object using `objectWithoutDataWithObjectId:`.
 
 ### Subclass Query
 
@@ -929,26 +931,27 @@ MLQuery *query = [Game query];
 
 ##MLUser
 
-许多应用的核心理念是，用户帐户保护应能让用户安全访问他们的信息。我们专门用于用户管理的类，叫做 `MLUser`，可自动处理用户帐户管理需要的很多功能。
+At the core of many apps, there is a notion of user accounts that lets users access their information in a secure manner. We provide a specialized user class called `MLUser` that automatically handles much of the functionality required for user account management.
 
-您可以使用这个类在您的应用程序中添加用户帐户功能。
+With this class, you'll be able to add user account functionality in your app.
 
-MLUser is a subclass of MLObject. It inherited all methods of MLObject and has the same features as MLObject, like flexible schema and key-value pair interface. The different is MLUser adds some specific features of user account.
+`MLUser` is a subclass of `MLObject`. It inherited all methods of `MLObject` and has the same features as `MLObject`, like flexible schema and key-value pair interface. The different is `MLUser` adds some specific features of user account.
 
 
 ###Property Description
 
 Apart from the properties inherited from `MLObject`, `MLUser` has some specific properties:
 
-- `username`：用户的用户名（必填）。
-- `password`：用户的密码（注册时必填）。
-- `email`：用户的电子邮箱地址（选填）。
+- `username`: The username for the user (required).
+- `password`: The password for the user (required on signup).
+- `email`: The email address for the user (optional).
 
-我们在浏览用户的各种用例时，会逐条仔细查看这些信息。切记，如果您通过这些属性设置 `username` 和 `email`，则无需使用 `setObject:forKey:` 方法进行设置 － 这是自动设置的。
+We'll go through each of these in detail as we run through the various use cases for users. Keep in mind that if you set `username` and `email` through these properties, you do not need to set it using the `setObject:forKey:` method &mdash; this is set for you automatically.
+
 
 ###User Signup
 
-您的应用程序要做的第一件事就是让用户注册。以下代码阐释了典型注册：
+The first thing your app will do is probably ask the user to sign up. The following code illustrates a typical sign up:
 
 ```objective_c
 - (void)myMethod {
@@ -969,17 +972,18 @@ Apart from the properties inherited from `MLObject`, `MLUser` has some specific 
 }
 ```
 
-这个调用将在您的 MaxLeap 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，MaxLeap 只保存密码的密文。我们从来不明文储存密码，也不会将密码明文传输回客户端。
+This call will asynchronously create a new user in your MaxLeap App. Before it does this, it also checks to make sure that both the username and email are unique. Also, it securely hashes the password in the cloud using bcrypt. We never store passwords in plaintext, nor will we ever transmit passwords back to the client in plaintext.
 
-**Notice**，Signup uses `-[user signUpInBackgroundWithBlock:]` method rather than `-[user saveInBackgroundWithBlock:]` method. 应始终使用 `-[user signUpInBackgroundWithBlock:]` 方法创建新的 `MLUser`。调用 `-[user saveInBackgroundWithBlock:]` 可以完成用户的后续更新。
+**Notice**: Signup uses `-[user signUpInBackgroundWithBlock:]` method rather than `-[user saveInBackgroundWithBlock:]` method. New `MLUser`s should always be created using the `-[user signUpInBackgroundWithBlock:]` method. Subsequent updates to a user can be done by calling `-[user saveInBackgroundWithBlock:]`.
 
-若注册不成功，您应该查看返回的错误对象。最可能的情况就是该用户名或邮箱已被其他用户使用。你应该将这种情况清楚地告诉用户，并要求他们尝试不同的用户名。
+If a signup isn't successful, you should read the error object that is returned. The most likely case is that the username or email has already been taken by another user. You should clearly communicate this to your users, and ask them try a different username.
 
-您可以使用电子邮箱地址作为用户名。只需让您的用户输入他们的电子邮箱，但是需要将它填写在用户名属性中 － `MLUser` 将可以正常运作。我们将在*重置密码*部分说明是如何处理这种情况的。
+You are free to use an email address as the username. Simply ask your users to enter their email, but fill it in the username property &mdash; `MLUser` will work as normal. We'll go over how this is handled in the *reset password* section.
+
 
 ###Signin
 
-当然，您让用户注册后，需要让他们以后登录到他们的帐户。为此，您可以使用类方法 `+[MLUser logInWithUsernameInBackground:password:block:]`。
+Of course, after you allow users to sign up, you need to let them log in to their account in the future. To do this, you can use the class method `+[MLUser logInWithUsernameInBackground:password:block:]`。
 
 ```objective_c
 [MLUser logInWithUsernameInBackground:@"myname" password:@"mypass" block:^(MLUser *user, NSError *error) {
@@ -993,9 +997,9 @@ Apart from the properties inherited from `MLObject`, `MLUser` has some specific 
 
 ###Current User 
 
-If the app required signin everytime, it will directly affect the user experience. You can use the cached `currentUser` object to avoid this situation.
+It would be bothersome if the user had to log in every time they open your app.  You can avoid this by using the cached `currentUser` object.
 
-There would be a cached user object in local disk when you register or signin. You can log in with the cached object with following method:
+Whenever you use any signup or login methods, the user is cached on disk. You can treat this cache as a session, and automatically assume the user is logged in:
 
 ```objective_c
 MLUser *currentUser = [MLUser currentUser];
@@ -1005,17 +1009,16 @@ if (currentUser) {
     // show the signup or login screen
 }
 ```
-
-You can clear cached object with following method:
+You can clear the current user by logging them out:
 
 ```objective_c
 [MLUser logOut];
 MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```
 
-### 修改密码
+### Change Password
 
-可以通过更新 `password` 字段来更改密码：
+You can change password by updating `password` field:
 
 ```
 [MLUser currentUser].password = @"the new password";
@@ -1028,7 +1031,7 @@ MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 }];
 ```
 
-为了安全起见，在更改密码前需要让用户输入旧密码并验证是否与当前账户匹配：
+In consideration of safety, old password is required before entering a new one:
 
 ```
 NSString *theOldPassword;
@@ -1058,20 +1061,19 @@ MaxLeap provides a method for users to reset the password securely. The procedur
 [MLUser requestPasswordResetForEmailInBackground:@"email@example.com"];
 ```
 
-该操作将尝试将给定的电子邮箱与用户电子邮箱或用户名字段进行匹配，并向用户发送密码重置邮件。这样，您可以选择让用户使用其电子邮箱作为用户名，或者您可以单独收集它并把它储存在电子邮箱字段。
-
+This will attempt to match the given email with the user's email or username field, and will send them a password reset email. By doing this, you can opt to have users use their email as their username, or you can collect it separately and store it in the email field.
 The reset procedure is show as below:
 
 * Users enter their email address and require password reset.
 * MaxLeap sends an email to the email address user just provided and this email contains the reset link.
-* User click on the reset lins, enter a ML page and set a new password.
+* Users click on the reset lins, enter a ML page and set a new password.
 * MaxLeap has reset user's password successfully.
 
-**注意**：该流程中的消息传送操作将根据您在 MaxLeap 上创建该应用时指定的名称引用您的应用程序。
+**Notice**: Note that the messaging in this flow will reference your app by the name that you specified when you created this app on MaxLeap.
 
 ###User Query
 
-若要查询用户表，您需要使用特殊的用户查询：
+To query for users, you need to use the special user query:
 
 ```objective_c
 MLQuery *query = [MLUser query];
@@ -1083,20 +1085,20 @@ MLQuery *query = [MLUser query];
 
 ###Email Verification
 
-在 MaxLeap 应用设置中启用电子邮箱验证，可以让应用将部分使用体验提供给验证过电子邮箱地址的用户。电子邮箱验证会将 `emailVerified` 键添加到 `MLUser` 中。`MLUser` 的 `email` 被修改后，`emailVerified` 被设置为 `false`。随后，MaxLeap 会向用户发送一个邮件，其中包含一个链接，可将 `emailVerified` 设置为 `true`。
+Enabling email verification in an MaxLeap  application's settings allows the application to reserve part of its experience for users with confirmed email addresses. Email verification adds the `emailVerified` key to the `MLUser` object. When a `MLUser`'s `email` is set or modified, `emailVerified` is set to `false`. MaxLeap then emails the user a link which will set `emailVerified` to `true`.
 
-有三种 `emailVerified` 状态需要考虑：
+There are three `emailVerified` states to consider:
 
-1. `true` － 用户通过点击 MaxLeap 发送给他们的链接确认电子邮箱地址。最初创建用户帐户时，`MLUsers` 没有 `true` 值。
-2. `false` － `MLUser` 对象最后一次刷新时，用户未确认其电子邮箱地址。若 `emailVerified` 为 `false`，可以考虑调用 `+[MLDataManager fetchDataOfObjectInBackground:block:]`，把 `MLUser` 传递给第一个参数。
-3. 缺失 － 电子邮箱验证关闭或 `MLUser` 没有 `email` 时创建了 `MLUser`。
+1. `true` － the user confirmed his or her email address by clicking on the link MaxLeap emailed them. `MLUsers` can never have a `true` value when the user account is first created.
+2. `false` － at the time the `MLUser` object was last refreshed, the user had not confirmed his or her email address. If `emailVerified` is `false`, consider calling `+[MLDataManager fetchDataOfObjectInBackground:block:]` to pass `MLUser` to the first parameter.
+3. missing － the `MLUser` was created when email verification was off or the `MLUser` does not have an `email`.
 
 
 ###Anonymous Users
 
-能够将数据和对象与具体用户关联非常有价值，但是有时您想在不强迫用户输入用户名和密码的情况下也能达到这种效果。
+Being able to associate data and objects with individual users is highly valuable, but sometimes you want to be able to do this without forcing a user to specify a username and password.
 
-Anonymous users refers to a special set of users with username and password. They have the same features as other users while all data will be no longer accessible once deleted. 
+Anonymous users refers to a special set of users without username and password. They have the same features as other users while all data will be no longer accessible once deleted. 
 
 You can get an anonymous user account with `MLAnonymousUtils`:
 
@@ -1110,8 +1112,8 @@ You can get an anonymous user account with `MLAnonymousUtils`:
 }];
 ```
 
-#####自动创建匿名用户
-在无网络请求的情况下，也可以自动为您创建匿名用户，以便您能在应用程序开启之后立即与您的用户互动。如果您启用在应用程序开启时自动创建匿名用户的功能，则 `[MLUser currentUser]` 将不会为 `nil`。首次保存用户或与该用户相关的任何对象时，将在云中自动创建用户。在此之前，该用户的对象 ID 为 `nil`。启用自动创建用户功能将使得把数据与您的用户关联变得简单。例如，在您的 `application:didFinishLaunchingWithOptions:` 函数中，您可以写：
+#####Create Anonymous Users Automatically
+Anonymous users can also be automatically created for you without requiring a network request, so that you can begin working with your user immediately when your application starts.  When you enable automatic anonymous user creation at application startup, `[MLUser currentUser]` will never be `nil`. The user will automatically be created in the cloud the first time the user or any object with a relation to the user is saved.  Until that point, the user's object ID will be `nil`.  Enabling automatic user creation makes associating data with your users painless.  For example, in your `application:didFinishLaunchingWithOptions:` function, you might write:
 
 ```objective_c
 [MLUser enableAutomaticUser];
@@ -1121,7 +1123,7 @@ You can get an anonymous user account with `MLAnonymousUtils`:
 }];
 ```
 
-您可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *Facebook* 或 *Twitter* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以试试 `+[MLAnonymousUtils isLinkedWithUser:]`:
+You can convert an anonymous user into a regular user by setting the username and password, then calling `-[user signUpInBackgroundWithlock:]`, or by logging in or linking with a service like *Facebook* or *Twitter*. The converted user will retain all of its data.  To determine whether the current user is an anonymous user, you can check `+[MLAnonymousUtils isLinkedWithUser:]`:
 
 ```objective_c
 if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
@@ -1144,15 +1146,15 @@ If the Facebook UserId is not bound to any `MLUser` after the Facebook login, Ma
 
 ####Preparations
 
-若要通过 MaxLeap 使用 Facebook，您需要：
+To start using Facebook with Parse, you need to:
 
-1. [设置 Facebook 应用程序][set up a facebook app], 若您尚未设置。
-2. 在您的 MaxLeap 应用设置页面添加应用程序的 Facebook 应用 ID。
-3. 按照 Facebook 的 [Facebook SDK 入门][getting started with the facebook sdk]提供的说明，创建与 Facebook SDK 关联的应用程序。仔细检查并确认您已经把 FacebookAppID 和 URL Scheme 添加至应用程序的 .plist 文件。
-4. 下载解压 [MaxLeap iOS SDK](https://github.com/MaxLeap/SDK-iOS/releases)，如果您还没有。
-5. 如果使用 FacebookSDK v3.x, 把 `MLFacebookUtils.framework` 添加到您的 Xcode 项目中;<br> 如果使用 FacebookSDK v4.x, 把 `MLFacebookUtilsV4.framework` 添加到您的 Xcode 项目中。
+1. [Set up a Facebook app](https://developers.facebook.com/apps), if you haven't already.
+2. Add your application's Facebook Application ID on your MaxLeap application's settings page.
+3. Follow Facebook's instructions for [getting started with the Facebook SDK][getting started with the facebook sdk] to create an app linked to the Facebook SDK. Double-check that you have added FacebookAppID and URL Scheme values to your application's .plist file.
+4. Download and unzip[MaxLeap iOS SDK](https://github.com/MaxLeap/SDK-iOS/releases), if you haven't already.
+5. Add `MLFacebookUtils.framework`  to your Xcode project if you are using FacebookSDK v3.x;<br> Add `MLFacebookUtilsV4.framework` to your Xcode project if you are using FacebookSDK v4.x.
 
-还有两步。首先，把下面的代码添加到您引用的 `application:didFinishLaunchingWithOptions:` 方法中。
+There's also two code changes you'll need to make. First, add the following to your `application:didFinishLaunchingWithOptions:` method.
 
 FacebookSDK v3.x 
 
@@ -1184,7 +1186,7 @@ FacebookSDK v4.x
 @end
 ```
 
-然后，在 app delegate 中添加以下处理器。
+Then, add following processors in app delegate.
 
 FacebookSDK v3.x 
 
@@ -1223,11 +1225,11 @@ FacebookSDK v4.x
 }
 ```
 
-MaxLeap 用户可通过以下两种主要方法使用 Facebook：(1) 以 Facebook 用户身份登录（注册），并创建 `MLUser`，或者 (2) 将 Facebook 与已有的 `MLUser` 关联。
+There are two main ways to use Facebook with your MaxLeap users: (1) logging in as a Facebook user and creating a `MLUser`, or (2) linking Facebook to an existing `MLUser`.
 
 ####Sign in and Register New MLUser
 
-`MLUser` 提供一种方法让您的用户可以通过 Facebook 登录或注册。这可以通过采用 `logInWithPermissions:` 方法来完成，例如：
+`MLUser` provides a way to allow your users to log in or sign up through Facebook. This is done by using the `logInWithPermissions:` method like so:
 
 FacebookSDK v3.x
 
@@ -1257,18 +1259,19 @@ FacebookSDK v4.x
 }];
 ```
 
-该代码运行时，会出现以下情况：
+When this code is run, the following happens:
 
-1. 用户会看到 Facebook 登录对话框。
-2. 用户通过 Facebook 验证，您的应用程序会使用 `handleOpenURL` 收到回调。
-3. 我们的 SDK 会收到 Facebook 数据并将其保存在 `MLUser` 中。如果是基于 Facebook ID 的新用户，那么该用户随后会被创建。
-4. 您的代码块(block)被调用，并传回这个用户对象。
+1. The user is shown the Facebook login dialog.
+2. The user authenticates via Facebook, and your app receives a callback using `handleOpenURL`.
+3. Our SDK receives the user's Facebook access data and saves it to a `MLUser`. If no `MLUser` exists with the same Facebook ID, then a new `MLUser` is created.
+4. Your code block is called with the user and the current user reference will be updated to this user.
 
-权限(permissions)参数是指定您的应用程序向 Facebook 用户要求什么读取权限的一系列字符串。这些权限必须只能包括读取权限。`MLUser` 整合不要求权限即时可用。[在 Facebook 开发人员指南上阅读关于权限的更多信息][facebook permissions]。
+The permissions argument is an array of strings that specifies what permissions your app requires from the Facebook user. These permissions must only include read permissions. The `MLUser` integration doesn't require any permissions to work out of the box. [Read more permissions on Facebook's developer guide.][facebook permissions].
 
-要想获得用户发布权限，以便您的应用程序能执行类似代表用户发布状态更新帖的操作:
 
-在 Facebook SDk 3.x 中，您必须调用 `+[MLFacebookUtils reauthorizeUser:withPublishPermissions:audience:block]`:
+To acquire publishing permissions for a user so that your app can, for example, post status updates on their behalf, in Facebook SDk 3.x, you must call
+
+ `+[MLFacebookUtils reauthorizeUser:withPublishPermissions:audience:block]`:
 
 ```objective_c
 [MLFacebookUtils reauthorizeUser:[MLUser currentUser]
@@ -1281,7 +1284,7 @@ FacebookSDK v4.x
                                }];
 ```
 
-在 Facebook SDK 4.x 中，调用 `[MLFacebookUtils logInInBackgroundWithPublishPermissions:]`:
+in Facebook SDk 4.x, you must call `[MLFacebookUtils logInInBackgroundWithPublishPermissions:]`:
 
 ```
 [MLFacebookUtils logInInBackgroundWithPublishPermissions:@[@"publish_actions"] block:^(MLUser *user, NSError *error) {
@@ -1293,11 +1296,11 @@ FacebookSDK v4.x
 }];
 ```
 
-您可以自行决定在用户验证后记录从 Facebook 用户处获取的所需的任何数据。要完成这一操作，您需要通过 Facebook SDK 进行一项图表查询。
+You can decide whether or not record the data got from Facebook users after the verification. To complete the operation, you need to conduct a graphic query with Facebook SDK.
 
 ####Bind `MLUser` and Facebook Account
 
-若您想要将已有的 `MLUser` 与 Facebook 帐户关联起来，您可以按以下方式进行关联：
+If you want to associate an existing `MLUser` to a Facebook account, you can link it like so:
 
 Facebook SDK 3.x
 
@@ -1323,11 +1326,11 @@ if (![MLFacebookUtils isLinkedWithUser:user]) {
 }
 ```
 
-关联步骤与登录非常类似。区别在于，成功登陆以后，将会使用来自 Facebook 的信息更新当前的 `MLUser`。今后通过 Facebook 进行登录会使用已有账户。
+The steps that happen when linking are very similar to log in. The difference is that on successful login, the existing `MLUser` is updated with the Facebook information. Future logins via Facebook will now log in the user to their existing account.
 
 ####Unbind
 
-若您想要取消用户与 Facebook 的关联，操作如下：
+If you want to unlink Facebook from a user, simply do this:
 
 ```objective_c
 [MLFacebookUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError *error) {
@@ -1337,9 +1340,10 @@ if (![MLFacebookUtils isLinkedWithUser:user]) {
 }];
 ```
 
-Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动。通常，您会使用 `FBRequest` 类代表您的登录用户与 Facebook 互动。若要了解有关 Facebook SDK 的更多内容，[请点击这里][facebook sdk reference]。
+The Facebook iOS SDK provides a number of helper classes for interacting with Facebook's API. Generally, you will use the `FBRequest` class to interact with Facebook on behalf of your logged-in user. [You can read more about the Facebook SDK here][facebook sdk reference]
 
-我们的库为您管理 `FBSession` 对象。您只需调用 `[MLFacebookUtils session]` 来访问会话实例，其随后能传给 `FBRequest`。
+Our library manage `FBSession` objects for you. You can simply call `[MLFacebookUtils session]` to access the session instance, which can be passed to `FBRequest`.
+
 
 ###Log in with Twitter Account
 
@@ -1349,25 +1353,26 @@ If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLea
 
 ####Preparations
 
-若要通过 MaxLeap 使用 Twitter，您需要：
+For using Twitter with MaxLeap:
 
-1. [设置 Twitter 应用][set up twitter app], 若您尚未设置。
-2. 在您的 MaxLeap 应用设置页面添加您应用的 Twitter 密钥(consumer key)。
-3. 当要求您为 Twitter 应用程序指定 “Callback URL”（回调地址），请插入有效地址。它不会被您的 iOS 或 Android 应用程序使用，但是在通过 Twitter 启用身份验证时非常必要。
-4. 将 `Accounts.framework` 和 `Social.framework` 库添加至您的 Xcode 项目。
-5. 在初始化 MaxLeap SDK 的地方加入以下代码，比如在 `application:didFinishLaunchingWithOptions:` 方法中。
+1. [Set up a Twitter app][set up twitter app], if you haven't already.
+2. Add your application's Twitter consumer key on your MaxLeap application's settings page.
+3. When asked to specify a "Callback URL" for your Twitter app, please insert a valid URL. This value will not be used by your iOS or Android application, but is necessary in order to enable authentication through Twitter.
+4. Add the `Accounts.framework` and `Social.framework` libraries to your Xcode project.
+5. Add the following where you initialize the Parse SDK, such as in `application:didFinishLaunchingWithOptions:`.
 
 ```objective_c
 [MLTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY" consumerSecret:@"YOUR CONSUMER SECRET"];
 ```
 
-若您遇到与 Twitter 相关的任何问题，请查阅 [Twitter 官方文档][twitter documentation]。
+If you encounter any issues that are Twitter-related, a good resource is the [official Twitter documentation][twitter documentation]。
 
-MaxLeap 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 用户身份登录，并创建 MLUser，或者 (2) 将 Twitter 与已有的 `MLUser` 关联。
+There are two main ways to use Twitter with your MaxLeap users: (1) logging in as a Twitter user and creating a `MLUser`, or (2) linking Twitter to an existing `MLUser`.
+
 
 ####Sign in and Register New MLUser
 
-`MLTwitterUtils` 提供一种方法让您的 `MLUser` 可以通过 `Twitter` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
+`MLTwitterUtils` provides a way to allow your `MLUser`s to log in or sign up through Twitter. This is accomplished using the `logInWithBlock` method:
 
 ```objective_c
 [MLTwitterUtils logInWithBlock:^(MLUser *user, NSError *error) {
@@ -1382,12 +1387,13 @@ MaxLeap 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 
 }];
 ```
 
-该代码运行时，会出现以下情况：
+When this code is run, the following happens:
 
-1. 用户会看到 Twitter 登录对话框。
-2. 用户通过 Twitter 验证，您的应用程序会收到回调。
-3. 我们的 SDK 会收到 Twitter 数据并将其保存在 `MLUser` 中。如果是基于 Twitter 句柄的新用户，那么该用户随后会被创建。
-4. 您的 `block` 被调用并带回这个用户对象(user)。
+1. The user is shown the Twitter login dialog.
+2. The user authenticates via Twitter, and your app receives a callback.
+3. Our SDK receives the Twitter data and saves it to a `MLUser`. If it's a new user based on the Twitter handle, then that user is created.
+4. Your `block` is called with the user and the current user reference will be updated to this user.
+
 
 ####Bind `MLUser` and Twitter Account
 
@@ -1403,10 +1409,11 @@ if (![MLTwitterUtils isLinkedWithUser:user]) {
 }
 ```
 
-关联时发生的步骤与登录非常类似。区别是在成功登录中，将会使用来自 Twitter 的信息更新当前的 MLUser。今后通过 Twitter 进行的登录会使用已存在的账户。
+The steps that happen when linking are very similar to log in. The difference is that on successful login, the existing `MLUser` is updated with the Twitter information. Future logins via Twitter will now log the user into their existing account.
+
 
 ####Unbind
-若您想要取消用户与 Twitter 的关联，操作如下：
+If you want to unlink Twitter from a user, simply do this:
 
 ```objective_c
 [MLTwitterUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError *error) {
@@ -1416,7 +1423,8 @@ if (![MLTwitterUtils isLinkedWithUser:user]) {
 }];
 ```
 
-在您的应用程序有与 Twitter 关联的 `MLUser` 的情况下，我们的 SDK 提供一种将您的 API HTTP 请求注册到 [Twitter REST API][twitter rest api] 的简单方法。若想通过我们的 API 发出请求，您可以使用 `MLTwitterUtils` 提供的 `ML_Twitter` 单元集：
+Our SDK provides a straightforward way to sign your API HTTP requests to the [Twitter REST API][twitter rest api] when your app has a Twitter-linked `MLUser`.  To make a request through our API, you can use the `ML_Twitter` singleton provided by `MLTwitterUtils`:
+
 
 ```objective_c
 NSURL *verify = [NSURL URLWithString:@"https://api.twitter.com/1/account/verify_credentials.json"];
@@ -1433,19 +1441,20 @@ NSData *data = [NSURMLonnection sendSynchronousRequest:request
 
 ##GeoPoint
 
-MaxLeap 让您可以把真实的纬度和经度坐标与对象关联起来。通过在 `MLObject` 中添加 MLGeoPoint，可以在查询时实现将对象与参考点的距离临近性纳入考虑。这可以让您轻松某些事情，如找出距离与某个用户最近的其他用户或者距离某个用户最近的地标。
+MaxLeap allows you to associate real-world latitude and longitude coordinates with an object.  Adding a MLGeoPoint to a `MLObject` allows queries to take into account the proximity of an object to a reference point. This allows you to easily do things like find out what user is closest to another user or which places are closest to a user.
 
-#### MLGeoPoint 字段说明
 
-#### 创建 MLGeoPoint
+#### MLGeoPoint Field Description
 
-要将某个地点与对象联系起来，您首先要创建一个 `MLGeoPoint`。例如，要创建一个纬度为 40.0 度，经度为 -30.0 的点：
+#### Create MLGeoPoint
+
+To associate a point with an object you first need to create a `MLGeoPoint`. For example, to create a point with latitude of 40.0 degrees and -30.0 degrees longitude:
 
 ```objective_c
 MLGeoPoint *point = [MLGeoPoint geoPointWithLatitude:40.0 longitude:-30.0];
 ```
 
-然后，该点被作为常规字段储存在对象中。
+This point is then stored in the object as a regular field.
 
 ```objective_c
 placeObject[@"location"] = point;
@@ -1454,7 +1463,7 @@ placeObject[@"location"] = point;
 
 #####Inquire the nearest place to target object
 
-有了一些具有空间坐标的对象后，找到哪些对象距离某个点最近将会产生很好的效应。这可以通过使用 `whereKey:nearGeoPoint:` 对 `MLQuery` 添加另一限制条件完成。举例而言，找出距离某个用户最近的十个地点的方法如下：
+Now that you have a bunch of objects with spatial coordinates, it would be nice to find out which objects are closest to a point. This can be done by adding another restriction to `MLQuery` using `whereKey:nearGeoPoint:`. Getting a list of ten places that are closest to a user may look something like:
 
 ```objective_c
 // User's location
@@ -1480,15 +1489,15 @@ query.limit = 10;
 }];
 ```
 
-此时，`placesObjects` 是按照与 `userGeoPoint` 的距离（由近及远）排列的一组对象。注意，若应用另一个 `orderByAscending:`/`orderByDescending:` 限制条件，该限制条件将优先于距离顺序。
+At this point `placesObjects` will be an array of objects ordered by distance (nearest to farthest) from `userGeoPoint`. Note that if an additional `orderByAscending:`/`orderByDescending:` constraint is applied, it will take precedence over the distance ordering.
 
 #####Inquire objects around a certain location
 
-若要用距离来限定获得哪些结果，请使用 `whereKey:nearGeoPoint:withinMiles:`、`whereKey:nearGeoPoint:withinKilometers:` 和 `whereKey:nearGeoPoint:withinRadians:`。
+ To limit the results using distance check out  `whereKey:nearGeoPoint:withinMiles:`、`whereKey:nearGeoPoint:withinKilometers:` and `whereKey:nearGeoPoint:withinRadians:`.
 
 #####Inquire objects within a certain range
 
-您还可以查询包含在特定区域内的对象集合。若要查找位于某个矩形区域内的对象，请将 `whereKey:withinGeoBoxFromSouthwest:toNortheast:` 限制条件添加至您的 `MLQuery`。
+It's also possible to query for the set of objects that are contained within a particular area. To find the objects in a rectangular bounding box, add the `whereKey:withinGeoBoxFromSouthwest:toNortheast:` restriction to your `MLQuery`.
 
 ```objective_c
 MLGeoPoint *swOfSF = [MLGeoPoint geoPointWithLatitude:37.708813 longitude:-122.526398];
