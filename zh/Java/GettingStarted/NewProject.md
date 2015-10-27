@@ -13,8 +13,8 @@ Eclipse:
 
 根据平台选择对应的客户端：
 
-1.  Windows：[maxleap.exe](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapforwindows.zip)
-2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar.gz)
+1.  Windows：[maxleap.exe](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapforwindows.zip)
+2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapformac.tar.gz)
 
 下载完成后，您可直接在终端中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
 
