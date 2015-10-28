@@ -55,7 +55,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 ##### UDFs
 
 | 函数名 | 功能 | 示例 | 备注 |
-|-|-|-|-|
+|--------|--------|--------|--------|
 | = | 等值比较 | select * from tbl where age = 18 | |
 | > | 大于比较 | select * from tbl where age > 18 | |
 | < | 小于比较 | select * from tbl where age < 18 | |
