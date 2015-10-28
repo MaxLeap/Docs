@@ -1,5 +1,7 @@
-
 # Python云代码使用指南
+
+##### _Author: Marvin
+##### _Github: https://github.com/zhoucen
 
 ## 云代码简介
 
@@ -772,48 +774,48 @@ def test_helloNinja():
 
 ## MLC － 云代码命令行工具
 MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
-### 登录:
+###登录:
 ```shell
-maxleap login <用户名> -region <CN or US ...>
+maxleap 或者maxleap -username <用户邮箱> -region <CN or US ...>
 ```
-`<用户名>` 为您登录MaxLeap管理中心的账号，`<CN or US ...>` 为选择中国区账号还是美国区账号，然后根据提示输入密码
-### 显示所有app：
+`<用户邮箱>` 为您登录MaxLeap管理中心的账号邮箱，`<CN or US ...>` 为选择中国区账号还是美国区账号，然后根据提示输入密码
+###显示所有app：
 ```shell
-maxleap apps
+apps
 ```
 查询账号下的所有应用，显示的信息为：AppId ：AppName
-### 选择应用:
+###选择应用:
 ```shell
-maxleap use <应用名>
+use <应用名>
 ```
-`<应用名>`为目标应用名。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-### 上传云代码:
+`<应用名>`为目标应用名，如果应用名包含空格，你可以用`use "应用名"`即使用引号来切换应用。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
+###上传云代码:
 ```shell
-maxleap upload <文件路径>
+upload <文件路径>
 ```
 `<文件路径>`为你将部署的云代码 package（zip文件），它将被上传到步骤3指定的应用下。
 上传的的代码会被制作成Docker镜像，版本号在云代码项目里的global.json文件中指定：
 ```
 "version": "0.0.1"
 ```
-### 显示所有云端云代码版本:
+###显示所有云端云代码版本:
 ```shell
-maxleap lv
+lv
 ```
 即显示所有该应用下，用户上传过的云代码的所有版本。
-### 部署云代码：
+###部署云代码：
 ```shell
-maxleap deploy <版本号>
+deploy <版本号>
 ```
-`<版本号>`为想要部署的云代码版本号：如执行maxleap deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码。如果部署不存在的版本，会提示错误："version of appId not exists"
-### 停止cloudcode：
+`<版本号>`为想要部署的云代码版本号：如执行deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码。如果部署不存在的版本，会提示错误："version of appId not exists"
+###停止cloudcode：
 ```shell
-maxleap undeploy <版本号>
+undeploy <版本号>
 ```
 停止该应用的指定版本云代码：如果之前已经部署过一个版本，需要先停止，再部署新的版本。
-### 输出最近的日志：
+###输出最近的日志：
 ```shell
-maxleap log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
+log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
 
 -l 指定输出日志的级别：info或是error
 -n 指定log的数量
