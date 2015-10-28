@@ -11,18 +11,18 @@ Eclipse:
 ####下载MaxLeap-CLI
 下载地址：[https://github.com/MaxLeap/MaxLeap-CLI/releases](https://github.com/MaxLeap/MaxLeap-CLI/releases)
 
-根据平台选择对应的客户端：
+更新版本为0.2，根据平台选择对应的客户端：
 
-1.  Windows：[maxleap.exe](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapforwindows.zip)
-2.  Linux/Mac OSX：[maxleapformac.tar](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar.gz)
+1.  Windows：[maxleapforwindows.zip](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapforwindows.zip)
+2.  Linux/Mac OSX：[maxleapformac.tar.gz](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapformac.tar.gz)
 
-下载完成后，您可直接在终端中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
+下载完成后解压到安装目录，您可直接在终端中使用 MaxLeap-CLI。进入安装目录，查看MaxLeap-CLI版本
 
 ```shell
 ./maxleap -v
 ```
     
-显示`maxleap version 0.1`表示MaxLeap客户端安装成功
+显示`maxleap version 0.2`表示MaxLeap客户端安装成功
 
 *	maxleap命令添加到环境变量
 
