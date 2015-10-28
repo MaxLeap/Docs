@@ -49,7 +49,36 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 当您的查询表数据规模比较大，或者您的数据为第一次加载的冷数据，此时您的查询有可能会需要几分钟的处理时间，为了避免浪费您宝贵的时间，我们推荐耐心等待系统将查询结果发送到您的邮箱。
 
 #### LeapQL 支持语法
+##### 基础SQL
+请参考基础SQL语法。支持`select`,`join`,`group by`,`order by`,`limit`等
+
+##### UDFs
+| 函数名 | 功能 | 示例 | 备注 |
+|-|-|-|-|
+| = | 等值比较 | select * from tbl where age = 18 | |
+| > | 大于比较 | select * from tbl where age > 18 | |
+| < | 小于比较 | select * from tbl where age < 18 | |
+| >= | 大于等于比较 | select * from tbl where age >= 18 | |
+| <= | 小于等于比较 | select * from tbl where age <= 18 | |
+| <>,!= | 不等值比较 | select * from tbl where age <> 18 | |
+| is null | 空值判断 | select * from tbl where name is null | |
+| is not null | 非空判断 | select * from tbl where name is not null | |
+| like | 相似比较 | select * from tbl where name like '_abc%' | 占位符说明: '%'表示任意数量的字符，而'_'表示单个任意字符 |
+| regexp | 正则比较 | select * from tbl where name regexp '^T.*my$' | |
+| array[0] | 数组访问 | select favorites[0] from tbl | 仅适用于array类型 |
+| size | 获取大小 | select size(playlists) from tbl | 仅适用于array类型 |
+| length | 获取长度 | select length(name) from tbl | 仅适用于字符串类型 |
+| from_unixtime | 日期格式化 | select from_unixtime(startTimeMills/1000,'yyyy-MM-dd HH:mm:ss') as date_str from tbl | |
+| to_date | 返回字符串的日期部分(年月日) | selet to_date(date_str) from tbl | 备注: '2015-01-01 12:25:00' 将会被转换成 '2015-01-01' |
+
+
+
+
+
+
+
 请参考Spark官网的SQL部分：[http://spark.apache.org/docs/latest/sql-programming-guide.html](http://spark.apache.org/docs/latest/sql-programming-guide.html)
+
 
 #### 查询样例
 ##### 简单样例
