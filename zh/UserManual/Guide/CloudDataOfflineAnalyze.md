@@ -53,6 +53,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 请参考基础SQL语法。支持`select`,`join`,`group by`,`order by`,`limit`等
 
 ##### UDFs
+
 | 函数名 | 功能 | 示例 | 备注 |
 |-|-|-|-|
 | = | 等值比较 | select * from tbl where age = 18 | |
