@@ -152,7 +152,7 @@ def helloword(request):
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，以获取lcc的更多信息。
+*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[mlc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，以获取mlc的更多信息。
 
 ### 测试
 
