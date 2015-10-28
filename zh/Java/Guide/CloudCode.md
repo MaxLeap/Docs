@@ -1,5 +1,8 @@
 
-# MaxLeap云代码使用指南
+# MaxLeap云代码开发指南
+
+##### _Author: David Young
+##### _Github: https://github.com/sdyy321
 
 ## 云代码简介
 
