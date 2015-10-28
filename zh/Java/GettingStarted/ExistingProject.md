@@ -1,6 +1,7 @@
 ##### _Author: David Young
 ##### _Github: https://github.com/sdyy321
-<br/>
+
+## JDK版本
 云代码 SDK支持 JDK6, 7, 8，推荐使用JDK8。
 
 ##安装Maven
