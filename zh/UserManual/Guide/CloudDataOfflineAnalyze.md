@@ -65,7 +65,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 | <>,!= | 不等值比较 | select * from tbl where age <> 18 | |
 | is null | 空值判断 | select * from tbl where name is null | |
 | is not null | 非空判断 | select * from tbl where name is not null | |
-| like | 相似比较 | select * from tbl where name like '_abc%' | 占位符说明: '%'表示任意数量的字符，而'_'表示单个任意字符 |
+| like | 相似比较 | select * from tbl where name like '\_abc%' | 占位符说明: '%'表示任意数量的字符，而'\_'表示单个任意字符 |
 | regexp | 正则比较 | select * from tbl where name regexp '^T.*my$' | |
 
 - 数组
@@ -99,13 +99,13 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 |--------|--------|--------|--------|
 | length | 获取长度 | select length(name) from tbl |  |
 | substr,substring | 子字符串 | select substr(name,3,2) from tbl |  |
-| concat | 拼接字符串 | select concat(_id,name) from tbl | |
+| concat | 拼接字符串 | select concat(\_id,name) from tbl | |
 | concat_ws | 带分隔符拼接字符串 | select concat_ws(':',_id,name) from tbl | |
 | reverse | 反转字符串 | select reverse(name) from tbl | |
 | upper,ucase | 转大写 | select upper(name) from tbl | |
 | lower,lcase | 转小写 | select lower(name) from tbl | |
-| trim,ltrim,rtrim | 去除(两边|左|右)空白 | select trim(title) from tbl | |
-| regexp_replace | 正则替换 | select regexp_replace(title,'abc|xyz','XYZ') from tbl | |
+| trim,ltrim,rtrim | 去除(两边\|左\|右)空白 | select trim(title) from tbl | |
+| regexp_replace | 正则替换 | select regexp_replace(title,'abc\|xyz','XYZ') from tbl | |
 | regexp_extract | 正则抽取 | select regexp_extract(title,'group_([a-f0-9]+)',1) from tbl | regexp_extract(origin,regex,group) |
 | split | 分割字符串为数组 | select split(names,',') from tbl | 返回为array类型 |
 
