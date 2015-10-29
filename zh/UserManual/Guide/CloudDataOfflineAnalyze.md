@@ -129,7 +129,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 
 | 函数名 | 功能 | 示例 | 备注 |
 |--------|--------|--------|--------|
-| round | 指定精度 | select rount(payment,2) from tbl | rount(double) 为取整 |
+| round | 指定精度 | select round(payment,2) from tbl | round(double) 为取整 |
 | ln | 自然对数 | select ln(number) from tbl | |
 | log10 | 以10为底的对数 | select log10(number) from tbl | |
 | log2 | 以2为底的对数 | select log2(number) from tbl | |
