@@ -36,10 +36,14 @@
  - 正常访问时长在几十毫秒内
  - 前后端系统采用100%异步架构
  - 网络、协议、架构层进行优化，多级缓存机制
+  
+ ![imgUMAdvantageInfra](../../../images/imgUMAdvantageInfra.png)
 
 ####高并发
  - 请求接入层和服务层采用NIO设计
  - 根据服务的压力，弹性扩容
+ 
+ ![imgUMAdvantageReactor](../../../images/imgUMAdvantageReactor.png)
 
 ####实时数据分析
 
