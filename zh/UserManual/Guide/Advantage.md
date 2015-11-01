@@ -7,6 +7,7 @@
  - 所有服务均有负载均衡节点
  - 实时、动态水平扩展，灵活应对各种流量激增、瞬间访问压力
  - 微服务架构、服务之间隔离，完全无影响
+ 
 ![imgUMAdvantageMicroService](../../../images/imgUMAdvantageMicroService.png)
 
 ####数据备份和灾难恢复
