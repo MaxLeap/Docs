@@ -28,6 +28,8 @@
  1. 启动新版本云代码并设定实例数量
  2. 设定负载均衡参数
  3. 服务无异常后，停止旧版本的实例
+ 
+ ![imgUMAdvantageCloudCodeArch](../../../images/imgUMAdvantageCloudCodeArch.png)
 
 ##高性能
 ####快速响应
