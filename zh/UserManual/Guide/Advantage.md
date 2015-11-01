@@ -7,11 +7,14 @@
  - 所有服务均有负载均衡节点
  - 实时、动态水平扩展，灵活应对各种流量激增、瞬间访问压力
  - 微服务架构、服务之间隔离，完全无影响
+ 
 ![imgUMAdvantageMicroService](../../../images/imgUMAdvantageMicroService.png)
 
 ####数据备份和灾难恢复
  - 数据和文件均有多个存储节点，存储节点之间相互备份
  - 多机房、多城市间容灾，对数据进行实时备份，能够在灾难发生时快速恢复
+
+ ![imgUMAdvantageBackup](../../../images/imgUMAdvantageBackup.png)
 
 ####无间断数据迁移
  - 提供数据迁移服务，随时导出数据或者迁移到其他系统中
