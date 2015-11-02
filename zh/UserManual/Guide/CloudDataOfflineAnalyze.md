@@ -72,8 +72,10 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 
 | 函数名 | 功能 | 示例 | 备注 |
 |--------|--------|--------|--------|
-| array[0] | 数组访问 | select favorites[0] from tbl | 仅适用于array类型 |
-| size | 获取大小 | select size(playlists) from tbl | 仅适用于array类型 |
+| array[0] | 数组访问 | select favorites[0] from tbl | |
+| size | 获取大小 | select size(playlists) from tbl | |
+| sort_array | 数组排序 | select sort_array(my_arr) from tbl | |
+| array_contains | 数组是否包含元素 | select array_contains(arr,'a') from tbl | 返回值为布尔型 |
 
 - 日期
 
@@ -99,6 +101,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 |--------|--------|--------|--------|
 | length | 获取长度 | select length(name) from tbl |  |
 | substr,substring | 子字符串 | select substr(name,3,2) from tbl |  |
+| instr | 是否包含字符串 | select instr(name,'a') from tbl | 返回值为索引位置，起始位置为1 |
 | concat | 拼接字符串 | select concat(\_id,name) from tbl | |
 | concat_ws | 带分隔符拼接字符串 | select concat_ws(':',_id,name) from tbl | |
 | reverse | 反转字符串 | select reverse(name) from tbl | |
@@ -108,6 +111,11 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 | regexp_replace | 正则替换 | select regexp_replace(title,'abc\|xyz','XYZ') from tbl | |
 | regexp_extract | 正则抽取 | select regexp_extract(title,'group_([a-f0-9]+)',1) from tbl | regexp_extract(origin,regex,group) |
 | split | 分割字符串为数组 | select split(names,',') from tbl | 返回为array类型 |
+| format_number | 格式化数字 | select format_number(number,2) from tbl | eg: format(1234.321,2) -> 1,234.32 |
+| repeat | 重复字符串 | select repeat(str,8) from tbl | |
+| space | 返回n个空格字符串 | select space(8) from tbl | |
+| ascii | 返回首字符ASCII码 | select ascii('a') from tbl | |
+| lpad,rpad | 左,右补足 | select lpad(str,10,'\_') from tbl | lpad('abc',10,'\_') -> _______abc |
 
 
 - JSON
@@ -130,19 +138,29 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 | 函数名 | 功能 | 示例 | 备注 |
 |--------|--------|--------|--------|
 | round | 指定精度 | select round(payment,2) from tbl | round(double) 为取整 |
+| floor | 向下取整 | select floor(payment,2) from tbl | |
+| ceil,ceiling | 向上取整 | select ceil(payment,2) from tbl | |
+| exp | 自然指数 | select exp(number) from tbl | |
 | ln | 自然对数 | select ln(number) from tbl | |
 | log10 | 以10为底的对数 | select log10(number) from tbl | |
 | log2 | 以2为底的对数 | select log2(number) from tbl | |
 | log | 自定义对数 | select log(3,number) from tbl | |
 | pow,power | 幂运算 | select pow(number,3) from tbl | |
 | sqrt | 平方根 | select sqrt(number) from tbl | |
+| bin | 转2进制 | select bin(number) from tbl | |
 | hex | 16进制表示 | select hex(number) from tbl | 如果变量是int类型，那么返回a的十六进制表示；如果变量是string类型，则返回该字符串的十六进制表示 |
 | unhex | 将字符串以16进制编码 | select unhex(num_str) from tbl | 如unhex('616263') -> 'abc' |
 | conv | 进制转换 | select conv(number,10,16) from tbl | 示例为10进制转16进制 |
 | abs | 绝对值 | select abs(number) from tbl | |
 | pmod | 取余 | select pmod(number,3) from tbl | |
-| negative | 取反数 | select negative(number) from tbl | |
+| positive,negative | 取正反数 | select negative(number) from tbl | |
 | sin,asin,cos,acos | 三角函数 | select sin(number) from tbl | |
+
+- 其他
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| cast | 类型转换 | select cast(foobar as STRING) from tbl | 转换失败返回空 |
 
 
 * 全部的语法手册请参考Spark官网的SQL部分：[http://spark.apache.org/docs/latest/sql-programming-guide.html](http://spark.apache.org/docs/latest/sql-programming-guide.html)
