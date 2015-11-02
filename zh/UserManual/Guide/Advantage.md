@@ -46,7 +46,7 @@
  ![imgUMAdvantageReactor](../../../images/imgUMAdvantageReactor.png)
 
 ####实时数据分析
- - 基于Lambda架构
+ - 基于Lambda架构
  - 对数据进行流式处理，采用增量计算实现数据视图，高吞吐、低延时
  
  ![imgUMAdvantageLambda](../../../images/imgUMAdvantageLambda.png)
