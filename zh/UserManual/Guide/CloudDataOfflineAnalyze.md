@@ -163,7 +163,8 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 | cast | 类型转换 | select cast(foobar as STRING) from tbl | 转换失败返回空 |
 
 
-* 全部的语法手册请参考Spark官网的SQL部分：[http://spark.apache.org/docs/latest/sql-programming-guide.html](http://spark.apache.org/docs/latest/sql-programming-guide.html)
+
+更多的语法手册请参考：[Hive官网文档](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF), [Spark官网文档](http://spark.apache.org/docs/latest/sql-programming-guide.html)
 
 
 #### 查询样例
