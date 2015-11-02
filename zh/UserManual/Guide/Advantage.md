@@ -92,6 +92,8 @@
  - 类级别和数据级别校验
  - 可以设定共享、公开、私有、只读4种类级别的安全限制
  - 未来还将加入行、列级别的安全控制
+ 
+ ![imgUMAdvantageSecurity](../../../images/imgUMAdvantageSecurity.png)
 
 
 
