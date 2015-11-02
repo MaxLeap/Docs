@@ -36,7 +36,7 @@
  - 正常访问时长在几十毫秒内
  - 前后端系统采用100%异步架构
  - 网络、协议、架构层进行优化，多级缓存机制
-  
+ 
  ![imgUMAdvantageInfra](../../../images/imgUMAdvantageInfra.png)
 
 ####高并发
@@ -46,14 +46,16 @@
  ![imgUMAdvantageReactor](../../../images/imgUMAdvantageReactor.png)
 
 ####实时数据分析
-
-
+ - 基于Lambda架构
+ - 对数据进行流式处理，采用增量计算实现数据视图，高吞吐、低延时
+ 
+ ![imgUMAdvantageLambda](../../../images/imgUMAdvantageLambda.png)
 
 ##灵活、弹性
 ####资源伸缩
 根据业务的发展趋势，您可随时对云资源进行横向和纵向的伸缩，杜绝资源浪费
 
-####多实例
+####动态扩展实例数量
 
 ##安全
 
@@ -85,7 +87,5 @@
 
 ####数据安全
 ####ACL
-
-
 
 
