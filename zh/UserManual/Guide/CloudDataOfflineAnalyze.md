@@ -14,7 +14,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 - 人性化的服务 （比如耗时长的任务我们会邮件通知，避免您不必要的等待）
  
 ### 技术架构
-- 基于业界比较成熟的解决方案，核心SQL采用SparkSQL，SparkSQL对比Hive拥有巨大的性能优势，我们在小型的测试环境中对千万级数据的聚合查询仅2分钟。
+- 基于业界比较成熟的解决方案，采用SparkSQL作为查询引擎，SparkSQL对比Hive拥有巨大的性能优势，我们在小型的测试环境中对千万级数据的聚合查询仅2分钟。
 - 我们的攻城狮实现了一套自有的ETL工具用于数据的转换，通过tail数据库的日志到Kafka，再入库到HBase形成全量数据，最后dump成高效的列式存储格式文件。
 - 对于SQL的请求和响应，我们基于Redis的PubSub定制了一套小型的消息系统。
 - 以下是我们大致的架构图
@@ -49,7 +49,123 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 当您的查询表数据规模比较大，或者您的数据为第一次加载的冷数据，此时您的查询有可能会需要几分钟的处理时间，为了避免浪费您宝贵的时间，我们推荐耐心等待系统将查询结果发送到您的邮箱。
 
 #### LeapQL 支持语法
-请参考Spark官网的SQL部分：[http://spark.apache.org/docs/latest/sql-programming-guide.html](http://spark.apache.org/docs/latest/sql-programming-guide.html)
+##### 基础SQL
+请参考基础SQL语法。支持`select`,`join`,`group by`,`order by`,`limit`等
+
+##### UDFs
+- 入门基础
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| = | 等值比较 | select * from tbl where age = 18 | |
+| > | 大于比较 | select * from tbl where age > 18 | |
+| < | 小于比较 | select * from tbl where age < 18 | |
+| >= | 大于等于比较 | select * from tbl where age >= 18 | |
+| <= | 小于等于比较 | select * from tbl where age <= 18 | |
+| <>,!= | 不等值比较 | select * from tbl where age <> 18 | |
+| is null | 空值判断 | select * from tbl where name is null | |
+| is not null | 非空判断 | select * from tbl where name is not null | |
+| like | 相似比较 | select * from tbl where name like '\_abc%' | 占位符说明: '%'表示任意数量的字符，而'\_'表示单个任意字符 |
+| regexp | 正则比较 | select * from tbl where name regexp '^T.*my$' | |
+
+- 数组
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| array[0] | 数组访问 | select favorites[0] from tbl | |
+| size | 获取大小 | select size(playlists) from tbl | |
+| sort_array | 数组排序 | select sort_array(my_arr) from tbl | |
+| array_contains | 数组是否包含元素 | select array_contains(arr,'a') from tbl | 返回值为布尔型 |
+
+- 日期
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| unix_timestamp | 日期字符串转时间戳 | select unix_timestamp(date_str,'yyyy-MM-dd HH:mm:ss') as ts from tbl | |
+| from_unixtime | 日期格式化 | select from_unixtime(datetime_mills/1000,'yyyy-MM-dd HH:mm:ss') as date_str from tbl | |
+| to_date | 返回字符串的日期部分(年月日) | selet to_date(date_str) from tbl | 备注: '2015-01-01 12:25:00' 将会被转换成 '2015-01-01' |
+| year | 返回字符串的年份 | select year(date_str) from tbl | |
+| month | 返回字符串的月份 | select month(date_str) from tbl | |
+| day | 返回字符串的天 | select day(date_str) from tbl | |
+| hour | 返回字符串的小时 | select hour(date_str) from tbl | |
+| minute | 返回字符串的分钟 | select minute(date_str) from tbl | |
+| second | 返回字符串的秒 | select second(date_str) from tbl | |
+| weekofyear | 返回一年中的星期数 | select weekofyear(date_str) from tbl | |
+| datediff | 返回两个日期天数之差 | select datediff(end_date,start_date) from tbl | |
+| date_add | 增加天数 | select date_add(origin_date_str,7) from tbl | |
+| date_sub | 减少天数 | select date_sub(origin_date_str,7) from tbl | |
+
+- 字符串
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| length | 获取长度 | select length(name) from tbl |  |
+| substr,substring | 子字符串 | select substr(name,3,2) from tbl |  |
+| instr | 是否包含字符串 | select instr(name,'a') from tbl | 返回值为索引位置，起始位置为1 |
+| concat | 拼接字符串 | select concat(\_id,name) from tbl | |
+| concat_ws | 带分隔符拼接字符串 | select concat_ws(':',_id,name) from tbl | |
+| reverse | 反转字符串 | select reverse(name) from tbl | |
+| upper,ucase | 转大写 | select upper(name) from tbl | |
+| lower,lcase | 转小写 | select lower(name) from tbl | |
+| trim,ltrim,rtrim | 去除(两边\|左\|右)空白 | select trim(title) from tbl | |
+| regexp_replace | 正则替换 | select regexp_replace(title,'abc\|xyz','XYZ') from tbl | |
+| regexp_extract | 正则抽取 | select regexp_extract(title,'group_([a-f0-9]+)',1) from tbl | regexp_extract(origin,regex,group) |
+| split | 分割字符串为数组 | select split(names,',') from tbl | 返回为array类型 |
+| format_number | 格式化数字 | select format_number(number,2) from tbl | eg: format(1234.321,2) -> 1,234.32 |
+| repeat | 重复字符串 | select repeat(str,8) from tbl | |
+| space | 返回n个空格字符串 | select space(8) from tbl | |
+| ascii | 返回首字符ASCII码 | select ascii('a') from tbl | |
+| lpad,rpad | 左,右补足 | select lpad(str,10,'\_') from tbl | lpad('abc',10,'\_') -> _______abc |
+
+
+- JSON
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| get_json_object | JSON解析 | select get_json_object(file,'$.name') from tbl | |
+
+- 聚合
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| count | 计数 | select count(1) from tbl | |
+| sum | 求和 | select sum(score) from tbl | |
+| avg | 求平均值 | select avg(age) from tbl | |
+| max,min | 求最大，最小值 | select max(age) from tbl | |
+
+- 数学运算
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| round | 指定精度 | select round(payment,2) from tbl | round(double) 为取整 |
+| floor | 向下取整 | select floor(payment,2) from tbl | |
+| ceil,ceiling | 向上取整 | select ceil(payment,2) from tbl | |
+| exp | 自然指数 | select exp(number) from tbl | |
+| ln | 自然对数 | select ln(number) from tbl | |
+| log10 | 以10为底的对数 | select log10(number) from tbl | |
+| log2 | 以2为底的对数 | select log2(number) from tbl | |
+| log | 自定义对数 | select log(3,number) from tbl | |
+| pow,power | 幂运算 | select pow(number,3) from tbl | |
+| sqrt | 平方根 | select sqrt(number) from tbl | |
+| bin | 转2进制 | select bin(number) from tbl | |
+| hex | 16进制表示 | select hex(number) from tbl | 如果变量是int类型，那么返回a的十六进制表示；如果变量是string类型，则返回该字符串的十六进制表示 |
+| unhex | 将字符串以16进制编码 | select unhex(num_str) from tbl | 如unhex('616263') -> 'abc' |
+| conv | 进制转换 | select conv(number,10,16) from tbl | 示例为10进制转16进制 |
+| abs | 绝对值 | select abs(number) from tbl | |
+| pmod | 取余 | select pmod(number,3) from tbl | |
+| positive,negative | 取正反数 | select negative(number) from tbl | |
+| sin,asin,cos,acos | 三角函数 | select sin(number) from tbl | |
+
+- 其他
+
+| 函数名 | 功能 | 示例 | 备注 |
+|--------|--------|--------|--------|
+| cast | 类型转换 | select cast(foobar as STRING) from tbl | 转换失败返回空 |
+
+
+
+更多的语法手册请参考：[Hive官网文档](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF), [Spark官网文档](http://spark.apache.org/docs/latest/sql-programming-guide.html)
+
 
 #### 查询样例
 ##### 简单样例
