@@ -225,7 +225,7 @@ document.querySelector('#avatarImg').src = file.url();
 file.destroy();
 ```
 
-## 查询 (todo, 依赖赵静的新api)
+## 查询
 ### 基本查询
 使用MLQuery查询 `ML.Object ` 分三步：
 
@@ -239,7 +239,8 @@ file.destroy();
 var GameScore = ML.Object.extend('GameScore');
 var query = new ML.Query(GameScore);
 query = new ML.Query(GameScore);
-query.exists('objectId');
+query.exists("name");
+query.equalTo("score", 13);
 query.find()
 ```
 ### 查询条件
@@ -254,6 +255,35 @@ query.equalTo("pubUser", "MaxLeap 官方客服");
 ```javascript
 query.equalTo("pubUser", "MaxLeap 官方客服");
 ```
+
+对于类型为数字的属性，您可以对其值的大小进行筛选：
+
+```javascript
+query.greaterThan('score', 7);
+query.greaterThanOrEqualTo('score', 7);
+query.lessThan('score', 11);
+query.lessThanOrEqualTo('score', 11);
+```
+您可以使用 `select` 和一个 `keys` 的列表来限定返回的字段，比如只获取 “name” 和 “score” 字段(自动包含内建属性， 如 objectId，createdAt 及 updatedAt)：
+
+```javascript
+query.select('name', 'score');
+```
+剩下的字段可以之后用返回的对象的 fetch 方法来获取：
+
+```javascript
+query.first().then(function(result){
+  result.fetch();
+});
+```
+
+如果想让返回的对象的某个属性匹配多个值，您可以使用 `containedIn`，提供一个数组就可以了。比如查询名字为「henry，frank」的 GameScore ：
+
+```javascript
+query.containedIn('name',['henry', 'zhou']);
+```
+
+相反地，您可以使用 `notContainedIn` 方法来查询在集合之外的目标对象。
 
 如果你只想要一个结果，一个更加方便的方法可能是使用 `first()`，而不是 `find()` 方法:
 
@@ -279,6 +309,63 @@ query.limit(10); // 最多返回 10 条结果
 query.ascending("pubUser"); // 升序
 
 query.descending("pubTimestamp"); // 降序
+```
+### 对数组值做查询
+对于属性值是数组的情况，您可以这样查询数组的值中有 “henry” 的游戏记录：
+
+```javascript
+query.equalTo('developer', 'henry');
+```
+您同样可以用下面的方式找到属性值中同时包含 “henry”，“frank” 的游戏记录：
+
+```javascript
+query.containsAll('developer', ['henry', 'frank']);
+```
+此外，您还可以根据数组长度来查询，比如查询 developer 人数为 2 的游戏记录：
+
+```javascript
+query.sizeEqualTo('developer', 2);
+```
+
+### 对字符串类型做查询
+使用 `startsWith()` 来限制属性值以一个特定的字符串开头，比如找出 name 以 “bai” 开头的游戏记录：
+
+```javascript
+query.startsWith('name', 'bai');
+```
+
+### 关系查询
+对于查询关系型数据来说有几种不同的方式，如果您想要获取的对象中有某个属性包含一个特定的 `ML.Object`，您可以使用 `equalTo()`，就像对于别的数据类型一样。
+
+例如，如果每条 Comment 的 post 字段都有一个 Post 对象，那么找出指定 post 下的 comment：
+
+```javascript
+// 假设 myPost 是已经创建的对象。
+var query = new ML.Query(Comment);
+query.equalTo("post", myPost);
+query.find();
+```
+如果想得到其字段中包含的子对象满足另一个查询的结果，你可以使用 `matchesQuery()` 操作。 注意默认的结果条数限制 100 和最大值 1000 也同样适用于子查询，所以对于大的数据集您可能需要小心构建查询条件，否则可能出现意料之外的状 况。例如，为了找到有图片的 post 的 comment，您可以：
+
+```javascript
+var innerQuery = new AV.Query(Post);
+innerQuery.exists("image");
+var query = new AV.Query(Comment);
+query.matchesQuery("post", innerQuery);
+query.find().then(function(comments) {
+    // comments 包含有所有带图片 post 的 comment.
+  });
+```
+如果您想要获取某字段中包含的子对象不满足指定查询的结果，你可以使用 `doesNotMatchQuery()`。例如，为了找到针对不含图片的 post 的 comment，可以这样：
+
+```javascript
+var innerQuery = new AV.Query(Post);
+innerQuery.exists("image");
+var query = new AV.Query(Comment);
+query.doesNotMatchQuery("post", innerQuery);
+query.find().then(function(comments) {
+    // comments 包含所有不带图片 post 的 comment.
+  })
 ```
 
 ## 用户
@@ -367,7 +454,7 @@ ML.User.requestPasswordReset('youremail@xx.xx');
 ### 匿名用户
 匿名用户是指提供用户名和密码，系统为您创建的一类特殊用户，它享有其他用户具备的相同功能。不过，一旦注销，匿名用户的所有数据都将无法访问。如果您的应用需要使用一个相对弱化的用户系统时，您可以考虑 MaxLeap 提供的匿名用户系统来实现您的功能。
 
-您可以通过 'anonymousSignUp()' 注册一个匿名的用户账号：
+您可以通过 `anonymousSignUp()` 注册一个匿名的用户账号：
 
 ```javascript
 var user = new ML.User();
@@ -387,7 +474,7 @@ MaxLeap 提供 `ML.GeoPoint` 对象，帮助用户根据地球的经度和纬度
 var geoPoint = new ML.GeoPoint(40, -30);
 ```
 
-该ML.GeoPoint对象可被存储在ML.Object中：
+该 `ML.GeoPoint` 对象可被存储在 `ML.Object` 中：
 
 ```javascript
 var post = new Post();
