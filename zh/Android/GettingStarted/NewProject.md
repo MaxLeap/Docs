@@ -14,12 +14,6 @@
     2. 	进入项目模板根目录，选择 `setting.gradle`
     3. 	按照默认配置点击下一步，直到完成
 
-    **Eclipse**
-
-    1.	打开 Eclipse，点击 "File" -> "Import.."
-    2. 	选择 "General"-> "Existing Projects into Workspace"
-    3. 	勾选 “Select root directory”，进入 workspace 目录，在项目列表中，选择MLStarterProject
-
 ##	配置 MaxLeap 项目
 
 1. 连接项目与 MaxLeap 应用

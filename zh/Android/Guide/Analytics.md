@@ -118,7 +118,8 @@ protected void onPause() {
 
 自定义事件可以实现在应用程序中埋点，以纪录用户的点击行为并且采集相应数据。
 
-###字段说明
+### 字段说明
+
 字段名|类型|描述
 ---|---|---|---
 eventId|String|事件名
@@ -127,15 +128,232 @@ value| String|事件参数的值
 
 请注意, 自定义事件名 (event_id) 请尽量保持其为静态值, 否则可能出现数目庞大的自定义事件列表, 而无法达到了解与分析用户行为的目的.
 
-###统计自定义事件发生次数
+### 统计自定义事件发生次数
 
 ```java
 MLAnalytics.logEvent(eventId);
 ```
 
-###统计事件及其属性
+### 统计事件及其属性
+
 在您希望跟踪的代码部分，调用如下方法：
 
 ```java
 MLAnalytics.logEvent(eventId, eventCount, dimensions);
 ```
+
+## 应用内支付
+
+### 建立 Transaction
+
+```java
+MLIapTransaction transaction = new MLIapTransaction("gas 360", MLIapTransaction.TYPE_IN_APP);
+transaction.setTitle("buy gas");
+transaction.setDescription("buy some gas to make the car continue running");
+transaction.setPriceAmount(7990000);
+transaction.setPriceCurrency("GBP");
+transaction.setPaySource(MLIapTransaction.PAYSOURCE_GOOGLE_PLAY);
+```
+
+Transaction 用于表示一次完整的购买行为所相关的信息。其构造方法接收两个参数：`productId` 和 `type`，`productId` 用于区分物品，`type` 为物品的类型，通常为应用内付费或者订阅付费两种。
+
+**Transaction 的属性说明**
+
+属性名|类型|描述
+---|---|---|---
+title|String|购买的物品的标题
+description| String |购买的物品的描述信息
+orderId| String |订单 ID
+priceAmount| long|购买的物品的价格，根据 Google Play 的定义，其值为实际价格的 100 万倍
+priceCurrency| String|购买的物品的货币单位
+paySource| String|表示购买的渠道的字符串，通常使用系统已定义的常量即可（PAYSOURCE_GOOGLE_PLAY, PAYSOURCE_AMAZON_STORE, PAYSOURCE_ALIPAY, PAYSOURCE_PAYPAL）
+virtualCurrencyAmount| String | 虚拟货币价格，仅用于游戏支付，应用内付费不需要设置该属性
+
+### 发送统计信息
+
+统计表示开始支付的事件
+
+```java
+MLAnalytics.onChargeRequest(transaction);
+```
+
+统计表示支付成功的事件
+
+```java
+MLAnalytics.onChargeSuccess(transaction);
+```
+
+统计表示支付失败的事件
+
+```java
+MLAnalytics.onChargeFailed(transaction);
+```
+
+统计表示支付取消的事件
+
+```java
+MLAnalytics.onChargeCancel(transaction);
+```
+
+**正确统计支付信息前提**
+
+1. 集成 Session 统计信息
+
+2. 调用成功，失败或取消事件前必须先调用开始支付才能保证统计的数据的正确性（即开始支付-支付失败-开始支付-支付成功，而不能开始支付-支付失败-支付成功）
+
+##  游戏统计
+
+### 游戏内付费
+
+#### 建立 Transaction
+
+```java
+MLIapTransaction transaction = new MLIapTransaction("diamond", MLIapTransaction.TYPE_IN_APP);
+transaction.setTitle("buy diamond");
+transaction.setDescription("buy some diamond");
+transaction.setPriceAmount(7990000);
+transaction.setPriceCurrency("GBP");
+transaction.setPaySource(MLIapTransaction.PAYSOURCE_GOOGLE_PLAY);
+transciation.setVirtualCurrencyAmount(100);
+```
+
+Transaction 用于表示一次完整的购买行为所相关的信息。其构造方法接收两个参数：`productId` 和 `type`，`productId` 用于区分物品，`type` 为物品的类型，通常为应用内付费或者订阅付费两种。
+
+**Transaction 的属性说明**
+
+属性名|类型|描述
+---|---|---|---
+title|String|购买的物品的标题
+description| String |购买的物品的描述信息
+orderId| String |订单 ID
+priceAmount| long|购买的物品的价格，根据 Google Play 的定义，其值为实际价格的 100 万倍
+priceCurrency| String|购买的物品的货币单位
+paySource| String|表示购买的渠道的字符串，通常使用系统已定义的常量即可（PAYSOURCE_GOOGLE_PLAY, PAYSOURCE_AMAZON_STORE, PAYSOURCE_ALIPAY, PAYSOURCE_PAYPAL）
+virtualCurrencyAmount| String | 虚拟货币价格，仅用于游戏支付，应用内付费不需要设置该属性
+
+
+#### 发送统计信息
+
+统计表示开始支付的事件
+
+```java
+MLGameAnalytics.onChargeRequest(transaction);
+```
+
+统计表示支付成功的事件
+
+```java
+MLGameAnalytics.onChargeSuccess(transaction);
+```
+
+统计表示支付失败的事件
+
+```java
+MLGameAnalytics.onChargeFailed(transaction);
+```
+
+统计表示支付取消的事件
+
+```java
+MLGameAnalytics.onChargeCancel(transaction);
+```
+
+统计表示系统赠送的事件
+
+```java
+MLGameAnalytics.onChargeSystemReward(transciation, "finish tutorial");
+```
+
+**正确统计支付信息前提**
+
+1. 集成 Session 统计信息
+
+2. 调用成功，失败或取消事件前必须先调用开始支付才能保证统计的数据的正确性（即开始支付-支付失败-开始支付-支付成功，而不能开始支付-支付失败-支付成功）
+
+### 游戏内物品的购买与消费
+
+购买物品
+
+```java
+MLGameAnalytics.onItemPurchase("sword", "weapon", 1, 100);
+```
+
+参数依次为 物品 ID，物品类型，购买数量，虚拟货币数量，即以上例子表示使用100个虚拟货币购买一把类型为武器的剑。
+
+消耗物品
+
+```java
+MLGameAnalytics.onItemUse("Ether", 1);
+```
+
+参数依次为 物品 ID，使用数量，即以上例子表示使用1个以太。
+
+系统赠送物品
+
+```java
+MLGameAnalytics.onItemSystemReward("Ether", "medicine", 10, "Open the treasure chest");
+```
+
+参数依次为 物品 ID，物品类型，赠送数量，赠送原因，即以上例子表示系统因为玩家打开了宝箱赠送给玩家10瓶类型为药剂的以太。
+
+**正确统计物品信息前提**
+
+1. 集成 Session 统计信息
+
+2. 集成关卡统计信息
+
+
+### 关卡统计
+
+关卡开始
+
+```java
+MLGameAnalytics.onMissionBegin("mission 1");
+```
+
+参数为关卡 ID
+
+通关失败
+
+```java
+MLGameAnalytics.onMissionFailed("mission 1", "hp is 0");
+```
+
+第一个参数为关卡 ID，第二个参数为失败原因。
+
+通关成功
+
+```java
+MLGameAnalytics.onMissionComplete("mission 1");
+```
+
+参数为关卡 ID
+
+关卡暂停
+
+```java
+ MLGameAnalytics.onMissionPause("mission 1");
+```
+
+参数为关卡 ID
+
+关卡重开
+
+```java
+MLGameAnalytics.onMissionResume("mission 1");
+```
+
+参数为关卡 ID
+
+**正确统计关卡信息前提**
+
+1. 集成 Session 统计信息
+
+2. 调用成功，失败，暂停或重开事件前必须先调用关卡开始才能保证统计的数据的正确性，且关卡 ID 必须一致。
+
+3. 关卡开始后要么失败要么成功，不允许交叉调用，即开始关卡1-开始关卡2是非法的调用，必须开始关卡1-关卡1结束-开始关卡2。
+
+
+
+
+
