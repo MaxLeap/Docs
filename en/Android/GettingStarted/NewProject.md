@@ -13,12 +13,6 @@ Android Studio
 1.  Open Android Studio and click “Import project”
 2. 	Enter template root directory and choose “settings.gradle”
 3. 	Click Next Step by default until done
-
-Eclipse
-	
-1.	Open Eclipse and click "File" -> "Import..." 
-2. 	Choose "General"-> "Existing Projects into Workspace"
-3. 	Select “Select root directory”, enter workspace directory and choose MLStarterProject in project list.
 	
 ##	Config MaxLeap Project
 
