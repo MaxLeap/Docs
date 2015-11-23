@@ -14,12 +14,6 @@ HelpCenter relies on MaxLeap Core SDK, please check if your project has installe
 	2. 	Enter template root directory and choose “build.gradle”
 	3. 	Click Next Step by default until done
 
-Eclipse
-
-	1.	Open Eclipse and click "File" -> "Import..."
-	2. 	Choose "General"-> "Existing Projects into Workspace"
-	3. 	Select “Select root directory”, enter workspace directory and choose MLStarterProject in project list.
-
 ##	Connect project to MaxLeap app
 
 Call `MaxLeap.initialize` from the `onCreate` method of your Application class to set your Application ID and REST API Key:
