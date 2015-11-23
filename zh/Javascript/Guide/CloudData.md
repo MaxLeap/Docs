@@ -132,6 +132,77 @@ comment.unset('content');
 comment.save();
 ```
 
+### 关联数据
+对象可能与别的对象有关系。比如对于微博来说，一条微博信息(Post 对象)可能有很 多评论(Comment 对象)。MaxLeap 支持各种关系，包括一对一、一对多和多对多。
+
+##### 一对一关联
+一对一关系和一对多关系都可以通过在一个 ML.Object 内保存另一个对象的实例来实现。 比如，每一个 Comment 都对应了一个 Post，创建一个带一条 Comment 的 Post, 你可以这样写：
+
+```javascript
+var post = new Post();
+var comment = new Comment();
+post.set('content', '这是我的第一条微博信息，请大家多多关照。');
+comment.set('content', '期待您更多的微博信息。');
+comment.add('post', post);
+comment.save()
+```
+MaxLeap 内部会自动处理，调用 Comment 的 save 方法就可以同时保存两个新对象。
+
+如果是现有对象想要关联到新对象，你同样可以通过只用它们的 `objectId` 来连接彼此。 请注意，不能直接像上面的例子那样将现有对象设置进去，而是必须 new 一个新对象并只设置 `objectId` 属性：
+
+```javascript
+var post = ML.Object.createWithoutData('Post', '5652ae2ba5ff7f00011d1c0b');
+var comment = new Comment();
+comment.add('post', post);
+comment.save();
+```
+或者：
+
+```javascript
+var post = new Post();
+post.id = '5652ae2ba5ff7f00011d1c0b';
+var comment = new Comment();
+comment.add('post', post);
+comment.save();
+```
+##### 一对多关联
+把两条评论关联至一条微博中：
+
+```javascript
+var post = new Post();
+post.set('content', '这是我的第一条微博信息，请大家多多关照。');
+
+var comment1 = new Comment();
+comment1.set('content', '期待您更多的微博信息。');
+var comment2 = new Comment();
+comment2.set('content', '我也期待。');
+
+post.add('comment', comment1);
+post.add('comment', comment2);
+post.save()
+```
+
+##### 多对多关联
+多对多关系是通过 `ML.Relation` 来建模的。这样很像在一个 key 中存储一个 `ML.Object` 数组。但是区别之处在于，在获取附加属性的时候，`ML.Relation` 不需要同步获取关联的所有 `ML.Object` 实例。这使得 `ML.Relation` 比数组的方式可以支持更多实例，读取方式也更加灵活。例如，一个 User 可以喜欢很多 Post。这种情况下，就可以用 `relation()` 方法保存一个用户喜欢的所有 Post 集合。为了新增一个喜欢的 Post，你可以这样做：
+
+```javascript
+var relation = user.relation('likes');
+relation.add(post);
+user.save()
+```
+仅可以从一个 `ML.Relation` 中删除一个 post:
+```javascript
+relation.remove(post);
+```
+
+默认情况下，`relation` 关联的对象不回被同步获取到，您可以通过使用 `query` 方法返回的 `ML.Query` 对象来获取 `ML.Object` 的列表，比如：
+
+```javascript
+query.first().then(function(result){
+  var relation = result.relation('likes');
+  relation.query().find();
+});
+```
 ### 计数器
 计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
 
