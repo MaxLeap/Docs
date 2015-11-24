@@ -17,7 +17,7 @@
 ## Cloud Object
 The object that stored in  Cloud Data is called `MLObject` and every `MLObject` is planned in different `class`(like table in database). `MLObject` contains several key-value pairs and the value is data compatible with JSON format.You don't need to assign properties contained by MLObject package, neither does the type of property value. You can add new property and value to `MLObject` at anytime, which could be stored in cloud by  Cloud Data service.
 
-###Create New
+### Create New
 Suppose that we need to save a piece of data to `Comment` class, it contains following properties: 
 
 Property Name|Value|Value Type
@@ -38,7 +38,7 @@ MLDataManager.saveInBackground(myComment);
 You may wonder if the operation is completed after running the code. You can check the metadata browser in the app in MaxLeap Dev Center and find similar info as shown below:
 
 ```
-objectId: "xWMyZ4YEGZ", content: "我很喜欢这条分享", pubUserId: 1314520, isRead: false,
+objectId: "xWMyZ4YEGZ", content: "Kind of funny", pubUserId: 1314520, isRead: false,
 createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 ```
 
@@ -47,7 +47,7 @@ Notices:
 
 * **When was "Comment" Class created:** For data security, creating sheet by client is prohibited in MaxLeap. You need to log in MaxLeap Console and create a Comment sheet by yourself, then the data will be inserted successfully after running the code.
 * **Property Value Type in the Table is consistent:** If there is already a data sheet named Comment in the app in cloud and contains peoperties like content、pubUserId、isRead and etc. Then the data type of relative property value should be consistent with the one you create the property, otherwise you will fail to save data. 
-* **MLObject is Schemaless:** You just need to add key-values when neccessary and backend will save them automatically. There's no need to assign `MLObject` ahead of time.
+* **Data Structure:** For data security, you must assign the required property and its type in console before the `MLObject` is saved.
 * **Property Created Automatically:** Every MLObeject has following properties for saving metadata that don't need specifying. Their creation and update are accomplished by MaxLeap backend system automatically, please don't save data with those properties in the code.
 
 	Property Name|Value|
@@ -75,11 +75,11 @@ MLDataManager.saveInBackground(myComment, new SaveCallback() {
 
 ###Query
 #####MLObject Query
-You can get the complete `MLObject` with the ObjectId of any piece of data. There are three required parameters for invoking `MLQueryManager.getInBackground()`: class name of the object, ObjectId and callback function, which would be invoked in getInBackground() method.
+You can get the complete `MLObject` with the ObjectId of any piece of data. There are three required parameters for invoking `MLQueryManager.getInBackground()`: class name of the object, ObjectId and callback function, which would be invoked in `getInBackground()` method.
 
 
 ```java
-String objId="OBJECT_ID";
+String objId = "OBJECT_ID";
 MLQueryManager.getInBackground("Comment", objId, new GetCallback<MLObject>() {
 
   @Override
@@ -94,7 +94,7 @@ Or, you can get MLObject with "paramater value + MLQuery":
 
 ```java
 MLQuery<MLObject> query = MLQuery.getQuery("Comment");
-query.whereMatches("isRead",false);
+query.whereEqualTo("isRead",false);
 
 MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
   @Override
@@ -1054,7 +1054,7 @@ Notices:
 * If the signup failed,you can check the returned error object. The mostly likely case is that the username or email is already taken. In this case, you can remind users to try another username or email.
 * You can also ask users to use Email address as username. The username will be taken as Email address and then used for password reset afterwards.
 
-###Signin
+### Signin
 You can sign in with MLUserManager.logInInBackground(). Property description: the first one is username, the second one is password and the third one is LogInCallback(), the callback method.
 
 ```java
@@ -1069,7 +1069,7 @@ MLUserManager.logInInBackground("userName", "passWord", new LogInCallback<MLUser
 });
 ```
 
-###Current User 
+### Current User 
 If the app required signin everytime, it will directly affect the user experience. You can use the cached currentUser object to avoid this situation.
 
 There would be a cached user object in local disk when you register or signin. You can log in with the cached object with following method:
@@ -1090,7 +1090,7 @@ MLUser.logOut();
 MLUser currentUser = MLUser.getCurrentUser(); //crrentUser will be null now
 ```
 
-###Password Reset
+### Password Reset
 
 MaxLeap provides a method for users to reset the password securely. The procedure is simple, only user's email address is required:
 
@@ -1112,7 +1112,7 @@ If the email address is same as the email used for signup, then the system will 
 * User click on the reset lins, enter a ML page and set a new password.
 * MaxLeap has reset user's password successfully.
 
-###User Query
+### User Query
 
 You can inquire user data with special UserQuery. MaxLeap provides all round protection of user data. More details: [User Object Security](..).
 
@@ -1130,7 +1130,7 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLUser>() {
 });
 ```
 
-###Email Verification
+### Email Verification
 
 MaxLeap provides powerful email verification service, you just need to Enable "Verify user's email address" in Console >> App Settings >> Email Settings and system will add `emailVerified` property in MLUser automatically. When the email property of MLUser is assigned or modified and the value of `emailVerified` is false, then MaxLeap will send a link to users automatically. `emailVerified` will be set as true once users click the link.
 
@@ -1140,7 +1140,7 @@ Three status of `emailVerified` property:
 * false - Not verify yet or failed to verify
 * null - Email verification is not enabled or no email address provided
 
-###Anonymous Users
+### Anonymous Users
 Anonymous users refers to a special set of users with username and password. They have the same features as other users while all data will be no longer accessible once deleted. If your app requires a relatively weakened user system, then Anonymous Users of MaxLeap is highly recommended. 
 
 You can get an anonymous user account with MLAnonymousUtils:
@@ -1162,10 +1162,10 @@ MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
 
 User class is a specialized class for storing MLUser objects. You'll see a _User class in Console >> Users. More details: [Console UserManual](...).
 
-##User Role
+## User Role
 Setting user roles to manage permissions is more effective. The permission assigned to a role will be inherited by users contains in this role. User role is a user collection and a role can also contains another role. There is a corresponding `_Role` class in MaxLeap for storing user roles.
 
-###Property Description
+### Property Description
 
 Property Name|Type|Introduction|If Necessary
 ---|---|---|---
@@ -1174,7 +1174,7 @@ Property Name|Type|Introduction|If Necessary
     name|String|Role name|Necessary
     user|Relation|Users in this Role|Optional
 
-###Create Roles
+### Create Roles
 There are two parameters required on creating the Role: the first one is the Role name (name property) and the second one is ACL.
 
 ```java
@@ -1184,7 +1184,7 @@ MLRole role = new MLRole("Administrator", roleACL);
 MLRoleManager.saveInBackground(role);
 ```
 
-###Add Users or Roles to the Role
+### Add Users or Roles to the Role
 You can add users or roles to the role with role.getUsers().add() or role.getRoles().add().
 
 ```java
@@ -1198,7 +1198,7 @@ for (MLRole childRole : rolesToAddToRole) {
 MLRoleManager.saveInBackground(role);
 ```
 
-###Get Role Object
+### Get Role Object
 
 Here is two ways to get role object:
 
@@ -1228,19 +1228,19 @@ Here is two ways to get role object:
 	});
 	```
 
-##Data Security
+## Data Security
 
 ### Security of MLObject
 There is a ACL property when user create MLObject. Only MLUser and MLRole in this ACL list has the access. If a user doesn't explicitly set ACL, then system will assign default ACL automatically.
 
-#####ACL
+##### ACL
 ACL is a white list which contains users that are allowed the access to the data. A User must have the read permission (or belong to the Role that has the read permission) to get the data if an object. Meanwhile, a User must have the write permission (or belong to the Role that has the write permission) to modify or delete an object. e.g. a typical ACL data:
 
 ```{"553892e860b21a48a50c1f29":{"read":true,"write":true}}```
 
 indicates that the user whose ObjectId is "553892e860b21a48a50c1f29" has the permission to read and modify the MLObject.
 
-#####Default Permission
+##### Default Permission
 
 Each object in MaxLeap has a default ACL value when there's no explicit designation. This value means that all users have the read and write permission towards this object. You can see following value in ACL property in data manegement class:
 ```{"*":{"read":true,"write":true}}```
@@ -1256,7 +1256,7 @@ MLACL.setDefaultACL(defaultACL, true);
 
 The second parameter of `MLACL.setDefaultACL()` is set as true, which means that the read and access permission is added to defaultACL by default, not vice versa.
 
-#####Only Available to Create User
+##### Only Available to Create User
 You can set the MLObject as only be read or modified by create users: users need to create MLObject after the signin and then add following ACL properties:
 
 ```java
@@ -1267,7 +1267,7 @@ MLDataManager.saveInBackground(privateNote);
 ```
 Now, the MLObject - "privateNote" is only available to this user and can be read and modified on any devices signed in by this user.
 
-#####Set Access Permission for Other Users
+##### Set Access Permission for Other Users
 You can add the read and write permission of **target user** to ACL of MLObject with setReadAccess and setWriteAccess.
 
 For example, add read and modify access for a group of users: 
@@ -1286,7 +1286,7 @@ groupMessage.setACL(groupACL);
 MLDataManager.saveInBackground(groupMessage);
 ```
 
-#####Set Access Permission for Roles
+##### Set Access Permission for Roles
 You can add the read and write permission of **target Role** to ACL of MLObject with setRoleWriteAccess and setRoleWriteAccess.
 
 For example, add read and modify access for a group of users:
@@ -1300,7 +1300,7 @@ wallPost.setACL(postACL);
 MLDataManager.saveInBackground(wallPost);
 ```
 
-#####Set Access Permission for Users and Roles
+##### Set Access Permission for Users and Roles
 The ACL of MLObject can be overlapped. For example, when you set ACL for a MLObject, you can add modify permission for a role while adding read permission for all users:
 
 
@@ -1314,7 +1314,7 @@ myACL.setRoleWriteAccess("Moderators");
 myMessage.setACL(myACL);
 ```	
 
-#####Set Access Permission for All Users
+##### Set Access Permission for All Users
 You can add the read and write permission of **All Users** to ACL of MLObject with setPublicReadAccess and setPublicWriteAccess.
 ```java
 MLObject publicPost = new MLObject("Post");
@@ -1365,34 +1365,31 @@ MLRole role = new MLRole("Administrator", roleACL);
 MLRoleManager.saveInBackground(role);
 ```
 
-##Third Party Login
+## Third Party Login
 
-MaxLeap provides 3rd party login service to simplify the signup and signin and integrate ML app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and ML SDK at the same time and connect MLUser and UserId of 3rd party app.
+MaxLeap provides 3rd party login service to simplify the signup and signin and integrate MaxLeap app as well as apps like Facebook and Twitter. You can use 3rd party app SDK and ML SDK at the same time and connect MLUser and UserId of 3rd party app. To reduce the installation package size, MaxLeap SDK will realize third-party authentification with web OAuth as much as possible while third-party SDK is also acceptable.
 
-###Log in with Facebook Account
-The Android SDK of Facebook helps app optimize the signin experience. As for the devices installed with Facebook app, ML app can realize direct login with Facebook user credential. If there's no Facebook app installed, users can provide signin info in a standard Facebook login page.
+### Log in with Facebook Account
+To reduce the installation package size, MaxLeap SDK will realize Facebook login with web authentification. If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two.
 
-If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two.
-####Preparations
+#### Preparations
 1. Create Facebook app in [Facebook Dev Center](https://developers.facebook.com). Click My Apps >> Add a New App.
+2. Fill your callback URL in Settings -> Advanced -> Client OAuth Settings -> Valid OAuth redirect URIs. MaxLeap SDK takes `https://www.facebook.com/connect/login_success.html` as the callback URL by default.
 2. Open MaxLeap Console >> App Settings >> User Authentication. Check Allow Facebook Authentication and fill the Facebook Application ID and App Secret got from step 1 into relative location.
-3. Integrate Facebook SDK, add Facebook Login button. Please check [Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4) for more details.
-4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
+4. Add following code after `MaxLeap.initialize(this, APP_ID, API_KEY)` in `Application.onCreate()` function:
 
 ```java
-MLFacebookUtils.initialize("YOUR FACEBOOK APP ID");
-```
-5. 	Add following code into onActivityResult() function in all Activites invoked Login with Facebook to finish verification.
+    MLFacebookUtils.initialize("YOUR FACEBOOK APP ID", "YOUR FACEBOOK SECRET");
+    ```
+#### Modify Callback URL
 
+If you didn't choose the default URL privided by SDK, please modify the callback URL before invoking registration.
 
 ```java
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-  super.onActivityResult(requestCode, resultCode, data);
-  MLFacebookUtils.finishAuthentication(requestCode, resultCode, data);
-}
+MLFacebookUtils.setRedirectUrl(redirectUrl);
 ```
-####Sign in and Register New MLUser
+    
+#### Sign in and Register New MLUser
 If the Facebook UserId is not bound to any MLUser after the Facebook login, MaxLeap will create an account for the user and bind the two. e.g.
 
 ```java
@@ -1410,15 +1407,30 @@ MLFacebookUtils.logInInBackground(this, new LogInCallback<MLUser>() {
 });
 ```
 
-Detailed login process:
+Or, you can assign Facebook permissions required applying during the registration. Please check Facebook Developer Conference for more details [Permissions Reference](https://developers.facebook.com/docs/facebook-login/permissions/v2.0#reference).
 
-* Login Facebook in Login with Facebook page provided by Facebook SDK.
-* Facebook verifies the login info, then return.
-* MaxLeap SDK accept the result and save it to MLUser. If the Facebook UserId is not bound to any MLUser, then MaxLeap will create an account for the user automatically.
-* Invoke LogInCallbackof ML and log in MLUser.
+```java
+List<String> permissions = Arrays.asList(
+            FacebookProvider.Permissions.User.ABOUT_ME,
+            FacebookProvider.Permissions.User.RELATIONSHIPS,
+            FacebookProvider.Permissions.User.BIRTHDAY,
+            FacebookProvider.Permissions.User.LOCATION);
+MLFacebookUtils.logInInBackground(permissions, this, new LogInCallback<MLUser>() {
+  @Override
+  public void done(MLUser user, MLException err) {
+    if (user == null) {
+      //Facebook login is canceled
+    } else if (user.isNew()) {
+      //Facebook login for the first time, registered and bound successfully
+    } else {
+      //Facebook login succeeded
+    }
+  }
+});
+```
 
-####Bind MLUser and Facebook Account
-You can bind ML account and Facebook account with following method:
+#### Bind MLUser and Facebook Account
+You can bind existing MLUser and Facebook account with following method:
 
 ```java
 if (!MLFacebookUtils.isLinked(user)) {
@@ -1435,7 +1447,7 @@ if (!MLFacebookUtils.isLinked(user)) {
 
 MaxLeap will update the Facebook account info to the MLUser after the bind. The next time user logs in with Facebook account, MaxLeap will detect the bind and don't need to add new MLUser to this Facebook account again. 
 
-####Unbind
+#### Unbind
 
 ```java
 MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
@@ -1449,29 +1461,28 @@ MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
 ```
 MaxLeap will remove all Facebook account info from the MLUser after the unbind. The next time user logs in with Facebook account, MaxLeap will detect there's no bind and then add new MLUser to this Facebook account.
 
-###Log in with Twitter Account
-Similar to Facebook, the Android SDK of Twitter helps app optimize the signin experience. As for the devices installed with Twitter app, ML app can realize direct login with Twitter user credential. If there's no Twitter app installed, users can provide signin info in a standard Twitter login page.
+### Log in with Twitter Account
 
-If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLeap will create an account for the user and bind the two.
-####Preparations
-1. Create Twitter app in [Twitter Dev Center](...). Click My Apps >> Add a New App
+To reduce the installation package size, MaxLeap SDK will realize Twitter login with web authentification. If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLeap will create an account for the user and bind the two.
+
+#### Preparations
+1. Create Twitter app in [Twitter Dev Center](https://apps.twitter.com/). Please fill a valid address in `Callback URL` and MaxLeap SDK takes `http://localhost` as the callback URL by default.
 2. Open MaxLeap Console >> App Settings >> User Authentication. Check Allow Twitter Authentication and fill the Twitter consumer Key got from step 1 into relative location.
-3. Integrate Twitter SDK, add Twitter Login button. Please check [Add Twitter Login to Your App or Website](...) for more details.
-4. Add following code after MaxLeap.initialize(this, APP_ID, API_KEY) in Application.onCreate()function:
+4. Add following code after `MaxLeap.initialize(this, APP_ID, API_KEY)` in `Application.onCreate()` function:
 
 ```java
-MLTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
+MLTwitterUtils.initialize("YOUR Twitter CONSUMER KEY", "YOUR Twitter CONSUMER SECRET");
 ```
-5. 	Add following code into onActivityResult() function in all Activites invoked Login with Twitter to finish verification.
+
+#### Modify Callback URL
+
+If you didn't choose the default URL privided by SDK, please modify the callback URL before invoking registration.
 
 ```java
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-  super.onActivityResult(requestCode, resultCode, data);
-  MLTwitterUtils.finishAuthentication(requestCode, resultCode, data);
-}
+MLTwitterUtils.setRedirectUrl(redirectUrl);
 ```
-####Sign in and Register New MLUser
+
+#### Sign in and Register New MLUser
 If the Twitter UserId is not bound to any MLUser after the Twitter login, MaxLeap will create an account for the user and bind the two. e.g.
 
 ```java
@@ -1488,16 +1499,10 @@ MLTwitterUtils.logInInBackground(this, new LogInCallback<MLUser>() {
   }
 });
 ```
-Detailed login process:
-
-* Login Twitter in Login with Twitter page provided by Twitter SDK.
-* Twitter verifies the login info, then return.
-* MaxLeap SDK accept the result and save it to MLUser. If the Twitter UserId is not bound to any MLUser, then MaxLeap will create an account for the user automatically.
-* Invoke LogInCallbackof ML and log in MLUser.
 
 
-####Bind MLUser and Twitter Account
-You can bind ML account and Twitter account with following method:
+#### Bind MLUser and Twitter Account
+You can bind MLUser account and Twitter account with following method:
 
 ```java
 if (!MLTwitterUtils.isLinked(user)) {
@@ -1515,7 +1520,7 @@ if (!MLTwitterUtils.isLinked(user)) {
 MaxLeap will update the Twitter account info to the MLUser after the bind. The next time user logs in with Twitter account, MaxLeap will detect the bind and don't need to add new MLUser to this Twitter account again. 
 
 
-####Unbind
+#### Unbind
 
 ```java
 MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
@@ -1530,13 +1535,13 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
 MaxLeap will remove all Twitter account info from the MLUser after the unbind. The next time user logs in with Twitter account, MaxLeap will detect there's no bind and then add new MLUser to this Twitter account.
 
 
-##GeoPoint
+## GeoPoint
 
 MaxLeap provides MLGeoPoint object to help users do location query based on longitude and latitude.
 
-####MLGeoPoint Overview
+#### MLGeoPoint Overview
 
-####Create MLGeoPoint
+#### Create MLGeoPoint
 MLGeoPoint requires two parameters: the first one is Latitude (positive is northern) and the second one is longitude (positive is eastern).
 
 ```java
@@ -1549,9 +1554,9 @@ The MLGeoPoint object can be stored in MLObject：
 ```java
 myShop.put("location", point);
 ```
-####Geolocation Query
-#####Inquire the nearest place to target object
-You can get adjacent object around A with whereNear method and it requires two parameters: the first one is the property name for storing location of target object and the second one is the location of A. We can find the nearest 10 shops around A with following instance.
+#### Geolocation Query
+##### Inquire the nearest place to target object
+You can get adjacent object around A with `whereNear` method and it requires two parameters: the first one is the property name for storing location of target object and the second one is the location of A. We can find the nearest 10 shops around A with following instance.
 
 ```java
 MLGeoPoint userLocation = (MLGeoPoint) userObject.get("location");
@@ -1560,10 +1565,10 @@ shopQuery.whereNear("location", userLocation);
 query.setLimit(10);
 MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() { ... });
 ```
-#####Inquire objects around a certain location
-You can inquire objects within a certain range with whereWithinKilometers and whereWithinMiles. The method is similar to the aforementioned one.
-#####Inquire objects within a certain range
-You can inquire objects within a certain range with whereWithinGeoBox and it requires three parameters: the first one is the property name for storing location of target object and the next two are MLGeoPoint objects. The circle built with two MLGeoPoints as the endpoints of the diameter is the query range of whereWithinGeoBox. We can find all shops with the certain range with the following instance. 
+##### Inquire objects around a certain location
+You can inquire objects within a certain range with `whereWithinKilometers` and `whereWithinMiles`. The method is similar to the aforementioned one.
+##### Inquire objects within a certain range
+You can inquire objects within a certain range with `whereWithinGeoBox` and it requires three parameters: the first one is the property name for storing location of target object and the next two are `MLGeoPoint` objects. The circle built with two MLGeoPoints as the endpoints of the diameter is the query range of `whereWithinGeoBox`. We can find all shops with the certain range with the following instance. 
 
 ```java
 MLGeoPoint southwestOfSF = new MLGeoPoint(37.708813, -122.526398);
@@ -1576,4 +1581,8 @@ MLQueryManager.findAllInBackground(new FindCallback<MLObject>() { ... });
 Notices:
 
 1. Every `MLObject` class can only have one key with `MLGeoPoint` object.
-2. The point should not be below the range. The latitude shouldn't be -90.0 or 90.0, the longitude shouldn't be -180.0 or 180.0. Or, it will return with error.
+2. Latitude of the `GeoPoint` should be within the `-90.0` to `90.0` range, the longitude should be `-180.0` to `180.0`. Or, it will return with error.
+
+## Data Security
+
+Every request arrived at MaxLeap cloud service is sent by client SDK, admin, cloud data or other clients and carries with a security token. MaxLeap backend can identify the authentication and authorization of each sender with the security token and filter out certain data not carrying the permission. Please check [Console Guide - Cloud Data](ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME) for more details.
