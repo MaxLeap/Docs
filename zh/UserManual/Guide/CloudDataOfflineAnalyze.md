@@ -104,7 +104,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 | 函数名 | 功能 | 示例 | 备注 |
 |--------|--------|--------|--------|
 | unix_timestamp | 日期字符串转时间戳 | select unix_timestamp(date_str,'yyyy-MM-dd HH:mm:ss') as ts from tbl | |
-| from_unixtime | 日期格式化 | select from_unixtime(datetime_mills,'yyyy-MM-dd HH:mm:ss') as date_str from tbl | 强制为UTC时区，第二个参数不带返回默认格式 yyyy-MM-dd HH:mm:ss.S |
+| from_unixtime | 日期格式化 | select from_unixtime(datetime_mills,'yyyy-MM-dd HH:mm:ss') as date_str from tbl | 强制为UTC时区 |
 | to_date | 返回字符串的日期部分(年月日) | selet to_date(date_str) from tbl | 备注: '2015-01-01 12:25:00' 将会被转换成 '2015-01-01' |
 | year | 返回字符串的年份 | select year(date_str) from tbl | |
 | month | 返回字符串的月份 | select month(date_str) from tbl | |
