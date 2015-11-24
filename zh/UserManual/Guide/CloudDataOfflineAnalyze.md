@@ -27,13 +27,33 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 
 ![Offline Arch](../../../images/imgOfflineStep1.png "Offline Arch")
 
-- 打开“开发者中心”-“云数据离线分析”页面，如果您的数据已经导入完成，页面会在左侧列出当前的所有表结构
+- 打开“开发者中心”-“云数据离线分析”页面，如果您的数据已经导入完成，页面会在左侧列出当前的所有表结构，如果未完全导入，底部会出现目前导入表的信息
 
 ![Offline Arch](../../../images/imgOfflineStep2.png "Offline Arch")
 
 - 在右侧的编辑器中撰写您的LeapQL语句，点击执行，等待片刻后，页面将会返回执行结果。
 
-![Offline Arch](../../../images/imgOfflineStep3.png "Offline Arch")
+![Offline Arch](../../../images/imgOfflineStep3.jpg "Offline Arch")
+
+
+### 使用我的查询
+- 点击右下角的保存按钮，可以将编辑器中的SQL语句保存，以方便以后的查询
+![Offline Arch](../../../images/imgOfflineSaveQuery1.png "Offline Arch")
+- 填写相关的名称和描述，名称必填
+![Offline Arch](../../../images/imgOfflineSaveQuery2.png "Offline Arch")
+- 保存后，编辑器的顶部即出现关于当前查询的信息
+![Offline Arch](../../../images/imgOfflineSaveQuery3.png "Offline Arch")
+- 你可以通过右下角的新查询按钮，清空编辑器，并将上面的查询信息清空
+
+- 点击编辑器上方的我的查询标签，查看到我的查询，在这里你可以运行，编辑，复制，删除已经存在的查询语句（支持多个删除）
+![Offline Arch](../../../images/imgOfflineQueryOperate1.png "Offline Arch")
+- 以点击运行按钮为例：点击运行后，将切换到LeapQL编辑器标签页，同时运行相关查询语句，并且在编辑器顶部显示 当前的SQL语句的名称和描述，点击名称和描述可以编辑
+![Offline Arch](../../../images/imgOfflineQueryOperate2.png "Offline Arch")
+
+
+### 查询历史
+- 查询历史包含了用户所有的成功查询的SQL语句，支持关键字搜索
+![Offline Arch](../../../images/imgOfflineQueryHistory.png "Offline Arch")
 
 ### 功能介绍
 
@@ -47,7 +67,10 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 当您的查询表数据规模比较小，或者您的数据已经被预热，此时您的查询速度快速，会在几秒至几十秒内返回响应。
 ##### 离线结果
 当您的查询表数据规模比较大，或者您的数据为第一次加载的冷数据，此时您的查询有可能会需要几分钟的处理时间，为了避免浪费您宝贵的时间，我们推荐耐心等待系统将查询结果发送到您的邮箱。
-
+#### 我的查询
+用户可以用将常用的查询SQL语句，保存起来，达到下次快速的进行查询
+#### 查询历史
+包含了用户所有的成功查询的SQL语句，支持关键字搜索
 #### LeapQL 支持语法
 ##### 基础SQL
 请参考基础SQL语法。支持`select`,`join`,`group by`,`order by`,`limit`等
