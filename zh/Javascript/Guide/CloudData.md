@@ -6,7 +6,7 @@
 ## 简介
 
 ### 什么是云数据服务
-云数据是 MaxLeap 提供的数据存储服务，它建立在对象 `ML.Object` 的基础上，每个 `ML.Object` 包含若干键值对。所有 `ML.Object` 均存储在 MaxLeap 上，您可以通过 Javascript SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `M.LUser` (用户)，`ML.File` (文件)，`ML.GeoPoint` (地理位置)，他们都是基于 `ML.Object` 的对象。
+云数据是 MaxLeap 提供的数据存储服务，它建立在对象 `ML.Object` 的基础上，每个 `ML.Object` 包含若干键值对。所有 `ML.Object` 均存储在 MaxLeap 上，您可以通过 Javascript SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `ML.User` (用户)，`ML.File` (文件)，`ML.GeoPoint` (地理位置)，他们都是基于 `ML.Object` 的对象。
 
 ### 为何需要云数据服务
  云数据将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
@@ -240,8 +240,8 @@ gameScore.save();
 比如，我们想在一条微博的属性 "tags" 中加入多个属性值:
 
 ```javascript
-post.addUnique("tags", "Frontend");
-post.addUnique("tags", "JavaScript");
+post.addUnique('tags', 'Frontend');
+post.addUnique('tags', 'JavaScript');
 post.save();
 ```
 ### 数据类型
@@ -268,10 +268,10 @@ post.save();
 <input type="button" id="fileUploadButton"/>
 <script>
   document.querySelector('#fileUploadButton').addEventListener('click', function(){
-    var fileUploadControl = document.querySelector("#photoFileUpload");
+    var fileUploadControl = document.querySelector('#photoFileUpload');
     if (fileUploadControl.files.length > 0) {
       var file = fileUploadControl.files[0];
-      var name = "avatar.jpg";
+      var name = 'avatar.jpg';
       var ML.File = new ML.File(name, file);
       ML.File.save();
     }
@@ -310,21 +310,21 @@ file.destroy();
 var GameScore = ML.Object.extend('GameScore');
 var query = new ML.Query(GameScore);
 query = new ML.Query(GameScore);
-query.exists("name");
-query.equalTo("score", 13);
-query.find()
+query.exists('name');
+query.equalTo('score', 13);
+query.find();
 ```
 ### 查询条件
 `equalTo` 方法用来过滤符合要求的对象：
 
 ```javascript
-query.equalTo("pubUser", "MaxLeap 官方客服");
+query.equalTo('pubUser', 'MaxLeap 官方客服');
 ```
 
 `notEqualTo` 方法用来过滤不符合要求的对象，`equalTo` 正好相反：
 
 ```javascript
-query.equalTo("pubUser", "MaxLeap 官方客服");
+query.equalTo('pubUser', 'MaxLeap 官方客服');
 ```
 
 对于类型为数字的属性，您可以对其值的大小进行筛选：
@@ -377,9 +377,9 @@ query.limit(10); // 最多返回 10 条结果
 对于可以排序的类型，比如 `number` 和 `string`，你可以控制返回结果的顺序：
 
 ```javascript
-query.ascending("pubUser"); // 升序
+query.ascending('pubUser'); // 升序
 
-query.descending("pubTimestamp"); // 降序
+query.descending('pubTimestamp'); // 降序
 ```
 ### 对数组值做查询
 对于属性值是数组的情况，您可以这样查询数组的值中有 “henry” 的游戏记录：
@@ -413,16 +413,16 @@ query.startsWith('name', 'bai');
 ```javascript
 // 假设 myPost 是已经创建的对象。
 var query = new ML.Query(Comment);
-query.equalTo("post", myPost);
+query.equalTo('post', myPost);
 query.find();
 ```
 如果想得到其字段中包含的子对象满足另一个查询的结果，你可以使用 `matchesQuery()` 操作。 注意默认的结果条数限制 100 和最大值 1000 也同样适用于子查询，所以对于大的数据集您可能需要小心构建查询条件，否则可能出现意料之外的状 况。例如，为了找到有图片的 post 的 comment，您可以：
 
 ```javascript
 var innerQuery = new AV.Query(Post);
-innerQuery.exists("image");
+innerQuery.exists('image');
 var query = new AV.Query(Comment);
-query.matchesQuery("post", innerQuery);
+query.matchesQuery('post', innerQuery);
 query.find().then(function(comments) {
     // comments 包含有所有带图片 post 的 comment.
   });
@@ -431,9 +431,9 @@ query.find().then(function(comments) {
 
 ```javascript
 var innerQuery = new AV.Query(Post);
-innerQuery.exists("image");
+innerQuery.exists('image');
 var query = new AV.Query(Comment);
-query.doesNotMatchQuery("post", innerQuery);
+query.doesNotMatchQuery('post', innerQuery);
 query.find().then(function(comments) {
     // comments 包含所有不带图片 post 的 comment.
   })
@@ -533,7 +533,7 @@ user.anonymousSignUp();
 ```
 
 ### 在 Console 中管理用户
-User 表是一个特殊的表，专门存储 `M.LUser` 对象。在Console >> 开发者中心 >> 云数据，您会看到一个 _User 表。
+User 表是一个特殊的表，专门存储 `ML.User` 对象。在Console >> 开发者中心 >> 云数据，您会看到一个 _User 表。
 
 ## 地理位置
 MaxLeap 提供 `ML.GeoPoint` 对象，帮助用户根据地球的经度和纬度坐标进行基于地理位置的信息查询。
