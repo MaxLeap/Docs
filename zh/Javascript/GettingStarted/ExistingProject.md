@@ -16,11 +16,11 @@
 
 3. 进入 [应用设置－应用密钥](https://maxleap.cn/settings#application) 复制 Application ID，REST API Key，Master Key。
  
-4. 初始化SDK调用，Javascript SDK 分别为 [中国区](https://maxleap.cn) / [海外区](https://maxleap.com) 用户提供了不同的服务器： ML.SERVER_EN / ML.SERVER_ZH
+4. 初始化SDK调用，Javascript SDK 分别为 [中国区](https://maxleap.cn) / [海外区](https://maxleap.com) 用户提供了不同的服务器（默认为美国区服务器）： ML.SERVER_EN / ML.SERVER_ZH
 
 ```javascript
 ML.initialize('{{appid}}', '{{apikey}}', '{{masterkey}}');
-ML.serverURL = ML.SERVER_ZH;
+ML.useCNServer();
 ```
 
 ## 开始测试
