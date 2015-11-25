@@ -1336,7 +1336,7 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 
 使用 Twitter 账号登录后，如果该 Twitter 用户Id并未与任何MLUser绑定，MaxLeap 将自动为该创建一个用户，并与其绑定。
 
-####准备工作
+#### 准备工作
 
 若要通过 MaxLeap 使用 Twitter，您需要：
 
@@ -1354,7 +1354,7 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 
 MaxLeap 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 用户身份登录，并创建 MLUser，或者 (2) 将 Twitter 与已有的 `MLUser` 关联。
 
-####登录并注册新MLUser
+#### 登录并注册新MLUser
 
 `MLTwitterUtils` 提供一种方法让您的 `MLUser` 可以通过 `Twitter` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
@@ -1394,7 +1394,7 @@ if (![MLTwitterUtils isLinkedWithUser:user]) {
 
 关联时发生的步骤与登录非常类似。区别是在成功登录中，将会使用来自 Twitter 的信息更新当前的 MLUser。今后通过 Twitter 进行的登录会使用已存在的账户。
 
-####解除绑定
+#### 解除绑定
 若您想要取消用户与 Twitter 的关联，操作如下：
 
 ```objective_c
@@ -1419,8 +1419,244 @@ NSData *data = [NSURMLonnection sendSynchronousRequest:request
 ```
 
 
+### 使用微博账号登陆
 
-##地理位置
+MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
+
+```
+[MLWeiboUtils loginInBackgroundWithScope:@"all" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
+    if (user) {
+        // 登陆成功
+    } else {
+        // 登陆失败
+    }
+}];
+```
+
+使用微博账号登录后，如果该微博用户并未与任何 `MLUser` 绑定，MaxLeap 将创建一个 `MLUser`，并与其绑定。
+
+#### 准备工作
+
+若要通过 MaxLeap 使用微博，您需要：
+
+1. 前往[微博开放平台][weibo_develop_site]，[创建微博应用][set up weibo app]。
+2. 在 微博应用 >> 应用信息 >> 高级信息 中仔细填写授权回调页和取消授权回调页地址。这个地址在集成微博 SDK 的时候需要用到。
+3. 前往 [MaxLeap 控制台][maxleap_console]，在您的 MaxLeap 应用设置页面添加您微博应用的 App Key 和 App Secret。
+4. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+
+	```objective_c
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	    [MaxLeap setApplicationId:@"your_maxleap_appId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
+	    [MLWeiboUtils initializeWeiboWithAppKey:@"your_weibo_app_key" redirectURI:@"微博应用授权回调页"];
+	    return YES;
+	}
+	```
+
+5. 处理授权回调
+	
+	```
+	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+   		return [WeiboSDK handleOpenURL:url delegate:self];
+	}
+
+	- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
+    	return [WeiboSDK handleOpenURL:url delegate:self];
+	}
+
+	- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+	    return [WeiboSDK handleOpenURL:url delegate:self];
+	}
+	```
+	
+6. 处理授权响应
+	
+	```
+	#pragma mark WeiboSDKDelegate
+	
+	- (void)didReceiveWeiboResponse:(WBBaseResponse *)response {
+       if ([response isKindOfClass:[WBAuthorizeResponse class]]) {
+           [MLWeiboUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];
+	    } else {
+	        // 处理其他请求的响应
+	    }
+	}
+	```
+
+若您遇到与微博相关的任何问题，请查阅 [微博官方文档][weibo documentation]。
+
+MaxLeap 用户可通过以下两种主要方法使用微博：(1) 以微博用户身份登录，并创建 `MLUser`。(2) 将微博账号与已有的 `MLUser` 关联。
+
+#### 登录并注册新 MLUser
+
+`MLTwitterUtils` 提供一种方法让您的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
+
+```objective_c
+[MLWeiboUtils loginInBackgroundWithScope:@"all" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
+    if (!user) {
+        NSLog(@"微博登陆失败");
+    } else if (user.isNew) {
+        NSLog(@"用户使用微博账户成功注册并登陆");
+    } else {
+        NSLog(@"用户使用微博账户登陆");
+    }
+}];
+```
+
+该代码运行时，会出现以下情况：
+
+1. 若设备安装了新浪微博客户端，则会跳转到微博客户端请求授权，否则弹出微博授权网页。
+2. 用户确认授权，您的应用程序会收到回调。
+3. 您的应用程序收到授权响应，并交由 `MLWeiboUtils` 处理，`[MLWeiboUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];`
+3. 我们的 SDK 会收到微博数据并将其保存在 `MLUser` 中。如果是基于微博身份的新用户，那么该用户随后会被创建。
+4. 您的 `block` 被调用并带回这个用户对象(user)。
+
+#### 绑定 `MLUser` 与微博账号
+
+若您想要将已有的 `MLUser` 与微博帐户关联起来，您可以按以下方式进行关联：
+
+```objective_c
+if (![MLWeiboUtils isLinkedWithUser:user]) {
+    [MLWeiboUtils linkUserInBackground:user withScope:@"all" block:^(BOOL succeeded, NSError * _Nullable error) {
+        if ([MLWeiboUtils isLinkedWithUser:user]) {
+            NSLog(@"Woohoo, user linked with Weibo!");
+        }
+    }];
+}
+```
+
+关联时发生的步骤与登录非常类似。区别是在成功登录中，将会使用来自微博的信息更新当前的 `MLUser`。今后通过微博进行的登录会返回已存在的 `MLUser`。
+
+#### 解除绑定
+
+若您想要取消用户与微博的关联，操作如下：
+
+```objective_c
+[MLWeiboUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
+    if (!error && succeeded) {
+        NSLog(@"The user is no longer associated with their Weibo account.");
+    }
+}];
+```
+
+在当前用户已经关联了微博账户的情况下，可以使用 `[MLWeiboAccessToken currentAccessToken].accessToken` 获取用户身份验证令牌。
+
+### 使用微信账号登陆
+
+集成微信 SDK 的过程与微博非常相似。
+
+#### 准备工作
+
+若要与微信集成，您需要：
+
+1. 前往[微信开放平台][wechat_develop_site]，创建微信移动应用。
+2. 前往 [MaxLeap 控制台][maxleap_console]，在您的 MaxLeap 应用设置页面添加您微信应用的 App Key 和 App Secret。
+3. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+
+	```objective_c
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	    [MaxLeap setApplicationId:@"your_maxleap_appId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
+	    [MLWeChatUtils initializeWeChatWithAppId:@"your_weixin_appID" appSecret:@"your_weixin_AppSecret"];
+	    return YES;
+	}
+	```
+
+4. 处理授权回调
+	
+	```
+	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+   		return [WXApi handleOpenURL:url delegate:self];
+	}
+
+	- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
+    	return [WXApi handleOpenURL:url delegate:self];
+	}
+
+	- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+	    return [WXApi handleOpenURL:url delegate:self];
+	}
+	```
+	
+5. 处理授权响应
+	
+	```
+	#pragma mark WXApiDelegate
+	
+	- (void)onResp:(BaseResp *)resp {
+       if ([resp isKindOfClass:[SendAuthResp class]]) {
+           [MLWeChatUtils handleAuthorizeResponse:(SendAuthResp *)resp];
+       } else {
+	       // 处理其他请求的响应
+	    }
+	}
+	```
+
+若您遇到与微信相关的任何问题，请查阅 [微信官方文档][wechat documentation]。
+
+[weibo_develop_site]: http://open.weibo.com/
+[set up weibo app]: http://open.weibo.com/apps/new?sort=mobile
+[weibo documentation]: http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5
+[wechat_develop_site]: https://open.weixin.qq.com
+[wechat documentation]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&lang=zh_CN
+[maxleap_console]: https://maxleap.cn
+
+MaxLeap 用户可通过以下两种主要方法使用微信：(1) 以微信用户身份登录，并创建 `MLUser`。(2) 将微信账号与已有的 `MLUser` 关联。
+
+#### 登录并注册新 MLUser
+
+`MLWeChatUtils` 提供了一个方法让您的 `MLUser` 可以通过微信登录或注册。这可以使用 `logInWithBlock` 方法实现：
+
+```objective_c
+[MLWeChatUtils loginInBackgroundWithScope:@"snsapi_userinfo" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
+    if (!user) {
+        NSLog(@"微信登陆失败");
+    } else if (user.isNew) {
+        NSLog(@"用户使用微信账户成功注册并登陆");
+    } else {
+        NSLog(@"用户使用微信账户登陆");
+    }
+}];
+```
+
+该代码运行时，会出现以下情况：
+
+1. 跳转到微信客户端请求授权。
+2. 用户确认授权，您的应用程序会收到回调。
+3. 您的应用程序收到授权响应，并交由 `MLWeChatUtils` 处理，`[MLWeChatUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];`
+3. 我们的 SDK 会收到微博数据并将其保存在 `MLUser` 中。如果是基于微信身份的新用户，那么该用户随后会被创建。
+4. 您的 `block` 被调用并带回这个用户对象(user)。
+
+#### 绑定 `MLUser` 与微信账号
+
+若您想要将已有的 `MLUser` 与微信帐户关联起来，您可以按以下方式进行关联：
+
+```objective_c
+if (![MLWeChatUtils isLinkedWithUser:user]) {
+    [MLWeChatUtils linkUserInBackground:user withScope:@"snsapi_userinfo" block:^(BOOL succeeded, NSError * _Nullable error) {
+        if ([MLWeChatUtils isLinkedWithUser:user]) {
+            NSLog(@"Woohoo, user linked with Wechat!");
+        }
+    }];
+}
+```
+
+关联时发生的步骤与登录非常类似。区别是在成功登录中，将会使用来自微信的信息更新当前的 `MLUser`。今后通过该微信账号进行的登录会返回已存在的 `MLUser`。
+
+#### 解除绑定
+
+若您想要取消用户与微信的关联，操作如下：
+
+```objective_c
+[MLWeChatUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
+    if (!error && succeeded) {
+        NSLog(@"The user is no longer associated with their Wechat account.");
+    }
+}];
+```
+
+在当前用户已经关联了微信账户的情况下，可以使用 `[MLWeChatAccessToken currentAccessToken].accessToken` 获取用户身份验证令牌。
+
+
+## 地理位置
 
 MaxLeap 让您可以把真实的纬度和经度坐标与对象关联起来。通过在 `MLObject` 中添加 MLGeoPoint，可以在查询时实现将对象与参考点的距离临近性纳入考虑。这可以让您轻松某些事情，如找出距离与某个用户最近的其他用户或者距离某个用户最近的地标。
 
