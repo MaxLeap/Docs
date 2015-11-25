@@ -1592,13 +1592,6 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 若您遇到与微信相关的任何问题，请查阅 [微信官方文档][wechat documentation]。
 
-[weibo_develop_site]: http://open.weibo.com/
-[set up weibo app]: http://open.weibo.com/apps/new?sort=mobile
-[weibo documentation]: http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5
-[wechat_develop_site]: https://open.weixin.qq.com
-[wechat documentation]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&lang=zh_CN
-[maxleap_console]: https://maxleap.cn
-
 MaxLeap 用户可通过以下两种主要方法使用微信：(1) 以微信用户身份登录，并创建 `MLUser`。(2) 将微信账号与已有的 `MLUser` 关联。
 
 #### 登录并注册新 MLUser
@@ -1761,3 +1754,13 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 [twitter documentation]: https://dev.twitter.com/docs
 
 [twitter rest api]: https://dev.twitter.com/docs/api
+
+
+[weibo_develop_site]: http://open.weibo.com/
+[set up weibo app]: http://open.weibo.com/apps/new?sort=mobile
+[weibo documentation]: http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5
+
+[wechat_develop_site]: https://open.weixin.qq.com
+[wechat documentation]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&lang=zh_CN
+
+[maxleap_console]: https://maxleap.cn
