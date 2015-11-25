@@ -1,0 +1,53 @@
+{
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME": "/guide/docs.html",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS": "/guide/devguide/ios.html",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN": "/guide/devguide/ios.html#cloud-data",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_EN": "/guide/devguide/ios.html#analytics",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_EN": "/guide/devguide/ios.html#cloud-config",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_EN": "/guide/devguide/ios.html#marketing",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN": "/guide/devguide/ios.html#support",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN": "/guide/devguide/ios.html#user",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH": "/guide/devguide/ios.html#云数据",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH": "/guide/devguide/ios.html#分析",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH": "/guide/devguide/ios.html#营销",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH": "/guide/devguide/ios.html#支持",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH": "/guide/devguide/ios.html#云配置",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_ZH": "/guide/devguide/ios.html#用户",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID": "/guide/devguide/android.html",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_EN": "/guide/devguide/android.html#cloud-data",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_EN": "/guide/devguide/android.html#analytics",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_EN": "/guide/devguide/android.html#cloud-config",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_EN": "/guide/devguide/android.html#marketing",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_EN": "/guide/devguide/android.html#support",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN": "/guide/devguide/android.html#user",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH": "/guide/devguide/android.html#云数据",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH": "/guide/devguide/android.html#分析",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH": "/guide/devguide/android.html#云配置",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH": "/guide/devguide/android.html#营销",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH": "/guide/devguide/android.html#支持",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH": "/guide/devguide/android.html#用户",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA": "/guide/devguide/java.html",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON": "/guide/devguide/python.html",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
+
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING": "/guide/usermanual/marketing.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DEVCENTER": "/guide/usermanual/devcenter.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN": "/guide/usermanual/usermgmt.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH": "/guide/usermanual/usermgmt.html",
+
+
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS": "/quickstart/ios/core/existing.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/android/core/existing.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/java/core/existing.html",
+  "ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS": "/api/ios/index.html",
+  "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html"
+}
