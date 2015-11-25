@@ -14,12 +14,12 @@
 	注意：Javascript SDK没有创建 / 删除 class 的权限，所以要先在 [云数据](https://maxleap.cn/clouddata) 中创建好需要用到的class。
 	   
 
-3. 进入 [应用设置－应用密钥](https://maxleap.cn/settings#application) 复制 Application ID，REST API Key，Master Key。
+3. 进入 [应用设置－应用密钥](https://maxleap.cn/settings#application) 复制 Application ID，Javascript Key。
  
 4. 初始化SDK调用，Javascript SDK 分别为 [中国区](https://maxleap.cn) / [海外区](https://maxleap.com) 用户提供了不同的服务器（默认为美国区服务器）： ML.SERVER_EN / ML.SERVER_ZH
 
 	```javascript
-	ML.initialize('{{appid}}', '{{apikey}}', '{{masterkey}}');
+	ML.initialize('{{appid}}', '{{javascriptkey}}');
 	ML.useCNServer();
 	```
 
