@@ -17,15 +17,20 @@
 存储在  Cloud Data 的对象称为 `MLObject`，而每个 `MLObject` 被规划至不同的 `class` 中（类似“表”的概念)。`MLObject` 包含若干键值对，且值为兼容 JSON 格式的数据。考虑到数据安全，MaxLeap 禁止客户端修改数据仓库的结构。您需要预先在 MaxLeap 开发者平台上创建需要用到的表，然后仔细定义每个表中的字段和其值类型。
 
 ### 新建
-假设我们要保存一条数据到`Comment`class，它包含以下属性：
+
+假设我们要保存一条数据到 `Comment` 类(数据表)，它包含以下属性：
 
 属性名|值|值类型
--------|-------|---|
-content|"我很喜欢这条分享"|字符
+-------|-------|-----
+content|"我很喜欢这条分享"|字符串
 pubUserId|1314520|数字
 isRead|false|布尔
 
-我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。
+我们建议使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis(类名首字母大写), nameYourKeysLikeThis(列名首字母小写)），让代码看起来整齐美观。
+
+首先，需要在云端数据仓库中添加 `Comment` 类，才能够往里面插入数据。
+有关添加类等操作的说明，请查阅：[控制台用户手册 － 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
+
 
 `MLObject` 接口与 `NSMutableDictionary` 类似，但多了 `saveInBackground` 方法。现在我们保存一条 `Comment`:
 
@@ -1731,7 +1736,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 ## 数据安全
 
 每个到达 MaxLeap 云服务的请求是由移动端SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
-具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)
+具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
 
 
 [+load api reference]: https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/classes/NSObject_class/#//apple_ref/occ/clm/NSObject/load
