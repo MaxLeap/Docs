@@ -14,10 +14,12 @@
 * 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
+
 存储在 Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值， Cloud Data服务会将其存储至云端。
 
-###新建
-假设我们要保存一条数据到`Comment`class，它包含以下属性：
+### 新建
+
+假设我们要保存一条数据到 `Comment` 类，它包含以下属性：
 
 属性名|值|值类型
 -------|-------|---|
@@ -25,7 +27,12 @@ content|"我很喜欢这条分享"|字符
 pubUserId|1314520|数字
 isRead|false|布尔
 
-我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。添加属性的方法与`Java`中的`Map`类似：
+我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。
+
+首先，需要在云端数据仓库中添加 `Comment` 类，才能够往里面插入数据。
+有关添加类等操作的说明，请查阅：[控制台用户手册 － 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
+
+添加属性的方法与 `Java` 中的 `Map` 类似：
 
 ```java
 MLObject myComment = new MLObject("Comment");
@@ -409,10 +416,12 @@ bigObject.put("myNull", JSONObject.NULL);
 MLDataManager.saveInBackground(bigObject);
 ```
 
-我们不建议存储较大的二进制数据，如图像或文件不应使用 MLObject 的 byte[] 字段类型。MLObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 MLFile 对象来存储，具体使用方法可见*文件*部分。 关于处理数据的更多信息，可查看*数据安全指南*。
+我们不建议存储较大的二进制数据，如图像或文件不应使用 MLObject 的 byte[] 字段类型。MLObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 MLFile 对象来存储，具体使用方法可见[文件](#文件)部分。 关于处理数据的更多信息，可查看[数据安全](#数据安全)。
 
 ## 文件
-###MLFile的创建和上传
+
+### MLFile 的创建和上传
+
 MLFile 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `MLObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
 
 在这个例子中，我们将图片保存为MLFile并上传到服务器端：
@@ -1410,4 +1419,4 @@ MLQueryManager.findAllInBackground(new FindCallback<MLObject>() { ... });
 ## 数据安全
 
 每个到达 MaxLeap 云服务的请求是由移动端SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
-具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)
+具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
