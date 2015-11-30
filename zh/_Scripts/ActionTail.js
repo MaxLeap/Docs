@@ -4,9 +4,15 @@
 
 $(document).ready(function () {
 
-    //Track Register
+    //Track Registration
     $('#element').click(function () {
         ga('send', 'event', 'button', 'click', 'register');
     });
+
+    var pathName=window.location.pathname;
+    var registerPathName = /^https:\/\/maxleap.cn\/regnotify\?send_email_flag=success\&verify_email_address=[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if(pathName.match(registerPathName)  ) {
+        ga('send', 'event', 'Activation', 'RegisterDone', 'Succeed');
+    }
 
 });
