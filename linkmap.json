@@ -1,5 +1,5 @@
 {
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME": "/guide/docs.html",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME": "/guide/helpcenter.html",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS": "/guide/devguide/ios.html",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_EN": "/guide/devguide/ios.html#cloud-data",
@@ -38,7 +38,7 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
 
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING": "/guide/usermanual/marketing.html",
-  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DEVCENTER": "/guide/usermanual/devcenter.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DEVCENTER": "/guide/usermanual/developercenter.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH": "/guide/usermanual/clouddata.html",
