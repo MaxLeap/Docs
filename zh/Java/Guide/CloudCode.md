@@ -123,6 +123,334 @@ public void doSomethingToCloudData(){
 }
 ```
 
+上面例子是基本的增删改查操作，更多详细的参见下面章节
+
+##### 查询
+我们可以通过构造MLQuery对象`MLQuery query = MLQuery.instance();`，来进行复杂查询
+
+###### 等值判断查询(=,!=,>,>=,<,<=)
+`equalTo`用来返回某字段为指定值的结果集(=)
+
+```java
+    //返回字段field1=value1的结果集
+    query.equalTo("field1", "value1");
+```
+
+`notEqualTo`用来返回某字段不为指定值的结果集(!=)
+```java
+    //返回字段field1!=value2的结果集
+    query.notEqualTo("field1","value1");
+```
+
+`greaterThan`用来返回某个字段值大于指定值的结果集(>)
+
+```java
+    //返回字段field1值>100的的结果集
+    query.greaterThan("field1",100);
+```
+
+`greaterThanOrEqualTo`用来返回某个字段值大于等于指定值的结果集(>=)
+
+```java
+    //返回字段field2值>=99的结果集
+    query.greaterThanOrEqualTo("field2",99);
+```
+
+`lessThan`用来返回某个字段值小于指定值的结果集(<)
+
+```java
+    //返回字段field1值<100的结果集
+    query.lessThan("field1",100);
+```
+
+`lessThanOrEqualTo`用来返回某个字段值小于等于指定值的结果集(<=)
+
+```java
+    //返回字段field2值<=99的结果集
+    query.lessThanOrEqualTo("field2",99);
+```
+
+###### 范围包含查询(exists、notExist、in、notIn、arrayAll、nearSpherePoint)
+exists用来返回某个字段存在值的结果集
+
+```java
+    //返回存在字段field1的结果集
+    query.exists("field1");
+```
+
+notExist用来返回某个字段不存在值的结果集
+
+```java
+    //返回不存在字段field2的结果集
+    query.notExist("field2");
+```
+
+`in`用来返回某个字段在指定枚举范围里的结果集
+
+```java
+    //返回字段field1在["value1","value2","value3"]枚举范围内的结果集
+    query.in("field1","value1","value2","value3");
+    //上面代码等效于下面方式：
+    List<String> list = new ArrayList<String>();
+    list.add("value1");
+    list.add("value2");
+    list.add("value3");
+    query.in("field1",list);
+```
+
+`notIn`用来返回某个字段不在指定枚举范围里的结果集
+
+```java
+    //返回字段field1不在["value1","value2","value3"]枚举范围内的结果集
+    query.notIn("field1","value1","value2","value3");
+    //上面代码等效于下面方式：
+    List<String> list = new ArrayList<String>();
+    list.add("value1");
+    list.add("value2");
+    list.add("value3");
+    query.notIn("field1",list);
+```
+
+`arrayAll`用来返回某个数组类型字段包含指定值的结果集(针对数组的查询)
+
+```java
+    //返回字段field1的值包含了value1且包含value2且包含value3的结果集，字段field1必须是一个array类型
+    query.arrayAll("field1","value1","value2","value3");
+    //上面参数你可以追加任意数量的值，等效于下面方式：
+    List<String> list = new ArrayList<String>();
+    list.add("value1");
+    list.add("value2");
+    list.add("value3");
+    query.arrayAll("field1",list);
+```
+
+`nearSpherePoint`用来返回某个字段在指定经度、纬度方圆范围内的结果集(针对MLGeoPoint类型的查询)
+
+```java
+    //返回字段field1值在经度(121.10013)纬度(31.11339)方圆500米范围内的结果集
+    MLGeoPoint geoPoint = new MLGeoPoint(31.11339, 121.10013);
+    query.nearSpherePoint("field1", geoPoint, 500);
+```
+
+###### 复合查询(and、or)
+在我们的业务逻辑中，可能存在非常复杂的查询组合，我们在一个query中可能无法满足，此时我们需要复合查询来达到组合效果
+
+`and`与操作，多个条件同时成立返回结果集
+
+```java
+    //与操作，返回字段field1等于value1并且字段field2等于value2并且字段field3等于value3同时成立的结果集
+    query.equalTo("field1", "value1").equalTo("field2","value2").equalTo("field3","value3");
+    //上面代码等同于下面效果：
+    MLQuery query = MLQuery.instance();
+    query.equalTo("field1","value1");
+    MLQuery query2 = MLQuery.instance();
+    query2.equalTo("field2","value2");
+    MLQuery query3 = MLQuery.instance();
+    query3.equalTo("field3","value3");
+    query.and(query2).and(query3);//通过and来实现与操作
+```
+
+`or`或操作，多个条件其中任意一个成立返回结果集
+
+```java
+    //或操作，返回字段field1等于value1或者value2的结果集
+    MLQuery query = MLQuery.instance();
+    query.equalTo("field1","value1");
+    MLQuery query2 = MLQuery.instance();
+    query2.equalTo("field1","value2");
+    query.or(query2);//通过or来实现或操作
+```
+
+###### 结果集显示限定查询(addKeys、excludeKeys、sort、skip、limit)
+可能我们的表结构很臃肿，比如订单结构超过上百的字段，查询的结果里我们可能只想关注特别的几个字段，我们可以通过限定结果集来实现
+
+`addKey`用来指定我们的结果集需要收集的字段
+```java
+    //返回结果集里只有field1字段
+    query.addKey("field1");
+```
+
+`addKeys`用来指定我们的结果集需要收集的字段列表
+
+```java
+    //返回结果集里只有field1、field2、field3字段
+    List<String> keys = new ArrayList();
+    keys.add("field1");
+    keys.add("field2");
+    keys.add("field3");
+    query.addKeys(keys);
+```
+
+你可以通过多次调用addKey来达到addKeys的效果
+
+当然你也可以指定不收集的字段
+
+`excludeKey`用来指定我们的结果集不需要收集的字段
+
+```java
+    //返回结果集中不包含field1字段
+    query.excludeKey("field1");
+```
+
+`excludeKeys`用来指定我们的结果集不需要收集的字段列表
+
+```java
+    //返回结果集中不包含field1、field2、field3字段
+    query.excludeKeys(new String[]{"field1","field2","field3"});
+```
+
+你可以通过多次调用excludeKey来达到excludeKeys的效果
+
+在查询的结果集中，我们一般都会用到排序功能
+
+`sort`用来按照指定字段升序(MLQuery.SORT_ASC)/降序(MLQuery.SORT_DESC)来排序
+
+```java
+    //结果集一次按照field1升序、field2升序、field3升序来排序
+    query.sort(MLQuery.SORT_ASC,"field1","field2","field3");
+    //上面代码的参数顺序不同返回的结果可能便不同，排序优先级从前到后，等效于下面：
+    query.sort(MLQuery.SORT_ASC,"field1").sort(MLQuery.SORT_ASC,"field2").sort(MLQuery.SORT_ASC,"field2")
+    //你也可以先预定排序规则（通过LinkedHashMap来保证顺序，请不要使用HashMap），然后统一执行sort操作：
+    Map<String,Integer> sort = new LinkedHashMap<String, Integer>();
+    sort.put("field1",MLQuery.SORT_ASC);
+    sort.put("field2",MLQuery.SORT_DESC);
+    sort.put("field3",MLQuery.SORT_DESC);
+    query.setSort(sort);
+```
+
+排序一般适用于数字类型或日期类型的字段
+
+除了排序功能，我们很多时候也会用到分页功能，特别是MLQuery限制了返回的结果集条数(最大2000)，在大量结果查询情况下，我们必须通过分页来实现业务逻辑
+
+`setLimit`用来设置返回的记录最大条数，`setSkip`用来设置忽略指定的前面行数
+
+```java
+    //返回的数据记录数最大为100条数据，如果不指定默认为2000条
+    query.setLimit(100);
+    //忽略前面10行记录，如果不指定默认为-1，即不忽略
+    query.setSkip(10);
+```
+
+通过setLimit和setSkip我们便很容易实现自己想要的分页功能，下面提供实现的一种方式，供大家参考：
+
+```java
+  /**
+   * 分页实现，每次返回100条数据
+   * @param query 基础查询语句，预先定义好的
+   * @param skip  动态忽略行数
+   * @return 最终结果集，包含全部分页结果
+   */
+  private List<Ninja> paging(MLQuery query,AtomicInteger skip){
+    query.setLimit(100);//设置返回最大记录条数为100条
+    query.setSkip(skip.get());//动态设置忽略前面N条记录
+    FindMsg<Ninja> findMsg = ninjaMLClassManager.find(query);//执行查询
+    if (findMsg.results() == null || findMsg.results().size() == 0) return new ArrayList<>();//结果集为空，退出
+    if (findMsg.results().size() < 100) return findMsg.results();//没有下一页退出
+    //有下一页
+    skip.addAndGet(100);//忽略前面已经查询过的条数
+    findMsg.results().addAll(paging(query, skip));//递归查询
+    return findMsg.results();
+  }
+  //有了上面的分页函数，你就可以直接调用实现分页了，如下面：
+  List<Ninja> result = paging(MLQuery.instance(), new AtomicInteger());
+```
+
+上面的分页实现可能会造成多查询一次，因为返回了100记录后就没有下一页，不过不影响，当然如果除了这种方式，你还可以有别的分页方式，比如每次实际多获取一条数据，比如101条，如果返回条数为101即表示有下一页，然后再做递归查询，不赘述了。
+
+###### 关联子查询(select、inQuery)
+在实际应用中，我们也许会用到类似关系型数据库子查询的功能，我们假设有表User（用户）和表Article（文章）,文章表Article外键为uid关联用户，如果我们想要查询出张三写的所有文章，关系型数据库的查询语句有：
+
+关联查询语句：`SELECT * FROM article,user WHERE article.uid = user.id AND user.username='张三'` 或者`SELECT * FROM article JOIN user ON article.uid = user.id WHERE user.username='张三'`
+
+子查询语句：`SELECT * FROM article WHERE uid IN(SELECT id FROM user WHERE username='张三')`
+
+而在MaxLeap中我们可以通过`select`操作到达类似效果：
+
+```java
+//构建User子查询SelectOperator
+MLQuery.SelectOperator selectOperator = new MLQuery.SelectOperator("User","id");
+selectOperator.$eq("username","张三");
+//构建Article查询
+query.select("uid",selectOperator);
+```
+
+如果我们想查询除不是张三写的所有文章，我们可以使用`notSelect`实现：
+
+```java
+//构建User子查询SelectOperator
+MLQuery.SelectOperator selectOperator = new MLQuery.SelectOperator("User","id");
+selectOperator.$eq("username","张三");
+//构建Article查询
+query.notSelect("uid",selectOperator);
+```
+
+因为Article的uid关联到User，在JAVA的POJO里表现为Article类有个字段author，类型为Pointer，指向User类，类似下面：
+
+```java
+public class Article extends MLObject {
+  private String title;
+  private MLPointer author;
+}
+```
+
+我们除了用`select`、`notSelect`操作来实现关联子查询外，还可以通过`inQuery`和`notInQuery`来达到相同的目的，而且更方便，这就是MaxLeap sdk为我们提供的关系查询：
+
+```java
+//查询张三写的所有文章
+MLQuery.InQueryOperator inQueryOperator = new MLQuery.InQueryOperator("User");
+inQueryOperator.$eq("username","张三");
+query.inQuery("author",inQueryOperator);
+//查询非张三写的所有文章
+query.notInQuery("author",inQueryOperator);
+```
+
+###### 关系查询(relationTo)
+在我们的表结构中，很多情况下都存在着一对多、多对多的关系，如果想通过这种关系来查询我们想要的数据用普通的查询比较繁琐，MaxLeap sdk为我们提供了relatedTo操作
+
+`relatedTo`关联查询操作
+
+我们还是以User表和Article表为例，User表有个字段articles关联了文章列表，在java的POJO里表现如下：
+
+```java
+public class User extends MLObject {
+  private String username;//用户名
+  private MLRelation articles;//文章列表，关联Article类
+}
+public class Article extends MLObject {
+  private String title;//文章标题
+  private MLPointer author;//文章作者，关联User类
+}
+```
+
+如果我们任然想查询张三的所有文章，我们可以先查询出用户为张三的User记录，然后通过relationTo关联查询到张三的所有文章
+
+```java
+    //获取张三User记录，得到张三的ObjectId
+    MLQuery userQuery = MLQuery.instance();
+    userQuery.equalTo("username", "张三");
+    FindMsg<User> userFindMsg = MLClassManagerFactory.getManager(User.class).find(userQuery);
+    ObjectId userObjectId = findMsg.results().get(0).objectId();
+    //查询Article表并设置关联对象，关联刚查询到的张三ObjectId
+    MLQuery articleQuery = MLQuery.instance();
+    MLPointer pointer = new MLPointer(userObjectId, "User");
+    articleQuery.relatedTo("articles", pointer);
+    FindMsg<Article> articleFindMsg = MLClassManagerFactory.getManager(Article.class).find(articleQuery);
+```
+
+这对我们一对多，多对多查询非常简便有效。
+
+有时候，你可能需要在一个查询中返回多种类型，做到类似显示结构树的效果，我们可以使用`setIncludes()`来设置需要包含查询的字段。
+
+比如，我们想获得某篇文章，同时得到它关联的用户信息
+
+```
+    //返回的文章结果集中包含作者详细信息
+    query.setIncludes("author");
+```
+
+需要注意的是setIncludes只针对MLPointer类型或者它的数组类型字段才有效(MLRelation类型的无效)，同时你可以做递归include，比如
+`query.setIncludes("author.posts.comments")`，多个字段include可以按逗号分隔。
+
 #### 使用Cloud Function
 
 ##### API方式调用
