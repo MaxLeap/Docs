@@ -17,139 +17,233 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
 
 ## 推送消息
 
-推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在 Console 中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标Activity。
+推送消息帮助您迅速地将消息展示给大量的用户。发送推送消息后，无论用户是否打开应用，都将在状态栏看见它。您可以在 Console 中自定义发送消息的内容，并且传递若干参数(键值对)至客户端。用户点击推送消息后，应用会根据参数决定目标 Activity。
 
-### 配置
+目前 MaxLeap 提供两种类型的推送服务：GCM 和 LPNS，GCM 依托于谷歌服务，LPNS 依托于长连接，开发者可以自行选择采用哪种类型。
 
-MaxLeap Core SDK 提供了一套完整的基于GCM的推送方案。GCM(Google Cloud Messaging)是谷歌提供的推送服务。使用GCM进行推送，您需要完成以下设置：
+### GCM
 
-1. 提供 **Sender ID** 和 **API key**. 请在*Google开发者中心*获取这两个Key.
-2. 在 `AndroidManifest.xml` 中添加权限和 Push Receiver(用于处理 Push 消息及显示 Notification)：
+#### 配置
+
+1. 提供 `Sender ID` 和 `API key`. 请在 [Google开发者中心](https://console.developers.google.com) 获取这两个Key.
+2. 在 `AndroidManifest.xml` 中进行必要的配置。
+
+    ```xml
+    <!-- your package -->
+    <permission
+        android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
+
+    <!-- App receives GCM messages. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application ...>
+        <!--渠道-->
+        <meta-data
+            android:name="ml_channel"
+            android:value="google_play" />
+
+        <!--Push 类型-->
+        <meta-data
+            android:name="ml_push"
+            android:value="gcm" />
+
+        <!--senderId-->
+        <meta-data
+            android:name="com.maxleap.push.gcm_sender_id"
+            android:value="id:yourSenderId" />
+
+        <!--Notification 图标（非必需），默认为应用的图标-->
+        <meta-data
+            android:name="com.maxleap.push.notification_icon"
+            android:resource="@android:drawable/ic_dialog_alert" />
+
+        <!--Play Services-->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!--Push 服务-->
+        <service
+            android:name="com.maxleap.MLPushService"
+            android:enabled="true"
+            android:exported="false" />
+
+		<!--Receiver-->
+        <receiver
+            android:name="com.maxleap.push.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+        <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+            <category android:name="YOUR_PACKAGE_NAME" />
+        </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
+        <intent-filter>
+            <action android:name="com.maxleap.push.intent.RECEIVE"/>
+            <action android:name="com.maxleap.push.intent.OPEN"/>
+        </intent-filter>
+        </receiver>
+    </application>
+    ```
+
+	**注意**
+
+	请将上述代码中的 `YOUR_PACKAGE_NAME` 换成你的应用的包名，将 `yourSenderId` 替换成你在 Google 开发者控制台上创建的 `senderId`，多个 `senderId` 可以用逗号进行分隔（即 "id:abc" 或 "id:abc,def,ghi" 都是合法的）。
+
+
+###  LPNS
+
+#### 配置
+
+在 `AndroidManifest.xml` 中添加权限和必要的项目
 
 ```xml
-<!-- your package -->
-<permission
-	android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
-	android:protectionLevel="signature" />
-<uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
+<manifest>
+	<!--必需-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
-<!-- App receives GCM messages. -->
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-<!-- GCM requires a Google account. -->
-<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-<!-- Keeps the processor from sleeping when a message is received. -->
-<uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--可选-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-<application ...>
-	<!-- play services -->
-	<meta-data
-		android:name="com.google.android.gms.version"
-		android:value="@integer/google_play_services_version" />
+    <application>
 
-	<receiver
-	android:name="com.maxleap.push.GcmBroadcastReceiver"
-	android:permission="com.google.android.c2dm.permission.SEND">
-	<intent-filter>
-		<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-		<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+		<!--渠道-->
+        <meta-data
+            android:name="ml_channel"
+            android:value="google_play" />
 
-		<category android:name="YOUR_PACKAGE_NAME" />
-	</intent-filter>
-	</receiver>
+		<!--Push 类型-->
+        <meta-data
+            android:name="ml_push"
+            android:value="lpns" />
 
-	<receiver android:name="com.maxleap.MLPushBroadcastReceiver" android:exported="false">
-	<intent-filter>
-		<action android:name="com.maxleap.push.intent.RECEIVE"/>
-		<action android:name="com.maxleap.push.intent.OPEN"/>
-	</intent-filter>
-	</receiver>
-</application>
+		<!--心跳间隔（非必需），默认为5分钟-->
+        <meta-data
+	        android:name="ml_push_heartbeat"
+    	    android:value="600000" />
+
+        <!--Notification 图标（非必需），默认为应用的图标-->
+        <meta-data
+            android:name="com.maxleap.push.notification_icon"
+            android:resource="@android:drawable/ic_dialog_alert" />
+
+		<!--用于接收 Push 信息-->
+        <receiver
+            android:name="com.maxleap.MLPushBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.maxleap.push.intent.RECEIVE" />
+                <action android:name="com.maxleap.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.maxleap.MLPushService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- 用于进行心跳检测，开机重启服务 -->
+        <receiver
+            android:name="com.maxleap.MLBootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.maxleap.MLHeartBeatReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.maxleap.push.intent.HEARTBEAT" />
+                <action android:name="com.maxleap.push.intent.RECONNECT" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
+
 ```
-
-3. **配置Sender ID：**在 `AndroidManifest.xml`的`<application ...> </application>`中添加：
-
-```xml
-<meta-data
-	android:name="com.maxleap.push.gcm_sender_id"
-	android:value="id:YOUR_SENDER_ID" />
-```
-
-4. **配置推送消息图标：**若不配置，将默认采用应用的图标作为推送消息图标进行显示。
-
-```xml
-<meta-data
-	android:name="com.maxleap.push.notification_icon"
-	android:resource="@android:drawable/ic_dialog_alert" />
-```
-5. **启用Marketing服务：**在`Application.onCreate()`中的`MaxLeap.initialize()`方法**之前**添加：
-
-```java
-MaxLeap.setMarketingEnabled(true);
-```
-
-注意：
-
-* 请将上述 YOUR\_PACKAGE\_NAME 字段替换成项目的 Package 名。将 YOUR\_SENDER\_ID 替换成您的 GCM Sender ID.
 
 ### 自定义推送消息的处理
 
 您可以通过以下步骤自定义推送消息的显示和处理。
 
-1. 新建 CustomPushReceiver 类，并继承 MLPushBroadcastReceiver
-2. 在 CustomPushReceiver 类中完成一系列自定义：点击后的目标 Activity，图标等
-3. 在`AndroidManifest.xml`中配置 CustomPushReceiver
+1. 新建任意继承自 `MLPushBroadcastReceiver` 的类
+2. 在以上步骤创建的类中完成通过方法的重写完成一系列自定义操作
+3. 在 `AndroidManifest.xml` 中配置将 `com.maxleap.MLPushBroadcastReceiver` 一项替换成你自定义的类。
 
-##### 新建 Receiver
+
+#####  跳转到指定的 Activity
+
+重写 `getActivity()` 方法可以指定当点击通知后所跳转的 Activity 画面。
 
 ```java
-public class CustomPushReceiver extends MLPushBroadcastReceiver {
-	@Override
-	protected class<? extends Activity> getActivity(Intent intent) {
-		return YOUR_ACTIVITY.class;
-	}
-	@Override
-	protected Uri getUri(Intent intent) {
-		return super.getUri(intent);
-	}
+@Override
+protected Class<? extends Activity> getActivity(Intent intent) {
+    return HelloWorld.class;
 }
 ```
 
-##### 自定义：目标 Activity
-```java
-protected class<? extends Activity> getActivity(Intent intent)
-```
-
-返回非 null 值后，点击 Notification 后会自动进入到目标Activity，在目标Activity中可以通过 `getIntent()` 得到该条 Push 所携带的信息
+在跳转到的目标 Activity 中可以通过 `getIntent()` 得到该条 Push 所携带的信息
 
 ```java
 Intent intent = getIntent();
 if (intent != null && intent.getExtras() != null) {
     for (String key : intent.getExtras().keySet()) {
-        MLLog.i(TAG, key + " = " + intent.getStringExtra(key));
+        Log.i(TAG, key + " = " + intent.getStringExtra(key));
     }
 }
 ```
 
-##### 自定义：目标 Uri
+##### 跳转到指定的 Uri
+
+重写 `getUri()` 方法可以指定当点击通知后所跳转的 Uri。
+
 ```java
-protected Uri getUri(Intent intent)
+@Override
+protected Uri getUri(Intent intent) {
+    return Uri.parse("http://www.github.com");
+}
 ```
 
-返回非 null 值后，点击 Notification 后会自动进入目标Uri
+**注意**
 
-注意：getActivity() 的优先级要高于 getUri()。如果 getActivity（）没有返回 null 的话，则 getUri() 会被忽略
+`getUri()` 的优先级要高于 `getActivity()`。如果 `getUri()` 没有返回 `null` 的话，则 `getActivity()` 会被忽略。
 
-#####其他自定义
+##### 自定义图标
+
 定义 Notification 的 LargeIcon
 
 ```java
- protected Bitmap getLargeIcon(Context context)
+@Override
+protected Bitmap getLargeIcon(Context context) {
+    return BitmapFactory.decodeStream(in);
+}
 ```
 
 自定义 Notification 的 SmallIcon
 
 ```java
-protected int getSmallIconId(Context context)
+@Override
+protected int getSmallIconId(Context context) {
+   return R.drawable.small_icon;
+}
 ```
 
 或者如之前所述，在 `AndroidManifest.xml` 中配置
@@ -160,77 +254,60 @@ protected int getSmallIconId(Context context)
     android:resource="@android:drawable/ic_dialog_alert" />
 ```
 
-修改 Intent：如果希望修改点击 Notification 获得的 Intent 的信息（如 Intent 的 Flag），可以重写如下代码
+##### 修改 Intent
+
+如果你希望在 Activity 或 Uri 跳转前修改 Intent 的信息，，可以重写如下代码
 
 ```java
 @Override
 protected void startIntent(Context context, Intent intent) {
 	// 修改 Intent 的 Flag 信息
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     super.startIntent(context, intent);
 }
 ```
 
-完全自定义 Notification：如果希望自己创建 Notification 对象，可以重写如下方法
+##### 完全自定义 Notification
+
+如果希望自己来实现 Notification 对象，可以重写如下方法
 
 ```java
+@Override
 protected Notification getNotification(Context context, Intent intent)
-```
-
-#####配置 CustomPushReceiver
-用下列Receiver替换默认的`com.maxleap.MLPushBroadcastReceiver`：
-
-```xml
-<receiver
-    android:name=".CustomPushReceiver"
-    android:exported="false">
-    <intent-filter>
-        <action android:name="com.maxleap.push.intent.RECEIVE" />
-        <action android:name="com.maxleap.push.intent.OPEN" />
-    </intent-filter>
-</receiver>
 ```
 
 ## 应用内消息
 
 ### 配置
-为了使用应用内消息服务，您需要**启用Marketing服务：**在`Application.onCreate()`中的`MaxLeap.initialize()`方法**之前**添加：
+
+为了使用应用内消息服务，您需要**启用Marketing服务**，在 `MaxLeap.initialize()`方法中修改默认配置信息：
 
 ```java
-MaxLeap.setMarketingEnabled(true);
+MaxLeap.Options options = new MaxLeap.Options();
+options.appId = APP_ID;
+options.clientKey = API_KEY;
+options.marketingEnable = true;
+options.serverRegion=MaxLeap.REGION_CN;
+MaxLeap.initialize(this, options);
 ```
 
-###定义目标Activity
-您可以在Console新建应用内消息时，自定义用户点击后进入到目标Activity. 假设我们在Console定义某个应用内消息时，指定用户点击后的目标Activity为`InAppMessageActivity`，则您需要在开发时新建`InAppMessageActivity`，并继承`AppCompatActivity`：
-
-在`InAppMessageActivity`中，您可以通过`getIntent()`获取该应用内消息的参数。
-
-```java
-protected void onCreate(Bundle savedInstanceState) {
-	Intent intent = getIntent();
-	if (intent != null && intent.getExtras() != null) {
-		for (String key : intent.getExtras().keySet()) {
-			MLLog.i(TAG, key + " = " + intent.getStringExtra(key));
-		}
-	}
-}
-```
-
-并在`onResume()`和`onPause()`方法中添加如下代码：
+如果你希望在某个 Activity 中显示应用内消息，则此 Activity 必须继承自 `FragmentActivity` 并且在 `onResume()` 和 `onPause()` 中实现如下方法。
 
 ```java
 @Override
 protected void onResume() {
-		super.onResume();
-	MLMarketing.setInAppMessageDisplayActivity(this);
-	MLAnalytics.onResume(this);
+    super.onResume();
+
+    MLMarketing.setInAppMessageDisplayActivity(this);
+    MLAnalytics.onResume(this);
 }
 
 @Override
 protected void onPause() {
-		super.onPause();
-	MLMarketing.dismissCurrentInAppMessage();
-	MLMarketing.clearInAppMessageDisplayActivity();
-	MLAnalytics.onPause(this);
+    super.onPause();
+
+    MLMarketing.dismissCurrentInAppMessage();
+    MLMarketing.clearInAppMessageDisplayActivity();
+    MLAnalytics.onPause(this);
 }
 ```
