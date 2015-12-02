@@ -57,9 +57,10 @@ MaxLeap.initialize(this, options);
 
 
 ##	会话
+
 会话（session）代表在某一段时间内，用户与应用之间的交互。记录会话可获取新增用户、活跃用户、启动次数、使用时长等基本数据。
 
-#### 追踪会话
+### 追踪会话
 
 * 用户在不同 Activity 中切换时，我们需要在所有 Activity 中的 `onPause()` 和 `onResume()` 中添加如下代码，以实现会话的暂停和继续，并判断用户是否开始新的会话。
 
@@ -120,6 +121,24 @@ protected void onPause() {
 
 * 每个页面都必须同时指定`onPageStart()`和`onPageEnd()`，并且不同页面之间须相互独立，没有交叉，即不能 `start page 1-start page 2-end page 1-end page 2`。
 * 若页面通过 Activity + Fragment 实现，我们需要在 Fragment 中的`onResume()`和`onPause()`中添加上述代码，以记录对该 Fragment 界面的访问。
+
+## 自动统计会话和页面
+
+自动统计可以省去手动调用的繁琐步骤，但是自动统计仅适用于 4.0 以上的设备，所以如果你的应用需要兼容 4.0 以下的设备时不应该使用自动统计，而应该按照前两节的所述进行手动统计。
+
+自动统计默认关闭，可以通过以下代码开启自动统计
+
+自动统计会话和页面
+
+```java
+options.autoTrackStrategy = MaxLeap.AUTO_TRACK_SESSION_AND_PAGEVIEW;
+```
+
+仅自动统计会话
+
+```java
+options.autoTrackStrategy = MaxLeap.AUTO_TRACK_SESSION;
+```
 
 ## 自定义事件
 
