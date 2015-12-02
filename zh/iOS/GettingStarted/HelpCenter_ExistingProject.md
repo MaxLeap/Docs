@@ -1,6 +1,21 @@
 
 ## 安装SDK
 
+### 使用 CocoaPods
+
+CocoaPods 是一个很好用的依赖管理工具，可以简化安装过程。
+
+在 Podfile 中添加：
+
+```
+pod "MaxLeap"
+pod "MLHelpCenter"
+```
+
+然后再项目根目录执行 `pod install` 命令，就能将 MaxLeap SDK 集成到你的项目中。
+
+### 手动安装
+
 1. 下载并解压缩 SDK
 
 	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。

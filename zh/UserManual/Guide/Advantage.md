@@ -7,10 +7,14 @@
  - 所有服务均有负载均衡节点
  - 实时、动态水平扩展，灵活应对各种流量激增、瞬间访问压力
  - 微服务架构、服务之间隔离，完全无影响
+ 
+![imgUMAdvantageMicroService](../../../images/imgUMAdvantageMicroService.png)
 
 ####数据备份和灾难恢复
  - 数据和文件均有多个存储节点，存储节点之间相互备份
  - 多机房、多城市间容灾，对数据进行实时备份，能够在灾难发生时快速恢复
+
+ ![imgUMAdvantageBackup](../../../images/imgUMAdvantageBackup.png)
 
 ####无间断数据迁移
  - 提供数据迁移服务，随时导出数据或者迁移到其他系统中
@@ -24,26 +28,36 @@
  1. 启动新版本云代码并设定实例数量
  2. 设定负载均衡参数
  3. 服务无异常后，停止旧版本的实例
+ 
+ ![imgUMAdvantageCloudCodeArch](../../../images/imgUMAdvantageCloudCodeArch.png)
 
 ##高性能
 ####快速响应
  - 正常访问时长在几十毫秒内
  - 前后端系统采用100%异步架构
  - 网络、协议、架构层进行优化，多级缓存机制
+ 
+ ![imgUMAdvantageInfra](../../../images/imgUMAdvantageInfra.png)
 
 ####高并发
  - 请求接入层和服务层采用NIO设计
  - 根据服务的压力，弹性扩容
+ 
+ ![imgUMAdvantageReactor](../../../images/imgUMAdvantageReactor.png)
 
 ####实时数据分析
-
-
+ - 基于Lambda架构
+ - 对数据进行流式处理，采用增量计算实现数据视图，高吞吐、低延时
+ 
+ ![imgUMAdvantageLambda](../../../images/imgUMAdvantageLambda.png)
 
 ##灵活、弹性
 ####资源伸缩
-根据业务的发展趋势，您可随时对云资源进行横向和纵向的伸缩，杜绝资源浪费
+ - 根据业务的发展趋势，您可随时对云资源进行横向和纵向的伸缩
 
-####多实例
+####云代码
+ - 根据需求，动态调整云代码的实例数量
+ - 高峰时扩容，平稳时减容，降低费用
 
 ##安全
 
@@ -64,18 +78,23 @@
 ####数据加密
  - 对密码、账号信息等敏感信息进行不对称加密存储
 
-
 ####应用层数据脱敏
  - 应用层隐藏密码、支付等敏感信息
  - 对有联系方式、地址等有脱敏需求的数据，可通过云代码进行控制
 
 
 ###安全机制
-####访问安全
 
+####访问控制
+ - 对请求中的密钥和用户session进行安全校验，拒绝非法请求
+ - 不同级别的密钥应对不同的使用场景
+ 
 ####数据安全
-####ACL
+ - 类级别和数据级别校验
+ - 可以设定共享、公开、私有、只读4种类级别的安全限制
+ - 未来还将加入行、列级别的安全控制
 
+ ![imgUMAdvantageSecurity](../../../images/imgUMAdvantageSecurity.png)
 
 
 

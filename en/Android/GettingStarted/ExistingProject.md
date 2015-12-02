@@ -6,7 +6,7 @@
 
 2.	Add the SDK to your project
 
-Import the zip file's contents into your existing Android project by extracting it into your "libs" folder. If your project does not already have a "libs" folder, create one at the root of the project by right-clicking the Project and choosing "New" and then "Folder".
+Import the zip file's contents into your existing Android project by extracting it into your "libs" folder. If your project does not already have a "libs" folder, create one at the root of the project by right-clicking the Project and choosing "New" and then "Directory".
 
 Android Studio
 

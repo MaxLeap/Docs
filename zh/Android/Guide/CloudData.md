@@ -14,10 +14,12 @@
 * 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
+
 存储在 Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值， Cloud Data服务会将其存储至云端。
 
-###新建
-假设我们要保存一条数据到`Comment`class，它包含以下属性：
+### 新建
+
+假设我们要保存一条数据到 `Comment` 类，它包含以下属性：
 
 属性名|值|值类型
 -------|-------|---|
@@ -25,7 +27,12 @@ content|"我很喜欢这条分享"|字符
 pubUserId|1314520|数字
 isRead|false|布尔
 
-我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。添加属性的方法与`Java`中的`Map`类似：
+我们建议您使用驼峰式命名法来命名类名和字段名（如：NameYourclassesLikeThis, nameYourKeysLikeThis），让您的代码看起来整齐美观。
+
+首先，需要在云端数据仓库中添加 `Comment` 类，才能够往里面插入数据。
+有关添加类等操作的说明，请查阅：[控制台用户手册 － 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
+
+添加属性的方法与 `Java` 中的 `Map` 类似：
 
 ```java
 MLObject myComment = new MLObject("Comment");
@@ -46,7 +53,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 * **Comment表合何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端创建表，所以在使用前必须先登录 MaxLeap 的控制台并手动创建 Comment 表。这样在运行代码后这条数据才会被成功插入。
 * **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **MLObject是Schemaless的:** 您无需事先指定 `MLObject` 存在哪些键，只需在需要的时候增加键值对，后台便会自动储存它们。
+* **数据结构** 为了数据的安全性，您必须事先在控制台指定好所需要的所有属性及其类型，然后 `MLObject` 才能被正常保存。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
 
 	属性名|值|
@@ -73,26 +80,28 @@ MLDataManager.saveInBackground(myComment, new SaveCallback() {
 ```
 
 ###查询
-#####查询MLObject
-您可以通过某条数据的ObjectId，获取完整的`MLObject`。调用`MLQueryManager.getInBackground()`方法需要提供三个参数：第一个为查询对象所属的class名，第二个参数为ObjectId，第三个参数为回调函数，将在getInBackground()方法完成后调用。
+
+##### 查询 MLObject
+
+您可以通过某条数据的ObjectId，获取完整的`MLObject`。调用`MLQueryManager.getInBackground()`方法需要提供三个参数：第一个为查询对象所属的 class 名，第二个参数为 ObjectId，第三个参数为回调函数，将在 `getInBackground()` 方法完成后调用。
 
 ```java
-String objId="OBJECT_ID";
+String objId = "OBJECT_ID";
 MLQueryManager.getInBackground("Comment", objId, new GetCallback<MLObject>() {
 
   @Override
   public void done(MLObject object, MLException e) {
-    // Object即为所查询的对象
+    // Object 即为所查询的对象
 
   }
 });
 ```
 
-也可以通过"属性值+MLQuery"方式获取MLObject：
+也可以通过 "属性值 + MLQuery" 方式获取 MLObject：
 
 ```java
 MLQuery<MLObject> query = MLQuery.getQuery("Comment");
-query.whereMatches("isRead",false);
+query.whereEqualTo("isRead",false);
 
 MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
   @Override
@@ -102,7 +111,7 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
 });
 ```
 
-如果您只需获取Query结果的第一条，您可以使用`MLQueryManager.getFirstInBackground()`方法：
+如果您只需获取 Query 结果的第一条，您可以使用 `MLQueryManager.getFirstInBackground()`方法：
 
 ```java
 MLQuery<MLObject> query = MLQuery.getQuery("Comment");
@@ -117,7 +126,8 @@ MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
 ```
 
 
-#####查询MLObject属性值
+##### 查询 MLObject 属性值
+
 要从检索到的 MLObject 实例中获取值，可以使用相应的数据类型的 getType 方法：
 
 ```java
@@ -138,7 +148,8 @@ MLDataManager.fetchInBackground(object, new GetCallback<MLObject>() {
 ```
 
 ###更新
-更新MLObject需要两步：首先获取需要更新的MLObject，然后修改并保存。
+
+更新 MLObject 需要两步：首先获取需要更新的 MLObject，然后修改并保存。
 
 ```java
 // 根据objectId获取MLObject
@@ -405,10 +416,12 @@ bigObject.put("myNull", JSONObject.NULL);
 MLDataManager.saveInBackground(bigObject);
 ```
 
-我们不建议存储较大的二进制数据，如图像或文件不应使用 MLObject 的 byte[] 字段类型。MLObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 MLFile 对象来存储，具体使用方法可见*文件*部分。 关于处理数据的更多信息，可查看*数据安全指南*。
+我们不建议存储较大的二进制数据，如图像或文件不应使用 MLObject 的 byte[] 字段类型。MLObject 的大小不应超过 128 KB。如果需要存储较大的文件类型如图像、文件、音乐，可以使用 MLFile 对象来存储，具体使用方法可见[文件](#文件)部分。 关于处理数据的更多信息，可查看[数据安全](#数据安全)。
 
 ## 文件
-###MLFile的创建和上传
+
+### MLFile 的创建和上传
+
 MLFile 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `MLObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
 
 在这个例子中，我们将图片保存为MLFile并上传到服务器端：
@@ -1169,36 +1182,39 @@ MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
 
 User 表是一个特殊的表，专门存储 MLUser 对象。在Console >> Users中，您会看到一个 _User 表。
 
-##第三方登录
+## 第三方登录
 
-为简化用户的注册及登录流程，并且集成ML应用与Facebook, Twitter等应用，MaxLeap提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与ML SDK，并将MLUser与第三方应用的用户ID进行连接。
+为简化用户的注册及登录流程，并且集成 MaxLeap 应用与 Facebook, Twitter 等应用。MaxLeap 提供了第三方登录应用的服务，通过该服务可以将 MLUser 与第三方平台的用户联系起来。。为了减少应用的安装包大小，MaxLeap SDK 将尽可能使用 Web OAuth 认证的方式来实现第三方认证，但是您也可以使用第三方应用的 SDK。
 
-###使用Facebook账号登录
-Facebook的Android SDK，帮助应用优化登录体验。对于已经安装Facebook应用的设备，ML应用可通过设备上的Facebook用户凭据，直接实现用户登录。对于未安装Facebook应用的设备，用户可以通过一个标准化的Facebook登录页面，提供相应的登录信息。
+### 使用 Facebook 账号登录
 
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何MLUser绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。
-####准备工作
+为了尽可能减少您的应用的大小，MaxLeap SDK 目前使用 Web 认证的方式登陆 Facebook 账号。Facebook 账号登录后，如果该 Facebook 用户Id并未与任何 MLUser 绑定，MaxLeap 将自动为该用户创建一个账号，并与其绑定。
 
-1. 在[Facebook开发者中心](https://developers.facebook.com)创建Facebook应用。点击My Apps >> Add a New App
-2. 打开MaxLeap Console >> App Settings >> User Authentication.勾选Allow Facebook Authentication. 并将步骤一中获取的Facebook Application ID 和 App Secret填写至相应位置。
-3. 集成Facebook SDK，添加Facebook Login按钮。详细步骤，请参考[Add Facebook Login to Your App or Website](https://developers.facebook.com/docs/facebook-login/v2.4)
-4. 在项目的Application.onCreate()函数中，于MaxLeap.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
+#### 准备工作
+
+1. 在 [Facebook开发者中心](https://developers.facebook.com) 创建 Facebook应用。点击 My Apps -> Add a New App
+
+2. 选择 Settings -> Advanced -> Client OAuth Settings -> Valid OAuth redirect URIs 一栏填入您的回调地址，MaxLeap SDK 默认使用 `https://www.facebook.com/connect/login_success.html` 作为回调地址。
+
+2. 打开 MaxLeap Console -> App Settings -> User Authentication。勾选 Allow Facebook Authentication. 并将步骤一中获取的 Facebook Application ID 和 App Secret 填写至相应位置。
+
+3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
+
+    ```java
+    MLFacebookUtils.initialize("YOUR FACEBOOK APP ID", "YOUR FACEBOOK SECRET");
+    ```
+
+#### 修改回调地址
+
+如果您在填写回调地址时没有使用 SDK 提供的默认地址的话，则需要在调用注册之前先修改回调地址。
 
 ```java
-MLFacebookUtils.initialize("YOUR FACEBOOK APP ID");
+MLFacebookUtils.setRedirectUrl(redirectUrl);
 ```
 
-5. 	在所有调用Login with Facebook的Activity中的onActivityResult()函数中添加如下代码，以完成验证。
+#### 登录并注册新 MLUser
 
-```java
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-  super.onActivityResult(requestCode, resultCode, data);
-  MLFacebookUtils.finishAuthentication(requestCode, resultCode, data);
-}
-```
-####登录并注册新MLUser
-使用Facebook账号登录后，如果该Facebook用户Id并未与任何MLUser绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。如：
+使用 Facebook 账号登录后，如果该 Facebook 用户Id 并未与任何 MLUser 绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。如：
 
 ```java
 MLFacebookUtils.logInInBackground(this, new LogInCallback<MLUser>() {
@@ -1215,15 +1231,31 @@ MLFacebookUtils.logInInBackground(this, new LogInCallback<MLUser>() {
 });
 ```
 
-详细登录流程为：
+您也可以在注册时指定所需要申请的 Facebook 权限。有关权限的说明可以参考 Facebook 开发人员指南的 [Permission 章节](https://developers.facebook.com/docs/facebook-login/permissions/v2.0#reference)。
 
-* 用户通过Facebook SDK提供的Login with Facebook界面登录Facebook
-* Facebook验证登录信息，并返回结果.
-* MaxLeap SDK接受结果，并保存至MLUser. 如果该Facebook用户Id并未与任何MLUser绑定，MaxLeap将自动为该用户创建一个账号.
-* 调用ML的LogInCallback登录该MLUser.
+```java
+List<String> permissions = Arrays.asList(
+            FacebookProvider.Permissions.User.ABOUT_ME,
+            FacebookProvider.Permissions.User.RELATIONSHIPS,
+            FacebookProvider.Permissions.User.BIRTHDAY,
+            FacebookProvider.Permissions.User.LOCATION);
+MLFacebookUtils.logInInBackground(permissions, this, new LogInCallback<MLUser>() {
+  @Override
+  public void done(MLUser user, MLException err) {
+    if (user == null) {
+      //用户取消了使用Facebook账号登录
+    } else if (user.isNew()) {
+      //用户第一次使用Facebook账号登录，成功注册并绑定user用户
+    } else {
+      //用户使用Facebook账号登录成功。
+    }
+  }
+});
+```
 
-####绑定MLUser与Facebook账号
-您可以通过以下方式，绑定已有的ML账号和Facebook账号：
+#### 绑定 MLUser 与 Facebook 账号
+
+您可以通过以下方式，绑定已有的 MLUser 和 Facebook 账号：
 
 ```java
 if (!MLFacebookUtils.isLinked(user)) {
@@ -1238,9 +1270,9 @@ if (!MLFacebookUtils.isLinked(user)) {
 }
 ```
 
-绑定成功后，MaxLeap将会把该Facebook账号的信息更新至该MLUser中。下次再使用该Facebook账号登录应用时，MaxLeap将检测到其已绑定MLUser，便不会为该Facebook账号添加新的MLUser.
+绑定成功后，MaxLeap 将会把该 Facebook 账号的信息更新至该 MLUser中。下次再使用该Facebook 账号登录应用时，MaxLeap 将检测到其已绑定 MLUser，便不会为该 Facebook 账号添加新的 MLUser.
 
-####解除绑定
+#### 解除绑定
 
 ```java
 MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
@@ -1252,32 +1284,33 @@ MLFacebookUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-解除绑定成功后，MaxLeap将会把该Facebook账号的信息从该MLUser中移除。下次再使用该Facebook账号登录应用时，MaxLeap将检测到其未绑定MLUser，便会为该Facebook账号添加新的MLUser.
+解除绑定成功后，MaxLeap 将会把该 Facebook 账号的信息从该 MLUser 中移除。下次再使用该 Facebook 账号登录应用时，MaxLeap 将检测到其未绑定 MLUser，便会为该Facebook 账号添加新的 MLUser.
 
-###使用Twitter账号登录
-与Facebook类似，Twitter的Android SDK，也能帮助应用优化登录体验。对于已经安装Twitter应用的设备，ML应用可通过设备上的Twitter用户凭据，直接实现用户登录。对于未安装Twitter应用的设备，用户可以通过一个标准化的Twitter登录页面，提供相应的登录信息。
+### 使用 Twitter 账号登录
 
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何MLUser绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。
-####准备工作
-1. 在*Twitter开发者中心*创建Twitter应用。点击My Apps >> Add a New App
-2. 打开MaxLeap Console >> App Settings >> User Authentication.勾选Allow Twitter Authentication. 并将步骤一中获取的Twitter consumer Key填写至相应位置。
-3. 集成Twitter SDK，添加Twitter Login按钮。详细步骤，请参考*Twitter*官网。
-4. 在项目的Application.onCreate()函数中，于MaxLeap.initialize(this, APP_ID, API_KEY)之后，添加如下代码：
+为了尽可能减少您的应用的大小，MaxLeap SDK 目前使用 Web 认证的方式登陆 Twitter 账号。使用 Twitter 账号登录后，如果该 Twitter 用户Id 并未与任何 MLUser 绑定，MaxLeap 将自动为该用户创建一个账号，并与其绑定。
 
-```java
-MLTwitterUtils.initialize("YOUR Twitter CUSUMER KEY");
-```
-5. 	在所有调用Login with Twitter的Activity中的onActivityResult()函数中添加如下代码，以完成验证。
+#### 准备工作
+
+1. 在 [Twitter开发者中心](https://apps.twitter.com/) 创建 Twitter 应用，其中 `Callback URL` 一项请填写有效地址，MaxLeap SDK 默认使用 `http://localhost` 作为回调地址。
+2. 打开 MaxLeap Console -> App Settings -> User Authentication.勾选 Allow Twitter Authentication，并将步骤一中获取的 Twitter consumer Key 填写至相应位置。
+3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
 
 ```java
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-  super.onActivityResult(requestCode, resultCode, data);
-  MLTwitterUtils.finishAuthentication(requestCode, resultCode, data);
-}
+MLTwitterUtils.initialize("YOUR Twitter CONSUMER KEY", "YOUR Twitter CONSUMER SECRET");
 ```
-####登录并注册新MLUser
-使用Twitter账号登录后，如果该Twitter用户Id并未与任何MLUser绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。如：
+
+#### 修改回调地址
+
+如果您在填写回调地址时没有使用 SDK 提供的默认地址的话，则需要在调用注册之前先修改回调地址。
+
+```java
+MLTwitterUtils.setRedirectUrl(redirectUrl);
+```
+
+#### 登录并注册新 MLUser
+
+使用 Twitter 账号登录后，如果该 Twitter 用户Id 并未与任何 MLUser 绑定，MaxLeap 将自动为该用户创建一个账号，并与其绑定。如：
 
 ```java
 MLTwitterUtils.logInInBackground(this, new LogInCallback<MLUser>() {
@@ -1294,15 +1327,9 @@ MLTwitterUtils.logInInBackground(this, new LogInCallback<MLUser>() {
 });
 ```
 
-详细登录流程为：
+#### 绑定 MLUser 与 Twitter 账号
 
-* 用户通过Twitter SDK提供的Login with Twitter界面登录Twitter
-* Twitter验证登录信息，并返回结果.
-* MaxLeap SDK接受结果，并保存至MLUser. 如果该Twitter用户Id并未与任何MLUser绑定，MaxLeap将自动为该用户创建一个账号.
-* 调用ML的LogInCallback登录该MLUser.
-
-####绑定MLUser与Twitter账号
-您可以通过以下方式，绑定已有的ML账号和Twitter账号：
+您可以通过以下方式，绑定已有的 MLUser 账号和 Twitter 账号：
 
 ```java
 if (!MLTwitterUtils.isLinked(user)) {
@@ -1317,9 +1344,9 @@ if (!MLTwitterUtils.isLinked(user)) {
 }
 ```
 
-绑定成功后，MaxLeap将会把该Twitter账号的信息更新至该MLUser中。下次再使用该Twitter账号登录应用时，MaxLeap将检测到其已绑定MLUser，便不会为该Twitter账号添加新的MLUser.
+绑定成功后，MaxLeap 将会把该 Twitter 账号的信息更新至该 MLUser 中。下次再使用该Twitter 账号登录应用时，MaxLeap 将检测到其已绑定 MLUser，便不会为该 Twitter账号添加新的 MLUser.
 
-####解除绑定
+#### 解除绑定
 
 ```java
 MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
@@ -1331,16 +1358,17 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
   }
 });
 ```
-解除绑定成功后，MaxLeap将会把该Twitter账号的信息从该MLUser中移除。下次再使用该Twitter账号登录应用时，MaxLeap将检测到其未绑定MLUser，便会为该Twitter账号添加新的MLUser.
+解除绑定成功后，MaxLeap 将会把该 Twitter 账号的信息从该 MLUser 中移除。下次再使用该 Twitter 账号登录应用时，MaxLeap 将检测到其未绑定 MLUser，便会为该 Twitter 账号添加新的 MLUser。
 
-##地理位置
+## 地理位置
 
-MaxLeap提供MLGeoPoint对象，帮助用户根据地球的经度和纬度坐标进行基于地理位置的信息查询。
+MaxLeap 提供 MLGeoPoint对象，帮助用户根据地球的经度和纬度坐标进行基于地理位置的信息查询。
 
-####MLGeoPoint字段说明
+#### MLGeoPoint 字段说明
 
-####创建MLGeoPoint
-MLGeoPoint需要提供两个参数：第一个为纬度(正为北纬)，第二个参数为经度(正为东经)。
+#### 创建 MLGeoPoint
+
+MLGeoPoint需要提供两个参数：第一个为纬度(正数表示北纬)，第二个参数为经度(正数表示东经)。
 
 ```java
 //创建北纬40度，西经30度的MLGeoPoint
@@ -1353,9 +1381,11 @@ MLGeoPoint point = new MLGeoPoint(40.0, -30.0);
 myShop.put("location", point);
 ```
 
-####地理位置查询
-#####查询距离某地理位置最近的对象
-您可以通过whereNear方法获取A点附近的对象，该方法需要提供两个参数：第一个为目标对象存储地理位置的字段名，第二个参数为A点的地理位置。通过下面的例子，我们可以找到离某用户最近的十家店铺。
+#### 地理位置查询
+
+##### 查询距离某地理位置最近的对象
+
+您可以通过 `whereNear` 方法获取A点附近的对象，该方法需要提供两个参数：第一个为目标对象存储地理位置的字段名，第二个参数为A点的地理位置。通过下面的例子，我们可以找到离某用户最近的十家店铺。
 
 ```java
 MLGeoPoint userLocation = (MLGeoPoint) userObject.get("location");
@@ -1364,10 +1394,14 @@ shopQuery.whereNear("location", userLocation);
 query.setLimit(10);
 MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() { ... });
 ```
-#####查询某地理位置一定距离内的对象
-您可以使用whereWithinKilometers, whereWithinMiles方法查找某地理位置一定距离内的对象。其用法与上述例子类似。
-#####查询一定地理位置范围内对象
-您可以通过whereWithinGeoBox方法获取一定地理位置范围内的对象，该方法需要提供三个参数：第一个为目标对象存储地理位置的字段名，后两个参数为MLGeoPoint对象，以这两个点连成的线段为直径的圆，便是whereWithinGeoBox将查询的范围。通过下面的例子，我们可以找到一定地理位置范围内所有店铺。
+
+##### 查询某地理位置一定距离内的对象
+
+您可以使用 `whereWithinKilometers`, `whereWithinMiles` 方法查找某地理位置一定距离内的对象。其用法与上述例子类似。
+
+##### 查询一定地理位置范围内对象
+
+您可以通过 `whereWithinGeoBox` 方法获取一定地理位置范围内的对象，该方法需要提供三个参数：第一个为目标对象存储地理位置的字段名，后两个参数为 `MLGeoPoint` 对象，以这两个点连成的线段为直径的圆，便是` whereWithinGeoBox` 将查询的范围。通过下面的例子，我们可以找到一定地理位置范围内所有店铺。
 
 ```java
 MLGeoPoint southwestOfSF = new MLGeoPoint(37.708813, -122.526398);
@@ -1380,9 +1414,9 @@ MLQueryManager.findAllInBackground(new FindCallback<MLObject>() { ... });
 请注意：
 
 1. 每个 `MLObject` 类仅可能有一个带 `MLGeoPoint` 对象的键。
-2. 点不应等于或大于最大范围值。纬度不能为 -90.0 或 90.0。经度不能为 -180.0 或 180.0。若纬度或经度设置超出边界，会引起错误。
+2. `GeoPoint` 的纬度必须在 `-90.0` 和 `90.0` 之间。经度必须在 `-180.0` 和 `180.0` 之间。若纬度或经度设置超出边界，会引起错误。
 
 ## 数据安全
 
 每个到达 MaxLeap 云服务的请求是由移动端SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
-具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)
+具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)

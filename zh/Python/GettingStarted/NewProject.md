@@ -1,3 +1,5 @@
+##### _Author: Marvin
+##### _Github: https://github.com/zhoucen
 
 ### 兼容性
 
@@ -7,18 +9,18 @@
 #### 下载MaxLeap-CLI
 下载地址：[https://github.com/MaxLeap/MaxLeap-CLI/releases](https://github.com/MaxLeap/MaxLeap-CLI/releases)
 
-根据平台选择对应的客户端：
+更新版本为0.2，根据平台选择对应的客户端：
 
-1.  Windows：[maxleapforwindows.zip](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapforwindows.zip)
-2.  Linux/Mac OSX：[maxleapformac.tar.gz](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/v0.1/maxleapformac.tar.gz)
+1.  Windows：[maxleapforwindows.zip](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapforwindows.zip)
+2.  Linux/Mac OSX：[maxleapformac.tar.gz](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapformac.tar.gz)
 
-下载完成后，您可直接在终端中使用 MaxLeap-CLI。进入下载目录(macos版本需要解压后使用)，查看MaxLeap-CLI版本
+下载完成后解压到安装目录，您可直接在终端中使用 MaxLeap-CLI。进入安装目录，查看MaxLeap-CLI版本
 
 ```shell
 ./maxleap -v
 ```
 
-显示`zcc version 0.1`表示MaxLeap客户端安装成功
+显示`maxleap version 0.2`表示MaxLeap客户端安装成功
 
 *	maxleap命令添加到环境变量
 
@@ -150,7 +152,7 @@ def helloword(request):
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[lcc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，以获取lcc的更多信息。
+*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[mlc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，以获取mlc的更多信息。
 
 ### 测试
 
@@ -161,7 +163,7 @@ curl -X POST \
 -H "X-ML-AppId: YOUR_APPID" \
 -H "X-ML-APIKey: YOUR_APIKEY" \
 -H "Content-Type: application/json" \
-https://api.leap.as/functions/helloword
+ https://api.maxleap.cn/2.0/functions/helloword
 ```
 此时，我们将得到如下结果：
 

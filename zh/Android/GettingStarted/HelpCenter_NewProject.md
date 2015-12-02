@@ -1,10 +1,10 @@
-##	安装SDK
+##	安装 SDK
 
 HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 HelpCenter SDK 之前，请确保您的项目已经安装 MaxLeap Core SDK. 您可以在 [MaxLeap Core SDK 安装向导](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID) 中获取更多信息。
 
 1.	获取项目模板：
 
-	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-Android" target="_blank">下载MaxLeap HelpCenter 项目模板</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-Android" target="_blank">下载 MaxLeap HelpCenter 项目模板</a>
 
 2.	打开项目模板
 
@@ -13,12 +13,6 @@ HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 He
     1. 	打开 Android Studio，点击 “Import project”
     2. 	进入项目模板根目录，选择 `build.gradle`
     3. 	按照默认配置点击下一步，直到完成
-
-    **Eclipse**
-
-    1.	打开 Eclipse，点击 "File" -> "Import.."
-    2. 	选择 "General"-> "Existing Projects into Workspace"
-    3. 	勾选 "Select root directory"，进入 workspace 目录，在项目列表中，选择 MLStarterProject
 
 ##	连接项目与 MaxLeap 应用
 

@@ -127,9 +127,230 @@ eventId|String|Event ID
 key| String |Parameter
 value| String|Parameter Value
 
-###Track Customized Events
-Invoke such method in code you want to track: 
+Notice that the event_id should be static value, or this may result in a long custom event list and a failure in understanding and analyzing.
+
+### Track the Count of Custom Event
+
+```java
+MLAnalytics.logEvent(eventId);
+```
+
+### Track Event and Its Property
+
+Invoke following method in the code required tracking: 
 
 ```java
 MLAnalytics.logEvent(eventId, eventCount, dimensions);
 ```
+
+## In-app Payment
+
+### Build Transaction
+
+```java
+MLIapTransaction transaction = new MLIapTransaction("gas 360", MLIapTransaction.TYPE_IN_APP);
+transaction.setTitle("buy gas");
+transaction.setDescription("buy some gas to make the car continue running");
+transaction.setPriceAmount(7990000);
+transaction.setPriceCurrency("GBP");
+transaction.setPaySource(MLIapTransaction.PAYSOURCE_GOOGLE_PLAY);
+```
+
+Transaction includes the information of a complete purchase event. The constructor receives two parameters: one is `productId` for identifying product and the other is `type` for sorting. It mainly refers to in-app payment and subscription payment.
+
+**Parameter description for Transaction**
+
+Parameter name|Type|Description
+---|---|---|---
+title|String|Title of the product
+description| String |Description of the product
+orderId| String |Order ID
+priceAmount| long|Price of the product. The value should be a million times more than the actual price according to Google Play.
+priceCurrency| String|Monetary unit of the product
+paySource| String|The srting of purchase sourse, typically using the defined constant (PAYSOURCE_GOOGLE_PLAY, PAYSOURCE_AMAZON_STORE, PAYSOURCE_ALIPAY, PAYSOURCE_PAYPAL)
+virtualCurrencyAmount| String | Virtual Currency Amount only for game payment. It's not required for in-app payment.
+
+### Send Statistical Info
+
+Track the payment event
+
+```java
+MLAnalytics.onChargeRequest(transaction);
+```
+
+Track the payment success
+
+```java
+MLAnalytics.onChargeSuccess(transaction);
+```
+
+Track the payment failure
+
+```java
+MLAnalytics.onChargeFailed(transaction);
+```
+
+Track the payment cancellation
+
+```java
+MLAnalytics.onChargeCancel(transaction);
+```
+
+**Premise for a Correct Payment Statistics**
+
+1. Integrate Session Statistics
+
+2. Start Payment should be invoked before the success, failure and cancellation to ensure the accuracy of statistics (It should be Start Payment - Payment Failure - Start Payment - Payment Success rather than Start Payment - Payment Failure - Payment Success).
+
+##  Game Statistics
+
+### In-Game Payment
+
+#### Build Transaction
+
+```java
+MLIapTransaction transaction = new MLIapTransaction("diamond", MLIapTransaction.TYPE_IN_APP);
+transaction.setTitle("buy diamond");
+transaction.setDescription("buy some diamond");
+transaction.setPriceAmount(7990000);
+transaction.setPriceCurrency("GBP");
+transaction.setPaySource(MLIapTransaction.PAYSOURCE_GOOGLE_PLAY);
+transciation.setVirtualCurrencyAmount(100);
+```
+
+Transaction includes the information of a complete purchase event. The constructor receives two parameters: one is `productId` for identifying product and the other is `type` for sorting. It mainly refers to in-app payment and subscription payment.
+
+
+**Parameter description for Transaction**
+
+Parameter name|Type|Description
+---|---|---|---
+title|String|Title of the product
+description| String |Description of the product
+orderId| String |Order ID
+priceAmount| long|Price of the product. The value should be a million times more than the actual price according to Google Play.
+priceCurrency| String|Monetary unit of the product
+paySource| String|The srting of purchase sourse, typically using the defined constant (PAYSOURCE_GOOGLE_PLAY, PAYSOURCE_AMAZON_STORE, PAYSOURCE_ALIPAY, PAYSOURCE_PAYPAL)
+virtualCurrencyAmount| String | Virtual Currency Amount only for game payment. It's not required for in-app payment.
+
+
+#### Send Statistical Info
+
+Track the payment event
+
+```java
+MLGameAnalytics.onChargeRequest(transaction);
+```
+
+Track the payment success
+
+```java
+MLGameAnalytics.onChargeSuccess(transaction);
+```
+
+Track the payment failure
+
+```java
+MLGameAnalytics.onChargeFailed(transaction);
+```
+
+Track the payment cancellation
+
+```java
+MLGameAnalytics.onChargeCancel(transaction);
+```
+
+Track the system reward
+
+```java
+MLGameAnalytics.onChargeSystemReward(transciation, "finish tutorial");
+```
+
+**Premise for a Correct Payment Statistics**
+
+1. Integrate Session Statistics
+
+2. Start Payment should be invoked before the success, failure and cancellation to ensure the accuracy of statistics (It should be Start Payment - Payment Failure - Start Payment - Payment Success rather than Start Payment - Payment Failure - Payment Success).
+
+### Purchase and Comsuption of Game Items
+
+Purchase products
+
+```java
+MLGameAnalytics.onItemPurchase("sword", "weapon", 1, 100);
+```
+
+The parameters are product ID, type, amount and price by order. The instance aforementioned refers to buying a sword weapon with 100 coins. 
+
+Consume products
+
+```java
+MLGameAnalytics.onItemUse("Ether", 1);
+```
+
+The parameters are product ID and amount by order. The instance aforementioned refers to using one Ether.
+
+Rewards products
+
+```java
+MLGameAnalytics.onItemSystemReward("Ether", "medicine", 10, "Open the treasure chest");
+```
+
+The parameters are product ID, type, amount and reason by order. The instance aforementioned refers to rewarding players 10 medicine Ether for their opening the treasure chest. 
+
+**Premise for a Correct Product Statistics**
+
+1. Integrate Session Statistics
+
+2. Integrate Level Statistics
+
+
+### Level Statistics
+
+Start the Mission
+
+```java
+MLGameAnalytics.onMissionBegin("mission 1");
+```
+
+Parameter is the level ID
+
+Mission failed
+
+```java
+MLGameAnalytics.onMissionFailed("mission 1", "hp is 0");
+```
+
+The first parameter is level ID and the second one is reason of failure.
+
+Mission completed
+
+```java
+MLGameAnalytics.onMissionComplete("mission 1");
+```
+
+Parameter is the level ID
+
+Mission paused
+
+```java
+ MLGameAnalytics.onMissionPause("mission 1");
+```
+
+Parameter is the level ID
+
+Mission restarted
+
+```java
+MLGameAnalytics.onMissionResume("mission 1");
+```
+
+Parameter is the level ID
+
+**Premise for a Correct Level Statistics**
+
+1. Integrate Session Statistics
+
+2. Start the mission should be invoked before the success, failure, pause and restart to ensure the accuracy of statistics. The level ID should also be consistent.
+
+3. The level should be either successful or failed. It should be Start Mission 1 - Mission 1 failed - Start Mission 2, cross-call like Start Mission 1 - Start Mission 2 is illegal. 
