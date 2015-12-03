@@ -129,7 +129,7 @@ public void doSomethingToCloudData(){
 上面例子是基本的增删改查操作，更多详细的参见下面章节
 
 ##### 查询
-我们可以通过构造MLQuery对象`MLQuery query = MLQuery.instance();`，来进行复杂查询
+我们可以通过构造MLQuery对象`MLQuery query = MLQuery.instance();`，来进行基础或相对比较复杂的查询，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的查询。
 
 ###### 等值判断查询(=,!=,>,>=,<,<=)
 `equalTo`用来返回某字段为指定值的结果集(=)
@@ -173,7 +173,7 @@ public void doSomethingToCloudData(){
     query.lessThanOrEqualTo("field2",99);
 ```
 
-###### 范围包含查询(exists、notExist、in、notIn、arrayAll、nearSpherePoint)
+###### 范围包含查询(exists、notExist、in、notIn、arrayAll、arraySize、nearSpherePoint)
 exists用来返回某个字段存在值的结果集
 
 ```java
@@ -227,6 +227,15 @@ notExist用来返回某个字段不存在值的结果集
     query.arrayAll("field1",list);
 ```
 
+`arraySize`用来返回某个数组类型字段长度为指定值的结果集(针对数组长度的查询)
+
+```java
+    //返回数组类型字段field1长度为0的结果集
+    query.arraySize("field1",0);
+    //返回数组类型字段field1长度为10的结果集
+    query.arraySize("field1",10);
+```
+
 `nearSpherePoint`用来返回某个字段在指定经度、纬度方圆范围内的结果集(针对MLGeoPoint类型的查询)
 
 ```java
@@ -235,7 +244,7 @@ notExist用来返回某个字段不存在值的结果集
     query.nearSpherePoint("field1", geoPoint, 500);
 ```
 
-###### 复合查询(and、or)
+###### 复合查询(and、or、not)
 在我们的业务逻辑中，可能存在非常复杂的查询组合，我们在一个query中可能无法满足，此时我们需要复合查询来达到组合效果
 
 `and`与操作，多个条件同时成立返回结果集
@@ -262,6 +271,15 @@ notExist用来返回某个字段不存在值的结果集
     MLQuery query2 = MLQuery.instance();
     query2.equalTo("field1","value2");
     query.or(query2);//通过or来实现或操作
+```
+
+`not`非操作，某个条件不成立返回结果集
+
+```java
+    //返回数组类型字段field1长度不为0，即field1字段不为空数组的结果集
+    query.exists("field1").not("field1",new MLQuery.SingleElemMatcher().$size(0));
+    //返回数组类型字段field1为空或者长度为0的结果集
+    query.notExist("field1").or(MLQuery.instance().arraySize("field1",0));
 ```
 
 ###### 结果集显示限定查询(addKeys、excludeKeys、sort、skip、limit)
@@ -407,7 +425,7 @@ query.inQuery("author",inQueryOperator);
 query.notInQuery("author",inQueryOperator);
 ```
 
-###### 关系查询(relationTo)
+###### 关系查询(relationTo、setIncludes)
 在我们的表结构中，很多情况下都存在着一对多、多对多的关系，如果想通过这种关系来查询我们想要的数据用普通的查询比较繁琐，MaxLeap sdk为我们提供了relatedTo操作
 
 `relatedTo`关联查询操作
@@ -453,6 +471,191 @@ public class Article extends MLObject {
 
 需要注意的是setIncludes只针对MLPointer类型或者它的数组类型字段才有效(MLRelation类型的无效)，同时你可以做递归include，比如
 `query.setIncludes("author.posts.comments")`，多个字段include可以按逗号分隔。
+
+
+##### 更新
+我们可以通过构造MLUpdate对象`MLUpdate update = MLQuery.getUpdate();`，来实现记录的更新操作，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的更新。
+
+###### 基本类型字段更新(set、setMany、unset、unsetMany、inc)
+`set`用来为指定字段赋值
+
+```java
+    //更新字段field1
+    update.set("field1","value1");
+    //更新字段field2
+    update.set("field2",123);
+    //更新字段field3
+    update.set("field3",false);
+```
+
+`setMany`用来为多个字段赋值，即同时更新多个字段，你可以通过多次调用`set`来达到`setMany`的效果
+```java
+    //更新字段field1,field2,field3
+    Map<String,Object> map = new HashMap<String, Object>();
+    map.put("field1","value1");
+    map.put("field2",123);
+    map.put("field3",true);
+    update.setMany(map);
+``
+
+`unset`用来删除指定字段
+
+```java
+    //删除字段field1
+    update.unset("field1");
+```
+
+`unsetMany`用来删除多个字段，你可以通过多次调用`unset`来达到`setMany`的效果
+```java
+    //删除字段field1,field2,field3
+    update.unsetMany("field1","field2","field3");
+    //上面代码等效于下面：
+    List<String> list = new ArrayList<String>();
+    list.add("field1");
+    list.add("field2");
+    list.add("field3");
+    update.unsetMany(list);
+``
+
+`inc`用来对数字类型字段增加指定数值(注意该值可以为负数，若为负数表示减少值)
+
+```java
+    //更新数字类型字段，数值递增1
+    update.inc("field1",1);
+    //更新数字类型字段，数值增加10.5
+    update.inc("field1",10.5);
+    //更新数字类型字段，数值递减1
+    update.inc("field1",-1);
+    //更新数字类型字段，数值递减10.5
+    update.inc("field1",-10.5);
+```
+
+注意，上面所有操作都可以针对子对象属性，通过`属性A.属性B.属性C...`这种实现递归更新，这样就会只更新到我们想要的子对象属性，而不会覆盖已经存在的子对象，比如我们有个POJO
+
+```java
+    public class A extends MLObject {
+      private B b;
+    }
+    public class B extends MLObject {
+      private int c;
+    }
+```
+
+如果我们想更新对象A的属性b的属性c的值可以做下面这些操作：
+
+```java
+    更新对象A的子对象b的属性c
+    update.set("b.c",5);
+    删除对象A的子对象b的属性c
+    update.unset("b.c");
+    对象A的子对象b的属性c的数值递增10
+    update.inc("b.c",10);
+```
+
+###### MLRelation类型字段更新(addRelation、removeRelation)
+`addRelation`用来为MLRelation类型字段添加关联对象
+
+我们以用户表为例，用户类的articles关联了文章类，属于一对多的关系
+```java
+public class User extends MLObject {
+  private String username;//用户名
+  private MLRelation articles;//文章列表，关联Article类
+}
+```
+
+为某个用户添加关联的文章，假设我们已经知晓了需要添加的文章的ObejctId：
+
+```java
+    //更新用户文章列表，添加用户关联的文章
+    update.addRelation("articles",new MLPointer(articleObjectId,"Article"));
+```
+
+当然，我们可以一次性关联多个对象，比如为某个用户批量添加关联的文章
+
+```java
+    //更新用户文章列表，添加用户关联的文章
+    update.addRelation("articles",new MLPointer(articleObjectId1,"Article"),new MLPointer(articleObjectId2,"Article"),new MLPointer(articleObjectId3,"Article"));
+    //上面代码等效于下面：
+    List<MLPointer> articlePointers = new ArrayList<MLPointer>();
+    articlePointers.add(new MLPointer("articleObjectId1","Article"));
+    articlePointers.add(new MLPointer("articleObjectId2","Article"));
+    articlePointers.add(new MLPointer("articleObjectId3","Article"));
+    update.addRelation("articles",articlePointers);
+```
+
+有添加关联就有删除关联，MaxLeap sdk为我们提供了相应的删除管理功能
+
+`removeRelation`用来为MLRelation类型字段删除关联对象
+
+任然以上面的用户文章为例，我们如果想删除某个用户关联的文章
+
+```java
+    //更新用户文章列表，删除用户关联的文章
+    update.removeRelation("articles",new MLPointer(articleObjectId,"Article"));
+    //更新用户文章列表，删除用户关联的多个文章
+    update.removeRelation("articles",new MLPointer(articleObjectId1,"Article"),new MLPointer(articleObjectId2,"Article"),new MLPointer(articleObjectId3,"Article"));
+    //上面代码等效于下面：
+    List<MLPointer> articlePointers = new ArrayList<MLPointer>();
+    articlePointers.add(new MLPointer("articleObjectId1","Article"));
+    articlePointers.add(new MLPointer("articleObjectId2","Article"));
+    articlePointers.add(new MLPointer("articleObjectId3","Article"));
+    update.removeRelation("articles",articlePointers);
+```
+
+###### 数组类型字段更新(arrayAdd、arrayAddUnique、arrayRemove)
+`arrayAdd`用来向数组类型字段里添加元素
+
+```java
+     //更新数组类型字段field1，添加元素value1
+     update.arrayAdd("field1","value1");
+     //更新数组类型字段field2，添加元素1
+     update.arrayAdd("field2",1);
+     //更新数组类型字段field3，添加多个元素1、2、3
+     update.arrayAdd("field3",1,2,3);
+     //上面代码等效于下面：
+     List<Integer> list = new ArrayList<Integer>();
+     list.add(1);
+     list.add(2);
+     list.add(3);
+     update.arrayAdd("field3",list);  
+```
+
+`arrayAddUnique`用来向数组类型字段里添加不重复的元素，即在数组中添加元素前会先判断该元素是否已经存在，如果存在则忽略这次添加操作，否则添加该元素
+
+```java
+    //更新数组类型字段field1，如果数组里已经存在value1则忽略，否则添加value1
+    update.arrayAddUnique("field1","value1");
+    //更新数组类型字段field2，如果数组里已经存在1则忽略，否则添加1
+    update.arrayAddUnique("field2",1);
+    //更新数组类型字段field3，添加多个不重复元素1、2、3
+    update.arrayAddUnique("field3",1,2,3);
+    //上面代码等效于下面：
+    List<Integer> list = new ArrayList<Integer>();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    update.arrayAddUnique("field3",list); 
+```
+
+`arrayRemove`用来向数组类型字段里删除元素
+
+```java
+     //更新数组类型字段field1，删除元素value1
+     update.arrayRemove("field1","value1");
+     //更新数组类型字段field2，删除元素1
+     update.arrayRemove("field2",1);
+     //更新数组类型字段field3，删除多个元素1、2、3
+     update.arrayRemove("field3",1,2,3);
+     //上面代码等效于下面：
+     List<Integer> list = new ArrayList<Integer>();
+     list.add(1);
+     list.add(2);
+     list.add(3);
+     update.arrayRemove("field3",list);  
+```
+
+
+
 
 #### 使用Cloud Function
 
