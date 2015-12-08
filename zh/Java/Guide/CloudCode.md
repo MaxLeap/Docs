@@ -128,10 +128,52 @@ public void doSomethingToCloudData(){
 
 上面例子是基本的增删改查操作，更多详细的参见下面章节
 
-##### 查询
+#### 使用Cloud Function
+
+##### API方式调用
+请求格式如下所示：
+
+```shell
+curl -X POST \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+-d '{"name":"David Wang"}' \
+https://api.maxleap.cn/2.0/functions/hello
+```
+	
+##### 通过Android/iOS SDK调用：
+Android SDK中：
+
+```java
+Map<String, Object> params = new HashMap<String, Object>();
+params.put("key1", 1);
+params.put("key2", "2");
+
+CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
+	@Override
+	public void done(JSONObject object, Exception exception) {
+		assertNull(exception);
+	}
+});
+```
+iOS SDK中：
+
+```objective-c
+NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
+    [MLCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
+        if (error) {
+            // 出现异常
+        } else {
+            // object
+        }
+    }];
+```
+
+## Cloud Data Object的查询
 我们可以通过构造MLQuery对象`MLQuery query = MLQuery.instance();`，来进行基础或相对比较复杂的查询，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的查询。
 
-###### 等值判断查询(=,!=,>,>=,<,<=)
+### 等值判断查询(=,!=,>,>=,<,<=)
 `equalTo`用来返回某字段为指定值的结果集(=)
 
 ```java
@@ -173,7 +215,7 @@ public void doSomethingToCloudData(){
     query.lessThanOrEqualTo("field2",99);
 ```
 
-###### 范围包含查询(exists、notExist、in、notIn、arrayAll、arraySize、nearSpherePoint)
+### 范围包含查询(exists、notExist、in、notIn、arrayAll、arraySize、nearSpherePoint)
 exists用来返回某个字段存在值的结果集
 
 ```java
@@ -244,7 +286,7 @@ notExist用来返回某个字段不存在值的结果集
     query.nearSpherePoint("field1", geoPoint, 500);
 ```
 
-###### 复合查询(and、or、not)
+### 复合查询(and、or、not)
 在我们的业务逻辑中，可能存在非常复杂的查询组合，我们在一个query中可能无法满足，此时我们需要复合查询来达到组合效果
 
 `and`与操作，多个条件同时成立返回结果集
@@ -282,7 +324,7 @@ notExist用来返回某个字段不存在值的结果集
     query.notExist("field1").or(MLQuery.instance().arraySize("field1",0));
 ```
 
-###### 结果集显示限定查询(addKeys、excludeKeys、sort、skip、limit)
+### 结果集显示限定查询(addKeys、excludeKeys、sort、skip、limit)
 可能我们的表结构很臃肿，比如订单结构超过上百的字段，查询的结果里我们可能只想关注特别的几个字段，我们可以通过限定结果集来实现
 
 `addKey`用来指定我们的结果集需要收集的字段
@@ -378,7 +420,7 @@ notExist用来返回某个字段不存在值的结果集
 
 上面的分页实现可能会造成多查询一次，因为返回了100记录后就没有下一页，不过不影响，当然如果除了这种方式，你还可以有别的分页方式，比如每次实际多获取一条数据，比如101条，如果返回条数为101即表示有下一页，然后再做递归查询，不赘述了。
 
-###### 关联子查询(select、inQuery)
+### 关联子查询(select、inQuery)
 在实际应用中，我们也许会用到类似关系型数据库子查询的功能，我们假设有表User（用户）和表Article（文章）,文章表Article外键为uid关联用户，如果我们想要查询出张三写的所有文章，关系型数据库的查询语句有：
 
 关联查询语句：`SELECT * FROM article,user WHERE article.uid = user.id AND user.username='张三'` 或者`SELECT * FROM article JOIN user ON article.uid = user.id WHERE user.username='张三'`
@@ -425,7 +467,7 @@ query.inQuery("author",inQueryOperator);
 query.notInQuery("author",inQueryOperator);
 ```
 
-###### 关系查询(relationTo、setIncludes)
+### 关系查询(relationTo、setIncludes)
 在我们的表结构中，很多情况下都存在着一对多、多对多的关系，如果想通过这种关系来查询我们想要的数据用普通的查询比较繁琐，MaxLeap sdk为我们提供了relatedTo操作
 
 `relatedTo`关联查询操作
@@ -473,10 +515,10 @@ public class Article extends MLObject {
 `query.setIncludes("author.posts.comments")`，多个字段include可以按逗号分隔。
 
 
-##### 更新
+## Cloud Data Object的更新
 我们可以通过构造MLUpdate对象`MLUpdate update = MLQuery.getUpdate();`，来实现记录的更新操作，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的更新。
 
-###### 基本类型字段更新(set、setMany、unset、unsetMany、inc)
+### 基本类型字段更新(set、setMany、unset、unsetMany、inc)
 `set`用来为指定字段赋值
 
 ```java
@@ -552,7 +594,7 @@ public class Article extends MLObject {
     update.inc("b.c",10);
 ```
 
-###### MLRelation类型字段更新(addRelation、removeRelation)
+### MLRelation类型字段更新(addRelation、removeRelation)
 `addRelation`用来为MLRelation类型字段添加关联对象
 
 我们以用户表为例，用户类的articles关联了文章类，属于一对多的关系
@@ -602,7 +644,7 @@ public class User extends MLObject {
     update.removeRelation("articles",articlePointers);
 ```
 
-###### 数组类型字段更新(arrayAdd、arrayAddUnique、arrayRemove)
+### 数组类型字段更新(arrayAdd、arrayAddUnique、arrayRemove)
 `arrayAdd`用来向数组类型字段里添加元素
 
 ```java
@@ -654,51 +696,6 @@ public class User extends MLObject {
      update.arrayRemove("field3",list);  
 ```
 
-
-
-
-#### 使用Cloud Function
-
-##### API方式调用
-请求格式如下所示：
-
-```shell
-curl -X POST \
--H "X-ML-AppId: YOUR_APPID" \
--H "X-ML-APIKey: YOUR_APIKEY" \
--H "Content-Type: application/json" \
--d '{"name":"David Wang"}' \
-https://api.maxleap.cn/2.0/functions/hello
-```
-	
-##### 通过Android/iOS SDK调用：
-Android SDK中：
-
-```java
-Map<String, Object> params = new HashMap<String, Object>();
-params.put("key1", 1);
-params.put("key2", "2");
-
-CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSONObject>() {
-	@Override
-	public void done(JSONObject object, Exception exception) {
-		assertNull(exception);
-	}
-});
-```
-iOS SDK中：
-
-```objective-c
-NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
-    [MLCloudCode callFunctionInBackground:@"hello" withParameters:params block:^(id object, NSError *error) {
-        if (error) {
-            // 出现异常
-        } else {
-            // object
-        }
-    }];
-```
-
 ## Background Job
 云代码中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。
 
@@ -746,7 +743,7 @@ img
 选中您想要查看的任务，便可以查看任务详情。
 img
 
-## Hook for  Cloud Data
+## Hook for Cloud Data
 Hook用于在对  Cloud Data 进行任何操作时（包括新建，删除及修改）执行特定的操作。例如，我们在用户注册成功之前，可以通过beforeCreate Hook，来检查其是否重名。也可以在其注册成功之后，通过afterCreate Hook，向其发送一条欢迎信息。Hook能很好地实现与数据操作相关的业务逻辑，它的优势在于，所有的业务在云端实现，而且被不同的应用/平台共享。
 
 ###创建和使用Hook
@@ -851,6 +848,21 @@ public BeforeResult<FriendList> beforeDelelte(FriendList list, UserPrincipal use
 
 #### afterDelete
 在对应的  Cloud Data 被删除之后调用，可以用于如清除其他有关的数据。
+
+## 消息推送
+在移动应用中，为每个客户端用户推送系统消息或定制消息必不可少，MaxLeap sdk为我们提供了消息推送功能，只需简单一步便可将消息推送到客户端
+
+```java
+//推送消息到指定终端设备
+PushMsg pushMsg = new PushMsg();
+pushMsg.withInstallationId("yourInstallationId").withMsg("hello").push();
+//推送消息到指定终端设备
+PushMsg pushMsg = new PushMsg();
+pushMsg.withDeviceToken("yourDeviceToken").withMsg("hello").push();
+//推送消息到所有终端设备
+PushMsg pushMsg = new PushMsg();
+pushMsg.withMsg("hello").push();
+```
 
 ## Logging
 云代码提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，云代码的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。
