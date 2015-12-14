@@ -182,6 +182,7 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
 ```
 
 `notEqualTo`用来返回某字段不为指定值的结果集(!=)
+
 ```java
     //返回字段field1!=value2的结果集
     query.notEqualTo("field1","value1");
@@ -328,6 +329,7 @@ notExist用来返回某个字段不存在值的结果集
 可能我们的表结构很臃肿，比如订单结构超过上百的字段，查询的结果里我们可能只想关注特别的几个字段，我们可以通过限定结果集来实现
 
 `addKey`用来指定我们的结果集需要收集的字段
+
 ```java
     //返回结果集里只有field1字段
     query.addKey("field1");
@@ -369,7 +371,7 @@ notExist用来返回某个字段不存在值的结果集
 `sort`用来按照指定字段升序(MLQuery.SORT_ASC)/降序(MLQuery.SORT_DESC)来排序
 
 ```java
-    //结果集一次按照field1升序、field2升序、field3升序来排序
+    //结果集依次按照field1升序、field2升序、field3升序来排序
     query.sort(MLQuery.SORT_ASC,"field1","field2","field3");
     //上面代码的参数顺序不同返回的结果可能便不同，排序优先级从前到后，等效于下面：
     query.sort(MLQuery.SORT_ASC,"field1").sort(MLQuery.SORT_ASC,"field2").sort(MLQuery.SORT_ASC,"field2")
@@ -423,9 +425,17 @@ notExist用来返回某个字段不存在值的结果集
 ### 关联子查询(select、inQuery)
 在实际应用中，我们也许会用到类似关系型数据库子查询的功能，我们假设有表User（用户）和表Article（文章）,文章表Article外键为uid关联用户，如果我们想要查询出张三写的所有文章，关系型数据库的查询语句有：
 
-关联查询语句：`SELECT * FROM article,user WHERE article.uid = user.id AND user.username='张三'` 或者`SELECT * FROM article JOIN user ON article.uid = user.id WHERE user.username='张三'`
+关联查询语句：
 
-子查询语句：`SELECT * FROM article WHERE uid IN(SELECT id FROM user WHERE username='张三')`
+`SELECT * FROM article,user WHERE article.uid = user.id AND user.username='张三'` 
+
+ 或者
+
+`SELECT * FROM article JOIN user ON article.uid = user.id WHERE user.username='张三'`
+
+子查询语句：
+
+`SELECT * FROM article WHERE uid IN(SELECT id FROM user WHERE username='张三')`
 
 而在MaxLeap中我们可以通过`select`操作到达类似效果：
 
@@ -531,6 +541,7 @@ public class Article extends MLObject {
 ```
 
 `setMany`用来为多个字段赋值，即同时更新多个字段，你可以通过多次调用`set`来达到`setMany`的效果
+
 ```java
     //更新字段field1,field2,field3
     Map<String,Object> map = new HashMap<String, Object>();
@@ -548,6 +559,7 @@ public class Article extends MLObject {
 ```
 
 `unsetMany`用来删除多个字段，你可以通过多次调用`unset`来达到`setMany`的效果
+
 ```java
     //删除字段field1,field2,field3
     update.unsetMany("field1","field2","field3");
@@ -598,6 +610,7 @@ public class Article extends MLObject {
 `addRelation`用来为MLRelation类型字段添加关联对象
 
 我们以用户表为例，用户类的articles关联了文章类，属于一对多的关系
+
 ```java
 public class User extends MLObject {
   private String username;//用户名
