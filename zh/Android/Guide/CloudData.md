@@ -1150,9 +1150,9 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLUser>() {
 });
 ```
 
-###邮箱验证
+### 邮箱验证
 
-MaxLeap提供强大的邮箱验证服务，您只需在Console >> App Settings >> Email Settings中Enable "Verify user's email address", 系统便会自动在MLUser中添加`emailVerified`字段。并且，当MLUser的email字段被赋值或者修改, 且`emailVerified`字 字段的值为false. MaxLeap便会自动向用户发送一个链接，用户点击链接后便会将`emailVerified`设置为true.
+MaxLeap 提供强大的邮箱验证服务，您只需在 控制台 -> 应用设置 -> 电子邮件设置 -> 打开 `验证用户的邮箱`。系统便会自动在 MLUser 中添加 `emailVerified` 字段。并且，当 MLUser 的 `email` 字段被赋值或者修改, 且`emailVerified` 字段的值为 `false`。 MaxLeap 便会自动向用户发送一个链接，用户点击链接后便会将 `emailVerified`设置为 `true`。
 
 `emailVerified`字段有三种状态:
 
@@ -1160,10 +1160,11 @@ MaxLeap提供强大的邮箱验证服务，您只需在Console >> App Settings >
 * false - 用户还未验证邮箱，或者验证失败
 * 空 - 邮箱验证功能未开，或者用户未提供邮箱
 
-###匿名用户
+### 匿名用户
+
 匿名用户是指提供用户名和密码，系统为您创建的一类特殊用户，它享有其他用户具备的相同功能。不过，一旦注销，匿名用户的所有数据都将无法访问。如果您的应用需要使用一个相对弱化的用户系统时，您可以考虑 MaxLeap 提供的匿名用户系统来实现您的功能。
 
-您可以通过MLAnonymousUtils获取一个匿名的用户账号：
+您可以通过 MLAnonymousUtils 获取一个匿名的用户账号：
 
 ```java
 MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
@@ -1171,16 +1172,159 @@ MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
       public void done(MLUser user, MLException e) {
         if (e != null) {
           Log.d("MyApp", "Anonymous login failed.");
-    } else {
-      Log.d("MyApp", "Anonymous user logged in.");
-    }
+    	} else {
+      	  Log.d("MyApp", "Anonymous user logged in.");
+ 	    }
   }
 });
 ```
 
-### 在Console中管理用户
+### 获取短信验证码
 
-User 表是一个特殊的表，专门存储 MLUser 对象。在Console >> Users中，您会看到一个 _User 表。
+通过获取短信验证码可以有效防止恶意注册。
+
+获得验证码
+
+```java
+MLUserManager.requestSmsCodeInBackground("手机号码", new RequestSmsCodeCallback() {
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+验证获得的验证码是否合法
+
+```java
+MLUserManager.verifySmsCodeInBackground("手机号码", "验证码", new VerifySmsCodeCallback() {
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+### 手机号码登录
+
+MaxLeap 支持直接使用手机号码进行登录，登录成功后手机号码将作为用户的用户名。
+
+获得登录短信验证码
+
+```java
+MLUserManager.requestLoginSmsCodeInBackground("手机号码", new RequestSmsCodeCallback() {
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+使用登录短信验证码和手机号进行登录
+
+```java
+MLUserManager.loginWithSmsCodeInBackground("手机号码", "验证码", new LogInCallback<MLUser>() {
+    @Override
+    public void done(final MLUser user, final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+### 手机号码验证
+
+在使用用户名和密码登录后手机号码默认是没有验证过的，您可以使用以下方法对手机号码进行验证。
+
+发送验证码
+
+```java
+MLUserManager.requestPhoneVerifyInBackground("手机号码", new RequestPhoneVerifyCallback() {
+
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+进行验证
+
+```java
+MLUserManager.verifyPhoneInBackground("手机号码", "验证码", new VerifyPhoneCallback() {
+
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+验证通过后控制台的用户记录的 `mobilePhoneVerified` 属性会变为 `true`。
+
+### 使用短信验证码重置密码
+
+如果用户使用手机号码注册或者验证过手机号码，你也可以通过手机短信来重置密码。
+
+申请获得重置密码的短信验证码
+
+```java
+MLUserManager.requestPasswordResetByPhoneNumberInBackground("手机号码", new RequestPasswordResetCallback() {
+
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+重置密码
+
+```java
+MLUserManager.requestResetPasswordInBackground("手机号码", "验证码", "新密码",
+        new ResetPasswordCallback() {
+
+    @Override
+    public void done(final MLException e) {
+        if (e != null) {
+            //  发生错误
+        } else {
+            //  成功请求
+        }
+    }
+});
+```
+
+### 在控制台中管理用户
+
+_User 表是一个特殊的表，专门存储 MLUser 对象。在控制台 -> 开发中心 -> 云数据中，您会看到一个 _User 表。
 
 ## 第三方登录
 

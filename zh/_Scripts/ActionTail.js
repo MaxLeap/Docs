@@ -4,15 +4,18 @@
 
 $(document).ready(function () {
 
-    //Track Registration
-    $('#element').click(function () {
-        ga('send', 'event', 'button', 'click', 'register');
-    });
+    ga('send', 'event', { eventCategory: 'Test', eventAction: 'CheckActionTail', eventLabel: 'Succeed'});
 
-    var pathName=window.location.pathname;
-    var registerPathName = /^https:\/\/maxleap.cn\/regnotify\?send_email_flag=success\&verify_email_address=[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if(pathName.match(registerPathName)  ) {
-        ga('send', 'event', 'Activation', 'RegisterDone', 'Succeed');
-    }
+    //var pathName=window.location.pathname;
+    //var registerPathName = /^\/regnotify\?send_email_flag=success\&verify_email_address=[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    //if(pathName.test(registerPathName)  ) {
+    //    ga('send', 'event', 'Activation', 'Register', 'Done');
+    //}
+    //
+    //var homePathName = /^\/zh_cn\/index\.html$/;
+    //if(pathName.test(homePathName)  ) {
+    //    ga('send', 'event', 'Acquisition', 'HomeVisit', 'Enter');
+    //}
+    //ga('send', 'event', 'Test', 'CheckActionTail', 'Succeed');
 
 });
