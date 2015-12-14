@@ -1653,6 +1653,147 @@ if (![MLWeChatUtils isLinkedWithUser:user]) {
 
 在当前用户已经关联了微信账户的情况下，可以使用 `[MLWeChatAccessToken currentAccessToken].accessToken` 获取用户身份验证令牌。
 
+## 短信验证服务
+
+MaxLeap 短信服务支持的应用场景有以下三种:
+
+- **用户注册/登录：**用户不再需要记住密码，只需要填写手机号和验证码就可以登录，如果用户还没有注册，则会自动注册
+- **用户操作验证：**例如银行金融类应用，用户在对资金进行敏感操作（例如转账、消费等）时，需要通过验证码来验证是否为用户本人操作。
+- **重设密码：**用户忘记密码时，可以凭借手机验证码重设密码。
+
+开发者在设置短信内容的时候，文字表述上应该做到规范、正确、简洁。我国相关法律**严令禁止**发送内容涉及以下情况的短信：
+
+- **政治敏感**
+- **极端言论**
+- **淫秽色情**
+- **传销诈骗**
+- **封建迷信**
+- **造谣诽谤**
+- **我国现行法律、行政法规及政策所禁止的内容**
+
+因此我们重申：
+
+<aside class="notice">
+MaxLeap 需要审核短信内容，并且保留对发送人追究相关法律责任的权力！
+</aside>
+
+### 短信验证码登录
+
+1. **用户输入手机号**
+	
+	引导用户正确输入，建议在调用 SDK 接口之前，验证一下手机号的格式。
+	
+2. **请求发送验证码**
+
+	用户点击获取验证码按钮，发送成功后该按钮应该变成不可用状态，然后等待至少60秒再允许重新发送。
+	获取验证码按钮事件调用 `+[MLUser requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码。
+	
+3. **用户输入验证码**
+	
+	最好验证一下用户输入的是否为纯数字。
+	
+4. **用户登录，调用 `loginWithPhoneNumber:smsCode:block:` 接口登录**
+
+	```
+	[MLUser loginWithPhoneNumber:@"18512340000" 
+							 smsCode:@"123456"
+							   block:^(MLUser * _Nullable user, NSError * _Nullable error) 
+	 {
+        if (user) {
+            // login success
+        } else {
+            // login failed
+        }
+    }];
+	```
+	
+	如果不存在用户名为手机号 `18512340000` 的账户，则会创建一个新用户，用户名为手机号，无密码，`mobilePhone` 字段也是手机号，`mobilePhoneVerified ` 为 `true`。如果存在，直接登录，返回用户的详细信息。
+
+### 验证用户手机号
+
+如果用户填写了手机号，并保存到 `mobilePhone` 字段，此时手机号为未验证状态。如果用户使用某个功能的时候需要验证手机号，可以调用接口进行验证，验证成功后 `mobilePhoneVerified ` 就会被置为 `true`。
+
+1. **请求发送验证码**
+
+	```
+	[[MLUser currentUser] requestMobilePhoneVerifySmsCodeWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            // 发送成功
+        }
+    }];
+	```
+	
+2. **调用验证接口，验证用户输入的纯数字验证码**
+
+	```
+	[[MLUser currentUser] verifyMobilePhoneWithSmsCode:@"123456" block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            // 验证成功
+        }
+    }];
+	```
+
+### 重设密码
+
+MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用户(`mobilePhoneVerified ` 为 `true`)可以使用这种途径重设密码。
+
+1. **用户输入手机号，请求发送验证码**
+
+	```
+	[MLUser requestPasswordResetSmsCodeWithPhoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            // 验证码发送成功
+        }
+    }];
+	```
+
+2. **用户输入验证码和新密码，重设密码**
+	
+	建议要求用户输入两次新密码，以免用户输错
+	
+	```
+	[MLUser resetPasswordWithPhoneNumber:@"18512340000" 
+									  smsCode:@"123456" 
+									 password:@"sine*&wehIHd" 
+									    block:^(BOOL succeeded, NSError * _Nullable error) 
+   	{
+        if (succeeded) {
+            // 重设密码成功，建议要求用户使用新密码重新登录
+        }
+    }];
+	```
+
+### 操作认证
+
+用户执行一些敏感操作（比如支付）时，可以使用短信来验证是否是本人操作。步骤如下：
+
+1. **用户点击支付按钮**
+2. **调用接口发送短信验证码，并等待用户输入验证码**
+	
+	建议提供一个重新发送验证码的按钮，验证码发送成功后需等待至少 60 秒才可以再次请求。
+	
+	注意，在执行这一步时，如果用户还没有提供手机号，则需要要求用户输入手机号。建议要求用户以手机号为用户名注册。
+	
+	```
+	[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
+    	if (succeeded) {
+        // 验证码发送成功
+    	}
+	}];
+	```
+	
+3. **用户收到短信，输入验证码**
+4. **调用接口验证用户输入的验证码是否有效。**
+	
+	```
+	[MLSmsCodeUtils verifySmsCode:@"123456" phoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
+    	if (succeeded) {
+      	  // 验证成功
+    	}
+	}];
+	```
+	
+	注意，以上两个接口需要在用户登录的状态下使用。
 
 ## 地理位置
 
