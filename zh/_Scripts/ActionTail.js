@@ -4,7 +4,7 @@
 
 $(document).ready(function () {
 
-    ga('send', 'event', { eventCategory: 'Test', eventAction: 'CheckActionTail', eventLabel: 'Succeed'});
+    ga('send', 'event', 'Test',  'CheckActionTail', 'Succeed');
 
     //var pathName=window.location.pathname;
     //var registerPathName = /^\/regnotify\?send_email_flag=success\&verify_email_address=[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
