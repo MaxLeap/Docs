@@ -1765,33 +1765,33 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 
 ### 操作认证
 
-	用户执行一些敏感操作（比如支付）时，可以使用短信来验证是否是本人操作。步骤如下：
-	
-	1. **用户点击支付按钮**
-	2. **调用接口发送短信验证码，并等待用户输入验证码**
-		
-		建议提供一个重新发送验证码的按钮，验证码发送成功后需等待至少 60 秒才可以再次请求。
-		
-		注意，在执行这一步时，如果用户还没有提供手机号，则需要要求用户输入手机号。建议要求用户以手机号为用户名注册。
-		
-		```
-		[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
-        	if (succeeded) {
-            // 验证码发送成功
-        	}
-    	}];
-		```
-		
-	3. **用户收到短信，输入验证码**
-	4. **调用接口验证用户输入的验证码是否有效。**
+用户执行一些敏感操作（比如支付）时，可以使用短信来验证是否是本人操作。步骤如下：
 
-		```
-		[MLSmsCodeUtils verifySmsCode:@"123456" phoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
-        	if (succeeded) {
-          	  // 验证成功
-        	}
-    	}];
-		```
+1. **用户点击支付按钮**
+2. **调用接口发送短信验证码，并等待用户输入验证码**
+	
+	建议提供一个重新发送验证码的按钮，验证码发送成功后需等待至少 60 秒才可以再次请求。
+	
+	注意，在执行这一步时，如果用户还没有提供手机号，则需要要求用户输入手机号。建议要求用户以手机号为用户名注册。
+	
+	```
+	[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
+    	if (succeeded) {
+        // 验证码发送成功
+    	}
+	}];
+	```
+	
+3. **用户收到短信，输入验证码**
+4. **调用接口验证用户输入的验证码是否有效。**
+	
+	```
+	[MLSmsCodeUtils verifySmsCode:@"123456" phoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
+    	if (succeeded) {
+      	  // 验证成功
+    	}
+	}];
+	```
 	
 	注意，以上两个接口需要在用户登录的状态下使用。
 
