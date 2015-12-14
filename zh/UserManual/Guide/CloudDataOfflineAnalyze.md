@@ -32,7 +32,7 @@ MaxLeap 云数据离线分析旨在为用户提供一种处理自有应用数据
 
 - 在右侧的编辑器中撰写您的LeapQL语句，点击执行，等待片刻后，页面将会返回执行结果。
 
-![Offline Arch](../../../images/imgOfflineStep3. "Offline Arch")
+![Offline Arch](../../../images/imgOfflineStep3.png "Offline Arch")
 
 
 ### 使用我的查询
