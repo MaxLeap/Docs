@@ -1,21 +1,4 @@
-/**
- * Created by Leo on 2015/11/27.
- */
+Config.isCN?(!function(e,a,t,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(t),s=a.getElementsByTagName(t)[0],o.async=1,o.src=n,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-70747550-1","auto"),ga("send","pageview")):(!function(e,a,t,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(t),s=a.getElementsByTagName(t)[0],o.async=1,o.src=n,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-42694301-6","auto"),ga("send","pageview"));
 
-$(document).ready(function () {
-
-    ga('send', 'event', 'Test',  'CheckActionTail', 'Succeed');
-
-    //var pathName=window.location.pathname;
-    //var registerPathName = /^\/regnotify\?send_email_flag=success\&verify_email_address=[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    //if(pathName.test(registerPathName)  ) {
-    //    ga('send', 'event', 'Activation', 'Register', 'Done');
-    //}
-    //
-    //var homePathName = /^\/zh_cn\/index\.html$/;
-    //if(pathName.test(homePathName)  ) {
-    //    ga('send', 'event', 'Acquisition', 'HomeVisit', 'Enter');
-    //}
-    //ga('send', 'event', 'Test', 'CheckActionTail', 'Succeed');
-
-});
+ga('send', 'event', 'Videos', 'play', 'Fall Campaign');
+ga('send', 'event', 'Test',  'CheckActionTail', 'Succeed');
