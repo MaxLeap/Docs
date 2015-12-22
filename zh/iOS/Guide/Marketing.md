@@ -107,5 +107,5 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
 	
 5. 上传证书
 	
-	在 [MaxLeap 管理平台：应用设置 - 推送通知] 上，选择对应的应用程序，上传之前获得的 .p12 文件。**这是集成 MaxLeap 推送的必要步骤。**
+	在 [MaxLeap 管理平台：应用设置 - 推送通知](https://maxleap.cn/settings#notification) 上，选择对应的应用程序，上传之前获得的 .p12 文件。**这是集成 MaxLeap 推送的必要步骤。**
 	
