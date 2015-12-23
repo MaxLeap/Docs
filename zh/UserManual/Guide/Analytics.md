@@ -53,20 +53,20 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 #####  昨日主要指标概览
 主要包括：昨日主要指标（新增用户/活跃用户/会话及收入）的准确数量以及增长率：
 
-![imgAAOverview1.png](../../../images/imgAAOverview1.png) 
+![imgAAOverview1.png](../../images/imgAAOverview1.png) 
 
 #####  主要指标随时间的变化
-![imgAAOverview2.png](../../../images/imgAAOverview2.png) 
+![imgAAOverview2.png](../../images/imgAAOverview2.png) 
 
 #####  主要指标的地理分布
-![imgAAOverview3.png](../../../images/imgAAOverview3.png) 
+![imgAAOverview3.png](../../images/imgAAOverview3.png) 
     
 #####  用户留存情况
 展示最近5周新增用户在随后每周的留存率：
-![imgAAOverview4.png](../../../images/imgAAOverview4.png)
+![imgAAOverview4.png](../../images/imgAAOverview4.png)
 
 #####  用户设备分布
-![imgAAOverview5.png](../../../images/imgAAOverview5.png) 
+![imgAAOverview5.png](../../images/imgAAOverview5.png) 
 
 ## 趋势
 
@@ -81,17 +81,17 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 
 快速展示：48小时内，三个主要指标每小时的数量变化
 
-![imgAATrendRT.png](../../../images/imgAATrendRT.png) 
+![imgAATrendRT.png](../../images/imgAATrendRT.png) 
 
 ###新用户/活跃用户/会话
 
-![imgAATrendNU.png](../../../images/imgAATrendNU.png) 
+![imgAATrendNU.png](../../images/imgAATrendNU.png) 
 
 
 ###应用程序版本/渠道
 
 展示三个主要指标在各个应用版本/渠道的数量分布
-![imgAATrendAV.png](../../../images/imgAATrendAV.png) 
+![imgAATrendAV.png](../../images/imgAATrendAV.png) 
 
 
 ## 留存
@@ -106,7 +106,7 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 #### 留存率
 留存率展示某一天/周/月注册用户，随后的留存率：
 
-![imgAARetention.png](../../../images/imgAARetention.png)
+![imgAARetention.png](../../images/imgAARetention.png)
 
 ## 收入
 
@@ -118,7 +118,7 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 * 购买规律（何时，注册后多久出现购买高峰）
 * 用户购买力/潜在购买力
 
-![imgAARevenue.png](../../../images/imgAARevenue.png) 
+![imgAARevenue.png](../../images/imgAARevenue.png) 
 
 1.  趋势
     
@@ -158,7 +158,7 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 
     展示某一天中，不同会话时长对应的会话数量及用户数量
     
-    ![imgAAUE.png](../../../images/imgAAUE.png) 
+    ![imgAAUE.png](../../images/imgAAUE.png) 
 	
 2.  会话频率
 
@@ -210,7 +210,7 @@ MaxLeap"分析"服务将通过以下功能，帮助您更了解用户及其行�
 
 终端向您展示：用户所持移动终端的信息。
 
-![imgAATerminal.png](../../../images/imgAATerminal.png) 
+![imgAATerminal.png](../../images/imgAATerminal.png) 
 
 您可以查看的所有以下统计信息的报表：
 

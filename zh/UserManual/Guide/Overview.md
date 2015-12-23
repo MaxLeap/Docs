@@ -6,7 +6,7 @@ MaxLeap为移动应用的研发，用户运营，市场营销及客户服务提�
 
 MaxLeap重新定义了MBaaS：它不仅仅为开发者解决数据存储等后端系统的开发及运维，而是全面覆盖企业移动业务的各个方面：为运营提供用户分群管理，数据分析等服务；为客服提供实时反馈处理及FAQ等服务；为市场营销提供消息推送，应用内消息等服务。
 
-![imgOVBusinessFlow](../../../images/imgOVBusinessFlow.png)
+![imgOVBusinessFlow](../../images/imgOVBusinessFlow.png)
 
 ##研发：降低成本，快速上市
 从开始使用MaxLeap起，您便已拥有了：应用研发所需的后端系统及客户端SDK供开发者使用，以及强大的后端管理系统供研发/运营/市场/客服人员使用。拥有Leap云服务，您会发现从开发到上市是如此简单和快速。
@@ -43,7 +43,7 @@ MaxLeap提供分析服务，帮助您全面分析运营状况，深度了解典�
 
 MaxLeap提供了一套标准客服方案，使客服人员与应用用户随时保持沟通：在客户端，提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，客服方案提供FAQ列表的管理及用户反馈的处理界面。
 
-![imgOVSupport](../../../images/imgOVSupport.png) 
+![imgOVSupport](../../images/imgOVSupport.png) 
 
 ##下一步
 * 有关MaxLeap各服务的详细介绍，请返回[文档中心](ML_DOCS_GUIDE_LINK_PLACEHOLDER_DOCHOME)。

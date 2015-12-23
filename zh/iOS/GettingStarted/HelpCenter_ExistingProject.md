@@ -27,7 +27,7 @@ pod "MLHelpCenter"
 	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
-	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
+	![drag_sdk_to_project](../../images/drag_sdk_to_project.png)
 
 	按照同样的方法把 `MLHelpCenter.embeddedframework` 拖到 Xcode 项目中，这样做的目的是为了把 MLHelpCenter.framework 和相关的资源同时添加到项目中。**注意：不要**使用 `Link Binary With Libraris >> Add Others` 来添加这个框架。
 
@@ -36,13 +36,13 @@ pod "MLHelpCenter"
 	确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为 YES。
     
     <p class="image-wrapper">
-    ![enable_modules](../../../images//enable_modules.png)
+    ![enable_modules](../../images//enable_modules.png)
 
 	点击 Targets → 应用名 → “Build Phases” 栏。</br>
 	将 “Link Binary With Libraries” 如下图展开。
 	
 	<p class="image-wrapper">
-	![add_dependencies](../../../images//add_dependencies.png)
+	![add_dependencies](../../images//add_dependencies.png)
     
 	点击 “Link Binary With Libraries” 左下角 + 号按钮，添加下列框架：
 	
@@ -124,17 +124,17 @@ pod "MLHelpCenter"
 	
 	运行配置好的模板项目，您会看到以下界面：
 	
-	![ios_faq_view](../../../images/ios_faq_view.png)
+	![ios_faq_view](../../images/ios_faq_view.png)
 	
 	新应用的 FAQ 会有 通用(General)、支付(Billing)、隐私(Privacy) 三个部分，如果此界面中显示这三个部分，说明与云端应用 FAQ 连接正常。
 	
 	在 FAQ 界面右上角有一个“反馈”按钮，按下这个按钮会进入应用反馈界面，如下：
 	
-	![ios_new_conversation_view](../../../images/ios_new_conversation_view.png)
+	![ios_new_conversation_view](../../images/ios_new_conversation_view.png)
 	
 	接下来填写问题简要描述和名字，点击右上角“发送”按钮就会把消息发送到服务器了。发送完成后会收到一条自动回复，这说明 HelpCenter 模块已经集成好了。
 	
-	![ios_issue_message_view](../../../images/ios_issue_message_view.png)
+	![ios_issue_message_view](../../images/ios_issue_message_view.png)
 	
 	在 MaxLeap 网站上的 Support -> App Issues -> New Issues 中可以看到这条反馈。
 

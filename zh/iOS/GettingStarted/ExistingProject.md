@@ -36,20 +36,20 @@ pod "MLTwitterUtils"
 	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
-	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
+	![drag_sdk_to_project](../../images/drag_sdk_to_project.png)
 
 3. 添加依赖
 
 	确保“Enable Modules (C and Objective-C)” 和 “Link Frameworks Automatically”的生成设置为Yes。
     
     <p class="image-wrapper">
-    ![enable_modules](../../../images/enable_modules.png)
+    ![enable_modules](../../images/enable_modules.png)
 
 	点击 Targets → YourAppName → "Build Phases" 栏。</br>
 	展开 “Link Binary With Libraries”，如下图：
 	
 	<p class="image-wrapper">
-	![add_dependencies](../../../images/add_dependencies.png)
+	![add_dependencies](../../images/add_dependencies.png)
 	
 	点击“Link Binary With Libraries”左下角+号按钮，添加下列框架：
 	
