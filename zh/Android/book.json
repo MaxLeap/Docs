@@ -1,0 +1,5 @@
+{
+  "plugins": ["maxlayout"],
+  "theme": "./node_modules/gitbook-plugin-maxlayout/maxtheme",
+  "output": "_book/zh_cn/Android"
+}
