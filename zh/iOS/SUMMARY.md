@@ -9,3 +9,6 @@
   * [SDK]  
     * [分析](Guide/Analytics.md)
     * [云配置](Guide/CloudConfig.md)
+    * [云数据](Guide/CloudData.md)
+    * [营销推广](Guide/Marketing.md)
+    * [支持](Guide/Support.md)
