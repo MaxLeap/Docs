@@ -923,13 +923,23 @@ MLQuery *query = [Game query];
 
 ## 用户
 
-许多应用的核心理念是，用户帐户保护应能让用户安全访问他们的信息。我们专门用于用户管理的类，叫做 `MLUser`，可自动处理用户帐户管理需要的很多功能。
+我们提供了用于用户管理的类，叫做 `MLUser`，可自动处理用户帐户管理需要的很多功能。
 
-您可以使用这个类在您的应用程序中添加用户帐户功能。
+你可以使用这个类在应用程序中添加用户帐户功能。
 
-`MLUser` 是 `MLObject` 的一个子类，拥有与之完全相同的特性，如灵活架构(flexible schema)、键值对接口。`MLObject` 上的所有方法也存在于 `MLUser` 中。不同的是 `MLUser` 具有针对用户帐户的一些特殊的附加功能。
+`MLUser` 是 `MLObject` 的一个子类，拥有与之完全相同的特性，如键值对接口。`MLObject` 上的所有方法也存在于 `MLUser` 中。不同的是 `MLUser` 具有针对用户帐户的一些特殊的附加功能。
 
-###字段说明
+### SDK 自动创建匿名用户
+
+因为一些特殊原因，SDK 中有一个逻辑：它会在没有用户登录的情况下自动创建一个匿名用户，有关匿名用户，请查看匿名用户介绍。
+
+	- 启动应用程序时，若 currentUser 为空，则会创建一个匿名用户
+	- 用户登出后，SDK 会自动创建一个匿名用户
+	- 这个过程是定时器驱动的，有一定的延迟，如果应用在某个时刻需要匿名登录，却发现当前用户为空，就需要手动创建匿名用户
+
+对于以上提到的`用户`、`当前用户`、`匿名用户`的含义以及其功能特性，在以下几个小节有详细解释。
+
+### 字段说明
 
 `MLUser` 有几种可以将其与 `MLObject` 区分开的属性：
 
@@ -937,20 +947,20 @@ MLQuery *query = [Game query];
 - `password`：用户的密码（注册时必填）。
 - `email`：用户的电子邮箱地址（选填）。
 
-我们在浏览用户的各种用例时，会逐条仔细查看这些信息。切记，如果您通过这些属性设置 `username` 和 `email`，则无需使用 `setObject:forKey:` 方法进行设置 － 这是自动设置的。
+切记，如果您通过这些属性设置 `username` 和 `email`，则无需使用 `setObject:forKey:` 方法进行设置。
 
 ### 注册用户
 
-您的应用程序要做的第一件事就是让用户注册。以下代码阐释了典型注册：
+您的应用程序要做的第一件事就是让用户注册。以下代码示范了一个典型注册过程：
 
 ```objective_c
 - (void)myMethod {
     MLUser *user = [MLUser user];
-    user.username = @"my name";
-    user.password = @"my pass";
+    user.username = @"my_name";
+    user.password = @"my_password";
     user.email = @"email@example.com";
     // other fields can be set just like with MLObject
-    user[@"phone"] = @"415-392-0202";
+    user[@"mobilePhone"] = @"415-392-0202";
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             // Hooray! Let them use the app now.
@@ -984,11 +994,13 @@ MLQuery *query = [Game query];
 }];
 ```
 
-### 当前用户
+### 当前用户（可以用来判断用户登录状态）
 
-若用户每次打开您的应用时都要登录，会很麻烦。您可以用缓存的 `currentUser` 对象来避免。
+当前用户是指当前已经登录的用户，使用方法 `currentUser` 可以获取到当前用户对象，这个对象会被 SDK 自动缓存起来。
 
-每次您使用任何注册或登录方法时，用户都被缓存到磁盘中。您可以把这个缓存当作一个会话，并假设用户已登录：
+可以使用缓存的 `currentUser` 对象实现自动登录，这样用户就不用每次打开应用都要登录了。
+
+每当用户成功注册或者登录后，这个用户对象就会被缓存到磁盘中。这个缓存可以用来判断用户是否登录：
 
 ```objective_c
 MLUser *currentUser = [MLUser currentUser];
@@ -1005,6 +1017,22 @@ if (currentUser) {
 [MLUser logOut];
 MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```
+
+**注意：**由于 SDK 会自动创建匿名用户，所以 `currentUser` 有值并不能代表用户已经登录，在检查用户登录状态时，推荐这种方式：
+
+```
+MLUser *currentUser = [MLUser currentUser];
+if (currentUser) {
+    if ([MLAnonymousUtils isLinkedWithUser:currentUser]) {
+        // 已经匿名登录
+    } else {
+        // 常规登录
+    }
+} else {
+    // 未登录
+}
+```
+
 
 ### 修改密码
 
@@ -1105,18 +1133,7 @@ MLQuery *query = [MLUser query];
 }];
 ```
 
-#####自动创建匿名用户
-在无网络请求的情况下，也可以自动为您创建匿名用户，以便您能在应用程序开启之后立即与您的用户互动。如果您启用在应用程序开启时自动创建匿名用户的功能，则 `[MLUser currentUser]` 将不会为 `nil`。首次保存用户或与该用户相关的任何对象时，将在云中自动创建用户。在此之前，该用户的对象 ID 为 `nil`。启用自动创建用户功能将使得把数据与您的用户关联变得简单。例如，在您的 `application:didFinishLaunchingWithOptions:` 函数中，您可以写：
-
-```objective_c
-[MLUser enableAutomaticUser];
-[[MLUser currentUser] incrementKey:@"RunCount"];
-[[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-    // Handle success or failure here ...
-}];
-```
-
-您可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *Facebook* 或 *Twitter* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以试试 `+[MLAnonymousUtils isLinkedWithUser:]`:
+您可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *Facebook* 或 *Twitter* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以使用 `+[MLAnonymousUtils isLinkedWithUser:]` 方法:
 
 ```objective_c
 if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
