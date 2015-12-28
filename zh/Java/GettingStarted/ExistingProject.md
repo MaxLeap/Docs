@@ -51,13 +51,14 @@ Eclipse:
 ##	安装SDK
 
 ### 添加云代码至已有的项目
+注意：你的云代码项目请确保放置在英文目录下，否则本地测试可能会引起文件解析错误
 ####配置pom.xml
 
 * 获取云代码 SDK
 * 获取测试插件JUnit
 * 获取编译打包插件
 
-添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.1，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
+添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.4，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
 
 ```xml
     <dependencies>
