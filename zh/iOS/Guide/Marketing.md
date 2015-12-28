@@ -34,7 +34,7 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
 
 ###配置
 
-首先要申请远程推送证书。
+首先要申请并上传远程推送证书，详细步骤请参照：[iOS 推送证书设置指南](#营销-推送证书设置指南)。
 
 在 `appDelegate.m` 中，您可以使用下面的代码开启远程推送
 
@@ -42,7 +42,7 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [MaxLeap setApplicationId:@"5552f51660b2056aa87dd9e0" clientKey:@"c3JscE50TWNnVzg4SkZlUnFsc3E2QQ"];
+    [MaxLeap setApplicationId:@"5552f51660b2056aa87dd9e0" clientKey:@"c3JscE50TWNnVzg4SkZlUnFsc3E2QQ" site:MLSiteCN];
     
     [self registerRemoteNotifications];
     
@@ -85,3 +85,27 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
 	[MLMarketingManager handlePushNotificationOpened:launchOptions];
 	```
 
+## 推送证书设置指南
+
+1. 生成推送证书，参照苹果官方文档《App Distribution Guide》的 [Creating a Universal Push Notification Client SSL Certificate](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11) 小节。
+
+2. 安装证书
+
+	下载并双击打开证书，证书打开时会启动“钥匙串”工具。
+	
+	在“钥匙串”中选择左边的 login 和 My Certificates，应该能在右边找到刚刚导入的证书
+
+3. 导出 .p12 文件
+
+	**注意不要展开 private key**
+
+	![enable_modules](../../../images/ios_push_export_p12.png)
+	
+4. 将文件保存为 Personal Information Exchange (.p12) 格式。
+	
+	![](../../../images/ios_push_export_filename.png)
+	
+5. 上传证书
+	
+	在 [MaxLeap 管理平台：应用设置 - 推送通知](https://maxleap.cn/settings#notification) 上，选择对应的应用程序，上传之前获得的 .p12 文件。**这是集成 MaxLeap 推送的必要步骤。**
+	
