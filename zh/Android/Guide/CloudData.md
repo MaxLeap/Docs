@@ -115,7 +115,7 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
 
 ```java
 MLQuery<MLObject> query = MLQuery.getQuery("Comment");
-query.whereMatches("pubUserId","USER_ID");
+query.whereMatches("pubId","USER_ID");
 
 MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
   @Override
@@ -999,7 +999,8 @@ public void takeDamage(int amount) {
 }
 ```
 
-###创建子类的实例
+### 创建子类的实例
+
 您可以使用您自定义的构造函数来创建您的子类对象。您的子类必须定义一个公开的默认构造函数，并且不修改任何父类 MLObject 中的字段，这个默认构造函数将会被 SDK 使用来创建子类的强类型的对象。
 
 要创建一个到现有对象的引用，可以使用 MLObject.createWithoutData():
@@ -1008,8 +1009,9 @@ public void takeDamage(int amount) {
 Armor armorReference = MLObject.createWithoutData(Armor.class, armor.getObjectId());
 ```
 
-###子类的查询
-您可以通过静态方法MLQuery.getQuery()获取特定的子类的查询对象。下面的例子用以查询用户可购买的所有防具：
+### 子类的查询
+
+您可以通过静态方法 `MLQuery.getQuery()` 获取特定的子类的查询对象。下面的例子用以查询用户可购买的所有防具：
 
 ```java
 MLQuery<Armor> query = MLQuery.getQuery(Armor.class);
@@ -1024,11 +1026,14 @@ MLQueryManager.findAllInBackground(query, new FindCallback<Armor>() {
 });
 ```
 
-##用户
+## 用户
 
-MLUser 是一个 MLObject 的子类，它继承了 MLObject 所有的方法，具有 MLObject 相同的功能。不同的是，MLUser 增加了一些特定的关于用户账户相关的功能。
+`MLUser` 是 `MLObject` 的子类，它继承了 `MLObject` 所有的方法，具有 `MLObject` 相同的功能。不同的是，`MLUser` 增加了一些特定的关于用户账户相关的功能。
 
-###字段说明
+如果当前应用没有用户时，SDK 会尝试在应用打开时会自动尝试创建一个匿名用户。有关匿名用户的概念请看匿名用户章节的介绍。
+
+### 字段说明
+
 MLUser 除了从 MLObject 继承的属性外，还有几个特定的属性：
 
 属性名|类型|介绍|是否必需或唯一
@@ -1037,33 +1042,31 @@ MLUser 除了从 MLObject 继承的属性外，还有几个特定的属性：
     password|String| 用户的密码|必需
     email|String| 用户的电子邮件地址|可选
     emailVerified|Boolean|电子邮件是否验证|可选
-    masterKey| String | 用户注册应用的MasterKey|可选
-    installationIds| String | 用户完成的所有安装的InstallationId|可选
+    mobilePhoneVerified| String | 手机号码是否验证|可选
+    installationIds| String | 用户完成的所有安装的 InstallationId|可选
 
 注意：
 
 * 请确保用户名和电子邮件地址是独一无二的。
-* 和其他 MLObject 对象不同的是，在设置 MLUser 这些属性的时候不是使用的 put 方法，而是专门的 setXXX 方法。
-* 系统会自动收集masterKey，installationIds的值。
+* 这些属性和其它 MLObject 的属性不同，在设置时不是使用的 `put()` 方法，而是使用专门的 `setXXX()` 方法。
 
-###注册用户
+### 注册用户
 
-1. 创建MLUser对象，并提供必需的username和password
-2. 利用MLUserManager.signUpInBackground()保存至云端。
+1. 创建 `MLUser` 对象，并提供必需的 `username` 和 `password`。
+2. 利用 `MLUserManager.signUpInBackground()` 保存至云端。
 
 ```java
-String mUsername ＝ "userName";
-String mPassword = "passWord";
 MLUser user = new MLUser();
-user.setUserName(mUsername);
-user.setPassword(mPassword);
+user.setUserName("userName");
+user.setPassword("passWord");
 
 MLUserManager.signUpInBackground(user, new SignUpCallback() {
 	public void done(MLException e) {
-	        if (e == null) {
-	        // 注册成功
-	        } else {
-	        }
+        if (e == null) {
+        	// 注册成功
+        } else {
+        	// 注册失败
+        }
 	}
 });
 ```
@@ -1074,8 +1077,9 @@ MLUserManager.signUpInBackground(user, new SignUpCallback() {
 * 如果注册不成功，您可以查看返回的错误对象。最有可能的情况是，用户名或电子邮件已经被另一个用户注册。这种情况您可以提示用户，要求他们尝试使用不同的用户名进行注册。
 * 您也可以要求用户使用 Email 做为用户名注册，这样做的好处是，您在提交信息的时候可以将输入的“用户名“默认设置为用户的 Email 地址，以后在用户忘记密码的情况下可以使用 MaxLeap 提供的重置密码功能。
 
-###登录
-您可以通过MLUserManager.logInInBackground()方法登录。字段说明：第一个参数为用户名，第二个参数为密码，第三个参数为回调方法LogInCallback().
+### 登录
+
+您可以通过 `MLUserManager.logInInBackground()` 方法登录。字段说明：第一个参数为用户名，第二个参数为密码，第三个参数为回调方法 `LogInCallback()`.
 
 ```java
 MLUserManager.logInInBackground("userName", "passWord", new LogInCallback<MLUser>() {
@@ -1089,25 +1093,32 @@ MLUserManager.logInInBackground("userName", "passWord", new LogInCallback<MLUser
 });
 ```
 
-###当前用户
-如果用户在每次打开您的应用程序时都要登录，这将会直接影响到您应用的用户体验。为了避免这种情况，您可以使用缓存的 currentUser 对象。
+### 当前用户
 
-每当您注册成功或是第一次登录成功，都会在本地磁盘中有一个缓存的用户对象，您可以这样来获取这个缓存的用户对象来进行登录：
+如果用户在每次打开您的应用程序时都要登录，这将会直接影响到您应用的用户体验。为了避免这种情况，您可以使用缓存的 `currentUser` 对象。
+
+每当您注册成功或是登录成功后，当前用户都会被保留在本地存储设备商。您可以使用以下方法来获取这个缓存的用户对象以判断当前应用是否曾经注册过：
 
 ```java
 MLUser currentUser = MLUser.getCurrentUser();
 if (currentUser != null) {
-  // do stuff with the user
+  if (MLAnonymousUtils.isLink(currentUser)) {
+  	//	匿名用户
+  } else {
+  	//	普通用户
+  }
 } else {
-  // show the signup or login screen
+  // 未登录
 }
 ```
 
-当然，您也可以使用如下方法清除缓存用户对象：
+注意：SDK 会自动创建匿名用户。
+
+当然，您也可以使用如下方法清除缓存的用户：
 
 ```java
 MLUser.logOut();
-MLUser currentUser = MLUser.getCurrentUser(); //此时，crrentUser将为null
+MLUser currentUser = MLUser.getCurrentUser(); //此时，crrentUser 将 为null
 ```
 
 ###重置密码
