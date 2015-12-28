@@ -24,21 +24,72 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 一个包含普通对象的文件看来像这样：
 
 ``` javascript
-{ "results": [
-  {
-    "createdAt" : "2015-09-15T06:12:38.476Z",
-    "number" : 2,
-    "name" : "lisi",
-    "class" : {
-     "__type" : "Pointer",
-     "className" : "class",
-     "objectId" : "55f7b6435ed2179e2736beb4"
-   },
-   "age" : 13,
-   "objectId" : "55f7b6d660b20b05f9ff86ce",
-   "updatedAt" : "2015-09-15T09:50:54.589Z"
-}]
+{"results":[
+{
+  "createdAt" : "2015-09-08T07:07:51.015Z",
+  "productIdentifier" : "fdasfasdfd",
+  "subtitle" : "fdfdsa",
+  "icon" : {
+    "__type" : "File",
+    "name" : "tfss-a08b774a-d0a6-433c-b632-8962564acc89-zcf-18864a34-36ee-48de-a6f6-ada37f463741.png",
+    "url" : "http://files.parsetfss.com/c8ddffe9-c28c-4517-9494-7f5f948d4fa0/tfss-a08b774a-d0a6-433c-b632-8962564acc89-zcf-18864a34-36ee-48de-a6f6-ada37f463741.png"
+  },
+  "title" : "fdas",
+  "objectId" : "561f86a84294ea00018a40fc",
+  "order" : 2,
+  "updatedAt" : "2015-09-08T07:07:51.015Z"
+},
+{
+  "createdAt" : "2015-10-28T06:28:43.061Z",
+  "productIdentifier" : "fdasfasdfd",
+  "subtitle" : "fdfdsa",
+  "icon" : {
+    "__type" : "File",
+    "name" : "tfss-a08b774a-d0a6-433c-b632-8962564acc89-zcf-18864a34-36ee-48de-a6f6-ada37f463741.png",
+    "url" : "http://files.parsetfss.com/c8ddffe9-c28c-4517-9494-7f5f948d4fa0/tfss-a08b774a-d0a6-433c-b632-8962564acc89-zcf-18864a34-36ee-48de-a6f6-ada37f463741.png"
+  },
+  "title" : "fdas",
+  "objectId" : "56306b1b2a52340001a3e56c",
+  "order" : 2,
+  "updatedAt" : "2015-10-28T06:28:43.061Z"
+},
+{
+  "createdAt" : "2015-11-23T02:22:28.897Z",
+  "productIdentifier" : "112",
+  "ACL" : {
+    "creator" : {
+      "id" : "561ce8dba5ff7f0001c48a25",
+      "type" : "OrgUser"
+    }
+  },
+  "objectId" : "56527864a5ff7f00011d1bde",
+  "updatedAt" : "2015-11-23T02:22:33.981Z"
+},
+{
+  "createdAt" : "2015-11-23T02:23:07.228Z",
+  "productIdentifier" : "2222",
+  "ACL" : {
+    "creator" : {
+      "id" : "561ce8dba5ff7f0001c48a25",
+      "type" : "OrgUser"
+    }
+  },
+  "objectId" : "5652788ba5ff7f00011d1bdf",
+  "updatedAt" : "2015-11-23T02:23:07.228Z"
+},
+{
+  "createdAt" : "2015-11-23T02:31:16.149Z",
+  "productIdentifier" : "555",
+  "ACL" : {
+    "creator" : {
+      "id" : "561ce8dba5ff7f0001c48a25",
+      "type" : "OrgUser"
+    }
+  },
+  "objectId" : "56527a74a5ff7f00011d1be8",
+  "updatedAt" : "2015-11-23T02:31:16.149Z"
 }
+]}
 ```
 
 关联Relation数据的导入，需要填写导入的class名称，导入后的字段名称，关联的class名称等信息，才能完整导入，示范的relation数据类似
