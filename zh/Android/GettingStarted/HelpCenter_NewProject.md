@@ -10,8 +10,8 @@ HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 He
 
 	**Android Studio**
 
-    1. 	打开 Android Studio，点击 “Import project”
-    2. 	进入项目模板根目录，选择 `build.gradle`
+    1. 	打开 Android Studio，点击 `Import project`
+    2. 	进入项目模板根目录，选择 `settings.gradle`
     3. 	按照默认配置点击下一步，直到完成
 
 ##	连接项目与 MaxLeap 应用

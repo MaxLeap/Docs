@@ -2,15 +2,15 @@
 
 HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 HelpCenter SDK 之前，请确保您的项目已经安装 MaxLeap Core SDK. 您可以在 [MaxLeap Core SDK 安装向导](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID) 中获取更多信息。
 
-1. 获取SDK
+1. 获取 SDK
 
     <a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-Android" target="_blank">下载 MaxLeap HelpCenter SDK</a>
 
-2. 添加SDK
+2. 添加 SDK
 
     **Android Studio**
 
-    1. 	打开 Android Studio，点击 “File” -> "New.." -> "Import Module"，选择所下载 SDK 的 "MaxLeap HelpCenter" 目录
+    1. 	打开 Android Studio，点击 `File` -> `New..` -> `Import Module`，选择所下载 SDK 的 `MaxLeap HelpCenter` 模块
     2. 	打开需要使用 HelpCenter 的 Module，在其 `build.gradle` 中添加如下依赖：
 
     ```gradle
