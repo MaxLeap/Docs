@@ -1147,7 +1147,7 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 
 为简化用户的注册及登录流程，并且集成ML应用与 Facebook, Twitter 等应用，MaxLeap 提供了第三方登录应用的服务。您可以同时使用第三方应用SDK与 MaxLeap SDK，并将 `MLUser` 与第三方应用的用户ID进行连接。
 
-###使用 Facebook 账号登录c
+###使用 Facebook 账号登录
 
 对于已经安装Facebook应用的设备，ML应用可通过设备上的 Facebook 用户凭据，直接实现用户登录。对于未安装 Facebook 应用的设备，用户可以通过浏览器，提供相应的登录信息。
 
