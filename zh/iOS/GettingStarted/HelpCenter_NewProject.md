@@ -36,19 +36,18 @@
 	
 	- (BOOL)application:(UIApplication *)application 	didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-	[MaxLeap setApplicationId:@"your_application_id" 	clientKey:@"your_client_key" site:MLSiteCN];
-	[MLHelpCenter install];
+		[MaxLeap setApplicationId:@"your_application_id" 	clientKey:@"your_client_key" site:MLSiteCN];
+		[MLHelpCenter install];
 
-	MLQuery *que = [MLQuery queryWithClassName:@"Test"];
-	[que whereKey:@"objectId" equalTo:@"561c83c0226"];
-	[que findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-	   if (error.code == 90000) {
-    		// 返回错误代码为 90000 说明 appid, clientKey, site 配置正确。
-	     	NSLog(@"已经能够正确连接上您的云端应用");
-   	    } else {
-	       NSLog(@"应用访问凭证不正确，请检查。");
-   		 }
-	}];
+		MLObject *obj = [MLObject objectWithoutDataWithClassName:@"Test" objectId:@"561c83c0226"];
+    	[obj fetchIfNeededInBackgroundWithBlock:^(MLObject * _Nullable object, NSError * _Nullable error) {
+    		if (error.code == kMLErrorInvalidObjectId) {
+        		NSLog(@"已经能够正确连接上您的云端应用");
+    		} else {
+        		NSLog(@"应用访问凭证不正确，请检查。");
+    		}
+		}];
+	}
 	```
 
 	运行您的应用。然后查看 Xcode console 中打印的日志。
