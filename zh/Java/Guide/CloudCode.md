@@ -877,6 +877,49 @@ PushMsg pushMsg = new PushMsg();
 pushMsg.withMsg("hello").push();
 ```
 
+## 分布式计数器、分布式锁
+在云端，随着用户的增多，一个单个的实例应用可能再也无法支撑，扩容是必要的，这样一个应用可能同时有多个容器实例来提供服务，类似一个分布式的集群在后端为用户提供所有的云端服务.
+在分布式系统中，MaxLeap SDK也为我们提供了计数器、锁相关的功能以便多个实例之间可以共享同一份数据。
+
+使用分布式计数器功能，你只需要实例化`Themis`接口，便可调用相关API
+
+分布式计数器API：
+
+```java
+//实例化Themis
+Themis themis = new ThemisImpl();
+//计数器名称，全局唯一，所有实例共享同一个名称的计数器
+String counterEntity = "myCount";
+//生成计数器
+themis.generateCounter(counterEntity);
+//获取当前计数器值
+themis.get(counterEntity);
+//计数器递增并返回递增后的值
+themis.incrementAndGet(counterEntity);
+//返回当前计数器值并递增
+themis.getAndIncrement(counterEntity);
+//计数器递减并返回递减后的值
+themis.decrementAndGet(counterEntity);
+//计数器增加指定值(如果为负数则表示减少)并返回更新后的值
+themis.addAndGet(counterEntity, 1);
+//返回当前计数器值并增加指定值(如果为负数则表示减少)
+themis.getAndAdd(counterEntity, 1);
+```
+
+分布式锁API:
+
+```java
+//实例化Themis
+Themis themis = new ThemisImpl();
+//锁名称，全局唯一，所有实例共享同一个名称的锁，同一时间有且只会有一个请求可以得到锁，直到主动释放锁
+String lockEntity = "myLock";
+//获取锁，一旦获取锁成功，其他任何实例或地方获取锁都将会失败
+themis.getLock(lockEntity);
+//TOTO:your service code
+//释放锁
+themis.lockRelease();
+```
+
 ## Logging
 云代码提供Logging功能，以便您能记录Function，Hook或者Job在运行过程中出现的信息。除此之外，云代码的部署过程，也将被记录下来。您可以在管理中心中查看所有的日志。
 ###在云代码中记录Log
