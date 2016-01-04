@@ -137,7 +137,7 @@ def helloword(request):
 
 `zip -r <ProjectLocation> ./*`
 
-我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
+`ProjectLocation`便是我们想要的package.
 
 ## 云代码的上传及部署
 1. 登录：`maxleap login <UserName> -region <CN or US ...>`
