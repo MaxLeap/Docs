@@ -3,15 +3,16 @@
 ##一、支付
 ###1. require "MLPay.php";
 ###2. 填充数组 $data ，内容包括
-   必须: appid: 由MaxLeap 后台获取,类型:String
-         token: 由MaxLeap 后台获取,类型:String
-         billNum: 订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一,类型:String
-         channel: 支付渠道, 目前支持 ali_web,类型:String
-         totalFee: 整数,单位为分,类型:Integer
-         subject: 订单主题,类型:String
-    可选:
-         extras: 附加数据, 类型:Array
-         returnUrl: 同步自动跳转url类型:String
+      必填: 
+            appid: 由MaxLeap 后台获取,类型:String
+            token: 由MaxLeap 后台获取,类型:String
+            billNum: 订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一,类型:String
+            channel: 支付渠道, 目前支持 ali_web,类型:String
+            totalFee: 整数,单位为分,类型:Integer
+            subject: 订单主题,类型:String
+      可选:
+            extras: 附加数据, 类型:Array
+            returnUrl: 同步自动跳转url类型:String
 ###3. 静态调用 $result = MLPayApi::bill($data);
 ###4. 返回值包含在$result中,结构如下:
     {
@@ -42,9 +43,10 @@
 ##二、订单查询
 ###1. require "MLPay.php";
 ###2. 填充数组$data, 内容包括
-   必须: appid: 由MaxLeap 后台获取,类型:String
-         token: 由MaxLeap 后台获取,类型:String
-         billNum: 订单号,类型:String
+      必填: 
+            appid: 由MaxLeap 后台获取,类型:String
+            token: 由MaxLeap 后台获取,类型:String
+            billNum: 订单号,类型:String
 ###3. 静态调用 $result = MLPayApi::record($data);
 ###4. 返回值包含在$result中,结构如下:
     {
