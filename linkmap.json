@@ -42,7 +42,8 @@
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH": "/guide/usermanual/clouddata.html",
-
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK": "/guide/usermanual/maxpaywebhook.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN": "/guide/usermanual/maxpayadmin.html",
 
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",
