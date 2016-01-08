@@ -37,6 +37,8 @@
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
 
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP": "/guide/devguide/php.html",
+
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING": "/guide/usermanual/marketing.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DEVCENTER": "/guide/usermanual/developercenter.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN": "/guide/usermanual/usermgmt.html",

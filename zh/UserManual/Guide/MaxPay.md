@@ -13,11 +13,11 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 
 ## SDK支持平台
 ##### iOS
-[详见iOS开发指南](../../../zh/iOS/Guide/MaxPay.md "iOS 开发指南")
+[详见iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)
 ##### Android
-[详见Android开发指南](../../../zh/Android/Guide/MaxPay.md "Android 开发指南")
+[详见Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)
 ##### PHP
-[详见PHP开发指南](../../../zh/PHP/Guide/MaxPay.md "PHP 开发指南")
+[详见PHP开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP)
 
 ## 支持渠道
 
