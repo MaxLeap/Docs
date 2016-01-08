@@ -6,10 +6,10 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 这里我们将介绍 MaxPay 是如何完成交易的，包括支付和查询两部分。
 
 #### 支付
-
+![../../../images/MaxPayPaymentSequence.png]
 
 #### 查询
-
+![../../../images/MaxPayQuerySequence.png]
 
 ## SDK支持平台
 ##### iOS
