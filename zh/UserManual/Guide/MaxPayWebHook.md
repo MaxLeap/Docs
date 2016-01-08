@@ -31,7 +31,7 @@ Webhook 支持 Test 模式和 Live 模式，Test 模式为测试模式，即可�
 ### 第三步：验证 Webhook 签名（可选）
 #####Maxpay的Webhook通知中包含的签名信息，签名放在了请求的json里sign中，除此之外还有一个timestamp字段。
 ######1.户需用自己的Maxleap的Appid，MasterKey和timestamp依次连接成一个字符串。
-######2.后用Md5算法对该字符串加密得到16进制的字符串。
+######2.后用Md5算法对该字符串加密得到16进制表示的字符串。
 ######3.得到的字符串与sign进行比较，若内容相同，则验证通过，否则失败。
 ## 如何测试 Webhook
 ###测试 Webhook
