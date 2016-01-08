@@ -6,9 +6,9 @@
 ## 使用
 
 请使用php5.4以上版本,并安装php-curl等相关模块
-##一、支付
-###1. require "MLPay.php";
-###2. 填充数组 $data ，内容包括
+### 支付
+####1. require "MLPay.php";
+####2. 填充数组 $data ，内容包括
       必填: 
             appid: 由MaxLeap 后台获取,类型:String
             token: 由MaxLeap 后台获取,类型:String
@@ -19,8 +19,8 @@
       可选:
             extras: 附加数据, 类型:Array
             returnUrl: 同步自动跳转url类型:String
-###3. 静态调用 $result = MLPayApi::bill($data);
-###4. 返回值包含在$result中,结构如下:
+####3. 静态调用 $result = MLPayApi::bill($data);
+####4. 返回值包含在$result中,结构如下:
     {
         code:0,
         msg:"OK",
@@ -46,15 +46,15 @@
            14 | RUN_TIME_ERROR | 实时未知错误，请与技术联系帮助查看
 
 
-##二、订单查询
-###1. require "MLPay.php";
-###2. 填充数组$data, 内容包括
+###二、订单查询
+####1. require "MLPay.php";
+####2. 填充数组$data, 内容包括
       必填: 
             appid: 由MaxLeap 后台获取,类型:String
             token: 由MaxLeap 后台获取,类型:String
             billNum: 订单号,类型:String
-###3. 静态调用 $result = MLPayApi::record($data);
-###4. 返回值包含在$result中,结构如下:
+####3. 静态调用 $result = MLPayApi::record($data);
+####4. 返回值包含在$result中,结构如下:
     {
      code:0,//0为正常，1为appid不存在
      results:[{
