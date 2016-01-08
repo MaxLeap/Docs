@@ -6,6 +6,8 @@
 ## 使用
 请使用php5.4以上版本,并安装php-curl等相关模块
 
+首先请<a class="download-sdk" href="https://github.com/MaxLeap/SDK-MaxPay-PHP/tree/1.0" target="_blank">下载php-sdk</a>
+
 ###一、 支付
 ####1. require "MLPay.php";
 ####2. 填充数组 $data ，内容包括
