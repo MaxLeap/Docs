@@ -23,6 +23,7 @@
 
 *  extras: 附加数据, 类型:Array
 *  returnUrl: 同步自动跳转url类型:String
+
 ####3. 静态调用 $result = MLPayApi::bill($data);
 ####4. 返回值包含在$result中,结构如下:
 ```
@@ -40,6 +41,7 @@
 *  msg: 类型: String; 含义: 返回信息， OK为正常
 *  err: 类型: String; 含义: 具体错误信息
 *  id: 类型: String; 含义: 成功发起支付后返回支付表记录唯一标识
+
 #####返回code 定义:
 *  0 | OK | 成功
 *  1 | APP_INVALID | 根据app_id找不到对应的APP或者app_sign不正确
@@ -58,6 +60,7 @@
 *  appid: 由MaxLeap 后台获取,类型:String
 *  token: 由MaxLeap 后台获取,类型:String
 *  billNum: 订单号,类型:String
+
 ####3. 静态调用 $result = MLPayApi::record($data);
 ####4. 返回值包含在$result中,结构如下:
 ```
