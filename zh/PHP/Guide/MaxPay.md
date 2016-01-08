@@ -18,7 +18,9 @@
 *  channel: 支付渠道, 目前支持 ali_web,类型:String
 *  totalFee: 整数,单位为分,类型:Integer
 *  subject: 订单主题,类型:String
+
 #####可选:
+
 *  extras: 附加数据, 类型:Array
 *  returnUrl: 同步自动跳转url类型:String
 ####3. 静态调用 $result = MLPayApi::bill($data);
