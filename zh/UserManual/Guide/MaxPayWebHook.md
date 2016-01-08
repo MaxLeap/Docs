@@ -21,9 +21,9 @@ Webhooks 支持 Test 模式和 Live 模式，Test 模式为测试模式，即可
 如果一个 Webhook 不再使用，可以点击 Webhook 列表中的“删除”图标来删除它。
 
 ### 第二步：接收 Webhooks 通知
-图文并茂
+后端写
 ### 第三步：验证 Webhooks 签名（可选）
-图文并茂
+后端写
 ## 如何测试 Webhooks
 ###测试 Webhook
 在 Webhook 列表中，点击“测试”图标可以测试该条 Webhook 是否配置成功：
