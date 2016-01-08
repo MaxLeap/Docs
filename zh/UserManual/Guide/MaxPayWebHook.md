@@ -30,9 +30,10 @@ Webhook 支持 Test 模式和 Live 模式，Test 模式为测试模式，即可�
 当一个支付事件发生后，将POST一个HTTP请求到webhook，数据是以json的形式放到body里。你需要接受该请求并处理数据：返回http状态码200表示成功；返回的状态码不是200或者超时未返回，maxleap将尝试发送多达10次的webhook通知直到返回200的状态码，间隔为1分钟,5分钟,10分钟,30分钟,1小时,2小时,4小时,8小时,16小时,24小时，若超过该次数，便不再尝试。
 ### 第三步：验证 Webhook 签名（可选）
 #####Maxpay的Webhook通知中包含的签名信息，签名放在了请求的json里sign中，除此之外还有一个timestamp字段。
-######1.户需用自己的Maxleap的Appid，MasterKey和timestamp依次连接成一个字符串。
+######1.用户需用自己的Maxleap的Appid，MasterKey和timestamp依次连接成一个字符串。
 ######2.后用Md5算法对该字符串加密得到16进制表示的字符串。
 ######3.得到的字符串与sign进行比较，若内容相同，则验证通过，否则失败。
+#####用户再自行确认金额等订单信息是否正确。
 ## 如何测试 Webhook
 ###测试 Webhook
 完成 Webhook 的配置后，你可以使用 Webhook 的测试功能对你填写的地址进行测试。你可以在已配置的 Webhook 中选择事件类型发起测试，你将看到 MaxLeap 向你填写的 URL 发送的请求内容以及你的服务器向 MaxLeap 服务器返回的内容，MaxLeap 将根据你返回的 HTTP 状态码判断你的服务器是否接收成功。
