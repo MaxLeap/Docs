@@ -27,7 +27,9 @@ wx_jsapi|微信公众号支付
 
 ***头信息***
 >Content-Type = application/json
+>
 >X-ML-AppId = ${应用的ID}
+>
 >X-ML-Session-Token = ${应用内用户的登录信息}
 
 ***公共参数***
