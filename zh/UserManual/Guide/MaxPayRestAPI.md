@@ -1,6 +1,6 @@
 ### Server地址
 
->MaxPay目前支持北京数据中心，未来会增加国内其它数据中心
+MaxPay目前支持北京数据中心，未来会增加国内其它数据中心
 
 域名      | 位置
 -------- | ---
@@ -20,17 +20,17 @@ wx_jsapi|微信公众号支付
 **请求路径**
 
 ***URL***
->/2.0/maxpay/bill
+/2.0/maxpay/bill
 
 ***Method***
->POST
+POST
 
 ***头信息***
->Content-Type = application/json
->
->X-ML-AppId = ${应用的ID}
->
->X-ML-Session-Token = ${应用内用户的登录信息}
+属性      	| 值
+------		| ---
+Content-Type | application/json
+X-ML-AppId | ${应用的ID}
+X-ML-Session-Token | ${应用内用户的登录信息}
 
 ***公共参数***
 
@@ -76,17 +76,17 @@ id | String | 成功发起支付后返回支付表记录唯一标识
 **请求路径**
 
 ***URL***
->/2.0/maxpay/records
+/2.0/maxpay/records
 
 ***Method***
->POST
+POST
 
 ***头信息***
->Content-Type = application/json
->
->X-ML-AppId = ${应用的ID}
->
->X-ML-Session-Token = ${应用内用户的登录信息}
+属性      	| 值
+------		| ---
+Content-Type |application/json
+X-ML-AppId | ${应用的ID}
+X-ML-Session-Token | ${应用内用户的登录信息}
 
 ***公共参数***
 
