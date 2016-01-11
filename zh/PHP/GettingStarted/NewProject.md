@@ -20,12 +20,12 @@ git clone https://github.com/MaxLeap/SDK-MaxPay-PHP.git
 #### bill 测试
 通过内部文件testMLpay.php，可以对MLPay.php库文件进行简单的测试
 
-```shell
+```
 php testMLpay.php
 ```
 此时，我们将得到如下结果：
 
-```shell
+```
 stdClass Object
 (
     [id] => 56930318e4b0018057291132
@@ -45,14 +45,14 @@ stdClass Object
 #### record 测试
 
 编辑testMLpay.php文件，把以下内容
-```php
+```
   //bill
   $data["billNum"] = "112233";
   ...
   $result = MLPayApi::bill($data);
 ```
 改为
-```php
+```
   //bill
   /*
   $data["billNum"] = "112233";
@@ -61,13 +61,13 @@ stdClass Object
   */
 ```
 并且把以下部分,
-```php
+```
   //records
   //$data["billNum"] = "112233";
   //$result = MLPayApi::record($data);
 ```
 改为
-```php
+```
   //records
   $data["billNum"] = "112233";
   $result = MLPayApi::record($data);
@@ -78,12 +78,12 @@ stdClass Object
 * 此操作即为注销bill支付部分测试代码，并且打开record查询部分测试代码。
 
 执行命令
-```shell
+```
 php testMLpay.php
 ```
 
 此时，系统会给出所有关于billNum='112233'的所有付款内容
-```shell
+```
 stdClass Object
 (
     [results] => Array
@@ -120,4 +120,4 @@ stdClass Object
 至此表明改SDK部署全部成功。
 
 ## 下一步
- 至此，您已经完成 MaxLeap PHP-PAY-SDK 的安装与必要的配置。请移步至<a class="download-sdk" href="https://github.com/MaxLeap/Docs/blob/master/zh/PHP/Guide/MaxPay.md" target="_blank">php-pay-sdk</a>以获取 PHP-PAY-SDK 的详细功能介绍以及使用方法。
+ 至此，您已经完成 MaxLeap PHP-PAY-SDK 的安装与必要的配置。请移步至[php-pay-sdk 使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK)以获取 PHP-PAY-SDK 的详细功能介绍以及使用方法。
