@@ -6,17 +6,24 @@
 
 ## 使用
 
-请确保你使用的是 Xcode 6.4 以及更新版本。
+### 填写各支付渠道信息
+
+在集成 `MaxPay iOS SDK` 之前，请确保正确填写了将要集成的支付渠道的支付参数。
+
+1. 创建 MaxLeap 应用
+2. 打开支付渠道配置页面([MaxLeap 控制台](https://maxleap.cn) -> 支付管理 -> 渠道配置)，填写各支付渠道所需数据。
+
+接下来集成 `MaxPay iOS SDK`, 请确保你使用的是 Xcode 6.4 或者更新版本。
 
 ### 使用 `cocoapods` 安装
 
-在 Podfile 中加上下面这行:
+在 `Podfile` 中加上下面这行:
 
 ```
 pod 'MaxLeapPay'
 ```
 
-打开应用 `终端`, 执行以下命令
+打开应用 `终端`, 执行以下命令:
 
 ```
 $ cd your_project_dir
@@ -34,12 +41,12 @@ $ pod install
 	`libsqlite3.dylib`</br>
 	`libz.dylib`</br>
 
-4. 使用支付宝还需以下步骤
+到这里 `MaxLeapPay.framework` 已经安装完成，但是所有的支付渠道应该都为不可用状态，因为还没有集成这些渠道对应的支付 SDK。
+
+1. 使用支付宝还需以下步骤：
 
 	1. [下载并解压最新支付宝 SDK](https://doc.open.alipay.com/doc2/detail.htm?spm=0.0.0.0.5TxcD7&treeId=59&articleId=103563&docType=1)
 	2. 找到 `AliPay` 文件夹，该文件夹包含 `AliPaySDK.framework` 和 `AliPaySDK.bundle`，把该文件夹拖进项目中。
-
-到这里 `MaxLeapPay.framework` 已经安装完成，但是所有的支付渠道应该都为不可用状态，因为还没有集成这些渠道对应的支付 SDK。
 
 你可以设置支付环境，以用来测试。`MaxLeapPay` 提供了三种环境，Production(产品环境)、Sandbox(沙盒环境)、Offline(离线环境)。
 
@@ -47,7 +54,7 @@ $ pod install
 
 **注意：**不是所有渠道都支持沙盒环境和离线环境，如果某个渠道不支持当前环境，`+[MaxLeapPay isChannelAvaliable:]` 会返回 `NO`.
 
-## 使用支付宝支付
+### 使用支付宝支付
 
 ```
 // 1. 生成订单
@@ -85,14 +92,8 @@ payment.scheme = @"maxleappaysample";
 处理支付宝应用回调:
 
 ```
-// iOS 2.0 -- iOS 8.4
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [MaxLeapPay handleOpenUrl:url completion:^(MLPayResult * _Nonnull result) {
-        // 跳钱包支付结果回调，保证跳转钱包支付过程中，即使调用方app被系统kill时，能通过这个回调取到支付结果。
-    }];
-}
-
 // iOS 4.2 -- iOS 8.4
+// 如果需要兼容 iOS 6, iOS 7, iOS 8，需要实现这个代理方法
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     return [MaxLeapPay handleOpenUrl:url completion:^(MLPayResult * _Nonnull result) {
         // 跳钱包支付结果回调，保证跳转钱包支付过程中，即使调用方app被系统kill时，能通过这个回调取到支付结果。
@@ -100,9 +101,30 @@ payment.scheme = @"maxleappaysample";
 }
 
 // iOS 9.0 or later
+// iOS 9 会优先调用这个代理方法，如果没有实现这个，则会调用上面那个
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     return [MaxLeapPay handleOpenUrl:url completion:^(MLPayResult * _Nonnull result) {
         // 跳钱包支付结果回调，保证跳转钱包支付过程中，即使调用方app被系统kill时，能通过这个回调取到支付结果。
     }];
 }
 ```
+
+### 订单查询
+
+```
+NSString *billNo;
+MLPayChannel channel = MLPayChannelAliApp;
+[MaxLeapPay fetchOrderInfoWithBillNo:billNo channel:channel block:^(MLOrder * _Nonnull order, NSError * _Nonnull error) {
+    if (order) {
+        if ([order.status isEqualToString:@"pay"]) {
+               // 订单已经成功支付
+        } else {
+           // 订单没有支付
+        }
+    } else {
+        // 查询失败，订单不存在或者网络出错
+    }
+}];
+```
+
+查询订单需要知道订单流水号(billNo)和订单支付渠道(channel)。
