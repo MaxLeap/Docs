@@ -53,5 +53,7 @@
   "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/android/core/existing.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/java/core/existing.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS": "/api/ios/index.html",
-  "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html"
+  "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html",
+  
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK": "/guide/devguide/php.html"
 }
