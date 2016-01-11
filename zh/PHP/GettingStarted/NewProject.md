@@ -1,46 +1,9 @@
 ##### _Author: Kevin
-##### _Github: https://github.com/MaxLeap/SDK-MaxPay-PHP
+##### _Github: https://github.com/lalamini
 
 ### 兼容性
 
 目前MaxLeap的php-SDK 运行于php 5.4以上版本,您也可以对库文件进行适当修改，以符合您所使用的php环境。就目前所知的兼容性问题包括但不仅限于函数数组的使用,譬如$ret_array()[]。
-
-### 安装 MaxLeap命令行工具（MaxLeap-CLI）
-#### 下载MaxLeap-CLI
-下载地址：[https://github.com/MaxLeap/MaxLeap-CLI/releases](https://github.com/MaxLeap/MaxLeap-CLI/releases)
-
-更新版本为0.2，根据平台选择对应的客户端：
-
-1.  Windows：[maxleapforwindows.zip](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapforwindows.zip)
-2.  Linux/Mac OSX：[maxleapformac.tar.gz](https://github.com/MaxLeap/MaxLeap-CLI/releases/download/0.2/maxleapformac.tar.gz)
-
-下载完成后解压到安装目录，您可直接在终端中使用 MaxLeap-CLI。进入安装目录，查看MaxLeap-CLI版本
-
-```shell
-./maxleap -v
-```
-
-显示`maxleap version 0.2`表示MaxLeap客户端安装成功
-
-*	maxleap命令添加到环境变量
-
-每次执行maxleap命令都需要进入下载安装目录才能执行命令，你可以将maxleap添加到环境变量，这样你可以随时随地使用maxleap了
-
-1.  LINUX和MAC：
-
-    ```
-    vim ~/.bash_profile
-    ```
-
-    编辑profile文件，将MaxLeap安装目录追加到PATH中，比如你的MaxLeap安装目录为`/usr/local/maxleap-cli`
-
-    `export PATH=/usr/local/maxleap-cli:$PATH`
-
-    最后让profile生效：`source ~/.bash_profile`
-
-2.  WINDOWS：
-
-    //TODO:
 
 ### 安装SDK
 
@@ -157,4 +120,4 @@ stdClass Object
 至此表明改SDK部署全部成功。
 
 ## 下一步
- 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
+ 至此，您已经完成 MaxLeap PHP-PAY-SDK 的安装与必要的配置。请移步至<a class="download-sdk" href="https://github.com/MaxLeap/Docs/blob/master/zh/PHP/Guide/MaxPay.md" target="_blank">php-pay-sdk</a>以获取 PHP-PAY-SDK 的详细功能介绍以及使用方法。
