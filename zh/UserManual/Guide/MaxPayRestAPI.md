@@ -92,11 +92,11 @@ id | String | 成功发起支付后返回支付表记录唯一标识
 
 属性      	| 类型		|示例数据			|说明
 -------- 		| ---			|----					|---
-channel 	| String		|'ali'					|选填项，支付渠道
+channel   | String		|'ali'					|选填项，支付渠道
 billNum    	| String  	|'00x98987'	|选填项，订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一
 status    | String | 'success' |选填，订单状态
 startTime | Long | 1451890938648 |选填，订单创建时间的起始时间
-endTime   ｜Long ｜1451890939648｜选填，订单创建时间的终止时间
+endTime ｜Long ｜1451890939648｜选填，订单创建时间的终止时间
 skip      |Integer| 0 |选填，分页参数，跳过条数
 limit     ｜Integer｜ 100 ｜选填，分页参数，分页大小
 order     ｜String | '-createdTime' |选填，排序项，"-"开头表示倒序，后紧跟需要排序的关键字。顺序则直接填写排序关键字
