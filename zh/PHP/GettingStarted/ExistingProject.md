@@ -126,9 +126,9 @@ stdClass Object
 
 ###部署SDK
 
-测试完毕后，您可以拷贝改SDK文件到您的项目目录中，在项目文件中包含改库文件，就能使用该SDK进行支付操作了。
+测试完毕后，您可以拷贝该SDK文件到您的项目目录中，并且在项目文件中包含该库文件，就能使用该SDK进行支付操作。
 
-testMLpay.php是测试文件，不包含功能，不必拷贝改文件到您的项目中，但是你可以参考该文件进行编码。
+testMLpay.php是测试文件，不包含功能，不必拷贝此文件到您的项目中，但是你可以参考该文件进行编码。
 
 ## 下一步
  至此，您已经完成 MaxLeap PHP-PAY-SDK 的安装与必要的配置。请移步至<a class="download-sdk" href="https://github.com/MaxLeap/Docs/blob/master/zh/PHP/Guide/MaxPay.md" target="_blank">php-pay-sdk</a>以获取 PHP-PAY-SDK 的详细功能介绍以及使用方法。
