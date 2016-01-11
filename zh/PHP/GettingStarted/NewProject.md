@@ -125,7 +125,7 @@ stdClass Object
 ```
 表明支付查询接口测试通过。
 
-至此表明改SDK部署全部成功。
+至此表明该SDK部署全部成功。
 
 ## 下一步
  至此，您已经完成 MaxLeap PHP-PAY-SDK 的安装与必要的配置。请移步至[php-pay-sdk 使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK)以获取 PHP-PAY-SDK 的详细功能介绍以及使用方法。
