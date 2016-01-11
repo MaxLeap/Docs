@@ -1,4 +1,4 @@
-##### _Author: Kavin
+##### _Author: Kevin
 ##### _Github: https://github.com/MaxLeap/SDK-MaxPay-PHP
 
 ### 兼容性
