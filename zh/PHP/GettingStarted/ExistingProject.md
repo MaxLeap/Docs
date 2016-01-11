@@ -50,13 +50,16 @@ stdClass Object
 #### record 测试
 
 编辑testMLpay.php文件，把以下内容
+
 ```
   //bill
   $data["billNum"] = "112233";
   ...
   $result = MLPayApi::bill($data);
 ```
+
 改为
+
 ```
   //bill
   /*
@@ -65,13 +68,17 @@ stdClass Object
   $result = MLPayApi::bill($data);
   */
 ```
+
 并且把以下部分,
+
 ```
   //records
   //$data["billNum"] = "112233";
   //$result = MLPayApi::record($data);
 ```
+
 改为
+
 ```
   //records
   $data["billNum"] = "112233";
@@ -83,11 +90,13 @@ stdClass Object
 * 此操作即为注销bill支付部分测试代码，并且打开record查询部分测试代码。
 
 执行命令
+
 ```
 php testMLpay.php
 ```
 
 此时，系统会给出所有关于billNum='112233'的所有付款内容
+
 ```
 stdClass Object
 (
@@ -120,6 +129,7 @@ stdClass Object
   ...
   }
 ```
+
 表明支付查询接口测试通过。
 
 至此表明改SDK运行全部成功。
