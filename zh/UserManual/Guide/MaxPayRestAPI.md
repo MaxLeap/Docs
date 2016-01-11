@@ -128,8 +128,9 @@ results:|JsonArray|查询结果
 
 属性      	| 类型		|示例数据|说明			|
 -------- 		| ---			|----	|----	
+id|String|568a18fad4c6062dcda477b2|订单纪录的唯一id
 channel 	| String		|'ali'					|支付渠道
-billNum    	| String  	|'00x98987'	|订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一
+billNum    	| String  	|'00x98987'	|商户传入订单号
 totalFee	| Int   	|9900					|交易金额,单位为分
 createdTime | Long | 1451890938648|订单创建时间
 endTime   |Long |1451890939648|订单交易终止时间
