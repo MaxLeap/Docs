@@ -26,6 +26,7 @@ wx_jsapi|微信公众号支付
 POST
 
 ***头信息***
+
 属性      	| 值
 ------		| ---
 Content-Type | application/json
@@ -82,6 +83,7 @@ id | String | 成功发起支付后返回支付表记录唯一标识
 POST
 
 ***头信息***
+
 属性      	| 值
 ------		| ---
 Content-Type |application/json
