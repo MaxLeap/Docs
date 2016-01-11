@@ -132,7 +132,7 @@ channel 	| String		|'ali'					|支付渠道
 billNum    	| String  	|'00x98987'	|订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一
 totalFee	| Int   	|9900					|交易金额,单位为分
 createdTime | Long | 1451890938648|订单创建时间
-endTime   ｜Long ｜1451890939648｜订单交易终止时间
-status    | String | 'success' |订单状态
-extras    ｜JsonObject|{"1": "2"}|创建订单传入的额外信息
+endTime   |Long |1451890939648|订单交易终止时间
+status    |String |'success' |订单状态
+extras    |JsonObject|{"1": "2"}|创建订单传入的额外信息
 
