@@ -98,8 +98,8 @@ status    | String | 'success' |选填，订单状态
 startTime | Long | 1451890938648 |选填，订单创建时间的起始时间
 endTime   |Long | 1451890939648 |选填，订单创建时间的终止时间
 skip      |Integer| 0 |选填，分页参数，跳过条数
-limit     ｜Integer｜ 100 ｜选填，分页参数，分页大小
-order     ｜String | '-createdTime' |选填，排序项，"-"开头表示倒序，后紧跟需要排序的关键字。顺序则直接填写排序关键字
+limit     |Integer|100 |选填，分页参数，分页大小
+order     |String |'-createdTime' |选填，排序项，"-"开头表示倒序，后紧跟需要排序的关键字。顺序则直接填写排序关键字
 
 
 ***返回公共参数***
