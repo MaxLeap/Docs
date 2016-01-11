@@ -1,3 +1,6 @@
+##### _Author: Kevin
+##### _Github: https://github.com/lalamini
+
 # MaxPay
 ## 简介
 
