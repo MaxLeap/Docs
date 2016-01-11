@@ -19,6 +19,9 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 ##### PHP
 [详见PHP开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP)
 
+## 开发API
+[详见开放API文档](ML_DOCS_REST_API_MAXPAY)
+
 ## 支持渠道
 
 #### 支付宝
