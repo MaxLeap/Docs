@@ -88,7 +88,7 @@ POST
 ------		| ---
 Content-Type |application/json
 X-ML-AppId | ${应用的ID}
-X-ML-Session-Token | ${应用的MasterKey}
+X-ML-MasterKey | ${应用的MasterKey}
 
 ***公共参数***
 
