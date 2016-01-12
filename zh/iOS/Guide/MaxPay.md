@@ -111,20 +111,36 @@ payment.scheme = @"maxleappaysample";
 
 ### 订单查询
 
-```
-NSString *billNo;
-MLPayChannel channel = MLPayChannelAliApp;
-[MaxLeapPay fetchOrderInfoWithBillNo:billNo channel:channel block:^(MLOrder * _Nonnull order, NSError * _Nonnull error) {
-    if (order) {
-        if ([order.status isEqualToString:@"pay"]) {
-               // 订单已经成功支付
-        } else {
-           // 订单没有支付
-        }
-    } else {
-        // 查询失败，订单不存在或者网络出错
-    }
-}];
-```
+1. 如果知道订单流水号(billNo)和订单支付渠道(channel)，可以使用 `fetchOrderInfoWithBillNo:channel:block:` 直接获取订单信息，在回调中，可以检查订单状态。
 
-查询订单需要知道订单流水号(billNo)和订单支付渠道(channel)。
+	```
+	NSString *billNo;
+	MLPayChannel channel = MLPayChannelAliApp;
+	[MaxLeapPay fetchOrderInfoWithBillNo:billNo channel:channel block:^(MLOrder * 	_Nonnull order, NSError * _Nonnull error) {
+	    if (order) {
+	        if ([order.status isEqualToString:@"pay"]) {
+	               // 订单已经成功支付
+	        } else {
+	           // 订单没有支付
+	        }
+	    } else {
+	        // 查询失败，订单不存在或者网络出错
+	    }
+	}];
+	```
+
+2. 如果只知道订单号，也可以查询，但由于不同支付渠道订单号有可能一样，因此查询结果中可能会有多个订单。
+
+	```
+	[MaxLeapPay queryOrderWithBillNo:@"fffsa" block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+	    if (error) {
+	        // 出错了
+	    } else {
+	        if (objects.count == 0) {
+	            // 订单不存在
+	        } else {
+	            // 查询到订单信息
+	        }
+	    }
+	}];
+	```
