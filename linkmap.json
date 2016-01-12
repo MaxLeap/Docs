@@ -35,17 +35,16 @@
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON": "/guide/devguide/python.html",
 
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS": "/guide/devguide/nodejs.html",
 
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP": "/guide/devguide/php.html",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
 
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING": "/guide/usermanual/marketing.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DEVCENTER": "/guide/usermanual/developercenter.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH": "/guide/usermanual/clouddata.html",
-  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK": "/guide/usermanual/maxpaywebhook.html",
-  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN": "/guide/usermanual/maxpayadmin.html",
+
 
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",
@@ -53,9 +52,5 @@
   "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/android/core/existing.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/java/core/existing.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS": "/api/ios/index.html",
-  "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html",
-  
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK": "/guide/devguide/php.html",
-
-  "ML_DOCS_REST_API_MAXPAY": "/guide/usermanual/maxpayrestapi.html"
+  "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html"
 }
