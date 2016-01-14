@@ -85,7 +85,7 @@ Compile and run!
 	// Create a piece of data
 	MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 	testObject[@"foo"] = @"bar";
-	[MLDataManager saveObjectInBackground:testObject block:nil];
+	[testObject saveInBackgroundWithBlock:nil];
 }
 ```
 
