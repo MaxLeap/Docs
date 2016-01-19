@@ -18,7 +18,7 @@
 *  appid: 由MaxLeap 后台获取,类型:String
 *  token: 由MaxLeap 后台获取,类型:String
 *  billNum: 订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一,类型:String
-*  channel: 支付渠道, 目前支持 ali_web,类型:String
+*  channel: 支付渠道, 目前支持 ali_web,wx_native,类型:String
 *  totalFee: 整数,单位为分,类型:Integer
 *  subject: 订单主题,类型:String
 
@@ -27,8 +27,15 @@
 *  extras: 附加数据, 类型:Array
 *  returnUrl: 同步自动跳转url类型:String
 
-####3. 静态调用 $result = MLPayApi::bill($data);
+####3. 静态调用 
+
+```
+$result = MLPayApi::bill($data);
+```
+
 ####4. 返回值包含在$result中,结构如下:
+
+支付宝:
 ```
     {
         code:0,
@@ -39,11 +46,28 @@
         ali_web:""
      }
 ```
+
+微信
+```
+    {
+        code:0,
+        prepayid:"",
+        codeUrl:"",
+     }
+```
+
 #####说明:
+
+支付宝:
 *  code: 类型: Integer; 含义:返回码，0为正常
 *  msg: 类型: String; 含义: 返回信息， OK为正常
 *  err: 类型: String; 含义: 具体错误信息
 *  id: 类型: String; 含义: 成功发起支付后返回支付表记录唯一标识
+
+微信:
+*  code: 类型: Integer; 含义:返回码，0为正常
+*  prepayid: 类型: String; 含义: 返回信息，微信支付id
+*  codeUrl: 类型: String; 含义: 返回信息，二维码信息
 
 #####返回code 定义:
 *  0 | OK | 成功
@@ -64,14 +88,17 @@
 *  token: 由MaxLeap 后台获取,类型:String
 *  billNum: 订单号,类型:String
 
-####3. 静态调用 $result = MLPayApi::record($data);
+####3. 静态调用 
+```
+$result = MLPayApi::record($data);
+```
 ####4. 返回值包含在$result中,结构如下:
 ```
     {
      code:0,//0为正常，1为appid不存在
      results:[{
         "billNum": "a0afb0d7-e26f-4e94-bb7b-8265fc1492b7",
-        "channel": "ali_web“,
+        "channel": "ali_web",//("wx_native")
         status:"created",//string,分别为created未支付，sucess已支付，refund已退款。
         "createdTime":121111121121,//timstamp
         "endTime":12132132131231,//timstamp
@@ -82,4 +109,20 @@
       }]
     }
 ```  
-参考程序可运行testMLpay.php, 运行方式 php testMLpay.php
+参考程序可运行testMLpay.php, 运行方式
+####1. 支付宝支付
+```
+php testMLpay.php ali_web bill
+```
+####2. 支付宝查询
+```
+php testMLpay.php ali_web record
+```
+####3. 微信支付
+```
+php testMLpay.php wx_native bill
+```
+####4. 微信查询
+```
+php testMLpay.php wx_native record
+```
