@@ -20,8 +20,14 @@
 ![pay_channel_ali.png](../../../images/pay_channel_ali.png)
 
 #### 微信支付
+微信支付分为 “微信 App 支付” 和 “微信公众号支付”。
 
-尽请期待
+微信 App 支付的配置：
+![pay_channel_wxapp.png](../../../images/pay_channel_wxapp.png)
+
+微信公众号支付的配置：
+![pay_channel_wxnative.png](../../../images/pay_channel_wxnative.png)
+
 
 ## WebHook 配置
 详见 [WebHook 使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK)
