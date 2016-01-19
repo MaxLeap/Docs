@@ -2,7 +2,7 @@
 
 ## 简介
 
-目前支持支付宝App支付功能，以及根据订单号查询订单功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
+目前支持支付宝合和微信App支付功能，以及根据订单号查询订单功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
 
 ## 使用
 
@@ -26,6 +26,7 @@
 **各第三方平台的 SDK**
 
 - 支付宝 Jar 包: `alipaySdk.jar`
+- 微信 Jar 包：`libammsdk.jar`
 
 
 ### 配置应用权限
@@ -51,6 +52,32 @@
         android:screenOrientation="behind"
         android:windowSoftInputMode="adjustResize|stateHidden">
 </activity>
+```
+
+### 初始化平台
+
+**微信**
+
+```java
+MLPayManager.initializeWechatPay(context, "your wechat appId");
+```
+
+### 处理回调
+
+**微信**
+
+需要在自定义的 `WXPayEntryActivity` 的 `onCreate()` 方法中调用以下方法：
+
+```java
+MLPayManager.onCreate(getIntent());
+```
+
+如果希望支付完成后关闭 `WXPayEntryActivity` 可以在 `onResp()` 中添加以下方法：
+
+```java
+if (resp instanceof PayResp) {
+    finish();
+}
 ```
 
 ### 进行支付
@@ -79,6 +106,11 @@ MLPayManager.doPayInBackground(MainActivity.this, payParam,
 - `activity : Activity` 调用支付的 Android Activity
 - `payParam : MLPayParam` 调用支付的相关参数
 - `payCallback : PayCallback` 支付完成后的回调
+
+MLPayParam.Channel 表示支付渠道，目前支持两种
+
+- ALIPAY_APP 支付宝
+- WECHAT_APP 微信
 
 如果应用只集成了一个第三方平台的话可以省略渠道参数，SDK 会自动根据应用当前集成的第三方平台的情况自动调用对应的支付请求。
 
