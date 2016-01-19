@@ -71,7 +71,6 @@ stdClass Object
 php testMLpay.php record
 ```
 
-
 此时，系统会给出所有关于billNum='112233'的所有付款内容
 
 ```
