@@ -25,8 +25,10 @@ git clone https://github.com/MaxLeap/SDK-MaxPay-PHP.git
 #### bill 测试
 通过内部文件testMLpay.php，可以对MLPay.php库文件进行简单的测试
 
+##### 支付宝支付
+
 ```
-php testMLpay.php
+php testMLpay.php bill ali_web
 ```
 此时，我们将得到如下结果：
 
@@ -41,7 +43,28 @@ stdClass Object
 )
 ```
 
-表明支付接口测试通过。
+表明支付宝支付接口测试通过。
+
+注意:
+
+* 返回的数据对象所包含的内容以用户提交的数据为准。
+
+##### 微信支付
+
+```
+php testMLpay.php bill wx_native
+```
+此时，我们将得到如下结果：
+
+```
+stdClass Object
+(
+    [prepayid] => wx20160119104319f0f91df8b90436948052
+    [codeUrl] => weixin://wxpay/bizpayurl?pr=IysMGTv
+    [code] => 0
+)
+```
+表明微信支付接口测试通过。
 
 注意:
 
@@ -49,50 +72,8 @@ stdClass Object
 
 #### record 测试
 
-编辑testMLpay.php文件，把以下内容
-
 ```
-  //bill
-  $data["billNum"] = "112233";
-  ...
-  $result = MLPayApi::bill($data);
-```
-
-改为
-
-```
-  //bill
-  /*
-  $data["billNum"] = "112233";
-  ...
-  $result = MLPayApi::bill($data);
-  */
-```
-
-并且把以下部分,
-
-```
-  //records
-  //$data["billNum"] = "112233";
-  //$result = MLPayApi::record($data);
-```
-
-改为
-
-```
-  //records
-  $data["billNum"] = "112233";
-  $result = MLPayApi::record($data);
-```
-
-注意:
-
-* 此操作即为注销bill支付部分测试代码，并且打开record查询部分测试代码。
-
-执行命令
-
-```
-php testMLpay.php
+php testMLpay.php record
 ```
 
 此时，系统会给出所有关于billNum='112233'的所有付款内容
@@ -133,6 +114,18 @@ stdClass Object
 表明支付查询接口测试通过。
 
 至此表明该SDK运行全部成功。
+
+#### 注:
+
+微信支付返回的codeUrl可以生成一个二维码进行扫码支付，代码参考如下
+```
+$widhtHeight = 200;
+$EC_level='L';
+$margin='0';
+$chl=$codeUrl;
+$size="xxxx";
+echo '<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight.'&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'" alt="QR code" widhtHeight="'.$size.'" widhtHeight="'.$size.'"/>';
+```
 
 ###部署SDK
 
