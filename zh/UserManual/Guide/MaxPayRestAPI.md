@@ -60,8 +60,8 @@ id | String | 成功发起支付后返回支付表记录唯一标识
 ***返回alipay的参数***
 属性      	| 类型		|说明			|
 -------- 		| ---			|----		
-ali_web|String|跳转到用户支付的连接
-ali_app|String|app使用的string
+ali_web | String | 跳转到用户支付的连接
+ali_app | String | app使用的string
 ***返回wxpay_native的参数***
 属性      	| 类型		|说明			|
 -------- 		| ---			|----		
