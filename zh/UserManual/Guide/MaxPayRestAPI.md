@@ -11,10 +11,9 @@ https://api.maxleap.cn | 北京
 -------- 		| ---			
 ali_app	|支付宝应用	
 ali_web|支付宝页面	
-ali_qrcode|支付宝内嵌二维码支付	
 wx_app|微信应用	
-wx_native|微信公众号扫码支付	
-wx_jsapi|微信公众号支付
+wx_native|微信扫码支付	
+
 
 ### 支付接口
 **请求路径**
