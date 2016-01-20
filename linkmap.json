@@ -46,6 +46,9 @@
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH": "/guide/usermanual/clouddata.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH": "/guide/usermanual/cloudcode.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CONFIG_ZH": "/guide/usermanual/cloudconfig.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_OFFLINE_ANALYZE_ZH": "/guide/usermanual/clouddataofflinedataanalyze.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK": "/guide/usermanual/maxpaywebhook.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN": "/guide/usermanual/maxpayadmin.html",
 
