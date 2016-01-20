@@ -3,17 +3,19 @@
 ###什么是云代码服务
 云代码是部署运行在MaxLeap中的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
 
+目前支持 Java、Python、Node.js，其他语言尽请期待。
+
 ###为什么需要云代码服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现。其优势在于：
 
 * 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求 Cloud Data，大大提升效率
-* 同一套代码可以为iOS，Android，web site等提供服务
+* 同一套代码可以为iOS，Android，Web Site等提供服务
 
 在应用管理页面中，您可以查看，新建和管理各个版本的云代码及相应的日志。
 
-**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**
+**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA),[Python开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON),[Node.js开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS) **
 
 ##版本状态
 在"版本状态"报表中，我们可以查看上传至该应用下的所有的云代码。该报表包含以下列：
@@ -74,10 +76,10 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 
 ![imgCCJobList.png](../../../images/imgCCJobList.png)
 
-####新建任务计划
-您可以通过“创建任务计划”，运行云代码中的任务。创建时，您需要提供
+####新建任务
+您可以通过“创建定时任务”，运行云代码中的任务。创建时，您需要提供
 
-* 名称：任务计划名
+* 名称：任务名
 * 当前版本：该任务执行在对应版本上，无法选择，系统会默认指定为应用当前的最新版本
 * 函数名：云代码中定义的任务名
 * 安排时间：设置任务的开始运行时间
@@ -86,8 +88,8 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 
 ![imgCCScheduleJob](../../../images/imgCCScheduleJob.png)
 
-####查看计划执行状态
-任务状态中，您可以查看任务计划，每次执行任务后的状态和结果。包括执行时间，结束时间以及是否成功。
+####查看任务执行状态
+任务状态中，您可以查看任务，每次执行任务后的状态和结果。包括执行时间，结束时间以及是否成功。
 
 ![imgCCJobStatus.png](../../../images/imgCCJobStatus.png)
 
@@ -136,4 +138,4 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 
 ## 下一步
 
-**如果您希望进一步了解MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。**
+**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA),[Python开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON),[Node.js开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS) **
