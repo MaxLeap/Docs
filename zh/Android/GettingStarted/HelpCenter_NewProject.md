@@ -10,8 +10,8 @@ HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 He
 
 	**Android Studio**
 
-    1. 	打开 Android Studio，点击 “Import project”
-    2. 	进入项目模板根目录，选择 `build.gradle`
+    1. 	打开 Android Studio，点击 `Import project`
+    2. 	进入项目模板根目录，选择 `settings.gradle`
     3. 	按照默认配置点击下一步，直到完成
 
 ##	连接项目与 MaxLeap 应用
@@ -81,18 +81,17 @@ public class MyApplication extends Application {
             MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
 
             //测试项目配置：
-    		MLQuery<MLObject> query = MLQuery.getQuery("foo");
-            query.whereEqualTo(MLObject.KEY_OBJECT_ID, "bar");
-            MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
-                @Override
-                public void done(final MLObject object, final MLException e) {
-                    if (e != null && e.getCode() == 90000) {
-                        Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
-                    } else {
-                        Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
-                    }
-                }
-            });
+            MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
+                        new GetCallback<MLObject>() {
+                            @Override
+                            public void done(MLObject mlObject, MLException e) {
+                                if (e != null && e.getCode() == MLException.INVALID_OBJECT_ID) {
+                                    Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
+                                } else {
+                                    Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
+                                }
+                            }
+                        });
         }
     }
     ```

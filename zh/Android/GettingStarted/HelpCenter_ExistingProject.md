@@ -2,15 +2,15 @@
 
 HelpCenter 是依赖于 MaxLeap Core SDK 之上的服务，在安装和使用 HelpCenter SDK 之前，请确保您的项目已经安装 MaxLeap Core SDK. 您可以在 [MaxLeap Core SDK 安装向导](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID) 中获取更多信息。
 
-1. 获取SDK
+1. 获取 SDK
 
     <a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-Android" target="_blank">下载 MaxLeap HelpCenter SDK</a>
 
-2. 添加SDK
+2. 添加 SDK
 
     **Android Studio**
 
-    1. 	打开 Android Studio，点击 “File” -> "New.." -> "Import Module"，选择所下载 SDK 的 "MaxLeap HelpCenter" 目录
+    1. 	打开 Android Studio，点击 `File` -> `New..` -> `Import Module`，选择所下载 SDK 的 `MaxLeap HelpCenter` 模块
     2. 	打开需要使用 HelpCenter 的 Module，在其 `build.gradle` 中添加如下依赖：
 
     ```gradle
@@ -86,18 +86,17 @@ public class MyApplication extends Application {
             MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
 
             //测试项目配置：
-    		MLQuery<MLObject> query = MLQuery.getQuery("foo");
-            query.whereEqualTo(MLObject.KEY_OBJECT_ID, "bar");
-            MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
-                @Override
-                public void done(final MLObject object, final MLException e) {
-                    if (e != null && e.getCode() == 90000) {
-                        Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
-                    } else {
-                        Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
-                    }
-                }
-            });
+            MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
+                        new GetCallback<MLObject>() {
+                            @Override
+                            public void done(MLObject mlObject, MLException e) {
+                                if (e != null && e.getCode() == MLException.INVALID_OBJECT_ID) {
+                                    Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
+                                } else {
+                                    Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
+                                }
+                            }
+                        });
         }
     }
     ```

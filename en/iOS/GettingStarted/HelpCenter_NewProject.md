@@ -42,7 +42,7 @@ We can add following code in `application:didFinishLaunchingWithOptions:` in `ap
 // Create a piece of data
 MLObject *testObject = [MLObject objectWithClassName:@"Person"];
 testObject[@"foo"] = @"bar";
-[MLDataManager saveObjectInBackground:testObject block:nil];
+[testObject saveInBackgroundWithBlock:nil];
 ```
 
 This code is used to create a piece of `Person` data. If there is no `Person` class in cloud, then it will create the class first and then insert data.

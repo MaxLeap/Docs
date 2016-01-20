@@ -3,7 +3,7 @@
 
 ### 兼容性
 
-目前 MaxLeap Python SDK 基于 Python 2.x 开发，在 Python 3.x 环境下使用仍然有一些兼容性问题。我们会尽快改善这一问题的。
+目前 MaxLeap Nodejs CloudCode 的Nodejs版本为5.3.0，请你最好使用此版本进行开发。至少不要低于0.12。
 
 ### 安装 MaxLeap命令行工具（MaxLeap-CLI）
 #### 下载MaxLeap-CLI
@@ -44,46 +44,17 @@
 
 ### 安装SDK
 
-你可以使用 `pip` 或者 `easy_install` 安装 Python SDK
+你可以使用 `npm` 安装 Nodejs SDK
 
 ```sh
-pip install maxleap-sdk
+npm install mlcloudcode
 ```
 
-or
-
-```sh
-easy_install maxleap-sdk
-```
-
-根据你的环境，命令之前可能还需要加上 `sudo` 。
-
-**注意**：如果您的 Python 版本低于 2.7.9，您可能会遇到如下的 Warning：ML
-
-```
-/usr/lib/python2.7/site-packages/requests-2.6.0-py2.7.egg/requests/packages/urllib3/util/ssl_.py:79: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
-InsecurePlatformWarning
-```
-
-建议您升级您的 Python 版本，或者通过安装 PyOpenSSL 来解决：
-
-```sh
-pip install pyopenssl ndg-httpsclient pyasn1
-```
-
-### 使用模板创建 MaxLeap 云代码项目
-
-获取 MaxLeap 云代码 Python项目模板
-
-```shell
-git clone https://github.com/MaxLeap/Demo-CloudCode-Python.git
-```
-
-### 一个python cloudcode项目的目录树应该如下：
+### 一个Nodejs cloudcode项目的目录树应该如下：
 
 ```
 ├── app                     #cloudcode主目录 (必备)
-│   ├── requirements.txt    #cloudcode所依赖的pip库（可选）
+│   ├── package.json        #cloudcode的环境依赖（可选）
 │   ├── function            #function目录（可选）
 │   │   └── demo.py
 │   ├── hook                #hook目录（可选）
@@ -91,14 +62,19 @@ git clone https://github.com/MaxLeap/Demo-CloudCode-Python.git
 |   └── tests               #tests目录（可选）
 ├── config                  #cloudcode配置文件目录（必备）
 │   └── global.json         #cloudcode配置文件（必备）
-└── lib                     #cloudcode所依赖的lib（可选）
+└── node_modules            #cloudcode的环境依赖（可选）
 ```
 
 ### 目录加载顺序
 
-1. 拷贝lib依赖
-2. pip安装requirements.txt
+1. npm安装package.json
+2. 拷贝node_modules依赖
 3. 加载程序文件，顺序为：config -> hook -> job -> function
+
+
+### 集成已有项目
+1. 你可以把以后的项目按照module的形式copy到node_modules目录。这样你可以在你的function、job、hook中访问它。
+2. 你也可以在`/app`目录下面添加你已有的项目。然后在function、job、hook中访问它。
 
 ### 修改配置
 在/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
@@ -108,7 +84,7 @@ git clone https://github.com/MaxLeap/Demo-CloudCode-Python.git
 	"applicationName" : "HelloWorld",
 	"applicationId": "YOUR_APPLICATION_ID",
 	"applicationKey": "YOUR_MASTER_KEY",
-	"lang" : "python",
+	"lang" : "nodejs",
 	"version": "0.0.1"
 }
 ```
@@ -125,13 +101,10 @@ version|当前云代码项目版本号
 ### 定义一个简单的function
 在`/function`目录下新建文件demo.py中
 
-```python
-from ML import Server
-from ML import Response
-@Server.Function
-def helloword(request):
-    return Response("hello world")
-
+```nodejs
+ML.Cloud.function('helloworld',function(req, res){
+	res.end("helloworld")
+});
 ```
 
 ### 打包
@@ -141,6 +114,7 @@ def helloword(request):
 `zip -r <ProjectLocation> ./*`
 
 `ProjectLocation`便是我们想要的package.
+
 
 ## 云代码的上传及部署
 1. 登录：`maxleap login <UserName> -region <CN or US ...>`
@@ -152,7 +126,7 @@ def helloword(request):
 
 *	这里的VersionNumber定义在您云代码项目中的global.json文件中（version字段的值）
 * 	若您在部署之前，已经部署过某个版本的云代码，需要先卸载该版本的云代码，才能部署新版本。
-*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[mlc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，以获取mlc的更多信息。
+*	使用`maxleap help`来获取所有相关命令帮助，你也可以查看[mlc使用向导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)，以获取mlc的更多信息。
 
 ### 测试
 
@@ -177,4 +151,4 @@ hello world
 * X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
 ## 下一步
- 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
+ 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
