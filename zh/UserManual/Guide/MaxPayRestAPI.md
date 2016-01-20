@@ -58,16 +58,19 @@ msg | String | 返回信息， OK为正常
 err | String | 具体错误信息
 id | String | 成功发起支付后返回支付表记录唯一标识
 ***返回alipay的参数***
+
 属性      	| 类型		|说明			|
 -------- 		| ---			|----		
 ali_web | String | 跳转到用户支付的连接
 ali_app | String | app使用的string
 ***返回wxpay_native的参数***
+
 属性      	| 类型		|说明			|
 -------- 		| ---			|----		
 prepayid|String|微信prepay_id
 codeUrl|String|微信二维码
 ***返回wxpay_app的参数***
+
 属性      	| 类型		|说明			|
 -------- 		| ---			|----	
 appid|String|微信应用id
