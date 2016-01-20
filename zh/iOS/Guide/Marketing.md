@@ -58,7 +58,9 @@ Marketing 服务是 MaxLeap 提供的营销和信息发布功能。目前提供�
         UIUserNotificationSettings *pushsettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:pushsettings];
     } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+#endif
     }
 }
 
