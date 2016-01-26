@@ -118,6 +118,7 @@ stdClass Object
 #### 注:
 
 微信支付返回的codeUrl可以生成一个二维码进行扫码支付，代码参考如下
+
 ```
 $widhtHeight = 200;
 $EC_level='L';
