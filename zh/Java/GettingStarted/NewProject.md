@@ -89,11 +89,10 @@ version|当前云代码项目版本号
 ### 定义一个简单的function
 
 ```Java
-import com.maxleap.code.MLLoader;
-import com.maxleap.code.Response;
+import com.maxleap.code.*;
 import com.maxleap.code.impl.GlobalConfig;
+import com.maxleap.code.impl.MLResponse;
 import com.maxleap.code.impl.LoaderBase;
-import com.maxleap.code.impl.Response;
 
 public class Main extends LoaderBase implements Loader {
     @Override

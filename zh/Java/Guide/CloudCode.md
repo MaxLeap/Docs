@@ -549,7 +549,7 @@ public class Article extends MLObject {
     map.put("field2",123);
     map.put("field3",true);
     update.setMany(map);
-``
+```
 
 `unset`用来删除指定字段
 
@@ -569,7 +569,7 @@ public class Article extends MLObject {
     list.add("field2");
     list.add("field3");
     update.unsetMany(list);
-``
+```
 
 `inc`用来对数字类型字段增加指定数值(注意该值可以为负数，若为负数表示减少值)
 
