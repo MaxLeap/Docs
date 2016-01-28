@@ -7,9 +7,12 @@
 
 ####新增 Webhook
 登录 MaxLeap 支付管理平台，点击你创建的应用,点击左侧 Webhook 选项。新建一个 Webhook 事件的基本操作如下图所示，用户需要设置接收 Webhook 事件的地址、模式和事件类型。
+其中，WebHook 的服务器可以选择 MaxLeap 提供的云函数，也可以是自己服务器的 URL。
+使用MaxLeap 云函数：
 ![pay_addwebhook.png](../../../images/pay_addwebhook.png)
 
-其中，WebHook 的服务器可以选择 MaxLeap 提供的云函数，也可以是自己服务器的 URL。
+自定义 URL:
+![pay_addwebhook_url.png](../../../images/pay_addwebhook_url.png)
 
 * Webhook 的云函数
 
@@ -53,8 +56,12 @@ Maxpay的Webhook通知中包含的签名信息，签名放在了请求的json里
 ## 如何测试 Webhook
 ###测试 Webhook
 完成 Webhook 的配置后，你可以使用 Webhook 的测试功能对你填写的地址进行测试。你可以在已配置的 Webhook 中选择事件类型发起测试，你将看到 MaxLeap 向你填写的 URL 发送的请求内容以及你的服务器向 MaxLeap 服务器返回的内容，MaxLeap 将根据你返回的 HTTP 状态码判断你的服务器是否接收成功。
-在 Webhook 列表中，点击“测试”图标可以测试该条 Webhook 是否配置成功：
+在 Webhook 列表中，点击“测试”图标可以测试该条 Webhook 是否配置成功。
 
+MaxLeap 云函数类型的 WebHook 测试：
+![pay_testwebhook_cloudfunction.png](../../../images/pay_testwebhook_cloudfunction.png)
+
+自定义 URL 的 WebHook 测试：
 ![pay_testwebhook.png](../../../images/pay_testwebhook.png)
 
 
