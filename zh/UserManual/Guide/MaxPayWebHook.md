@@ -9,9 +9,11 @@
 登录 MaxLeap 支付管理平台，点击你创建的应用,点击左侧 Webhook 选项。新建一个 Webhook 事件的基本操作如下图所示，用户需要设置接收 Webhook 事件的地址、模式和事件类型。
 其中，WebHook 的服务器可以选择 MaxLeap 提供的云函数，也可以是自己服务器的 URL。
 使用MaxLeap 云函数：
+
 ![pay_addwebhook.png](../../../images/pay_addwebhook.png)
 
 自定义 URL:
+
 ![pay_addwebhook_url.png](../../../images/pay_addwebhook_url.png)
 
 * Webhook 的云函数
@@ -63,6 +65,7 @@ MaxLeap 云函数类型的 WebHook 测试：
 ![pay_testwebhook_cloudfunction.png](../../../images/pay_testwebhook_cloudfunction.png)
 
 自定义 URL 的 WebHook 测试：
+
 ![pay_testwebhook.png](../../../images/pay_testwebhook.png)
 
 
