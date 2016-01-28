@@ -59,6 +59,7 @@ Maxpay的Webhook通知中包含的签名信息，签名放在了请求的json里
 在 Webhook 列表中，点击“测试”图标可以测试该条 Webhook 是否配置成功。
 
 MaxLeap 云函数类型的 WebHook 测试：
+
 ![pay_testwebhook_cloudfunction.png](../../../images/pay_testwebhook_cloudfunction.png)
 
 自定义 URL 的 WebHook 测试：
