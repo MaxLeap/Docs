@@ -2,10 +2,15 @@
    为了便于客户系统或者第三方系统处理客户的交易信息， MaxPay 提供 WebHook 功能，可以按照客户要求把特定的事件结果推送到指定的地址以便于客户做后续处理。
 
 ## WebHook 类型
+
 ### MaxLeap 云函数
-    您可以使用 MaxLeap 云代码中的云函数来实现您的WebHook功能，MaxLeap 云函数会处理来自 MaxPay 的通知事件。使用 MaxLeap 云函数意味着您将不用自建服务器，详情请参考![MaxLeap － 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)。 
+
+    您可以使用 MaxLeap 云代码中的云函数来实现您的WebHook功能，MaxLeap 云函数会处理来自 MaxPay 的通知事件。使用 MaxLeap 云函数意味着您将不用自建服务器，详情请参考![MaxLeap － 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)。
+    
 ### 自定义URL
+
     您也可以自建服务器来接收来自 MaxPay 的通知事件。
+    
 ## 如何使用 WebHook
 
 ### 第一步：配置你的 WebHook
