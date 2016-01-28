@@ -5,11 +5,11 @@
 
 ### MaxLeap 云函数
 
-    您可以使用 MaxLeap 云代码中的云函数来实现您的WebHook功能，MaxLeap 云函数会处理来自 MaxPay 的通知事件。使用 MaxLeap 云函数意味着您将不用自建服务器，详情请参考![MaxLeap － 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)。
+   您可以使用 MaxLeap 云代码中的云函数来实现您的 WebHook 功能，MaxLeap 云函数会处理来自 MaxPay 的通知事件。使用 MaxLeap 云函数意味着您将不用自建服务器，详情请参考 [MaxLeap云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)。
     
 ### 自定义URL
 
-    您也可以自建服务器来接收来自 MaxPay 的通知事件。
+  您也可以自建服务器来接收来自 MaxPay 的通知事件。
     
 ## 如何使用 WebHook
 
