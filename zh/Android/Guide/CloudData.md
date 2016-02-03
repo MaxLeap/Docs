@@ -1160,23 +1160,9 @@ MLUserManager.requestPasswordResetInBackground(
 * 用户根据向导点击重置密码链接，打开一个ML的页面，输入一个新的密码。
 * MaxLeap 将用户的密码重置为新输入的密码。
 
-###查询用户
+### 查询用户
 
-您可以通过特殊的UserQuery查询用户数据。MaxLeap对用户数据安全性提供充分的保障，如需获取更多信息，请查看*用户对象的安全性*部分。
-
-```java
-MLQuery<MLUser> query = MLUser.getQuery();
-query.whereEqualTo("gender", "female");
-MLQueryManager.findAllInBackground(query, new FindCallback<MLUser>() {
-  public void done(List<MLUser> objects, MLException e) {
-    if (e == null) {
-        // The query was successful.
-    } else {
-        // Something went wrong.
-    }
-  }
-});
-```
+出于安全性考虑，MaxLeap 目前不允许对用户进行查询操作。
 
 ### 邮箱验证
 
