@@ -1094,15 +1094,7 @@ NSString *theNewPassword;
 
 ### 查询用户
 
-若要查询用户表，您需要使用特殊的用户查询：
-
-```objective_c
-MLQuery *query = [MLUser query];
-[query whereKey:@"gender" equalTo:@"female"]; // find all the women
-[query findObjectsInBackgroundWithBlock:^(NSArray *girls, NSError *error) {
-    NSLog(@"%@", girls);
-}];
-```
+出于安全考虑，不允许客户端查询用户表。
 
 ### 邮箱验证
 
