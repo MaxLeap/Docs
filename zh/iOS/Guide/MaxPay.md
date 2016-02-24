@@ -122,7 +122,7 @@ payment.subject = @"测试";
 // 总金额，单位：分
 payment.totalFee = 0.01 * 100;
 
-// 支付宝支付完成后通知支付结果时需要用到，没有固定格式
+// 支付宝支付完成后通知支付结果时需要用到，没有固定格式，可以是 info.plist -> URL Types 中的任意一个 scheme
 payment.scheme = @"maxleappaysample";
 
 // 配置自定义字段
@@ -187,7 +187,7 @@ payment.scheme = @"maxleappaysample";
 	// 总金额，单位：分
 	payment.totalFee = 0.01 * 100;
 	
-	// 注意：这里与支付宝不同，微信移动支付需要配置 URLScheme
+	// 注意：这里与支付宝不同，微信移动支付需要在 info.plist -> URL Types 中配置专用 URL Scheme, scheme 值为微信应用的 appId
 	// payment.scheme = @"不需要设置";
 	
 	// 配置自定义字段
