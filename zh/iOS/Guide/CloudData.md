@@ -120,7 +120,7 @@ NSDate *createdAt = myComment.createdAt;
 
 ```objective_c
 // 根据 objectId 获取 MLObject
-MLObject *object = [MLObject objectWithClassName:@"Comment"];
+MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:@"objectId"];
 [object fetchInBackgroundWithBlock:^(MLObject *myComment, NSError *error) {
     // Now let's update it with some new data. In this case only isRead will get sent to the cloud
     myComment[@"isRead"] = @YES;
