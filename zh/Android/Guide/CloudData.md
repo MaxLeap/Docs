@@ -3,19 +3,21 @@
 ## 简介
 
 ### 什么是 Cloud Data服务
- Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
-### 为何需要 Cloud Data服务
- Cloud Data将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+ Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象 `MLObject` 的基础上，每个 `MLObject` 包含若干键值对。所有` MLObject` 均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于 `MLObject` 的对象。
+
+### 为何需要 Cloud Data 服务
+
+Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
-* 提供标准而又完整的数据访问API
-* 不同于传统关系型数据库，向云端存储数据无需提前建表，数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可结合Cloud Code服务，实现云端数据的Hook （详情请移步至[Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
+* 提供标准而又完整的数据访问 API
+* 数据对象以 JSON 格式随存随取，高并发访问轻松无压力
+* 可结合 Cloud Code 服务，实现云端数据的 Hook （详情请移步至 [Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
 
 ## Cloud Object
 
-存储在 Cloud Data的对象称为`MLObject`，而每个`MLObject`被规划至不同的`class`中（类似“表”的概念)。`MLObject`包含若干键值对，且值为兼容JSON格式的数据。您无需预先指定每个 MLObject包含哪些属性，也无需指定属性值的类型。您可以随时向`MLObject`增加新的属性及对应的值， Cloud Data服务会将其存储至云端。
+存储在 Cloud Data 的对象称为 `MLObject`，而每个 `MLObject` 被规划至不同的 `class` 中（类似“表”的概念)。`MLObject` 包含若干键值对，且值为兼容 JSON 格式的数据。您无需预先指定每个 MLObject 包含哪些属性，也无需指定属性值的类型。您可以随时向 `MLObject` 增加新的属性及对应的值， Cloud Data 服务会将其存储至云端。
 
 ### 新建
 
@@ -52,8 +54,8 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 注意：
 
 * **Comment表合何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端创建表，所以在使用前必须先登录 MaxLeap 的控制台并手动创建 Comment 表。这样在运行代码后这条数据才会被成功插入。
-* **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建comment对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **数据结构** 为了数据的安全性，您必须事先在控制台指定好所需要的所有属性及其类型，然后 `MLObject` 才能被正常保存。
+* **表中同一属性值类型一致:** 如果云端的这个应用中已经存在名为 Comment 的数据表，而且也包括 content、pubUserId、isRead 等属性，那么，新建 comment 对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
+* **数据结构:** 为了数据的安全性，您必须事先在控制台指定好所需要的所有属性及其类型，然后 `MLObject` 才能被正常保存。
 * **内建的属性:** 每个 MLObject 对象有以下几个保存元数据的属性是不需要开发者指定的。这些属性的创建和更新是由系统自动完成的，请不要在代码里使用这些属性来保存数据。
 
 	属性名|值|
@@ -62,9 +64,9 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 	createdAt|对象的创建时间
 	updatedAt|对象的最后修改时间
 
-* **大小限制：** ML Object的大小被限制在128K以内。
+* **大小限制：** MLObject的大小被限制在 128K 以内。
 * 键的名称可以包含英文字母，数字和下划线，但是必须以字母开头。值的类型可为字符, 数字, 布尔, 数组或是MLObject，为支持JSON编码的类型即可.
-* 您可以在调用 `MLDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback实例，用以检查新建是否成功。
+* 您可以在调用 `MLDataManager.saveInBackground()`时，传入第二个参数 - SaveCallback 实例，用以检查新建是否成功。
 
 ```java
 MLDataManager.saveInBackground(myComment, new SaveCallback() {
@@ -79,7 +81,7 @@ MLDataManager.saveInBackground(myComment, new SaveCallback() {
 });
 ```
 
-###查询
+### 查询
 
 ##### 查询 MLObject
 
@@ -147,7 +149,7 @@ MLDataManager.fetchInBackground(object, new GetCallback<MLObject>() {
 });
 ```
 
-###更新
+### 更新
 
 更新 MLObject 需要两步：首先获取需要更新的 MLObject，然后修改并保存。
 
@@ -169,15 +171,18 @@ MLQueryManager.getInBackground(query, objId, new GetCallback<MLObject>() {
 
 客户端会自动找出被修改的数据，所以只有 “dirty” 字段会被发送到服务器。您不需要担心其中会包含您不想更新的数据。
 
-###删除
-#####删除MLObject
+### 删除
+
+##### 删除MLObject
+
 您可以使用`MLDataManager.deleteInBackground()` 方法删除MLObjcet。确认删除是否成功，您可以使用 DeleteCallback 回调来处理删除操作的结果。
 
 ```java
 MLDataManager.deleteInBackground(comment);
 ```
 
-#####批量删除
+##### 批量删除
+
 您可以使用`MLDataManager.deleteAllInBackground()` 方法删除多个MLObjcet。
 
 ```java
@@ -185,7 +190,8 @@ List<MLObject> objects = ...
 MLDataManager.deleteAllInBackground(objects);
 ```
 
-#####删除MLObject实例的某一属性
+##### 删除MLObject实例的某一属性
+
 除了完整删除一个对象实例外，您还可以只删除实例中的某些指定的值。请注意只有调用 saveInBackground() 之后，修改才会同步到云端。
 
 ```java
@@ -201,14 +207,15 @@ MLDataManager.saveInBackground(comment.remove);
 
 比如记录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
 
-#####递增计数器
+##### 递增计数器
+
 此时，我们可以利用`increment()`方法(默认增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录用户游戏分数的字段"score"，我们可以使用如下方式：
 
 ```java
 gameScore.increment("score");
 MLDataManager.saveInBackground(gameScore);
 ```
-#####指定增量
+##### 指定增量
 
 ```java
 gameScore.increment("score",1000);
@@ -216,18 +223,20 @@ MLDataManager.saveInBackground(gameScore);
 ```
 
 注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
-#####递减计数器
+
+##### 递减计数器
 
 ```java
 gameScore.increment("score",-1000);
 MLDataManager.saveInBackground(gameScore);
 ```
 
-###数组
+### 数组
 
 您可以通过以下方式，将数组类型的值保存至MLObject的某字段(如下例中的skills字段)下：
 
-#####增加至数组尾部
+##### 增加至数组尾部
+
 您可以使用`add()`或`addAll()`向`skills`属性的值的尾部，增加一个或多个值。
 
 ```java
@@ -238,7 +247,8 @@ MLDataManager.saveInBackground(gameScore);
 
 同时，您还可以通过`addUnique()` 及 `addAllUnique()`方法，仅增加与已有数组中所有item都不同的值。插入位置是不确定的。
 
-#####使用新数组覆盖
+##### 使用新数组覆盖
+
 调用`put()`函数，`skills`字段下原有的数组将被覆盖：
 
 ```java
@@ -246,7 +256,8 @@ gameScore.put("skills", Arrays.asList("flying", "kungfu"));
 MLDataManager.saveInBackground(gameScore);
 ```
 
-#####删除某数组字段的值
+##### 删除某数组字段的值
+
 调用`removeAll()`函数，`skills`字段下原有的数组将被清空：
 
 ```java
@@ -263,7 +274,8 @@ MLDataManager.saveInBackground(gameScore);
 
 注：MaxLeap Services是通过 Pointer 类型来解决这种数据引用的，并不会将数据 a 在数据 b 的表中再额外存储一份，这也可以保证数据的一致性。
 
-####一对一关联
+#### 一对一关联
+
 例如：一条微博信息可能会对应多条评论。创建一条微博信息并对应一条评论信息，您可以这样写：
 
 ```JAVA
@@ -303,7 +315,8 @@ MLDataManager.fetchInBackground(post, new GetCallback<MLObject>() {
 });
 ```
 
-####一对多关联
+#### 一对多关联
+
 将两条评论分别关联至一条微博中：
 
 ```java
@@ -341,7 +354,7 @@ myPost.add("comment", myComment);
 myPost.add("comment", anotherComment);
 ```
 
-####使用MLRelation实现关联
+#### 使用 MLRelation 实现关联
 
 您可以使用 MLRelation 来建模多对多关系。这有点像 List 链表，但是区别之处在于，在获取附加属性的时候，MLRelation 不需要同步获取关联的所有 MLRelation 实例。这使得 MLRelation 比链表的方式可以支持更多实例，读取方式也更加灵活。例如，一个 User 可以赞很多 Post。这种情况下，就可以用`getRelation()`方法保存一个用户喜欢的所有 Post 集合。为了新增一个喜欢的 Post，您可以这样做：
 
@@ -386,7 +399,7 @@ query.limit(10);
 
 更多关于 MLQuery 的信息，请查看的*查询*部分。查询的时候，一个 MLRelation 对象运作起来像一个对象链表，因此任何您作用在链表上的查询（除了 include），都可以作用在 MLRelation上。
 
-###数据类型
+### 数据类型
 
 目前为止，我们支持的数据类型有 String、Int、Boolean 以及 MLObject 对象类型。同时 MaxLeap 也支持 java.util.Date、byte[]数组、JSONObject、JSONArray 数据类型。 您可以在 JSONArray 对象中嵌套 JSONObject 对象存储在一个 MLObject 中。 以下是一些例子：
 
@@ -433,10 +446,10 @@ public void UploadFile(Bitmap img){
   ByteArrayOutputStream stream = new ByteArrayOutputStream();
   bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
   byte[] image = stream.toByteArray();
-  
+
   // 创建MLFile对象
   MLFile myFile = new MLFile("myPic.png", image);
-  
+
   // 上传
   MLFileManager.saveInBackground(myFile, new SaveCallback() {
     @Override
@@ -456,7 +469,7 @@ String fileName = myFile.getName();
 ```
 
 * 	可以将 MLFile 直接存储到其他对象的某个属性里，后续可以取出来继续使用。
- 
+
 ```java
 //创建一个MLObject，包含ImageName，ImageFile字段
 MLObject imgupload = new MLObject("ImageUploaded");
@@ -472,14 +485,14 @@ MLDataManager.saveInBackground(imgupload, new SaveCallback() {
 ```
 
 ### 上传进度
-MLFile的 saveInBackground() 方法除了可以传入一个 SaveCallback 回调来通知上传成功或者失败之外，还可以传入第二个参数 ProgressCallback 回调对象，通知上传进度：
+
+MLFile 的 `saveInBackground()` 方法除了可以传入一个 SaveCallback 回调来通知上传成功或者失败之外，还可以传入第二个参数 ProgressCallback 回调对象，通知上传进度：
 
 ```java
 MLFileManager.saveInBackground(file, new SaveCallback() {
 	@Override
 	public void done(MLException e) {
-			
-        }
+
 	},new ProgressCallback() {
 	@Override
 	public void done(int i) {
@@ -701,9 +714,9 @@ MLQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<MLUser>() 
 });
 ```
 
-###不同属性值类型的查询
+### 不同属性值类型的查询
 
-####值类型为数组的查询
+#### 值类型为数组的查询
 
 如果一个 Key 对应的值是一个数组，您可以查询 Key 的数组包含了数字 2 的所有对象，通过：
 
@@ -723,8 +736,9 @@ numbers.add(4);
 query.whereContainsAll("arrayKey", numbers);
 ```
 
-####值类型为字符串的查询
-使用 whereStartsWith 方法来限制字符串的值以另一个字符串开头。非常类似 MySQL 的 LIKE 查询，这样的查询会走索引，因此对于大数据集也一样高效：
+#### 值类型为字符串的查询
+
+使用 `whereStartsWith` 方法来限制字符串的值以另一个字符串开头。非常类似 MySQL 的 LIKE 查询，这样的查询会走索引，因此对于大数据集也一样高效：
 
 ```java
 // Finds barbecue sauces that start with "Big Daddy's".
@@ -749,7 +763,8 @@ public void done(List<MLObject> commentList, MLException e) {
 }
 });
 ```
-#####MLObject类型字段匹配Query
+##### MLObject 类型字段匹配 Query
+
 如果您想查询的对象的某个字段包含了一个 MLObject，并且这个 MLObject 匹配一个不同的查询，您可以使用 whereMatchesQuery 嵌套查询方法。请注意，默认的 limit 限制 100 也同样作用在内部查询上。因此如果是大规模的数据查询，您可能需要仔细构造您的查询对象来获取想要的行为。例如，为了查询有图片附件的 Post 的评论列表：
 
 ```java
@@ -777,7 +792,9 @@ MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
   }
 });
 ```
-#####返回指定MLObject类型的字段
+
+##### 返回指定 MLObject 类型的字段
+
 默认情况下，当您获取一个对象的时候，关联的 MLObject 不会被获取，但您可以使用 include 方法将其返回。例如。您想获取最近的 10 条评论，同时包括它们关联的 post：
 
 ```java
@@ -1143,23 +1160,9 @@ MLUserManager.requestPasswordResetInBackground(
 * 用户根据向导点击重置密码链接，打开一个ML的页面，输入一个新的密码。
 * MaxLeap 将用户的密码重置为新输入的密码。
 
-###查询用户
+### 查询用户
 
-您可以通过特殊的UserQuery查询用户数据。MaxLeap对用户数据安全性提供充分的保障，如需获取更多信息，请查看*用户对象的安全性*部分。
-
-```java
-MLQuery<MLUser> query = MLUser.getQuery();
-query.whereEqualTo("gender", "female");
-MLQueryManager.findAllInBackground(query, new FindCallback<MLUser>() {
-  public void done(List<MLUser> objects, MLException e) {
-    if (e == null) {
-        // The query was successful.
-    } else {
-        // Something went wrong.
-    }
-  }
-});
-```
+出于安全性考虑，MaxLeap 目前不允许对用户进行查询操作。
 
 ### 邮箱验证
 
@@ -1514,6 +1517,179 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
 });
 ```
 解除绑定成功后，MaxLeap 将会把该 Twitter 账号的信息从该 MLUser 中移除。下次再使用该 Twitter 账号登录应用时，MaxLeap 将检测到其未绑定 MLUser，便会为该 Twitter 账号添加新的 MLUser。
+
+### 使用新浪微博账号登录
+
+为了尽可能减少您的应用的大小，MaxLeap SDK 目前 默认使用 Web 认证的方式登陆微博账号,但是如果你在工程中引入了微博 SDK后.MaxLeap SDK 会自动调用微博的接口来完成认证.
+微博账号登录后，如果该 微博 用户Id并未与任何 MLUser 绑定，MaxLeap 将自动为该用户创建一个账号，并与其绑定。
+
+#### 准备工作
+
+1. 在 [微博开放平台](http://open.weibo.com/) 创建微博应用。
+
+2. 选择你的应用,点击 应用信息 -> 高级信息,填写授权回调页. MaxLeap SDK 默认使用 `https://api.weibo.com/oauth2/default.html` 作为回调地址。
+
+2. 打开 MaxLeap Console -> App Settings -> User Authentication。勾选 Allow Weibo Authentication. 并将步骤一中获取的 App Key 和 App Secret 填写至相应位置。
+
+3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
+
+    ```java
+    MLFacebookUtils.initialize("YOUR WEIBO APP ID", "YOUR WEIBO SECRET");
+    ```
+
+#### 修改回调地址
+
+如果您在填写回调地址时没有使用 SDK 提供的默认地址的话，则需要在调用注册之前先修改回调地址。
+
+```java
+MLWeiboUtils.setRedirectUrl(redirectUrl);
+```
+
+#### 登录并注册新 MLUser
+
+使用 微博 账号登录后，如果该 微博 用户Id 并未与任何 MLUser 绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。如：
+
+```java
+MLWeiboUtils.logInInBackground(this, new LogInCallback<MLUser>() {
+  @Override
+  public void done(MLUser user, MLException err) {
+    if (user == null) {
+      //用户取消了使用微博账号登录
+    } else if (user.isNew()) {
+      //用户第一次使用微博账号登录，成功注册并绑定user用户
+    } else {
+      //用户使用微博账号登录成功。
+    }
+  }
+});
+```
+
+您也可以在注册时指定所需要申请的 scope 权限。有关权限的说明可以参考 [scope 说明](http://open.weibo.com/wiki/Scope)。
+
+```java
+List<String> scopes = Arrays.asList(
+            WeiboProvider.Scope.EMAIL, 
+            WeiboProvider.Scope.DIRECT_MESSAGES_READ);
+MLWeiboUtils.logInInBackground(scopes, this, new LogInCallback<MLUser>() {
+  @Override
+  public void done(MLUser user, MLException err) {
+    if (user == null) {
+      //用户取消了使用微博账号登录
+    } else if (user.isNew()) {
+      //用户第一次使用微博账号登录，成功注册并绑定user用户
+    } else {
+      //用户使用微博账号登录成功。
+    }
+  }
+});
+```
+
+#### 绑定 MLUser 与微博 账号
+
+您可以通过以下方式，绑定已有的 MLUser 和 微博 账号：
+
+```java
+if (!MLWeiboUtils.isLinked(user)) {
+    MLWeiboUtils.linkInBackground(user, this, new SaveCallback() {
+        @Override
+        public void done(MLException ex) {
+          if (MLWeiboUtils.isLinked(user)) {
+            //绑定成功
+      }
+    }
+  });
+}
+```
+
+绑定成功后，MaxLeap 将会把该 微博 账号的信息更新至该 MLUser中。下次再使用该微博 账号登录应用时，MaxLeap 将检测到其已绑定 MLUser，便不会为该 微博 账号添加新的 MLUser.
+
+#### 解除绑定
+
+```java
+MLWeiboUtils.unlinkInBackground(user, new SaveCallback() {
+  @Override
+  public void done(MLException ex) {
+    if (ex == null) {
+      Log.d("MyApp", "The user is no longer associated with their Weibo account.");
+    }
+  }
+});
+```
+解除绑定成功后，MaxLeap 将会把该 微博  账号的信息从该 MLUser 中移除。下次再使用该 微博 账号登录应用时，MaxLeap 将检测到其未绑定 MLUser，便会为该微博 账号添加新的 MLUser.
+
+
+
+
+### 使用微信博账号登录
+
+由于微信开发平台只支持 SSO 登录,所以在使用 MaxLeap SDK 登录微信时必须先导入微信的 SDK 才能正常使用.
+微信账号登录后，如果该 微信 用户Id并未与任何 MLUser 绑定，MaxLeap 将自动为该用户创建一个账号，并与其绑定。
+
+#### 准备工作
+
+1. 在 [微信开放平台](https://open.weixin.qq.com) 创建微信应用.注意按照微信官方的指导务必填写正确的应用签名并且通过微信的开发者认证.
+
+2. 打开 MaxLeap Console -> App Settings -> User Authentication。勾选 Allow Wechat Authentication. 并将步骤一中获取的 App Key 和 App Secret 填写至相应位置。
+
+3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
+
+    ```java
+    MLWechatUtils.initialize("YOUR WEIBO APP ID", "YOUR WEIBO SECRET");
+    ```
+
+#### 登录并注册新 MLUser
+
+使用 微信 账号登录后，如果该 微信 用户Id 并未与任何 MLUser 绑定，MaxLeap将自动为该用户创建一个账号，并与其绑定。如：
+
+```java
+MLWechatUtils.logInInBackground(this, new LogInCallback<MLUser>() {
+  @Override
+  public void done(MLUser user, MLException err) {
+    if (user == null) {
+      //用户取消了使用微信账号登录
+    } else if (user.isNew()) {
+      //用户第一次使用微信账号登录，成功注册并绑定user用户
+    } else {
+      //用户使用微信账号登录成功。
+    }
+  }
+});
+```
+
+#### 绑定 MLUser 与微信 账号
+
+您可以通过以下方式，绑定已有的 MLUser 和 微信 账号：
+
+```java
+if (!MLWechatUtils.isLinked(user)) {
+    MLWechatUtils.linkInBackground(user, this, new SaveCallback() {
+        @Override
+        public void done(MLException ex) {
+          if (MLWechatUtils.isLinked(user)) {
+            //绑定成功
+      }
+    }
+  });
+}
+```
+
+绑定成功后，MaxLeap 将会把该 微信 账号的信息更新至该 MLUser中。下次再使用该微信 账号登录应用时，MaxLeap 将检测到其已绑定 MLUser，便不会为该 微博 账号添加新的 MLUser.
+
+#### 解除绑定
+
+```java
+MLWechatUtils.unlinkInBackground(user, new SaveCallback() {
+  @Override
+  public void done(MLException ex) {
+    if (ex == null) {
+      Log.d("MyApp", "The user is no longer associated with their Wechat account.");
+    }
+  }
+});
+```
+解除绑定成功后，MaxLeap 将会把该 微信 账号的信息从该 MLUser 中移除。下次再使用该 微信 账号登录应用时，MaxLeap 将检测到其未绑定 MLUser，便会为该微博 账号添加新的 MLUser.
+
+
 
 ## 地理位置
 

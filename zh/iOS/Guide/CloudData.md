@@ -120,7 +120,7 @@ NSDate *createdAt = myComment.createdAt;
 
 ```objective_c
 // 根据 objectId 获取 MLObject
-MLObject *object = [MLObject objectWithClassName:@"Comment"];
+MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:@"objectId"];
 [object fetchInBackgroundWithBlock:^(MLObject *myComment, NSError *error) {
     // Now let's update it with some new data. In this case only isRead will get sent to the cloud
     myComment[@"isRead"] = @YES;
@@ -1094,15 +1094,7 @@ NSString *theNewPassword;
 
 ### 查询用户
 
-若要查询用户表，您需要使用特殊的用户查询：
-
-```objective_c
-MLQuery *query = [MLUser query];
-[query whereKey:@"gender" equalTo:@"female"]; // find all the women
-[query findObjectsInBackgroundWithBlock:^(NSArray *girls, NSError *error) {
-    NSLog(@"%@", girls);
-}];
-```
+出于安全考虑，不允许客户端查询用户表。
 
 ### 邮箱验证
 

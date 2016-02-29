@@ -122,7 +122,7 @@ payment.subject = @"测试";
 // 总金额，单位：分
 payment.totalFee = 0.01 * 100;
 
-// 支付宝支付完成后通知支付结果时需要用到，没有固定格式
+// 支付宝支付完成后通知支付结果时需要用到，没有固定格式，可以是 info.plist -> URL Types 中的任意一个 scheme
 payment.scheme = @"maxleappaysample";
 
 // 配置自定义字段
@@ -142,7 +142,11 @@ payment.scheme = @"maxleappaysample";
 
 #### 微信移动支付
 
-1. 实现微信代理协议 `WXApiDelegate`：
+1. 在Xcode中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“添加“URL scheme”为你所注册的应用程序id（如下图所示）。
+
+	![drag_sdk_to_project](../../../images/pay_channel_wx_set_urlscheme.jpg)
+
+2. 实现微信代理协议 `WXApiDelegate`：
 
 	```
 	@interface WXApiManager : NSObject <WXApiDelegate>
@@ -159,14 +163,14 @@ payment.scheme = @"maxleappaysample";
 	@end
 	```
 
-2. 配置微信 SDK，在 `application:didFinishLaunchingWithOptions:`方法中，加入以下代码：
+3. 配置微信 SDK，在 `application:didFinishLaunchingWithOptions:`方法中，加入以下代码：
 
 	```
 	WXApiManager *wxDelegate = [[WXApiManager alloc] init];
 	[MaxLeapPay setWXAppId:@"your_weixin_appId" wxDelegate:wxDelegate description:@"sample"];
 	```
 
-2. 发起支付：
+4. 发起支付：
 
 	```
 	// 1. 生成订单
@@ -187,7 +191,7 @@ payment.scheme = @"maxleappaysample";
 	// 总金额，单位：分
 	payment.totalFee = 0.01 * 100;
 	
-	// 注意：这里与支付宝不同，微信移动支付需要配置 URLScheme
+	// 注意：这个值不需要设置，但是需要在 info.plist -> URL Types 中配置微信专用 URL Scheme, scheme 值为微信应用的 appId
 	// payment.scheme = @"不需要设置";
 	
 	// 配置自定义字段

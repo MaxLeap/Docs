@@ -3,7 +3,7 @@
 ## 交易管理
 在“交易列表”中，我们可以查看当前 app 中发生的交易记录：
 
-![pay_records.png](../../../images/pay_records.png)
+![](../../../images/pay_records.png)
 
 列表提供了组合过滤功能:
 
@@ -17,16 +17,25 @@
 
 在“渠道配置”中，我们可以配置相应的支付渠道：
 
-![pay_channel_ali.png](../../../images/pay_channel_ali.png)
+![](../../../images/pay_channel_ali.png)
 
 #### 微信支付
 微信支付分为 “微信 App 支付” 和 “微信公众号支付”。
 
 微信 App 支付的配置：
-![pay_channel_wxapp.png](../../../images/pay_channel_wxapp.png)
+![](../../../images/pay_channel_wxapp.png)
 
 微信公众号支付的配置：
-![pay_channel_wxnative.png](../../../images/pay_channel_wxnative.png)
+![](../../../images/pay_channel_wxnative.png)
+
+#### 银联支付
+银联支付氛围 “银联 App 支付” 和 “银联网页支付”。
+
+银联 App 支付的配置：
+![](../../../images/pay_channel_unipayapp.png)
+
+银联网页支付的配置：
+![](../../../images/pay_channel_unipayweb.png)
 
 
 ## WebHook 配置
