@@ -148,7 +148,7 @@ $size="xxxx";
 echo '<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight.'&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'" alt="QR code" widhtHeight="'.$size.'" widhtHeight="'.$size.'"/>';
 ```
 
-* 银联支付返回的html可以生成一个html页面，该页面会带领用户前往银联认证页面进行先关支付行为。
+* 银联支付返回的html可以生成一个html页面，该页面会带领用户前往银联认证页面进行相关支付行为。
 
 ###部署SDK
 
