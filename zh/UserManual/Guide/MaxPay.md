@@ -29,9 +29,14 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 渠道配置 [详见 MaxPay 管理后台使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN)
 #### 支付宝
 #### 微信支付
-
+#### 银联支付
+#### Apple Pay
+尽请期待
 
 ## WebHook
 为了便于客户系统或者第三方系统处理客户的交易信息， MaxPay 提供 Webhooks 功能，可以按照客户要求把特定的事件结果推送到指定的地址以便于客户做后续处理。[详见 WebHook 使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK)
+
+## 费用
+MaxLeap 不收取任何费用，各支付渠道单独收费与 MaxLeap 无关
 
 ## FAQ
