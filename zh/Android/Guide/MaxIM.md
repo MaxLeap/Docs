@@ -1,4 +1,4 @@
-# MaxIMLib
+# MaxIMLib for Android
 
 ## 简介
 
