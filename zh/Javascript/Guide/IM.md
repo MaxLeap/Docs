@@ -1,18 +1,15 @@
-# MaxIM JavaScript SDK 指南
+# MaxIMLib for Javascript
 
 ##### _Author: Marvin
 ##### _Github: https://github.com/zhoucen
 
-## 通信开发指南
+## 简介
 
-### 简介
-感谢你使用 JavaScript 实时通信 Maxleap 的实时通信服务每天处理请求数超过百万级，安全可靠，是你的明智之选。
-
-你可以通过使用我们提供的 SDK，一行后端代码都不用写，就可以做一个功能完备的实时聊天应用、也可以做一个实时对战类的游戏，总之一切与实时通信相关的业务都可以使用 Maxleap 提供的实时通信服务。
+MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和会话、消息等对象。引用到 App 工程中后，需要开发者自己实现 UI 界面，相对较轻量，适用于对 UI 有较高订制需求的开发者。
 
 本 SDK 实现轻量、高效、无依赖，其中浏览器支持涵盖了移动终端的浏览器及各种 WebView，包括微信、PhoneGap、Cordova 的 WebView。
 
-### Demo
+## Demo
 
 - 简单聊天 Demo[源码](https://github.com/MaxLeap/MaxIM-JavaScript/tree/master/demo/Chat)
 
@@ -38,7 +35,7 @@
 
 ## 注意事项
 
-1. MaxIM不存储用户详细信息, 开发者维护自己的用户系统, 只需适配用户标识ID进行对接。您也可以将用户系统完全托管在MaxLeap, 这样可以减少开发成本。
+1. MaxIM 不存储用户详细信息, 开发者维护自己的用户系统, 只需适配用户标识ID进行对接。您可以直接使用 MaxLeap 的账户系统, 这样可以减少开发成本。
 
 2. 离线推送必须在登录时提供应用安装ID。
 
