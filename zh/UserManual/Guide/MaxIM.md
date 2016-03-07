@@ -11,11 +11,11 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 ## SDK
 #### iOS
-![详见 iOS 开发指南](../../../zh/iOS/Guide/MaxIM.md)
+[详见 iOS 开发指南](../../../zh/iOS/Guide/MaxIM.md)
 #### Android
-![详见 Android 开发指南](../../../zh/Android/Guide/MaxIM.md)
+[详见 Android 开发指南](../../../zh/Android/Guide/MaxIM.md)
 #### Javascript
-![详见 Javascript 开发指南](../../../zh/Javascript/Guide/IM.md)
+[详见 Javascript 开发指南](../../../zh/Javascript/Guide/IM.md)
 
 
 ## 基础概念
