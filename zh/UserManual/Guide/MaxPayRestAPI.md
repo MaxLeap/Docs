@@ -9,9 +9,9 @@ https://api.maxleap.cn | 北京
 ### 支付渠道列表
 渠道      	|说明		
 -------- 		| ---			
-ali_app	|支付宝应用	
-ali_web|支付宝页面	
-wx_app|微信应用	
+ali_app	|支付宝移动支付
+ali_web|支付宝网页支付
+wx_app|微信移动支付
 wx_native|微信扫码支付	
 
 
@@ -30,7 +30,7 @@ POST
 ------		| ---
 Content-Type | application/json
 X-ML-AppId | ${应用的ID}
-X-ML-Session-Token | ${应用的MasterKey}
+X-ML-Session-Token | ${应用的SessionToken}
 
 ***公共参数***
 
@@ -40,14 +40,9 @@ channel 	| String		|'ali'					|必填项，支付渠道
 billNum    	| String  	|'00x98987'	|必填项，订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一
 totalFee	| Int   	|9900					|必填项，交易金额,单位为分
 subject		| String	|'图书-支付战争'	|必填项，订单主题
-returnUrl	| String	|'http://maxleap.cn/returnUrl'|选填项,同步自动跳转url
-
-***支付宝渠道的参数***
-
-属性      	| 类型		|示例数据			|说明
--------- 		| ---			|----					|---
+extras    | Object  |{"key1":"value1","key2":"value2"}|选填项,附加数据,JsonObject类型
+returnUrl	| String	|'http://maxleap.cn/returnUrl' |选填项,同步自动跳转url,若为支付宝网页支付则必填
 showUrl 	| String		|'http://maxleap.cn/showUrl'					|可选，支付宝网页支付(ali_web)的选填参数
-
 
 ***返回公共参数***
 
@@ -80,6 +75,19 @@ partnerid|String|微信商户id
 prepayid|String|支付id
 sign|String|签名
 timestamp|String|时间戳
+
+***返回unipay_web的参数***
+
+属性      	| 类型		|说明			|
+-------- 		| ---			|----	
+html  | String |包含一个自动提交表单的html
+
+***返回unipay_app的参数***
+
+属性      	| 类型		|说明			|
+-------- 		| ---			|----	
+tn    | String |支付流水号，用于手机sdk
+
 ***返回Code的含义***
 
 属性      	| 类型		|说明			|
