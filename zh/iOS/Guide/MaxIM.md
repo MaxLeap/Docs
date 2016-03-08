@@ -1,4 +1,4 @@
-# 实时通信服务
+# MaxIMLib for iOS
 
 ## 简介
 
