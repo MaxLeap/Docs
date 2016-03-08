@@ -193,7 +193,7 @@ MLIMMessage *msg = [MLIMMessage messageWithText:@"Hi!"];
 
 #pragma mark - MLIMClientDelegate
 
-- (void)frriend:(MLIMFriendInfo *)frriend didReceiveMessage:(MLIMMessage *)message {
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)frriend {
 	if ([frriend.uid isEqualToString:@"Tom"]) {
 		// NSLog(@"Did receive Tom's message");
 	}
@@ -283,7 +283,7 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 
 #pragma mark - MLIMClientDelegate
 
-- (void)group:(MLIMGroup *)group didReceiveMessage:(MLIMMessage *)message; {
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromGroup:(MLIMGroup *)group {
 	NSLog(@"Did receive group message：%@"， message);
 }
 ```
@@ -378,7 +378,7 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 
 #pragma mark - MLIMClientDelegate
 
-- (void)room:(MLIMRoom *)room didReceiveMessage:(MLIMMessage *)message {
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromRoom:(MLIMRoom *)room {
 	NSLog(@"Did receive room message：%@"， message);
 }
 ```
