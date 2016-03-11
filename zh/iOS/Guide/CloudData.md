@@ -1502,7 +1502,7 @@ MaxLeap 用户可通过以下两种主要方法使用微博：(1) 以微博用�
 
 #### 登录并注册新 MLUser
 
-`MLTwitterUtils` 提供一种方法让您的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
+`MLWeiboUtils` 提供一种方法让您的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
 ```objective_c
 [MLWeiboUtils loginInBackgroundWithScope:@"all" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
@@ -1661,6 +1661,120 @@ if (![MLWeChatUtils isLinkedWithUser:user]) {
 ```
 
 在当前用户已经关联了微信账户的情况下，可以使用 `[MLWeChatAccessToken currentAccessToken].accessToken` 获取用户身份验证令牌。
+
+### 使用 QQ 账号登陆
+
+MaxLeap SDK 能够与 TencentOpenAPI SDK 集成，使用 QQ 账号登陆。
+
+```
+NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
+[MLQQUtils loginInBackgroundWithPermissions:permissions block:^(MLUser * _Nullable user, NSError * _Nullable error) {
+    if (user) {
+        // 登陆成功
+    } else {
+        // 登陆失败
+    }
+}];
+```
+
+使用 QQ 账号登录后，如果该 QQ 用户并未与任何 `MLUser` 绑定，MaxLeap 将创建一个 `MLUser`，并与其绑定。
+
+#### 准备工作
+
+若要通过 MaxLeap 使用 QQ ，您需要：
+
+1. 前往[腾讯开放平台][open_qq_site]，[创建 QQ 应用][set_up_qq_app]。
+2. 前往 [MaxLeap 控制台][maxleap_console]，前往 MaxLeap 应用设置 >> 用户验证 页面，打开"允许QQ登录"选项。
+3. [下载腾信开发平台 SDK][qq_documentation]
+4. 把 `TencentOpenAPI.framework`、`TencentOpenAPI_iOS_Bundle.bundle` 和 `MLQQUtils.framework` 添加到项目中。
+5. 初始化 `MLQQUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+
+	```objective_c
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	    [MaxLeap setApplicationId:@"your_maxleap_appId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
+	    [MLQQUtils initializeQQWithAppId:@"222222" qqDelegate:self]; // self 不能为空且需遵循 TencentSessionDelegate 协议
+	    return YES;
+	}
+	```
+
+6. 实现 TencentSessionDelegate 协议方法
+	
+	```
+	#pragma mark TencentLoginDelegate
+	
+	// 以下三个方法保持空实现就可以，MLQQUtils 会置换这三个方法，但是会调用这里的实现
+	
+	- (void)tencentDidLogin {
+    
+	}
+	
+	- (void)tencentDidNotLogin:(BOOL)cancelled {
+    
+	}
+
+	- (void)tencentDidNotNetWork {
+    
+	}
+	```
+
+
+若您遇到与 TencentOpenAPI SDK 相关的任何问题，请查阅 [腾讯官方文档][qq_documentation]。
+
+MaxLeap 用户可通过以下两种主要方法使用 QQ：(1) 以QQ用户身份登录，并创建 `MLUser`。(2) 将QQ账号与已有的 `MLUser` 关联。
+
+#### 登录并注册新 MLUser
+
+`MLQQUtils` 提供一种方法让您的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `loginInBackgroundWithPermissions:block:` 方法实现：
+
+```objective_c
+NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
+[MLQQUtils loginInBackgroundWithPermissions:permissions block:^(MLUser * _Nullable user, NSError * _Nullable error) {
+    if (!user) {
+        NSLog(@"QQ登陆失败");
+    } else if (user.isNew) {
+        NSLog(@"用户使用QQ账户成功注册并登陆");
+    } else {
+        NSLog(@"用户使用QQ账户登陆");
+    }
+}];
+```
+
+该代码运行时，会出现以下情况：
+
+1. 若设备安装了新浪QQ客户端，则会跳转到QQ客户端请求授权，否则弹出QQ授权网页。
+2. 用户确认授权，您的应用程序会收到回调。
+3. 我们的 SDK 会收到QQ数据并将其保存在 `MLUser` 中。如果是基于QQ身份的新用户，那么该用户随后会被创建。
+4. 您的 `block` 被调用并带回这个用户对象(user)。
+
+#### 绑定 `MLUser` 与微博账号
+
+若您想要将已有的 `MLUser` 与微博帐户关联起来，您可以按以下方式进行关联：
+
+```objective_c
+if (![MLQQUtils isLinkedWithUser:user]) {
+    [MLQQUtils linkUserInBackground:user withPermissions:@[@"all"] block:^(BOOL succeeded, NSError * _Nullable error) {
+        if ([MLQQUtils isLinkedWithUser:user]) {
+            NSLog(@"Woohoo, user linked with QQ!");
+        }
+    }];
+}
+```
+
+关联时发生的步骤与登录非常类似。区别是在成功登录中，将会使用来自微博的信息更新当前的 `MLUser`。今后通过微博进行的登录会返回已存在的 `MLUser`。
+
+#### 解除绑定
+
+若您想要取消用户与微博的关联，操作如下：
+
+```objective_c
+[MLQQUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
+    if (!error && succeeded) {
+        NSLog(@"The user is no longer associated with their QQ account.");
+    }
+}];
+```
+
+在当前用户已经关联了 QQ 账户的情况下，可以使用 `[MLQQUtils tencentOAuth].accessToken` 获取用户身份验证令牌。
 
 ## 短信验证服务
 
@@ -1901,5 +2015,9 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 
 [wechat_develop_site]: https://open.weixin.qq.com
 [wechat documentation]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&lang=zh_CN
+
+[open_qq_site]: http://open.qq.com/
+[set_up_qq_app]: http://op.open.qq.com/appregv2/
+[qq_documentation]: http://wiki.open.qq.com/wiki/IOS_API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E
 
 [maxleap_console]: https://maxleap.cn
