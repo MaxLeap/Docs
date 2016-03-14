@@ -56,12 +56,19 @@ $ pod install
 
 	1. [下载并解压最新支付宝 SDK](https://doc.open.alipay.com/doc2/detail.htm?spm=0.0.0.0.5TxcD7&treeId=59&articleId=103563&docType=1)
 	2. 找到 `AliPay` 文件夹，该文件夹包含 `AliPaySDK.framework` 和 `AliPaySDK.bundle`，把该文件夹拖进项目中。
+	3. 添加依赖 libc++.tbd
 
 2. 微信移动支付需以下步骤：
 	
 	1. [下载并解压微信支付 SDK](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)
 	2. 找到微信 SDK 文件夹，该文件夹应包括 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h`三个文件，把该文件夹拖进项目中。
+	3. 添加依赖 libc++.tbd
 	
+3. 银联手机控件支付需要额外步骤：
+
+	1. [下载并解压银联手机支付控件](https://open.unionpay.com/ajweb/help/file/techFile?productId=3)
+	2. 找到 "UPPaymentControl" 文件夹，该文件夹包括 `libPaymentControl.a` 和 `UPPaymentControl.h` 两个文件，把该文件夹拖到项目中。
+	3. 添加依赖 libc++.tbd
 
 你可以设置支付环境，以用来测试。`MaxLeapPay` 提供了三种环境，Production(产品环境)、Sandbox(沙盒环境)、Offline(离线环境)。
 
@@ -197,6 +204,57 @@ payment.scheme = @"maxleappaysample";
 	// 配置自定义字段
 	[payment.extraAttrs addEntriesFromDictionary:@{@"keyA":@"valueA"}];
 	
+	
+	// 2. 开始支付流程
+	[MaxLeapPay startPayment:payment completion:^(MLPayResult * _Nonnull result) {
+	    if (result.code == MLPaySuccess) {
+	        NSLog(@"支付成功");
+	    } else {
+	        NSLog(@"支付失败");
+	    }
+	}];
+	```
+
+### 使用银联支付
+
+MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支付。
+
+#### 银联手机控件支付
+
+1. 添加银联支付跳转应用白名单
+
+	uppaywallet<br>
+	uppaysdk
+	
+2. 发起支付
+
+	```
+	// 1. 生成订单
+	MLPayment *payment = [[MLPayment alloc] init];
+	
+	// 设置通过”银联手机控件支付“渠道支付
+	payment.channel = MLPayChannelUnipayApp;
+	
+	// 生成订单号，订单号要保证在商户系统中唯一
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
+	NSString *billNo = [formatter stringFromDate:[NSDate date]];
+	payment.billNo = billNo;
+	
+	// 订单简要说明
+	payment.subject = @"测试";
+	
+	// 总金额，单位：分
+	payment.totalFee = 0.01 * 100;
+	
+	// 银联支付完成后通知支付结果时需要用到，没有固定格式，可以是 info.plist -> URL Types 中的任意一个 scheme
+	payment.scheme = @"paysample";
+	
+	// 银联需要配置 returnUrl
+	payment.returnUrl = @"http://maxleap.cn/returnUrl";
+	
+	// 配置自定义字段
+	[payment.extraAttrs addEntriesFromDictionary:@{@"keyA":@"valueA"}];
 	
 	// 2. 开始支付流程
 	[MaxLeapPay startPayment:payment completion:^(MLPayResult * _Nonnull result) {
