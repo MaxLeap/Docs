@@ -58,6 +58,11 @@ MaxIMKit 目前正在内测中，尽请期待。
 #### Javascript
 [详见 Javascript 开发指南](../../../zh/Javascript/Guide/IM.md)
 
+## Server 开发
+
+#### Rest API
+[详见 Javascript 开发指南](../../../zh/Javascript/Guide/IM.md)
+
 ## 注意事项
 
 1. MaxIM 不存储用户详细信息, 开发者维护自己的用户系统, 只需适配用户标识ID进行对接。您可以直接使用 MaxLeap 的账户系统, 这样可以减少开发成本。
