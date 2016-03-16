@@ -112,9 +112,11 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
 ### 好友管理
 #### 加好友
 
+```
 [self.client.currentUser addFriendWithUser:@"friendUserId" completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
     // ...
 }];
+```
 
 #### 删除好友
 
@@ -199,6 +201,20 @@ MLIMMessage *msg = [MLIMMessage messageWithText:@"Hi!"];
 	}
 }
 
+```
+
+### 获取历史消息
+
+与好友的聊天记录会在云端保存 7 天
+
+```
+// 获取当前时间最新的十条历史消息（包括自己发的）
+NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
+[self.client.currentUser getLatestChatsWithFriend:@"friend_uid" beforeTimestamp:ts limit:10 block:^(NSArray<MLIMMessage *> * _Nullable messages, NSError * _Nullable error) {
+    if (!error) {
+        NSLog(@"lastest history messages: %@", messages);
+    }
+}];
 ```
 
 ## 群组聊天
@@ -288,6 +304,20 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 }
 ```
 
+### 获取群组聊天历史记录
+
+群组聊天记录会在云端保存七天
+
+```
+// 获取当前时间最新的十条消息（包括自己发送的）
+NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
+[group getLatestMessagesBefore:ts limit:10 completion:^(NSArray<MLIMMessage *> * _Nullable messages, NSError * _Nullable error) {
+    if (!error) {
+        NSLog(@"lastest group messages: %@", messages);
+    }
+}];
+```
+
 ### 解散群组
 
 ```
@@ -297,6 +327,8 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 ```
 
 ## 聊天室
+
+聊天室消息不会存在云端
 
 ### 获取所有加入的聊天室
 
