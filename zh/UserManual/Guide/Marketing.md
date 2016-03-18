@@ -1,26 +1,27 @@
-# 营销推广
-##简介
-###什么是 MaxLeap 营销推广服务
+# 推送营销
+## 简介
+###什么是 MaxLeap 推送营销服务
 
-营销推广服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。
+推送营销服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种消息模式：推送消息 和 应用内消息。您可以通过推送消息方式向指定人群推送消息，也可以通过应用内消息，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标 Activity。消息的创建，设置和发送均在Console中完成。
 
-###为何需要MaxLeap营销推广服务
+### 为何需要 MaxLeap 推送营销服务
 
-结合 MaxLeap 分析服务提供的分析数据，以及MaxLeap 数据分析服务提供的用户分组功能，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。使用MaxLeap营销服务的优势在于：
+结合 MaxLeap 数据分析服务提供的分析数据，以及用户分组，您可以高效地制定营销策略，并且通过推送营销服务实施您的策略。MaxLeap 推送营销服务的优势在于：
+
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
-* **保障用户体验：**选择向指定用户分组发送消息，更具有针对性
-* **动态内容管理：**推送消息和应用内消息中的内容均在Console中设置，意味着用户所见内容可随时更新
+* **保障用户体验：**选择向指定用户分群发送消息，更具有针对性
+* **动态内容管理：**应用内消息和推送消息中的内容均在 Console 中设置，用户所见内容可实时更新
 
 
-**如果您希望进一步了解MaxLeap Marketing服务SDK，请参考[iOS开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
+**如果您希望进一步了解MaxLeap Marketing服务SDK，请参考 [iOS 开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) 或 [Android 开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
 
-##营销活动列表
-在"营销推广"报表中，我们可以查看该应用下所有的活动（包括**应用内消息**和**活动**）的列表：
+## 营销活动列表
+在"推送营销"报表中，我们可以查看该应用下所有的活动（包括**应用内消息**和**活动**）的列表：
 
 ![imgMCampaignList.png](../../../images/imgMCampaignList.png)
 
-##新建推送消息
+## 新建推送消息
 点击"＋创建新活动"按钮 >> 推送，即可进入创建推送消息界面：
 
 ####步骤一：选择推送目标

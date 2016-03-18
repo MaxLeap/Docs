@@ -1,8 +1,8 @@
-#运营管理 
-##简介
-运营服务是MaxLeap为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的FAQ的显示页面及问题反馈对话页面。在Console端，运营服务提供FAQ列表的管理及用户反馈的处理界面。
+# 用户支持
+## 简介
+用户支持服务是 MaxLeap 为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的 FAQ 的显示页面及用户反馈对话页面。在Console端，用户支持服务提供FAQ 的管理及用户反馈的处理界面。
 
-**如果您希望进一步了解MaxLeap Support服务SDK，请参考[iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)或[Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
+**如果您希望进一步了解 MaxLeap 用户支持服务 SDK，请参考 [iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH) 或 [Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
 
 ##用户反馈
 
@@ -39,8 +39,8 @@
 在与用户沟通，处理反馈时，您可以插入图片或FAQ（FAQ详细介绍请见下文）
 
 
-##FAQ
-###查看FAQ列表
+## FAQ 管理
+### 查看FAQ列表
 所有的FAQ都会被存放在不同的分类中，并且分类数据会在客户端与Console之间自动同步，默认的，MaxLeap将为您创建三个分类：通用，支付及隐私。
 
 ![imgSPFAQList.png](../../../images/imgSPFAQList.png)
@@ -54,4 +54,4 @@
 
 ## 下一步
 
-**如果您希望进一步了解MaxLeap Support服务SDK，请参考[iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)或[Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
+**如果您希望进一步了解 MaxLeap 用户支持服务 SDK，请参考 [iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH) 或 [Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**

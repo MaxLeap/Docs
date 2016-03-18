@@ -1,4 +1,4 @@
-## 云数据在线分析
+## 云数据分析
 ##### _Authors: <a href="https://github.com/jjeffcaii">Jeff Tsai</a> , <a href="https://github.com/wbye">wbye</a>
 ### 简介
 MaxLeap 云数据在线分析旨在为用户提供一种处理自有应用数据的方式，用户可以使用类SQL的查询语句对自己的数据进行高效的查询和导出。该功能的数据源为截止今日凌晨的历史数据。
