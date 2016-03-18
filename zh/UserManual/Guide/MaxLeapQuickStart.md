@@ -14,21 +14,21 @@ MaxLeap 提供两种模式创建应用
 我们今天演示使用模板应用快速构建 App
 
 ##### 1、未创建过 App 登录后页面
-![](../../../images/QuictStart/login_1.png)
+![](../../../images/login_1.png)
 ##### 2、点击创建应用，并输入用户名，下面选择模板应用
-![](../../../images/QuictStart/createApp1.png)
+![](../../../images/createApp1.png)
 ##### 3、模板应用可以查看详情或者立即使用，点击查看详情
-![](../../../images/QuictStart/createApp2.png)
+![](../../../images/createApp2.png)
 ##### 4、点击使用后，MaxLeap 会自动生成配置好的移动端工程项目和后端初始化云数据
-![](../../../images/QuictStart/createApp3.png)
+![](../../../images/createApp3.png)
 ##### 5、生成好以后，您可以根据需要选择下载 iOS 工程项目或者 Android 工程项目
-![](../../../images/QuictStart/createApp4.png)
+![](../../../images/createApp4.png)
 ##### 6、下载工程项目需要点时间，此时可以直接进入开发中心云数据库查看云端初始化数据
-![](../../../images/QuictStart/createApp5.png)
+![](../../../images/createApp5.png)
 ##### 7、工程项目下载完成后解压出工程项目（以 iOS 为例）并导入Xcode，直接运行即可查看模板应用，AppId 和 ClientKey 已经自动配置完成
-![](../../../images/QuictStart/createApp12.png)
+![](../../../images/createApp12.png)
 ##### 8、可以在应用设置下的应用密钥中查看应用的相关key，包括 AppId 和 ClientKey 等
-![](../../../images/QuictStart/CreateApp10.png)
+![](../../../images/CreateApp10.png)
 
 ##### Ok，是不是很简单呢，您可以直接基于我们的模板应用快速构建您自己的应用，Happy Coding!!!!
 
