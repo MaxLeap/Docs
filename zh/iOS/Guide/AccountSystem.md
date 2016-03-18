@@ -1,14 +1,11 @@
 # 账号服务
+
 ## 准备
-## 用户管理
-## 第三方登录
-### Facebook 登录
-### Twitter 登录
-### 微信登录
-### QQ 登录
-### 新浪微博登录
-## 短信登录
-## FAQ
+
+如果您尚未安装 SDK，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+
+**注意**：我们支持 iOS 7.0 及以上版本。
 
 ## 用户管理
 
@@ -990,3 +987,5 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 	```
 	
 	注意，以上两个接口需要在用户登录的状态下使用。
+	
+## FAQ
