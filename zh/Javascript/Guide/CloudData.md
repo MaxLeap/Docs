@@ -1,15 +1,15 @@
-# Javascript 云数据开发指南
+# 数据存储
 
 ##### _Author: Henry
 ##### _Github: https://github.com/henryybai
 
 ## 简介
 
-### 什么是云数据服务
-云数据是 MaxLeap 提供的数据存储服务，它建立在对象 `ML.Object` 的基础上，每个 `ML.Object` 包含若干键值对。所有 `ML.Object` 均存储在 MaxLeap 上，您可以通过 Javascript SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `ML.User` (用户)，`ML.File` (文件)，`ML.GeoPoint` (地理位置)，他们都是基于 `ML.Object` 的对象。
+### 什么是数据存储服务
+云数据库是 MaxLeap 提供的数据存储服务，它建立在对象 `ML.Object` 的基础上，每个 `ML.Object` 包含若干键值对。所有 `ML.Object` 均存储在 MaxLeap 上，您可以通过 Javascript SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `ML.User` (用户)，`ML.File` (文件)，`ML.GeoPoint` (地理位置)，他们都是基于 `ML.Object` 的对象。
 
-### 为何需要云数据服务
- 云数据将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
+### 为何需要数据存储服务
+ 数据存储将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
  
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
