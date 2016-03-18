@@ -503,9 +503,9 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
         UIUserNotificationSettings *pushsettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:pushsettings];
     } else {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
+//#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
-#endif
+//#endif
     }
 }
 

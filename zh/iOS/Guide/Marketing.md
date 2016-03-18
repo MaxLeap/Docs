@@ -41,15 +41,15 @@
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
     [MaxLeap setApplicationId:@"5552f51660b2056aa87dd9e0" clientKey:@"c3JscE50TWNnVzg4SkZlUnFsc3E2QQ" site:MLSiteCN];
-    
+
     [self registerRemoteNotifications];
-    
+
     [MLMarketingManager enable];
     // 统计推送点击事件
     [MLMarketingManager handlePushNotificationOpened:launchOptions];
-    
+
     return YES;
 }
 
@@ -58,9 +58,9 @@
         UIUserNotificationSettings *pushsettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:pushsettings];
     } else {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
+//#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
-#endif
+//#endif
     }
 }
 
