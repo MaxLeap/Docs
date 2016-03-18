@@ -24,7 +24,7 @@ MaxLeap 提供两种模式创建应用
 ##### 5、生成好以后，您可以根据需要选择下载 iOS 工程项目或者 Android 工程项目
 ![](../../../images/QuictStart/createApp4.png)
 ##### 6、下载工程项目需要点时间，此时可以直接进入开发中心云数据库查看云端初始化数据
-![](../../../images/QuictStart/createApp5.png)
+![](../../../images/QuictStart/createApp5.png)
 ##### 7、工程项目下载完成后解压出工程项目（以 iOS 为例）并导入Xcode，直接运行即可查看模板应用，AppId 和 ClientKey 已经自动配置完成
 ![](../../../images/QuictStart/createApp12.png)
 ##### 8、可以在应用设置下的应用密钥中查看应用的相关key，包括 AppId 和 ClientKey 等
