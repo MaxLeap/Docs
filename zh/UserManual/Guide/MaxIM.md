@@ -51,17 +51,13 @@ MaxIMKit 目前正在内测中，尽请期待。
 > 当用户处于未登录状态时，系统会将消息以离线推送的方式发送给用户。
 
 ## SDK
-#### iOS
-[详见 iOS 开发指南](../../../zh/iOS/Guide/MaxIM.md)
-#### Android
-[详见 Android 开发指南](../../../zh/Android/Guide/MaxIM.md)
-#### Javascript
-[详见 Javascript 开发指南](../../../zh/Javascript/Guide/IM.md)
+[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH)
 
-## Server 开发
+[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)
 
-#### Rest API
-[详见 Javascript 开发指南](../../../zh/Javascript/Guide/IM.md)
+[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
+
+
 
 ## 注意事项
 
