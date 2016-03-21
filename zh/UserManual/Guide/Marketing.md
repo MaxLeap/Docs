@@ -88,5 +88,8 @@
 
 ![imgMActivatePush.png](../../../images/imgMActivatePush.png)
 
+## FAQ
+内容更新中
+
 ## 下一步
 **如果您希望进一步了解MaxLeap Marketing服务SDK，请参考[iOS开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**

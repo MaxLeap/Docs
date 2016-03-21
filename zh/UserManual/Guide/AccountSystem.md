@@ -8,6 +8,7 @@
 ## 短信登录
 ## 短信验证
 ## FAQ
+内容更新中
 ## SDK 开发指南
 [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ACCOUNT_SYSTEM_ZH)
 

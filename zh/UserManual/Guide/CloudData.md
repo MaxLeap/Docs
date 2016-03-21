@@ -141,5 +141,8 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 ![imgCDHandleHistory](../../../images/imgCDHandleHistory.png)
 
+## FAQ
+内容更新中
+
 ## 下一步
 **如果您希望进一步了解MaxLeap  数据存储服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
