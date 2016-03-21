@@ -1,33 +1,30 @@
 
-# MaxLeap云代码开发指南
-
+# 代码托管
 ##### _Author: David Young
 ##### _Github: https://github.com/sdyy321
 
-## 云代码简介
+## 简介
+### 什么是代码托管服务
+云代码是部署运行在 MaxLeap 云引擎上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在 Web server上的 Web Service或 RESTful API。它对外提供的接口也是 RESTful API，也正是以这种方式被移动应用调用。 
 
-###什么是云代码服务
-云代码是部署运行在MaxLeap上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
-
-###为什么需要云代码服务
+###为什么需要代码托管服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
 * 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求 Cloud Data，大大提升效率
-* 同一套代码可以为iOS，Android，web site等提供服务
+* 同一套代码可以为 iOS，Android，Web Site 等提供服务
 
 ###云代码如何工作
 
 <p class="image-wrapper">
 ![imgWhatsCloudCode](../../../images/imgCloudCodeWorkflow.png)
 
-一个云代码项目包含Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具MaxLeap-CLI上传到MaxLeap，MaxLeap会生成对应的docker image。用maxleap deploy命令可以让MaxLeap启动Docker container运行该Docker image。
+一个 Java 云代码项目包含 Custom Cloud Code，Cloud Code SDK，3rd Party Libraries。开发完成后，用maven把项目打包成package，然后用云代码命令行工具 MaxLeap-CLI 上传到 MaxLeap，MaxLeap 会生成对应的 Docker image。用 maxleap deploy命令可以让 MaxLeap 启动 Docker container运行该 Docker image。
 
-目前云代码支持Java环境和Python环境，我们在近期会推出其他开发语言版本。
 
 ## 云函数
-云函数是运行在MaxLeap上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种第三方类库。
+云函数是运行在 MaxLeap 上的代码。可以使用它来实现各种复杂逻辑，也可以使用各种第三方类库。
 
 ###定义云函数
 每个云函数需要实现 com.maxleap.code.MLHandler interface，该interface是典型的Functional Interface。
