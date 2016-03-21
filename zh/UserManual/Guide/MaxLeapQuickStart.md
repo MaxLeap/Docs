@@ -9,7 +9,7 @@ MaxLeap 提供两种模式创建应用
 #### 自定义应用
 用户自行创建工程项目并配置，以及自行根据具体业务设计数据库表结构等
 #### 模板应用
-直接基于 MaxLeap 提供的模板应用快速开发，模板应用包括配置好的移动端工程项目以及云端初始化数据
+直接基于 MaxLeap 提供的模板应用快速开发，模板应用包括配置好的移动端工程项目以及云端初始化数据，您可以基于模板应用开发您的应用
 
 我们今天演示使用模板应用快速构建 App
 
@@ -32,7 +32,7 @@ MaxLeap 提供两种模式创建应用
 
  Ok，是不是很简单呢，您可以直接基于我们的模板应用快速构建您自己的应用，Happy Coding!!!!
 
-### 了解更多
+## 了解更多
 使用指南  | SDK 开发指南
 ------------- | -------------
 [数据存储](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)，[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#CLOUD_DATA_ZH)
