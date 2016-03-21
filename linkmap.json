@@ -10,7 +10,7 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN": "/guide/devguide/ios.html#user",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH": "/guide/devguide/ios.html#数据存储",
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH": "/guide/devguide/ios.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH": "/guide/devguide/ios.html#云代码",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ACCOUNT_SYSTEM_ZH": "/guide/devguide/ios.html#账号服务",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH": "/guide/devguide/ios.html#即时通讯",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXPAY_ZH": "/guide/devguide/ios.html#移动支付",
@@ -31,7 +31,7 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN": "/guide/devguide/android.html#user",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH": "/guide/devguide/android.html#数据存储",
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CODE_ZH": "/guide/devguide/android.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CODE_ZH": "/guide/devguide/android.html#云代码",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ACCOUNT_SYSTEM_ZH": "/guide/devguide/android.html#账号服务",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH": "/guide/devguide/android.html#即时通讯",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXPAY_ZH": "/guide/devguide/android.html#移动支付",
@@ -49,9 +49,9 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#INAPPSOCIAL_ZH": "/guide/devguide/javascript.html#应用内社交",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#SOCIALSHARE_ZH": "/guide/devguide/javascript.html#社交分享",
 
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH": "/guide/devguide/java.html#代码托管",
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH": "/guide/devguide/python.html#代码托管",
-  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH": "/guide/devguide/nodejs.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH": "/guide/devguide/java.html#云代码",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH": "/guide/devguide/python.html#云代码",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH": "/guide/devguide/nodejs.html#云代码",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP#MAXPAY_ZH": "/guide/devguide/php.html#移动支付",
 
