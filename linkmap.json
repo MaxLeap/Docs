@@ -10,6 +10,12 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN": "/guide/devguide/ios.html#user",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH": "/guide/devguide/ios.html#数据存储",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH": "/guide/devguide/ios.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ACCOUNT_SYSTEM_ZH": "/guide/devguide/ios.html#账号服务",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH": "/guide/devguide/ios.html#即时通讯",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXPAY_ZH": "/guide/devguide/ios.html#移动支付",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SOCIALSHARE_ZH": "/guide/devguide/ios.html#社交分享",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#INAPPSOCIAL_ZH": "/guide/devguide/ios.html#应用内社交",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH": "/guide/devguide/ios.html#数据分析",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH": "/guide/devguide/ios.html#推送营销",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH": "/guide/devguide/ios.html#用户支持",
@@ -25,11 +31,31 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_EN": "/guide/devguide/android.html#user",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH": "/guide/devguide/android.html#数据存储",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CODE_ZH": "/guide/devguide/android.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ACCOUNT_SYSTEM_ZH": "/guide/devguide/android.html#账号服务",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH": "/guide/devguide/android.html#即时通讯",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXPAY_ZH": "/guide/devguide/android.html#移动支付",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SOCIALSHARE_ZH": "/guide/devguide/android.html#社交分享",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#INAPPSOCIAL_ZH": "/guide/devguide/android.html#应用内社交",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH": "/guide/devguide/android.html#数据分析",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH": "/guide/devguide/android.html#在线参数",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH": "/guide/devguide/android.html#推送营销",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH": "/guide/devguide/android.html#用户支持",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH": "/guide/devguide/android.html#用户",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#CLOUD_DATA_ZH": "/guide/devguide/javascript.html#数据存储",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#ACCOUNTSYSTEM_ZH": "/guide/devguide/javascript.html#账号服务",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH": "/guide/devguide/javascript.html#即时通讯",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#INAPPSOCIAL_ZH": "/guide/devguide/javascript.html#应用内社交",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#SOCIALSHARE_ZH": "/guide/devguide/javascript.html#社交分享",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH": "/guide/devguide/java.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH": "/guide/devguide/python.html#代码托管",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH": "/guide/devguide/nodejs.html#代码托管",
+
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP#MAXPAY_ZH": "/guide/devguide/php.html#移动支付",
+
+
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA": "/guide/devguide/java.html",
 
@@ -51,6 +77,13 @@
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_OFFLINE_ANALYZE_ZH": "/guide/usermanual/clouddataofflinedataanalyze.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK": "/guide/usermanual/maxpaywebhook.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN": "/guide/usermanual/maxpayadmin.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY": "/guide/usermanual/maxpay.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ACCOUNTSYSTEM_ZH": "/guide/usermanual/accountsystem.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXIM_ZH": "/guide/usermanual/maxim.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#INAPPSOCIAL_ZH": "/guide/usermanual/inappsocial.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SOCIALSHARE_ZH": "/guide/usermanual/socialshare.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SUPPORT_ZH": "/guide/usermanual/support.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ANALYTICS_ZH": "/guide/usermanual/analytics.html",
 
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",

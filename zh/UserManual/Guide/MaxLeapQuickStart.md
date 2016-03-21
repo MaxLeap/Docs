@@ -2,8 +2,8 @@
 
 
 ## 准备
-#### 注册并登录 MaxLeap
-#### 安装 IDE
+##### 注册并登录 MaxLeap
+##### 安装 IDE（iOS 或者 Android 平台具体选择）
 ## 创建应用
 MaxLeap 提供两种模式创建应用
 #### 自定义应用
@@ -30,19 +30,19 @@ MaxLeap 提供两种模式创建应用
 ##### 8、可以在应用设置下的应用密钥中查看应用的相关key，包括 AppId 和 ClientKey 等
 ![](../../../images/CreateApp10.png)
 
-##### Ok，是不是很简单呢，您可以直接基于我们的模板应用快速构建您自己的应用，Happy Coding!!!!
+ Ok，是不是很简单呢，您可以直接基于我们的模板应用快速构建您自己的应用，Happy Coding!!!!
 
-## 了解更多
+### 了解更多
 使用指南  | SDK 开发指南
 ------------- | -------------
-[数据存储]()  | [iOS 开发指南]()，[Android 开发指南]()，[JavaScript 开发指南]()
-[代码托管]()  | [iOS 开发指南]()，[Android 开发指南]()，[Java 开发指南]()，[Python 开发指南]()，[Node.js 开发指南]()
-[账号系统]()  | [iOS 开发指南]()，[Android 开发指南]()
-[即时通讯]()  | [iOS 开发指南]()，[Android 开发指南]()，[JavaScript 开发指南]()
-[移动支付]()  | [iOS 开发指南]()，[Android 开发指南]()，[PHP 开发指南]()
-[应用内社交]()  | [iOS 开发指南]()，[Android 开发指南]()，[JavaScript 开发指南]()
-[社交分享]()  | [iOS 开发指南]()，[Android 开发指南]()，[JavaScript 开发指南]()
-[在线参数]()  | [iOS 开发指南]()，[Android 开发指南]()
-[数据分析]()  | [iOS 开发指南]()，[Android 开发指南]()
-[推送营销]()  | [iOS 开发指南]()，[Android 开发指南]()
-[用户支持]()  | [iOS 开发指南]()，[Android 开发指南]()
+[数据存储](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)，[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#CLOUD_DATA_ZH)
+[代码托管](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CODE_ZH)，[Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH)，[Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH)，[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH)
+[账号系统](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ACCOUNTSYSTEM_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ACCOUNT_SYSTEM_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ACCOUNT_SYSTEM_ZH)
+[在线参数](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CONFIG_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CONFIG_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CONFIG_ZH)
+[即时通讯](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXIM_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)，[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
+[移动支付](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXPAY_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXPAY_ZH)，[PHP 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP#MAXPAY_ZH)
+[应用内社交](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#INAPPSOCIAL_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#INAPPSOCIAL_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#INAPPSOCIAL_ZH)，[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#INAPPSOCIAL_ZH)
+[社交分享](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SOCIALSHARE_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SOCIALSHARE_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SOCIALSHARE_ZH)，[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#SOCIALSHARE_ZH)
+[数据分析](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ANALYTICS_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)
+[推送营销](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MARKETING)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)
+[用户支持](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SUPPORT_ZH)  | [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)，[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#USER_ZH)
