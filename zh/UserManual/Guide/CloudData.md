@@ -1,10 +1,10 @@
 # 数据存储
 ## 简介
 
-### 什么是 数据存储服务
- Cloud Data是MaxLeap提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+### 什么是数据存储服务
+ Cloud Data是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
-### 为何需要 数据存储服务
+### 为何需要数据存储服务
 数据存储服务将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
 
 * 解决硬件资源的部署和运维
@@ -14,7 +14,7 @@
 
 **如果您希望进一步了解 MaxLeap 数据存储服务SDK，请参考 [iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或 [Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
 
-## 表列表
+## 数据表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
 
 ![imgCDclassList.png](../../../images/imgCDClassList.png)
@@ -41,8 +41,6 @@
 ![imgCDDeleteclass](../../../images/imgCDDeleteClass.png)
 
 ## 数据迁移
-##### _Author: ben.Ma
-##### _Github: https://github.com/benkris1
 
 ### 简介
 
@@ -140,6 +138,11 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 您还可以进入 数据迁移 >> 操作历史 查看导入或者导出的历史纪录：
 
 ![imgCDHandleHistory](../../../images/imgCDHandleHistory.png)
+
+## 在线 SQL 分析
+MaxLeap 为您的应用数据提供在线分析功能，您可以使用类SQL的查询语句对自己的数据进行高效的查询和导出。
+
+[查看详情](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_OFFLINE_ANALYZE_ZH)
 
 ## FAQ
 内容更新中
