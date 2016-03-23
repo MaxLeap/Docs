@@ -50,14 +50,6 @@ MaxIMKit 目前正在内测中，尽请期待。
 ### 离线推送
 当用户处于未登录状态时，系统会将消息以离线推送的方式发送给用户。
 
-## SDK 开发指南
-[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH)
-
-[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)
-
-[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
-
-
 
 ## 注意事项
 
@@ -67,3 +59,10 @@ MaxIMKit 目前正在内测中，尽请期待。
 
 ## FAQ
 内容更新中
+
+## SDK 开发指南
+[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH)
+
+[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)
+
+[JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)

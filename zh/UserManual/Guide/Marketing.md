@@ -13,9 +13,6 @@
 * **保障用户体验：**选择向指定用户分群发送消息，更具有针对性
 * **动态内容管理：**应用内消息和推送消息中的内容均在 Console 中设置，用户所见内容可实时更新
 
-
-**如果您希望进一步了解MaxLeap Marketing服务SDK，请参考 [iOS 开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH) 或 [Android 开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
-
 ## 营销活动列表
 在"推送营销"报表中，我们可以查看该应用下所有的活动（包括**应用内消息**和**活动**）的列表：
 
@@ -91,5 +88,7 @@
 ## FAQ
 内容更新中
 
-## 下一步
-**如果您希望进一步了解MaxLeap Marketing服务SDK，请参考[iOS开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
+## SDK 开发指南
+[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)
+
+[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)

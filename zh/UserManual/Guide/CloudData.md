@@ -10,9 +10,7 @@
 * 解决硬件资源的部署和运维
 * 提供标准而又完整的数据访问API
 * 不同于传统关系型数据库，向云端存储数据无需提前建表，JSON 格式的对象随存随取，高并发访问轻松无压力
-* 可结合代码托管服务，实现云端数据的Hook （详情请移步至[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)）
-
-**如果您希望进一步了解 MaxLeap 数据存储服务SDK，请参考 [iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或 [Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
+* 可结合代码托管服务，实现云端数据的 Hook （详见 [MaxLeap 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)）
 
 ## 数据表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
@@ -108,7 +106,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 导入数据：
 
- ![ import_relation](../../../images/import_relation.png)
+  ![ import_relation](../../../images/import_relation.png)
 
 如果 Class 类型为Relation,在目标列中可以填入已有的字段类型为relation的名称。如果不存在，系统则会自动创建。
 
@@ -142,10 +140,12 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 ## 在线 SQL 分析
 MaxLeap 为您的应用数据提供在线分析功能，您可以使用类SQL的查询语句对自己的数据进行高效的查询和导出。
 
-[查看详情](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_OFFLINE_ANALYZE_ZH)
+详情查看 [云数据在线 SQL 分析](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_OFFLINE_ANALYZE_ZH)
 
 ## FAQ
 内容更新中
 
-## 下一步
-**如果您希望进一步了解MaxLeap  数据存储服务SDK，请参考[iOS开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)或[Android开发指南 － 云数据](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)。**
+## SDK 开发指南
+[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)
+
+[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_DATA_ZH)

@@ -2,8 +2,6 @@
 ## 简介
 用户支持服务是 MaxLeap 为开发者提供的一套标准应用客服方案。在移动端，此方案提供完整的 FAQ 的显示页面及用户反馈对话页面。在 Console 端，用户支持服务提供 FAQ 的管理及用户反馈的处理界面。
 
-**如果您希望进一步了解 MaxLeap 用户支持服务 SDK，请参考 [iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH) 或 [Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
-
 
 ## 功能服务
 
@@ -59,6 +57,8 @@
 ## FAQ
 内容更新中
 
-## 下一步
+## SDK 开发指南
 
-**如果您希望进一步了解 MaxLeap 用户支持服务 SDK，请参考 [iOS开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH) 或 [Android开发指南 － 支持](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)。**
+[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)
+
+[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)

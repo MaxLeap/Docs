@@ -15,8 +15,6 @@
 
 在应用管理页面中，您可以查看，新建和管理各个版本的云代码及相应的日志。
 
-**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，[Python开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，[Node.js开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS) **
-
 ##版本状态
 在"版本状态"报表中，我们可以查看上传至该应用下的所有的云代码。该报表包含以下列：
 
@@ -138,6 +136,19 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 
 ## FAQ
 内容更新中
-## 下一步
 
-**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，[Python开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，[Node.js开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS) **
+## SDK 开发指南
+
+### 移动端 SDK
+
+[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH)
+
+[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CODE_ZH)
+
+### 服务端 SDK
+
+[Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)
+
+[Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)
+
+[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)
