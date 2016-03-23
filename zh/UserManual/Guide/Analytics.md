@@ -26,7 +26,7 @@
 4.  追踪页面访问
 5.  收集安装信息
 
-MaxLeap"数据分析"服务将通过以下功能，帮助您更了解用户及其行为，做出更有效的运营策略，
+MaxLeap "数据分析"服务将通过以下功能，帮助您更了解用户及其行为，做出更有效的运营策略，
 
 1. **用户分析：** 包括“趋势”，“留存”，“终端”等模块
 2. **使用行为分析：** 包括”用户使用率“，”用户行为“等模块
@@ -34,7 +34,7 @@ MaxLeap"数据分析"服务将通过以下功能，帮助您更了解用户及�
 
 ##### 优势：
 
-1.  最佳实践：MaxLeap提供业内极具竞争力的分析参数和模型，经过亿级用户量应用的验证
+1.  最佳实践：MaxLeap 提供业内极具竞争力的分析参数和模型，经过亿级用户量应用的验证
 2.  用户群划分：您可以分析自定义用户群的属性及行为
 3.  丰富的报表：透过运营者视角，MaxLeap提供一套完整的，直观的报表:
 
@@ -44,7 +44,6 @@ MaxLeap"数据分析"服务将通过以下功能，帮助您更了解用户及�
 * 过滤器：指定应用版本和渠道
 * 时间段：指定特定的时间跨度
 	
-**如果您希望进一步了解  MaxLeap 分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
 
 ## 概览
 
@@ -224,8 +223,11 @@ MaxLeap"数据分析"服务将通过以下功能，帮助您更了解用户及�
 ## FAQ
 内容更新中
     
-## 下一步
+## SDK 开发指南
 
-**如果您希望进一步了解 MaxLeap 分析服务SDK，请参考[iOS开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)或[Android开发指南 － 分析服务](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)。**
+[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ANALYTICS_ZH)
+
+
+[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ANALYTICS_ZH)
     
     

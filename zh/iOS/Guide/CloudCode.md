@@ -12,9 +12,14 @@
 
 **注意**：我们支持 iOS 7.0 及以上版本。
 
-首先，需要开发 Cloud Code，实现所需的接口和 Hook，开发以及发布过程请参考 [Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。
+首先，需要开发云代码，实现所需的接口和 HOOK，开发以及发布过程请根据您的需求选择对应服务端语言
 
-发布 Cloud Code 之后，客户端可以使用 `+[MLCloudCode callFunctionInBackground:withParameters:block:]` 方法调用云函数。
+[Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH)，
+[Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH)，[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH)
+
+### 调用云函数
+
+发布云代码之后，客户端可以使用 `+[MLCloudCode callFunctionInBackground:withParameters:block:]` 方法调用云函数。
 
 假如在 CloudCode 中定义了一个名称为 `hello` 的函数，带一个名字为 `name` 的参数，返回值为输入的参数字典。现在调用这个云函数：
 

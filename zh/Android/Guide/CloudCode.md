@@ -10,9 +10,12 @@
 如果您尚未安装 SDK，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)。
 您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID)，了解有关我们 SDK 的更多详细信息。
 
-首先，需要开发 Cloud Code，实现所需的接口和 HOOK，开发以及发布过程请参考 [Cloud Code引导](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)。
+首先，需要开发云代码，实现所需的接口和 HOOK，开发以及发布过程请根据您的需求选择对应服务端语言
 
-调用云函数
+[Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH)，
+[Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH)，[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH)
+
+### 调用云函数
 
 只需要使用 `MLCloudManager.callFunctionInBackground()` 方法就可以调用部署在云端的代码，该方法接收两个参数，第一个参数为方法名，第二个参数为方法的参数列表（参数名：参数值）。
 
