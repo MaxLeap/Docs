@@ -1,6 +1,8 @@
 # 支付服务
 
-MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统，通过一个 SDK 便可以同时支持移动端以及 PC 端网页的多种主流支付渠道。
+MaxLeap 支付服务是为移动端应用以及 PC 网页量身打造的下一代支付系统，通过一个 SDK 便可以同时支持移动端以及 PC 端网页的多种主流支付渠道。
+
+简称: MaxPay
 
 ## 接入流程
 ![Pay](../../../images/MaxPayJoinFlow.png "MaxPay 接入流程")
@@ -16,7 +18,7 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 
 
 ## 支持渠道
-渠道配置 [详见 MaxPay 管理后台使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN)
+渠道配置 [详见支付管理后台使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN)
 #### 支付宝
 #### 微信支付
 #### 银联支付
