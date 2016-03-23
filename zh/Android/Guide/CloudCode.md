@@ -5,7 +5,7 @@
 
 目前支持 Java、Python、Node.js，其他语言尽请期待。
 
-## 云代码调用
+## 准备
 
 如果您尚未安装 SDK，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)。
 您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID)，了解有关我们 SDK 的更多详细信息。
@@ -15,7 +15,7 @@
 [Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH)，
 [Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH)，[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH)
 
-### 调用云函数
+## 云代码调用
 
 只需要使用 `MLCloudManager.callFunctionInBackground()` 方法就可以调用部署在云端的代码，该方法接收两个参数，第一个参数为方法名，第二个参数为方法的参数列表（参数名：参数值）。
 

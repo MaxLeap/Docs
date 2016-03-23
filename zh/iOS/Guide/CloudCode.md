@@ -5,7 +5,7 @@
 
 目前支持 Java、Python、Node.js，其他语言尽请期待。
 
-## 云代码调用
+## 准备
 
 如果您尚未安装 SDK，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
 您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
@@ -17,7 +17,7 @@
 [Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH)，
 [Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH)，[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH)
 
-### 调用云函数
+## 云代码调用
 
 发布云代码之后，客户端可以使用 `+[MLCloudCode callFunctionInBackground:withParameters:block:]` 方法调用云函数。
 
