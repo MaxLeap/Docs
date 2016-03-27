@@ -15,16 +15,18 @@
 ## 数据表
 在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
 
-![imgCDclassList.png](../../../images/imgCDClassList.png)
+![imgCDclassList.png](../../../images/clouddata_1.png)
 
 若某个字段的类型为MLRelation，即关联了其他MLObject，该列的值会显示为"View Relations".点击后，便可查看该属性关联的所有MLObject.
 
-![imgCDShowRelation.png](../../../images/imgCDShowRelation.png)
+![imgCDShowRelation.png](../../../images/clouddata_2.png)
+
+![imgCDAddclass.png](../../../images/clouddata_3.png)
 
 ### 新建/修改 表
 点击"＋添加类"按钮，输入class名，便可以完成class的新建：
 
-![imgCDAddclass.png](../../../images/imgCDAddClass.png)
+![imgCDAddclass.png](../../../images/clouddata_4.png)
 
 新建class完毕后，您可以选中改class后，对其进行如下修改：
 
@@ -36,7 +38,7 @@
 ### 删除 表
 在Claas列表中选中要删除的class，在右侧选择 更多 >> 删除类，确认即可。
 
-![imgCDDeleteclass](../../../images/imgCDDeleteClass.png)
+![imgCDAddclass.png](../../../images/clouddata_5.png)
 
 ## 数据迁移
 
@@ -102,7 +104,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 在云数据中点击 数据迁移 >> 导入数据，选择您所要导入的 JSON 文件：
 
- ![imgCDImport](../../../images/imgCDImport.png)
+![imgCDAddclass.png](../../../images/clouddata_6.png)
 
 导入数据：
 
@@ -120,11 +122,14 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 数据导出可以将MaxLeap平台数据导出到本地。导出任务完成后用户会收到通知邮件，内容会包含文件下载链接。
 
+##### 数据迁移
+
+![imgCDExport](../../../images/clouddata_8.png)
 ##### 导出流程
 
 点击 数据迁移 >> 导出数据，所选的 Class 就会被导出为 JSON 格式的文件，并发送至您的邮箱：
 
-![imgCDExport](../../../images/imgCDExport.png)
+![imgCDExport](../../../images/clouddata_7.png)
 
 ##### 注意事项
 
@@ -135,7 +140,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 您还可以进入 数据迁移 >> 操作历史 查看导入或者导出的历史纪录：
 
-![imgCDHandleHistory](../../../images/imgCDHandleHistory.png)
+![imgCDExport](../../../images/clouddata_9.png)
 
 ## 在线 SQL 分析
 MaxLeap 为您的应用数据提供在线分析功能，您可以使用类SQL的查询语句对自己的数据进行高效的查询和导出。
