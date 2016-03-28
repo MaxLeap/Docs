@@ -1102,5 +1102,6 @@ MLQueryManager.findAllInBackground(new FindCallback<MLObject>() { ... });
 
 ## 数据安全
 
-每个到达 MaxLeap 云服务的请求是由移动端SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
-具体的介绍及操作方法，请参考[Console 使用指南 - 云数据](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
+每个到达 MaxLeap 云服务的请求是由移动端 SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
+
+具体的介绍及操作方法，请参考 [数据存储-使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
