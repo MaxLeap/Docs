@@ -2,7 +2,7 @@
 ## 简介
 
 ### 什么是数据存储服务
- Cloud Data是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过iOS/Android Core SDK对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+ Cloud Data是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
 ### 为何需要数据存储服务
 数据存储服务将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
@@ -13,30 +13,35 @@
 * 可结合代码托管服务，实现云端数据的 Hook （详见 [MaxLeap 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)）
 
 ## 数据表
-在开发者中心的"数据"分类中，我们可以查看该应用下所有的class的列表：
+
+### 所有表
+在开发中心的云数据库中，我们可以查看该应用下所有的表的列表：
 
 ![imgCDclassList.png](../../../images/clouddata_1.png)
 
-若某个字段的类型为MLRelation，即关联了其他MLObject，该列的值会显示为"View Relations".点击后，便可查看该属性关联的所有MLObject.
+若某个字段的类型为 `MLRelation`，即关联了其他 `MLObject`，该列的值会显示为"查看 Relations"。
 
 ![imgCDShowRelation.png](../../../images/clouddata_2.png)
+
+点击 “查看 Relation” 进入详细页面，便可查看该属性关联的所有 `MLObject`.
 
 ![imgCDAddclass.png](../../../images/clouddata_3.png)
 
 ### 新建/修改 表
-点击"＋添加类"按钮，输入class名，便可以完成class的新建：
+点击"＋新建表"按钮，输入表名，便可以完成表的新建，您同时可以设置表的权限：
 
 ![imgCDAddclass.png](../../../images/clouddata_4.png)
 
-新建class完毕后，您可以选中改class后，对其进行如下修改：
+新建表完毕后，您可以选中改表后，对其进行如下修改：
 
-* 新建列：添加class属性
+* 新建列：对当前表新增列
 * 新建行：添加一条数据
 * 筛选表格数据显示：点击沙漏图标
 * 选择表格显示列：点击右上角表格图标
+* 更多按钮下，还可以删除列、删除表、对表进行权限设置
 
-### 删除 表
-在Claas列表中选中要删除的class，在右侧选择 更多 >> 删除类，确认即可。
+### 删除表
+在表列表中选中要删除的表，在右侧选择 更多 >> 删除表，确认即可。
 
 ![imgCDAddclass.png](../../../images/clouddata_5.png)
 
@@ -46,20 +51,22 @@
 
 数据迁移是可以对用户数据进行备份，平台迁移。
 
+#####包括
+* 数据导入
+* 数据导出
+
 ### 需求场景
 
 * 数据备份
-* 从其他平台迁移到MaxLeap
+* 从其他平台迁移到 MaxLeap
 
-### 功能介绍
-
-#### 数据导入
+### 数据导入
 
 我们提供通过 JSON 文件导入数据的功能。
 
 ##### JSON文件格式
 
-JSON格式要求JSON对象包含results字段，对应的是一个对象数组。
+JSON 格式要求 JSON 对象包含 results 字段，对应的是一个对象数组。
 
 一个包含普通对象的文件看来像这样：
 
@@ -81,7 +88,7 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 }
 ```
 
-关联Relation数据的导入，需要填写导入的class名称，导入后的字段名称，关联的class名称等信息，才能完整导入，示范的relation数据类似
+关联 Relation 数据的导入，需要填写导入的表名称，导入后的字段名称，关联的表名称等信息，才能完整导入，示范的 relation 数据类似
 
 ``` json
 {"results":[
@@ -95,50 +102,57 @@ JSON格式要求JSON对象包含results字段，对应的是一个对象数组�
 
 其中：
 
-* owningId 是将要导入的class表内已经存在的对象的objectId。
-* relatedId 是将要关联的class里的对象的objectId。
+* owningId 是将要导入的表内已经存在的对象的 objectId。
+* relatedId 是将要关联的表里的对象的 objectId。
 
-例如Post有一个字段comments是relation类型，对应的Class是Comment，那么owningId就是已存在的Post的objectId，而relatedId就是关联的Comment的ObjectId。
+例如 Post 有一个字段 comments 是 relation 类型，对应的表是 Comment，那么 owningId 就是已存在的 Post 的 objectId，而 relatedId 就是关联的 Comment 的 ObjectId。
 
-##### 导入流程
+#### 导入流程
 
-在云数据中点击 数据迁移 >> 导入数据，选择您所要导入的 JSON 文件：
+在云数据库中点击 数据迁移 >> 导入数据，选择您所要导入的 JSON 文件：
 
 ![imgCDAddclass.png](../../../images/clouddata_6.png)
 
 导入数据：
 
-  ![ import_relation](../../../images/import_relation.png)
+![ import_relation](../../../images/import_relation.png)
 
-如果 Class 类型为Relation,在目标列中可以填入已有的字段类型为relation的名称。如果不存在，系统则会自动创建。
+如果表类型为 Relation，在目标列中可以填入已有的字段类型为 Relation 的名称。如果不存在，系统则会自动创建。
 
 ##### 注意事项
 
 * 导入文件最大支持`100M`,如果超过可以分多次导入
-* 数据objectId重复，会忽略该记录
+* 数据 objectId 重复，会忽略该记录
 * 一次导入如果产生`500`条以上失败日志系统将终止导入进程
 
-#### 数据导出
+### 数据导出
 
-数据导出可以将MaxLeap平台数据导出到本地。导出任务完成后用户会收到通知邮件，内容会包含文件下载链接。
+数据导出可以将 MaxLeap 平台数据导出到本地。导出任务完成后用户会收到通知邮件，内容会包含文件下载链接，也可以在 **数据迁移** >> **操作历史** 里面下载
 
-##### 数据迁移
+#### 数据迁移
+
+数据迁移按钮下包含：**数据导入**、**数据导出**、**操作历史** 的入口。
 
 ![imgCDExport](../../../images/clouddata_8.png)
-##### 导出流程
+#### 导出流程
 
-点击 数据迁移 >> 导出数据，所选的 Class 就会被导出为 JSON 格式的文件，并发送至您的邮箱：
+点击 **数据迁移** >> **导出数据**，所选的表的数据就会被导出为 JSON 格式的文件，并发送至您的邮箱：
 
 ![imgCDExport](../../../images/clouddata_7.png)
 
 ##### 注意事项
 
-* 导出时数据文件存储在云服务器，并保留7天，发邮件通知，请及时下载
+* 导出时数据文件存储在云服务器，并保留 7 天，发邮件通知，请及时下载
 * 导出支持最多`1000`万条记录，能够区分公司账号，用`AdminConsole`可以设置
 
-#### 操作历史
+### 操作历史
 
-您还可以进入 数据迁移 >> 操作历史 查看导入或者导出的历史纪录：
+您还可以进入 **数据迁移** >> **操作历史** 查看导入或者导出的历史纪录
+
+并且还可以
+
+* 下载导出数据
+* 查看导入/导入日志
 
 ![imgCDExport](../../../images/clouddata_9.png)
 
