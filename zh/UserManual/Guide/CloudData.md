@@ -2,7 +2,7 @@
 ## 简介
 
 ### 什么是数据存储服务
- Cloud Data是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在MaxLeap上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在Console中管理所有的对象。此外MaxLeap还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
+ Cloud Data是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在Console中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLRole`(角色)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于`MLObject`的对象。
 
 ### 为何需要数据存储服务
 数据存储服务将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
@@ -41,7 +41,7 @@
 * 更多按钮下，还可以删除列、删除表、对表进行权限设置
 
 ### 删除表
-在表列表中选中要删除的表，在右侧选择 更多 >> 删除表，确认即可。
+在表列表中选中要删除的表，在右侧选择 **更多** >> **删除表** ，确认即可。
 
 ![imgCDAddclass.png](../../../images/clouddata_5.png)
 
@@ -63,7 +63,7 @@
 
 ### 操作入口
 
-数据迁移按钮下包含：**数据导入**、**数据导出**、**操作历史** 的入口。
+**数据迁移** 按钮下包含：**数据导入**、**数据导出**、**操作历史** 的入口。
 
 ![imgCDExport](../../../images/clouddata_8.png)
 
@@ -116,15 +116,15 @@ JSON 格式要求 JSON 对象包含 results 字段，对应的是一个对象数
 
 #### 导入数据
 
-在云数据库中点击 数据迁移 >> 导入数据，选择您所要导入的 JSON 文件：
+在云数据库中点击 **数据迁移** >> **导入数据**，或者直接在左下角点击 **导入数据** ，选择您所要导入的 JSON 文件：
 
 ![imgCDAddclass.png](../../../images/clouddata_6.png)
 
-导入数据：
+#### 选择表类型
 
 ![ import_relation](../../../images/clouddata_10.png)
 
-##### 注意事项
+##### 说明
 * 如果是无 Relation 类型列的数据表，直接选择 Class 完成导入，默认使用文件名作为表名称
 * 如果表存在列类型为 Relation，在目标列中可以填入已有的字段类型为 Relation 的名称。如果不存在，系统则会自动创建。
 
@@ -157,7 +157,7 @@ JSON 格式要求 JSON 对象包含 results 字段，对应的是一个对象数
 并且还可以
 
 * 下载导出数据
-* 查看导入/导入日志
+* 查看导入/导出日志
 
 ![imgCDExport](../../../images/clouddata_9.png)
 

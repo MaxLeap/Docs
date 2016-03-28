@@ -1,11 +1,11 @@
 # 数据分析
 ## 简介
 
-###	什么是  MaxLeap 数据分析服务
+###	什么是 MaxLeap 数据分析服务
 
  MaxLeap 数据分析服务通过客户端及  Cloud Data 服务，收集应用及用户的各种数据，并在 MaxLeap 中进行专业分析，最终生成面向运营者的报表。
 
-###	为何需要  MaxLeap 数据分析服务
+###	为何需要 MaxLeap 数据分析服务
 
  MaxLeap 数据分析服务是实时、免费、专业的移动应用统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
 
@@ -231,15 +231,15 @@ MaxLeap 支持服务端及移动端两种模式自定义事件，事件相关限
 
 MaxLeap 会自动给每个 App 创建 10 个默认的用户分组，您也可以自行创建用户分组
 
-##### 用户分组列表
+### 用户分组列表
 
 ![imgAATerminal.png](../../../images/analytics_27.png) 
 
-##### 某个用户分组详情
+### 某个用户分组详情
 
 ![imgAATerminal.png](../../../images/analytics_28.png) 
 
-##### 创建用户分组
+### 创建用户分组
 
 ![imgAATerminal.png](../../../images/analytics_29.png) 
 
@@ -247,11 +247,11 @@ MaxLeap 会自动给每个 App 创建 10 个默认的用户分组，您也可以
 
 提供了完整的用户账号信息与行为的历史记录，包括登录、付费、事件等详细行为，深入分析单个用户行为轨迹，并可通过设备、用户分组过滤。
 
-##### 用户列表
+### 用户列表
 
 ![imgAATerminal.png](../../../images/analytics_31.png) 
 
-##### 用户行为轨迹
+### 用户行为轨迹
 
 ![imgAATerminal.png](../../../images/analytics_30.png) 
 
