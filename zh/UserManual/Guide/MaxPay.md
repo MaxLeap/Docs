@@ -1,6 +1,8 @@
-# MaxPay
+# 支付服务
 
-MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统，通过一个 SDK 便可以同时支持移动端以及 PC 端网页的多种主流支付渠道。
+MaxLeap 支付服务是为移动端应用以及 PC 网页量身打造的下一代支付系统，通过一个 SDK 便可以同时支持移动端以及 PC 端网页的多种主流支付渠道。
+
+简称: MaxPay
 
 ## 接入流程
 ![Pay](../../../images/MaxPayJoinFlow.png "MaxPay 接入流程")
@@ -14,19 +16,9 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 #### 查询
 ![Query](../../../images/MaxPayQuerySequence.png "MaxPay 查询流程")
 
-## SDK支持平台
-##### iOS
-[详见iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)
-##### Android
-[详见Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)
-##### PHP
-[详见PHP开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP)
-
-## 开放 RestAPI
-[详见开放API文档](ML_DOCS_REST_API_MAXPAY)
 
 ## 支持渠道
-渠道配置 [详见 MaxPay 管理后台使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN)
+渠道配置 [详见支付管理后台使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN)
 #### 支付宝
 #### 微信支付
 #### 银联支付
@@ -40,3 +32,16 @@ MaxPay 是为移动端应用以及 PC 网页量身打造的下一代支付系统
 MaxLeap 不收取任何费用，各支付渠道单独收费与 MaxLeap 无关
 
 ## FAQ
+内容更新中
+
+## SDK 开发指南
+
+[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS)
+
+[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID)
+
+[PHP开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP)
+
+## 开放 REST API
+[开放API文档](ML_DOCS_REST_API_MAXPAY)
+

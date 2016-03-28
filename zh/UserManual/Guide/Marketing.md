@@ -1,64 +1,90 @@
-# 营销推广
-##简介
-###什么是 MaxLeap 营销推广服务
+# 推送营销
+## 简介
+###什么是 MaxLeap 推送营销服务
 
-营销推广服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种Marketing形式：Push Notification和In-App Message.您可以通过推送消息方式向指定人群推送消息，也可以通过In-App Message，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的跳转。
+推送营销服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种消息模式：推送消息 和 应用内消息。您可以通过推送消息方式向指定人群推送消息，也可以通过应用内消息，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标 Activity。消息的创建，设置和发送均在Console中完成。
 
-###为何需要MaxLeap营销推广服务
+### 为何需要 MaxLeap 推送营销服务
 
-结合 MaxLeap 分析服务提供的分析数据，以及MaxLeap 数据分析服务提供的用户分组功能，您可以高效地制定营销策略，并且通过Marketing服务实施您的策略。使用MaxLeap营销服务的优势在于：
+结合 MaxLeap 数据分析服务提供的分析数据，以及用户分组，您可以高效地制定营销策略，并且通过推送营销服务实施您的策略。MaxLeap 推送营销服务的优势在于：
+
 
 * **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
-* **保障用户体验：**选择向指定用户分组发送消息，更具有针对性
-* **动态内容管理：**推送消息和应用内消息中的内容均在Console中设置，意味着用户所见内容可随时更新
+* **保障用户体验：**选择向指定用户分群发送消息，更具有针对性
+* **动态内容管理：**应用内消息和推送消息中的内容均在 Console 中设置，用户所见内容可实时更新
 
+## 营销活动列表
+在"推送营销"报表中，我们可以查看该应用下所有的活动（包括**应用内消息活动**和**推送消息活动**）的列表：
 
-**如果您希望进一步了解MaxLeap Marketing服务SDK，请参考[iOS开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
+![imgMCampaignList.png](../../../images/marketing_14.png)
 
-##营销活动列表
-在"营销推广"报表中，我们可以查看该应用下所有的活动（包括**应用内消息**和**活动**）的列表：
+## 推送消息
 
-![imgMCampaignList.png](../../../images/imgMCampaignList.png)
+### 新建推送活动
 
-##新建推送消息
-点击"＋创建新活动"按钮 >> 推送，即可进入创建推送消息界面：
+点击"＋创建活动"按钮，选择活动类型为**`推送`**即可进入创建推送消息界面：
 
-####步骤一：选择推送目标
+![imgMCampaignList.png](../../../images/marketing_2.png)
+
+### 步骤一：选择推送目标人群
 选择接受推送的目标用户为下列三种类型之一：
 
 * 所有用户
-* 指定Segment用户分群
-* 指定设备
+* 指定用户群体（**通过数据分析用户分组设置**）
+* 指定设备过滤
 
-![imgMAddPush1.png](../../../images/imgMAddPush1.png)
+![imgMCampaignList.png](../../../images/marketing_4.png)
 
-####步骤二：创建推送消息内容
-一条推送消息包含以下内容，您需要在创建时填写。而且，您可以实时预览效果。
+###步骤二：创建推送消息内容
+一条推送消息包含以下内容，您需要在创建时填写，您还可以实时预览效果。
 
 * 推送标题
 * 推送消息内容文字
 * 传递至客户端的参数
+* 是否 A/B 测试
 
-![imgMAddPush2.png.png](../../../images/imgMAddPush2.png)
+如下图显示，使用 **`A/B 测试`** 效果
 
-注意：
+![imgMCampaignList.png](../../../images/marketing_5.png)
 
-* 您可以同一个推送中同时创建多条消息，点击该页面左侧的"＋"号即可
+**A/B 测试** 
 
-####步骤三：指定发送时间
-最后您需要指定该推送消息，何时开始发送及有效期：
+* 您可以对同一个活动设置不同方案推送
+* 设置不同方案后，MaxLeap 将随机为每个方案推送对应 比例 用户
 
-![imgMAddPush3.png](../../../images/imgMAddPush3.png)
+###步骤三：设置发送时间
+最后您需要指定该推送消息，何时开始发送及结束时间：
 
-##新建应用内消息
+![imgMCampaignList.png](../../../images/marketing_6.png)
+
+###步骤四：预览活动详情并确认发送
+最后您需要指定该推送消息，何时开始发送及结束时间：
+
+![imgMCampaignList.png](../../../images/marketing_7.png)
+
+## 应用内消息
 应用内消息，是当用户在应用内出现某些行为时，在应用内显示的消息。一个应用内消息，可包含文字，图片以及一个按钮，您可以自定义用户点击该按钮之后的跳转。
 
-点击"＋创建新活动"按钮 >> 应用内消息，即可进入创建应用内消息界面：
+### 新建应用内消息活动
 
-####步骤一：选择消息接收目标
-与新建推送消息的步骤一类似。
+点击"＋创建活动"按钮，选择活动类型为**`应用内内息`**即可进入创建推应用内消息界面：
 
-####步骤二：创建消息内容
+![imgMCampaignList.png](../../../images/marketing_9.png)
+
+### 步骤一：选择目标人群
+选择接受推送的目标用户为下列三种类型之一：
+
+* 所有用户
+* 指定用户群体（**通过数据分析用户分组设置**）
+* 指定设备过滤
+
+![imgMCampaignList.png](../../../images/marketing_10.png)
+
+**注意** 
+
+* 您还可以设置灰度测试，选择一定比例用户作为试验，效果好了以后再大规模推广
+
+### 步骤二：创建消息内容
 一条推送消息包含以下内容，您需要在创建时填写。而且，您可以实时预览效果。
 
 * 活动名：该应用内消息活动的名字
@@ -67,25 +93,37 @@
 * 选择布局：图像文字的布局
 * 选择背景：背景颜色或背景图片（支持上传图片）
 * 设计&编辑内容：消息内容文字，以及文字颜色样式
-* 设置点击行为：用户点击Call to Action按钮之后，跳转的目标Activity
+* 设置点击行为：用户点击 对应 按钮之后，跳转的目标链接
+
+![imgMCampaignList.png](../../../images/marketing_11.png)
+
+**A/B 测试** 
+
+* 您可以对同一个活动设置不同方案推送
+* 设置不同方案后，MaxLeap 将随机为每个方案推送对应 比例 用户
+
+### 步骤三：指定触发事件和时间
+
+![imgMCampaignList.png](../../../images/marketing_12.png)
+
+### 步骤四：预览活动详情并确认发送
+最后您需要指定该推送消息，何时开始发送及结束时间：
+
+![imgMCampaignList.png](../../../images/marketing_13.png)
+
+## 活动效果分析
+
+查看某个活动效果
+![imgMCampaignList.png](../../../images/marketing_17.png)
+
+查看活动效果详情
+![imgMCampaignList.png](../../../images/marketing_16.png)
 
 
-![imgMAddMsg2.png](../../../images/imgMAddMsg2.png)
+## FAQ
+内容更新中
 
-![imgMAddMsg2-2.png](../../../images/imgMAddMsg2-2.png)
+## SDK 开发指南
+[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)
 
-注意：
-
-* 您可以同一个活动中中同时创建多条应用内消息，点击该页面左侧的"＋"号即可
-
-####步骤三：指定触发事件和有效期
-
-![imgMAddMsg3.png](../../../images/imgMAddMsg3.png)
-
-##激活推送消息/应用内消息
-新建完毕的推送消息，将为“草稿”状态。您可以选中一个推送消息，点击“激活任务”，以将该活动的状态改为“运行中”。此时，活动将按照指定的计划执行。
-
-![imgMActivatePush.png](../../../images/imgMActivatePush.png)
-
-## 下一步
-**如果您希望进一步了解MaxLeap Marketing服务SDK，请参考[iOS开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MARKETING_ZH)或[Android开发指南 － 营销](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)。**
+[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MARKETING_ZH)

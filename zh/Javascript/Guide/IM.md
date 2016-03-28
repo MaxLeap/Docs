@@ -1,9 +1,13 @@
-# MaxIMLib for Javascript
+# 即时通讯
 
 ##### _Author: Marvin
 ##### _Github: https://github.com/zhoucen
 
 ## 简介
+
+使用 MaxLeap 的即时通讯服务，可以轻松实现一个实时聊天应用，或者一个联机对战类的游戏。除聊天室外的聊天记录都保存在云端，离线消息会通过消息推送及时送达，推送的消息文本可以灵活定制。
+
+### MaxIMLib
 
 MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和会话、消息等对象。引用到 App 工程中后，需要开发者自己实现 UI 界面，相对较轻量，适用于对 UI 有较高订制需求的开发者。
 
@@ -11,7 +15,7 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 ## Demo
 
-- 简单聊天 Demo[源码](https://github.com/MaxLeap/MaxIM-JavaScript/tree/master/demo/Chat)
+- 简单聊天 Demo [源码](https://github.com/MaxLeap/MaxIM-JavaScript/tree/master/demo/Chat)
 
 ## 基础概念
 ### 用户

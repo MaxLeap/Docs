@@ -1,21 +1,19 @@
 # 云代码
-##简介
-###什么是云代码服务
-云代码是部署运行在MaxLeap中的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
+## 简介
+### 什么是云代码服务
+云代码是部署运行在 MaxLeap 云引擎上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在 Web server上的 Web Service或 RESTful API。它对外提供的接口也是 RESTful API，也正是以这种方式被移动应用调用。
 
 目前支持 Java、Python、Node.js，其他语言尽请期待。
 
-###为什么需要云代码服务
+### 为什么需要云代码服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现。其优势在于：
 
-* 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 强大的运算能力：云代码运行在 MaxLeap 的 Docker 容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求 Cloud Data，大大提升效率
 * 同一套代码可以为iOS，Android，Web Site等提供服务
 
 在应用管理页面中，您可以查看，新建和管理各个版本的云代码及相应的日志。
-
-**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，[Python开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，[Node.js开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS) **
 
 ##版本状态
 在"版本状态"报表中，我们可以查看上传至该应用下的所有的云代码。该报表包含以下列：
@@ -136,6 +134,21 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 ##白名单
 可以将函数的某个调用方法添加至白名单，添加后，当请求调用该函数时，将不进行Http请求头中X-ML-AppId和X-ML-APIKey的校验。
 
-## 下一步
+## FAQ
+内容更新中
 
-**如果您希望进一步了解 MaxLeap 云代码服务SDK，请参考[Java开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)，[Python开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)，[Node.js开发指南 － 云代码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS) **
+## SDK 开发指南
+
+### 移动端 SDK
+
+[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH)
+
+[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#CLOUD_CODE_ZH)
+
+### 服务端 SDK
+
+[Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)
+
+[Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)
+
+[Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)

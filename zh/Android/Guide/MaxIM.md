@@ -1,4 +1,4 @@
-# MaxIMLib for Android
+# 即时通讯
 
 ## 简介
 
