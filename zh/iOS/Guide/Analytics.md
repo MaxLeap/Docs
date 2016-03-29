@@ -105,6 +105,7 @@ NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 [MLAnalytics onPurchaseCancelled:transaction isSubscription:NO];
 ```
 
+<!--
 ## 游戏统计
 
 ### 跟踪玩家充值
@@ -325,3 +326,5 @@ cause|NSString|必填|失败原因，最多16个字符。共支持100种原因�
 [MLGAMission onBegin:@"赚钱1"];
 [MLGAMission onFailed:@"赚钱1" failedCause:@"quit"];
 ```
+
+-->
