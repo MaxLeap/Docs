@@ -140,13 +140,16 @@ Maxleap JavaScript 相关 SDK 都会使用「ML」作为命名空间。
 ```javascript
 ML.im(options, callback)
 ```
-
 #### 输入
 目前可以采取两种不同的模式登录：
 
 模式一：使用自己的账号系统，那么只需要提供userId
 
 模式二：使用Maxleap的账号系统，那么需要username和password
+
+模式三：使用手机号码登录，那么需要phone和password
+
+模式四：使用第三方登录，那么需要oauth信息
 
 参数|类型|约束|默认|说明
 ---|---|---|---|---
@@ -155,9 +158,10 @@ ML.im(options, callback)
 &nbsp;&nbsp;&nbsp;&nbsp; clientId|String|必须||app 的 Client Key 或者 Javascript Key 或者 REST API Key 或者 Master Key
 &nbsp;&nbsp;&nbsp;&nbsp; userId|String|模式一必须||当前客户的唯一 id，用来标示当前客户。
 &nbsp;&nbsp;&nbsp;&nbsp; username|String|模式二必须||当前客户的username。
-&nbsp;&nbsp;&nbsp;&nbsp; password|String|模式二必须||当前客户的password。
+&nbsp;&nbsp;&nbsp;&nbsp; password|String|模式二或者模式三必须||当前客户的password。
+&nbsp;&nbsp;&nbsp;&nbsp; phone|String|模式三必须||当前客户的phone。
+&nbsp;&nbsp;&nbsp;&nbsp; oauth|Object|模式四必须||第三方登录的oauth信息。
 &nbsp;&nbsp;&nbsp;&nbsp; installId|String|||当前客户端的设备 id，用来标示当前设备。如果需要离线接收推送消息的话，必须提供。
-&nbsp;&nbsp;&nbsp;&nbsp; region|String||cn|选择服务部署的节点，如果是美国节点，则设置为 `us`，如果是国内节点，则设置为 `cn`。
 
 #### 返回
 
@@ -174,8 +178,12 @@ var clientId = 'Y3FxbHE2aTJmQ2dQazYtQVlvc0NnQQ';
 var userId = 'user1';
 // (模式二)username
 var username = 'username';
-// (模式二)password
+// (模式二 或者 模式三)password
 var password = 'password';
+// (模式三)phone
+var phone = '13810001000';
+// (模式四)oauth信息
+var oauth = {};
 // installId 是你的设备id
 var installId = 'M3pyVEdsSFBBZm5UTDlLMTB3a0xYdw'；
 var im;
@@ -185,8 +193,7 @@ im = ML.im({
          appId: appId,
          clientId: clientId,
          userId: userId,
-         installId: installId,
-         region: 'cn'
+         installId: installId
        },function(data){
          /* 处理登录结果,当登录失败时服务器最后会断开连接。消息结构如下:
              {
@@ -196,14 +203,13 @@ im = ML.im({
              }
         */
 				 });
-// 创建实时通信实例--模式一（支持单页多实例）
+// 创建实时通信实例--模式二（支持单页多实例）
 im = ML.im({
          appId: appId,
          clientId: clientId,
          username: username,
          password: password,
-         installId: installId,
-         region: 'cn'
+         installId: installId
        },function(data){
          /* 处理登录结果,当登录失败时服务器最后会断开连接。消息结构如下:
          {
@@ -213,6 +219,39 @@ im = ML.im({
          }
          */
          });
+// 创建实时通信实例--模式三（支持单页多实例）
+im = ML.im({
+         appId: appId,
+         clientId: clientId,
+         phone: phone,
+         password: password,
+         installId: installId
+       },function(data){
+         /* 处理登录结果,当登录失败时服务器最后会断开连接。消息结构如下:
+         {
+             id: 'YOUR_LOGIN_USER_ID',    // 模式一为userId。模式二为Maxleap账号系统中的用户的objectId
+             success: true,        //  是否登录成功
+             error: 5003        // 错误码，仅当登录失败时
+         }
+         */
+         });
+
+// 创建实时通信实例--模式四（支持单页多实例）
+im = ML.im({
+        appId: appId,
+        clientId: clientId,
+        oauth: oauth,
+        installId: installId
+      },function(data){
+        /* 处理登录结果,当登录失败时服务器最后会断开连接。消息结构如下:
+        {
+            id: 'YOUR_LOGIN_USER_ID',    // 模式一为userId。模式二为Maxleap账号系统中的用户的objectId
+            success: true,        //  是否登录成功
+            error: 5003        // 错误码，仅当登录失败时
+        }
+        */
+        });
+
 ```
 
 ### ML.im.version
