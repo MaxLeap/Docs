@@ -15,7 +15,12 @@
 
 ## 登录
 
-MaxIM 有两种登录方式：1. 使用一个用户 ID 直接建立连接，2. 使用 MaxLeap 账户系统验证登录
+MaxIM 支持四种登录方式：
+
+1. 使用一个用户 ID 直接建立连接
+2. 使用 MaxLeap 账户系统验证登录
+3. 使用手机号和短信验证码登录
+4. 使用第三方平台认证信息登录
 
 ### 创建 `MLIMClient` 示例
 
@@ -62,6 +67,36 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
     if (succeeded) {
         NSLog(@"登录成功, 用户 ID 为: %@", client.currentUser.uid);
     }
+}];
+```
+
+### 使用手机号和短信验证码登录
+
+此登录方式无需注册。但是，用户每次登录时，都需要填写手机号，然后请求一个短信验证码。
+
+```
+NSString *phoneNumber;
+// 用户填写手机号，请求短信验证码
+[MLUser requestLoginSmsCodeWithPhoneNumber:phoneNumber block:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+        // 验证码发送成功，...
+    }
+}];
+//...
+// 用户收到短信后填写验证码
+NSString *smsCode;
+// 登录
+[[MLCDataManager sharedManager].client loginWithPhoneNumber:phoneNumber smsCode:smsCode completion:^(BOOL succeeded, NSError * _Nullable error) {
+    // ...
+}];
+```
+
+### 使用第三方平台授权数据登录
+
+```
+NSDictionary *authData = [MLUser currentUser].oauthData;
+[[MLCDataManager sharedManager].client loginWithThirdPartyOAuth:authData completion:^(BOOL succeeded, NSError * _Nullable error) {
+    // ...
 }];
 ```
 
