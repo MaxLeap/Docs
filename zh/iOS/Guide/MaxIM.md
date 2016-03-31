@@ -2,7 +2,7 @@
 
 ## 简介
 
-使用 MaxLeap 的即时通讯服务，可以轻松实现一个实时聊天应用，或者一个联机对战类的游戏。除聊天室外的聊天记录都保存在云端，离线消息会通过消息推送及时送达，推送的消息文本可以灵活定制。
+使用 MaxLeap 的即时通讯服务，简称：MaxIM，可以轻松实现一个实时聊天应用，或者一个联机对战类的游戏。除聊天室外的聊天记录都保存在云端，离线消息会通过消息推送及时送达，推送的消息文本可以灵活定制。
 
 ## 安装
 
@@ -15,12 +15,14 @@
 
 ## 登录
 
-MaxIM 支持四种登录方式：
+### 使用用户已有账号系统
 
-1. 使用一个用户 ID 直接建立连接
-2. 使用 MaxLeap 账户系统验证登录
-3. 使用手机号和短信验证码登录
-4. 使用第三方平台认证信息登录
+1. 使用一个用户 ID 直接建立连接登录
+
+### 使用 MaxLeap 账号系统
+1. 使用用户名和密码验证登录
+2. 使用手机号和短信验证码登录
+3. 使用第三方平台认证信息登录
 
 ### 创建 `MLIMClient` 示例
 
@@ -44,7 +46,7 @@ configuration.installationId = [MLInstallation currentInstallation].installation
 MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
 ```
 
-### 使用 ID 直接登录
+### 使用一个用户 ID 直接建立连接登录
 
 现在登录 Tom 这个 ID，使用该方式登录，无论 Tom 这个 ID 存不存在，都能登录成功。系统仅仅校验 AppId 与 ClientKey 是否匹配。实现如下：
 
@@ -57,7 +59,7 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
 }];
 ```
 
-### 使用 MaxLeap 账户系统验证登录
+### 使用用户名和密码验证登录
 
 此登录方式会使用 MaxLeap 账户系统的用户名与密码校验，需用户名与密码相匹配才能成功登录。登录成功后会使用 MLUser 的 objectId 作为 IM 系统的用户 ID。
 
@@ -136,13 +138,19 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 
 在 `MaxIMLib` 中, `MLIMMessage` 代表一条消息。它其中字段的含义如下：
 
-**`mediaType`**: 消息媒体类型，目前支持文本，图片，音频，视频四种类型
-**`text`**: 文本消息内容，如果 `mediaType` 不是文本类型，该字段内容会被忽略
-**`attachmentUrl`**: 非文本消息(如音频消息，图片消息)的附件地址，文本消息忽略该字段
-**`sender`**: 发送方，表示谁发送过来的，`sender.type` 表示发送发类型，`sender.userId` 发送方的用户 ID, `sender.groupId` 如果消息来自群组，该字段表示该群组的 ID， `sender.roomId` 如果消息来自聊天室，该字段表示该群组的 ID
-**`receiver`**: 接收方，跟 `sender` 有一样的结构
-**`status`**: 消息状态，发送中，发送成功，发送失败等
-**`sendTimestamp`**: 消息发送时间，距离1970年的秒数
+1. **`mediaType`**: 消息媒体类型，目前支持文本，图片，音频，视频四种类型
+
+2. **`text`**: 文本消息内容，如果 `mediaType` 不是文本类型，该字段内容会被忽略
+
+3. **`attachmentUrl`**: 非文本消息(如音频消息，图片消息)的附件地址，文本消息忽略该字段
+
+4. **`sender`**: 发送方，表示谁发送过来的，`sender.type` 表示发送发类型，`sender.userId` 发送方的用户 ID, `sender.groupId` 如果消息来自群组，该字段表示该群组的 ID， `sender.roomId` 如果消息来自聊天室，该字段表示该群组的 ID
+
+5. **`receiver`**: 接收方，跟 `sender` 有一样的结构
+
+6. **`status`**: 消息状态，发送中，发送成功，发送失败等
+
+7. **`sendTimestamp`**: 消息发送时间，距离1970年的秒数
 
 ## 单聊
 
