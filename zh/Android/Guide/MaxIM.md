@@ -62,7 +62,9 @@ IMLib 支持两种方式进行登录，用户自定的账户系统或者基于 M
 
 在调用具体的登录方法前需要先指定使用哪种方式进行登录。
 
-基于自定义的账号系统
+#### 选择登录方式
+
+**基于自定义的账号系统**
 
 ```java
 parrot.initWithCustomAccount("your application id", "your api key", clientId, installId);
@@ -70,13 +72,41 @@ parrot.initWithCustomAccount("your application id", "your api key", clientId, in
 
 其中 `installId` 主要用于推送，如果不需要推送的话可以直接传 `null`。
 
-基于 MLUser
+**基于 MLUser**
 
 ```java
 parrot.initWithMLUser("your application id", "your api key",  username, password);
 ```
 
-以上传入的参数为 `MLUser` 的用户名和密码。
+以上传入的参数为已经注册过的 `MLUser` 的用户名和密码。
+
+**基于手机号码和验证码**
+
+先使用 MaxLeap 核心库获得手机验证码
+
+```java
+MLUserManager.requestLoginSmsCodeInBackground("your phone number", new RequestSmsCodeCallback() {
+    @Override
+    public void done(MLException e) {
+    }
+});
+```
+
+然后再进行初始化操作
+
+```java
+parrot.initWithPhoneNumber("your application id", "your api key",  phoneNumber, verifyCode);
+```
+
+**基于第三方登录**
+
+```java
+parrotAndroid.initWithAuth(App.APPLICATION_ID, App.API_KEY, authDataJSON);
+```
+
+以上 `authDataJSON` 是 MaxLeap 系统的 `MLUser` 对应的 `authData`。
+
+#### 创建连接
 
 
 指定好登录的方式后就可以通过以下方式建立连接，如果使用自定义的账户系统则登录成功返回的就是传入的 `clientId`，如果使用 `MLUser` 则返回的是该 `MLUser` 的 `objectId`。
@@ -656,6 +686,7 @@ protected void onDestroy() {
 }
 ```
 
-注意以上方法应该只在退出应用时调用，而不是在每个 Activity 的 `onDestroy()` 中调用。
+以上方法会关闭 Socket 连接并停止内部线程池，在调用后如果试图再次发送请求会导致线程池的错误。
+所以以上方法应该只在退出应用时调用，而不是在每个 Activity 的 `onDestroy()` 中调用。
 
 
