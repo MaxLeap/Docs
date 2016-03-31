@@ -93,6 +93,8 @@ NSString *smsCode;
 
 ### 使用第三方平台授权数据登录
 
+`[MLUser currentUser].oauthData` 需要 MaxLeap v2.0.9 以上版本支持。
+
 ```
 NSDictionary *authData = [MLUser currentUser].oauthData;
 [[MLCDataManager sharedManager].client loginWithThirdPartyOAuth:authData completion:^(BOOL succeeded, NSError * _Nullable error) {
