@@ -393,7 +393,7 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
 
 1. 在 [微信开放平台](https://open.weixin.qq.com) 创建微信应用.注意按照微信官方的指导务必填写正确的应用签名并且通过微信的开发者认证.
 
-2. 打开 MaxLeap Console -> App Settings -> User Authentication。勾选 Allow Wechat Authentication. 并将步骤一中获取的 App Key 和 App Secret 填写至相应位置。
+2. 打开 MaxLeap Console -> 应用设置 -> 用户验证。勾选 "允许使用微信登录"。
 
 3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
 
@@ -540,12 +540,12 @@ MLQQUtils.unlinkInBackground(user, new SaveCallback() {
 
 2. 选择你的应用,点击 应用信息 -> 高级信息,填写授权回调页. MaxLeap SDK 默认使用 `https://api.weibo.com/oauth2/default.html` 作为回调地址。
 
-2. 打开 MaxLeap Console -> App Settings -> User Authentication。勾选 Allow Weibo Authentication. 并将步骤一中获取的 App Key 和 App Secret 填写至相应位置。
+3. 打开 MaxLeap Console -> 应用设置 -> 用户验证。勾选 "允许使用新浪微博登录"。
 
-3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
+4. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
 
     ```java
-    MLFacebookUtils.initialize("YOUR WEIBO APP ID", "YOUR WEIBO SECRET");
+    MLWeiboUtils.initialize("YOUR WEIBO APP ID", "YOUR WEIBO SECRET");
     ```
 
 #### 修改回调地址
