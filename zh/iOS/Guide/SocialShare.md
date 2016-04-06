@@ -39,6 +39,8 @@
 		
 		ImageIO (Weibo SDK 依赖)
 
+	4. 在 Target -> Build Settings -> Other Link Flags 中加上 `-ObjC`
+
 ### 认证说明
 
 MaxLeap 中用一个用户系统，可以使用第三方登录，认证信息保存在 `MLUser` 中。
@@ -98,6 +100,8 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 ```
 
 ### 分享内容
+
+**注意:** 腾讯 QQ 分享和微信分享需要安装相应的客户端，否则分享按钮不会出现。
 
 - 分享文本
 
