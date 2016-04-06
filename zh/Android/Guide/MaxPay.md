@@ -23,10 +23,17 @@
 - 核心 Jar 包: `maxleap-core-xxx.jar`
 - 支付 Jar 包: `maxleap-pay-xxx.jar`
 
-**各第三方平台的 SDK**
+**支付宝和微信平台的 SDK**
 
 - [支付宝 Jar 包](https://doc.open.alipay.com/doc2/detail?treeId=54&articleId=103419&docType=1): `alipaySdk-xxx.jar`
 - [微信 Jar 包](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)：`libammsdk.jar`
+
+**银联 SDK**
+1. 下载 [手机控件支付开发包安卓版](https://open.unionpay.com/ajweb/help/file/techFile?productId=3)
+2. 解压后依次进行以下目录 "手机控件支付产品入网材料" -> "手机控件支付产品技术开发包" -> "开发包" -> "app开发包" -> "控件开发包" -> "upmp_android" -> "sdkPro"
+3. 将 `UPPayAssistEx.jar` 和 `jar/UPPayPluginExPro.jar` 放入 `libs` 目录下。
+4. 将 `data.bin` 放入 `assets` 目录下。
+5. 将 `arm64-v8a`,`mips`,`x86` 等含有 *.so 文件的目录放入 `jniLibs` 目录下。
 
 
 ### 配置应用权限
@@ -39,6 +46,11 @@
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+<!--银联-->
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.NFC" />
 ```
 
 在 `AndroidManifest.xml` 中注册 `activity`
@@ -52,11 +64,24 @@
         android:screenOrientation="behind"
         android:windowSoftInputMode="adjustResize|stateHidden">
 </activity>
+
+<!--银联-->
+<activity android:name="com.maxleap.MLUnionPaymentActivity"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:excludeFromRecents="true"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait"/>
+<activity
+        android:name="com.unionpay.uppay.PayActivity"
+        android:configChanges="orientation|keyboardHidden"
+        android:excludeFromRecents="true"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize" />
 ```
 
 ### 初始化平台
 
-- **支付宝不需要**
+- **支付宝，银联不需要初始化**
 
 - **微信**
 
@@ -66,7 +91,7 @@
 
 ### 处理回调
 
-- **支付宝不需要**
+- **支付宝和银联不需要**
 
 - **微信**
 
@@ -132,6 +157,10 @@ MLPayParam.Channel 表示支付渠道，目前支持两种
 - `WECHAT_APP` 微信
 
 如果应用只集成了一个第三方平台的话可以省略渠道参数，SDK 会自动根据应用当前集成的第三方平台的情况自动调用对应的支付请求。
+
+>注意
+>
+>使用银联支付时控制台会打印 `java.lang.ClassNotFoundException:org.simalliance.openmobileapi.SEService` 之类的异常信息，此时无视即可。
 
 ### 订单查询
 
