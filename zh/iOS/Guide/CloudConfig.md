@@ -1,15 +1,15 @@
-# 云配置
+# 在线参数
 
 ## 简介
-###什么是云配置
+### 什么是在线参数
 每个应用在云端都有一个对应的`MLConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过 Console 在 MaxLeap 中配置应用参数，并且使用 iOS/Android SDK 读取云端的参数。
-###为何需要云配置
+### 为何需要在线参数
 将应用的部分配置放置在云端的优势在于：
 
 * **动态配置：**
-* **个性化用户体验：**在云端，您可以根据Segment配置参数，使不同用户群有不同的用户体验
+* **个性化用户体验：**在云端，您可以根据不同用户群体配置参数，使不同用户群有不同的用户体验
 
-##在云配置中添加参数
+## 在线参数中添加参数
 您可以通过Console向Cloud Config中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
 
 属性名|值
@@ -50,7 +50,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 `– doubleForKey:defaultValue:`
 
 
-## 更新云配置
+## 更新在线参数
 
 在每次 app 进入前台时，SDK 会自动更新 currentConfig
 
@@ -95,7 +95,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 [MLConfig removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
 ```
 
-## 云参数值类型
+## 在线参数值类型
 
 `MLConfig` 支持大部分 `MLObject` 支持的数据类型:
 

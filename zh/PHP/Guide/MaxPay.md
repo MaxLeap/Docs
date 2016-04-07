@@ -1,10 +1,10 @@
 ##### _Author: Kevin
 ##### _Github: https://github.com/lalamini
 
-# MaxPay
+# 支付服务
 ## 简介
 
-目前支持支付宝即时到帐支付功能，以及根据订单号查询订单功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
+目前支持支付宝、微信、银联支付等渠道，支持支付及查询订单功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
 
 ## 使用
 请使用php5.4以上版本,并安装php-curl等相关模块
@@ -18,14 +18,14 @@
 *  appid: 由MaxLeap 后台获取,类型:String
 *  token: 由MaxLeap 后台获取,类型:String
 *  billNum: 订单号，需要保证唯一，由客户端提供，需请自行确保在商户系统中唯一,类型:String
-*  channel: 支付渠道, 目前支持 ali_web,wx_native,类型:String
+*  channel: 支付渠道, 目前支持 ali_web,wx_native,unipay_web 类型:String
 *  totalFee: 整数,单位为分,类型:Integer
 *  subject: 订单主题,类型:String
 
 #####可选:
 
 *  extras: 附加数据, 类型:Array
-*  returnUrl: 同步自动跳转url类型:String
+*  returnUrl: 同步自动跳转url类型:String (银联付款必填)
 
 ####3. 静态调用 
 
@@ -56,6 +56,14 @@ $result = MLPayApi::bill($data);
      }
 ```
 
+银联
+```
+    {
+        code:0,
+        html:""
+     }
+```
+
 #####说明:
 
 支付宝:
@@ -68,6 +76,10 @@ $result = MLPayApi::bill($data);
 *  code: 类型: Integer; 含义:返回码，0为正常
 *  prepayid: 类型: String; 含义: 返回信息，微信支付id
 *  codeUrl: 类型: String; 含义: 返回信息，二维码信息
+
+银联:
+*  code: 类型: Integer; 含义:返回码，0为正常
+*  html: 类型: String; 含义: html页面，该页面包含跳转到银联支付的所有信息
 
 #####返回code 定义:
 *  0 | OK | 成功
@@ -112,17 +124,25 @@ $result = MLPayApi::record($data);
 参考程序可运行testMLpay.php, 运行方式
 ####1. 支付宝支付
 ```
-php testMLpay.php ali_web bill
+php testMLpay.php bill ali_web
 ```
 ####2. 支付宝查询
 ```
-php testMLpay.php ali_web record
+php testMLpay.php record ali_web
 ```
 ####3. 微信支付
 ```
-php testMLpay.php wx_native bill
+php testMLpay.php bill wx_native
 ```
 ####4. 微信查询
 ```
-php testMLpay.php wx_native record
+php testMLpay.php record wx_native
+```
+####5. 银联支付
+```
+php testMLpay.php bill unipay_web
+```
+####6. 银联查询
+```
+php testMLpay.php record unipay_web 
 ```

@@ -65,6 +65,26 @@ stdClass Object
 
 * 返回的数据对象所包含的内容以用户提交的数据为准。
 
+##### 银联支付
+
+```
+php testMLpay.php bill unipay_web
+```
+此时，我们将得到如下结果：
+
+```
+stdClass Object
+(
+    [html] => <html>......</html>
+    [code] => 0
+)
+```
+表明银联支付接口测试通过。
+
+注意:
+
+* 返回的数据对象所包含的内容以用户提交的数据为准。
+
 #### record 测试
 
 ```
@@ -111,7 +131,7 @@ stdClass Object
 
 #### 注:
 
-微信支付返回的codeUrl可以生成一个二维码进行扫码支付，代码参考如下
+* 微信支付返回的codeUrl可以生成一个二维码进行扫码支付，代码参考如下
 
 ```
 $widhtHeight = 200;
@@ -121,6 +141,9 @@ $chl=$codeUrl;
 $size="xxxx";
 echo '<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight.'&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'" alt="QR code" widhtHeight="'.$size.'" widhtHeight="'.$size.'"/>';
 ```
+
+* 银联支付返回的html可以生成一个html页面，该页面会带领用户前往银联认证页面进行相关支付行为。
+
 
 ## 下一步
  至此，您已经完成 MaxLeap PHP-PAY-SDK 的安装与必要的配置。请移步至[php-pay-sdk 使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK)以获取 PHP-PAY-SDK 的详细功能介绍以及使用方法。

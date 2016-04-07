@@ -1,20 +1,20 @@
-# Nodejs云代码开发指南
+# 云代码
 
 ##### _Author: Marvin
 ##### _Github: https://github.com/zhoucen
 
-## 云代码简介
-
+## 简介
 ### 什么是云代码服务
-云代码是部署运行在MaxLeap上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在Web server上的Web Service或RESTful API。它对外提供的接口也是RESTful API，也正是以这种方式被移动应用调用。
+云代码是部署运行在 MaxLeap 云引擎上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在 Web server上的 Web Service或 RESTful API。它对外提供的接口也是 RESTful API，也正是以这种方式被移动应用调用。 
 
 ### 为什么需要云代码服务
 
 如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
 
-* 强大的运算能力：云代码运行在MaxLeap的Docker容器中，可以使用多个CPU和大容量内存进行计算
+* 强大的运算能力：云代码运行在 MaxLeap 的 Docker 容器中，可以使用多个CPU和大容量内存进行计算
 * 更高效：可以在一次调用中通过高速网络多次请求 Cloud Data，大大提升效率
-* 同一套代码可以为iOS，Android，web site等提供服务
+* 同一套代码可以为 iOS，Android，Web Site 等提供服务
+
 
 ## 对象
 存储在云数据的对象称为 `ML.Object`，而每个 `ML.Object` 被规划至不同的 `class` 中（类似“表”的概念)。`ML.Object` 包含若干键值对，且值为兼容 JSON 格式的数据。考虑到数据安全，MaxLeap 禁止客户端修改数据仓库的结构。您需要预先在 MaxLeap 开发者平台上创建需要用到的表，然后仔细定义每个表中的字段和其值类型。
@@ -423,11 +423,11 @@ ML.Cloud.function('hello',function(req, res){
 * 所有SDK的api都提供了使用UserPrincipal方式来访问数据，除了cloudcode云代码自身发起的请求必须使用masterKey来访问外，其他所有请求我们建议你使用UserPrincipal这种方式来保证你的秘钥安全。
 
 
-## CloudCode
+## 云代码 项目
 
 ### 新建一个项目
 
-### 一个Nodejs cloudcode项目的目录树应该如下：
+### 一个Nodejs CloudCode项目的目录树应该如下：
 
 ```
 ├── app                     #cloudcode主目录 (必备)
