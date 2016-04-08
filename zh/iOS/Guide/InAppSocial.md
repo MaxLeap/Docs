@@ -2,6 +2,8 @@
 
 ## 简介
 
+应用内社交，在应用开发中出现的场景非常多，包括用户间关注（好友）、朋友圈（时间线）、状态广场、互动（评论、点赞）等常用功能，应用内社交可以认为是一个应用基础通用功能。
+
 ## 集成
 
 **重要:** `MaxSocial.framework` 依赖于 `MaxLeap.framework`，如果还没集成 `MaxLeap.framework`, 建议先看下[快速开始](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，先集成并配置好 `MaxLeap.framework`.
