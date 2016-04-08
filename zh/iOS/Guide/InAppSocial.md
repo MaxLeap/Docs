@@ -73,6 +73,17 @@ NSString *b = @"asdgaeesdage";
 }];
 ```
 
+屏蔽某个人，A 屏蔽：
+
+```
+// A 屏蔽 B, 假如，B 还未关注 A，调用这个接口后，B 会关注 A，但不能看 A 的动态
+NSString *userBId = @"";
+BOOL block = YES; // 是否屏蔽 userB，YES 表示屏蔽，NO 表示取消屏蔽
+[userA block:block user:userBId completion:^(BOOL succeeded, NSError * _Nullable error) {
+    // ...
+}];
+```
+
 获取关注列表，返回的列表是 `MaxSocialRelationInfo` 对象数组：
 
 ```
@@ -161,11 +172,15 @@ NSString *locationInfoId = @"";
 
 发布说说：
 
-可以发表三种类型的说说：1. 纯文字，2. 文字 + 链接，3. 文字 + 图片
+可以发表四种类型的说说：1. 纯文字，2. 纯链接，3. 文字 + 链接，4. 文字 + 图片<br>
+同时可以控制是否发布说说到广场上，发布到广场上的说说会同时出现在朋友圈和广场，否则说说只会出现在朋友圈
 
 ```
 // 纯文字
 MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"text"];
+
+// 纯链接
+MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithURL:[NSURL URLWithString:@"http://www.google.com"]];
 
 // 文字 + 链接
 status.content = [MaxSocialShuoShuoContent contentWithText:@"test" url:[NSURL URLWithString:@"http://www.google.com"]];
@@ -177,8 +192,12 @@ MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"
 MaxSocialShuoShuo *shuoshuo = [MaxSocialShuoShuo new];
 shuoshuo.content = content;
 
+// toSquare 控制是否将说说发布到广场。
+// YES 表示发布到广场，说说将同时出现在广场和朋友圈；NO 表示只发布到朋友圈，说说将不会出现在广场上
+BOOL toSquare = YES;
+
 // 发表说说
-[self.user postShuoShuo:shuoshuo block:^(BOOL succeeded, NSError * _Nullable error) {
+[self.user postShuoShuo:shuoshuo toSquare:toSquare block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -235,17 +254,36 @@ NSString *shuoId;
 
 ```
 MaxSocialQuery *query = [MaxSocialQuery new]; // default query
-[user getShuoShuoWithQeury:query block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-    NSLog(@"self status: %@, error: %@", objects, error);
+[self.user getShuoShuoWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+    NSLog(@"self shuoshuo: %@, error: %@", result, error);
 }];
 ```
 
-获取用户可以看到的最新的说说列表：
+获取广场上最新的说说：
 
 ```
 MaxSocialQuery *query = [MaxSocialQuery new]; // default query
-[user getLatestShuoShuoWithQuery:query block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-    NSLog(@"latest status: %@, error: %@", objects, error);
+[self.user getLatestShuoShuoInSquareWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+    NSLog(@"latest shuoshuo on square: %@, error: %@", result, error);
+}];
+```
+
+获取朋友圈最新的说说：
+
+```
+MaxSocialQuery *query = [MaxSocialQuery new]; // default query
+[self.user getLatestShuoShuoInFriendCycleWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+    NSLog(@"latest shuoshuo on friend cycle: %@, error: %@", result, error);
+    fulfill();
+}];
+```
+
+获取附近的说说：
+
+```
+MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitude:34];
+[self.user getShuoShuoNearLocation:location distance:10086 block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+    NSLog(@"nearest shuoshuo: %@, error: %@", result, error);
 }];
 ```
 
@@ -274,7 +312,8 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 
 ```
 [user likeShuoShuo:@"shuoId" block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
-	// ...
+	// comment.isLike 应该为 YES.
+	// 可以通过评论对象 comment 的 isLike 属性判断该评论是点赞还是文字评论
 }];
 ```
 
