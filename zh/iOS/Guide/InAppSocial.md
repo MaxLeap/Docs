@@ -355,3 +355,11 @@ MaxSocialQuery *query = [MaxSocialQuery new];
 }];
 ```
 
+把评论标记为已读：
+
+```
+[user markCommentAsRead:@"commetId" completion:^(BOOL updated, NSError * _Nullable error) {
+    // ...
+}];
+```
+
