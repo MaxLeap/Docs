@@ -12,7 +12,7 @@
 
     <a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">下载 MaxLeap SDK</a>
 
-    解压后将 ``maxleap-imlib-xxx.jar`` 包导入工程的 `libs` 目录下。
+    解压后将 `maxleap-imlib-xxx.jar` 包导入工程的 `libs` 目录下。
 
 2. 配置权限
 
@@ -24,10 +24,10 @@
 3. 添加依赖
 
     ```gradle
-    provided('io.socket:socket.io-client:0.6.3') {
+    compile('io.socket:socket.io-client:0.6.3') {
         exclude group: 'org.json', module: 'json'
     }
-    provided "com.squareup.okhttp3:okhttp:3.1.2"
+    compile "com.squareup.okhttp3:okhttp:3.1.2"
     ```
 
 
