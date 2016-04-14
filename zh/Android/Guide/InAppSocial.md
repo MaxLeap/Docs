@@ -257,8 +257,10 @@ shuoShuoManager.getShuoShuo(shushuoObjectId, new DataHandler<ShuoShuo>() {
 
 #### 删除说说
 
+删除的同时也会把说说对应的文件也给删除掉
+
 ```java
-shuoShuoManager.deleteShuoShuo(shushuoObjectId, new DataHandler<Void>() {
+shuoShuoManager.deleteShuoShuo(userId, shushuoObjectId, new DataHandler<Void>() {
     @Override
     public void onSuccess(Void aVoid) {
 
