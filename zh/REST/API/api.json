@@ -18,7 +18,7 @@
             "post": {
                 "summary": "analytics tracking",
                 "tags": [
-                    "Analytics"
+                    "数据分析"
                 ],
                 "produces": [
                     "application/json"
@@ -57,7 +57,7 @@
         "/classes/{className}": {
             "post": {
                 "tags": [
-                    "Cloud Data"
+                    "数据存储"
                 ],
                 "summary": "Create an LASObject",
                 "description": "",
@@ -101,7 +101,7 @@
             },
             "get": {
                 "tags": [
-                    "Cloud Data"
+                    "数据存储"
                 ],
                 "summary": "Get LASObjects",
                 "description": "",
@@ -195,7 +195,7 @@
         "/classes/{className}/{objectId}": {
             "put": {
                 "tags": [
-                    "Cloud Data"
+                    "数据存储"
                 ],
                 "summary": "Update an LASObject",
                 "description": "",
@@ -246,7 +246,7 @@
             },
             "get": {
                 "tags": [
-                    "Cloud Data"
+                    "数据存储"
                 ],
                 "summary": "Get LASObject",
                 "description": "",
@@ -288,7 +288,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Data"
+                    "数据存储"
                 ],
                 "summary": "Delete LASObject",
                 "description": "",
@@ -341,7 +341,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "数据存储"
                 ],
                 "responses": {
                     "200": {
@@ -364,7 +364,7 @@
                 "summary": "Login with Anonymous",
                 "description": "Login or register with AuthData",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "produces": [
                     "application/json"
@@ -431,7 +431,7 @@
                 "summary": "Get User List.",
                 "description": "",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -457,7 +457,7 @@
                 "summary": "Update the user",
                 "description": "",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "produces": [
                     "application/json"
@@ -499,7 +499,7 @@
                 "summary": "Get the user",
                 "description": "Get the user information by id",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "produces": [
                     "application/json"
@@ -532,7 +532,7 @@
                 "summary": "Delete  user",
                 "description": "Delete the user by id",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "produces": [
                     "application/json"
@@ -567,7 +567,7 @@
                 "summary": "User profile.",
                 "description": "Get the user's profile",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -590,7 +590,7 @@
                 "summary": "request password reset",
                 "description": "",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "parameters": [
                     {
@@ -635,7 +635,7 @@
                 "summary": "request verify email",
                 "description": "",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "parameters": [
                     {
@@ -680,7 +680,7 @@
                 "summary": "verify user's email",
                 "description": "",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "parameters": [
                     {
@@ -717,7 +717,7 @@
                 "summary": "reset user's password",
                 "description": "",
                 "tags": [
-                    "User"
+                    "账号系统"
                 ],
                 "parameters": [
                     {
@@ -787,7 +787,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -835,7 +835,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -889,7 +889,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -937,7 +937,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -991,7 +991,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -1039,7 +1039,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -1093,7 +1093,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -1141,7 +1141,7 @@
                     }
                 ],
                 "tags": [
-                    "Sms"
+                    "账号系统"
                 ],
                 "responses": {
                     "200": {
@@ -1168,7 +1168,7 @@
         "/files/{name}": {
             "put": {
                 "tags": [
-                    "File"
+                    "数据存储"
                 ],
                 "description": "upload,download and delete file\n",
                 "parameters": [
@@ -1209,7 +1209,7 @@
             ],
             "get": {
                 "tags": [
-                    "File"
+                    "数据存储"
                 ],
                 "description": "get  metadata of specific one with X-LAS-Fid or all files.",
                 "responses": {
@@ -1226,7 +1226,7 @@
             },
             "delete": {
                 "tags": [
-                    "File"
+                    "数据存储"
                 ],
                 "description": "delete a file",
                 "responses": {
@@ -1252,7 +1252,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1281,7 +1281,7 @@
                 "summary": "Get the all of campaignList.",
                 "description": "Can get a campaignList which include of all marketing tasks' contents.\n",
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1309,7 +1309,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1344,7 +1344,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1383,7 +1383,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1413,7 +1413,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1461,7 +1461,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1493,7 +1493,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1525,7 +1525,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1559,7 +1559,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1591,7 +1591,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1625,7 +1625,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1659,7 +1659,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1700,7 +1700,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1740,7 +1740,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1781,7 +1781,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1819,7 +1819,7 @@
                     }
                 ],
                 "tags": [
-                    "Push"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -1841,7 +1841,7 @@
             "post": {
                 "summary": "create section",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -1875,7 +1875,7 @@
             "get": {
                 "summary": "load section by Query",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -1964,7 +1964,7 @@
             "get": {
                 "summary": "get section by Id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -1996,7 +1996,7 @@
             "delete": {
                 "summary": "delete section by Id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2028,7 +2028,7 @@
             "put": {
                 "summary": "update section by Id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2069,7 +2069,7 @@
             "post": {
                 "summary": "load section by Query with Post method",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2108,7 +2108,7 @@
             "put": {
                 "summary": "update section sequence by id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2158,7 +2158,7 @@
             "post": {
                 "summary": "create faq item",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2192,7 +2192,7 @@
             "get": {
                 "summary": "Find All the app's item Matchs The Query",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2278,7 +2278,7 @@
             "get": {
                 "summary": "get faq item by Id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2310,7 +2310,7 @@
             "delete": {
                 "summary": "delete item by Id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2342,7 +2342,7 @@
             "put": {
                 "summary": "update item by Id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2383,7 +2383,7 @@
             "get": {
                 "summary": "get total count of faq item",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2416,7 +2416,7 @@
             "put": {
                 "summary": "update item's sequence by id",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2465,7 +2465,7 @@
             "get": {
                 "summary": "search item",
                 "tags": [
-                    "FAQ"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2530,7 +2530,7 @@
             "post": {
                 "summary": "create tag",
                 "tags": [
-                    "Tag"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2564,7 +2564,7 @@
             "get": {
                 "summary": "Find All the tags Matchs The Query",
                 "tags": [
-                    "Tag"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2653,7 +2653,7 @@
             "delete": {
                 "summary": "delete tag by id",
                 "tags": [
-                    "Tag"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2687,7 +2687,7 @@
             "post": {
                 "summary": "create Issue",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2721,7 +2721,7 @@
             "get": {
                 "summary": "get all Issues that match the Query object",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2812,7 +2812,7 @@
                 "summary": "create Issue. for web console",
                 "description": "this implement only used for web console.",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2848,7 +2848,7 @@
             "put": {
                 "summary": "update Issue",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2888,7 +2888,7 @@
             "get": {
                 "summary": "get Issue by Id",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2920,7 +2920,7 @@
             "delete": {
                 "summary": "delelte Issue by Id",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2954,7 +2954,7 @@
             "post": {
                 "summary": "get total number of Issue that match the query",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -2987,7 +2987,7 @@
             "put": {
                 "summary": "close Issue",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3021,7 +3021,7 @@
             "put": {
                 "summary": "batch update Issue",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3085,7 +3085,7 @@
             "post": {
                 "summary": "find Issue for client",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3120,7 +3120,7 @@
             "post": {
                 "summary": "add msg to issue",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3161,7 +3161,7 @@
             "post": {
                 "summary": "create smart view",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3194,7 +3194,7 @@
             "get": {
                 "summary": "get all smart view tha match the query object",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3273,7 +3273,7 @@
             "get": {
                 "summary": "get smart view by Id",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3305,7 +3305,7 @@
             "put": {
                 "summary": "update smart view by Id",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3344,7 +3344,7 @@
             "delete": {
                 "summary": "delete smart view",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3378,7 +3378,7 @@
             "post": {
                 "summary": "update smart view sequence",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3428,7 +3428,7 @@
             "get": {
                 "summary": "get notification",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3454,7 +3454,7 @@
             "put": {
                 "summary": "clear notification",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3499,7 +3499,7 @@
             "get": {
                 "summary": "get issue's device info",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3532,7 +3532,7 @@
             "get": {
                 "summary": "get issue's log info",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3565,7 +3565,7 @@
             "get": {
                 "summary": "search issue",
                 "tags": [
-                    "Issue"
+                    "用户支持"
                 ],
                 "produces": [
                     "application/json"
@@ -3641,7 +3641,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3694,7 +3694,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3733,7 +3733,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3770,7 +3770,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3818,7 +3818,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3859,7 +3859,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3900,7 +3900,7 @@
                     }
                 ],
                 "tags": [
-                    "Msgs"
+                    "推送营销"
                 ],
                 "responses": {
                     "200": {
@@ -3948,7 +3948,7 @@
                     }
                 ],
                 "tags": [
-                    "MaxPay"
+                    "移动支付"
                 ],
                 "responses": {
                     "200": {
@@ -3996,7 +3996,7 @@
                     }
                 ],
                 "tags": [
-                    "MaxPay"
+                    "移动支付"
                 ],
                 "responses": {
                     "200": {
