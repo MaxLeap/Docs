@@ -869,61 +869,6 @@ MLQueryManager.findAllInBackground(mainQuery, new FindCallback<MLObject>() {
 });
 ```
 
-###缓存查询
-经常需要缓存一些查询的结果到磁盘上，这可以让您在离线的时候，或者应用刚启动，网络请求还没有足够时间完成的时候可以展现一些数据给用户。当缓存占用了太多空间的时候，MaxLeap 会自动清空缓存。
-
-默认情况下的查询不会使用缓存，除非您使用 setCachePolicy 方法明确设置启用。例如，尝试从网络请求，如果网络不可用则从缓存数据中获取，可以这样设置：
-
-```java
-query.setCachePolicy(MLQuery.CachePolicy.NETWORK_ELSE_CACHE);
-MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
-  public void done(List<MLObject> scoreList, MLException e) {
-    if (e == null) {
-      // Results were successfully found, looking first on the
-      // network and then on disk.
-    } else {
-      // The network was inaccessible and we have no cached data
-      // for this query.
-    }
-  }
-});
-```
-MaxLeap 提供了几种不同的缓存策略：
-
-缓存策略|介绍
----|---
-IGNORE_CACHE | 默认的缓存策略，查询不走缓存，查询结果也不存储在缓存。
-CACHE_ONLY | 查询只从缓存获取，不走网络。如果缓存中没有结果，引发一个 MLException。
-NETWORK_ONLY | 查询不走缓存，从网路中获取，但是查询结果会写入缓存。
-CACHE\_ELSE_NETWORK | 查询首先尝试从缓存中获取，如果失败，则从网络获取，如果两者都失败，则引发一个 MLException。
-NETWORK\_ELSE_CACHE | 查询首先尝试从网络获取，如果失败，则从缓存中查找；如果两者都失败，则应发一个 MLException。
-CACHE\_THEN_NETWORK | 查询首先尝试从缓存中获取，然后再从网络获取。在这种情况下，FindCallback 会被实际调用两次 -- 首先是缓存的结果，其次是网络查询的结果。这个缓存策略只能用在异步的 findInBackground() 方法中。
-
-如果您想控制缓存的行为。您可以使用 MLQuery 提供的方法来操作缓存。您可以在缓存上做如下这些操作：
-
-#####检查查询是否有缓存结果：
-```java
-boolean isInCache = query.hasCachedResult();
-```
-
-#####删除查询的任何缓存结果：
-
-```java
-query.clearCachedResult();
-```
-
-#####清空所有查询的缓存结果：
-
-```java
-MLQuery.clearAllCachedResults();
-```
-
-#####控制缓存结果的最大存活时间（毫秒为单位）：
-
-```java
-query.setMaxCacheAge(TimeUnit.DAYS.toMillis(1));
-```
-
 ##MLObject子类
 
 MaxLeap 希望设计成能让人尽快上手并使用。您可以通过 MLDataManager.fetchInBackground() 方法访问所有的数据。但是在很多现有成熟的代码中，子类化能带来更多优点，诸如简洁、可扩展性以及 IDE 提供的代码自动完成的支持等等。子类化不是必须的，您可以将下列代码转化：
