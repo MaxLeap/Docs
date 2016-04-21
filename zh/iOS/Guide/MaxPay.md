@@ -45,7 +45,7 @@ $ pod install
 
 	```
 	[MaxLeap setApplicationId:@"your_maxleap_applicationId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
-	// 最后一个参数根据你账号所在大区填写，目前有中国区和美国区两个大区，它们之间数据不互通
+	// 最后一个参数根据应用所属平台填写，如果是 maxleap.cn 填写 MLSiteCN，如果是 maxleap.com 填写 MLSiteUS
 	```
 
 到这里 `MaxLeapPay.framework` 已经安装完成，但是所有的支付渠道应该都为不可用状态，因为还没有集成这些渠道对应的支付 SDK。
