@@ -76,10 +76,11 @@ MaxLeap 计费都基于用户账号，根据用户购买的服务版本收费，
 
 ## 数据存储
 ### 是否支持数据迁移
-完成支持，MaxLeap 秉承互联网开放精神，完全支持数据导入和导出，您可以在【开发中心 -> 云数据库 -> 数据迁移】下，自由进行数据迁移
+完成支持，MaxLeap 秉承互联网开放精神，完全支持数据导入和导出，您可以在【开发中心 -> 云数据库 -> 数据迁移】下，自由进行数据迁移，详情参考 [数据迁移](https://maxleap.cn/s/web/zh_cn/guide/usermanual/clouddata.html#数据存储-数据迁移)
+
 
 ### 是否支持云数据库在线使用 SQL 查询
-支持，MaxLeap 提供强大的在线云数据分析功能，让您自由使用标准 SQL 语法进行自定义查询，就像使用 Mysql 数据库一样
+支持，MaxLeap 提供强大的在线云数据分析功能，让您自由使用标准 SQL 语法进行自定义查询，就像使用 Mysql 数据库一样，详情参考 [云数据库 SQL](https://maxleap.cn/s/web/zh_cn/guide/usermanual/clouddata.html#数据存储-在线-sql-分析)
 
 ## 云代码
 ### 云代码支持 Java 语言么
@@ -90,8 +91,18 @@ MaxLeap 计费都基于用户账号，根据用户购买的服务版本收费，
 ## 账号系统
 ### 是否可以自定义用户信息
 可以，您可以自定义扩展 **_User** 表，新增你要的列来存储其他信息
-### 
+
 ## 即时通讯
+
+### 我已经有应用了，怎么接入
+
+MaxLeap 即时通讯服务支持两种模式接入
+
+* 使用 MaxLeap 账号系统
+* 使用自建账号系统
+
+如果您已经有应用了，那么使用第二种模式接入，[iOS 点击这里](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#即时通讯-登录-使用用户已有账号系统)， [Android 点击这里](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#即时通讯-登录-使用用户已有账号系统)
+ 
 ### 是否支持离线消息，保存几天
 支持保存离线消息，保存的时间为 7 天（业内默认逻辑）。
 ### 是否支持多客户端登录
@@ -122,9 +133,20 @@ MaxLeap 不收取任何费用，各支付渠道收费情况根据对应渠道的
 
 如果您是使用 MaxLeap 云代码来实现发送短信或邮件，那么您只需要选择对应的 MaxLeap 云函数作为 WebHook，来接收支付成功事件，成功接收后，发送短信或者邮件
 
+假如您的业务在支付成功后无任何其他业务，则不需要配置 WebHook
+
 需要强调的是，**WebHook 不是必须配置的**
 
 ## 应用内社交
+### 我已经有应用了，怎么接入
+
+MaxLeap 应用内社交服务支持两种模式接入
+
+* 使用 MaxLeap 账号系统
+* 使用自建账号系统
+
+如果您已经有应用了，那么使用第二种模式接入，[iOS 点击这里](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#即时通讯-登录-使用用户已有账号系统)， [Android 点击这里](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#即时通讯-登录-使用用户已有账号系统)
+
 ## 社交分享
 ## 在线参数
 ## 数据分析
