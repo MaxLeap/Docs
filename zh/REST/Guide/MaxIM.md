@@ -84,10 +84,17 @@
 ### 附件
 
 #### 上传附件
-上传附件到服务器使用POST方式
-> curl -X POST -H "X-ML-AppId: 56a86320e9db7300015438f7" -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" -H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" -F "attachment=@[object Object]" "http://im.maxleap.cn/attachment"
 
-图文并茂说明各个 API 具体使用情况
+上传附件到服务器使用POST方式
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" \
+    -F "attachment=@[YOUR_LOCAL_FILE]" \
+    "http://im.maxleap.cn/attachment"
+```
 
 ### 用户注册
 ### 用户登录
