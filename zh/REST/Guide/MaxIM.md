@@ -45,32 +45,32 @@
 
 | URL | HTTP | 功能 |
 |-----|------|------|
-| /rooms | POST | 创建聊天室 |
-| /rooms | GET | 搜索聊天室 |
-| /rooms/`<roomId>` | GET | 获取聊天室基础信息 |
-| /rooms/`<roomId>` | DELETE | 删除聊天室 |
-| /rooms/`<roomId>`/attributes | POST | 设置聊天室属性 |
-| /rooms/`<roomId>`/attributes | PUT | 覆盖更新聊天室属性 |
-| /rooms/`<roomId>`/attributes | GET | 获取聊天室属性 |
-| /rooms/`<roomId>`/attributes/`<attribute>` | GET | 获取某个聊天室属性 |
-| /rooms/`<roomId>`/attributes | DELETE | 清空聊天室属性 |
-| /rooms/`<roomId>`/members | POST | 追加聊天室成员 |
-| /rooms/`<roomId>`/members | DELETE | 移除聊天室成员 |
+| /rooms | POST | [创建聊天室](#创建聊天室) |
+| /rooms | GET | [搜索聊天室](#搜索聊天室) |
+| /rooms/`<roomId>` | GET | [获取聊天室基础信息](#获取聊天室基础信息) |
+| /rooms/`<roomId>` | DELETE | [删除聊天室](#删除聊天室) |
+| /rooms/`<roomId>`/attributes | POST | [设置聊天室属性](#设置聊天室属性) |
+| /rooms/`<roomId>`/attributes | PUT | [覆盖更新聊天室属性](#覆盖更新聊天室属性) |
+| /rooms/`<roomId>`/attributes | GET | [获取聊天室属性](#获取聊天室属性) |
+| /rooms/`<roomId>`/attributes/`<attribute>` | GET | [获取某个聊天室属性](#获取某个聊天室属性) |
+| /rooms/`<roomId>`/attributes | DELETE | [清空聊天室属性](#清空聊天室属性) |
+| /rooms/`<roomId>`/members | POST | [追加聊天室成员](#追加聊天室成员) |
+| /rooms/`<roomId>`/members | DELETE | [移除聊天室成员](#移除聊天室成员) |
 
 ### 游客
 
 | URL | HTTP | 功能 |
 |-----|------|------|
-| /passengers | POST | 创建游客 |
-| /passengers/`<passengerId>` | GET | 获取游客基础信息 |
-| /passengers/`<passengerId>`/chats/`<userId>` | GET | 获取游客聊天记录 |
+| /passengers | POST | [创建游客](#创建游客) |
+| /passengers/`<passengerId>` | GET | [获取游客基础信息](#获取游客基础信息) |
+| /passengers/`<passengerId>`/chats/`<userId>` | GET | [获取游客聊天记录](#获取游客聊天记录) |
 
 ### 系统消息
 
 | URL | HTTP | 功能 |
 |-----|------|------|
-| /system | POST | 给所有人发送系统消息 |
-| /system/`<target>` | POST | 给指定对象发送系统消息 |
+| /system | POST | [给所有人发送系统消息](#给所有人发送系统消息) |
+| /system/`<target>` | POST | [给指定对象发送系统消息](#给指定对象发送系统消息) |
 
 ### 附件
 
@@ -363,25 +363,194 @@ $ curl -X DELETE \
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/chats"
 ```
 
-### 附件
+### 聊天室
 
-#### 上传附件
-
-上传附件到服务器使用POST方式
+#### 创建聊天室
 
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
     -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
-    -H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" \
+    -H "Content-Type: application/json" \
+    -d '{"name": "room_test","members": ["testuser1","testuser2"]}' \
+    "http://im.maxleap.cn/rooms"
+```
+
+#### 搜索聊天室
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/rooms"
+```
+
+#### 获取聊天室基础信息
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6"
+```
+
+#### 删除聊天室
+
+``` shell
+$ curl -X DELETE \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6"
+```
+
+#### 设置聊天室属性
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"company": "maxleap","star": 5}' \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+```
+
+#### 覆盖更新聊天室属性
+
+``` shell
+$ curl -X PUT \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"rate": "100%"}' \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+```
+
+#### 获取聊天室属性
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+```
+
+#### 获取某个聊天室属性
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes/company"
+```
+
+#### 清空聊天室属性
+
+``` shell
+$ curl -X DELETE \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+```
+
+#### 追加聊天室成员
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"members": ["testuser3"]}' \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/members"
+```
+
+#### 移除聊天室成员
+
+``` shell
+$ curl -X DELETE \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"members": ["testuser3"]}' \
+    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/members"
+```
+
+### 游客
+
+#### 创建游客
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"name": "王尼玛"}' \
+    "http://im.maxleap.cn/passengers"
+```
+
+#### 获取游客基础信息
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://imuat.maxleap.cn/passengers/58550388f9434168bf2019317b649265"
+```
+
+#### 获取游客聊天记录
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/passengers/58550388f9434168bf2019317b649265/chats/testuser1"
+```
+
+### 系统消息
+
+#### 给所有人发送系统消息
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"content": {"media": 0,"body": "hello all!"}}' \
+    "http://im.maxleap.cn/system"
+```
+
+#### 给指定对象发送系统消息
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    -d '{"content":{"media": 0,"body": "hello!"}}' \
+    "http://im.maxleap.cn/system/testuser1"
+```
+
+### 附件
+
+#### 上传附件
+
+上传附件到服务器使用POST表单方式。
+
+``` shell
+$ curl -X POST \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: multipart/form-data;" \
     -F "attachment=@[YOUR_LOCAL_FILE]" \
     "http://im.maxleap.cn/attachment"
 ```
-
-### 用户注册
-### 用户登录
-### 用户退出
-### 其他
 
 ## FAQ
 补充说明
