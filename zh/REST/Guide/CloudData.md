@@ -18,8 +18,6 @@ URL	| HTTP	|功能
 URL	| HTTP |	功能
 ------|--------|--------
 `/files/<filename>`|PUT|	上传文件
-`/files`|DELETE|	删除文件，头中包含X-ML-Fid
-`/files`|GET|	获取文件元信息，头中包含X-ML-Fid
 
 ### 安装
 
@@ -28,8 +26,6 @@ URL |	HTTP|	功能
 `/installations` |	POST|	上传安装数据
 `/installations/<objectId>`|	GET|	获取安装数据
 `/installations/<objectId>`|	PUT|	更新安装数据
-`/installations`|	GET|	查询安装数据
-`/installations/<objectId>`|	DELETE|	删除安装数据
 
 
 ## API 详解
@@ -276,3 +272,64 @@ success 的值是通常是进行其他 REST 操作会返回的值：
 
 
 ### 安装
+
+#### 上传安装数据
+
+一个安装对象表示了一个你的在手机上被安装的 app。
+
+字段	| 描述
+------|--------
+channels|	数组，可选，表示这个安装对象的频道列表。
+deviceToken|	由 Apple 生成的字符串标志，在 deviceType 为 iOS 上的设备是必须的，而且自对象生成开始就不能改动，对于一个 app 来说也是不可重复的。
+deviceType|	必须被设置为"ios"、"android"、"wp"、"web"中的一种，而且自这个对象生成以后就不能变化。
+installationId|	由 MaxLeap 生成的字符串标志，而且如果 deviceType 是 android 的话是一个必选字段，如果是 iOS 的话则可选。它只要对象被生成了就不能发生改变，而且对一个 app 来说是不可重复的。
+timeZone|字符串，表示安装的这个设备的系统时区。
+
+创建一个安装对象时，deviceToken或者installationId必选其中一个，MaxLeap通过installationId和deviceToken来区分不同的安装
+
+    curl -X POST \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      -H "Content-Type: application/json" \
+      -d '{
+              "deviceType": "ios",
+              "installationId": "a2188f955d1a4a968ee40e6952b05407",
+              "deviceId": "o09f93f6996123c1c2d3d8b9639201be783207360",
+              "channels": [
+                ""
+              ]
+            }' \
+      https://api.maxleap.cn/2.0/installations
+
+
+当创建成功后，返回的 body 是一个 JSON 对象，包括了 objectId 和 createdAt 这个创建对象的时间戳。
+
+    {"objectId":"571d9d76169e7d0001a4317b","createdAt":"2016-04-25T04:30:46.349Z"}
+
+
+#### 获取安装对象
+
+你可以通过 GET 方法请求创建的时候 Location 表示的 URL 来获取 Installation 对象。比如，获取上面的被创建的对象：
+
+    curl -X GET \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      https://api.maxleap.cn/2.0/installations/571d9d76169e7d0001a4317b
+
+返回的 JSON 对象所有用户提供的字段，加上 createdAt、updatedAt 和 objectId 字段：
+
+    {"deviceType":"ios","createdAt":"2016-04-25T04:30:46.349Z","channels":[""],"ACL":{"creator":{"id":null,"type":"APIKey"}},"installationId":"a2188f955d1a4a968ee40e6952b05407","deviceId":"o09f93f6996123c1c2d3d8b9639201be783207360","objectId":"571d9d76169e7d0001a4317b","updatedAt":"2016-04-25T04:30:46.349Z"}
+
+#### 更新安装对象
+
+安装对象可以向相应的 URL 发送 PUT 请求来更新。例如，更新安装的语言：
+
+    curl -X PUT \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      -H "Content-Type: application/json" \
+      -d '{
+              "language": "en"
+            }' \
+      https://api.maxleap.cn/2.0/installations/571d9d76169e7d0001a4317b
+
