@@ -1058,6 +1058,552 @@ ML.im.yourself(function(msg){
     }
 ```
 
+### ML.im.searchUsers
+
+搜索用户
+
+```Javascript
+  ML.im.searchUsers(size,skip,name,data, function (error,value) {
+
+  });
+```
+
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+size|int|可选||显示的条数
+skip|int|可选||跳过的条数
+name|string|可选||排序的字段(多个字段直接用","隔开)
+data|object|可选||自定义的属性字段如{'name':'小不点'}
+#### callback 返回
+
+```object``` callback返回
+
+#### 返回示例值
+
+```javascript
+[{
+    "id":"foo",
+    "ts":1461570739830,
+    "attributes":{
+        "name":"小不点"
+    },
+    "online":false
+},
+... ...
+
+]
+```
+
+### ML.im.setUserAttributes
+
+设置用户自定义属性
+
+```javascript
+    ML.im.setUserAttributes(user,data, function (error,value) {
+
+    });
+
+```
+
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+user|string|必须|&ensp;|用户的id
+data|object|必须|&ensp;|需要设置的属性(如:{'name':'混世魔王','age':99999})
+
+#### callback返回
+````object````空对象
+
+### ML.im.coverSetUserAttributes
+
+覆盖设置用户自定义属性
+
+```javascript
+  ML.im.coverSetUserAttributes(user,data, function (error,data) {
+
+  });
+
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+user|string|必须|&ensp;|用户的id
+data|object|必须|&ensp;|需要设置的属性(如:{'name':'西门吹雪'})
+
+#### callback返回
+````object````空对象
+
+### ML.im.getUserAttributes
+
+获取用户自定义属性
+
+```javascript
+    ML.im.getUserAttributes(user, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+user|string|必须|&ensp;|用户id
+
+#### callback返回
+```object```callback返回
+
+#### 返回值示例
+
+```javascript
+{
+    "bar": "baz",
+    "gender": "male",
+    "foo": "bar",
+    "name": "隔壁老王",
+    "baz": "qux",
+    "age": 46
+}
+```
+
+
+### ML.im.getUserOneAttribute
+
+获取用户自定义属性
+
+```javascript
+    ML.im.getUserOneAttribute(user,data, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+user|string|必须|&ensp;|用户id
+data|string|必须|&ensp;|自定义的属性名称
+
+#### callback返回
+```string```callback返回字符串
+
+
+### ML.im.rmUserAttributes
+
+删除用户自定义属性
+
+```javascript
+ ML.im.rmUserAttributes(user, function (error,data) {
+
+ });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+user|string|必须|&ensp;|用户id
+
+#### callback返回
+```object```callback返回空object
+
+
+### ML.im.addOrModifyPassenger
+
+新增或修改游客信息
+
+```javascript
+  ML.im.addOrModifyPassenger(passenger, function (error,data) {
+
+  });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+passenger|object|必须|&ensp;|游客信息(如:{ 'id':'jessicaZhe',&'desc':'我是游客,我怕谁'  }// 可选项, 如果设置则强制使用该ID, 否则系统会随机分配一个ID)
+
+#### callback返回
+```object```callback返回空object
+
+
+### ML.im.getPassenger
+
+获取游客信息
+
+```javascript
+    ML.im.getPassenger(passengerId, function (error,data) {
+
+    });
+
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+passengerId|string|必须|&ensp;|游客id
+
+#### callback返回
+```object```callback返回
+#### 返回值示例
+
+```javascript
+    {
+        "des": "我是一个游客",
+        "tel": 1302013,
+        "xxx": "hello"
+    }
+```
+
+### ML.im.getPassengerRecentChat
+
+获取游客的聊天记录
+
+```javascript
+    ML.im.getPassengerRecentChat(passenger,user,ts,size,function (error,data) {
+
+    });
+```
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+passenger|string|必须|&ensp;|游客id
+user|string|必须|&ensp;|用户id
+ts|string|必须|&ensp;|时间戳
+size|int|必须|&ensp;|显示的条数
+#### callback返回
+
+```array```callback返回json格式的数组
+#### 返回值示例
+
+```javascript
+[
+    {
+        "ts": 1461635974546,
+        "speaker": "jerryJone",
+        "content": {
+            "media": 0,
+            "body": "hi"
+        }
+    },
+    {
+        "ts": 1461636003006,
+        "speaker": "jerry",
+        "content": {
+            "media": 0,
+            "body": "你好！"
+        }
+    },
+    {
+        "ts": 1461636016786,
+        "speaker": "jerryJone",
+        "content": {
+            "media": 0,
+            "body": "嘿嘿"
+        }
+    }
+]
+```
+
+
+### ML.im.searchGroups
+
+搜索群组
+
+```javascript
+    im.searchGroups(size,skip,sort,data, function (error,value) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+size|int|可选|&ensp;|显示的条数
+skip|int|可选|&ensp;|跳过多少条
+sort|string|可选|&ensp;|排序字段
+data|object|可选|&ensp;|自定义的属性(如:{'description':'搞基'})
+
+#### callback返回
+```array``` callback返回一个数组
+
+#### 返回示例
+```javascript
+
+    {
+        "id": "86f42c3d79f94c1fa65dbb5a54adfabb",
+        "owner": "foo",
+        "ts": 1460070742000,
+        "attributes": {
+            "name": "mygroup"
+        }
+    },
+    {
+        "id": "4889ccb75c07432e8d6fa653658ea693",
+        "owner": "foo",
+        "ts": 1461032499000,
+        "attributes": {
+            "name": "sbsbsbsb"
+        }
+    },
+    ... ...
+]
+```
+
+
+### ML.im.setGroupAttributes
+
+设置群组自定义属性
+
+```javascript
+    ML.im.setGroupAttributes(group,data,function (error,value) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+group|string|必须|&ensp;|群组id
+data|object|必须|&ensp;|需要设置的属性(如:{name:'专业交流群','description':'专业交流一百年'})
+
+#### callback返回
+```object``` callback返回空对象
+
+
+### ML.im.coverSetGroupAttributes
+
+覆盖设置群组自定义属性
+
+```javascript
+    ML.im.coverSetGroupAttributes(group,data, function (error,value) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+group|string|必须|&ensp;|群组id
+data|object|必须|&ensp;|需要设置的属性(如:{name:'专业交流群','description':'专业交流一百年'})
+
+#### callback返回
+```object``` callback返回空对象
+
+
+### ML.im.getGroupAttributes
+
+获取群组自定义属性
+
+```javascript
+     im.getGroupAttributes(group, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+group|string|必须|&ensp;|群组id
+
+#### callback
+```object```callback返回
+
+#### 返回示例
+
+```javascript
+{
+    "name": "摄影爱好者群",
+    "description": "爱摄影就来吧"
+}
+```
+
+### ML.im.getGroupOneAttribute
+
+获取群组的某个自定义属性
+
+```javascript
+    ML.im.getGroupOneAttribute(group,attr, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+group|string|必须|&ensp;|群组id
+attr|string|必须|&ensp;|自定义属性的字段(如:description)
+
+#### callback返回
+```string```callback返回字符串
+
+### ML.im.rmGroupAttributes
+
+删除群组自定义属性
+
+```javascript
+    im.rmGroupAttributes(group, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+group|string|必须|&ensp;|群组id
+
+#### callback返回
+```object```callback返回空对象
+
+### ML.im.searchRooms
+
+搜索聊天室
+
+```javascript
+    ML.im.searchRooms(size,skip,name,data, function (error,value) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+size|int|可选|&ensp;|显示的条数
+skip|int|可选|&ensp;|跳过多少条
+sort|string|可选|&ensp;|排序字段
+data|object|可选|&ensp;|自定义的属性(如:{'description':'搞基'})
+
+#### callback返回
+```array``` callback返回一个数组
+
+#### 返回示例
+```javascript
+    [
+        {
+            "id": "c0eebb302b1345fd983345336dd4eaa6",
+            "attributes": {
+                "name": "千年恋",
+                "description": "千年等候!"
+            }
+        },
+        {
+            "id": "4217fd2d424d47d78907c509b8bc8403",
+            "attributes": {
+                "name": "天涯阁",
+                "description": "天涯共此时!"
+            }
+        },
+        ... ...
+    ]
+```
+
+
+### ML.im.setRoomAttributes
+
+设置聊天室自定义属性
+
+```javascript
+    ML.im.setRoomAttributes(room,data,function (error,value) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+room|string|必须|&ensp;|聊天室id
+data|object|必须|&ensp;|需要设置的属性(如:{name:'大家来聊天','description':'开心交流'})
+
+#### callback返回
+```object``` callback返回空对象
+
+### ML.im.coverSetRoomAttributes
+
+覆盖设置聊天室自定义属性
+
+```javascript
+    ML.im.coverSetRoomAttributes(room,data}, function (error,value) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+room|string|必须|&ensp;|聊天室id
+data|object|必须|&ensp;|需要设置的属性(如:{name:'大家来聊天二','description':'开心交流二'})
+
+#### callback返回
+```object``` callback返回空对象
+
+
+### ML.im.getRoomAttributes
+
+获取聊天室自定义属性
+
+```javascript
+    ML.im.getRoomAttributes(room, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+room|string|必须|&ensp;|聊天室id
+
+#### callback
+```object```callback返回
+
+#### 返回示例
+
+```javascript
+{
+    "name": "大家来聊天二",
+    "description": "开心交流二"
+}
+```
+
+
+### ML.im.getRoomOneAttribute
+
+获取聊天室的某个自定义属性
+
+```javascript
+    ML.im.getRoomOneAttribute(room,attr, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+room|string|必须|&ensp;|群组id
+attr|string|必须|&ensp;|自定义属性的字段(如:description)
+
+#### callback返回
+```string```callback返回字符串
+
+
+### ML.im.rmRoomAttributes
+
+删除聊天室自定义属性
+
+```javascript
+    ML.im.rmRoomAttributes(room, function (error,data) {
+
+    });
+```
+
+#### 参数
+参数|类型|约束|默认|说明
+---|---|---|---|---
+room|string|必须|&ensp;|聊天室id
+
+#### callback
+```object```callback返回空对象
+
+
 ## 错误码
 
 错误码|含义
