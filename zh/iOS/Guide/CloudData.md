@@ -484,9 +484,9 @@ MLFile *file = [MLFile fileWithName:@"resume.txt" data:data];
 
 使用 `MLQuery` 查询 `MLObject` 分三步：
 
-1. 创建一个 `MLQuery` 对象，并指定对应的 MLObject class；
+1. 创建一个 `MLQuery` 对象，并指定对应的 `leapClassName`；
 2. 为 `MLQuery` 添加过滤条件；
-3. 执行 `MLQuery`：调用 `findObjectsInBackgroundWithBlock:` 来查询与条件匹配的 `MLObject` 数据。
+3. 执行 `MLQuery`：调用 `findObjectsInBackgroundWithBlock:` 来查询与过滤条件匹配的 `MLObject` 数据。
 
 例如，查询指定人员所发的微博，可以使用 `whereKey:equalTo:` 方法限定键值：
 
@@ -593,9 +593,9 @@ MLQuery *query = [MLQuery queryWithclassName:@"Post"];
 
 ```objective_c
 // Sorts the results in ascending order by the score field if the previous sort keys are equal.
-[query orderByAscending:@"score"];
+[query addAscendingOrder:@"score"];
 // Sorts the results in descending order by the score field if the previous sort keys are equal.
-[query orderByDescending:@"username"];
+[query addDescendingOrder:@"username"];
 ```
 
 ##### 设置数值大小约束

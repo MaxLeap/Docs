@@ -24,7 +24,7 @@
 2. 使用手机号和短信验证码登录
 3. 使用第三方平台认证信息登录
 
-### 创建 `MLIMClient` 示例
+### 创建 `MLIMClient` 实例
 
 ```
 // 客户端配置
@@ -48,7 +48,9 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
 
 ### 使用一个用户 ID 直接建立连接登录
 
-现在登录 Tom 这个 ID，使用该方式登录，无论 Tom 这个 ID 存不存在，都能登录成功。系统仅仅校验 AppId 与 ClientKey 是否匹配。实现如下：
+用户 ID 需匹配正则表达式 `[a-zA-Z0-9_\-]+`。
+
+现在登录 Tom 这个 ID，如果 Tom 这个 ID 不存在，系统会创建一个。实现如下：
 
 ```
 // 登录，不需要密码
@@ -112,7 +114,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 [client pause];
 ```
 
-假设用户只使用当前终端登录，客户端暂时断开连接后，用户会出于离线状态。离线状态下的消息会通过远程推送的方式送达，这需要客户端打开远程推送功能。详情请查阅 [离线消息推送](...) 一节。
+假设用户现在只使用当前终端登录，客户端暂时断开连接后，用户会出于离线状态。离线状态下的消息会通过远程推送的方式送达，这需要客户端打开远程推送功能。详情请查阅 [离线消息推送] 一节。
 
 用户切换回前台后需要手动连接。
 
@@ -151,6 +153,8 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 6. **`status`**: 消息状态，发送中，发送成功，发送失败等
 
 7. **`sendTimestamp`**: 消息发送时间，距离1970年的秒数
+
+## 用户信息管理
 
 ## 单聊
 
@@ -493,6 +497,211 @@ MLIMRoom *room = [MLIMRoom roomWithId:@"rid"];
 
 系统消息也区分全体消息，群组消息，特定用户消息，可以使用 `message.receiver` 区分。
 
+## 游客（新增）
+
+### 创建或更新游客
+
+创建游客和更新游客信息使用的是同一个接口。如果传入的属性字典中有 id 字段，并且这个游客已经存在，那就是更新操作，否则系统会创建一个新的游客。
+
+创建游客：
+
+```
+// 注意：这个字典中没有 id 字段
+NSDictionary *attrs = @{@"foo":@"bar", @"age":@23};
+[MLIMPassenger createOrUpdatePassengerWithAttributes:attrs
+                                          completion:^(MLIMPassenger * _Nullable passenger, NSError * _Nullable error)
+{
+    // ...
+}];
+```
+
+更新游客信息：
+
+```
+// 假设存在一个 id 为 772b12084d7c413a9d03df04363b71dd 的游客
+NSDictionary *attrs = @{@"id":@"772b12084d7c413a9d03df04363b71dd", 
+						    @"foo":@"bar", 
+						    @"age":@23};
+[MLIMPassenger createOrUpdatePassengerWithAttributes:attrs
+                                          completion:^(MLIMPassenger * _Nullable passenger, NSError * _Nullable error)
+{
+    // ...
+}];
+```
+
+如果你已经持有一个 `passenger` 对象(`passenger.pid` 不能为空)，可以这样更新：
+
+```
+MLIMPassenger *passenger;
+NSDictionary *attrs = @{@"nickname":@"xiaobao"};
+[passenger updatePassengerAttributes:attrs completion:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+    	// ...
+    }
+}];
+```
+
+### 根据游客 ID 获取游客信息
+
+```
+NSString *pid = @"772b12084d7c413a9d03df04363b71dd";
+MLIMPassenger *passenger = [MLIMPassenger passengerWithId:pid];
+[passenger fetchWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+    	// ...
+    }
+}];
+```
+
+### 获取游客最新的聊天记录
+
+```
+NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
+[self.passenger getHistoryMessagesWithUser:@"wind"
+                                beforeTime:ts
+                                     limit:20
+                                completion:^(NSArray<MLIMMessage *> *_Nullable messages,
+                                             NSError * _Nullable error)
+{
+    NSLog(@"messages: %@, error: %@", messages, error);
+}];
+```
+
+## 自定义属性（新增）
+
+MaxIM 系统可以给一个游客、用户、群组或者聊天室设置自定义属性。自定义属性保存在一个 JSON Object 中，键值必须是 JSON 支持的数据类型，可以嵌套，键值对可以随意增加。
+
+该节提到的 API 适用于 `MLIMUser`、`MLIMGroup`、`MLIMRoom`，`MLIMPassenger` 请参照 [游客] 小节。 
+
+### 部分更新自定义属性：
+
+```
+id object; // MLIMUser, MLIMGroup 或 MLIMRoom
+
+// 只更新该字典中存在的键值对，其他的不受影响。
+NSDictionary *attrs = @{@"nickname":@"acher", @"age":@29};
+
+[object updateAttributes:attrs completion:^(BOOL success, NSError * _Nullable error) {
+    NSLog(@"attributes: %@", object.attributes);
+}];
+```
+
+### 覆盖更新自定义属性
+
+```
+id object; // MLIMUser, MLIMGroup 或 MLIMRoom
+
+// 不同于部分更新，该接口直接使用新的字典覆盖用户属性
+NSDictionary *attrs = @{@"nickname":@"acher", @"age":@29};
+
+[object replaceAttributes:attrs completion:^(BOOL success, NSError * _Nullable error) {
+    NSLog(@"attributes: %@", object.attributes);
+}];
+```
+
+### 获取自定义属性
+
+```
+id object; // MLIMUser, MLIMGroup 或 MLIMRoom
+
+[object fetchAttributesWithCompletion:^(NSDictionary * _Nullable attrs, NSError * _Nullable error) {
+    NSLog(@"attributes: %@", object.attributes);
+}];
+```
+
+### 获取单个自定义属性的值
+
+```
+id object; // MLIMUser, MLIMGroup 或 MLIMRoom
+
+[object getAttributeForKey:@"age" completion:^(id  _Nullable value, NSError * _Nullable error) {
+	// 注意：如果 age 对应的值为空，value 会是一个 NSNull 对象
+    NSLog(@"value: %@", value);
+}];
+```
+
+### 删除所有的自定义属性
+
+```
+id object; // MLIMUser, MLIMGroup 或 MLIMRoom
+
+[object deleteAttributesWithCompletion:^(BOOL success, NSError * _Nullable error) {
+    if (success) {
+        //...
+    }
+}];
+```
+
+## 查询（新增）
+
+MaxIM 也支持对自定义属性进行查询，SDK 使用一个 `MLIMQuery` 来实现，它使用起来跟 `MLQuery` 类似，但是简化很多。下面是示例代码：
+
+查询分为三步：
+
+1. 创建一个 `MLIMQuery` 对象；
+2. 为 `MLIMQuery` 对象添加过滤条件；
+3. 执行查询方法，获取与过滤条件相匹配的数据。
+
+例如，查询自定义属性的 `type` 值为 1 的用户，并按照 `age` 正序排列：
+
+```
+MLIMQuery *query = [MLIMQuery query];
+[query whereAttribute:@"type" equalTo:@"1"];
+[query orderByAscending:@"age"];
+[query findUserWithBlock:^(NSArray<MLIMUser *> * _Nullable result, NSError * _Nullable error) {
+    XCTAssertTrue(result.count <= query.limit);
+    fulfill();
+}];
+```
+
+### 查询约束
+
+设置查询约束, 这个约束支持模糊查询：
+
+**注意：**equalTo: 参数值是 String 类型
+
+```
+[query whereAttribute:@"type" equalTo:@"1"];
+```
+
+也可以添加多个约束，它们之间是 AND 的关系：
+
+```
+[query whereAttribute:@"type" equalTo:@"1"];
+[query whereAttribute:@"gender" equalTo:@"male"];
+```
+
+可以通过设置 `limit` 来限制结果的数量，默认的数量限制为 20：
+
+```
+query.limit = 30; // 最多返回三十条数据
+```
+
+`skip` 用来跳过查询结果中开头的一些数据，配合 `limit` 可以对结果进行分页：
+
+```
+query.skip = 2*30; // 跳过前 60 条数据，如果 limit 为 30，就是获取第三页数据
+```
+
+对结果进行排序：
+
+对于可排序的数据，如数字和字符串，你可以控制结果返回的顺序:
+
+```
+// Sorts the results in ascending order by the createdAt field
+[query orderByAscending:@"createdAt"];
+// Sorts the results in descending order by the createdAt field
+[query orderByDescending:@"createdAt"];
+```
+
+一个查询可以使用多个排序键，如下：
+
+```
+// Sorts the results in ascending order by the score field if the previous sort keys are equal.
+[query addAscendingOrder:@"score"];
+// Sorts the results in descending order by the score field if the previous sort keys are equal.
+[query addDescendingOrder:@"username"];
+```
 
 ## 离线推送消息
 
