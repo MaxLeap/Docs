@@ -59,8 +59,8 @@ URL |	HTTP|	功能
           -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
           -H "Content-Type: application/json" \
           https://api.maxleap.cn/2.0/jobs/helloJob
-
-云函数会返回结果:`hello job`
+          
+执行Job会返回结果:`hello job`
 
 MaxLeap不建议你通过rest api方式来调用background job,而是通过console界面上创建后台任务来替代,一方面通过rest api调用job这是一个同步接口,如果你的后台任务需要比较长时间执行,你得到的响应可能便是超时,而通过后台界面执行任务是异步方式,你不但可以方便管理你的后台任务,同时也能清楚的追踪你的任务状态,详情请见[云代码-任务](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_JOB)
 
