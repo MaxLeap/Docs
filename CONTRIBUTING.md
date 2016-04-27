@@ -75,6 +75,7 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#FUNCTION': '/guide/devguide/java.html#云代码-云函数',
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#JOB': '/guide/devguide/java.html#云代码-background-job',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_JOB':'/guide/usermanual/cloudcode.html#云代码-任务',
+        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_WHITELIST':'/guide/usermanual/cloudcode.html#云代码-白名单',
 
         'ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON': '/guide/devguide/python.html',
         
