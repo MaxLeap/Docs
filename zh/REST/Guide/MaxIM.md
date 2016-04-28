@@ -101,19 +101,23 @@ $ curl -X GET \
 
 ``` json
 {
-  "attributes": {   /* 自定义属性, 可选项 */
+  "attributes": {
     "key1": "value1",
     "key2": "value2"
   },
-  "installs": [ "installid1", "installid2" ],    // 应用安装ID列表
+  "installs": [ "installid1", "installid2" ],
   "sessions": 1,    // 当前会话数
-  "friends": [ "friendid1", "friendid2" ],    // 好友
-  "groups": [ "groupid1", "groupid2" ],    // 群组
-  "rooms": [ "roomid1", "roomid2" ]    // 聊天室
+  "friends": [ "friendid1", "friendid2" ],
+  "groups": [ "groupid1", "groupid2" ],
+  "rooms": [ "roomid1", "roomid2" ]
 }
 ```
 
 #### 设置用户属性
+
+对系统中已存在的用户进行一些属性设置。本操作为追加形式写入, 当写入的属性已存在时则覆盖, 不存在时则新建。如果您需要完全覆盖重置, 请使用[覆盖更新用户属性](#覆盖更新用户属性)。
+用户属性可以被用来读取或进行搜索。
+以下举例为标识为`testuser1`的用户设置一些属性:
 
 ``` shell
 $ curl -X POST \
@@ -124,7 +128,12 @@ $ curl -X POST \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
 ```
 
+当设置成功时, 系统会返回201状态码。
+
 #### 覆盖更新用户属性
+
+类似[设置用户属性](#设置用户属性), 但本操作会强制重置并覆盖所有属性。
+以下举例为标识为`testuser1`的用户设置一些属性:
 
 ``` shell
 $ curl -X PUT \
@@ -135,7 +144,12 @@ $ curl -X PUT \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
 ```
 
+当设置成功时, 系统会返回201状态码。
+
 #### 获取用户属性
+
+查询当前的用户属性。
+以下示例查询标识为`testuser1`的用户属性:
 
 ``` shell
 $ curl -X GET \
@@ -147,6 +161,9 @@ $ curl -X GET \
 
 #### 获取某个用户属性
 
+查询单个的用户属性。
+以下示例查询用户标识为`testuser1`的`name`属性:
+
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
@@ -155,7 +172,12 @@ $ curl -X GET \
     "http://im.maxleap.cn/ctx/testuser1/attributes/name"
 ```
 
+查询成功则返回属性值。无此属性则返回HTTP状态码404及错误信息。
+
 #### 清空用户属性
+
+强制清空用户的所有属性。
+以下示例清空用户标识`testuser1`的所有属性:
 
 ``` shell
 $ curl -X DELETE \
@@ -165,7 +187,12 @@ $ curl -X DELETE \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
 ```
 
+清空成功则返回HTTP状态码204。
+
 #### 添加用户好友
+
+使两个用户彼此成为好友, 该调用为幂等操作, 可以顺序颠倒或多次调用。
+以下示例让用户标识为`testuser1`和`testuser2`的用户彼此成为好友。
 
 ``` shell
 $ curl -X POST \
@@ -175,7 +202,24 @@ $ curl -X POST \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
 
+成功调用则返回友谊(friendship)信息:
+
+``` json
+{
+  "id": "b9d61d4e80ad1f6d",
+  "from": "testuser1",
+  "to": "testuser2",
+  "ns": "56a86320e9db7300015438f7",
+  "ts": 1461824615892
+}
+```
+其中, id唯一标识友谊, from表示建立友谊的发起人, to表示接受人, ns表示命名空间(等价于ApplicationID), ts表示最后更新时间戳。
+
+
 #### 获取友谊信息
+
+查询两个用户彼此的友谊信息。如果彼此不是好友或者用户标识不存在则返回错误信息。
+以下示例尝试获取用户标识为`testuser1`和`testuser2`的友谊信息。
 
 ``` shell
 $ curl -X GET \
@@ -185,7 +229,12 @@ $ curl -X GET \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
 
+返回的消息体参考上文。
+
 #### 删除好友
+
+擦除友谊信息, 令两人彼此不再是好友。本操作为幂等操作: 用户标识不存在, 顺序置换或者多次调用均可成功执行。
+以下实例尝试删除用户标识为`testuser1`和`testuser2`之间的好友关系(友谊小船说翻就翻):
 
 ``` shell
 $ curl -X DELETE \
@@ -195,7 +244,17 @@ $ curl -X DELETE \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
 
+成功调用后返回HTTP状态码204。
+
 #### 获取好友聊天记录
+
+查询最近7天的两位好友之间的聊天记录。
+
+您可以额外添加过滤参数:
+ - ts: 查询截止时间戳, 默认为当前时间戳。
+ - limit: 返回记录数, 默认为20条, 最大可设置为100。
+
+以下示例返回用户标识`testuser1`和`testuser2`最近的20条聊天记录:
 
 ``` shell
 $ curl -X GET \
@@ -205,7 +264,28 @@ $ curl -X GET \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2/chats"
 ```
 
+请求成功会返回聊天记录数组, 以下为范例:
+
+``` json
+[
+  {
+    "speaker": "testuser1",
+    "content": {
+        "media": 0,
+        "body": "Hello!"
+    },
+    "ts": 1454490959094
+  }
+]
+```
+其中speaker表示发言者, content表示消息体(具体请参考附录), ts表示发言时间戳。
+
+
 #### 获取用户好友列表
+
+根据用户标识获取该用户的所有好友信息。默认仅返回每个好友的用户标识, 如需返回更详细的信息, 可追加过滤条件detail。
+
+以下示例返回用户标识`testuser1`的所有好友详情:
 
 ``` shell
 $ curl -X GET \
@@ -214,6 +294,25 @@ $ curl -X GET \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/friends?detail"
 ```
+
+成功调用后会返回好友信息列表, 以下范例为追加detail后的返回格式:
+
+``` json
+[
+  "id": "testuser2",
+  "online": false,
+  "recent": {
+    "speaker": "testuser1",
+    "content": {
+      "media": 0,
+      "body": "Hello!",
+    },
+    "ts": 1454490959094
+  }
+]
+```
+其中id为好友的用户标识, online表示好友当前是否在线, recent为彼此的最近一条聊天记录。
+
 
 #### 获取用户已经加入的群组列表
 
