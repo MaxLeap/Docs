@@ -317,6 +317,10 @@ $ curl -X GET \
 
 #### 获取用户已经加入的群组列表
 
+根据用户标识获取该用户已经加入的群组信息。默认仅返回每个群组的标识ID, 如需返回更详细的信息, 可追加过滤条件detail。
+
+以下示例返回用户标识`testuser1`的所有群组信息:
+
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
@@ -325,7 +329,37 @@ $ curl -X GET \
     "http://im.maxleap.cn/ctx/testuser1/groups?detail"
 ```
 
+成功调用后会返回群组信息列表, 以下范例为追加detail后的返回格式:
+
+``` json
+[
+  {
+    "id": "7c9fb6ca88ed41d58f69bb40b779d5bc",
+    "owner": "testuser1",
+    "attributes": {
+        "name": "周杰伦粉丝群",
+        "description": "这里是周杰伦粉丝的基地!"
+    },
+    "members": [ "testuser2", "testuser3" ],
+    "ts": 1456306512958,
+    "recent": {
+      "speaker": "testuser1",
+      "content": {
+        "media": 0,
+        "body": "hello everyone."
+      },
+      "ts": 1454490959094
+    }
+  }
+]
+```
+其中id为群组标识, owner为群管理员的用户标识, attributes为群属性, members为群成员表, recent为该群的最近一条聊天信息, ts表示群创建日期时间戳。
+
 #### 获取用户已经加入的聊天室列表
+
+根据用户标识获取该用户已经加入的聊天室信息。默认仅返回每个聊天室的标识ID, 如需返回更详细的信息, 可追加过滤条件detail。
+
+以下示例返回用户标识`testuser1`的所有聊天室信息:
 
 ``` shell
 $ curl -X GET \
@@ -335,30 +369,85 @@ $ curl -X GET \
     "http://im.maxleap.cn/ctx/testuser1/rooms?detail"
 ```
 
+成功调用后会返回聊天室信息列表, 以下范例为追加detail后的返回格式:
+
+``` json
+[
+  {
+    "id": "7c9fb6ca88ed41d58f69bb40b779d5bc",
+    "attributes": {
+        "name": "周杰伦粉丝群",
+        "description": "这里是周杰伦粉丝的基地!"
+    },
+    "members": [ "testuser2", "testuser3" ],
+    "ts": 1456306512958
+  }
+]
+```
+
+其中id为聊天室标识, attributes为聊天室属性, members为聊天室成员表, ts表示聊天室创建日期时间戳。
+
+
 ### 群组
 
 #### 创建群组
+
+新建一个群组, 调用时您必须指定一个群管理员(owner)。另外您也可以指定初始化成员(members)。
+
+以下提交将会创建一个群, 管理员用户标识为`testuser1`, 额外的初始化成员为`testuser2`:
 
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
     -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
     -H "Content-Type: application/json" \
-    -d '{"owner": "testuser1","name": "testgroup1","members": ["testuser2"]}' \
+    -d '{"owner": "testuser1","members": ["testuser2"]}' \
     "http://im.maxleap.cn/groups"
 ```
 
+调用成功将会返回该群的标识ID, 如:
+
+``` json
+"7c9fb6ca88ed41d58f69bb40b779d5bc"
+```
+
 #### 搜索群组
+
+自定义搜索群组, 您可以使用自定义群组属性作为搜索过滤条件, 另外还支持基础的分页过滤条件, 分页条件请参考附录。
+
+以下操作搜索company属性为maxleap的群组:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
     -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542"
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/groups"
+    "http://im.maxleap.cn/groups?company=maxleap"
 ```
 
+成功调用后返回匹配的群组详情列表, 范例如下:
+
+``` json
+[
+  {
+    "id": "4fced5ee96ac438bbf56b4a1fd87d330",
+    "owner": "testuser1",
+    "members": [ "testuser2", "testuser3" ],
+    "attributes": {
+      "name": "test group",
+      "description": "this is a test group",
+      "company": "maxleap"
+    }
+    "ts": 1458153453000
+  }
+]
+```
+
+
 #### 获取群组基础信息
+
+根据群组标识ID获取群组信息。
+以下示例获取群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的群组信息:
 
 ``` shell
 $ curl -X GET \
@@ -367,6 +456,23 @@ $ curl -X GET \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e"
 ```
+
+查询成功则返回群组信息, 范例如下:
+
+``` json
+{
+  "owner": "testuser1",
+  "members": [ "testuser2", "testuser3" ],
+  "attributes": {
+    "name": "test group",
+    "description": "this is a test group",
+    "company": "maxleap"
+  },
+  "ts": 1456306512958
+}
+```
+
+如果群组不存在则返回HTTP状态码404以及错误信息。
 
 #### 更新群组基础信息
 
