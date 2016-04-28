@@ -300,13 +300,13 @@ $ curl -X GET \
 ``` json
 [
   {
-  "id": "testuser2",
-  "online": false,
-  "recent": {
-    "speaker": "testuser1",
-    "content": {
-      "media": 0,
-      "body": "Hello!",
+    "id": "testuser2",
+    "online": false,
+    "recent": {
+      "speaker": "testuser1",
+      "content": {
+        "media": 0,
+        "body": "Hello!",
     },
     "ts": 1454490959094
   }
