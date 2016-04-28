@@ -8,6 +8,7 @@
 
 | URL | HTTP | 功能 |
 |-----|------|------|
+| /ctx | GET | [搜索用户](#搜索用户) |
 | /ctx/`<userId>` | GET | [获取用户详情](#获取用户详情) |
 | /ctx/`<userId>`/attributes | POST | [设置用户属性](#设置用户属性) |
 | /ctx/`<userId>`/attributes | PUT | [覆盖更新用户属性](#覆盖更新用户属性) |
@@ -83,6 +84,38 @@
 
 ### 用户
 
+#### 搜索用户
+
+自定义搜索用户, 您可以使用自定义用户属性作为搜索过滤条件, 另外还支持基础的分页过滤条件, 分页条件请参考[FAQ](#FAQ)。
+
+以下示例搜索`city`为`shanghai`的用户:
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 56a86320e9db7300015438f7" \
+    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "Content-Type: application/json" \
+    "http://im.maxleap.cn/ctx?city=shanghai"
+```
+
+如果搜索到结果, 则返回匹配列表, 如:
+
+``` json
+[
+  {
+    "id": "testuser1",
+    "online": false,
+    "ts": 1461827422054,
+    "attributes": {
+      "name": "王尼玛",
+      "city": "shanghai",
+      "qq": 88888888
+    }
+  }
+]
+```
+其中id表示用户标识, online表示用户当前是否在线, ts表示最后更新时间戳, attributes表示用户属性。
+
 #### 获取用户详情
 
 根据**用户标识**来获取详细的用户信息。
@@ -106,12 +139,14 @@ $ curl -X GET \
     "key2": "value2"
   },
   "installs": [ "installid1", "installid2" ],
-  "sessions": 1,    // 当前会话数
+  "sessions": 1,
   "friends": [ "friendid1", "friendid2" ],
   "groups": [ "groupid1", "groupid2" ],
   "rooms": [ "roomid1", "roomid2" ]
 }
 ```
+
+其中attributes表示用户属性, installs表示用户的APP安装ID, sessions表示该用户当前在线数, friends表示该用户的好友列表, groups表示该用户已加入的群组列表, rooms表示该用户已加入的聊天室列表。
 
 #### 设置用户属性
 
