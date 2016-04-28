@@ -16,8 +16,12 @@ URL	| HTTP	|功能
 -------- 		| ---
 ali_app	|支付宝移动支付
 ali_web|支付宝网页支付
+ali_wap|支付宝手机网页支付
 wx_app|微信移动支付
 wx_native|微信扫码支付
+unipay_app|银联移动支付
+unipay_web|银联网页支付
+
 
 #### 头信息说明
 属性      	| 值
@@ -51,6 +55,7 @@ id | String | 成功发起支付后返回支付表记录唯一标识
 -------- 		| ---			|----
 ali_web | String | 跳转到用户支付的连接
 ali_app | String | app使用的string
+ali_wap | String | 跳转到用户支付的连接
 
 #### 返回wxpay_native的特有数据
 属性      	| 类型		|说明
@@ -94,7 +99,73 @@ tn    | String |支付流水号，用于手机sdk
 7 | CHANNEL_ERROR | 渠道内部错误
 14 | RUN_TIME_ERROR | 实时未知错误，请与技术联系帮助查看
 
+#### 示例
+调用支付请求,前提是你已经为你的应用配置了相关渠道支付参数(如何配置请参考[支付服务-配置渠道参数](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_CHANNEL)),如果你已经配置完你的渠道参数,你可以这样发起一个`支付宝网页支付`请求:
 
+    curl -X POST \
+          -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+          -H "X-ML-Session-Token: U9_sVnH_MRfmXYDRnug-jtF_FtD65RHlrNxWhHr-l5k" \
+          -H "Content-Type: application/json" \
+          -d '{ "channel": "ali_web","billNum": "5721d724bee82c77290c29e9","totalFee": 1,"subject":"test","extras":{"t":"2"},"returnUrl":"http://maxleap.cn/returnUrl","showUrl":"http://maxleap.cn/showUrl"}' \
+          https://api.maxleap.cn/2.0/maxpay/bill
+
+返回结果:
+
+    {
+        "id":"5721d724bee82c77290c29e9",
+        "ali_app":"_input_charset=\"utf-8\"&notify_url=\"http://101.95.153.34:8888/maxpay/alinotify\"&out_trade_no=\"5721d724bee82c77290c29e9\"&partner=\"2088121305224121\"&payment_type=\"1\"&seller_id=\"2088121305224121\"&service=\"mobile.securitypay.pay\"&sign=\"n9Nk%2BshO%2BuhFOUxIgCLerbYnrMCcSe26ZNVcHxVgaX7yHfzv4EeeIAYCLzQkoYHL0zPLtmaHR8Gg0IXuyt1ANCTxM%2B8L3Femvq%2FUw22WCmOwR6ZWmv3ESrQ6uOuwekNa4uXK9SihmQQBYWKgsbJWdAhGo62dmMzBu2RNyE5wdTA%3D\"&sign_type=\"RSA\"&subject=\"test\"&total_fee=\"0.01\"",
+        "ali_web":"https://mapi.alipay.com/gateway.do?_input_charset=utf-8&notify_url=http://101.95.153.34:8888/maxpay/alinotify&out_trade_no=5721d724bee82c77290c29e9&partner=2088121305224121&payment_type=1&seller_id=2088121305224121&service=create_direct_pay_by_user&sign=7d8515a7d3ba68ebbfafc1236a487c0b&sign_type=MD5&subject=test&total_fee=0.01",
+        "ali_wap":"https://mapi.alipay.com/gateway.do?_input_charset=utf-8&notify_url=http://101.95.153.34:8888/maxpay/alinotify&out_trade_no=5721d724bee82c77290c29e9&partner=2088121305224121&payment_type=1&seller_id=2088121305224121&service=alipay.wap.create.direct.pay.by.user&sign=2e02ab9c76c1efcd0e72ddaad88b1d91&sign_type=MD5&subject=test&total_fee=0.01",
+        "msg":"OK",
+        "code":0
+    }
+
+
+需要注意的是,返回结果里包含了`ali_web`,`ali_app`等多个返回参数URL,你应该根据请求里的channel值来选择对应的URL来完成支付
+
+你可以这样发起一个`微信移动支付`请求:
+
+    curl -X POST \
+          -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+          -H "X-ML-Session-Token: U9_sVnH_MRfmXYDRnug-jtF_FtD65RHlrNxWhHr-l5k" \
+          -H "Content-Type: application/json" \
+          -d '{ "channel": "wx_app","billNum": "5721d724bee82c77290c29e9","totalFee": 1,"subject":"test","extras":{"t":"2"}}' \
+          https://api.maxleap.cn/2.0/maxpay/bill
+          
+返回结果:
+
+    {
+        "appid":"wx85fcd0162fdd8c11",
+        "noncestr":"acc7a298fa3e4693a43886932ccb0497",
+        "package":"Sign=WXPay",
+        "partnerid":"1301506401",
+        "prepayid":"wx20160428173420f12d329a3f0305120260",
+        "sign":"A560ED5DFA0721913E598E4DC4C5AD36",
+        "timestamp":"1461836061",
+        "id":"5721d91bbee82c77290c29ea",
+        "code":0
+    }
+    
+这个结果都是微信支付的特有数据,拿到这些数据你可以完成你后续的微信支付了
+
+你可以这样发起一个`银联移动支付`请求:
+
+    curl -X POST \
+        -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+        -H "X-ML-Session-Token: U9_sVnH_MRfmXYDRnug-jtF_FtD65RHlrNxWhHr-l5k" \
+        -H "Content-Type: application/json" \
+        -d '{ "channel": "unipay_app","billNum": "5721d724bee82c77290c29e9","totalFee": 1,"subject":"test","extras":{"t":"2"}}' \
+        https://api.maxleap.cn/2.0/maxpay/bill
+        
+返回结果:
+
+    {
+        "tn":"201604281737505105498",
+        "id":"5721d9eebee82c77290c29eb",
+        "code":0
+    }
+
+得到返回结果中的tn支付流水号,你便可以通过手机SDK完成后续的银联支付了
 
 ### 支付查询
 
@@ -152,4 +223,33 @@ extras    |JsonObject|{"1": "2"}|创建订单传入的额外信息
 
 
 
+下面举例发起一个查询4月22日-四月28日内所有支付宝网页支付的交易列表请求:
 
+    curl -X POST \
+        -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+        -H "X-ML-MasterKey: NkZCeHprbjlKN2ZIOEtVOTBiLU5GQQ" \
+        -H "Content-Type: application/json" \
+        -d '{ "channel":"ali_web","startTime": 1461254400000,"endTime": 1461859199000,"skip": 0,"limit": 21}' \
+        https://api.maxleap.cn/2.0/maxpay/bill
+    {startTime: 1461254400000, endTime: 1461859199000, limit: 21, skip: 0, channel: "ali_web"}
+
+返回结果:
+
+    {
+        "results":[
+            {
+                "billNum":"5721df20bee8bb1b17703533",
+                "channel":"ali_web",
+                "createdTime":1461837602028,
+                "currency":"CNY",
+                "extras":{"t":"2"},
+                "id":"5721df21bee87096cb665f6a",
+                "money":"ï¿¥ 0.01",
+                "status":"created",
+                "totalFee":1
+            }
+        ],
+        "code":0
+    }
+    
+    

@@ -85,6 +85,8 @@ We provide several path-maps here, you can compile links of other pages with tho
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DEVCENTER': '/guide/usermanual/devcenter.html',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_EN': '/guide/usermanual/usermgmt.html',
         'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH': '/guide/usermanual/usermgmt.html',
+        
+        'ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_CHANNEL': '/guide/usermanual/maxpay.htmll#支付服务-配置渠道参数',
 
 
         'ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS': '/tutorials/ios.html',
