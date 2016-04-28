@@ -221,7 +221,7 @@ parrot.onMessage(new SimpleDataHandler<Message>() {
 Message msg = MessageBuilder.newBuilder()
                 .toRoom(targetRoom)	// 目标的 Room 的 Id
                 .text(message);
-parrotAndroid.sendMessage(msg, new DataHandler<Void>() {
+parrot.sendMessage(msg, new DataHandler<Void>() {
     @Override
     public void onSuccess(Void aVoid) {
         toastP("sendMessage() success");
@@ -251,7 +251,22 @@ parrot.onMessage(new SimpleDataHandler<Message>() {
 
 ## 系统消息
 
-接收系统消息
+### 发送系统消息
+
+```java
+parrot.sendSystemMessage(targetFriend, message, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+
+### 接收系统消息
 
 ```java
 parrot.onSystemMessage(new SimpleDataHandler<Message>() {
@@ -558,6 +573,309 @@ parrot.removeRoomMembers("group id", removedMembers, new DataHandler<Void>() {
 
     @Override
     public void onError(ParrotException e) {
+    }
+});
+```
+
+
+## 自定义属性
+
+用户，群组和聊天室在使用时可以任意设置自定义属性。自定义的属性本身是一个普通的 JSONObject 对象。
+
+### 用户
+
+创建或更新自定义属性
+
+```java
+parrot.saveOrUpdateUserExtras(jsonExtras, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+创建自定义属性（会覆盖原来设置的所有自定义属性）
+
+```java
+parrot.saveUserExtras(jsonExtras, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+获取自定义属性
+
+```java
+parrot.getUserExtras(new DataHandler<JSONObject>() {
+    @Override
+    public void onSuccess(JSONObject jsonObject) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+删除自定义属性
+
+```java
+parrot.deleteUserExtras(new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+
+### 群组
+
+创建或更新自定义属性
+
+```java
+parrot.saveOrUpdateGroupExtras(groupId, jsonExtras, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+创建自定义属性（会覆盖原来设置的所有自定义属性）
+
+```java
+parrot.saveGroupExtras(groupId, jsonExtras, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+获取自定义属性
+
+```java
+parrot.getGroupExtras(groupId, new DataHandler<JSONObject>() {
+    @Override
+    public void onSuccess(JSONObject jsonObject) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+删除自定义属性
+
+```java
+parrot.deleteGroupExtras(groupId, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+
+### 聊天室
+
+创建或更新自定义属性
+
+```java
+parrot.saveOrUpdateRoomExtras(roomId, jsonExtras, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+创建自定义属性（会覆盖原来设置的所有自定义属性）
+
+```java
+parrot.saveRoomExtras(roomId, jsonExtras, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+获取自定义属性
+
+```java
+parrot.getRoomExtras(roomId, new DataHandler<JSONObject>() {
+    @Override
+    public void onSuccess(JSONObject jsonObject) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+删除自定义属性
+
+```java
+parrot.deleteRoomExtras(roomId, new DataHandler<Void>() {
+    @Override
+    public void onSuccess(Void aVoid) {
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+    }
+});
+```
+
+## 游客管理
+
+### 创建游客
+
+游客在创建时可用直接指定 ID 和自定义属性，两者都是可选项。如果指定了游客 ID 则系统会以 ID 为准创建或更新游客，如果没有指定 ID 则系统会自行分配 ID 并返回。
+
+```java
+parrot.createOrUpdateGuest("guest id", jsonExtras, new DataHandler<String>() {
+    @Override
+    public void onSuccess(String id) {
+
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+
+    }
+});
+```
+
+### 获得游客信息
+
+```java
+parrot.getGuestInfo("guest id", new DataHandler<JSONObject>() {
+    @Override
+    public void onSuccess(JSONObject jsonObject) {
+
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+
+    }
+});
+```
+
+### 获取游客历史消息
+
+```java
+parrot.recentGuestMessages("guest id", ts, limit, new DataListHandler<MessageHistory>() {
+    @Override
+    public void onSuccess(List<MessageHistory> t) {
+
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+
+    }
+});
+```
+
+## 搜索支持
+
+搜索功能主要有 4 个参数，query, sort, skip 和 limit。
+其中 skip 和 limit 为 int 类型数值，主要用于分页。
+sort 用于进行排序，`+` 表示顺序，`-` 表示逆序，多个条件之间使用 `,` 分隔（如：`-size,-ts` 表示先按 size 逆序再按 ts 逆序）。
+query 表示查询条件，主要用于查询自定义属性，值为普通的 Map 类型（如 foo:bar 表示查询拥有自定义属性为 foo 且 foo 值为 bar 的对象）。
+
+### 搜索用户
+
+```java
+Map<String, String> query = new HashMap<String, String>();
+query.put("foo", "bar");
+String sort = "-size,-ts";
+int skip = 0;
+int limit = 10;
+parrot.searchUsers(query, sort, skip, limit, new DataListHandler<User>() {
+    @Override
+    public void onSuccess(List<User> users) {
+
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+
+    }
+});
+```
+
+### 搜索群组
+
+```java
+Map<String, String> query = new HashMap<String, String>();
+query.put("foo", "bar");
+String sort = "-size,-ts";
+int skip = 0;
+int limit = 10;
+parrot.searchGroups(query, sort, skip, limit, new DataListHandler<Group>() {
+    @Override
+    public void onSuccess(List<Group> groups) {
+
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+
+    }
+});
+```
+
+### 搜索聊天室
+
+```java
+Map<String, String> query = new HashMap<String, String>();
+query.put("foo", "bar");
+String sort = "-size,-ts";
+int skip = 0;
+int limit = 10;
+parrot.searchRooms(query, sort, skip, limit, new DataListHandler<Room>() {
+    @Override
+    public void onSuccess(List<Room> rooms) {
+
+    }
+
+    @Override
+    public void onError(ParrotException e) {
+
     }
 });
 ```
