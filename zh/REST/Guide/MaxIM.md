@@ -101,7 +101,10 @@ $ curl -X GET \
 
 ``` json
 {
-  "attributes": {...},    // 自定义属性, 可选项
+  "attributes": {   /* 自定义属性, 可选项 */
+    "key1": "value1",
+    "key2": "value2"
+  },
   "installs": [ "installid1", "installid2" ],    // 应用安装ID列表
   "sessions": 1,    // 当前会话数
   "friends": [ "friendid1", "friendid2" ],    // 好友
