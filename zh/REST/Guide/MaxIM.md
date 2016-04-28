@@ -85,12 +85,29 @@
 
 #### 获取用户详情
 
+根据**用户标识**来获取详细的用户信息。
+用户标识用于标识应用内全局唯一的某个用户, 由字母、数字、下划线或中横线组成, 且长度不能超过128位。
+以下举例标识为`testuser1`的用户详情:
+
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
     -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1"
+```
+
+获取成功时, 将返回用户详情:
+
+``` json
+{
+  "attributes": {...},    // 自定义属性, 可选项
+  "installs": [ "installid1", "installid2" ],    // 应用安装ID列表
+  "sessions": 1,    // 当前会话数
+  "friends": [ "friendid1", "friendid2" ],    // 好友
+  "groups": [ "groupid1", "groupid2" ],    // 群组
+  "rooms": [ "roomid1", "roomid2" ]    // 聊天室
+}
 ```
 
 #### 设置用户属性
