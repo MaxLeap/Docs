@@ -271,10 +271,27 @@ userid|String|必须||用户id
 
 ```javascript
 {
-  "installs": ["installation1","installation2"],
-  "friends": ["bar"],
-  "groups": ["50bd8c3eba4044ca97f099aed0a0efa2"],
-  "rooms": ["50bd8c3eba4044ca97f099aed0a0efa3"]
+ {
+     "sessions": 1,
+     "installs": ['install1','install2'],
+     "friends": [
+         "bar"
+     ],
+     "attributes": {
+         "name": "猴哥",
+         "description": "我是猴哥我怕誰",
+         "power": "3000000"
+     },
+     "rooms": [
+         "da6469c86847458fb4fe82a04cf60424",
+         "2a416cb1847d4700b0431f193f6418b7"
+     ],
+     "groups": [
+         "cafe9923f8ce4edaabb6cae9b8333ec6",
+         "46b9c7cc4fc6428185a2e3a1c1f9e26e",
+         "6cd90bf2c8fc4973af25af02ce13b75b"
+     ]
+ }
 }
 ```
 
@@ -480,10 +497,15 @@ groupid|String|必须||Group ID
 
 ```javascript
 {
-  "name":"xxx group",    // 群组名称
-  "owner":"foo",    // 群组管理员
-  "members": ["ar","az","oo"],    // 群组成员ID
-  "ts": 1456306512958
+  "owner": "jerry", // 群组管理员
+  "ts": 1461607141000,
+  "members": [
+    "jerry"// 群组成员ID
+  ],
+  "attributes": {
+    "name": "美女起来high",
+    "description": "聊天交友群"
+  }
 }
 ```
 
@@ -675,9 +697,14 @@ roomid|String|必须||Room ID
 
 ```javascript
 {
-  "members": ["bar","foo"],
-  "name": "room_test",
-  "ts": 1456471029751
+  "ts": 1461608237000,
+  "members": [
+    "foo",
+    "bar"
+  ],
+  "attributes": {
+    "name": "test room1"
+  }
 }
 ```
 
