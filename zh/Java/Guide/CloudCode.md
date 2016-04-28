@@ -39,7 +39,7 @@ public interface MLHandler <T extends com.maxleap.code.Request, R extends com.ma
 
 ```Java
 request -> {
-    Response<String> response = new Response<String>(String.class);
+    Response<String> response = new MLResponse<String>(String.class);
     response.setResult("Hello, world!");
     return response;
 }
@@ -50,7 +50,7 @@ JDK6和7可以如下定义:
 ```Java
 public class HelloWorldHandler implements MLHandler {
     public Response handle(Request request) {
-        Response<String> response = new ResponseImpl<String>(String.class);
+        Response<String> response = new MLResponse<String>(String.class);
         response.setResult("Hello, world!");
         return response;
     }
@@ -82,6 +82,7 @@ public class MyObject extends MLObject {
     
 }
 ```
+
 定义 Cloud Data Object需注意：
 
 * 一个  Cloud Data Object 对应一个  Cloud Data class， Cloud Data Object 的类名必须和管理中心中创建的 class 名字一样
@@ -154,6 +155,7 @@ CloudManager.callFunctionInBackground("hello", params, new FunctionCallback<JSON
 	}
 });
 ```
+
 iOS SDK中：
 
 ```objective-c
@@ -714,7 +716,7 @@ public class User extends MLObject {
 ``` java
 public class MyJobHandler implements MLHandler {
     public Response handle(Request request) {
-        Response<String> response = new ResponseImpl<String>(String.class);
+        Response<String> response = new MLResponse<String>(String.class);
         response.setResult("Job done!");
         return response;
     }

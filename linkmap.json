@@ -52,6 +52,8 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#CLOUD_CODE_ZH": "/guide/devguide/java.html#云代码",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON#CLOUD_CODE_ZH": "/guide/devguide/python.html#云代码",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS#CLOUD_CODE_ZH": "/guide/devguide/nodejs.html#云代码",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#FUNCTION": "/guide/devguide/java.html#云代码-云函数",
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#JOB": "/guide/devguide/java.html#云代码-background-job",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP#MAXPAY_ZH": "/guide/devguide/php.html#支付服务",
 
@@ -73,11 +75,14 @@
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#USERMGMT_SEGMENT_ZH": "/guide/usermanual/usermgmt.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH": "/guide/usermanual/clouddata.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH": "/guide/usermanual/cloudcode.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_JOB": "/guide/usermanual/cloudcode.html#云代码-任务",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_WHITELIST": "/guide/usermanual/cloudcode.html#云代码-白名单",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CONFIG_ZH": "/guide/usermanual/cloudconfig.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_OFFLINE_ANALYZE_ZH": "/guide/usermanual/clouddataofflinedataanalyze.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_WEBHOOK": "/guide/usermanual/maxpaywebhook.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_ADMIN": "/guide/usermanual/maxpayadmin.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY": "/guide/usermanual/maxpay.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXPAY_CHANNEL": "/guide/usermanual/maxpay.htmll#支付服务-配置渠道参数",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ACCOUNTSYSTEM_ZH": "/guide/usermanual/accountsystem.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#MAXIM_ZH": "/guide/usermanual/maxim.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#INAPPSOCIAL_ZH": "/guide/usermanual/inappsocial.html",
