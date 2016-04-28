@@ -299,6 +299,7 @@ $ curl -X GET \
 
 ``` json
 [
+  {
   "id": "testuser2",
   "online": false,
   "recent": {
