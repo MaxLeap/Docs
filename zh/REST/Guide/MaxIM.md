@@ -438,12 +438,11 @@ $ curl -X GET \
       "name": "test group",
       "description": "this is a test group",
       "company": "maxleap"
-    }
+    },
     "ts": 1458153453000
   }
 ]
 ```
-
 
 #### 获取群组基础信息
 
@@ -477,16 +476,26 @@ $ curl -X GET \
 
 #### 更新群组基础信息
 
+更新群组基础属性, 基础属性包括owner, members。当前版本系统只会处理这两个属性。
+
+以下示例将群组`35802e7cc8b546f2b51558f44fecc0ea`的管理员设置为`testuser2`
+
 ``` shell
 $ curl -X PUT \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
     -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542"
     -H "Content-Type: application/json" \
-    -d '{"owner": "baz"}' \
+    -d '{"owner": "testuser2"}' \
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea"
 ```
 
+更新成功则返回HTTP状态码201。
+
 #### 删除群组
+
+根据群组标识ID彻底删除群组。**该操作不可逆, 请谨慎调用**!
+
+以下示例将删除标识为`b313c8af604a44f690ff9528b309ca1d`的群组:
 
 ``` shell
 $ curl -X DELETE \
@@ -496,7 +505,15 @@ $ curl -X DELETE \
     "http://im.maxleap.cn/groups/b313c8af604a44f690ff9528b309ca1d"
 ```
 
+删除成功返回HTTP状态码204。
+
 #### 设置群组属性
+
+为某个群组自定义一些属性, 群组属性可以被用来作为搜索条件。具体请参考参考[搜索群组](#搜索群组)。
+
+本操作为追加形式写入, 对已存在的属性进行覆写, 不存在的属性则新建并写入。如果您需要完全覆盖重置, 请使用[覆盖更新群组属性](#覆盖更新群组属性)。
+
+以下示例为标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的群组设置一些属性:
 
 ``` shell
 $ curl -X POST \
@@ -507,7 +524,11 @@ $ curl -X POST \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
 ```
 
+设置成功则返回HTTP状态码201。
+
 #### 覆盖更新群组属性
+
+参考上文, 本API为上述的强制覆盖版本。
 
 ``` shell
 $ curl -X PUT \
@@ -520,6 +541,10 @@ $ curl -X PUT \
 
 #### 获取群组属性
 
+根据群组标识获取该群组的所有自定义属性。
+
+以下示例返回群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的所有属性:
+
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 56a86320e9db7300015438f7" \
@@ -528,7 +553,22 @@ $ curl -X GET \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
 ```
 
+如果调用成功, 将返回类似如下格式的消息体:
+
+``` json
+{
+  "name": "周杰伦粉丝群",
+  "description": "这里是周杰伦粉丝的基地",
+  "score": 5
+}
+```
+
+
 #### 获取某个群组属性
+
+获取单个的群组自定义属性。
+
+以下示例返回群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的`name`属性:
 
 ``` shell
 $ curl -X GET \
@@ -538,7 +578,20 @@ $ curl -X GET \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes/name"
 ```
 
+调用成功则返回:
+
+``` json
+"周杰伦粉丝群"
+```
+
+如果属性不存在则返回HTTP状态码404及错误信息。
+
+
 #### 清空群组属性
+
+用于擦除群组所有自定义属性。本操作不可逆, 请谨慎调用。
+
+以下示例擦除群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的所有自定义属性:
 
 ``` shell
 $ curl -X DELETE \
@@ -548,7 +601,13 @@ $ curl -X DELETE \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
 ```
 
+调用成功则返回HTTP状态码204。
+
 #### 追加群组成员
+
+为某个群组添加新的群组成员, 请确保群组标识和您要加入的成员标识在系统中存在! 否则系统会返回错误提示!
+
+以下示例为标识为`35802e7cc8b546f2b51558f44fecc0ea`的群组添加新成员`testuser3`:
 
 ``` shell
 $ curl -X POST \
@@ -559,7 +618,13 @@ $ curl -X POST \
    "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/members"
 ```
 
+成功添加后返回HTTP状态码201。
+
 #### 移除群组成员
+
+为群组移除某些成员。调用前请确保群组标识存在, 并且**将要移除的成员标识不能为管理员**! 否则系统会返回错误消息。
+
+以下示例为标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的群组移除`testuser3`成员:
 
 ``` shell
 $ curl -X DELETE \
@@ -570,7 +635,16 @@ $ curl -X DELETE \
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/members"
 ```
 
+成功调用后返回HTTP状态码204。
+
 #### 获取群组聊天记录
+
+根据群组标识查询获取7天内的群组聊天记录。
+您可以追加过滤字段:
+ - **ts**: 标识截止时间戳, 默认为当前时间戳。
+ - **limit**: 返回记录数, 默认为20条, 最大支持100。
+
+以下示例返回群组标识为`db86cd76326d457da38ab05303722876`的聊天记录:
 
 ``` shell
 $ curl -X GET \
@@ -580,7 +654,27 @@ $ curl -X GET \
     "http://im.maxleap.cn/groups/db86cd76326d457da38ab05303722876/chats"
 ```
 
+查询成功则返回聊天记录消息体:
+
+``` json
+[
+  {
+    "speaker": "testuser1",
+    "content": {
+      "media": 0,
+      "body": "大家都在吗?"
+    },
+    "ts": 1454490959094
+  }
+]
+```
+
+
 #### 清空群组聊天记录
+
+擦除保存在云端的群组聊天记录。该操作不可逆, 请谨慎调用!
+
+以下示例擦除群组标识为`35802e7cc8b546f2b51558f44fecc0ea`的所有云端聊天记录:
 
 ``` shell
 $ curl -X DELETE \
@@ -589,6 +683,8 @@ $ curl -X DELETE \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/chats"
 ```
+
+擦除成功返回HTTP状态码204。
 
 ### 聊天室
 
