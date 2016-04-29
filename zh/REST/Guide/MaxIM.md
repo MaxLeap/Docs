@@ -561,7 +561,7 @@ $ curl -X DELETE \
 
 本操作为追加形式写入, 对已存在的属性进行覆写, 不存在的属性则新建并写入。如果您需要完全覆盖重置, 请使用[覆盖更新群组属性](#覆盖更新群组属性)。
 
-以下示例为标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的群组设置一些属性:
+以下示例为标识为`11e930016e2e48d8b5faa6fd0ee90517`的群组设置一些属性:
 
 ``` shell
 $ curl -X POST \
@@ -569,7 +569,7 @@ $ curl -X POST \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"company": "maxleap","star": 5}' \
-    "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/attributes"
 ```
 
 设置成功则返回HTTP状态码201。
