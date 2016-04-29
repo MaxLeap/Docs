@@ -634,7 +634,7 @@ id object; // MLIMUser, MLIMGroup 或 MLIMRoom
 
 ## 查询（新增）
 
-MaxIM 也支持对自定义属性进行查询，SDK 使用一个 `MLIMQuery` 来实现，它使用起来跟 `MLQuery` 类似，但是简化很多。下面是示例代码：
+MaxIM 也支持对用户、群组、聊天室进行查询，根据它们的自定义属性进行过滤。SDK 使用一个 `MLIMQuery` 来实现查询，它使用起来跟 `MLQuery` 类似，但是简化很多。
 
 查询分为三步：
 
@@ -642,7 +642,7 @@ MaxIM 也支持对自定义属性进行查询，SDK 使用一个 `MLIMQuery` 来
 2. 为 `MLIMQuery` 对象添加过滤条件；
 3. 执行查询方法，获取与过滤条件相匹配的数据。
 
-例如，查询自定义属性的 `type` 值为 1 的用户，并按照 `age` 正序排列：
+例如，查询自定义属性的 `type` 值为 1 的用户，并按照 `age` 升序排列：
 
 ```
 MLIMQuery *query = [MLIMQuery query];
