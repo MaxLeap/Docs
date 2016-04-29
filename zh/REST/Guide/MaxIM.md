@@ -93,7 +93,7 @@
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: aa2cdfc982f44a770b4be0dec7d3a1df,1456373078542" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx?city=shanghai"
 ```
@@ -125,7 +125,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1"
 ```
@@ -157,7 +157,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"name": "隔壁老王","age": 46,"gender": "male"}' \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
@@ -173,7 +173,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X PUT \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"name": "隔壁老李"}' \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
@@ -189,7 +189,7 @@ $ curl -X PUT \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
 ```
@@ -202,7 +202,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/attributes/name"
 ```
@@ -217,7 +217,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/attributes"
 ```
@@ -232,7 +232,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
@@ -259,7 +259,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
@@ -274,7 +274,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
@@ -294,7 +294,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2/chats"
 ```
@@ -325,7 +325,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/friends?detail"
 ```
@@ -360,7 +360,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/groups?detail"
 ```
@@ -400,7 +400,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/ctx/testuser1/rooms?detail"
 ```
@@ -435,7 +435,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"owner": "testuser1","members": ["testuser2"]}' \
     "http://im.maxleap.cn/groups"
@@ -456,7 +456,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ"
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060"
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups?company=maxleap"
 ```
@@ -487,7 +487,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e"
 ```
@@ -518,7 +518,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X PUT \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ"
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060"
     -H "Content-Type: application/json" \
     -d '{"owner": "testuser2"}' \
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea"
@@ -535,7 +535,7 @@ $ curl -X PUT \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/b313c8af604a44f690ff9528b309ca1d"
 ```
@@ -553,7 +553,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"company": "maxleap","star": 5}' \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
@@ -568,7 +568,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X PUT \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"flag": "Game"}' \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
@@ -583,7 +583,7 @@ $ curl -X PUT \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
 ```
@@ -608,7 +608,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes/name"
 ```
@@ -631,7 +631,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
 ```
@@ -647,7 +647,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}' \
    "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/members"
@@ -664,7 +664,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}'
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/members"
@@ -684,7 +684,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/db86cd76326d457da38ab05303722876/chats"
 ```
@@ -714,7 +714,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/chats"
 ```
@@ -732,7 +732,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser1","testuser2"]}' \
     "http://im.maxleap.cn/rooms"
@@ -753,7 +753,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/rooms?company=maxleap"
 ```
@@ -786,7 +786,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6"
 ```
@@ -817,7 +817,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6"
 ```
@@ -835,7 +835,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"city": "shanghai","score": 5}' \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
@@ -850,7 +850,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X PUT \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"rate": "100%"}' \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
@@ -865,7 +865,7 @@ $ curl -X PUT \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
 ```
@@ -888,7 +888,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes/city"
 ```
@@ -910,7 +910,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
 ```
@@ -926,7 +926,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}' \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/members"
@@ -941,7 +941,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}' \
     "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/members"
@@ -962,7 +962,7 @@ $ curl -X DELETE \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"name": "王尼玛","qq": 88888888,"age": 28}' \
     "http://im.maxleap.cn/passengers"
@@ -983,7 +983,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://imuat.maxleap.cn/passengers/58550388f9434168bf2019317b649265"
 ```
@@ -1010,7 +1010,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/passengers/58550388f9434168bf2019317b649265/chats/testuser1"
 ```
@@ -1049,7 +1049,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"content": {"media": 0,"body": "hello all!"}}' \
     "http://im.maxleap.cn/system"
@@ -1071,7 +1071,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"content":{"media": 0,"body": "hello!"}}' \
     "http://im.maxleap.cn/system/testuser1"
@@ -1091,7 +1091,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: multipart/form-data;" \
     -F "attachment=@[YOUR_LOCAL_FILE]" \
     "http://im.maxleap.cn/attachment"
@@ -1113,7 +1113,7 @@ $ curl -X POST \
 | 名称 | 作用 | 示例 | 备注 |
 |----|----|----|----|
 | X-ML-AppId | 应用ID | X-ML-AppId: 569d84a0169e7d00012c7afe | 头名称大小写不敏感 |
-| X-ML-Request-Sign | 应用签名 | X-ML-Request-Sign: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ | 头名称大小写不敏感, 值可以为MaxLeap的任意类型密钥 |
+| X-ML-Request-Sign | 应用签名 | X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060 | 头名称大小写不敏感, 值可以为MaxLeap的任意类型密钥 |
 | X-Parrot-Version | 请求的聊天服务版本 | X-Parrot-Version: 2 | 头名称大小写不敏感, 可选项, 默认使用最新版本的API |
 
 ### 通用的分页过滤参数
