@@ -107,9 +107,10 @@ $ curl -X GET \
     "online": false,
     "ts": 1461827422054,
     "attributes": {
-      "name": "王尼玛",
-      "city": "shanghai",
-      "qq": 88888888
+      "name": "隔壁老王",
+      "gender": "male",
+      "age": 46,
+      "city": "shanghai"
     }
   }
 ]
@@ -176,7 +177,7 @@ $ curl -X PUT \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"name": "隔壁老李"}' \
-    "http://im.maxleap.cn/ctx/testuser1/attributes"
+    "http://im.maxleap.cn/ctx/testuser2/attributes"
 ```
 
 当设置成功时, 系统会返回201状态码。
@@ -219,7 +220,7 @@ $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/ctx/testuser1/attributes"
+    "http://im.maxleap.cn/ctx/testuser3/attributes"
 ```
 
 清空成功则返回HTTP状态码204。
@@ -264,19 +265,31 @@ $ curl -X GET \
     "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
 ```
 
-返回的消息体参考上文。
+成功调用则返回友谊(friendship)详情:
+
+``` json
+{
+  "id": "b9d61d4e80ad1f6d",
+  "from": "testuser1",
+  "to": "testuser2",
+  "online": false,
+  "ts": 1461824615892
+}
+```
+其中, id唯一标识友谊, from表示建立友谊的发起人, to表示接受人, online表示好友是否在线, ts表示最后更新时间戳。
+
 
 #### 删除好友
 
 擦除友谊信息, 令两人彼此不再是好友。本操作为幂等操作: 用户标识不存在, 顺序置换或者多次调用均可成功执行。
-以下实例尝试删除用户标识为`testuser1`和`testuser2`之间的好友关系(友谊小船说翻就翻):
+以下实例尝试删除用户标识为`testuser3`和`testuser4`之间的好友关系(友谊小船说翻就翻):
 
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/ctx/testuser1/friends/testuser2"
+    "http://im.maxleap.cn/ctx/testuser3/friends/testuser4"
 ```
 
 成功调用后返回HTTP状态码204。
@@ -456,7 +469,7 @@ $ curl -X POST \
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060"
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     "http://im.maxleap.cn/groups?company=maxleap"
 ```
