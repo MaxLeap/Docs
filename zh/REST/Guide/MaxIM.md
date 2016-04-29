@@ -510,7 +510,7 @@ $ curl -X GET \
 ``` json
 {
   "owner": "testuser1",
-  "members": [ "testuser2"" ],
+  "members": [ "testuser2" ],
   "attributes": {
     "name": "我的测试群",
     "description": "专业测试一百年",
