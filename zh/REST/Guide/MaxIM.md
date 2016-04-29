@@ -865,7 +865,7 @@ $ curl -X PUT \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"rate": "100%"}' \
-    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes"
+    "http://im.maxleap.cn/rooms/403b479663a24f47a08262ca293c47db/attributes"
 ```
 
 #### 获取聊天室属性
@@ -917,14 +917,14 @@ $ curl -X GET \
 
 用于擦除聊天室所有自定义属性。本操作不可逆, 请谨慎调用。
 
-以下示例擦除聊天室标识为`52f5e4bfa4e3442fb38225887187a0ae`的所有自定义属性:
+以下示例擦除聊天室标识为`9699068226a14cfbbc569b6fa2f5cf8d`的所有自定义属性:
 
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes"
+    "http://im.maxleap.cn/rooms/9699068226a14cfbbc569b6fa2f5cf8d/attributes"
 ```
 
 调用成功则返回HTTP状态码204。
