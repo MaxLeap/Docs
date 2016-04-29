@@ -654,7 +654,7 @@ $ curl -X DELETE \
 
 为某个群组添加新的群组成员, 请确保群组标识和您要加入的成员标识在系统中存在! 否则系统会返回错误提示!
 
-以下示例为标识为`35802e7cc8b546f2b51558f44fecc0ea`的群组添加新成员`testuser3`:
+以下示例为标识为`11e930016e2e48d8b5faa6fd0ee90517`的群组添加新成员`testuser3`:
 
 ``` shell
 $ curl -X POST \
@@ -662,7 +662,7 @@ $ curl -X POST \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}' \
-   "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/members"
+   "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/members"
 ```
 
 成功添加后返回HTTP状态码201。
@@ -671,7 +671,7 @@ $ curl -X POST \
 
 为群组移除某些成员。调用前请确保群组标识存在, 并且**将要移除的成员标识不能为管理员**! 否则系统会返回错误消息。
 
-以下示例为标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的群组移除`testuser3`成员:
+以下示例为标识为`11e930016e2e48d8b5faa6fd0ee90517`的群组移除`testuser3`成员:
 
 ``` shell
 $ curl -X DELETE \
@@ -679,7 +679,7 @@ $ curl -X DELETE \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}'
-    "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea/members"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/members"
 ```
 
 成功调用后返回HTTP状态码204。
@@ -691,14 +691,14 @@ $ curl -X DELETE \
  - **ts**: 标识截止时间戳, 默认为当前时间戳。
  - **limit**: 返回记录数, 默认为20条, 最大支持100。
 
-以下示例返回群组标识为`db86cd76326d457da38ab05303722876`的聊天记录:
+以下示例返回群组标识为`11e930016e2e48d8b5faa6fd0ee90517`的聊天记录:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/groups/db86cd76326d457da38ab05303722876/chats"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/chats"
 ```
 
 查询成功则返回聊天记录消息体:
