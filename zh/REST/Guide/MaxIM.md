@@ -495,14 +495,14 @@ $ curl -X GET \
 #### 获取群组基础信息
 
 根据群组标识ID获取群组信息。
-以下示例获取群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的群组信息:
+以下示例获取群组标识为`11e930016e2e48d8b5faa6fd0ee90517`的群组信息:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517"
 ```
 
 查询成功则返回群组信息, 范例如下:
@@ -510,10 +510,10 @@ $ curl -X GET \
 ``` json
 {
   "owner": "testuser1",
-  "members": [ "testuser2", "testuser3" ],
+  "members": [ "testuser2"" ],
   "attributes": {
-    "name": "test group",
-    "description": "this is a test group",
+    "name": "我的测试群",
+    "description": "专业测试一百年",
     "company": "maxleap"
   },
   "ts": 1456306512958
@@ -526,7 +526,7 @@ $ curl -X GET \
 
 更新群组基础属性, 基础属性包括owner, members。当前版本系统只会处理这两个属性。
 
-以下示例将群组`35802e7cc8b546f2b51558f44fecc0ea`的管理员设置为`testuser2`
+以下示例将群组`11e930016e2e48d8b5faa6fd0ee90517`的管理员设置为`testuser2`
 
 ``` shell
 $ curl -X PUT \
@@ -534,7 +534,7 @@ $ curl -X PUT \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060"
     -H "Content-Type: application/json" \
     -d '{"owner": "testuser2"}' \
-    "http://im.maxleap.cn/groups/35802e7cc8b546f2b51558f44fecc0ea"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517"
 ```
 
 更新成功则返回HTTP状态码201。
