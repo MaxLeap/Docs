@@ -990,14 +990,14 @@ $ curl -X POST \
 
 根据游客标志获取该游客的信息。
 
-以下示例获取标志为`58550388f9434168bf2019317b649265`的游客信息:
+以下示例获取标志为`dcb52ac805ab459dabb66032bb43edaf`的游客信息:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://imuat.maxleap.cn/passengers/58550388f9434168bf2019317b649265"
+    "http://im.maxleap.cn/passengers/dcb52ac805ab459dabb66032bb43edaf"
 ```
 
 成功获取后, 将返回该游客的所有属性:
@@ -1017,14 +1017,14 @@ $ curl -X GET \
 
 根据游客标志和用户标志, 获取两者的云端历史聊天记录 ( 历史聊天记录最长保存1年 )。
 
-以下示例返回游客`58550388f9434168bf2019317b649265`和用户`testtuser1`之间的云端聊天记录:
+以下示例返回游客`dcb52ac805ab459dabb66032bb43edaf`和用户`testtuser1`之间的云端聊天记录:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/passengers/58550388f9434168bf2019317b649265/chats/testuser1"
+    "http://im.maxleap.cn/passengers/dcb52ac805ab459dabb66032bb43edaf/chats/testuser1"
 ```
 
 成功调用后返回:
@@ -1032,7 +1032,7 @@ $ curl -X GET \
 ``` json
 [
   {
-    "speaker": "58550388f9434168bf2019317b649265",
+    "speaker": "dcb52ac805ab459dabb66032bb43edaf",
     "content": {
       "media": 0,
       "body": "这个能包邮吗?"
