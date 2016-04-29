@@ -65,12 +65,21 @@ IMLib 支持两种方式进行登录，用户自定的账户系统或者基于 M
 
 ### 使用用户已有账号系统
 
+**1、作为普通用户登录**
 
 ```java
 parrot.initWithCustomAccount("your application id", "your api key", clientId, installId);
 ```
 
 其中 `installId` 主要用于推送，如果不需要推送的话可以直接传 `null`。
+
+**2、作为游客登录**
+
+```java
+parrot.initWithGuest("your application id", "your api key", clientId, jsonExtras);
+```
+
+其中 `clientId` 可以为空，此时系统会自动分配 ID，如果指定的话则强制使用指定的 ID 作为游客的身份识别。最后一个参数为 JSON 形式的对象，代表登录游客的自定义属性，可以为空。
 
 ### 使用 MaxLeap 账号系统
 
@@ -814,7 +823,7 @@ parrot.recentGuestMessages("guest id", ts, limit, new DataListHandler<MessageHis
 
 搜索功能主要有 4 个参数，query, sort, skip 和 limit。
 其中 skip 和 limit 为 int 类型数值，主要用于分页。
-sort 用于进行排序，`+` 表示顺序，`-` 表示逆序，多个条件之间使用 `,` 分隔（如：`-size,-ts` 表示先按 size 逆序再按 ts 逆序）。
+sort 用于进行排序，值为需要使用的属性的字符串序列。单独指定属性名表示顺序，在属性名前加上 `-` 表示逆序，多个条件之间使用 `,` 分隔（如：`-size,-ts` 表示先按 size 逆序再按 ts 逆序）。
 query 表示查询条件，主要用于查询自定义属性，值为普通的 Map 类型（如 foo:bar 表示查询拥有自定义属性为 foo 且 foo 值为 bar 的对象）。
 
 ### 搜索用户
