@@ -572,7 +572,7 @@ $ curl -X POST \
     "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/attributes"
 ```
 
-设置成功则返回HTTP状态码201。
+设置成功则返回HTTP状态码201。如果群组不存在则返回HTTP状态码404以及错误信息。
 
 #### 覆盖更新群组属性
 
@@ -591,14 +591,14 @@ $ curl -X PUT \
 
 根据群组标识获取该群组的所有自定义属性。
 
-以下示例返回群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的所有属性:
+以下示例返回群组标识为`11e930016e2e48d8b5faa6fd0ee90517`的所有属性:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/attributes"
 ```
 
 如果调用成功, 将返回类似如下格式的消息体:
@@ -611,19 +611,18 @@ $ curl -X GET \
 }
 ```
 
-
 #### 获取某个群组属性
 
 获取单个的群组自定义属性。
 
-以下示例返回群组标识为`46b9c7cc4fc6428185a2e3a1c1f9e26e`的`name`属性:
+以下示例返回群组标识为`11e930016e2e48d8b5faa6fd0ee90517`的`name`属性:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/groups/46b9c7cc4fc6428185a2e3a1c1f9e26e/attributes/name"
+    "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/attributes/name"
 ```
 
 调用成功则返回:
