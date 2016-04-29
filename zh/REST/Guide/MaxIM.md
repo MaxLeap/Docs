@@ -531,7 +531,7 @@ $ curl -X GET \
 ``` shell
 $ curl -X PUT \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
-    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060"
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"owner": "testuser2"}' \
     "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517"
