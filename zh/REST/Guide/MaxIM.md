@@ -678,7 +678,7 @@ $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    -d '{"members": ["testuser3"]}'
+    -d '{"members": ["testuser3"]}' \
     "http://im.maxleap.cn/groups/11e930016e2e48d8b5faa6fd0ee90517/members"
 ```
 
@@ -793,14 +793,14 @@ $ curl -X GET \
 
 #### 获取聊天室基础信息
 
-根据聊天室标识ID获取聊天室信息。 以下示例获取群组标识为`c0eebb302b1345fd983345336dd4eaa6`的聊天室信息:
+根据聊天室标识ID获取聊天室信息。 以下示例获取群组标识为`52f5e4bfa4e3442fb38225887187a0ae`的聊天室信息:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae"
 ```
 
 查询成功则返回聊天室信息, 范例如下:
@@ -842,7 +842,7 @@ $ curl -X DELETE \
 
 本操作为追加形式写入, 对已存在的属性进行覆写, 不存在的属性则新建并写入。如果您需要完全覆盖重置, 请使用[覆盖更新聊天室属性](#覆盖更新聊天室属性)。
 
-以下示例为标识为`c0eebb302b1345fd983345336dd4eaa6`的聊天室设置一些属性:
+以下示例为标识为`52f5e4bfa4e3442fb38225887187a0ae`的聊天室设置一些属性:
 
 ``` shell
 $ curl -X POST \
@@ -850,7 +850,7 @@ $ curl -X POST \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"city": "shanghai","score": 5}' \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes"
 ```
 
 设置成功则返回HTTP状态码201。
@@ -865,21 +865,21 @@ $ curl -X PUT \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"rate": "100%"}' \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes"
 ```
 
 #### 获取聊天室属性
 
 根据聊天室标识获取该聊天室的所有自定义属性。
 
-以下示例返回群组标识为`c0eebb302b1345fd983345336dd4eaa6`的所有属性:
+以下示例返回群组标识为`52f5e4bfa4e3442fb38225887187a0ae`的所有属性:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes"
 ```
 
 如果调用成功, 将返回类似如下格式的消息体:
@@ -895,14 +895,14 @@ $ curl -X GET \
 
 获取单个的聊天室自定义属性。
 
-以下示例返回群组标识为`c0eebb302b1345fd983345336dd4eaa6`的`city`属性:
+以下示例返回群组标识为`52f5e4bfa4e3442fb38225887187a0ae`的`city`属性:
 
 ``` shell
 $ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes/city"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes/city"
 ```
 
 调用成功则返回属性值, 如本例:
@@ -917,14 +917,14 @@ $ curl -X GET \
 
 用于擦除聊天室所有自定义属性。本操作不可逆, 请谨慎调用。
 
-以下示例擦除聊天室标识为`c0eebb302b1345fd983345336dd4eaa6`的所有自定义属性:
+以下示例擦除聊天室标识为`52f5e4bfa4e3442fb38225887187a0ae`的所有自定义属性:
 
 ``` shell
 $ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/attributes"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/attributes"
 ```
 
 调用成功则返回HTTP状态码204。
@@ -933,7 +933,7 @@ $ curl -X DELETE \
 
 为某个聊天室添加新的成员, 请确保聊天室标识和您要加入的成员标识在系统中存在! 否则系统会返回错误提示!
 
-以下示例为标识为`c0eebb302b1345fd983345336dd4eaa6`的聊天室添加新成员`testuser3`:
+以下示例为标识为`52f5e4bfa4e3442fb38225887187a0ae`的聊天室添加新成员`testuser3`:
 
 ``` shell
 $ curl -X POST \
@@ -941,14 +941,14 @@ $ curl -X POST \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}' \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/members"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/members"
 ```
 
 #### 移除聊天室成员
 
 为聊天室移除某些成员。调用前请确保聊天室标识存在, 否则系统会返回错误提示。
 
-以下示例为标识为`c0eebb302b1345fd983345336dd4eaa6`的聊天室移除成员`testuser3`:
+以下示例为标识为`52f5e4bfa4e3442fb38225887187a0ae`的聊天室移除成员`testuser3`:
 
 ``` shell
 $ curl -X DELETE \
@@ -956,7 +956,7 @@ $ curl -X DELETE \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
     -d '{"members": ["testuser3"]}' \
-    "http://im.maxleap.cn/rooms/c0eebb302b1345fd983345336dd4eaa6/members"
+    "http://im.maxleap.cn/rooms/52f5e4bfa4e3442fb38225887187a0ae/members"
 ```
 
 成功调用后返回HTTP状态码204。
