@@ -634,7 +634,7 @@ id object; // MLIMUser, MLIMGroup 或 MLIMRoom
 
 ## 查询（新增）
 
-MaxIM 也支持对用户、群组、聊天室进行查询，过滤条件是它们的自定义属性。SDK 使用一个 `MLIMQuery` 来实现查询，它使用起来跟 `MLQuery` 类似，但是简化很多。
+MaxIM 也支持对用户、群组、聊天室进行查询，根据它们的自定义属性进行过滤。SDK 使用一个 `MLIMQuery` 来实现查询，它使用起来跟 `MLQuery` 类似，但是简化很多。
 
 查询分为三步：
 
