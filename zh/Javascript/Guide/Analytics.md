@@ -62,6 +62,7 @@ analytics.trackEvent('userEvent', data)
 ### 用户注册
 
 记录用户注册时相关信息
+
 ```javascript
 var data = {
 	eventId: 'registereventid',
@@ -74,6 +75,7 @@ analytics.trackUserRegister(data)
 ### 用户登录
 
 记录用户登录时相关信息
+
 ```javascript
 var data = {
 	eventId: 'logineventid',
@@ -86,6 +88,7 @@ analytics.trackUserlogin(data)
 ### 用户注销
 
 记录用户注册时相关信息
+
 ```javascript
 var data = {
 	eventId: 'logouteventid',
@@ -98,6 +101,7 @@ analytics.trackUserLogout(data)
 ### 会话开始
 
 记录用户会话开始相关信息
+
 ```javascript
 var data = {
 	eventId: 'sessionstartid',
