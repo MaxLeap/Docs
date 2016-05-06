@@ -272,8 +272,8 @@ post.save();
     if (fileUploadControl.files.length > 0) {
       var file = fileUploadControl.files[0];
       var name = 'avatar.jpg';
-      var ML.File = new ML.File(name, file);
-      ML.File.save();
+      var mlfile = new ML.File(name, file);
+      mlfile.save();
     }
   });
 </script>
@@ -419,9 +419,9 @@ query.find();
 如果想得到其字段中包含的子对象满足另一个查询的结果，你可以使用 `matchesQuery()` 操作。 注意默认的结果条数限制 100 和最大值 1000 也同样适用于子查询，所以对于大的数据集您可能需要小心构建查询条件，否则可能出现意料之外的状 况。例如，为了找到有图片的 post 的 comment，您可以：
 
 ```javascript
-var innerQuery = new AV.Query(Post);
+var innerQuery = new ML.Query(Post);
 innerQuery.exists('image');
-var query = new AV.Query(Comment);
+var query = new ML.Query(Comment);
 query.matchesQuery('post', innerQuery);
 query.find().then(function(comments) {
     // comments 包含有所有带图片 post 的 comment.
@@ -430,9 +430,9 @@ query.find().then(function(comments) {
 如果您想要获取某字段中包含的子对象不满足指定查询的结果，你可以使用 `doesNotMatchQuery()`。例如，为了找到针对不含图片的 post 的 comment，可以这样：
 
 ```javascript
-var innerQuery = new AV.Query(Post);
+var innerQuery = new ML.Query(Post);
 innerQuery.exists('image');
-var query = new AV.Query(Comment);
+var query = new ML.Query(Comment);
 query.doesNotMatchQuery('post', innerQuery);
 query.find().then(function(comments) {
     // comments 包含所有不带图片 post 的 comment.
