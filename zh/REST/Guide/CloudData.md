@@ -332,3 +332,8 @@ timeZone|字符串，表示安装的这个设备的系统时区。
             }' \
       https://api.maxleap.cn/2.0/installations/571d9d76169e7d0001a4317b
 
+## 错误码
+补充说明
+
+## FAQ
+补充说明

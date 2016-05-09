@@ -38,4 +38,6 @@ https://api.maxleap.cn/2.0/classes/books
       "code": 105,
       "error": "invalid field name: bl!ng"
     }
-
+    
+## 通用错误码
+补充
