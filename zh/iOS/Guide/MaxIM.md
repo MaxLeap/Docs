@@ -271,7 +271,11 @@ MLIMMessage *msg = [MLIMMessage messageWithText:@"Hi!"];
 
 - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)aFriend {
 	if ([aFriend.uid isEqualToString:@"Tom"]) {
-		// NSLog(@"Did receive Tom's message");
+		if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+			// NSLog(@"Did receive Jerry's message send via another client.");
+		} else {
+			// NSLog(@"Did receive Tom's message");
+		}
 	}
 }
 
@@ -375,7 +379,11 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 #pragma mark - MLIMClientDelegate
 
 - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromGroup:(MLIMGroup *)group {
-	NSLog(@"Did receive group message：%@"， message);
+	if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+		// NSLog(@"Did receive Jerry's message send to the group via another client.");
+	} else {
+		// NSLog(@"Did receive group message：%@"， message);
+	}
 }
 ```
 
@@ -487,7 +495,11 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 #pragma mark - MLIMClientDelegate
 
 - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromRoom:(MLIMRoom *)room {
-	NSLog(@"Did receive room message：%@"， message);
+	if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+		// NSLog(@"Did receive Jerry's message send to the room via another client.");
+	} else {
+		// NSLog(@"Did receive room message：%@"， message);
+	}
 }
 ```
 
