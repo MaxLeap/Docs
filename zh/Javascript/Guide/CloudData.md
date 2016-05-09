@@ -231,17 +231,11 @@ gameScore.save();
 增量无需为整数，您还可以指定增量为浮点类型的数值。
 
 ### 数组
-为了帮你存储数组类数据，MaxLeap 提供了三种操作让你可以原子地改动一个数组的值（当然，他们都需要一个给定的 key）:
-
-* **`add`：** 在一个数组的末尾加入一个给定的对象
-* **`addUnique`：** 只会把原本不存在的对象加入数组，所以加入的位置没有保证
-* **`remove`：** 在一个数组中删除所有指定的实例
-
+为了帮你存储数组类数据，MaxLeap 可以直接使用 `set()` 方法存储数组:
 比如，我们想在一条微博的属性 "tags" 中加入多个属性值:
 
 ```javascript
-post.addUnique('tags', 'Frontend');
-post.addUnique('tags', 'JavaScript');
+post.set('tags', ['Frontend', 'JavaScript']);
 post.save();
 ```
 ### 数据类型
