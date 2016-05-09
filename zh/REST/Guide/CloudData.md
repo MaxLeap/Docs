@@ -333,7 +333,7 @@ timeZone|字符串，表示安装的这个设备的系统时区。
       https://api.maxleap.cn/2.0/installations/571d9d76169e7d0001a4317b
 
 ## 错误码
-补充说明
+参考 [通用错误码](https://github.com/MaxLeap/Docs/blob/d1a8591584e4aa12cbeff533ce64dbdafec540a5/zh/REST/Guide/API.md)
 
 ## FAQ
 补充说明
