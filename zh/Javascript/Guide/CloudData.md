@@ -386,11 +386,6 @@ query.equalTo('developer', 'henry');
 ```javascript
 query.containsAll('developer', ['henry', 'frank']);
 ```
-此外，您还可以根据数组长度来查询，比如查询 developer 人数为 2 的游戏记录：
-
-```javascript
-query.sizeEqualTo('developer', 2);
-```
 
 ### 对字符串类型做查询
 使用 `startsWith()` 来限制属性值以一个特定的字符串开头，比如找出 name 以 “bai” 开头的游戏记录：
