@@ -190,6 +190,8 @@ var relation = user.relation('likes');
 relation.add(post);
 user.save()
 ```
+注: relation的被关联对象(即上面的 post)必须是已经持久化的数据。
+
 仅可以从一个 `ML.Relation` 中删除一个 post:
 ```javascript
 relation.remove(post);
