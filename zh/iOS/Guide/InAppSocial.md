@@ -75,7 +75,7 @@ NSString *b = @"asdgaeesdage";
 }];
 ```
 
-屏蔽某个人，A 屏蔽：
+屏蔽某个人，A 屏蔽 B：
 
 ```
 // A 屏蔽 B, 假如，B 还未关注 A，调用这个接口后，B 会关注 A，但不能看 A 的动态
@@ -187,8 +187,8 @@ MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithURL:[NS
 // 文字 + 链接
 status.content = [MaxSocialShuoShuoContent contentWithText:@"test" url:[NSURL URLWithString:@"http://www.google.com"]];
 
-// 一条带文字和图片的说说
-MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"text" imagePaths:imagePaths];
+// 文字 + 图片，目前图片还只支持传入 FileUrl 数组
+MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"text" imageURLs:imageFileUrls];
 
 // 创建说说对象
 MaxSocialShuoShuo *shuoshuo = [MaxSocialShuoShuo new];
