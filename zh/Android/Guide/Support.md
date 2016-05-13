@@ -107,7 +107,7 @@ MLHelpCenter.openConversation(context);
 
 #### All Questions 画面
 
-![actionbar](../../../images/hc_allQuestions.png)
+![actionbar](../../../images/hc_allquestions.png)
 
 - values/ml_hc_strings.xml
 	- `ml_hc_allQuestions` - 用于设置 ALL Questions 标题文字
