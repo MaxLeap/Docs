@@ -75,12 +75,13 @@ NSString *b = @"asdgaeesdage";
 }];
 ```
 
-屏蔽某个人，A 屏蔽：
+屏蔽某个人，A 屏蔽 B：
 
 ```
 // A 屏蔽 B, 假如，B 还未关注 A，调用这个接口后，B 会关注 A，但不能看 A 的动态
 NSString *userBId = @"";
 BOOL block = YES; // 是否屏蔽 userB，YES 表示屏蔽，NO 表示取消屏蔽
+MaxSocialUser *userA = [MaxSocialUser userWithId:@"userAId"];
 [userA block:block user:userBId completion:^(BOOL succeeded, NSError * _Nullable error) {
     // ...
 }];
@@ -89,6 +90,7 @@ BOOL block = YES; // 是否屏蔽 userB，YES 表示屏蔽，NO 表示取消屏�
 获取关注列表，返回的列表是 `MaxSocialRelationInfo` 对象数组：
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 MaxSocialQuery *query = [MaxSocialQuery new]; // 使用默认查询条件，也可以对其属性进行更改
 [user getFolloweesWithQuery:query block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     NSLog(@"followeeeeeees: %@, error: %@", objects, error);
@@ -99,6 +101,7 @@ MaxSocialQuery *query = [MaxSocialQuery new]; // 使用默认查询条件，也�
 **注意：**这个接口跟上面的接口只相差一个字母，是 **get followers**。
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 MaxSocialQuery *query = [MaxSocialQuery new]; // 使用默认查询条件，也可以对其属性进行更改
 [user getFollowersWithQuery:query block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     NSLog(@"followers: %@, error: %@", objects, error);
@@ -109,7 +112,8 @@ MaxSocialQuery *query = [MaxSocialQuery new]; // 使用默认查询条件，也�
 
 ```
 NSString *relationInfoId = @"";
-[self.user getRelationInfoWithId:relationInfoId block:^(MaxSocialRelationInfo * _Nullable relation, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user getRelationInfoWithId:relationInfoId block:^(MaxSocialRelationInfo * _Nullable relation, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -118,6 +122,7 @@ NSString *relationInfoId = @"";
 
 ```
 NSString *relationInfoId = nil;
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user deleteRelationInfoWithId:relationInfoId block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
@@ -129,6 +134,7 @@ NSString *relationInfoId = nil;
 
 ```
 MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitude:35];
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user updateLocation:location block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
@@ -137,6 +143,7 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 获取用户的地理位置信息：
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user getLocationInfoWithBlock:^(MaxSocialLocationInfo * _Nullable location, NSError * _Nullable error) {
     NSLog(@"user location: %@, error: %@", location, error);
 }];
@@ -146,7 +153,8 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 
 ```
 NSString *locatioinInfoId = @"";
-[self.user deleteLocationInfoWithObjectId:locatioinInfoId block:^(BOOL succeeded, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user deleteLocationInfoWithObjectId:locatioinInfoId block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -156,6 +164,7 @@ NSString *locatioinInfoId = @"";
 
 ```
 MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitude:35];
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user queryUserNearLocation:location distance:10086 block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     NSLog(@"People nearby: %@, error: %@", objects, error);
 }];
@@ -165,6 +174,7 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 
 ```
 NSString *locationInfoId = @"";
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user fetchLocationInfoWithObjectId:locationInfoId block:^(MaxSocialLocationInfo * _Nullable location, NSError * _Nullable error) {
 	 // ...
 }];
@@ -187,8 +197,8 @@ MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithURL:[NS
 // 文字 + 链接
 status.content = [MaxSocialShuoShuoContent contentWithText:@"test" url:[NSURL URLWithString:@"http://www.google.com"]];
 
-// 一条带文字和图片的说说
-MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"text" imagePaths:imagePaths];
+// 文字 + 图片，目前图片还只支持传入 FileUrl 数组
+MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"text" imageURLs:imageFileUrls];
 
 // 创建说说对象
 MaxSocialShuoShuo *shuoshuo = [MaxSocialShuoShuo new];
@@ -199,7 +209,8 @@ shuoshuo.content = content;
 BOOL toSquare = YES;
 
 // 发表说说
-[self.user postShuoShuo:shuoshuo toSquare:toSquare block:^(BOOL succeeded, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user postShuoShuo:shuoshuo toSquare:toSquare block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -208,7 +219,8 @@ BOOL toSquare = YES;
 
 ```
 NSString *shuoId = @"";
-[self.user fetchShuoShuoWithId:shuoId block:^(MaxSocialShuoShuo * _Nullable status, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user fetchShuoShuoWithId:shuoId block:^(MaxSocialShuoShuo * _Nullable status, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -217,7 +229,8 @@ NSString *shuoId = @"";
 
 ```
 NSString *shuoId = @"";
-[self.user deleteShuoShuoWithId:shuoId block:^(BOOL succeeded, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user deleteShuoShuoWithId:shuoId block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -226,6 +239,7 @@ NSString *shuoId = @"";
 
 ```
 NSString *shuoId = @"";
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user getImageNamesOfShuoShuo:shuoId block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     NSLog(@"image names: %@, error: %@", objects, error);
 }];
@@ -236,7 +250,8 @@ NSString *shuoId = @"";
 ```
 NSString *shuoId = @"";
 NSString *imgName = @"";
-[self.user downloadImageWithName:imgName ofShuoShuo:shuoId progress:^(int percentDone) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user downloadImageWithName:imgName ofShuoShuo:shuoId progress:^(int percentDone) {
     NSLog(@"download progress: %d%%", percentDone);
 } completion:^(NSString * _Nullable string, NSError * _Nullable error) {
     NSLog(@"downloaded image path: %@", string);
@@ -246,8 +261,9 @@ NSString *imgName = @"";
 删除说说的图片：
 
 ```
-NSString *shuoId;
-[self.user deleteImagesOfShuoShuo:shuoId block:^(BOOL succeeded, NSError * _Nullable error) {
+NSString *shuoId = @"id";
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user deleteImagesOfShuoShuo:shuoId block:^(BOOL succeeded, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -255,8 +271,9 @@ NSString *shuoId;
 获取用户自己的说说列表：
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 MaxSocialQuery *query = [MaxSocialQuery new]; // default query
-[self.user getShuoShuoWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+[user getShuoShuoWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
     NSLog(@"self shuoshuo: %@, error: %@", result, error);
 }];
 ```
@@ -265,7 +282,8 @@ MaxSocialQuery *query = [MaxSocialQuery new]; // default query
 
 ```
 MaxSocialQuery *query = [MaxSocialQuery new]; // default query
-[self.user getLatestShuoShuoInSquareWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user getLatestShuoShuoInSquareWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
     NSLog(@"latest shuoshuo on square: %@, error: %@", result, error);
 }];
 ```
@@ -274,7 +292,8 @@ MaxSocialQuery *query = [MaxSocialQuery new]; // default query
 
 ```
 MaxSocialQuery *query = [MaxSocialQuery new]; // default query
-[self.user getLatestShuoShuoInFriendCycleWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user getLatestShuoShuoInFriendCycleWithQuery:query block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
     NSLog(@"latest shuoshuo on friend cycle: %@, error: %@", result, error);
     fulfill();
 }];
@@ -284,7 +303,8 @@ MaxSocialQuery *query = [MaxSocialQuery new]; // default query
 
 ```
 MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitude:34];
-[self.user getShuoShuoNearLocation:location distance:10086 block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user getShuoShuoNearLocation:location distance:10086 block:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
     NSLog(@"nearest shuoshuo: %@, error: %@", result, error);
 }];
 ```
@@ -293,6 +313,7 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 
 ```
 MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitude:34];
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user getShuoShuoNearLocation:location distance:10086 block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     NSLog(@"nearest status: %@, error: %@", objects, error);
 }];
@@ -305,6 +326,7 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 对说说添加文字评论：
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user createCommentForShuoShuo:@"shuoId" withContent:@"hello" block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
 	// ...
 }];
@@ -313,6 +335,7 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 对说说点赞：
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user likeShuoShuo:@"shuoId" block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
 	// comment.isLike 应该为 YES.
 	// 可以通过评论对象 comment 的 isLike 属性判断该评论是点赞还是文字评论
@@ -323,7 +346,8 @@ MaxSocialLocation *location = [MaxSocialLocation locationWithLatitude:22 longitu
 
 ```
 NSString *commentId = @"";
-[self.user deleteCommentWithId:commentId block:^(BOOL succeeded, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user deleteCommentWithId:commentId block:^(BOOL succeeded, NSError * _Nullable error) {
 	// ...
 }];
 ```
@@ -332,6 +356,7 @@ NSString *commentId = @"";
 
 ```
 NSString *commentId = @"";
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user getCommentWithId:commentId block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
 	// ...
 }];
@@ -342,6 +367,7 @@ NSString *commentId = @"";
 ```
 NSString *shuoId = @"";
 MaxSocialQuery *query = [MaxSocialQuery new];
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user getCommentOfShuoshuo:shuoId withQuery:query block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 	// ...
 }];
@@ -350,7 +376,8 @@ MaxSocialQuery *query = [MaxSocialQuery new];
 列出未读评论：
 
 ```
-[self.user getUnreadCommentWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
+[user getUnreadCommentWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     NSLog(@"unread comments: %@, error: %@", objects, error);
 }];
 ```
@@ -358,6 +385,7 @@ MaxSocialQuery *query = [MaxSocialQuery new];
 把评论标记为已读：
 
 ```
+MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user markCommentAsRead:@"commetId" completion:^(BOOL updated, NSError * _Nullable error) {
     // ...
 }];

@@ -231,7 +231,6 @@ extras    |JsonObject|{"1": "2"}|创建订单传入的额外信息
         -H "Content-Type: application/json" \
         -d '{ "channel":"ali_web","startTime": 1461254400000,"endTime": 1461859199000,"skip": 0,"limit": 21}' \
         https://api.maxleap.cn/2.0/maxpay/bill
-    {startTime: 1461254400000, endTime: 1461859199000, limit: 21, skip: 0, channel: "ali_web"}
 
 返回结果:
 
@@ -252,4 +251,8 @@ extras    |JsonObject|{"1": "2"}|创建订单传入的额外信息
         "code":0
     }
     
-    
+## 错误码
+补充说明
+
+## FAQ
+补充说明

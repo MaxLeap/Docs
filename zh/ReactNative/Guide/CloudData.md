@@ -190,8 +190,6 @@ var relation = user.relation('likes');
 relation.add(post);
 user.save()
 ```
-注: relation的被关联对象(即上面的 post)必须是已经持久化的数据。
-
 仅可以从一个 `ML.Relation` 中删除一个 post:
 ```javascript
 relation.remove(post);
@@ -233,11 +231,17 @@ gameScore.save();
 增量无需为整数，您还可以指定增量为浮点类型的数值。
 
 ### 数组
-为了帮你存储数组类数据，MaxLeap 可以直接使用 `set()` 方法存储数组:
+为了帮你存储数组类数据，MaxLeap 提供了三种操作让你可以原子地改动一个数组的值（当然，他们都需要一个给定的 key）:
+
+* **`add`：** 在一个数组的末尾加入一个给定的对象
+* **`addUnique`：** 只会把原本不存在的对象加入数组，所以加入的位置没有保证
+* **`remove`：** 在一个数组中删除所有指定的实例
+
 比如，我们想在一条微博的属性 "tags" 中加入多个属性值:
 
 ```javascript
-post.set('tags', ['Frontend', 'JavaScript']);
+post.addUnique('tags', 'Frontend');
+post.addUnique('tags', 'JavaScript');
 post.save();
 ```
 ### 数据类型
@@ -268,8 +272,8 @@ post.save();
     if (fileUploadControl.files.length > 0) {
       var file = fileUploadControl.files[0];
       var name = 'avatar.jpg';
-      var mlfile = new ML.File(name, file);
-      mlfile.save();
+      var ML.File = new ML.File(name, file);
+      ML.File.save();
     }
   });
 </script>
@@ -388,6 +392,11 @@ query.equalTo('developer', 'henry');
 ```javascript
 query.containsAll('developer', ['henry', 'frank']);
 ```
+此外，您还可以根据数组长度来查询，比如查询 developer 人数为 2 的游戏记录：
+
+```javascript
+query.sizeEqualTo('developer', 2);
+```
 
 ### 对字符串类型做查询
 使用 `startsWith()` 来限制属性值以一个特定的字符串开头，比如找出 name 以 “bai” 开头的游戏记录：
@@ -410,9 +419,9 @@ query.find();
 如果想得到其字段中包含的子对象满足另一个查询的结果，你可以使用 `matchesQuery()` 操作。 注意默认的结果条数限制 100 和最大值 1000 也同样适用于子查询，所以对于大的数据集您可能需要小心构建查询条件，否则可能出现意料之外的状 况。例如，为了找到有图片的 post 的 comment，您可以：
 
 ```javascript
-var innerQuery = new ML.Query(Post);
+var innerQuery = new AV.Query(Post);
 innerQuery.exists('image');
-var query = new ML.Query(Comment);
+var query = new AV.Query(Comment);
 query.matchesQuery('post', innerQuery);
 query.find().then(function(comments) {
     // comments 包含有所有带图片 post 的 comment.
@@ -421,9 +430,9 @@ query.find().then(function(comments) {
 如果您想要获取某字段中包含的子对象不满足指定查询的结果，你可以使用 `doesNotMatchQuery()`。例如，为了找到针对不含图片的 post 的 comment，可以这样：
 
 ```javascript
-var innerQuery = new ML.Query(Post);
+var innerQuery = new AV.Query(Post);
 innerQuery.exists('image');
-var query = new ML.Query(Comment);
+var query = new AV.Query(Comment);
 query.doesNotMatchQuery('post', innerQuery);
 query.find().then(function(comments) {
     // comments 包含所有不带图片 post 的 comment.

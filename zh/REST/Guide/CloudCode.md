@@ -65,3 +65,9 @@ MaxLeap不建议你通过rest api方式来调用background job,而是通过conso
 
 ### 补充说明
 在调用云函数/执行Job时POST请求所传递数据必须符合application/json格式
+
+## 错误码
+补充说明
+
+## FAQ
+补充说明

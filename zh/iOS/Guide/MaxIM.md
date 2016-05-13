@@ -90,7 +90,7 @@ NSString *phoneNumber;
 // 用户收到短信后填写验证码
 NSString *smsCode;
 // 登录
-[[MLCDataManager sharedManager].client loginWithPhoneNumber:phoneNumber smsCode:smsCode completion:^(BOOL succeeded, NSError * _Nullable error) {
+[client loginWithPhoneNumber:phoneNumber smsCode:smsCode completion:^(BOOL succeeded, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -100,8 +100,10 @@ NSString *smsCode;
 `[MLUser currentUser].oauthData` 需要 MaxLeap v2.0.9 以上版本支持。
 
 ```
+#import <MaxLeap/MLUser.h>
+
 NSDictionary *authData = [MLUser currentUser].oauthData;
-[[MLCDataManager sharedManager].client loginWithThirdPartyOAuth:authData completion:^(BOOL succeeded, NSError * _Nullable error) {
+[client loginWithThirdPartyOAuth:authData completion:^(BOOL succeeded, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -127,7 +129,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 用户登出后，将不会再收到任何消息，包括离线消息推送。
 
 ```
-[[MLCDataManager sharedManager].client logoutWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+[client logoutWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
     if (succeeded) {
         NSLog(@"注销成功");
     } else {
@@ -159,10 +161,13 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 ## 单聊
 
 ### 好友管理
+
 #### 加好友
 
+使用此接口添加对方为好友，无需经过对方的同意，自己也会出现在对方好友列表中。
+
 ```
-[self.client.currentUser addFriendWithUser:@"friendUserId" completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
+[client.currentUser addFriendWithUser:@"friendUserId" completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -170,29 +175,49 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 #### 删除好友
 
 ```
-[self.client.currentUser deleteFriend:@"fid" completion:^(BOOL success, NSError * _Nullable error) {
+[client.currentUser deleteFriend:@"friendUserId" completion:^(BOOL success, NSError * _Nullable error) {
     // ...
 }];
 ```
 
 #### 监听好友上下线事件
 
-```
-#pragma mark - MLIMClientDelegate
+1. 通过实现 MLIMClientDelegate 中的接口：
 
-- (void)frriendDidOnline:(MLIMFriendInfo *)frriend {
-	// ...
-}
+	```
+	#pragma mark - MLIMClientDelegate
+	
+	- (void)client:(MLIMClient *)client friendDidOnline:(MLIMFriendInfo *)aFriend {
+		// ...
+	}
+	
+	- (void)client:(MLIMClient *)client friendDidOffline:(MLIMFriendInfo *)aFriend {
+		// ...
+	}
+	```
 
-- (void)frriendDidOffline:(MLIMFriendInfo *)frriend {
-	// ...
-}
-```
+2. 好友上下线的时候，都会发布通知，通过监听通知实现：
+	
+	```
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didOnline:) name:MLIMFriendOnlineNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didOffline:) name:MLIMFriendOfflineNotification object:nil];
+	
+	- (void)didOnline:(NSNotification *)notification {
+		NSString *userId = notification.userInfo[@"id"];
+		// ...
+	}
+	
+	- (void)didOffline:(NSNotification *)notification {
+	    NSString *userId = notification.userInfo[@"id"];
+	    // ...
+	}
+	```
 
 #### 获取所有好友信息
 
 ```
-[self.client.currentUser fetchFriendsWithDetail:YES completion:^(BOOL success, NSError * _Nullable error) {
+[client.currentUser fetchFriendsWithDetail:YES completion:^(BOOL success, NSError * _Nullable error) {
+	NSLog(@"friends: %@", client.currentUser.friends);
     // ...
 }];
 // 注：该方法第一个参数表示是否获取好友详细信息，如果为 YES 则拉取全部信息，否则只返回好友 ID
@@ -204,7 +229,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 假如只知道好友的 ID，要拿好友详细信息，代码如下：
 
 ```
-[self.client.currentUser getFriendInfo:@"fid" completion:^(MLIMFriendInfo * _Nonnull info, NSError * _Nullable error) {
+[client.currentUser getFriendInfo:@"fid" completion:^(MLIMFriendInfo * _Nonnull info, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -218,7 +243,7 @@ Tom 给 Jerry 发一条消息，假设 Jerry 的 ID 就是 Jerry，实现如下�
 // 创建一条文本消息
 MLIMMessage *msg = [MLIMMessage messageWithText:@"Hi!"];
 // 将文本消息发给 Jerry
-[self.client sendMessage:msg toFriend:@"Jerry" completion:^(BOOL succeeded, NSError * _Nullable error) {
+[client sendMessage:msg toFriend:@"Jerry" completion:^(BOOL succeeded, NSError * _Nullable error) {
     if (succeeded) {
         NSLog(@"发送成功！")；
     }
@@ -244,9 +269,13 @@ MLIMMessage *msg = [MLIMMessage messageWithText:@"Hi!"];
 
 #pragma mark - MLIMClientDelegate
 
-- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)frriend {
-	if ([frriend.uid isEqualToString:@"Tom"]) {
-		// NSLog(@"Did receive Tom's message");
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)aFriend {
+	if ([aFriend.uid isEqualToString:@"Tom"]) {
+		if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+			// NSLog(@"Did receive Jerry's message send via another client.");
+		} else {
+			// NSLog(@"Did receive Tom's message");
+		}
 	}
 }
 
@@ -257,9 +286,9 @@ MLIMMessage *msg = [MLIMMessage messageWithText:@"Hi!"];
 与好友的聊天记录会在云端保存 7 天
 
 ```
-// 获取当前时间最新的十条历史消息（包括自己发的）
+// 获取当前时间之前最新的十条历史消息（包括自己发的）
 NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
-[self.client.currentUser getLatestChatsWithFriend:@"friend_uid" beforeTimestamp:ts limit:10 block:^(NSArray<MLIMMessage *> * _Nullable messages, NSError * _Nullable error) {
+[client.currentUser getLatestChatsWithFriend:@"friend_uid" beforeTimestamp:ts limit:10 block:^(NSArray<MLIMMessage *> * _Nullable messages, NSError * _Nullable error) {
     if (!error) {
         NSLog(@"lastest history messages: %@", messages);
     }
@@ -271,7 +300,8 @@ NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
 ### 获取所有已加入的群组
 
 ```
-[self.client.currentUser fetchGroupsWithDetail:YES completion:^(BOOL success, NSError * _Nullable error) {
+[client.currentUser fetchGroupsWithDetail:YES completion:^(BOOL success, NSError * _Nullable error) {
+	NSLog(@"groups: %@", client.currentUser.groups);
     // ...
 }];
 // 注：该方法第一个参数表示是否获取群组详细信息，如果为 YES 则拉取全部信息，否则只返回群组 ID
@@ -328,7 +358,7 @@ MLIMGroup *group = [MLIMGroup groupWithId:@"gid"];
 
 ```
 MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
-[self.client sendMessage:message toGroup:groupId completion:completionBlock];
+[client sendMessage:message toGroup:groupId completion:completionBlock];
 ```
 
 ### 接收群组消息
@@ -349,7 +379,11 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 #pragma mark - MLIMClientDelegate
 
 - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromGroup:(MLIMGroup *)group {
-	NSLog(@"Did receive group message：%@"， message);
+	if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+		// NSLog(@"Did receive Jerry's message send to the group via another client.");
+	} else {
+		// NSLog(@"Did receive group message：%@"， message);
+	}
 }
 ```
 
@@ -382,7 +416,8 @@ NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
 ### 获取所有加入的聊天室
 
 ```
-[self.client.currentUser fetchRoomsWithDetail:YES completion:^(BOOL success, NSError * _Nullable error) {
+[client.currentUser fetchRoomsWithDetail:YES completion:^(BOOL success, NSError * _Nullable error) {
+	NSLog(@"rooms: %@", client.currentUser.rooms);
     // ...
 }];
 // 注：该方法第一个参数表示是否获取聊天室详细信息，如果为 YES 则拉取全部信息，否则只返回聊天室 ID
@@ -439,7 +474,7 @@ MLIMRoom *room = [MLIMRoom roomWithId:@"rid"];
 
 ```
 MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
-[self.client sendMessage:message toRoom:roomId completion:completionBlock];
+[client sendMessage:message toRoom:roomId completion:completionBlock];
 ```
 
 ### 接收聊天室消息
@@ -460,7 +495,11 @@ MLIMMessage *message = [MLIMMessage messageWithText:@"Hi!"];
 #pragma mark - MLIMClientDelegate
 
 - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromRoom:(MLIMRoom *)room {
-	NSLog(@"Did receive room message：%@"， message);
+	if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+		// NSLog(@"Did receive Jerry's message send to the room via another client.");
+	} else {
+		// NSLog(@"Did receive room message：%@"， message);
+	}
 }
 ```
 
@@ -557,11 +596,13 @@ MLIMPassenger *passenger = [MLIMPassenger passengerWithId:pid];
 
 ```
 NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
-[self.passenger getHistoryMessagesWithUser:@"wind"
-                                beforeTime:ts
-                                     limit:20
-                                completion:^(NSArray<MLIMMessage *> *_Nullable messages,
-                                             NSError * _Nullable error)
+NSString *pid = @"772b12084d7c413a9d03df04363b71dd";
+MLIMPassenger *passenger = [MLIMPassenger passengerWithId:pid];
+[passenger getHistoryMessagesWithUser:@"wind"
+                           beforeTime:ts
+                                limit:20
+                           completion:^(NSArray<MLIMMessage *> *_Nullable messages,
+                                        NSError * _Nullable error)
 {
     NSLog(@"messages: %@, error: %@", messages, error);
 }];
@@ -634,7 +675,7 @@ id object; // MLIMUser, MLIMGroup 或 MLIMRoom
 
 ## 查询（新增）
 
-MaxIM 也支持对自定义属性进行查询，SDK 使用一个 `MLIMQuery` 来实现，它使用起来跟 `MLQuery` 类似，但是简化很多。下面是示例代码：
+MaxIM 也支持对用户、群组、聊天室进行查询，根据它们的自定义属性进行过滤。SDK 使用一个 `MLIMQuery` 来实现查询，它使用起来跟 `MLQuery` 类似，但是简化很多。
 
 查询分为三步：
 
@@ -642,7 +683,7 @@ MaxIM 也支持对自定义属性进行查询，SDK 使用一个 `MLIMQuery` 来
 2. 为 `MLIMQuery` 对象添加过滤条件；
 3. 执行查询方法，获取与过滤条件相匹配的数据。
 
-例如，查询自定义属性的 `type` 值为 1 的用户，并按照 `age` 正序排列：
+例如，查询自定义属性的 `type` 值为 1 的用户，并按照 `age` 升序排列：
 
 ```
 MLIMQuery *query = [MLIMQuery query];
