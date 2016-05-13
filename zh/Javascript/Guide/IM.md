@@ -1583,7 +1583,6 @@ data|object|必须|&ensp;|需要设置的属性(如:{name:'大家来聊天二','
 #### callback返回
 ```object``` callback返回空对象
 
-
 ### ML.im.getRoomAttributes
 
 获取聊天室自定义属性
@@ -1600,6 +1599,7 @@ data|object|必须|&ensp;|需要设置的属性(如:{name:'大家来聊天二','
 room|string|必须|&ensp;|聊天室id
 
 #### callback
+
 ```object```callback返回
 
 #### 返回示例
@@ -1625,16 +1625,17 @@ room|string|必须|&ensp;|聊天室id
 #### 参数
 参数|类型|约束|默认|说明
 ---|---|---|---|---
-room|string|必须|&ensp;|群组id
+room|string|必须|&ensp;|聊天室id
 attr|string|必须|&ensp;|自定义属性的字段(如:description)
 
 #### callback返回
+
 ```string```callback返回字符串
 
 
 ### ML.im.rmRoomAttributes
 
-删除聊天室自定义属性
+获取聊天室的某个自定义属性
 
 ```javascript
     ML.im.rmRoomAttributes(room, function (error,data) {
@@ -1648,7 +1649,7 @@ attr|string|必须|&ensp;|自定义属性的字段(如:description)
 room|string|必须|&ensp;|聊天室id
 
 #### callback返回
-```object```callback返回空对象
+```string```callback返回字符串
 
 ## 错误码
 错误码|含义
