@@ -1598,6 +1598,10 @@ data|object|必须|&ensp;|需要设置的属性(如:{name:'大家来聊天二','
 ---|---|---|---|---
 room|string|必须|&ensp;|聊天室id
 
+#### callback返回
+
+```object``` callback返回对象
+
 #### 返回示例
 
 ```javascript
