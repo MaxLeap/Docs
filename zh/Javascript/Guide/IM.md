@@ -1598,10 +1598,6 @@ data|object|必须|&ensp;|需要设置的属性(如:{name:'大家来聊天二','
 ---|---|---|---|---
 room|string|必须|&ensp;|聊天室id
 
-#### callback
-
-```object```callback返回
-
 #### 返回示例
 
 ```javascript
@@ -1630,7 +1626,7 @@ attr|string|必须|&ensp;|自定义属性的字段(如:description)
 
 #### callback返回
 
-```string```callback返回字符串
+```string``` callback返回字符串
 
 
 ### ML.im.rmRoomAttributes
@@ -1649,7 +1645,8 @@ attr|string|必须|&ensp;|自定义属性的字段(如:description)
 room|string|必须|&ensp;|聊天室id
 
 #### callback返回
-```string```callback返回字符串
+```string``` callback返回字符串
+
 
 ## 错误码
 错误码|含义
