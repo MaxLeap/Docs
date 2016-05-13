@@ -128,6 +128,8 @@ ML.im(options, callback)
 
 模式四：使用第三方登录，那么需要 oauth 信息
 
+模式五: 游客登录,那么需要提供 passenger  信息
+
 参数|类型|约束|默认|说明
 ---|---|---|---|---
 **options**|Object|必须||配置实时通信服务所需的必要参数。其中包括：
@@ -138,6 +140,7 @@ ML.im(options, callback)
 &nbsp;&nbsp;&nbsp;&nbsp; password|String|模式二或者模式三必须||当前客户的password。
 &nbsp;&nbsp;&nbsp;&nbsp; phone|String|模式三必须||当前客户的phone。
 &nbsp;&nbsp;&nbsp;&nbsp; oauth|Object|模式四必须||第三方登录的oauth信息。
+&nbsp;&nbsp;&nbsp;&nbsp; passenger|Object|模式五必须||游客登录的信息。
 &nbsp;&nbsp;&nbsp;&nbsp; installId|String|||当前客户端的设备 id，用来标示当前设备。如果需要离线接收推送消息的话，必须提供。
 
 #### 返回
@@ -161,6 +164,8 @@ var password = 'password';
 var phone = '13810001000';
 // (模式四)oauth信息
 var oauth = {};
+//(模式五)passenger信息
+var passenger = {}
 // installId 是你的设备id
 var installId = 'M3pyVEdsSFBBZm5UTDlLMTB3a0xYdw'；
 var im;
@@ -228,6 +233,21 @@ im = ML.im({
         }
         */
         });
+// 创建实时通信实例--模式五（支持单页多实例）
+im = ML.im({
+        appId: appId,
+        clientId: clientId,
+        passenger: passenger,
+        installId: installId
+      },function(data){
+        /* 处理登录结果,当登录失败时服务器最后会断开连接。消息结构如下:
+        {
+            id: 'YOUR_LOGIN_USER_ID',    // 模式五为游客的id 可以在以后成功登录系统,
+            success: true,        //  是否登录成功
+            error: 5003        // 错误码，仅当登录失败时
+        }
+        */
+    });
 
 ```
 
@@ -511,7 +531,7 @@ groupid|String|必须||Group ID
 
 ### ML.im.updateGroup
 
-修改一个Group的信息。
+修改一个Group的所有者或者群成员信息(群成员要为存在的用户)。
 
 ```javascript
 ML.im.updateGroup(groupid, data, function(err, data){
@@ -1584,11 +1604,12 @@ room|string|必须|&ensp;|聊天室id
 
 #### 返回示例
 
+
 ```javascript
-{
-    "name": "大家来聊天二",
+    {
+      "name": "大家来聊天二",
     "description": "开心交流二"
-}
+    }
 ```
 
 
@@ -1621,13 +1642,12 @@ attr|string|必须|&ensp;|自定义属性的字段(如:description)
 
     });
 ```
-
 #### 参数
 参数|类型|约束|默认|说明
 ---|---|---|---|---
 room|string|必须|&ensp;|聊天室id
 
-#### callback
+#### callback返回
 ```object```callback返回空对象
 
 
