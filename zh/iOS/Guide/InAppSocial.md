@@ -195,7 +195,7 @@ MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"
 MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithURL:[NSURL URLWithString:@"http://www.google.com"]];
 
 // 文字 + 链接
-status.content = [MaxSocialShuoShuoContent contentWithText:@"test" url:[NSURL URLWithString:@"http://www.google.com"]];
+MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"test" url:[NSURL URLWithString:@"http://www.google.com"]];
 
 // 文字 + 图片，目前图片还只支持传入 FileUrl 数组
 MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"text" imageURLs:imageFileUrls];
@@ -203,6 +203,9 @@ MaxSocialShuoShuoContent *content = [MaxSocialShuoShuoContent contentWithText:@"
 // 创建说说对象
 MaxSocialShuoShuo *shuoshuo = [MaxSocialShuoShuo new];
 shuoshuo.content = content;
+
+// 填写地理位置
+shuoshuo.location = [MaxSocialLocation locationWithLatitude:42.8 longitude:135.2];
 
 // toSquare 控制是否将说说发布到广场。
 // YES 表示发布到广场，说说将同时出现在广场和朋友圈；NO 表示只发布到朋友圈，说说将不会出现在广场上
@@ -248,8 +251,9 @@ MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 下载说说中的图片：
 
 ```
-NSString *shuoId = @"";
-NSString *imgName = @"";
+MaxSocialShuoShuo *shuoshuo;
+NSString *shuoId = shuoshuo.objectId;
+NSString *imgName = shuoshuo.content.imageNames.firstObject;
 MaxSocialUser *user = [MaxSocialUser userWithId:@"userId"];
 [user downloadImageWithName:imgName ofShuoShuo:shuoId progress:^(int percentDone) {
     NSLog(@"download progress: %d%%", percentDone);
