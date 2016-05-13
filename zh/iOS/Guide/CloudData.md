@@ -1021,30 +1021,4 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 [access control list]: http://en.wikipedia.org/wiki/Access_control_list
 [role-based access control]: http://en.wikipedia.org/wiki/Role-based_access_control
 
-[set up a facebook app]: https://developers.facebook.com/apps
-
-[getting started with the facebook sdk]: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
-
-[facebook permissions]: https://developers.facebook.com/docs/reference/api/permissions/
-
-[facebook sdk reference]: https://developers.facebook.com/docs/reference/ios/current/
-
-[set up twitter app]: https://dev.twitter.com/apps
-
-[twitter documentation]: https://dev.twitter.com/docs
-
-[twitter rest api]: https://dev.twitter.com/docs/api
-
-
-[weibo_develop_site]: http://open.weibo.com/
-[set up weibo app]: http://open.weibo.com/apps/new?sort=mobile
-[weibo documentation]: http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5
-
-[wechat_develop_site]: https://open.weixin.qq.com
-[wechat documentation]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&lang=zh_CN
-
-[open_qq_site]: http://open.qq.com/
-[set_up_qq_app]: http://op.open.qq.com/appregv2/
-[qq_documentation]: http://wiki.open.qq.com/wiki/IOS_API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E
-
 [maxleap_console]: https://maxleap.cn
