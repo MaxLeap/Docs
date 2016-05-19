@@ -1021,4 +1021,3 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 [access control list]: http://en.wikipedia.org/wiki/Access_control_list
 [role-based access control]: http://en.wikipedia.org/wiki/Role-based_access_control
 
-[maxleap_console]: https://maxleap.cn

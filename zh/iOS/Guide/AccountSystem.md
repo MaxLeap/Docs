@@ -989,9 +989,53 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 	```
 	
 	注意，以上两个接口需要在用户登录的状态下使用。
+
+## 适配 iOS 9 系统
+
+### 允许 http 请求
+
+默认配置下，iOS 9 会拦截 http 协议的请求，并打印如下一行文字：
+
+```
+App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app's Info.plist file.
+```
+
+问题是，大部分社交平台接口都使用 http 协议。而且，应用中也可能需要访问 http 协议的接口。
+
+有一个简单粗暴的解决办法就是，允许所有的 http 请求：
+
+1. 在项目的 info.plist 文件中添加一个字段：NSAppTransportSecurity，值为字典类型
+2. 然后再在这个字典中添加一个字段：NSAllowsArbitraryLoads，值为 YES
+
+### 添加 Scheme 白名单
+
+许多社交平台登录都需要跳转到它们的应用中进行，但是iOS 9 对 `canOpenURL:` 接口做了限制，导致许多社交平台的 SDK 无法正常跳转到对应的应用中进行分享。
+
+解决办法如下：
+
+1. 在项目的 info.plist 中添加一个字段：LSApplicationQueriesSchemes，值类型为 Array
+2. 然后在这个数组中添加需要支持的 scheme，各平台的 scheme 列表如下：
 	
+	平台	|  scheme
+	-------|----------
+	Facebook|fbauth2
+	Twitter| 无需配置
+	新浪微博|sinaweibo,<br>sinaweibohd,<br>sinaweibosso,<br>sinaweibohdsso,<br>weibosdk,<br>weibosdk2.5
+	微信	| wechat, <br>weixin
+	QQ		| mqqOpensdkSSoLogin,<br>mqqopensdkapiV2,<br>mqqopensdkapiV3,<br>wtloginmqq2,<br>mqq,<br>mqqapi
+	QQ空间	| mqzoneopensdk, <br>mqzoneopensdkapi, <br>mqzoneopensdkapi19, <br>mqzoneopensdkapiV2, <br>mqqOpensdkSSoLogin, <br>mqqopensdkapiV2, <br>mqqopensdkapiV3, <br>wtloginmqq2, <br>mqqapi, <br>mqqwpa，<br>mqzone，<br>mqq<br>**注：若同时使用QQ和QQ空间，则只添加本格中的即可**
+
+如果没有把平台的 scheme 添加到白名单中，系统会打印如下文字信息：
+
+```
+-canOpenURL: failed for URL: “sinaweibohdsso://xxx” – error: “This app is not allowed to query for scheme sinaweibohdsso”
+```
+
+按照上述方法，把 `sinaweibohdsso` 加入白名单即可。
+
 ## FAQ
 
+[maxleap_console]: https://maxleap.cn
 
 [set up a facebook app]: https://developers.facebook.com/apps
 
