@@ -209,6 +209,22 @@
          }];
      }
 
+###四、收藏新闻
+ 1.收藏：
+ 
+      - (void)collectTheNews {
+         // UserCollection 表格
+         MLObject *collectionObj = [MLObject objectWithClassName:@"UserCollection"];
+         collectionObj[@"collectedNews"] = self.newsToShow; // 在表格该字段为 Point 类型
+         collectionObj[@"collectedByUserID"] = currentUser.objectId;
+         [collectionObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+             if (succeeded) {
+                [SVProgressHUD showSuccessWithStatus:@"收藏成功，可以在个人收藏列表中查看!"];
+            } else {
+                 [SVProgressHUD showErrorWithStatus:@"收藏失败，请稍后再试!"];
+             }
+         }];
+     }
 
 
 
