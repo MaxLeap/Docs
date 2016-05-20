@@ -197,16 +197,18 @@
       }
       
 2.查找新闻对应的评论:
-   - (void)loadCommentsForTheNews:(MLObject *)news {
-       // MLQuery 负责查找，可以设置各种查找条件
-       MLQuery *commentQuery = [MLQuery queryWithClassName:@"Comment"];
-       [commentQuery includeKey:@"fromUser"]; // Comment表格中的fromUser字段为 Point属性，查找时需要用includeKey指明
-       [commentQuery includeKey:@"commentedNews"];
-       [commentQuery whereKey:@"belongNewsID" equalTo:news.objectId];
-       [commentQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-           ...
-       }];
-   }
+
+     - (void)loadCommentsForTheNews:(MLObject *)news {
+         // MLQuery 负责查找，可以设置各种查找条件
+         MLQuery *commentQuery = [MLQuery queryWithClassName:@"Comment"];
+         [commentQuery includeKey:@"fromUser"]; // Comment表格中的fromUser字段为 Point属性，查找时需要用includeKey指明
+         [commentQuery includeKey:@"commentedNews"];
+         [commentQuery whereKey:@"belongNewsID" equalTo:news.objectId];
+         [commentQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+             ...
+         }];
+     }
+
 
 
 
