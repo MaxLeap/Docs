@@ -225,7 +225,24 @@
              }
          }];
      }
-
+ 2.查找我的收藏：
+ 
+      - (void)fetchMyCollections {
+         MLUser *currentUser = [MLUser currentUser];
+         MLQuery *collectQuery = [MLQuery queryWithClassName:@"UserCollection"];
+         [collectQuery whereKey:@"collectedByUserID" equalTo:currentUser.objectId];
+         [collectQuery includeKey:@"collectedNews"];
+         [SVProgressHUD showWithStatus:@"Loading..."];
+         [collectQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+             if (error) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [SVProgressHUD showErrorWithStatus:@"获取收藏失败，请稍后再试!"];
+                 });
+             } else {
+                 ...           
+             }
+         }];
+       }
 
 
 ## FAQ
