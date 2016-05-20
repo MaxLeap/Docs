@@ -176,19 +176,36 @@
     	return YES;
 	}
 
-###三、查找新闻分类
+###三、获取新闻数据
+ 1. 获取新闻分类信息：
+ 
+        // 查询 MaxLeap 云平台数据
+        // 方法1. 不子类化 MLObject
+        MLQuery *cateQuery = [MLQuery queryWithClassName:@"Category"];
+        [cateQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+           if (error && objects.count <= 0) {
+              [SVProgressHUD showErrorWithStatus:@"获取分类信息失败"];
+           } else {
+               ...
+           }
+        }];
+ 
+ 2. 获取分类对应的新闻：
+    
+     - (void)fetchNewsWithCategoryID:(NSString *)categoryID {
+         // 方法2: 子类化 MLObject, News 对应MaxLeap云平台数据库表格News
+         MLQuery *newsQuery = [News query]; // News : NSObject <MLSubclassing> 
+         [newsQuery whereKey:@"belongCategoryID" equalTo:categoryID];
+         [newsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+             if (error) {
+                 [SVProgressHUD showErrorWithStatus:@"获取新闻数据失败"];
+             } else {
+                 ...
+             }
+         }];
+       }
 
-     MLQuery *cateQuery = [MLQuery queryWithClassName:@"Category"];
-    [cateQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        [SVProgressHUD dismiss];
-        if (error && objects.count <= 0) {
-            [SVProgressHUD showErrorWithStatus:@"获取分类信息失败"];
-        } else {
-            ...
-        }
-    }];
-
-###三、发表评论
+###四、发表评论
  1.发表:
  
       - (void)commentTheNews:(NSString *)comment {
@@ -221,7 +238,7 @@
          }];
      }
 
-###四、收藏新闻
+###五、收藏新闻
  1.收藏：
  
       - (void)collectTheNews {
