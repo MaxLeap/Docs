@@ -176,6 +176,18 @@
     	return YES;
 	}
 
+###三、查找新闻分类
+
+     MLQuery *cateQuery = [MLQuery queryWithClassName:@"Category"];
+    [cateQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        if (error && objects.count <= 0) {
+            [SVProgressHUD showErrorWithStatus:@"获取分类信息失败"];
+        } else {
+            ...
+        }
+    }];
+
 ###三、发表评论
  1.发表:
  
