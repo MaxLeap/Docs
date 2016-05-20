@@ -2,7 +2,7 @@
 
 ## 简介
 
-目前支持支付宝、微信、银联支付等渠道，支持支付及查询订单功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
+目前支持支付宝、微信、银联支付等渠道，支持支付及查询交易记录功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
 
 ## 使用
 
@@ -111,19 +111,19 @@ $ pod install
 发起支付：
 
 ```
-// 1. 生成订单
+// 1. 生成 payment 对象
 MLPayment *payment = [[MLPayment alloc] init];
 
 // 设置使用 AliApp 渠道支付，该渠道会打开支付宝应用进行支付，如果没有安装支付宝应用，支付宝 SDK 会打开一个网页进行支付
 payment.channel = MLPayChannelAliApp;
 
-// 生成订单号，订单号要保证在商户系统中唯一
+// 生成交易流水号，流水号号要保证在商户系统中唯一
 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 [formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
 NSString *billNo = [formatter stringFromDate:[NSDate date]];
 payment.billNo = billNo;
 
-// 订单简要说明
+// payment 简要说明
 payment.subject = @"测试";
 
 // 总金额，单位：分
@@ -180,19 +180,19 @@ payment.scheme = @"maxleappaysample";
 4. 发起支付：
 
 	```
-	// 1. 生成订单
+	// 1. 生成 payment 对象
 	MLPayment *payment = [[MLPayment alloc] init];
 	
 	// 设置通过”微信移动支付“渠道支付，该支付方式目前要求必须安装有微信应用，否则无法使用
 	payment.channel = MLPayChannelWxApp;
 	
-	// 生成订单号，订单号要保证在商户系统中唯一
+	// 生成交易流水号，流水号要保证在商户系统中唯一
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
 	NSString *billNo = [formatter stringFromDate:[NSDate date]];
 	payment.billNo = billNo;
 	
-	// 订单简要说明
+	// payment 简要说明
 	payment.subject = @"测试";
 	
 	// 总金额，单位：分
@@ -229,19 +229,19 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 2. 发起支付
 
 	```
-	// 1. 生成订单
+	// 1. 生成 payment 对象
 	MLPayment *payment = [[MLPayment alloc] init];
 	
 	// 设置通过”银联手机控件支付“渠道支付
 	payment.channel = MLPayChannelUnipayApp;
 	
-	// 生成订单号，订单号要保证在商户系统中唯一
+	// 生成交易流水号，流水号要保证在商户系统中唯一
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
 	NSString *billNo = [formatter stringFromDate:[NSDate date]];
 	payment.billNo = billNo;
 	
-	// 订单简要说明
+	// 简要说明
 	payment.subject = @"测试";
 	
 	// 总金额，单位：分
@@ -266,9 +266,9 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 	}];
 	```
 
-### 订单查询
+### 交易信息查询
 
-1. 如果知道订单流水号(billNo)和订单支付渠道(channel)，可以使用 `fetchOrderInfoWithBillNo:channel:block:` 直接获取订单信息，在回调中，可以检查订单状态。
+1. 如果知道交易流水号(billNo)和支付渠道(channel)，可以使用 `fetchOrderInfoWithBillNo:channel:block:` 直接获取交易信息，在回调中，可以检查交易状态。
 
 	```
 	NSString *billNo;
@@ -276,17 +276,17 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 	[MaxLeapPay fetchOrderInfoWithBillNo:billNo channel:channel block:^(MLOrder * 	_Nonnull order, NSError * _Nonnull error) {
 	    if (order) {
 	        if ([order.status isEqualToString:@"pay"]) {
-	               // 订单已经成功支付
+	               // 已经成功支付
 	        } else {
-	           // 订单没有支付
+	           // 没有支付
 	        }
 	    } else {
-	        // 查询失败，订单不存在或者网络出错
+	        // 查询失败，交易不存在或者网络出错
 	    }
 	}];
 	```
 
-2. 如果只知道订单号，也可以查询，但由于不同支付渠道订单号有可能一样，因此查询结果中可能会有多个订单。
+2. 如果只知道交易流水号，也可以查询，但由于不同支付渠道中可能存在相同的流水号，因此查询结果中可能会有多条记录。
 
 	```
 	[MaxLeapPay queryOrderWithBillNo:@"fffsa" block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -294,9 +294,9 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 	        // 出错了
 	    } else {
 	        if (objects.count == 0) {
-	            // 订单不存在
+	            // 交易记录不存在
 	        } else {
-	            // 查询到订单信息
+	            // 查询到交易记录
 	        }
 	    }
 	}];
