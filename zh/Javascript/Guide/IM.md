@@ -15,7 +15,7 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 ## Demo
 
-- 简单聊天 Demo [源码](https://github.com/MaxLeap/MaxIM-JavaScript/tree/master/demo/Chat)
+- 简单聊天 Demo [源码](https://github.com/MaxLeap/Demo-IM-Javascript)
 
 ## 安装与配置
 
