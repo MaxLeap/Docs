@@ -192,18 +192,18 @@
  
  2. 获取分类对应的新闻：
     
-     - (void)fetchNewsWithCategoryID:(NSString *)categoryID {
-         // 方法2: 子类化 MLObject, News 对应MaxLeap云平台数据库表格News
-         MLQuery *newsQuery = [News query]; // News : NSObject <MLSubclassing> 
-         [newsQuery whereKey:@"belongCategoryID" equalTo:categoryID];
-         [newsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-             if (error) {
-                 [SVProgressHUD showErrorWithStatus:@"获取新闻数据失败"];
-             } else {
-                 ...
-             }
-         }];
-       }
+         - (void)fetchNewsWithCategoryID:(NSString *)categoryID {
+            // 方法2: 子类化 MLObject, News 对应MaxLeap云平台数据库表格News
+            MLQuery *newsQuery = [News query]; // News : NSObject <MLSubclassing> 
+            [newsQuery whereKey:@"belongCategoryID" equalTo:categoryID];
+            [newsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                if (error) {
+                   [SVProgressHUD showErrorWithStatus:@"获取新闻数据失败"];
+                } else {
+                    ...
+               }
+            }];
+         }
 
 ###四、发表评论
  1.发表:
