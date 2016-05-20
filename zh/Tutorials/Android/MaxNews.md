@@ -75,6 +75,107 @@
                     // 文件上传失败，请检查网络
                 }
             }];
+###二、使用手机验证码登录，或者使用微博、QQ、微信等第三方登录：
+1、根据需要导入项目的framework：MLWeiboUtils.framework支持微博登录，MLQQUtils.framework支持QQ登录，MLWeChatUtils.framework支持微信登录。
+
+2、下载微博、QQ及微信的第三方登录SDK并导入项目中。MaxChat中的第三方登录SDK目录分别是：微博：libWeiboSDK.a、WeiboSDK.bundle及相关头文件；QQ：TencentOpenAPI.framework和TecentOpenApi_IOS_Bundle.bundle；微信：libWeChatSDK.a及相关头文件。
+		
+3、在AppDelegate.m中启动第三方登录支持：
+
+		- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    		
+    		...
+    		
+    		[MaxLeap setApplicationId:MAXLEAP_APPID clientKey:MAXLEAP_CLIENTKEY site:MLSiteCN];
+			
+    		[MLWeChatUtils initializeWeChatWithAppId:WECHAT_APPID appSecret:WECHAT_SECRET wxDelegate:self];
+    		[MLWeiboUtils initializeWeiboWithAppKey:WEIBO_APPKEY redirectURI:WEIBO_REDIRECTURL];
+    		[MLQQUtils initializeQQWithAppId:QQ_APPID qqDelegate:self];
+		}
+3、在AppDelegate.m中实现第三方登录SDK的回调，以下代码包括了微博、QQ及微信的所有回调方法:
+	
+	@interface AppDelegate () <WXApiDelegate, WeiboSDKDelegate, TencentSessionDelegate>
+	@end
+	
+	#pragma mark TencentLoginDelegate TencentSessionDelegate
+
+	// 以下三个方法保持空实现就可以，MLQQUtils 会置换这三个方法，但是会调用这里的实现
+
+	- (void)tencentDidLogin {
+    
+	}
+
+	- (void)tencentDidNotLogin:(BOOL)cancelled {
+    
+	}
+
+	- (void)tencentDidNotNetWork {
+    
+	}
+
+	#pragma mark - WeiboSDKDelegate
+	- (void)didReceiveWeiboRequest:(WBBaseRequest *)request {
+    	NSLog(@"didReceiveWeiboRequest %@", request);
+	}
+
+	- (void)didReceiveWeiboResponse:(WBBaseResponse *)response {
+    	if ([response isKindOfClass:WBAuthorizeResponse.class]) {
+        	[MLWeiboUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];
+    	}
+	}
+
+	#pragma mark WXApiDelegate
+
+	- (void)onResp:(BaseResp *)resp {
+    	if ([resp isKindOfClass:[SendAuthResp class]]) {
+        	[MLWeChatUtils handleAuthorizeResponse:(SendAuthResp *)resp];
+    	} else {
+        	// 处理其他请求的响应
+   		}
+	}
+
+	- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
+   	 	if ([url.absoluteString hasPrefix:@"tencent"]) {
+        	return [TencentOAuth HandleOpenURL:url];
+    	}
+    	if ([url.absoluteString hasPrefix:@"wb"]) {
+        	return [WeiboSDK handleOpenURL:url delegate:self];
+    	}
+    	if ([url.absoluteString hasPrefix:@"wx"]) {
+        	return [WXApi handleOpenURL:url delegate:self];
+    	}
+    
+    	return YES;
+	}
+
+	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    	if ([url.absoluteString hasPrefix:@"tencent"]) {
+        	return [TencentOAuth HandleOpenURL:url];
+    	}
+    	if ([url.absoluteString hasPrefix:@"wb"]) {
+        	return [WeiboSDK handleOpenURL:url delegate:self];
+    	}
+    	if ([url.absoluteString hasPrefix:@"wx"]) {
+        	return [WXApi handleOpenURL:url delegate:self];
+    	}
+    
+    	return YES;
+	}
+
+	- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+    	if ([url.absoluteString hasPrefix:@"tencent"]) {
+        	return [TencentOAuth HandleOpenURL:url];
+    	}
+    	if ([url.absoluteString hasPrefix:@"wb"]) {
+        	return [WeiboSDK handleOpenURL:url delegate:self];
+    	}
+    	if ([url.absoluteString hasPrefix:@"wx"]) {
+        	return [WXApi handleOpenURL:url delegate:self];
+    	}
+    
+    	return YES;
+	}
+
  
 
 
