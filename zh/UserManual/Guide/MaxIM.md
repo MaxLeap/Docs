@@ -128,3 +128,17 @@ MaxLeap 提供的即时通讯组件支持 **用户已有账号系统** 和 **使
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)
 
 [JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
+
+## 样例应用
+
+### iOS
+[Sample-MaxChat-iOS](https://github.com/MaxLeap/Sample-MaxChat-iOS)
+
+### Android
+
+[Sample-MaxChat-Android](https://github.com/MaxLeap/Sample-MaxChat-Android)
+
+
+### JavaScript
+[Sample-IM-Javascript](https://github.com/MaxLeap/Demo-IM-Javascript)
+

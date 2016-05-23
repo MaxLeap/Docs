@@ -159,3 +159,13 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 [Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)
 
 [Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)
+
+## Demo 项目
+### Java
+[Demo-CloudCode-Java](https://github.com/MaxLeap/Demo-CloudCode-Java)
+
+### Python
+[Demo-CloudCode-Python](https://github.com/MaxLeap/Demo-CloudCode-Python)
+
+### Node.js
+[Demo-CloudCode-Nodejs](https://github.com/MaxLeap/Demo-CloudCode-Nodejs)
