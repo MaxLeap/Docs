@@ -27,6 +27,7 @@ MaxLeap 云容器服务是帮助用户 **部署及运维** 其后端应用程序
 
 ## 使用流程
 
+![imgCCVersionList](../../../images/CloudContainer1.png)
 ## 核心概念
 
 ### 应用版本
@@ -119,21 +120,21 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 ## 应用准备及注意
 
 ### 静态网站
-静态网站的意思是不包含php,perl,python,java等动态服务器脚本的只含有html文件，png图片的网站。
+静态网站是指不包含 php,perl,python,java 等动态服务器脚本的只含有html 文件，png 图片的网站。
 
-1. 准备一个目录，目录名称必须为html，把所有的网站文件拷贝到目录html下面。
-2. 用zip工具打包, zip -r html.zip html ，包名必须是html.zip。
-3. 准备自己的nginx config文件，调整相应设置。你也可以不修改提供的nginx conf文件，本模板是一个可以直接使用的，使用默认目录的nginx配置。注意如果要修改nginx conf文件，则模板里面系统注释部分不要更改，一旦更改，轻则失去系统监测支持，重则容器不能启动。
+1. 准备一个目录，**目录名称必须为html**，把所有的网站文件拷贝到目录 html 下面。
+2. 用 zip 工具打包, zip -r html.zip html ，**包名必须是 html.zip**。
+3. 准备自己的 nginx config 文件，调整相应设置。你也可以不修改提供的 nginx conf 文件，本模板是一个可以直接使用的，使用默认目录的 nginx 配置。注意如果要修改 nginx conf 文件，则模板里面系统注释部分不要更改，否则容器不能启动。
 
 ### PHP 应用
-目前PHP支持5.6版本
+目前 PHP 支持 5.6 版本
 
-1. 准备一个目录，目录名称必须为html，把所有的网站文件拷贝到目录html下面。
-2. 如果已经在maxleap上申请了应用，那么进入引用设置，创建mysql数据库，拿到数据源连接字符串，用户名和密码。
-3. 修改php项目的数据源连接，用户名和密码，并且数据库名也是和用户名相同。
-4. 用zip工具打包, zip -r html.zip html ，包名必须是html.zip。
-5. 准备自己的nginx config文件，调整相应设置，包括url伪装，转发，静态文件location等设置。你也可以不修改提供的nginx conf文件，本模板是一个可以直接使用的，使用默认目录的nginx配置。注意模板里面系统注释部分不要更改，一旦更改，轻则失去系统监测支持，重则容器不能启动。
-6. 准备 容器一旦启动的sh脚本，以yii framework 为例， 需要修改web/assets权限，web发布目录根据nginx 配置，默认是/var/www/html/
+1. 准备一个目录，**目录名称必须为 html**，把所有的网站文件拷贝到目录 html 下面。
+2. 在 MaxLeap 平台上创建应用，进入【应用设置-系统设置】，创建 Mysql 数据库，拿到数据源连接字符串，用户名和密码。
+3. 修改 php 项目的数据源连接，用户名和密码，并且数据库名也是和用户名相同。
+4. 用 zip 工具打包, zip -r html.zip html ，**包名必须是 html.zip**。
+5. 准备自己的 nginx config 文件，调整相应设置，包括 url 伪装，转发，静态文件 location 等设置。你也可以不修改提供的 nginx conf 文件，本模板是一个可以直接使用的，使用默认目录的 nginx 配置。注意模板里面系统注释部分不要更改，否则容器不能启动。
+6. （可选）准备容器启动后需要运行的 sh 脚本，以 yii framework 为例， 需要修改 web/assets 权限，web 发布目录根据 nginx 配置，默认是 /var/www/html/
 
 ```
 chmod 777 /var/www/html/web/assets
