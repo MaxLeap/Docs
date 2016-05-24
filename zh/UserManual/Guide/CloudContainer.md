@@ -119,18 +119,18 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 ## 应用准备及注意
 
 ### 静态网站
-静态网站的意思是不包含php,perl,python,java等动态服务器脚本的只含有html文件，png图片的网站
+静态网站的意思是不包含php,perl,python,java等动态服务器脚本的只含有html文件，png图片的网站。
 
 1. 准备一个目录，目录名称必须为html，把所有的网站文件拷贝到目录html下面。
 2. 用zip工具打包, zip -r html.zip html ，包名必须是html.zip。
-3. 准备自己的nginx config文件，调整相应设置。注意nginx conf 模板里面系统注释部分不要更改，一旦更改，轻则失去系统监测支持，重则容器不能启动。
+3. 准备自己的nginx config文件，调整相应设置。你也可以不修改提供的nginx conf文件，本模板是一个可以直接使用的，使用默认目录的nginx配置。注意如果要修改nginx conf文件，则模板里面系统注释部分不要更改，一旦更改，轻则失去系统监测支持，重则容器不能启动。
 
 ### PHP 应用
 目前PHP支持 6.5版本
 
 1. 准备一个目录，目录名称必须为html，把所有的网站文件拷贝到目录html下面。
 2. 用zip工具打包, zip -r html.zip html ，包名必须是html.zip。
-3. 准备自己的nginx config文件，调整相应设置，包括url伪装，转发，静态文件location等设置注意nginx conf 模板里面系统注释部分不要更改，一旦更改，轻则失去系统监测支持，重则容器不能启动。
+3. 准备自己的nginx config文件，调整相应设置，包括url伪装，转发，静态文件location等设置。你也可以不修改提供的nginx conf文件，本模板是一个可以直接使用的，使用默认目录的nginx配置。注意模板里面系统注释部分不要更改，一旦更改，轻则失去系统监测支持，重则容器不能启动。
 4. 准备 容器一旦启动的sh脚本，以yii framework 为例， 需要修改web/assets权限，web发布目录根据nginx 配置，默认是var/www/html/
 
 ```
