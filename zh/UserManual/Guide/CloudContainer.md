@@ -31,12 +31,13 @@ MaxLeap 云容器服务是帮助用户 **部署及运维** 其后端应用程序
 ## 核心概念
 
 ### 应用版本
-在"版本"报表中，我们可以查看上传至该应用下的所有的云代码。该报表包含以下列：
+在"版本"报表中，我们可以查看上传至该应用下的所有的云容器。该报表包含以下列：
 
-* 版本号：每份上传的云代码，都有一个唯一的版本号标识，定义在云代码项目中的global.json中
-* 状态：对应版本号的云代码是否被部署并处于正常运行状态
-* 实例数量：对应版本号的云代码部署了几个实例
-* 配置：查看云代码的配置文件 global.json. 包括 应用名，应用信息(App ID/MasterKey)，Cloud Code 项目信息(编写语言/入口函数名/Hook包名/Entity包名)及版本号等信息。
+* 版本号：每份上传的云容器，都有一个唯一的版本号标识，需要你在上传代码的时候指定
+* 状态：对应版本号的云容器是否被部署并处于正常运行状态
+* 实例数量：对应版本号的云容器部署了几个实例
+* 配置：查看云容器的配置. 包括 应用名，Cloud Container项目信息及版本号等信息。
+* 项目类型：对应版本所属的云容器类型,包括JAVA/PHP/SITE多种类型
 * 上传时间：对应版本最新的上传时间，同一个版本重复上传取最近的上传时间
 * 开始时间：对应版本第一个实例启动的时间，即对应版本开始提供服务的时间
 * 健康值：对应版本的健康值百分比，系统会对每个版本实例定期做健康检查
@@ -44,27 +45,27 @@ MaxLeap 云容器服务是帮助用户 **部署及运维** 其后端应用程序
 
 如下图所示：
 
-![imgCCVersionList](../../../images/imgCCVersionList.png)
+![imgCContainerVersionList](../../../images/imgCContainerVersionList.png)
 
 ####上传应用程序
-在"版本"报表中，我们可以上传该应用下的云代码。点击上传云代码按钮选择本地ZIP文件即可上传云代码
+在"版本"报表中，我们可以上传该应用下的云容器。点击上传静态网站/上传JAVA项目/上传PHP项目
 
-![imgCCUpload](../../../images/imgCCUpload.png)
+![imgCContainerUpload](../../../images/imgCContainerUpload.png)
 
 ####部署
 在每个版本操作中，我们选择部署操作，你需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
 
-![imgCCDeploy](../../../images/imgCCDeploy.png)
+![imgCContainerDeploy](../../../images/imgCContainerDeploy.png)
 
 ####扩容
 在每个版本操作中，如果你已经部署了该版本，你可以再次扩容该版本，以达到支撑更好规模的业务，上限最多同时运行3个实例
 
-![imgCCScale](../../../images/imgCCScale.png)
+![imgCContainerScale](../../../images/imgCContainerScale.png)
 
 ####缩容
 在每个版本操作中，如果你已经部署了该版本并且该版本下的实例数量不少于1个，可以减少实例的数量，以便不必要的资源消耗
 
-![imgCCReduce](../../../images/imgCCReduce.png)
+![imgCContainerReduce](../../../images/imgCContainerReduce.png)
 
 ####停用
 如果你已经部署了一个版本，你可以停止该版本的服务，如此该版本启动的所有实例都会被删除
@@ -77,7 +78,7 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 
 如果我们已经部署了一个版本，再部署另一个版本时会执行灰度发布操作，首先你需要设置2个版本的请求流量比例
 
-![imgCCFollowControl](../../../images/imgCCFollowControl.png)
+![imgCContainerFollowControl](../../../images/imgCContainerFollowControl.png)
 
 如果你的两个版本中有一个版本的比例为0，那么该版本将会无法对外提供服务，设置好流控后便可以选择部署策略来完成灰度发布了
 
@@ -88,20 +89,18 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 ### 日志
 您可以通过日志，查看以下信息：
 
-* Cloud Function 的上传部署信息
-* Hook Entities的 Cache 信息
-* 云代码 API 请求信息
-* 在云代码中通过日志 API 记录的其他日志
+* JAVA项目的WEB容器日志
+* PHP项目和静态网站的Nginx日志
 
 你可以查看对应版本下的日志，指定版本下的日志为显示所有实例的日志
 
 日志被分为三种类型：Info（信息），Error（错误）及Warn（警告）。
 
-![imgCCLog.png](../../../images/imgCCLog.png)
+![imgCContainerLog.png](../../../images/imgCContainerLog.png)
 
 
 ### 实例
-为了确保云代码健康运行，MaxLeap 将会自动为每个版本的云代码分别启动一个或多个实例。您可以查看每个实例的运行状况，包括：
+为了确保云容器健康运行，MaxLeap 将会自动为每个版本的云代码分别启动一个或多个实例。您可以查看每个实例的运行状况，包括：
 
 * 别名：可编辑，以便用户可以识别具体的实例
 * 版本：当前运行实例所属的版本
@@ -112,7 +111,7 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 * 内存使用及上限
 * 网络IO输入及输出
 
-![imgCCInstance.png](../../../images/imgCCInstance.png)
+![imgCContainerInstance.png](../../../images/imgCContainerInstance.png)
 
 ####多实例
 每个版本你都可以部署多个实例，这些实例可以通过扩容、缩容来增减以符合你的业务需求，同一个版本最多支持同时允许3个实例，同一个版本里的请求流量将均衡负载到每一个实例上以便减轻系统的业务压力
@@ -140,9 +139,10 @@ MaxLeap允许我们最多部署2个版本，以便我们在发布新版本的时
 chmod 777 /var/www/html/web/assets
 ```
 
-### Java Tomcat 应用
+### Java 应用
+Tomcat目前支持Tomcat6(支持servlet版本2.5),tomcat7(支持servlet版本3.0),tomcat8(支持servlet版本3.1),tomcat9(支持servlet版本4.0)版本WEB容器
 
-
+你需要将你的应用代码打包成war包方可上传到云容器
 
 
 ## FAQ
