@@ -51,6 +51,8 @@ MaxLeap 云容器服务是帮助用户 **部署及运维** 其后端应用程序
 在"版本"报表中，我们可以上传该应用下的云容器。点击上传静态网站/上传JAVA项目/上传PHP项目
 
 ![imgCContainerUpload](../../../images/imgCContainerUpload.png)
+![imgCContainerUpload2](../../../images/imgCContainerUpload2.png)
+![imgCContainerUpload3](../../../images/imgCContainerUpload3.png)
 
 ####部署
 在每个版本操作中，我们选择部署操作，你需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
