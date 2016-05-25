@@ -64,3 +64,33 @@
 [iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)
 
 [Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)
+
+## Demo 及源码
+### iOS
+
+用户反馈
+
+[Module-MaxIssues-iOS](https://github.com/MaxLeap/Module-MaxIssues-iOS)
+
+FAQ 管理
+
+[Module-MaxFAQ-iOS](https://github.com/MaxLeap/Module-MaxFAQ-iOS)
+
+### Android
+
+用户反馈
+
+[Module-MaxIssues-Android](https://github.com/MaxLeap/Module-MaxIssues-Android)
+
+FAQ 管理
+
+[Module-MaxFAQ-Android](https://github.com/MaxLeap/Module-MaxFAQ-Android)
+
+## 样例应用
+
+### iOS
+[Sample-MaxNews-iOS](https://github.com/MaxLeap/Sample-MaxNews-iOS)
+
+### Android
+
+[Sample-MaxNews-Android](https://github.com/MaxLeap/Sample-MaxNews-Android)

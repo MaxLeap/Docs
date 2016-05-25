@@ -129,6 +129,13 @@ MaxLeap 提供的即时通讯组件支持 **用户已有账号系统** 和 **使
 
 [JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
 
+## Demo 及源码
+### iOS
+[Module-MaxIM-iOS](https://github.com/MaxLeap/Module-MaxIM-iOS)
+
+### Android
+[Module-MaxIM-Android](https://github.com/MaxLeap/Module-MaxIM-Android)
+
 ## 样例应用
 
 ### iOS

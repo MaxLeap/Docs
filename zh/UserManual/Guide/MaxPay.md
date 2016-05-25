@@ -212,3 +212,17 @@ MaxLeap 不收取任何费用，各支付渠道收费情况根据对应渠道的
 ## 开放 REST API
 [开放API文档](ML_DOCS_REST_API_MAXPAY)
 
+## Demo 及源码
+### iOS
+[Module-MaxPay-iOS](https://github.com/MaxLeap/Module-MaxPay-iOS)
+
+### Android
+[Module-MaxPay-Android](https://github.com/MaxLeap/Module-MaxPay-Android)
+
+## 样例应用
+### iOS
+[Sample-MaxMall-iOS](https://github.com/MaxLeap/Sample-MaxMall-iOS)
+
+### Android
+[Sample-MaxMall-Android](https://github.com/MaxLeap/Sample-MaxMall-Android)
+

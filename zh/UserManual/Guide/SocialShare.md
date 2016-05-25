@@ -17,3 +17,20 @@
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SOCIALSHARE_ZH)
 
 [Javascript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#SOCIALSHARE_ZH)
+
+
+## Demo 及源码
+### iOS
+[Module-MaxShare-iOS](https://github.com/MaxLeap/Module-MaxShare-iOS)
+
+### Android
+[Module-MaxShare-Android](https://github.com/MaxLeap/Module-MaxShare-Android)
+
+## 样例应用
+
+### iOS
+[Sample-MaxNews-iOS](https://github.com/MaxLeap/Sample-MaxNews-iOS)
+
+### Android
+
+[Sample-MaxNews-Android](https://github.com/MaxLeap/Sample-MaxNews-Android)

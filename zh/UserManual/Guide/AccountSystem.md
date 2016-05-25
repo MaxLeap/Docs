@@ -60,3 +60,10 @@ MaxLeap 还提供短信验证码服务，用户执行一些敏感操作（比如
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ACCOUNT_SYSTEM_ZH)
 
 [Javascript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#ACCOUNTSYSTEM_ZH)
+
+## Demo 及源码
+### iOS
+[Module-MaxLogin-iOS](https://github.com/MaxLeap/Module-MaxLogin-iOS)
+
+### Android
+[Module-MaxLogin-Android](https://github.com/MaxLeap/Module-MaxLogin-Android)
