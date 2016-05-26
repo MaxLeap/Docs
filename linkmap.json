@@ -89,6 +89,8 @@
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SOCIALSHARE_ZH": "/guide/usermanual/socialshare.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SUPPORT_ZH": "/guide/usermanual/support.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ANALYTICS_ZH": "/guide/usermanual/analytics.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DATASOURCE_ZH": "/guide/usermanual/datasource.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUDCONTAINER_ZH": "/guide/usermanual/cloudContainer.html",
 
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",
