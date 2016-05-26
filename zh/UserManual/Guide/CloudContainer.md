@@ -150,6 +150,8 @@ chmod 777 /var/www/html/web/assets
 chown -R www-data:www-data /var/www/html
 ```
 
+* 注: 容器内的工作端口是8080,但提供给用户的端口是80，所以用户请不要使用系统变量$_SERVER['SERVER_PORT'], 从而避免让页面转到URL:8080/XXX，这是不正确的访问方式。已知在Discuz上存在此问题。
+
 ### Java 应用
 
 目前支持运行在 Tomcat 容器的应用，主要包括如下具体版本：
