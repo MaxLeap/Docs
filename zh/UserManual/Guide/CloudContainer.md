@@ -142,8 +142,8 @@ MaxLeap 允许最多部署两个版本，以便我们在发布新版本的时候
 6. （可选）准备容器启动后需要运行的 sh 脚本，以 yii framework 为例， 需要修改 web/assets 权限，web 发布目录根据 nginx 配置，默认是 /var/www/html/
 
 ```
-chmod 777 /var/www/html/web/assets
-chmod 777 /var/www/html/runtime
+chmod -R 777 /var/www/html/web/assets
+chmod -R 777 /var/www/html/runtime
 ```
 
 并更改目录的属主属性，属主和目录的名称如果用户没有更改ngxin config文件，那么命令格式如下：
