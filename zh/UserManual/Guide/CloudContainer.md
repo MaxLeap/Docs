@@ -151,7 +151,12 @@ chmod -R 777 /var/www/html/runtime
 chown -R www-data:www-data /var/www/html
 ```
 
-* 注: 容器内的工作端口是8080,但提供给用户的端口是80，所以用户请不要使用系统变量$_SERVER['SERVER_PORT'], 从而避免让页面转到URL:8080/XXX，这是不正确的访问方式。已知在Discuz上存在此问题。
+* 注1: 容器内的工作端口是8080,但提供给用户的端口是80，所以用户请不要使用系统变量$_SERVER['SERVER_PORT'], 从而避免让页面转到URL:8080/XXX，这是不正确的访问方式。已知在Discuz上存在此问题。
+* 注2: 推荐用户在自己的Linux环境上调试通过，直接打包部署，而不是通过github, 项目的.gitignore会忽略一些重要目录不提交，并且，提交之后的目录权限也会变化。用户本地处理时，拷贝请带 -p参数,zip打包本身保留目录属性，这样 在页面的sh脚本部分，只要执行 
+```
+chown -R www-data:www-data /var/www/html
+```
+就能顺利部署完成了
 
 ### Java 应用
 
