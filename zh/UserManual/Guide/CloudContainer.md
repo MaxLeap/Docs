@@ -143,6 +143,7 @@ MaxLeap 允许最多部署两个版本，以便我们在发布新版本的时候
 
 ```
 chmod 777 /var/www/html/web/assets
+chmod 777 /var/www/html/runtime
 ```
 
 并更改目录的属主属性，属主和目录的名称如果用户没有更改ngxin config文件，那么命令格式如下：
