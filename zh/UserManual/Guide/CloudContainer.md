@@ -80,6 +80,110 @@ Jetty 等其他容器内测中，敬亲期待。。。
 ![imgCCVersionList](../../../images/CloudContainer1.png)
 ### Java Tomcat 项目
 ### PHP 项目
+假设用户已有maxleap的账号，则通过以下步骤部署一个带mysql数据库的php应用
+
+step1:
+
+选择某一应用，进入应用设置，界面；然后通过左侧菜单进入系统设置：
+
+![imgCCVersionList](../../../images/php_container1.png)
+
+step2:
+
+点击创建mysql数据库；之后，点击【管理我的数据】 左侧的“眼睛”状图标，显示数据库连接和账号，记录下来；而后填写云容器主机子域名；点击保存更改：
+
+
+![imgCCVersionList](../../../images/php_container2.png)
+
+该数据库连接账号，需要在你的php项目中使用，该子域名，就是你所建立项目应用的子域名。
+
+step3:
+
+点击【管理我的数据】，进入phpMyAdmin来管理用户数据库，创建并初始化数据表。如果表数据比较大，用户可以联系我们，由我们帮用户直接导入到mysql数据库中。本例中，使用Yii Framework所提供的CRUD样例数据库：
+
+```
+CREATE TABLE `country` (
+  `code` CHAR(2) NOT NULL PRIMARY KEY,
+  `name` CHAR(52) NOT NULL,
+  `population` INT(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `country` VALUES ('AU','Australia',18886000);
+INSERT INTO `country` VALUES ('BR','Brazil',170115000);
+INSERT INTO `country` VALUES ('CA','Canada',1147000);
+INSERT INTO `country` VALUES ('CN','China',1277558000);
+INSERT INTO `country` VALUES ('DE','Germany',82164700);
+INSERT INTO `country` VALUES ('FR','France',59225700);
+INSERT INTO `country` VALUES ('GB','United Kingdom',59623400);
+INSERT INTO `country` VALUES ('IN','India',1013662000);
+INSERT INTO `country` VALUES ('RU','Russia',146934000);
+INSERT INTO `country` VALUES ('US','United States',278357000);
+
+```
+
+step4:
+
+在自己的php项目中，修改数据连接的地址：
+
+![imgCCVersionList](../../../images/php_container4.png)
+
+step5:
+
+修改php项目的目录名为Html, 并用zip -r 进行打包，备用：
+
+![imgCCVersionList](../../../images/php_container5.png)
+
+step6:
+
+进入【开发中心】 ，而后点击左侧的【云容器】，进入云容器界面:
+
+![imgCCVersionList](../../../images/php_container6.png)
+
+step7:
+
+点击【上传PHP项目】，显示如下页面：
+
+![imgCCVersionList](../../../images/php_container7.png)
+
+* 应用名称随便起
+* php版本目前支持5.6
+* nginx配置需要由有经验的用户自行更改，或者默认不更改，用户的目录将直接发布在/var/www/html下面(发布目录不能更改)
+* sh执行脚本，该脚本主要用来执行系统启动完毕后，用户所执行的一些初始化等命令。当用户是由本地Linux发布环境使用zip打包出来的html.zip文件进行发布时，只需要加上：
+
+	```
+	chown -R www-data:www-data /var/www/html
+	```
+
+	而如果用户是在windows系统下用zip打包，或者通过git把代码pull下来之后进行打包的话，就还要加上以下命令(该命令仅作参考，具体请参照项目本身情况)：
+	
+	```
+	chmod -R 777 /var/www/html/web/assets
+	chmod -R 777 /var/www/html/runtime
+	```
+* 点击【选择一个文件】上传html.zip包。然后点击【保存】
+
+step8:
+
+程序运行完毕后，显示以下界面，用户此时可以点击【部署】
+
+![imgCCVersionList](../../../images/php_container8.png)
+
+step9:
+
+选择部署策略，而后按确定。如图：
+
+![imgCCVersionList](../../../images/php_container9.png)
+
+step10:
+
+而后，访问你的子域名/web/index.php?r=country，即可看到一个Yii Framework的官方CRUD样例：
+![imgCCVersionList](../../../images/php_container10.png)
+
+
+
+	
+	
+
 ### 静态网站项目
 
 ## 核心概念
