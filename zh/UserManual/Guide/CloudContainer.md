@@ -25,9 +25,63 @@ MaxLeap 云容器服务是帮助用户 **部署及运维** 其后端应用程序
 
 在管理页面中，您可以查看，新建和管理各个版本的云代码及相应的日志。
 
+## 应用准备及注意
+
+### 静态网站
+静态网站是指不包含 php,perl,python,java 等动态服务器脚本的只含有html 文件，png 图片的网站。
+
+1. 准备一个目录，**目录名称必须为html**，把所有的网站文件拷贝到目录 html 下面。
+2. 用 zip 工具打包, zip -r html.zip html ，**包名必须是 html.zip**。
+3. 准备自己的 nginx config 文件，调整相应设置。你也可以不修改提供的 nginx conf 文件，本模板是一个可以直接使用的，使用默认目录的 nginx 配置。注意如果要修改 nginx conf 文件，则模板里面系统注释部分不要更改，否则容器不能启动。
+
+### PHP 应用
+目前 PHP 支持 5.6 版本
+
+1. 准备一个目录，**目录名称必须为 html**，把所有的网站文件拷贝到目录 html 下面。
+2. 在 MaxLeap 平台上创建应用，进入【应用设置 -> 系统设置】，创建 Mysql 数据库，拿到数据源连接字符串，用户名和密码。
+3. 修改 php 项目的数据源连接，用户名和密码，并且数据库名也是和用户名相同。
+4. 用 zip 工具打包, zip -r html.zip html ，**包名必须是 html.zip**。
+5. 准备自己的 nginx config 文件，调整相应设置，包括 url 伪装，转发，静态文件 location 等设置。你也可以不修改提供的 nginx conf 文件，本模板是一个可以直接使用的，使用默认目录的 nginx 配置。注意模板里面系统注释部分不要更改，否则容器不能启动。
+6. （可选）准备容器启动后需要运行的 sh 脚本，以 yii framework 为例， 需要修改 web/assets 权限，web 发布目录根据 nginx 配置，默认是 /var/www/html/
+
+```
+chmod -R 777 /var/www/html/web/assets
+chmod -R 777 /var/www/html/runtime
+```
+
+并更改目录的属主属性，属主和目录的名称如果用户没有更改ngxin config文件，那么命令格式如下：
+```
+chown -R www-data:www-data /var/www/html
+```
+
+* 注1: 容器内的工作端口是8080,但提供给用户的端口是80，所以用户请不要使用系统变量$_SERVER['SERVER_PORT'], 从而避免让页面转到URL:8080/XXX，这是不正确的访问方式。已知在Discuz上存在此问题。
+* 注2: 推荐用户在自己的Linux环境上调试通过，直接打包部署，而不是通过github, 项目的.gitignore会忽略一些重要目录不提交，并且，提交之后的目录权限也会变化。用户本地处理时，拷贝请带 -p参数,zip打包本身保留目录属性，这样 在页面的sh脚本部分，只要执行 
+```
+chown -R www-data:www-data /var/www/html
+```
+就能顺利部署完成了
+
+### Java 应用
+
+目前支持运行在 Tomcat 容器的应用，主要包括如下具体版本：
+
+1. Tomcat 6 (支持 Servlet 版本 2.5)
+2. Tomcat 7 (支持 Servlet 版本 3.0)
+3. Tomcat 8 (支持 Servlet 版本 3.1)
+4. Tomcat 9 (支持 Servlet 版本 4.0)
+
+你需要将你的应用代码打包成 war 包方可上传到 MaxLeap 云容器部署。
+
+Jetty 等其他容器内测中，敬亲期待。。。
+
 ## 使用流程
+### 整体流程
 
 ![imgCCVersionList](../../../images/CloudContainer1.png)
+### Java Tomcat 项目
+### PHP 项目
+### 静态网站项目
+
 ## 核心概念
 
 ### 服务器程序版本
@@ -121,55 +175,6 @@ MaxLeap 允许最多部署两个版本，以便我们在发布新版本的时候
 
 ####多实例
 每个版本你都可以部署多个实例，这些实例可以通过扩容、缩容来增减以符合你的业务需求，同一个版本最多支持同时允许3个实例，同一个版本里的请求流量将均衡负载到每一个实例上以便减轻系统的业务压力
-
-## 应用准备及注意
-
-### 静态网站
-静态网站是指不包含 php,perl,python,java 等动态服务器脚本的只含有html 文件，png 图片的网站。
-
-1. 准备一个目录，**目录名称必须为html**，把所有的网站文件拷贝到目录 html 下面。
-2. 用 zip 工具打包, zip -r html.zip html ，**包名必须是 html.zip**。
-3. 准备自己的 nginx config 文件，调整相应设置。你也可以不修改提供的 nginx conf 文件，本模板是一个可以直接使用的，使用默认目录的 nginx 配置。注意如果要修改 nginx conf 文件，则模板里面系统注释部分不要更改，否则容器不能启动。
-
-### PHP 应用
-目前 PHP 支持 5.6 版本
-
-1. 准备一个目录，**目录名称必须为 html**，把所有的网站文件拷贝到目录 html 下面。
-2. 在 MaxLeap 平台上创建应用，进入【应用设置 -> 系统设置】，创建 Mysql 数据库，拿到数据源连接字符串，用户名和密码。
-3. 修改 php 项目的数据源连接，用户名和密码，并且数据库名也是和用户名相同。
-4. 用 zip 工具打包, zip -r html.zip html ，**包名必须是 html.zip**。
-5. 准备自己的 nginx config 文件，调整相应设置，包括 url 伪装，转发，静态文件 location 等设置。你也可以不修改提供的 nginx conf 文件，本模板是一个可以直接使用的，使用默认目录的 nginx 配置。注意模板里面系统注释部分不要更改，否则容器不能启动。
-6. （可选）准备容器启动后需要运行的 sh 脚本，以 yii framework 为例， 需要修改 web/assets 权限，web 发布目录根据 nginx 配置，默认是 /var/www/html/
-
-```
-chmod -R 777 /var/www/html/web/assets
-chmod -R 777 /var/www/html/runtime
-```
-
-并更改目录的属主属性，属主和目录的名称如果用户没有更改ngxin config文件，那么命令格式如下：
-```
-chown -R www-data:www-data /var/www/html
-```
-
-* 注1: 容器内的工作端口是8080,但提供给用户的端口是80，所以用户请不要使用系统变量$_SERVER['SERVER_PORT'], 从而避免让页面转到URL:8080/XXX，这是不正确的访问方式。已知在Discuz上存在此问题。
-* 注2: 推荐用户在自己的Linux环境上调试通过，直接打包部署，而不是通过github, 项目的.gitignore会忽略一些重要目录不提交，并且，提交之后的目录权限也会变化。用户本地处理时，拷贝请带 -p参数,zip打包本身保留目录属性，这样 在页面的sh脚本部分，只要执行 
-```
-chown -R www-data:www-data /var/www/html
-```
-就能顺利部署完成了
-
-### Java 应用
-
-目前支持运行在 Tomcat 容器的应用，主要包括如下具体版本：
-
-1. Tomcat 6 (支持 Servlet 版本 2.5)
-2. Tomcat 7 (支持 Servlet 版本 3.0)
-3. Tomcat 8 (支持 Servlet 版本 3.1)
-4. Tomcat 9 (支持 Servlet 版本 4.0)
-
-你需要将你的应用代码打包成 war 包方可上传到 MaxLeap 云容器部署。
-
-Jetty 等其他容器内测中，敬亲期待。。。
 
 
 ## FAQ
