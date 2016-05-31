@@ -283,7 +283,7 @@ step2：
 
 step3：
 
-输入应用名称、版本，以及上传 **html.zip** 代码包，点击保存按钮，稍等一下
+输入应用名称、版本，以及上传 **html.zip** 代码包，如果需要自定义 nginx 配置，请修改对应配置，点击保存按钮，稍等一下
 
 ![imgCCVersionList](../../../images/web_container3.png)
 
