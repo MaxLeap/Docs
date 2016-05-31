@@ -79,6 +79,93 @@ Jetty 等其他容器内测中，敬亲期待。。。
 
 ![imgCCVersionList](../../../images/CloudContainer1.png)
 ### Java Tomcat 项目
+假设用户已有maxleap的账号，则通过以下步骤部署一个带mysql数据库的java web应用
+
+step1:
+
+选择某一应用，进入应用设置，界面；然后通过左侧菜单进入系统设置：
+
+![imgCCVersionList](../../../images/java_container1.png)
+
+step2:
+
+点击创建mysql数据库；之后，点击【管理我的数据】 左侧的“眼睛”状图标，显示数据库连接和账号，记录下来；而后填写云容器主机子域名；点击保存更改：
+
+
+![imgCCVersionList](../../../images/java_container2.png)
+
+该数据库连接账号，需要在你的java web项目中使用，该子域名，就是你所建立项目应用的子域名。
+
+step3:
+
+点击【管理我的数据】，进入phpMyAdmin来管理用户数据库，创建并初始化数据表。如果表数据比较大，用户可以联系我们，由我们帮用户直接导入到mysql数据库中。本例中，使用[Demo-CloudContainer-Tomcat](https://github.com/MaxLeap/Demo-CloudContainer-Tomcat)中的数据库：
+
+```
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(45) NOT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+```
+
+step4:
+
+在自己的Java web项目中，修改数据连接的地址。本例中,使用[Demo-CloudContainer-Tomcat](https://github.com/MaxLeap/Demo-CloudContainer-Tomcat)中的数据源配置
+
+![imgCCVersionList](../../../images/java_container3.png)
+
+step5:
+
+想自己的Java WEB项目打包成war包,用于部署在云容器中.
+
+step6:
+
+进入【开发中心】 ，而后点击左侧的【云容器】，进入云容器界面:
+
+![imgCCVersionList](../../../images/java_container4.png)
+
+step7:
+
+点击【上传JAVA项目】，显示如下页面：
+
+![imgCCVersionList](../../../images/java_container5.png)
+
+* 应用名称和应用版本随便起,但仅支持[a-z0-9-_.]字符组成的名称
+* Servlet版本目前支持2.5/3.0/3.1/4.0
+* 应用服务器目前仅提供tomcat
+* 对应的Servlet版本和tomcat版本关系可以参考:
+
+![imgCCVersionList](../../../images/java_container9.png)
+
+* 点击【选择一个文件】上传war包。然后点击【保存】
+
+step8:
+
+程序运行完毕后，显示以下界面，用户此时可以点击【部署】
+
+![imgCCVersionList](../../../images/java_container6.png)
+
+step9:
+
+选择部署策略，而后按确定。如图：
+
+![imgCCVersionList](../../../images/java_container7.png)
+
+step10:
+
+而后，访问你的子域名，即可看到你的WEB应用首页：
+tomcat web应用部署可能需要花费一点时间,如果访问域名页面一直没有显示出来可能你的应用正在启动,过一会就好.
+![imgCCVersionList](../../../images/java_container8.png)
+
 ### PHP 项目
 假设用户已有maxleap的账号，则通过以下步骤部署一个带mysql数据库的php应用
 
