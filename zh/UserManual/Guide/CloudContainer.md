@@ -265,13 +265,51 @@ step10:
 
 而后，访问你的子域名/web/index.php?r=country，即可看到一个Yii Framework的官方CRUD样例：
 ![imgCCVersionList](../../../images/php_container10.png)
-
-
-
-	
 	
 
 ### 静态网站项目
+
+step1：
+
+注册并登录 MaxLeap 平台，创建一个应用，进入【应用设置 -> 系统设置】，配置云容器二级域名并保存
+
+![imgCCVersionList](../../../images/web_container1.png)
+
+step2：
+
+进入【开发中心 -> 云容器 -> 版本】，点击【上传静态网站】按钮，上传已经打包好的代码包（**html.zip**），代码包准备详见上文 【应用准备及注意 - 静态网站项目】
+
+![imgCCVersionList](../../../images/web_container2.png)
+
+step3：
+
+输入应用名称、版本，以及上传 **html.zip** 代码包，点击保存按钮，稍等一下
+
+![imgCCVersionList](../../../images/web_container3.png)
+
+step4：
+
+成功上传后，点击【操作 -> 部署】按钮，部署网站
+
+![imgCCVersionList](../../../images/web_container4.png)
+
+step5：
+
+在弹出框中，根据需要选择实例以及数量，每个版本最多支持 3 个实例同时运行，达到负载均衡效果，用户根据自己流量选择，也可以后期扩容
+
+![imgCCVersionList](../../../images/web_container5.png)
+
+step6：
+
+成功部署后，当前版本状态将变成 **running**，此时网站可以开始正常访问
+
+![imgCCVersionList](../../../images/web_container6.png)
+
+step7：
+
+根据 step1 中配置的二级域名，访问网站，用户也可以在自己的域名下配置 CName 指向 MaxLeap 平台的二级域名
+
+![imgCCVersionList](../../../images/web_container7.png)
 
 ## 核心概念
 
