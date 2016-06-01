@@ -39,11 +39,28 @@ user.signUp()
 * 您也可以要求用户使用 `Email` 做为用户名注册，这样做的好处是，您在提交信息的时候可以将输入的“用户名“默认设置为用户的 `Email` 地址，以后在用户忘记密码的情况下可以使用 `MaxLeap` 提供的重置密码功能。
 
 ## 登录
+
+### 用户名、密码登录
+
 您可以通过 `ML.User.logIn()` 方法登录：
 
 ```javascript
 ML.User.logIn('yourname', 'yourpass');
 ```
+
+### 手机验证码登录
+
+您可以通过 `requestLoginSmsCode()` 方法获取手机验证码：
+
+```javascript
+ML.User.requestLoginSmsCode('phonenumber');
+```
+然后通过 `logInWithMobilePhoneSmsCode()` 方法用上一步获取到的验证码登录：
+
+```javascript
+ML.User.logInWithMobilePhoneSmsCode('phonenumber', 'smscode');
+```
+
 ## 邮箱验证
 
 MaxLeap 提供强大的邮箱验证服务，您只需在 Console >> 应用设置 >> 电子邮件设置 中 开启 “验证用户的邮箱”, 系统便会自动在 `ML.User` 中添加 `emailVerified` 字段。并且，当 `ML.User` 的 email 字段被赋值或者修改, 且 `emailVerified` 字 字段的值为 false. MaxLeap 便会自动向用户发送一个链接，用户点击链接后便会将 `emailVerified` 设置为true.
