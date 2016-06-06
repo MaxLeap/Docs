@@ -1,25 +1,22 @@
-##### _Author: Henry
-##### _Github: https://github.com/henryybai
-
 ## 安装SDK
 
-1. 把下面这行代码加入您的测试页面中：
+1. 执行 npm 安装命令：
 
-	```javascript
-	<script src="https://rawgit.com/MaxLeap/SDK-Javascript/master/dist/ml.js"></script>
+	```bash
+	npm install maxleap-react-native
 	```
 
 2. 进入 [MaxLeap](https://maxleap.cn) 注册并登录，然后在 [云数据](https://maxleap.cn/clouddata) 创建class，这里创建一个Post class。
 	
-	注意：Javascript SDK没有创建 / 删除 class 的权限，所以要先在 [云数据](https://maxleap.cn/clouddata) 中创建好需要用到的class。
+	注意：ReactNative SDK没有创建 / 删除 class 的权限，所以要先在 [云数据](https://maxleap.cn/clouddata) 中创建好需要用到的class。
 	   
 
 3. 进入 [应用设置－应用密钥](https://maxleap.cn/settings#application) 复制 Application ID，Client Key。
  
-4. 初始化SDK调用，Javascript SDK 分别为 [中国区](https://maxleap.cn) / [海外区](https://maxleap.com) 用户提供了不同的服务器（默认为美国区服务器）： ML.SERVER_EN / ML.SERVER_ZH
+4. 初始化SDK调用，ReactNative SDK 分别为 [中国区](https://maxleap.cn) / [海外区](https://maxleap.com) 用户提供了不同的服务器（默认为美国区服务器）： ML.SERVER_EN / ML.SERVER_ZH
 
 	```javascript
-	ML.initialize('{{appid}}', '{{javascriptkey}}');
+    import ML from 'maxleap-react-native';
 	ML.useCNServer();
 	```
 
@@ -52,5 +49,5 @@
 	
 ## 下一步
 
-至此，您已经完成 Javascript SDK 的安装与必要的配置。请移步至 [Javascript SDK使用指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT) 以获取 MaxLeap 的详细功能介绍以及使用方法，开启 MaxLeap 云服务之旅。	
+至此，您已经完成 ReactNative SDK 的安装与必要的配置。请移步至 [ReactNative SDK使用指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT) 以获取 MaxLeap 的详细功能介绍以及使用方法，开启 MaxLeap 云服务之旅。	
 	
