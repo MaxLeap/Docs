@@ -65,6 +65,8 @@
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
 
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_REACTNATIVE": "/guide/devguide/reactnative.html",
+
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP": "/guide/devguide/php.html",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS": "/guide/devguide/nodejs.html",
