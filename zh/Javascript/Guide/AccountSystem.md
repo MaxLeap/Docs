@@ -77,7 +77,9 @@ MaxLeap 提供强大的邮箱验证服务，您只需在 Console >> 应用设置
 每当您注册成功或是第一次登录成功，都会在本地磁盘中有一个缓存的用户对象，您可以这样来获取这个缓存的用户对象来进行登录：
 
 ```javascript
-var currentUser = ML.User.current();
+ML.User.currentAsync().then(user => {
+	console.log('current user is ' + user)
+});
 ```
 
 当然，您也可以使用如下方法清除缓存用户对象：

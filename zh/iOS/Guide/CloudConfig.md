@@ -50,9 +50,9 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 `– doubleForKey:defaultValue:`
 
 
-## 更新在线参数
+## 获取最新的在线参数
 
-在每次 app 进入前台时，SDK 会自动更新 currentConfig
+在每次 app 进入前台时，SDK 会自动刷新 currentConfig
 
 也可以调用以下代码手动刷新所有云参数
 
@@ -71,7 +71,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 }];
 ```
 
-更新后，如果有参数的值发生变化，就会在主线程调用相应的 `valueChangedHandler()`
+刷新后，如果有参数的值发生变化，就会在主线程调用相应的 `valueChangedHandler()`
 
 ### 监听
 
