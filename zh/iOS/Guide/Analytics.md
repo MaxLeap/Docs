@@ -50,9 +50,11 @@
 ```
  
 ## 自定义事件
+
 自定义事件可以实现在应用程序中埋点，以纪录用户的点击行为并且采集相应数据。
 
-###字段说明
+### 字段说明
+
 字段名|类型|描述
 ---|---|---|---
 eventId|String|事件名
@@ -67,12 +69,13 @@ value| String|事件参数的值
 [MLAnalytics trackEvent:@"event_id"];
 ```
 
-### 统计事件属性被触发次数
+### 统计事件各属性被触发次数
+
 示例：统计电商应用中“购买”事件发生的次数，以及购买的商品类型及数量，那么在购买的函数里调用：
 
 ```objective_c
 NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
-[MLAnalytics trackEvent:@"purchase" dimensions:dict];
+[MLAnalytics trackEvent:@"purchase" parameters:dict];
 ```
 
 ## 应用内支付统计
