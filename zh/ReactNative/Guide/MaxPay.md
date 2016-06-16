@@ -1,4 +1,4 @@
-# MaxPay RN [![npm version](https://badge.fury.io/js/maxpay-react-native.svg)](http://badge.fury.io/js/maxpay-react-native)
+# 移动支付 [![npm version](https://badge.fury.io/js/maxpay-react-native.svg)](http://badge.fury.io/js/maxpay-react-native)
 
 ## 简介
 
