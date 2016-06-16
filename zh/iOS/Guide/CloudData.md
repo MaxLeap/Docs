@@ -829,7 +829,7 @@ game[@"price"] = @0.99;
 转换为：
 
 ```objective_c
-Game *game = [Game object];
+MyGame *game = [MyGame object];
 game.displayName = @"Bird";
 game.multiplayer = @YES;
 game.price = @0.99;
@@ -840,23 +840,24 @@ game.price = @0.99;
 创建 `MLObject` 子类的步骤：
 
 1. 声明符合 `MLSubclassing` 协议的子类。
-2. 实现子类方法 `MLclassName`。这是您传给 `-initWithclassName:` 方法的字符串，这样以后就不必再传类名了。
-3. 将 `MLObject+Subclass.h` 导入您的 .m 文件。该操作导入了 `MLSubclassing` 协议中的所有方法的实现。其中 `MLclassName` 的默认实现是返回类名(指 Objective C 中的类)。
+2. 实现子类方法 `+ leapClassName`。返回你传给 `-initWithclassName:` 方法的字符串, 也就是在服务器上创建的表名，这样以后可以使用 `[Yourclass object]` 来创建新对象了。
+3. 将 `MLObject+Subclass.h` 导入您的 .m 文件。该操作导入了 `MLSubclassing` 协议中的所有方法的实现。其中 `+ leapClassName` 的默认实现是返回类名(指 Objective C 中的类)。
 4. 在 `+[MaxLeap setApplicationId:clientKey:]` 之前调用 `+[Yourclass registerSubclass]`。一个简单的方法是在类的 [+load][+load api reference] (Obj-C only) 或者 [+initialize][+initialize api reference] (both Obj-C and Swift) 方法中做这个事情。
 
-下面的代码成功地声明、实现和注册了 `MLObject` 的 `Game` 子类：
+下面的代码成功地声明、实现和注册了 `MLObject` 的 `MyGame` 子类：
 
 ```objective_c
-// Game.h
-@interface Game : MLObject <MLSubclassing>
+// MyGame.h
+@interface MyGame : MLObject <MLSubclassing>
 + (NSString *)leapClassName;
 @end
 
-// Game.m
+// MyGame.m
 // Import this header to let Armor know that MLObject privately provides most
 // of the methods for MLSubclassing.
 #import <MaxLeap/MLObject+Subclass.h>
-@implementation Game
+
+@implementation MyGame
 + (void)load {
     [self registerSubclass];
 }
@@ -870,16 +871,16 @@ game.price = @0.99;
 
 向 `MLObject` 子类添加自定义属性和方法有助于封装关于这个类的逻辑。借助 `MLSubclassing`，您可以将与同一个主题的所有相关逻辑放在一起，而不必分别针对事务逻辑和存储/传输逻辑使用单独的类。
 
-`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `Game` 类中创建了 `displayName` 属性：
+`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `MyGame` 类中创建了 `displayName` 属性：
 
 ```objective_c
-// Game.h
-@interface Game : MLObject <MLSubclassing>
+// MyGame.h
+@interface MyGame : MLObject <MLSubclassing>
 + (NSString *)leapClassName;
 @property (retain) NSString *displayName;
 @end
 
-// Game.m
+// MyGame.m
 @dynamic displayName;
 ```
 
@@ -892,7 +893,7 @@ game.price = @0.99;
 @property float price;
 ```
 
-这种情况下，`game[@"multiplayer"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"price"]` 将返回一个 `NSNumber`，可以使用 `floatValue` 访问。但是，`fireProof` 属性实际上是 `BOOL`，`rupees` 属性实际上是 `float`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。您可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
+这种情况下，`game[@"multiplayer"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"price"]` 将返回一个 `NSNumber`，可以使用 `floatValue` 访问。但是，`multiplayer` 属性实际上是 `BOOL`，`price` 属性实际上是 `float`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。你可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
 
 ### 定义函数
 
@@ -919,11 +920,11 @@ game.price = @0.99;
 您可以使用类方法 `query` 获取对特定子类对象的查询。下面的示例查询了用户可购买的装备：
 
 ```objective_c
-MLQuery *query = [Game query];
+MLQuery *query = [MyGame query];
 [query whereKey:@"rupees" lessThanOrEqualTo:@0.99];
 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (!error) {
-        Game *firstArmor = objects[0];
+        MyGame *firstArmor = objects[0];
         // ...
     }
 }];
