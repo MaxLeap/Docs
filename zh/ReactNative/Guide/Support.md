@@ -9,7 +9,7 @@
 
 ### 集成 iOS 环境
 
-1. **重要：**先安装 `maxleap-react-native`, 参照 [MaxLeap 开发文档](http://badge.fury.io/js/maxleap-react-native)
+1. **重要：**先安装 `maxleap-react-native`, 参照 [MaxLeap 开发文档](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_REACTNATIVE)
 
 2. 安装 `maxleap-helpcenter-react-native`
 
@@ -28,7 +28,7 @@
 
 ### 集成 Android 环境
 
-1. 按照 [MaxLeap 文档](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#用户支持) 添加项目依赖。
+1. 按照 [MaxLeap 文档](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH) 添加项目依赖。
 
 1. 修改父工程目录下的 `build.gradle` 文件（与 `settings.gradle` 位于同级目录）。
 
