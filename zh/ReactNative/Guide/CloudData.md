@@ -191,6 +191,7 @@ relation.add(post);
 user.save()
 ```
 仅可以从一个 `ML.Relation` 中删除一个 post:
+
 ```javascript
 relation.remove(post);
 ```
@@ -203,6 +204,7 @@ query.first().then(function(result){
   relation.query().find();
 });
 ```
+
 ### 计数器
 计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
 
@@ -261,22 +263,13 @@ post.save();
 ## 文件
 ### ML.File的创建和上传
 `ML.File` 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `ML.Object` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
-在这个例子中，我们用 HTML5 上传一张图片：
+在这个例子中，我们上传一张图片：
 
 ```javascript
-<input type="file" id="photoFileUpload">
-<input type="button" id="fileUploadButton"/>
-<script>
-  document.querySelector('#fileUploadButton').addEventListener('click', function(){
-    var fileUploadControl = document.querySelector('#photoFileUpload');
-    if (fileUploadControl.files.length > 0) {
-      var file = fileUploadControl.files[0];
-      var name = 'avatar.jpg';
-      var ML.File = new ML.File(name, file);
-      ML.File.save();
-    }
-  });
-</script>
+  var filePath; // 文件路径
+  var name = 'avatar.jpg';
+  var ML.File = new ML.File(name, filePath);
+  ML.File.save();
 ```
 注意：
 
@@ -286,7 +279,7 @@ post.save();
 把上传的文件显示到页面的指定元素中：
 
 ```javascript
-document.querySelector('#avatarImg').src = file.url();
+<Image source={{uri: file.url()}}/>
 ```
 
 ### 删除文件
