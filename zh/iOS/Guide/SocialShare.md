@@ -193,6 +193,8 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 
 #### 分享示例
 
+**注意:** 微信 SDK 限制缩略图大小为不超过 32k，如果点击微信按钮后得到`分享失败`的错误提示，请检查相关数据的规格是否合乎微信 SDK 的要求。更多信息请查阅[微信开发者须知](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318037&token=&lang=zh_CN)
+
 - 分享文本
 
 	```
@@ -228,7 +230,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
     webpageItem.title = @"网页标题";
     webpageItem.detail = @"网页描述";
     webpageItem.webpageURL = [NSURL URLWithString:@"网页地址"];
-	webpageItem.previewImageData = previewImageData; // 预览图
+	webpageItem.previewImageData = previewImageData; // 预览图, 微信限制不大于 32k
 	
     [MaxSocialShare shareItem:webpageItem completion:^(MLSActivityType activityType, BOOL completed, NSError * _Nullable activityError) {
         NSLog(@"share activity (%d) completed: %d", activityType, completed);
@@ -242,7 +244,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 	
     musicItem.title = @"音乐标题";
     musicItem.detail = @"音乐描述";
-	musicItem.previewImageData = previewImageData; // 预览图
+	musicItem.previewImageData = previewImageData; // 预览图, 微信限制不大于 32k
     musicItem.attachmentURL = [NSURL URLWithString:@"音乐数据流地址"];
     
     musicItem.webpageURL = [NSURL URLWithString:@"音乐网页地址"]; // 微博，微信支持，QQ不支持
@@ -260,7 +262,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 	// 以下字段三个平台都支持
     videoItem.title = @"视频标题";
     videoItem.detail = @"视频描述";
-	videoItem.previewImageData = previewImageData; // 预览图像
+	videoItem.previewImageData = previewImageData; // 预览图像，微信限制不大于 32k
 	
 	// 微信，微博支持，QQ 不支持
     videoItem.webpageURL = [NSURL URLWithString:@"视频网页地址"];
