@@ -82,6 +82,9 @@ npm install --save maxleap-react-native
 3. 修改工程的主 Activity 文件。
 
     ```java
+    import android.os.Bundle;
+    import com.maxleap.reactnative.MaxLeap;
+
     private MaxLeap maxLeap;
 
      @Override
@@ -129,5 +132,5 @@ npm install --save maxleap-react-native
 	
 ## 下一步
 
-至此，您已经完成 Javascript SDK 的安装与必要的配置。请移步至 [ReactNative SDK使用指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_REACTNATIVE) 以获取 MaxLeap 的详细功能介绍以及使用方法，开启 MaxLeap 云服务之旅。
+至此，您已经完成 ReactNative SDK 的安装与必要的配置。请移步至 [ReactNative SDK使用指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_REACTNATIVE) 以获取 MaxLeap 的详细功能介绍以及使用方法，开启 MaxLeap 云服务之旅。
 	
