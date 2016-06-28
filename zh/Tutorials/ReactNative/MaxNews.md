@@ -31,19 +31,20 @@
 
 MaxLeap 提供了用户登陆界面组件 `maxlogin-react-native`，可以集成使用。
 
-1. 集成方法
 
-	集成核心 SDK `maxleap-react-native`: [参照快速开始手册，安装SDK](https://maxleap.cn/s/web/zh_cn/quickstart/reactnative/core/new.html)。<br>
-	集成登陆组件 `maxlogin-react-native`: [参照说明文档，安装SDK](https://github.com/MaxLeap/Module-MaxLogin-RN)
+集成核心 SDK `maxleap-react-native`: [参照快速开始手册，安装SDK](https://maxleap.cn/s/web/zh_cn/quickstart/reactnative/core/new.html)。<br>
+集成登陆组件 `maxlogin-react-native`: [参照说明文档，安装SDK](https://github.com/MaxLeap/Module-MaxLogin-RN)
 	
-	然后在 AppDelegate.m 中加入 MaxLeap SDK 启动代码：
+然后在 AppDelegate.m 中加入 MaxLeap SDK 启动代码：
 	
-	```objc
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-		...
-		[MaxLeap setApplicationId:MAXLEAP_APPID clientKey:MAXLEAP_CLIENTKEY site:MLSiteCN];
-	}
-	```
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	...
+	[MaxLeap setApplicationId:MAXLEAP_APPID clientKey:MAXLEAP_CLIENTKEY site:MLSiteCN];
+}
+```
+
+###二、登录与注册
 
 2. 使用登陆组件：
 
