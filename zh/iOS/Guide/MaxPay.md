@@ -13,7 +13,7 @@
 1. 创建 MaxLeap 应用
 2. 打开支付渠道配置页面([MaxLeap 控制台](https://maxleap.cn) -> 我的应用 －> 应用设置 -> 支付设置 -> 渠道配置)，填写各支付渠道所需数据。
 
-接下来集成 `MaxPay iOS SDK`, 请确保你使用的是 Xcode 6.4 或者更新版本。
+接下来集成 `MaxPay iOS SDK`, 请确保你使用的是 Xcode 7.0 或者更新版本。
 
 ### 使用 `cocoapods` 安装
 
@@ -108,9 +108,13 @@ $ pod install
 
 #### 支付宝移动支付
 
-1. 在 Xcode 中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“中添加“URL scheme”, **格式自定义**，建议添加一个支付宝专用的，比如：`alipay1234567`。
+1. 接入支付宝，参考支付宝[移动支付接入文档](https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103563&docType=1).
 
-2. 发起支付：
+2. 登录 MaxLeap 后台，前往 应用设置->支付设置->支付宝，填写相关信息并保存。
+
+3. 在 Xcode 中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“中添加“URL scheme”, **格式自定义，不能与其它应用的重复**，建议添加一个支付宝专用的，比如：`alipay1234567`。
+
+4. 发起支付：
 
 	```
 	// 1. 生成 payment 对象
@@ -151,11 +155,15 @@ $ pod install
 
 #### 微信移动支付
 
-1. 在Xcode中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“添加“URL scheme”，格式为你所注册的微信应用程序id（如下图所示）。
+1. 注册微信移动应用，申请微信支付功能，申请流程可以参照[微信官方文档-微信APP支付接入商户服务中心](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419317780&token=&lang=zh_CN)。
+
+2. 登录 MaxLeap 后台，前往 应用设置->支付设置->微信App支付，填写相关信息并保存。
+
+3. 在Xcode中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“添加“URL scheme”，格式为你所注册的微信应用程序id（如下图所示）。
 
 	![drag_sdk_to_project](../../../images/pay_channel_wx_set_urlscheme.jpg)
 
-2. 实现微信代理协议 `WXApiDelegate`：
+4. 实现微信代理协议 `WXApiDelegate`：
 
 	```
 	@interface WXApiManager : NSObject <WXApiDelegate>
@@ -172,14 +180,14 @@ $ pod install
 	@end
 	```
 
-3. 配置微信 SDK，在 `application:didFinishLaunchingWithOptions:`方法中，加入以下代码：
+5. 配置微信 SDK，在 `application:didFinishLaunchingWithOptions:`方法中，加入以下代码：
 
 	```
 	WXApiManager *wxDelegate = [[WXApiManager alloc] init];
 	[MaxLeapPay setWXAppId:@"your_weixin_appId" wxDelegate:wxDelegate description:@"sample"];
 	```
 
-4. 发起支付：
+6. 发起支付：
 
 	```
 	// 1. 生成 payment 对象
@@ -223,14 +231,18 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 
 #### 银联手机控件支付
 
-1. 添加银联支付跳转应用白名单
+1. [接入银联手机控件支付](https://open.unionpay.com/ajweb/product/detail?id=3)，得到银联商户代码和证书。
+
+2. 登录 MaxLeap 后台，前往 应用设置->支付设置->银联手机支付，填写相关信息并保存。
+
+3. 添加银联支付跳转应用白名单
 
 	uppaywallet<br>
 	uppaysdk
 
-2. 在 Xcode 中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“中添加“URL scheme”, **格式自定义**，建议添加一个银联专用的，比如：`unionpay1234567`。
+4. 在 Xcode 中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“中添加“URL scheme”, **格式自定义，不能与其它应用的重复**，建议添加一个银联专用的，比如：`unionpay1234567`。
 
-3. 发起支付
+5. 发起支付
 
 	```
 	// 1. 生成 payment 对象
