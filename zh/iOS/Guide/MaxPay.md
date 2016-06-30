@@ -108,48 +108,50 @@ $ pod install
 
 #### 支付宝移动支付
 
-发起支付：
+1. 在 Xcode 中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“中添加“URL scheme”, **格式自定义**，建议添加一个支付宝专用的，比如：`alipay1234567`。
 
-```
-// 1. 生成 payment 对象
-MLPayment *payment = [[MLPayment alloc] init];
+2. 发起支付：
 
-// 设置使用 AliApp 渠道支付，该渠道会打开支付宝应用进行支付，如果没有安装支付宝应用，支付宝 SDK 会打开一个网页进行支付
-payment.channel = MLPayChannelAliApp;
-
-// 生成交易流水号，流水号号要保证在商户系统中唯一
-NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-[formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
-NSString *billNo = [formatter stringFromDate:[NSDate date]];
-payment.billNo = billNo;
-
-// payment 简要说明
-payment.subject = @"测试";
-
-// 总金额，单位：分
-payment.totalFee = 0.01 * 100;
-
-// 支付宝支付完成后通知支付结果时需要用到，没有固定格式，可以是 info.plist -> URL Types 中的任意一个 scheme
-payment.scheme = @"maxleappaysample";
-
-// 配置自定义字段
-[payment.extraAttrs addEntriesFromDictionary:@{@"keyA":@"valueA"}];
-
-// 2. 开始支付流程
-[MaxLeapPay startPayment:payment completion:^(MLPayResult * _Nonnull result) {
-    if (result.code == MLPaySuccess) {
-        NSLog(@"支付成功");
-    } else {
-        NSLog(@"支付失败");
-    }
-}];
-```
+	```
+	// 1. 生成 payment 对象
+	MLPayment *payment = [[MLPayment alloc] init];
+	
+	// 设置使用 AliApp 渠道支付，该渠道会打开支付宝应用进行支付，如果没有安装支付宝应用，支付宝 SDK 会打开一个网页进行支付
+	payment.channel = MLPayChannelAliApp;
+	
+	// 生成交易流水号，流水号号要保证在商户系统中唯一
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
+	NSString *billNo = [formatter stringFromDate:[NSDate date]];
+	payment.billNo = billNo;
+	
+	// payment 简要说明
+	payment.subject = @"测试";
+	
+	// 总金额，单位：分
+	payment.totalFee = 0.01 * 100;
+	
+	// 支付宝支付完成后通知支付结果时需要用到，填写上一步中配置的 URL Scheme
+	payment.scheme = @"alipay1234567";
+	
+	// 配置自定义字段
+	[payment.extraAttrs addEntriesFromDictionary:@{@"keyA":@"valueA"}];
+	
+	// 2. 开始支付流程
+	[MaxLeapPay startPayment:payment completion:^(MLPayResult * _Nonnull result) {
+	    if (result.code == MLPaySuccess) {
+	        NSLog(@"支付成功");
+	    } else {
+	        NSLog(@"支付失败");
+	    }
+	}];
+	```
 
 ### 使用微信支付
 
 #### 微信移动支付
 
-1. 在Xcode中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“添加“URL scheme”为你所注册的应用程序id（如下图所示）。
+1. 在Xcode中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“添加“URL scheme”，格式为你所注册的微信应用程序id（如下图所示）。
 
 	![drag_sdk_to_project](../../../images/pay_channel_wx_set_urlscheme.jpg)
 
@@ -225,8 +227,10 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 
 	uppaywallet<br>
 	uppaysdk
-	
-2. 发起支付
+
+2. 在 Xcode 中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“中添加“URL scheme”, **格式自定义**，建议添加一个银联专用的，比如：`unionpay1234567`。
+
+3. 发起支付
 
 	```
 	// 1. 生成 payment 对象
@@ -247,8 +251,8 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 	// 总金额，单位：分
 	payment.totalFee = 0.01 * 100;
 	
-	// 银联支付完成后通知支付结果时需要用到，没有固定格式，可以是 info.plist -> URL Types 中的任意一个 scheme
-	payment.scheme = @"paysample";
+	// 银联支付完成后通知支付结果时需要用到，填写上一步中添加的 URL Scheme
+	payment.scheme = @"unionpay1234567";
 	
 	// 银联需要配置 returnUrl
 	payment.returnUrl = @"http://maxleap.cn/returnUrl";
