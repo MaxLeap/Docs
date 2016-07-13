@@ -445,7 +445,7 @@ ML.Cloud.function('hello',function(req, res){
 ### 目录加载顺序
 
 1. npm安装package.json
-2. 拷贝node_modules依赖
+2. 拷贝node_modules依赖 (包括 mlcloudcode)
 3. 加载程序文件，顺序为：config -> hook -> job -> function
 
 ### 修改配置
