@@ -19,7 +19,7 @@
 4. 初始化SDK调用，Javascript SDK 分别为 [中国区](https://maxleap.cn) / [海外区](https://maxleap.com) 用户提供了不同的服务器（默认为美国区服务器）： ML.SERVER_EN / ML.SERVER_ZH
 
 	```javascript
-	ML.initialize('{{appid}}', '{{javascriptkey}}');
+	ML.initialize('{{appid}}', '{{clientkey}}');
 	ML.useCNServer();
 	```
 
