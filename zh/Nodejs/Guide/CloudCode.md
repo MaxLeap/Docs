@@ -442,6 +442,8 @@ ML.Cloud.function('hello',function(req, res){
 └── node_modules            #cloudcode的环境依赖（可选）
 ```
 
+温馨提示: 如果你需要手动打包项目,请保持目录结构如上图所示,请勿再外套一层目录.
+
 ### 目录加载顺序
 
 1. npm安装package.json
