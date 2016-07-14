@@ -54,7 +54,7 @@ var analytics = new ML.Analytics(options);
 var data = {"sex":"man","age":"18"};
 analytics.trackEvent('userEvent', data)
 ```
-
+<!-- 
 ## 自定义事件2.0
 
 自定义事件2.0可以支持sql检索，从而实现更灵活的数据查询。
@@ -87,6 +87,7 @@ var data = [{
 ```
 
 其中，下划线字段是系统预定义字段，其他字段为用户自定义字段。
+-->
 
 ## 用户使用轨迹
 
