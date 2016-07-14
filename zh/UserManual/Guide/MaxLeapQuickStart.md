@@ -37,11 +37,11 @@ MaxLeap 提供两种模式创建应用
 5、可以直接进入我的应用列表页面查看刚创建好的应用
 ![](../../../images/CreateAppTemp6.png)
 6、点击开发选择进入开发中心云数据库查看云端初始化数据
-![](../../../images/createApp5.png)
+![](../../../images/CreateAppTemp8.png)
 7、工程项目下载完成后解压出工程项目（以 iOS 为例）并导入Xcode，直接运行即可查看模板应用，AppId 和 ClientKey 已经自动配置完成
 ![](../../../images/createApp12.png)
 8、可以在应用设置下的应用密钥中查看应用的相关key，包括 AppId 和 ClientKey 等
-![](../../../images/CreateApp10.png)
+![](../../../images/CreateAppTemp7.png)
 
  Ok，是不是很简单呢，您可以直接基于我们的模板应用快速构建您自己的应用，Happy Coding!!!!
 
