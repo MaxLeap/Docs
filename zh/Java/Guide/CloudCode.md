@@ -126,9 +126,9 @@ public void doSomethingToCloudData(){
 
 上面例子是基本的增删改查操作，更多详细的参见下面章节
 
-#### 使用Cloud Function
+### 调用 Cloud Function
 
-##### API方式调用
+##### REST API 方式调用
 请求格式如下所示：
 
 ```shell
@@ -140,7 +140,8 @@ curl -X POST \
 https://api.maxleap.cn/2.0/functions/hello
 ```
 	
-##### 通过Android/iOS SDK调用：
+##### 通过 Android / iOS SDK调用：
+
 Android SDK中：
 
 ```java
@@ -169,7 +170,7 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
     }];
 ```
 
-## Cloud Data Object的查询
+## Cloud Data Object 的查询
 我们可以通过构造MLQuery对象`MLQuery query = MLQuery.instance();`，来进行基础或相对比较复杂的查询，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的查询。
 
 ### 等值判断查询(=,!=,>,>=,<,<=)

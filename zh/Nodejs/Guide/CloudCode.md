@@ -442,10 +442,12 @@ ML.Cloud.function('hello',function(req, res){
 └── node_modules            #cloudcode的环境依赖（可选）
 ```
 
+温馨提示: 如果你需要手动 zip 打包项目,请保持目录结构如上图所示,请勿再外套一层目录.
+
 ### 目录加载顺序
 
 1. npm安装package.json
-2. 拷贝node_modules依赖
+2. 拷贝node_modules依赖 (包括 mlcloudcode)
 3. 加载程序文件，顺序为：config -> hook -> job -> function
 
 ### 修改配置

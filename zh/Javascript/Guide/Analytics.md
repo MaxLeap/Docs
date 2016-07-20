@@ -54,6 +54,40 @@ var analytics = new ML.Analytics(options);
 var data = {"sex":"man","age":"18"};
 analytics.trackEvent('userEvent', data)
 ```
+<!-- 
+## 自定义事件2.0
+
+自定义事件2.0可以支持sql检索，从而实现更灵活的数据查询。
+
+```javascript
+var data = [{
+        "distinct_id": "2b0a6f51a3cd6775",
+        "time": 1434556935000,
+        "type": "track",
+        "event": "ViewProduct",
+        "properties": {
+          "_manufacturer":"Apple",
+          "_model": "iPhone 5",
+          "_os":"iOS",
+          "_os_version":"7.0",
+          "_app_version":"1.3",
+          "_wifi":true,
+          "_ip":"180.79.35.65",
+          "_province":"湖南",
+          "_city":"长沙",
+          "_screen_width":320,
+          "_screen_height":640,
+          "product_id":123451231231212,
+          "product_name":"苹果",
+          "product_classify":"水果",
+          "product_price":14.0
+        }
+      }];
+      analytics.trackOriginEvent(data);
+```
+
+其中，下划线字段是系统预定义字段，其他字段为用户自定义字段。
+-->
 
 ## 用户使用轨迹
 
