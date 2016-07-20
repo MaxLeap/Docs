@@ -4,23 +4,21 @@
 
 目前支持支付宝、微信、银联支付等渠道，支持支付及查询交易记录功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
 
-## 使用
-
-### 填写各支付渠道信息
+## 在后台填写各支付渠道信息
 
 在集成 `MaxPay iOS SDK` 之前，请确保正确填写了将要集成的支付渠道的支付参数。
 
 1. 创建 MaxLeap 应用
 2. 打开支付渠道配置页面([MaxLeap 控制台](https://maxleap.cn) -> 我的应用 －> 应用设置 -> 支付设置 -> 渠道配置)，填写各支付渠道所需数据。
 
-接下来集成 `MaxPay iOS SDK`, 请确保你使用的是 Xcode 7.0 或者更新版本。
+## 安装 SDK
 
 ### 使用 `cocoapods` 安装
 
 在 `Podfile` 中加上下面这行:
 
 ```
-pod 'MaxLeapPay'
+pod 'MaxLeap/Pay'
 ```
 
 打开应用 `终端`, 执行以下命令:
@@ -50,25 +48,27 @@ $ pod install
 
 到这里 `MaxLeapPay.framework` 已经安装完成，但是所有的支付渠道应该都为不可用状态，因为还没有集成这些渠道对应的支付 SDK。
 
-**集成各支付平台还需如下配置：**
+### 接入第三方支付平台
 
-1. 使用支付宝移动支付还需以下步骤：
+**只集成 MaxLeapPay.framework 并不能使用第三方支付功能。**
 
-	1. [下载并解压最新支付宝 SDK](https://doc.open.alipay.com/doc2/detail.htm?spm=0.0.0.0.5TxcD7&treeId=59&articleId=103563&docType=1)
-	2. 找到 `AliPay` 文件夹，该文件夹包含 `AliPaySDK.framework` 和 `AliPaySDK.bundle`，把该文件夹拖进项目中。
-	3. 添加依赖 libc++.tbd
+#### 接入支付宝移动支付
 
-2. 微信移动支付需以下步骤：
+1. [下载并解压最新支付宝 SDK](https://doc.open.alipay.com/doc2/detail.htm?spm=0.0.0.0.5TxcD7&treeId=59&articleId=103563&docType=1)
+2. 找到 `AliPay` 文件夹，该文件夹包含 `AliPaySDK.framework` 和 `AliPaySDK.bundle`，把该文件夹拖进项目中。
+3. 添加依赖 libc++.tbd
+
+#### 接入微信移动支付
 	
-	1. [下载并解压微信支付 SDK](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)
-	2. 找到微信 SDK 文件夹，该文件夹应包括 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h`三个文件，把该文件夹拖进项目中。
-	3. 添加依赖 libc++.tbd
+1. [下载并解压微信支付 SDK](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)
+2. 找到微信 SDK 文件夹，该文件夹应包括 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h`三个文件，把该文件夹拖进项目中。
+3. 添加依赖 libc++.tbd
 	
-3. 银联手机控件支付需要额外步骤：
+#### 接入银联手机控件支付
 
-	1. [下载并解压银联手机支付控件](https://open.unionpay.com/ajweb/help/file/techFile?productId=3)
-	2. 找到 "UPPaymentControl" 文件夹，该文件夹包括 `libPaymentControl.a` 和 `UPPaymentControl.h` 两个文件，把该文件夹拖到项目中。
-	3. 添加依赖 libc++.tbd
+1. [下载并解压银联手机支付控件](https://open.unionpay.com/ajweb/help/file/techFile?productId=3)
+2. 找到 "UPPaymentControl" 文件夹，该文件夹包括 `libPaymentControl.a` 和 `UPPaymentControl.h` 两个文件，把该文件夹拖到项目中。
+3. 添加依赖 libc++.tbd
 
 你可以设置支付环境，以用来测试。`MaxLeapPay` 提供了三种环境，Production(产品环境)、Sandbox(沙盒环境)、Offline(离线环境)。
 
@@ -103,6 +103,8 @@ $ pod install
     }];
 }
 ```
+
+## 使用
 
 ### 使用支付宝支付
 

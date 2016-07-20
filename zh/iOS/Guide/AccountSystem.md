@@ -2,7 +2,10 @@
 
 ## 准备
 
-如果您尚未安装 SDK，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+基础用户管理功能集成在 `MaxLeap.framework` 中，如果还没有继承这个框架，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+
+第三方登录需要集成 `ML**Utils.framework` 和第三方平台对应 SDK。
+
 您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 7.0 及以上版本。
@@ -240,7 +243,7 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 1. [设置 Facebook 应用程序][set up a facebook app], 若您尚未设置。
 2. 在您的 MaxLeap 应用设置页面添加应用程序的 Facebook 应用 ID。
 3. 按照 Facebook 的 [Facebook SDK 入门][getting started with the facebook sdk]提供的说明，创建与 Facebook SDK 关联的应用程序。仔细检查并确认您已经把 FacebookAppID 和 URL Scheme 添加至应用程序的 .plist 文件。
-4. 下载解压 [MaxLeap iOS SDK](https://github.com/MaxLeap/SDK-iOS/releases)，如果您还没有。
+4. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
 5. 如果使用 FacebookSDK v3.x, 把 `MLFacebookUtils.framework` 添加到您的 Xcode 项目中;<br> 如果使用 FacebookSDK v4.x, 把 `MLFacebookUtilsV4.framework` 添加到您的 Xcode 项目中。
 
 还有两步。首先，把下面的代码添加到您引用的 `application:didFinishLaunchingWithOptions:` 方法中。
@@ -445,8 +448,10 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 1. [设置 Twitter 应用][set up twitter app], 若您尚未设置。
 2. 在您的 MaxLeap 应用设置页面添加您应用的 Twitter 密钥(consumer key)。
 3. 当要求您为 Twitter 应用程序指定 “Callback URL”（回调地址），请插入有效地址。它不会被您的 iOS 或 Android 应用程序使用，但是在通过 Twitter 启用身份验证时非常必要。
-4. 将 `Accounts.framework` 和 `Social.framework` 库添加至您的 Xcode 项目。
-5. 在初始化 MaxLeap SDK 的地方加入以下代码，比如在 `application:didFinishLaunchingWithOptions:` 方法中。
+4. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+5. 将 `MLTwitterUtils.framework` 到 Xcode 项目中
+6. 添加依赖 `Accounts.framework` 和 `Social.framework`。
+7. 在初始化 MaxLeap SDK 的地方加入以下代码，比如在 `application:didFinishLaunchingWithOptions:` 方法中。
 
 ```objective_c
 [MLTwitterUtils initializeWithConsumerKey:@"YOUR CONSUMER KEY" consumerSecret:@"YOUR CONSUMER SECRET"];
@@ -456,7 +461,7 @@ Facebook iOS SDK 提供了很多帮助工具类，用来与 Facebook API 互动�
 
 MaxLeap 用户可通过以下两种主要方法使用 Twitter：(1) 以 Twitter 用户身份登录，并创建 MLUser，或者 (2) 将 Twitter 与已有的 `MLUser` 关联。
 
-#### 登录并注册新MLUser
+#### 登录并注册新 MLUser
 
 `MLTwitterUtils` 提供一种方法让您的 `MLUser` 可以通过 `Twitter` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
@@ -544,7 +549,11 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 1. 前往[微博开放平台][weibo_develop_site]，[创建微博应用][set up weibo app]。
 2. 在 微博应用 >> 应用信息 >> 高级信息 中仔细填写授权回调页和取消授权回调页地址。这个地址在集成微博 SDK 的时候需要用到。
 3. 前往 [MaxLeap 控制台][maxleap_console]，在您的 MaxLeap 应用设置页面添加您微博应用的 App Key 和 App Secret。
-4. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+4. 下载 [微博 iOS SDK](https://github.com/sinaweibosdk/weibo_ios_sdk)
+5. 把 libWeiboSDK 文件夹添加到项目中，注意选择 Group Reference。
+6. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+7. 把 `MLWeiboUtils.framework` 添加到项目中。
+8. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
 	```objective_c
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -652,7 +661,10 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 1. 前往[微信开放平台][wechat_develop_site]，创建微信移动应用。
 2. 前往 [MaxLeap 控制台][maxleap_console]，在您的 MaxLeap 应用设置页面添加您微信应用的 App Key 和 App Secret。
-3. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+3. [下载微信 iOS SDK（iOS开发工具包64位）](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319164&token=&lang=zh_CN)
+4. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+5. 把 `MLWeChatUtils.framework` 添加到项目中。
+6. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
 	```objective_c
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -774,7 +786,9 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 1. 前往[腾讯开放平台][open_qq_site]，[创建 QQ 应用][set_up_qq_app]。
 2. 前往 [MaxLeap 控制台][maxleap_console]，前往 MaxLeap 应用设置 >> 用户验证 页面，打开"允许QQ登录"选项。
 3. [下载腾信开发平台 SDK][qq_documentation]
-4. 把 `TencentOpenAPI.framework`、`TencentOpenAPI_iOS_Bundle.bundle` 和 `MLQQUtils.framework` 添加到项目中。
+4. 把 `TencentOpenAPI.framework` 和 `TencentOpenAPI_iOS_Bundle.bundle` 添加到项目中。
+5. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+6. 把 `MLQQUtils.framework` 添加到项目中。
 5. 初始化 `MLQQUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
 	```objective_c

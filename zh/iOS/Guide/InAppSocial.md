@@ -6,7 +6,7 @@
 
 ## 集成
 
-**重要:** `MaxSocial.framework` 依赖于 `MaxLeap.framework`，如果还没集成 `MaxLeap.framework`, 建议先看下[快速开始](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，先集成并配置好 `MaxLeap.framework`.
+**重要:** `MaxSocial.framework` 依赖于 `MaxLeap.framework`，如果还没集成 `MaxLeap.framework`, 请先查阅[快速开始](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，集成并配置好 `MaxLeap.framework`.
 
 ### 使用 `Cocoapods` 安装
 
@@ -25,7 +25,7 @@ $ pod install
 
 ### 手动安装
 
-1. [下载并解压最新 SDK](https://github.com/MaxLeap/SDK-iOS/releases)
+1. [下载并解压最新 SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)
 2. 把解压得到的 `MaxSoical.framework` 拖到项目中。
 
 ## 使用方法
