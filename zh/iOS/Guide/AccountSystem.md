@@ -547,8 +547,8 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 若要通过 MaxLeap 使用微博，您需要：
 
 1. 前往[微博开放平台][weibo_develop_site]，[创建微博应用][set up weibo app]。
-2. 在 微博应用 >> 应用信息 >> 高级信息 中仔细填写授权回调页和取消授权回调页地址。这个地址在集成微博 SDK 的时候需要用到。
-3. 前往 [MaxLeap 控制台][maxleap_console]，在您的 MaxLeap 应用设置页面添加您微博应用的 App Key 和 App Secret。
+2. 在 “微博应用 >> 应用信息 >> 高级信息” 中仔细填写授权回调页和取消授权回调页地址。授权回调页地址在集成微博 SDK 的时候需要用到。
+3. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用新浪微博登录” 开关。
 4. 下载 [微博 iOS SDK](https://github.com/sinaweibosdk/weibo_ios_sdk)
 5. 把 libWeiboSDK 文件夹添加到项目中，注意选择 Group Reference。
 6. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
@@ -660,7 +660,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 若要与微信集成，您需要：
 
 1. 前往[微信开放平台][wechat_develop_site]，创建微信移动应用。
-2. 前往 [MaxLeap 控制台][maxleap_console]，在您的 MaxLeap 应用设置页面添加您微信应用的 App Key 和 App Secret。
+2. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用微信登录” 开关。
 3. [下载微信 iOS SDK（iOS开发工具包64位）](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319164&token=&lang=zh_CN)
 4. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
 5. 把 `MLWeChatUtils.framework` 添加到项目中。
