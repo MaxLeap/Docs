@@ -15,6 +15,13 @@
 * **保障用户体验：**选择向指定用户分群发送消息，更具有针对性
 * **动态内容管理：**应用内消息和推送消息中的内容均在 Console 中设置，用户所见内容可实时更新
 
+## 准备
+
+推送营销功能集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+
+**注意**：我们支持 iOS 7.0 及以上版本。
+
 ## 应用内消息
 
 默认情况下，推送营销功能处于关闭状态，不会接收消息。启用这个功能很简单，只需要 `[MLMarketingManager enable]` 一行代码，如下：

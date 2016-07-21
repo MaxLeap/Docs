@@ -37,11 +37,11 @@ pod "MaxLeap/QQUtils"
 
 	请确认您使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
 
-	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 SDK</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 SDK (maxleap-sdk-ios-*.zip)</a>
 
 2. 添加 SDK 到您的应用
 
-	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
+	将解压后文件夹中的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
