@@ -10,15 +10,6 @@ CocoaPods 是一个很好用的依赖管理工具，可以简化安装过程。
 # MaxLeap 核心 SDK
 pod "MaxLeap/Core"
 
-# 如果使用需要连接 Facebook，并使用的是 FacebookSDK v3.x，则添加
-pod "MaxLeap/FacebookUtils"
-
-# 如果使用的是 FacebookSDK v4.x 版本，则添加
-pod "MaxLeap/FacebookUtilsV4"
-
-# 如果需要连接 Twitter，需添加
-pod "MaxLeap/TwitterUtils"
-
 # 微信登录
 pod "MaxLeap/WeChatUtils"
 
@@ -27,6 +18,12 @@ pod "MaxLeap/WeiboUtils"
 
 # QQ 登录
 pod "MaxLeap/QQUtils"
+
+# 支付
+pod "MaxLeap/Pay"
+
+# 应用内支付
+pod "MaxLeap/Social"
 ```
 
 然后再项目根目录执行 `pod install` 命令，就能将 MaxLeap SDK 集成到你的项目中。

@@ -6,12 +6,13 @@
 
 ## 安装
 
-`MaxIMLib.framework` 依赖于 `SocketIOClientSwift.framework`，支持 iOS 8 及更新版本的 iOS 系统。
-支持 Xcode 7 及更新版本。
+> ### `MaxIMLib.framework` 依赖于 `SocketIOClientSwift.framework`，支持 iOS 8 及更新版本的 iOS 系统。
+
+需要 Xcode 7 或者更新版本。
 
 1. 下载最新版 [MaxIMSDK (maxleap-im-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)
 2. 在 Xcode 中打开你的项目，导航到 Project -> Target -> General
-3. 把下载好的 `MaxIMLib.framework` 和 `SocketIOClientSwift.framework` 拖到 **Embedded Binaries** 下面
+3. 把下载好的 `MaxIMLibDynamic.framework` 和 `SocketIOClientSwift.framework` 拖到 **Embedded Binaries** 下面
 
 ## 登录
 

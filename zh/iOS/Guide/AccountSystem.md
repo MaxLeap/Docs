@@ -2,7 +2,7 @@
 
 ## 准备
 
-> 基础用户管理功能集成在 `MaxLeap.framework` 中，如果还没有集成，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+> ### 基础用户管理功能集成在 `MaxLeap.framework` 中，如果还没有集成，请**先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK** 并使之在 Xcode 中运行。
 
 第三方登录需要集成 `ML**Utils.framework` 和第三方平台对应 SDK。
 
@@ -16,7 +16,8 @@
 
 你可以使用这个类在应用程序中添加用户帐户功能。
 
-`MLUser` 是 `MLObject` 的一个子类，拥有与之完全相同的特性，如键值对接口。`MLObject` 上的所有方法也存在于 `MLUser` 中。不同的是 `MLUser` 具有针对用户帐户的一些特殊的附加功能。
+> ### `MLUser` 是 `MLObject` 的一个子类，拥有与之完全相同的特性，如键值对接口。`MLObject` 上的所有方法也存在于 `MLUser` 中。不同的是 `MLUser` 具有针对用户帐户的一些特殊的附加功能。
+> ### 请先阅读 [`MLObject` 部分](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH)。
 
 ### SDK 自动创建匿名用户
 
