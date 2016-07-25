@@ -94,6 +94,28 @@
 	[MLMarketingManager handlePushNotificationOpened:launchOptions];
 	```
 
+### 设置 Badge
+
+badge 是 iOS 用来标记应用程序未读消息(通知)的一个数字，出现在应用图标右上角。MaxLeap 支持保存 badge 值到服务器，然后由后台来管理每个用户推送的 badge 值。
+
+> ### SDK 初始化时，会自动将应用实际 badge 值（[UIApplication sharedApplication].applicationIconBadgeNumber）上传到 MaxLeap 服务器。
+> ### 在后台发送推送消息时，后台会自动把每个 installation.badge 加 1.
+
+#### 上传 badge 值
+
+```
+[MLInstallation currentInstallation].badge = 5;
+[[MLInstallation currentInstallation] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+        // 上传成功
+    } else {
+        // 上传失败
+    }
+}];
+```
+
+**注意：设置 badge 值操作并不会更改应用图标实际 badge 值，本地仍然需要调用 `-[UIApplication setApplicationIconBadgeNumber:]` 方法。**
+
 ## 推送证书设置指南
 
 1. 生成推送证书，参照苹果官方文档《App Distribution Guide》的 [Creating a Universal Push Notification Client SSL Certificate](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11) 小节。
