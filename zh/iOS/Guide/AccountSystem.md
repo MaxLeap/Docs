@@ -779,12 +779,12 @@ Q: 用户每次都请求短信验证码来登录的话，成本太高，有什�
     
 2. 注册时不设密码，注册完成后由用户自行更改密码
 
-    i.   用户输入手机号
-    ii.  用户点击请求验证码按钮，程序调用 `+[MLUser(MLSmsCodeUtils) requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码
-    iii. 用户收到验证码短信后，输入验证码
-    iv.  用户点击 注册／登录 按钮，程序调用 `+[MLUser(MLSmsCodeUtils) loginWithPhoneNumber:smsCode:block:]` 接口登录／注册
-    v.   用户前往用户信息界面，修改密码（这里略去修改密码的具体流程）
-    vi.  以后用户就可以通过 手机号／密码 登录
+    i.   用户输入手机号<br>
+    ii.  用户点击请求验证码按钮，程序调用 `+[MLUser(MLSmsCodeUtils) requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码<br>
+    iii. 用户收到验证码短信后，输入验证码<br>
+    iv.  用户点击 注册／登录 按钮，程序调用 `+[MLUser(MLSmsCodeUtils) loginWithPhoneNumber:smsCode:block:]` 接口登录／注册<br>
+    v.   用户前往用户信息界面，修改密码（这里略去修改密码的具体流程）<br>
+    vi.  以后用户就可以通过 手机号／密码 登录<br>
 
 
 [maxleap_console]: https://maxleap.cn
