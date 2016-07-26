@@ -750,9 +750,42 @@ App Transport Security has blocked a cleartext HTTP (http://) resource load sinc
 -canOpenURL: failed for URL: “sinaweibohdsso://xxx” – error: “This app is not allowed to query for scheme sinaweibohdsso”
 ```
 
-按照上述方法，把 `sinaweibohdsso` 加入白名单即可。
+按照上述方法，把 `sinaweibohdsso` 加入白名单即可去掉这个日志。
 
 ## FAQ
+
+Q: 用户每次都请求短信验证码来登录的话，成本太高，有什么解决办法吗？
+
+解决办法是让用户设置密码，之后用户就可以使用 手机号／密码 方式登录了。设置密码的方法大致有下面两种：
+
+1. 在注册时设置密码, 流程：
+
+    i.   用户输入手机号</br>
+    ii.  用户点击请求验证码按钮，程序调用 `+[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码</br>
+    iii. 用户收到验证码短信后，输入验证码和密码</br>
+    iv.  用户点击注册按钮</br>
+    v.   程序验证验证码是否正确，调用 `+[MLSmsCodeUtils verifySmsCode:phoneNumber:block:]` 接口</br>
+    vi.  验证通过后，注册用户：</br>
+        ```
+        MLUser *user = [MLUser user];
+        user.username = @"135xxxxxxxx"; // 用户名即手机号
+        user.password = @"***********"; // 密码
+        user[@"mobilePhone"] = @"135xxxxxxxx";
+        user[@"mobilePhoneVerified"] = @(YES); // 这两行代码含义是绑定手机号，这样用户即可以使用手机号／验证码登录，也可以使用 手机号／密码 登陆
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            // ...
+        }];
+        ```
+    
+2. 注册时不设密码，注册完成后由用户自行更改密码
+
+    i.   用户输入手机号
+    ii.  用户点击请求验证码按钮，程序调用 `+[MLUser(MLSmsCodeUtils) requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码
+    iii. 用户收到验证码短信后，输入验证码
+    iv.  用户点击 注册／登录 按钮，程序调用 `+[MLUser(MLSmsCodeUtils) loginWithPhoneNumber:smsCode:block:]` 接口登录／注册
+    v.   用户前往用户信息界面，修改密码（这里略去修改密码的具体流程）
+    vi.  以后用户就可以通过 手机号／密码 登录
+
 
 [maxleap_console]: https://maxleap.cn
 
