@@ -253,13 +253,14 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 若要通过 MaxLeap 使用微博，您需要：
 
 1. 前往[微博开放平台][weibo_develop_site]，[创建微博应用][set up weibo app]。
-2. 在 “微博应用 >> 应用信息 >> 高级信息” 中仔细填写授权回调页和取消授权回调页地址。授权回调页地址在集成微博 SDK 的时候需要用到。
+2. 在 “微博应用 >> 应用信息 >> 高级信息” 中仔细填写授权回调页和取消授权回调页地址。授权回调页地址在集成微博 SDK 的时候需要用到，一般情况下填写默认值(`https://api.weibo.com/oauth2/default.html`)即可。
 3. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用新浪微博登录” 开关。
 4. 下载 [微博 iOS SDK](https://github.com/sinaweibosdk/weibo_ios_sdk)
 5. 把 libWeiboSDK 文件夹添加到项目中，注意选择 Group Reference。
 6. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
-7. 把 `MLWeiboUtils.framework` 添加到项目中。
-8. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+7. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 MaxLeap.framework。
+8. 把 `MLWeiboUtils.framework` 添加到项目中。
+9. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
 	```objective_c
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -269,7 +270,7 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 	}
 	```
 
-5. 处理授权回调
+10. 处理授权回调
 	
 	```
 	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
@@ -285,7 +286,7 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 	}
 	```
 	
-6. 处理授权响应
+11. 处理授权响应
 	
 	```
 	#pragma mark WeiboSDKDelegate
@@ -367,10 +368,12 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 1. 前往[微信开放平台][wechat_develop_site]，创建微信移动应用。
 2. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用微信登录” 开关。
-3. [下载微信 iOS SDK（iOS开发工具包64位）](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319164&token=&lang=zh_CN)
-4. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
-5. 把 `MLWeChatUtils.framework` 添加到项目中。
-6. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+3. [下载微信 iOS SDK（iOS开发工具包64位）并解压](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319164&token=&lang=zh_CN)
+4. 微信 SDK 文件夹应该有 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h` 和 `WechatAuthSDK.h` 四个文件，把这个文件夹添加到项目中，注意选择 Group Reference 选项
+5. [下载解压 MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+6. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 `MaxLeap.framework`。
+7. 把 `MLWeChatUtils.framework` 添加到项目中。
+8. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
 	```objective_c
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -380,7 +383,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 	}
 	```
 
-4. 处理授权回调
+9. 处理授权回调
 	
 	```
 	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
@@ -396,7 +399,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 	}
 	```
 	
-5. 处理授权响应
+9. 处理授权响应
 	
 	```
 	#pragma mark WXApiDelegate
@@ -491,11 +494,12 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 
 1. 前往[腾讯开放平台][open_qq_site]，[创建 QQ 应用][set_up_qq_app]。
 2. 前往 [MaxLeap 控制台][maxleap_console]，前往 MaxLeap 应用设置 >> 用户验证 页面，打开"允许QQ登录"选项。
-3. [下载腾信开发平台 SDK][qq_documentation]
+3. [下载并解压腾讯开发平台 SDK][qq_documentation]
 4. 把 `TencentOpenAPI.framework` 和 `TencentOpenAPI_iOS_Bundle.bundle` 添加到项目中。
-5. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
-6. 把 `MLQQUtils.framework` 添加到项目中。
-5. 初始化 `MLQQUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
+5. [下载解压 MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+6. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 `MaxLeap.framework`。
+7. 把 `MLQQUtils.framework` 添加到项目中。
+8. 初始化 `MLQQUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
 	```objective_c
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -505,7 +509,7 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 	}
 	```
 
-6. 实现 TencentSessionDelegate 协议方法
+9. 实现 TencentSessionDelegate 协议方法
 	
 	```
 	#pragma mark TencentLoginDelegate
@@ -586,11 +590,14 @@ if (![MLQQUtils isLinkedWithUser:user]) {
 
 ## 短信验证服务
 
-MaxLeap 短信服务支持的应用场景有以下三种:
+MaxLeap 短信服务支持的应用场景有以下四种:
 
 - **用户注册/登录：**用户不再需要记住密码，只需要填写手机号和验证码就可以登录，如果用户还没有注册，则会自动注册
+- **用户绑定手机号：**用户可以绑定手机号，之后可以使用 手机号／验证码 方式登录
 - **用户操作验证：**例如银行金融类应用，用户在对资金进行敏感操作（例如转账、消费等）时，需要通过验证码来验证是否为用户本人操作。
 - **重设密码：**用户忘记密码时，可以凭借手机验证码重设密码。
+
+**注意：短信验证服务的 API 必须配对使用，`+[MLUser requestLoginSmsCodeWithPhoneNumber:block:]` 只能在登录接口 `+[MLUser loginWithPhoneNumber:smsCode:block:]` 上使用，其他类似。**
 
 ### 短信验证码登录
 
@@ -603,11 +610,24 @@ MaxLeap 短信服务支持的应用场景有以下三种:
 	用户点击获取验证码按钮，发送成功后该按钮应该变成不可用状态，然后等待至少60秒再允许重新发送。
 	获取验证码按钮事件调用 `+[MLUser requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码。
 	
+	```
+	NSString *phoneNumber = @"18512340000";
+	/* verify the phoneNumber */
+	// 请求验证码
+	[MLUser requestLoginSmsCodeWithPhoneNumber:phoneNumber block:^(BOOL succeeded, NSError * __nullable error) {
+        if (succeeded) {
+            // 登录验证码发送成功
+        } else {
+            // 验证码发送失败，检查 error 分析失败原因
+        }
+    }];
+	```
+	
 3. **用户输入验证码**
 	
 	最好验证一下用户输入的是否为纯数字。
 	
-4. **用户登录，调用 `loginWithPhoneNumber:smsCode:block:` 接口登录**
+4. **用户登录，调用 `+[MLUser loginWithPhoneNumber:smsCode:block:]` 接口登录**
 
 	```
 	[MLUser loginWithPhoneNumber:@"18512340000" 
@@ -622,7 +642,7 @@ MaxLeap 短信服务支持的应用场景有以下三种:
     }];
 	```
 	
-	如果不存在用户名为手机号 `18512340000` 的账户，则会创建一个新用户，用户名为手机号，无密码，`mobilePhone` 字段也是手机号，`mobilePhoneVerified ` 为 `true`。如果存在，直接登录，返回用户的详细信息。
+	如果不存在用户名为手机号 `18512340000` 的账户，则会创建一个新用户，用户名(`username`)为手机号，无密码，`mobilePhone` 字段也是手机号，`mobilePhoneVerified ` 为 `true`。如果存在，直接登录，返回用户的详细信息。
 
 ### 绑定手机号
 
@@ -634,7 +654,7 @@ MaxLeap 短信服务支持的应用场景有以下三种:
     [MLUser currentUser][@"mobilePhone"] = @"135xxxxxxxx";
     [[MLUser currentUser] saveInBackground:^(BOOL succeeded, NSError *error) {
         // ...
-    }];]
+    }];
     ```
 
 2. **请求发送验证码**
@@ -647,15 +667,16 @@ MaxLeap 短信服务支持的应用场景有以下三种:
     }];
 	```
 	
-3. **调用验证接口，验证用户输入的纯数字验证码**
+3. **调用验证接口，验证用户输入的验证码是否正确**
 
 	```
 	[[MLUser currentUser] verifyMobilePhoneWithSmsCode:@"123456" block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            // 验证成功
+            // 验证成功, currentUser[@"mobilePhoneVerified"].boolValue 为 YES
         }
     }];
 	```
+成功绑定手机号的用户以后就可以使用 手机号／验证码 方式登录了，也可以使用短信验证码重设密码。
 
 <span id="reset_password_by_mobile_phone"></span>
 ### 重设密码
@@ -690,6 +711,8 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 
 ### 操作认证
 
+**注意，以下两个接口需要在用户登录的状态下使用，匿名登录也可以。**
+
 用户执行一些敏感操作（比如支付）时，可以使用短信来验证是否是本人操作。步骤如下：
 
 1. **用户点击支付按钮**
@@ -717,8 +740,6 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
     	}
 	}];
 	```
-	
-> ###	注意，以上两个接口需要在用户登录的状态下使用，匿名登录也可以。
 
 ## 适配 iOS 9 系统
 
