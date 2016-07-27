@@ -15,18 +15,25 @@
 
 ### 使用 `cocoapods` 安装
 
-在 `Podfile` 中加上下面这行:
+1. 在 `Podfile` 中加上下面这行:
 
-```
-pod 'MaxLeap/Pay'
-```
+    ```python
+    pod 'MaxLeap/Pay'
+    ```
 
-打开应用 `终端`, 执行以下命令:
+2. 打开应用 `终端`, 执行以下命令:
 
-```
-$ cd your_project_dir
-$ pod install
-```
+    ```bash
+    $ cd your_project_dir
+    $ pod install
+    ```
+
+3. 在 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码，初始化 MaxLeap SDK：
+
+	```objc
+	[MaxLeap setApplicationId:@"your_maxleap_applicationId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
+	// 最后一个参数根据应用所属平台填写，如果是 maxleap.cn 填写 MLSiteCN，如果是 maxleap.com 填写 MLSiteUS
+	```
 	
 ### 手动安装
 
@@ -41,7 +48,7 @@ $ pod install
 
 4. 在 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码，初始化 MaxLeap SDK：
 
-	```
+	```objc
 	[MaxLeap setApplicationId:@"your_maxleap_applicationId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
 	// 最后一个参数根据应用所属平台填写，如果是 maxleap.cn 填写 MLSiteCN，如果是 maxleap.com 填写 MLSiteUS
 	```
@@ -60,7 +67,7 @@ $ pod install
 
 #### 接入微信移动支付
 	
-1. [下载并解压微信支付 SDK](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)
+1. [下载并解压微信支付 SDK](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=11_1)
 2. 找到微信 SDK 文件夹，该文件夹应包括 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h`三个文件，把该文件夹拖进项目中。
 3. 添加依赖 libc++.tbd
 	
@@ -74,7 +81,7 @@ $ pod install
 
 沙盒环境和离线环境都可以用来测试，区别在于：沙盒环境会连接沙盒测试服务器，而离线环境不会连接服务器，只会使用一些模拟数据。
 
-**注意：**不是所有渠道都支持沙盒环境和离线环境，如果某个渠道不支持当前环境，`+[MaxLeapPay isChannelAvaliable:]` 会返回 `NO`.
+**注意：不是所有渠道都支持沙盒环境和离线环境，如果某个渠道不支持当前环境，`+[MaxLeapPay isChannelAvaliable:]` 会返回 `NO`.**
 
 ### 处理应用跳转回调
 
