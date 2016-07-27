@@ -13,6 +13,12 @@
 1. 下载最新版 [MaxIMSDK (maxleap-im-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)
 2. 在 Xcode 中打开你的项目，导航到 Project -> Target -> General
 3. 把下载好的 `MaxIMLibDynamic.framework` 和 `SocketIOClientSwift.framework` 拖到 **Embedded Binaries** 下面
+4. **重要：**导航到 Project -> Target -> Build Settings 找到 Embedded Content Contains Swift Code，并设置为 YES。
+5. **重要：**导航到 Project -> Target -> Build Phases，点击左上角的 `+` 号，选择 `New Run Script Phase`，点击刚刚添加的 `Run Script` 前面的三角符号，展开它，把[这段脚本(strip-frameworks)](https://raw.githubusercontent.com/realm/realm-cocoa/d59c86f11525f346c8e8db277fdbf2d9ff990d98/scripts/strip-frameworks.sh)拷贝到代码区域中。
+
+**第四步和第五步很重要，不执行可能导致应用无法上传到 iTunes Connect。**
+
+**为了方便模拟器调试，我们把支持 i386 和 x86_64 的代码也合并到 MaxIMLibDynamic.framework 里面，提交应用时应该去掉这些代码。但是 Xcode 在打包时会把整个动态库原封拷贝到应用程序包中（[详情戳这里](https://forums.developer.apple.com/thread/21496)），在上传到 iTunes Connect 的时候就会出错。strip-frameworks 这个脚本的作用就是去掉多余的代码。**
 
 ## 登录
 
@@ -117,7 +123,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 [client pause];
 ```
 
-假设用户现在只使用当前终端登录，客户端暂时断开连接后，用户会出于离线状态。离线状态下的消息会通过远程推送的方式送达，这需要客户端打开远程推送功能。详情请查阅 [离线消息推送] 一节。
+假设用户现在只使用当前终端登录，客户端暂时断开连接后，用户会出于离线状态。离线状态下的消息会通过远程推送的方式送达，这需要客户端打开远程推送功能。详情请查阅 [离线消息推送](#offline_message_push) 一节。
 
 用户切换回前台后需要手动连接。
 
@@ -127,7 +133,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 
 ## 登出（注销）
 
-用户登出后，将不会再收到任何消息，包括离线消息推送。
+用户登出后，将不会再收到任何消息，包括[离线消息推送](#offline_message_push)。
 
 ```
 [client logoutWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -149,7 +155,12 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 
 3. **`attachmentUrl`**: 非文本消息(如音频消息，图片消息)的附件地址，文本消息忽略该字段
 
-4. **`sender`**: 发送方，表示谁发送过来的，`sender.type` 表示发送发类型，`sender.userId` 发送方的用户 ID, `sender.groupId` 如果消息来自群组，该字段表示该群组的 ID， `sender.roomId` 如果消息来自聊天室，该字段表示该群组的 ID
+4. **`sender`**: 发送者，表示谁发送过来的，**MaxIM 支持多终端登录和同步消息，发送方有可能是当前登录用户，说明这条消息是该用户使用别的终端发送的消息**
+
+    `sender.type` 消息来源类型，好友／群组／聊天室／游客<br>
+    `sender.userId` 发送者的 ID<br>
+    `sender.groupId` 如果消息来自群组，该字段表示该群组的 ID，否则为 nil<br>
+    `sender.roomId` 如果消息来自聊天室，该字段表示该群组的 ID，否则为 nil
 
 5. **`receiver`**: 接收方，跟 `sender` 有一样的结构
 
@@ -515,6 +526,31 @@ MLIMRoom *room = [MLIMRoom roomWithId:@"rid"];
 
 ## 系统消息
 
+### 发送系统消息
+
+发送给单个用户:
+
+```
+MLIMMessage *msg = [MLIMMessage messageWithText:@"test"];
+[client sendSystemMessage:msg toUser:@"targetUserId" completion:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+        // ...
+    }
+}];
+```
+
+发送给所有用户:
+
+```
+[client sendSystemMessageToAllUsers:msg completion:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+        // ...
+    }
+}];
+```
+
+### 接受系统消息
+
 ```
 - (void)jerryLogin {
 	MLIMClientConfiguration *configuration = [MLIMClientConfiguration defaultConfiguration];
@@ -532,10 +568,21 @@ MLIMRoom *room = [MLIMRoom roomWithId:@"rid"];
 
 - (void)client:(MLIMClient *)client didReceiveSystemMessage:(MLIMMessage *)message {
 	NSLog(@"Did receive room message：%@"， message);
+	// 接收到的系统消息可能不带有发送者以及接受者的信息
 }
 ```
 
 系统消息也区分全体消息，群组消息，特定用户消息，可以使用 `message.receiver` 区分。
+
+## 多终端消息同步
+
+MaxIM 支持多终端同时登录和多终端消息同步。如果用户同时登录的终端 A 和终端 B，他在 A 上面发送消息，那么 B 上面会收到这条消息，判断方法如下：
+
+```
+if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
+    // 这条消息是当前登录用户通过别的终端发送的
+}
+```
 
 ## 游客（新增）
 
@@ -745,6 +792,7 @@ query.skip = 2*30; // 跳过前 60 条数据，如果 limit 为 30，就是获�
 [query addDescendingOrder:@"username"];
 ```
 
+<span id="offline_message_push"></span>
 ## 离线推送消息
 
 当用户离线，并且没用注销的时候，如果收到好友或者群组消息，系统会尝试给该用户发送推送。为了使用户能正常接收推送消息，请客户端远程推送功能。
@@ -758,8 +806,6 @@ MaxIM 离线消息推送依赖于 MaxLeap 推送服务，所以需要集成 MaxL
 另外，在创建 MLIMCient 实例的时候需要传入当前的 installationId :
 
 ```
-
-```
 MLIMClientConfiguration *configuration = [MLIMClientConfiguration 
 defaultConfiguration];
 configuration.appId = @"Your_MaxLeap_ApplicationId";
@@ -769,8 +815,6 @@ configuration.clientKey = @"Your_MaxLeap_ClientKey";
 configuration.installationId = [MLInstallation currentInstallation].installationId;
 
 MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
-```
-
 ```
 
 ### 配置
@@ -845,4 +889,3 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
 	
 	在 [MaxLeap 管理平台：应用设置 - 推送通知](https://maxleap.cn/settings#notification) 上，选择对应的应用程序，上传之前获得的 .p12 文件。**这是集成 MaxLeap 推送的必要步骤。**
 	
-	**目前 MaxLeap 还只支持产品环境推送证书，我们稍后会支持沙盒环境。**
