@@ -83,20 +83,28 @@ Jetty 等其他容器内测中，敬亲期待。。。
 
 step1:
 
-选择某一应用，进入应用设置，界面；然后通过左侧菜单进入系统设置：
+选择某一应用，进入【开发中心 -> 云数据源】，界面；然后通过左侧菜单进入系统设置：
 
-![imgCCVersionList](../../../images/java_container1.png)
+![imgCCVersionList](../../../images/CloudContainerJava1.png)
 
 step2:
 
-点击创建mysql数据库；之后，点击【管理我的数据】 左侧的“眼睛”状图标，显示数据库连接和账号，记录下来；而后填写云容器主机子域名；点击保存更改：
+点击创建mysql数据库；之后，点击【管理我的数据】 左侧的“眼睛”状图标，显示数据库连接和账号，记录下来；
 
 
-![imgCCVersionList](../../../images/java_container2.png)
+![imgCCVersionList](../../../images/CloudContainerJava2.png)
 
-该数据库连接账号，需要在你的java web项目中使用，该子域名，就是你所建立项目应用的子域名。
-
+该数据库连接账号，需要在你的java web项目中使用。
 step3:
+
+进入【开发中心 -> 云容器 -> 设置】，修改云容器主机子域名，点击保存更改：
+
+![imgCCVersionList](../../../images/CloudContainerJava3.png)
+
+该子域名，就是你所建立项目应用的子域名。
+
+
+step4:
 
 点击【管理我的数据】，进入phpMyAdmin来管理用户数据库，创建并初始化数据表。如果表数据比较大，用户可以联系我们，由我们帮用户直接导入到mysql数据库中。本例中，使用[Demo-CloudContainer-Tomcat](https://github.com/MaxLeap/Demo-CloudContainer-Tomcat)中的数据库：
 
@@ -171,20 +179,28 @@ tomcat web应用部署可能需要花费一点时间,如果访问域名页面一
 
 step1:
 
-选择某一应用，进入应用设置，界面；然后通过左侧菜单进入系统设置：
+选择某一应用，进入【开发中心 -> 云数据源】：
 
-![imgCCVersionList](../../../images/php_container1.png)
+![imgCCVersionList](../../../images/CloudContainerJava1.png)
 
 step2:
 
-点击创建mysql数据库；之后，点击【管理我的数据】 左侧的“眼睛”状图标，显示数据库连接和账号，记录下来；而后填写云容器主机子域名；点击保存更改：
+点击创建mysql数据库；之后，点击【管理我的数据】 左侧的“眼睛”状图标，显示数据库连接和账号，记录下来
 
 
-![imgCCVersionList](../../../images/php_container2.png)
+![imgCCVersionList](../../../images/CloudContainerJava2.png)
 
-该数据库连接账号，需要在你的php项目中使用，该子域名，就是你所建立项目应用的子域名。
+该数据库连接账号，需要在你的php项目中使用。
 
 step3:
+
+进入【开发中心 -> 云容器 -> 设置】，修改您的二级子域名，保存。
+
+![imgCCVersionList](../../../images/CloudContainerJava3.png)
+
+该子域名，就是你所建立项目应用的子域名。
+
+step4:
 
 点击【管理我的数据】，进入phpMyAdmin来管理用户数据库，创建并初始化数据表。如果表数据比较大，用户可以联系我们，由我们帮用户直接导入到mysql数据库中。本例中，使用Yii Framework所提供的CRUD样例数据库：
 
@@ -271,7 +287,7 @@ step10:
 
 step1：
 
-注册并登录 MaxLeap 平台，创建一个应用，进入【应用设置 -> 系统设置】，配置云容器二级域名并保存
+注册并登录 MaxLeap 平台，创建一个应用，进入【开发中心-> 云容器 -> 设置】，配置云容器二级域名并保存
 
 ![imgCCVersionList](../../../images/web_container1.png)
 

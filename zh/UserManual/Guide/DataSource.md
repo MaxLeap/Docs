@@ -49,21 +49,18 @@ MaxLeap 平台为每个应用准备一个以 appId 命名的数据库，用户�
 
 Mongo 数据库内测中，敬请期待。。。
 
-1、进入【应用设置 -> 系统设置】，如下图所示：
+1、进入【开发中心 -> 云数据源】，如下图所示：
 
 ![imgCCUpload](../../../images/dataSource1.png)
 
-2、在 Mysql 数据库配置下，点击【创建数据库】按钮，开始创建数据库，稍等一会，如下图所示：
-![imgCCUpload](../../../images/dataSource2.png)
-
-3、创建成功后会生成对应的数据库连接地址、用户名（AppId）和密码，密码可以修改
-![imgCCUpload](../../../images/dataSource6.png)
-4、点击眼睛按钮查看数据源链接地址、用户名和密码详情，至此当前应用的 Mysql 数据库已成功创建
+2、点击【创建 Mysql 数据源】成功后会生成对应的数据库连接地址、用户名（AppId）和密码，密码可以修改
 ![imgCCUpload](../../../images/dataSource3.png)
+3、点击眼睛按钮查看数据源链接地址、用户名和密码详情，至此当前应用的 Mysql 数据库已成功创建
+![imgCCUpload](../../../images/dataSource4.png)
 
 ### 管理数据
 
-1、在 Mysql 数据库配置右边，点击【管理我的数据】进入phpMyAdmin 管理台，就像在本地操作自己数据库一样开始你的操作
+1、进入【开发中心 -> 云数据源】，在 Mysql 数据库配置右边，点击【管理我的数据】进入phpMyAdmin 管理台，就像在本地操作自己数据库一样开始你的操作
 ![imgCCUpload](../../../images/dataSource4.png)
 2、MaxLeap 会给当前应用创建一个以 AppId 命名的数据库，你可随意操作
 ![imgCCUpload](../../../images/dataSource5.png)
