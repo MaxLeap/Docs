@@ -2,7 +2,7 @@
 
 ## 准备
 
-> #### 基础用户管理功能集成在 `MaxLeap.framework` 中，如果还没有集成，请**先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK** 并使之在 Xcode 中运行。
+> #### 基础用户管理功能集成在 `MaxLeap.framework` 中，如果还没有集成，请**先查阅[快速入门指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK** 并使之在 Xcode 中运行。
 
 第三方登录需要集成 `ML**Utils.framework` 和第三方平台对应 SDK。
 

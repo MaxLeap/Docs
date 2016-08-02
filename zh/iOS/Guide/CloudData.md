@@ -15,7 +15,7 @@
 
 ## 准备
 
-> ### 云数据存储集成在 `MaxLeap.framework` 中，如果尚未安装，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+> #### 云数据存储集成在 `MaxLeap.framework` 中，如果尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
 
 您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
@@ -82,7 +82,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 ### 检索
 
-##### 获取 `MLObject`
+#### 获取 `MLObject`
 
 您可以通过某条数据的 `objectId`, 获取这条数据的完整内容:
 
@@ -97,7 +97,7 @@ MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
 // inside the completion block above.
 ```
 
-##### 获取 `MLObject` 属性值
+#### 获取 `MLObject` 属性值
 
 要从检索到的 `MLObject` 实例中获取值，您可以使用 `objectForKey:` 方法或 `[]` 操作符：
 
@@ -434,7 +434,7 @@ MLFile *applicantResume = anotherApplication[@"applicantResumeFile"];
 }];
 ```
 
-##### 图像
+#### 图像
 
 通过将图片转换成 `NSData` 然后使用 `MLFile` 就可以轻松地储存图片。假设您有一个名为 `image` 的 `UIImage`，并想把它另存为 `MLFile`：
 
@@ -542,7 +542,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"Post" predicate:predicate];
 - 将一个键与另一个键比较的谓语。
 - 带多个 `OR` 子句的复杂谓语。
 
-##### 设置过滤条件
+#### 设置过滤条件
 
 有几种方法可以对 `MLQuery` 可以查到的对象设置限制条件。您可以用 `whereKey:notEqualTo:` 将具有特定键值对的对象过滤出来：
 
@@ -693,7 +693,7 @@ MLQuery *postsQuery = [MLQuery queryWithClassName:@"Post"];
 [query whereKey:@"arrayKey" containsAllObjectsInArray:@[@2, @3, @4]];
 ```
 
-####值类型为字符串的查询
+#### 值类型为字符串的查询
 
 使用 `whereKey:hasPrefix:` 将结果限制为以某一特定字符串开头的字符串值。与 MySQL `LIKE` 运算符类似，它包含索引，所以对大型数据集很有效：
 

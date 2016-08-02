@@ -55,7 +55,7 @@ MaxIMLibDynamic.framework **动态库，**MaxLeap 提供的即时通讯功能代
 
 MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
-> **_MaxIMLibDynamic.framework 与 MaxIMLib.framework 二选一，不可以同时集成_**
+**_MaxIMLibDynamic.framework 与 MaxIMLib.framework 二选一，不可以同时集成_**
 
 集成使用指南：https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF
 
@@ -80,7 +80,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：https://github.com/MaxLeap/Module-MaxLogin-iOS
 
-> 建议使用之前先了解[云数据库(MLObject 的一些基本操作)][cloud_data]和[账户管理系统][accout_system]
+**建议使用之前先了解[云数据库(MLObject 的一些基本操作)][cloud_data]和[账户管理系统][accout_system]**
 
 ### 2.2 MaxIMUI
 
@@ -88,7 +88,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：https://github.com/MaxLeap/Module-MaxIM-iOS
 
-> 建议使用之前先了解 [MaxIMLib.framework](#maxleap-im-ios)
+**建议使用之前先了解 [MaxIMLib.framework](#maxleap-im-ios)**
 
 ### 2.3 MaxSocialUI
 
@@ -96,7 +96,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：https://github.com/MaxLeap/Module-MaxSocial-iOS
 
-> 建议使用之前先了解 [应用内社交基础模块(MaxSocial.framework)](#MaxSocial_detail)
+**建议使用之前先了解 [应用内社交基础模块(MaxSocial.framework)](#MaxSocial_detail)**
 
 ### 2.4 MaxPayUI
 
@@ -104,7 +104,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：https://github.com/MaxLeap/Module-MaxPay-iOS
 
-> 建议使用之前先了解 [移动支付基础模块(MaxLeapPay.framework)](#MaxLeapPay_detail)
+**建议使用之前先了解 [移动支付基础模块(MaxLeapPay.framework)](#MaxLeapPay_detail)**
 
 ### 2.5 MaxShare
 

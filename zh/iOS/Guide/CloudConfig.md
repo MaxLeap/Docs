@@ -22,7 +22,7 @@ Value|参数的值
 
 ## 集成 SDK
 
-> ### 在线参数集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+> #### 在线参数集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[快速入门指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
 
 你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 

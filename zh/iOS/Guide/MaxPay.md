@@ -37,7 +37,7 @@
 	
 ### 手动安装
 
-1. [下载并解压最新版本的 SDK](https://github.com/MaxLeap/SDK-iOS/releases)
+1. [下载并解压最新版本的 SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)
 2. 把解压得到的 `MaxLeap.framework` 和 `MaxLeapPay.framework` 拖到项目中 
 3. 添加以下依赖库</br>
 	`MobileCoreServices.framework`</br>

@@ -6,7 +6,7 @@
 
 ## 安装
 
-> ### `MaxIMLib.framework` 依赖于 `SocketIOClientSwift.framework`，支持 iOS 8 及更新版本的 iOS 系统。
+> #### `MaxIMLib.framework` 依赖于 `SocketIOClientSwift.framework`，支持 iOS 8 及更新版本的 iOS 系统。
 
 需要 Xcode 7 或者更新版本。
 
