@@ -15,6 +15,7 @@ URL |	HTTP|	功能
 ### 调用云函数
 云函数是运行在 MaxLeap 上的代码,可以使用它来实现各种复杂逻辑。用户在上传完云代码后,可以通过REST API来调用云端定义的函数,以JAVA版本为例,当你使用CloudCode-SDK(如何使用请参考[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#FUNCTION))定义了一个function:
 
+```java
     //定义一个简单的function:返回输入数据
     defineFunction("hello", new MLHandler<Request, Response>() {
         @Override
@@ -24,6 +25,7 @@ URL |	HTTP|	功能
             return response;
         }
     });
+```
 
 部署该云代码后,通过API调用该云函数如下:
 
@@ -41,6 +43,7 @@ URL |	HTTP|	功能
 ### 执行job
 云代码中，您还可以自定义后台任务，它可以很有效的帮助您完成某些重复性的任务，或者定时任务。如深夜进行数据库迁移，每周六给用户发送打折消息等等。您也可以将一些耗时较长的任务通过Job来有条不紊地完成。用户在上传完云代码后,可以通过REST API来调用云端定义的后台任务,以JAVA版本为例,当你使用CloudCode-SDK(如何使用请参考[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA#JOB))定义了一个background job:
 
+```java
     //定义一个简单的job
     defineJob("helloJob", new MLHandler<Request, Response>() {
         @Override
@@ -50,6 +53,7 @@ URL |	HTTP|	功能
             return response;
         }
     });
+```
     
 部署该云代码后,通过API调用该任务如下:
 
