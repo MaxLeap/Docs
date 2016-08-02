@@ -17,7 +17,7 @@
 
 ## 准备
 
-> ### 推送营销功能集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+> #### 推送营销功能集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
 你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 7.0 及以上版本。
@@ -98,8 +98,8 @@
 
 badge 是 iOS 用来标记应用程序未读消息(通知)的一个数字，出现在应用图标右上角。MaxLeap 支持保存 badge 值到服务器，然后由后台来管理每个用户推送的 badge 值。
 
-> ### SDK 初始化时，会自动将应用实际 badge 值（[UIApplication sharedApplication].applicationIconBadgeNumber）上传到 MaxLeap 服务器。
-> ### 在后台发送推送消息时，后台会自动把每个 installation.badge 加 1.
+>####  SDK 初始化时，会自动将应用实际 badge 值（[UIApplication sharedApplication].applicationIconBadgeNumber）上传到 MaxLeap 服务器。
+>####  在后台发送推送消息时，后台会自动把每个 installation.badge 加 1.
 
 #### 上传 badge 值
 

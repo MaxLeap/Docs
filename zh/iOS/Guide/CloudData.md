@@ -68,7 +68,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 * **Comment表何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端建表，所以在保存这条数据之前，必须先在开发者中心创建 Comment 这个表。
 * **表中同一属性值类型一致:** 新建 comment 对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **客户端无法修改后端数据结构：** 例如，如果 Comment 表中没有 `isRead` 这个字段，那么保存将会失败
+* **客户端可以添加字段：** 例如，如果 Comment 表中没有 `isRead` 这个字段，那么保存时会自动添加这个字段，字段类型是第一次保存的 `isRead` 值的类型
 * **内建的属性:** 每个 MLObject 对象有以下几个字段是不需要开发者指定的。这些字段的创建和更新是由系统自动完成的，请不要在代码里使用这些字段来保存数据。
 
 属性名|值|
@@ -144,7 +144,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 ### 删除对象
 
-##### 删除 `MLObject`
+**删除 `myComment` 整条数据，这条数据的 `objectId` 不能为空：**
 
 ```objective_c
 [myComment deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -155,19 +155,8 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 	}
 }];
 ```
-##### 批量删除 `MLObject`
 
-```
-[MLObject deleteAllInBackground:objectsToDelete block:^(BOOL succeeded, NSError *error) {
-	 if (succeeded) {
-    	//
-    } else {
-   	   // there was an error
-    }
-}];
-```
-
-##### 删除 `MLObject` 实例的某一属性
+**删除 `MLObject` 实例的某一属性**
 
 除了完整删除一个对象实例外，您还可以只删除实例中的某些指定的值。请注意只有调用 `-saveInBackgroundWithBlock:` 之后，修改才会同步到云端。
 
@@ -184,12 +173,28 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 }];
 ```
 
+### 批量操作
+
+为了减少请求次数带来的浪费，可以使用批量操作接口，在一个请求中对多条数据进行创建，更新，删除，获取操作，接口有下面这些：
+
+```
+// 批量创建、更新
++[MLObject saveAllInBackground:block:]
+
+// 批量删除
++[MLObject deleteAllInBackground:block:]
+
+// 批量获取
++[MLObject fetchAllInBackground:block:]
++[MLObject fetchAllIfNeededInBackground:block:]
+```
+
 ### 计数器
 计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
 
 比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
 
-##### 递增计数器
+#### 递增计数器
 此时，我们可以利用`-incrementKey:`(增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录某帖子的阅读次数字段 `readCount`，我们可以使用如下方式：
 
 ```objective_c
@@ -197,10 +202,10 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 [myPost saveInBackgroundWithBlock:nil];
 ```
 
-##### 指定增量
+#### 指定增量
 您还可以使用 `-incrementKey:byAmount:` 实现任何数量的递增。注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
 
-##### 递减计数器
+#### 递减计数器
 
 要实现递减计数器，只需要向 `-incrementKey:byAmount:` 接口传入一个负数即可：
 
@@ -213,7 +218,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 您可以通过以下方式，将数组类型的值保存至 `MLObject` 的某字段(如下例中的 `tags` 字段)下：
 
-##### 增加至数组尾部
+#### 增加至数组尾部
 您可以使用 `addObject:forKey:` 和 `addObjectsFromArray:forKey:`向`tags`属性的值的尾部，增加一个或多个值。
 
 ```objective_c
@@ -223,7 +228,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 同时，您还可以通过`-addUniqueObject:forKey:` 和 `addUniqueObjectsFromArray:forKey:`，仅增加与已有数组中所有 item 都不同的值。插入位置是不确定的。
 
-##### 使用新数组覆盖
+#### 使用新数组覆盖
 
 可以通过 `setObject:forKey:` 方法使用一个新数组覆盖 `tags` 中原有数组：
 
@@ -231,7 +236,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 [myPost setObject:@[] forKey:@"tags"]
 ```
 
-##### 删除某数组字段的值
+#### 删除某数组字段的值
 
 `-removeObject:forKey:` 和 `-removeObjectsInArray:forKey:` 会从数组字段中删除每个给定对象的所有实例。
 
