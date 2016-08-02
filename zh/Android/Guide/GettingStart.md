@@ -6,7 +6,7 @@
 
 1.	获取项目模板，并解压缩至您的 Workspace
 
-    <a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-Android" target="_blank">下载 Android 项目模板</a>
+    <a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-Android/archive/master.zip" target="_blank">下载 Android 项目模板</a>
 
 2.	打开项目模板
 
@@ -104,9 +104,8 @@
 
 ## 已有项目
 
-1. 获取 SDK，并解压缩
-
-    <a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">下载 MaxLeap SDK</a>
+1. 安装 SDK
+	[下载 SDK](下载链接)
 
 2. 将 SDK 添加至项目
 
