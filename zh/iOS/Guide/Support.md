@@ -7,7 +7,7 @@
 
 ## 准备工作
 
-1. 安装并配置 MaxLeap Core SDK. 详细步骤，请查看[QuickStart - Core SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
+1. 安装并配置 MaxLeap Core SDK. 详细步骤，请查看[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)
 2. 安装并配置 HelpCenter SDK. 详细步骤，请查看[QuickStart - HelpCenter](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)
 
 ## 展示 FAQ 页面

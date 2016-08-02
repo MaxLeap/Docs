@@ -26,7 +26,7 @@
 
 ## 启用服务
 
-> #### 统计分析功能集成在 `MaxLeap.framework` 中，如果还没有继承这个框架，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+> #### 统计分析功能集成在 `MaxLeap.framework` 中，如果还没有继承这个框架，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
 
 安装SDK完成后，MaxLeap 服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
 
