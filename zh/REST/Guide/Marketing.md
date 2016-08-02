@@ -6,7 +6,7 @@
 
 | URL                                      | HTTP | 功能                             |
 | ---------------------------------------- | ---- | ------------------------------ |
-| `/marketing/push/msg/(all\|{installId})` | POST | [向用户推送消息](#向用户发送消息)            |
+| `/marketing/push/msg/(all|{installId})` | POST | [向用户推送消息](#向用户发送消息)            |
 | `/goppush/server/get?k={key}&p={}`       | GET  | [获取可用Android 推送服务器](#)         |
 | `/gopush/msg/get?k={key}&m={}`           | GET  | [获取Android离线消息](获取Android离线消息) |
 | `/gopush/time/get?cb={}`                 | GET  | [获取初始消息ID](获取初始消息ID)           |
