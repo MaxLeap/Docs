@@ -1,6 +1,6 @@
 # SDK 集成
 
-## 新项目集成
+## 全新项目
 
 ### 环境依赖
 - JDK安装:云代码 SDK支持 JDK6, 7, 8，推荐使用JDK8。
@@ -18,9 +18,7 @@
 
 获取 MaxLeap 云代码 Java项目模板(注意：你的云代码项目请确保放置在英文目录下，否则本地单元测试可能会引起文件解析错误)
 
-```shell
-git clone https://github.com/MaxLeap/Demo-CloudCode-Java.git
-```
+[下载模板项目](https://github.com/MaxLeap/Demo-CloudCode-Java/archive/master.zip)
 
 2. 修改配置
 
@@ -105,9 +103,23 @@ public class Main extends LoaderBase implements Loader {
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package。
 
 ### 云代码的上传及部署
-登录MaxLeap后台，进入您的应用，选择[开发中心->云代码->版本->上传云代码]，在弹出的文件选择框中选中生成的zip文件，点击上传。
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
 
-上传完成后在版本列表中选中当前版本执行操作[部署]，选择相应的部署策略后点击确定执行部署。
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 
 ### 测试
@@ -135,14 +147,14 @@ Hello, David Wang!
 
 * X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
-### 下一步
- 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
 
-## 已有项目集成
+ 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。
+ 
+## 已有项目
 
 ### 添加云代码至已有的项目
 
-注意：你的云代码项目请确保放置在英文目录下，否则本地测试可能会引起文件解析错误
+**注意**：你的云代码项目请确保放置在英文目录下，否则本地测试可能会引起文件解析错误
 
 ####配置maven项目的pom.xml
 
@@ -352,7 +364,7 @@ public class Main extends LoaderBase implements Loader {
 }
 ```
 
-注意：
+**注意：**
 
 * Main class的main method是云代码项目启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
 
@@ -365,9 +377,23 @@ public class Main extends LoaderBase implements Loader {
 我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
 
 ### 云代码的上传及部署
-登录MaxLeap后台，进入您的应用，选择[开发中心->云代码->版本->上传云代码]，在弹出的文件选择框中选中生成的zip文件，点击上传。
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
 
-上传完成后在版本列表中选中当前版本执行操作[部署]，选择相应的部署策略后点击确定执行部署。
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 
 ### 测试
@@ -395,6 +421,4 @@ Hello, David Wang!
 
 * X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
 
-### 下一步
- 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK使用教程](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
-
+ 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。
