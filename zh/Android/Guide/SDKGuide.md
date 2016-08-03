@@ -61,22 +61,22 @@ maxleap-sdk-social-v0.0.1.jar
 
 登录组件，内置 注册界面，登录界面，其他登录界面（包含手机号登录，第三方平台账号登录）。
 
-组件地址：https://github.com/MaxLeap/Module-MaxLogin-Android
+组件地址：[https://github.com/MaxLeap/Module-MaxLogin-Android](https://github.com/MaxLeap/Module-MaxLogin-Android)
 
-> 建议使用之前先了解[云数据库(MLObject 的一些基本操作)][cloud_data]和[账户管理系统][accout_system]
+**建议使用之前先了解** [云数据库(MLObject 的一些基本操作)][cloud_data]和[账户系统][accout_system]
 
 ### 2.2 MaxIMUI
 
 聊天 UI 组件，内置 联系人和群组列表界面，最近聊天列表，聊天界面。
 
-组件地址：https://github.com/MaxLeap/Module-MaxIM-Android
+组件地址：[https://github.com/MaxLeap/Module-MaxIM-Android](https://github.com/MaxLeap/Module-MaxIM-Android)
 
 
 ### 2.3 MaxSocialUI
 
 应用内社交组件，包含 说说发布界面，说说列表界面，广场界面，朋友圈界面等。
 
-组件地址：https://github.com/MaxLeap/Module-MaxSocial-iOS
+组件地址：[https://github.com/MaxLeap/Module-MaxSocial-iOS](https://github.com/MaxLeap/Module-MaxSocial-iOS)
 
 
 ### 2.4 MaxPayUI
@@ -87,21 +87,21 @@ maxleap-sdk-social-v0.0.1.jar
 
 ### 2.5 MaxShare
 
-社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。支持 新浪微博，微信好友，微信朋友圈，QQ好友，QQ空间 分享，但是都需要集成对应平台的 SDK，更详细内容请查阅[社交分享使用指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB)。
+社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。支持 新浪微博，微信好友，微信朋友圈，QQ好友，QQ空间 分享，但是都需要集成对应平台的 SDK，更详细内容请查阅[社交分享使用指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB)。
 
-组件地址：https://github.com/MaxLeap/Module-MaxShare-Android
+组件地址：[https://github.com/MaxLeap/Module-MaxShare-Android](https://github.com/MaxLeap/Module-MaxShare-Android)
 
 ### 2.6 MaxIssues
 
 用户反馈组件，通过这个组件，用户可以创建一个会话，用来反馈问题。客服可以与之对话，近似实时聊天。
 
-组件地址：https://github.com/MaxLeap/Module-MaxIssues-Android
+组件地址：[https://github.com/MaxLeap/Module-MaxIssues-Android](https://github.com/MaxLeap/Module-MaxIssues-Android)
 
 ### 2.7 MaxFAQ
 
 常见问题界面组件，包含 问题分类，问题列表，问题答案界面。可以在后台编辑问题，然后在客户端显示出来。
 
-组件地址：https://github.com/MaxLeap/Module-MaxFAQ-Android
+组件地址：[https://github.com/MaxLeap/Module-MaxFAQ-Android](https://github.com/MaxLeap/Module-MaxFAQ-Android)
 
 
 
