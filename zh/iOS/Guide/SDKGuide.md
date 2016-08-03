@@ -20,18 +20,17 @@ MaxLeapPay.framework 支付模块，支持支付宝支付、微信支付、银�
 <span id="MaxSocial_detail"></span>
 MaxSocial.framework 社交模块，支持发帖、评论／点赞、关注、朋友圈、广场等功能，[集成使用指南][MaxSocial_detail]
 
-<span id="MLQQUtils_detail"></span>
 MLQQUtils.framework QQ 登录模块，[集成使用指南][MLQQUtils_detail]
 
-<span id="MLWeChatUtils_detail"></span>
 MLWeChatUtils.framework 微信登录模块，[集成使用指南][MLWeChatUtils_detail]
 
-<span id="MLWeiboUtils_detail"></span>
 MLWeiboUtils.framework 微博登录模块，[集成使用指南][MLWeiboUtils_detail]
 
-<span id="MaxShare_detail"></span>
-MaxShare.framework 社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。[集成使用指南][MaxShare_detail]
+MaxSocialShare.embeddedframework 社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。[集成使用指南][MaxShare_detail]，[源码地址][maxshare_source]
 
+MaxIssues.embeddedframework 用户反馈组件，[源码地址][maxissues_source]，使用指南请查阅源码仓库中的 README
+
+MaxFAQ.embeddedframework FAQ 界面组件, [源码地址][maxfaq_source], 使用指南请查阅源码仓库中的 README
 
 <span id="MaxLeap_detail"></span>
 #### MaxLeap.framework
@@ -85,6 +84,8 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：[https://github.com/MaxLeap/Module-MaxLogin-iOS](https://github.com/MaxLeap/Module-MaxLogin-iOS)
 
+使用指南请查阅源码仓库中的 README
+
 **建议使用之前先了解[云数据库(MLObject 的一些基本操作)][cloud_data]和[账户管理系统][accout_system]**
 
 ### 2.2 MaxIMUI
@@ -92,6 +93,8 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 聊天 UI 组件，内置 联系人和群组列表界面，最近聊天列表，聊天界面。
 
 组件地址：[https://github.com/MaxLeap/Module-MaxIM-iOS](https://github.com/MaxLeap/Module-MaxIM-iOS)
+
+使用指南请查阅源码仓库中的 README
 
 **建议使用之前先了解 [MaxIMLib.framework](#maxleap-im-ios)**
 
@@ -101,6 +104,8 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：[https://github.com/MaxLeap/Module-MaxSocial-iOS](https://github.com/MaxLeap/Module-MaxSocial-iOS)
 
+使用指南请查阅源码仓库中的 README
+
 **建议使用之前先了解 [应用内社交基础模块(MaxSocial.framework)](#MaxSocial_detail)**
 
 ### 2.4 MaxPayUI
@@ -109,26 +114,33 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：[https://github.com/MaxLeap/Module-MaxPay-iOS](https://github.com/MaxLeap/Module-MaxPay-iOS)
 
+使用指南请查阅源码仓库中的 README
+
 **建议使用之前先了解 [移动支付基础模块(MaxLeapPay.framework)](#MaxLeapPay_detail)**
 
 ### 2.5 MaxShare
 
 社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。支持 新浪微博，微信好友，微信朋友圈，QQ好友，QQ空间 分享，但是都需要集成对应平台的 SDK，更详细内容请查阅[社交分享使用指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB)。
 
-组件地址：[https://github.com/MaxLeap/Module-MaxShare-iOS](https://github.com/MaxLeap/Module-MaxShare-iOS)
+组件地址：[https://github.com/MaxLeap/Module-MaxShare-iOS][maxshare_source]
+
+使用指南请查阅源码仓库中的 README
 
 ### 2.6 MaxIssues
 
 用户反馈组件，通过这个组件，用户可以创建一个会话，用来反馈问题。客服可以与之对话，近似实时聊天。
 
-组件地址：[https://github.com/MaxLeap/Module-MaxIssues-iOS](https://github.com/MaxLeap/Module-MaxIssues-iOS)
+组件地址：[https://github.com/MaxLeap/Module-MaxIssues-iOS][maxissues_source]
+
+使用指南请查阅源码仓库中的 README
 
 ### 2.7 MaxFAQ
 
 常见问题界面组件，包含 问题分类，问题列表，问题答案界面。可以在后台编辑问题，然后在客户端显示出来。
 
-组件地址：[https://github.com/MaxLeap/Module-MaxFAQ-iOS](https://github.com/MaxLeap/Module-MaxFAQ-iOS)
+组件地址：[https://github.com/MaxLeap/Module-MaxFAQ-iOS][maxfaq_source]
 
+使用指南请查阅源码仓库中的 README
 
 
 [cloud_data]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#数据存储
@@ -145,3 +157,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 [MLQQUtils_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-第三方登录-使用-qq-账号登陆
 [MLWeChatUtils_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-第三方登录-使用微信账号登陆
 [MLWeiboUtils_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-第三方登录-使用微博账号登陆
+
+[maxshare_source]: https://github.com/MaxLeap/Module-MaxShare-iOS
+[maxissues_source]: https://github.com/MaxLeap/Module-MaxIssues-iOS
+[maxfaq_source]: https://github.com/MaxLeap/Module-MaxFAQ-iOS
