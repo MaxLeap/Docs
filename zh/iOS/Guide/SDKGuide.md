@@ -31,7 +31,7 @@ MLWeiboUtils.framework 微博登录模块，[集成使用指南][MLWeiboUtils_de
 <span id="MaxLeap_detail"></span>
 #### MaxLeap.framework
 
-集成指南：[https://maxleap.cn/s/web/zh_cn/quickstart/ios/core/existing.html](https://maxleap.cn/s/web/zh_cn/quickstart/ios/core/existing.html)
+集成指南：请查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)
 
 MaxLeap.framework 内置功能以及使用指南：
 
