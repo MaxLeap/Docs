@@ -6,6 +6,8 @@ MaxLeap SDK 有三个压缩包：maxleap-sdk-ios.zip, maxleap-im-ios.zip, maxlea
 
 ## 1 闭源模块
 
+[SDK 压缩包下载地址](https://github.com/MaxLeap/SDK-iOS/releases)
+
 ### 1.1 maxleap-sdk-ios.zip
 
 包含以下代码库：
