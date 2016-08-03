@@ -1,7 +1,4 @@
-##### _Author: Kevin
-##### _Github: https://github.com/lalamini
-
-# 支付服务
+# 移动支付
 ## 简介
 
 目前支持支付宝、微信、银联支付等渠道，支持支付及查询订单功能。我们将持续更新，支持更多支付平台和更多功能，敬请期待。
@@ -9,9 +6,9 @@
 ## 使用
 请使用php5.4以上版本,并安装php-curl等相关模块
 
-首先请<a class="download-sdk" href="https://github.com/MaxLeap/SDK-MaxPay-PHP/tree/1.0" target="_blank">下载php-sdk</a>
+首先请<a class="download-sdk" href="https://github.com/MaxLeap/SDK-MaxPay-PHP/archive/master.zip" target="_blank">下载php-sdk</a>
 
-###一、 支付
+###支付
 ####1. require "MLPay.php";
 ####2. 填充数组 $data ，内容包括
 #####必填: 
@@ -92,7 +89,7 @@ $result = MLPayApi::bill($data);
 *  7 | CHANNEL_ERROR | 渠道内部错误
 *  14 | RUN_TIME_ERROR | 实时未知错误，请与技术联系帮助查看
 
-###二、订单查询
+### 交易查询
 ####1. require "MLPay.php";
 ####2. 填充数组$data, 内容包括
 #####必填: 

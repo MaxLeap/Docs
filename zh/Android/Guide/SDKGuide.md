@@ -1,34 +1,42 @@
 # SDK 简介
 
-MaxLeap Android SDK 包含 maxleap-sdk-core.zip，maxleap-sdk-im.zip，maxleap-sdk-social.zip。
-
+MaxLeap Android SDK 集中整合在 maxleap-sdk-all.zip 文件中。
 
 ## 1 闭源模块
 
-### 1.1 maxleap-sdk-core.zip
+### maxleap-sdk-all.zip
 
 包含以下代码库：
 
-maxleap-sdk-core.jar 核心库，下面的代码库都依赖它
+maxleap-sdk-core-{版本}.jar 核心库，下面的代码库都依赖它
+
+<span id="MaxSupport_detail"></span>
+maxleap-sdk-support-{版本}.jar 用户支持模块，支持用户反馈，FAQ 管理等功能。
+
+目录：maxleap-sdk-support-resources 用户支持模块资源文件。
 
 <span id="MaxLeapPay_detail"></span>
-maxleap-sdk-pay.jar 支付模块，支持支付宝支付、微信支付、银联支付。
+maxleap-sdk-pay-{版本}.jar 支付模块，支持支付宝支付、微信支付、银联支付。
+
+<span id="MaxIM_detail"></span>
+maxleap-sdk-im-{版本}.jar 实时通讯模块，支持单聊、多聊等功能
 
 <span id="MaxSocial_detail"></span>
-maxleap-sdk-social.jar 社交模块，支持发帖、评论／点赞、关注、朋友圈、广场等功能。
+maxleap-sdk-social-{版本}.jar 包括社交分享及应用内社交模块，支持发帖、评论／点赞、关注、朋友圈、广场等功能。
 
 <span id="MLQQUtils_detail"></span>
-maxleap-sdk-qq.jar QQ 登录模块
+maxleap-sdk-qq-{版本}.jar QQ 登录模块
 
 <span id="MLWeChatUtils_detail"></span>
-maxleap-sdk-wechat.jar 微信登录模块
+maxleap-sdk-wechat-{版本}.jar 微信登录模块
 
 <span id="MLWeiboUtils_detail"></span>
-maxleap-sdk-weibo.jar 微博登录模块
+maxleap-sdk-weibo-{版本}.jar 微博登录模块
 
 
 <span id="MaxLeap_detail"></span>
-#### maxleap-sdk-core.jar
+
+#### maxleap-sdk-core-{版本}.jar
 
 
 maxleap-sdk-core.jar  内置功能以及使用指南：
@@ -41,19 +49,6 @@ maxleap-sdk-core.jar  内置功能以及使用指南：
 - 短信服务, [使用指南][smscode]
 - 推送营销, [使用指南][marketing]
 
-
-<span id="maxleap-im-android"></span>
-### 1.2 maxleap-im-ios.zip
-
-包含以下代码库：
-
-maxleap-sdk-im-v0.0.4.jar
-
-### 1.3 maxleap-sdk-social.zip
-
-包含以下代码库：
-
-maxleap-sdk-social-v0.0.1.jar
 
 ## 2 开源 UI 组件
 
@@ -87,7 +82,7 @@ maxleap-sdk-social-v0.0.1.jar
 
 ### 2.5 MaxShare
 
-社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。支持 新浪微博，微信好友，微信朋友圈，QQ好友，QQ空间 分享，但是都需要集成对应平台的 SDK，更详细内容请查阅[社交分享使用指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB)。
+依赖于第三方平台 SDK。支持 新浪微博，微信好友，微信朋友圈，QQ好友，QQ空间 分享，但是都需要集成对应平台的 SDK，更详细内容请查阅[社交分享使用指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB)。
 
 组件地址：[https://github.com/MaxLeap/Module-MaxShare-Android](https://github.com/MaxLeap/Module-MaxShare-Android)
 
@@ -112,6 +107,8 @@ maxleap-sdk-social-v0.0.1.jar
 [cloud_config]: https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#在线参数
 
 [marketing]: https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#推送营销
+
+[smscode]: https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#账号服务-短信登录
 
 [MaxLeapPay_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#移动支付
 [MaxSocial_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html#应用内社交

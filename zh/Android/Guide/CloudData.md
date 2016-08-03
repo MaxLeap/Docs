@@ -2,18 +2,13 @@
 
 ## 简介
 
-### 什么是 Cloud Data服务
+### 什么是 Cloud Data 服务
 
  Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象 `MLObject` 的基础上，每个 `MLObject` 包含若干键值对。所有` MLObject` 均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于 `MLObject` 的对象。
+ 
+## SDK 集成
 
-### 为何需要 Cloud Data 服务
-
-Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
-
-* 解决硬件资源的部署和运维
-* 提供标准而又完整的数据访问 API
-* 数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可结合代码托管服务，实现云端数据的 Hook （详见 [MaxLeap 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)）
+请按第二章【SDK 集成】步骤完成 SDK 集成。
 
 ## Cloud Object
 

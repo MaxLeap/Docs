@@ -1,8 +1,5 @@
 # 即时通讯
 
-##### _Author: Marvin
-##### _Github: https://github.com/zhoucen
-
 ## 简介
 
 使用 MaxLeap 的即时通讯服务，可以轻松实现一个实时聊天应用，或者一个联机对战类的游戏。除聊天室外的聊天记录都保存在云端，离线消息会通过消息推送及时送达，推送的消息文本可以灵活定制。
@@ -15,13 +12,14 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 ## Demo
 
-- 简单聊天 Demo [源码](https://github.com/MaxLeap/Demo-IM-Javascript)
+- 简单聊天 Demo [源码](https://github.com/MaxLeap/Demo-IM-Javascript/archive/master.zip)
+- 下载后根据 README 文档步骤启动
 
 ## 安装与配置
 
-### 浏览器环境
+### 集成 SDK
 
-下载[SDK](https://github.com/MaxLeap/MaxIM-JavaScript/releases/latest)
+请按第一章 【SDK 集成】完成集成。
 
 下载好之后，在页面中加载 dist/ML.im.js 后即可使用 `ML.im` 全局变量。
 
