@@ -29,6 +29,9 @@ MLWeChatUtils.framework 微信登录模块，[集成使用指南][MLWeChatUtils_
 <span id="MLWeiboUtils_detail"></span>
 MLWeiboUtils.framework 微博登录模块，[集成使用指南][MLWeiboUtils_detail]
 
+<span id="MaxShare_detail"></span>
+MaxShare.framework 社交分享组件，此组件可以单独使用，只依赖于第三方平台 SDK。[集成使用指南][MaxShare_detail]
+
 
 <span id="MaxLeap_detail"></span>
 #### MaxLeap.framework
@@ -114,8 +117,6 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 组件地址：[https://github.com/MaxLeap/Module-MaxShare-iOS](https://github.com/MaxLeap/Module-MaxShare-iOS)
 
-使用指南：[https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E7%A4%BE%E4%BA%A4%E5%88%86%E4%BA%AB)
-
 ### 2.6 MaxIssues
 
 用户反馈组件，通过这个组件，用户可以创建一个会话，用来反馈问题。客服可以与之对话，近似实时聊天。
@@ -140,6 +141,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 [MaxLeapPay_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#移动支付
 [MaxSocial_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#应用内社交
+[MaxShare_detail]: https://github.com/MaxLeap/Module-MaxShare-iOS/blob/master/README.md
 [MLQQUtils_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-第三方登录-使用-qq-账号登陆
 [MLWeChatUtils_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-第三方登录-使用微信账号登陆
 [MLWeiboUtils_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-第三方登录-使用微博账号登陆
