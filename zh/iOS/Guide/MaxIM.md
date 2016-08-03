@@ -20,7 +20,7 @@
 
 **为了方便模拟器调试，我们把支持 i386 和 x86_64 的代码也合并到 MaxIMLibDynamic.framework 里面，提交应用时应该去掉这些代码。但是 Xcode 在打包时会把整个动态库原封拷贝到应用程序包中（[详情戳这里](https://forums.developer.apple.com/thread/21496)），在上传到 iTunes Connect 的时候就会出错。strip-frameworks 这个脚本的作用就是去掉多余的代码。**
 
-**如果需要接受离线推送消息，还需要集成 `MaxLeap.framework`，集成方法请查阅：[QuickStart - Core SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)。另外，在创建 MLIMCient 实例的时候需要传入当前的 installationId。**
+**如果需要接受离线推送消息，还需要集成 `MaxLeap.framework`，集成方法请查阅：[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)。另外，在创建 MLIMCient 实例的时候需要传入当前的 installationId。**
 
 ## 初始化 IM 客户端，创建 `MLIMClient` 实例
 
