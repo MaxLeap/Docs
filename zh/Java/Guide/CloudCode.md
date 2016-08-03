@@ -526,7 +526,7 @@ public class Article extends MLObject {
 
 
 ## Cloud Data Object的更新
-我们可以通过构造MLUpdate对象`MLUpdate update = MLQuery.getUpdate();`，来实现记录的更新操作，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的更新。
+我们可以通过构造MLUpdate对象`MLUpdate update = MLUpdate.getUpdate();`，来实现记录的更新操作，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的更新。
 
 ### 基本类型字段更新(set、setMany、unset、unsetMany、inc)
 `set`用来为指定字段赋值
@@ -741,7 +741,7 @@ https://api.maxleap.cn/2.0/jobs/YOUR_JOBNAME
 ```
 
 ####在管理中心中Schedule Job Plan
-img
+![imgCCScheduleJob](../../../images/imgCCScheduleJob.png)
 
 表单项目|作用 
 ----|-------|
