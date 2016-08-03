@@ -1,6 +1,8 @@
 #SDK 集成
 
-目前 MaxLeap Nodejs CloudCode 的 Nodejs 版本为 5.3.0，请你最好使用此版本进行开发。至少不要低于 0.12。
+目前 MaxLeap Node.js SDK 仅支持 **云代码** 服务，更多服务敬请期待。
+
+Nodejs 版本为 5.3.0，请你最好使用此版本进行开发。至少不要低于 0.12。
 
 ## 全新项目
 
@@ -80,7 +82,23 @@ ML.Cloud.function('helloworld',function(req, res){
 
 
 ### 云代码的上传及部署
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
 
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 ### 测试
 
@@ -184,6 +202,23 @@ ML.Cloud.function('helloworld',function(req, res){
 
 ### 云代码的上传及部署
 
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
+
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 
 

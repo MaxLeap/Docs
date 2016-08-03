@@ -1,6 +1,6 @@
 # SDK 简介
 
-目前 MaxLeap Java SDK 仅支持云代码服务，更多服务敬请期待。
+目前 MaxLeap Java SDK 仅支持 **云代码** 服务，更多服务敬请期待。
 
 ## SDK介绍
 

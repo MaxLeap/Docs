@@ -1,6 +1,8 @@
 #SDK 集成
 
-目前 MaxLeap Python SDK 基于 Python 2.x 开发，在 Python 3.x 环境下使用仍然有一些兼容性问题。我们会尽快改善这一问题的。
+目前 MaxLeap Python SDK 仅支持 **云代码** 服务，更多服务敬请期待。
+
+MaxLeap Python SDK 基于 Python 2.x 开发，在 Python 3.x 环境下使用仍然有一些兼容性问题。我们会尽快改善这一问题的。
 
 ## 全新项目
 ### 安装SDK
@@ -102,7 +104,23 @@ def helloword(request):
 `ProjectLocation`便是我们想要的package.
 
 ### 云代码的上传及部署
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
 
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 ### 测试
 
@@ -228,7 +246,23 @@ def helloword(request):
 `ProjectLocation`便是我们想要的package.
 
 ### 云代码的上传及部署
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
 
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
 
 ### 测试
 
