@@ -1,1 +1,459 @@
-# iOS 快速入门
+# Java 快速入门
+## 创建应用
+MaxLeap 提供两种模式创建应用
+### 自定义应用
+用户自行创建工程项目并配置，根据具体业务设计数据库表结构和对应逻辑。
+
+1、点击创建应用后，进入如下页面，输入应用名称并选择自定义应用，然后点击创建按钮
+![](../../../images/CreateAppCustom1.png)
+2、点击创建按钮后，应用创建成功，如果下图所示，可以应用相关密钥信息、移动端新手指南入口和我的应用列表入口
+
+新手指南如下：[iOS 新手指南 ](https://maxleap.cn/s/web/zh_cn/quickstart/ios/core/new.html) ，[Android 新手指南 ](https://maxleap.cn/s/web/zh_cn/quickstart/android/core/new.html) ，[React Native 新手指南 ](https://maxleap.cn/s/web/zh_cn/quickstart/android/core/new.html) 
+
+![](../../../images/CreateAppCustom2.png)
+### 模板应用
+直接基于 MaxLeap 提供的模板应用快速开发，模板应用包括配置好的移动端工程项目、后端工程项目（视具体模板应用而定，不一定都有）以及云端初始化数据，您可以基于模板应用开发您的应用。
+
+
+1、点击创建应用，并输入用户名，下面选择模板应用
+![](../../../images/CreateAppTemp2.png)
+2、模板应用可以查看详情或者立即根据此模板创建，点击查看详情进入如下UI
+![](../../../images/CreateAppTemp3.png)
+3、点击立即使用后，MaxLeap 会自动生成配置好的移动端工程项目、后端工程项（视具体模板应用而定，不一定都有）和后端初始化云数据
+![](../../../images/CreateAppTemp4.png)
+4、生成好以后，您可以下载项目工程，里面包括：iOS、Android、ReactNative 等移动端工程，如果有后端工程项目（视具体模板应用而定），也会包含
+![](../../../images/CreateAppTemp5.png)
+5、可以直接进入我的应用列表页面查看刚创建好的应用
+![](../../../images/CreateAppTemp6.png)
+6、点击开发选择进入开发中心云数据库查看云端初始化数据
+![](../../../images/CreateAppTemp8.png)
+7、工程项目下载完成后解压出工程项目（以 iOS 为例）并导入Xcode，直接运行即可查看模板应用，AppId 和 ClientKey 已经自动配置完成
+![](../../../images/createApp12.png)
+8、可以在应用设置下的应用密钥中查看应用的相关key，包括 AppId 和 ClientKey 等
+![](../../../images/CreateAppTemp7.png)
+
+ Ok，是不是很简单呢，您可以直接基于我们的模板应用快速构建您自己的应用，Happy Coding!!!!
+ ## 全新项目
+
+### 环境依赖
+- JDK安装:云代码 SDK支持 JDK6, 7, 8，推荐使用JDK8。
+- IDE Maven插件安装
+
+  Eclipse:
+  
+  1.	点击"Help" >> "Install New Software.."
+  2.	在"Work with"中输入：`http://download.eclipse.org/technology/m2e/releases`，在列表中选择"Maven Integration for Eclipse"，即可安装Maven插件。
+
+
+###	SDK安装
+
+1. 使用模板创建 MaxLeap 云代码项目
+
+获取 MaxLeap 云代码 Java项目模板(注意：你的云代码项目请确保放置在英文目录下，否则本地单元测试可能会引起文件解析错误)
+
+[下载模板项目](https://github.com/MaxLeap/Demo-CloudCode-Java/archive/master.zip)
+
+2. 修改配置
+
+打开模板项目,在/src/main/resources/config（请确保此路径存在）中，修改global.json文件配置：
+
+```java
+{
+	"applicationName" : "YOUR_APPLICATION_NAME",
+	"applicationId": "YOUR_APPLICATION_ID",
+	"applicationKey": "YOUR_MASTER_KEY",
+	"lang" : "java",
+	"javaMain": "YOUR_JAVA_MAIN_CLASS_NAME",
+	"packageHook" : "YOUR_HOOK_PACKAGE_NAME",
+	"packageClasses" : "YOUR_ENTITY_PACKAGE_NAME",
+	"version": "YOUR_VERSION"
+}
+```
+
+根据创建应用时获取的key，修改下列键的值：
+	
+键|值|
+------------|-------|
+applicationName|MaxLeap应用名称
+applicationId|Application ID
+applicationKey|Master Key
+javaMain|入口main函数类名
+packageHook|Hook包名
+packageClasses|Class实体包名
+version|当前云代码项目版本号
+
+### 定义一个简单的function
+
+```Java
+import com.maxleap.code.*;
+import com.maxleap.code.impl.GlobalConfig;
+import com.maxleap.code.impl.MLResponse;
+import com.maxleap.code.impl.LoaderBase;
+
+public class Main extends LoaderBase implements Loader {
+    @Override
+    public void main(GlobalConfig globalConfig) {
+
+    	//定义Cloud Function
+        defineFunction("hello", request -> {
+            Response<String> response = new Response<String>(String.class);
+            response.setResult("Hello, " + request.parameter(Map.class).get("name") + "!");
+            return response;
+        });
+    }
+}
+```
+
+注意：
+
+* Main class的main method是云代码项目启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
+
+### 本地测试
+
+定义完成您的函数任务后应最先在本地测试,以防程序出现异常导致发布云代码失败,你可以编写一个测试类如MainTest(该类需要继承`com.maxleap.code.test.framework.TestCloudCode`类),测试方法如Junit测试
+
+```Java
+	@Test
+	public void hello(){
+		String json = "{\"name\":\"jack\",\"ids\":[\"aa\",\"bb\"]}";
+		Response response = runFunction("hello", json);
+		if (response.succeeded()){
+			System.out.println(response.getResult());
+		} else {
+			Assert.fail(response.getError());
+		}
+	}
+```
+
+注意:在发布云代码前请确保您的每个function和job的单元测试都通过
+
+### 打包
+
+在当前项目根目录下运行Maven命令：
+
+`mvn package`
+
+我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package。
+
+### 云代码的上传及部署
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
+
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
+
+
+### 测试
+
+通过 curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
+
+```shell
+curl -X POST \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+-d '{"name":"David Wang"}' \
+https://api.maxleap.cn/2.0/functions/hello
+```
+
+此时，我们将得到如下结果：
+
+```shell
+Hello, David Wang!
+```
+
+表明测试通过，部署成功。
+
+注意:
+
+* X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
+
+
+ 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。
+ 
+## 已有项目
+
+### 添加云代码至已有的项目
+
+**注意**：你的云代码项目请确保放置在英文目录下，否则本地测试可能会引起文件解析错误
+
+####配置maven项目的pom.xml
+
+* 获取云代码 SDK
+* 获取测试插件JUnit
+* 获取编译打包插件
+
+添加依赖，获取云代码 SDK(sdk.version最新版本为2.4.8，你可以通过[这里](https://github.com/MaxLeap/SDK-CloudCode-Java/releases)查看最新版本)及JUnit测试插件
+
+```xml
+    <dependencies>
+        <dependency>
+            <groupId>com.maxleap</groupId>
+            <artifactId>cloud-code-base</artifactId>
+            <version>${sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.maxleap</groupId>
+            <artifactId>cloud-code-sdk</artifactId>
+            <version>${sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.maxleap</groupId>
+            <artifactId>cloud-code-test</artifactId>
+            <version>${sdk.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+	
+	//获取编译打包插件
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-mod-dependencies-to-target</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/lib</outputDirectory>
+                            <includeScope>compile</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/mod.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assemble</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.0</version>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+            </configuration>
+          </plugin>
+        </plugins>
+    </build>
+```
+
+####配置打包规则
+
+在/src/main/assembly中新建mod.xml文件，并在其中添加如下配置：
+
+```xml
+	<?xml version="1.0" encoding="UTF-8"?>
+	<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+	    <id>mod</id>
+	    <formats>
+	        <format>zip</format>
+	    </formats>
+	    <includeBaseDirectory>false</includeBaseDirectory>
+	    <fileSets>
+	        <fileSet>
+	            <outputDirectory>/config</outputDirectory>
+	            <directory>src/main/resources/config</directory>
+	            <includes>
+	                <include>**</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/public</outputDirectory>
+	            <directory>src/main/resources/public</directory>
+	            <includes>
+	                <include>**</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/lib</outputDirectory>
+	            <directory>target</directory>
+	            <includes>
+	                <include>${project.artifactId}-${project.version}.jar</include>
+	            </includes>
+	        </fileSet>
+	        <fileSet>
+	            <outputDirectory>/cloud/lib</outputDirectory>
+	            <directory>target/lib</directory>
+	            <excludes>
+                    <exclude>jackson-*.jar</exclude>
+                    <exclude>log4j-*.jar</exclude>
+                    <exclude>slf4j-*.jar</exclude>
+                    <exclude>cloud-code-*.jar</exclude>
+                    <exclude>sdk-data-api*.jar</exclude>
+                    <exclude>junit-*.jar</exclude>
+                </excludes>
+	        </fileSet>
+	    </fileSets>
+	</assembly>
+```
+
+请注意：如果您选择将打包配置文件放在其他路径下，您则需要更新pom.xml文件中的以下部分，将`src/main/assembly/mod.xml`替换为您自定义的路径：
+
+```xml
+	<plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<configuration>
+			<descriptors>
+				<descriptor>src/main/assembly/mod.xml</descriptor>
+			</descriptors>
+		</configuration>
+	</plugin>	
+```
+
+当然你也可以自己打包zip，只需按照我们的目录结构来打包你的应用即可
+![imgCloudCodeStructure](../../../images/imgCloudcodeZipStructure.png)
+
+需要注意的是:您的云代码打包后不应包括cloud-code-*.jar以及jackson-*.jar,这些在我们云端服务器已经默认为您添加了这些依赖,并且本地依赖的cloud-code-*.jar并不适合在云端运行(你可以把他们看成同一套接口不同的实现).
+
+#### 配置 global.json
+在/src/main/resources/config（请确保此路径存在）中，添加global.json文件，并在其中添加如下配置：
+
+```java
+{
+	"applicationName" : "YOUR_APPLICATION_NAME",
+	"applicationId": "YOUR_APPLICATION_ID",
+	"applicationKey": "YOUR_MASTER_KEY",
+	"lang" : "java",
+	"javaMain": "YOUR_JAVA_MAIN_CLASS_NAME",
+	"packageHook" : "YOUR_HOOK_PACKAGE_NAME",
+	"packageClasses" : "YOUR_ENTITY_PACKAGE_NAME",
+	"version": "YOUR_VERSION"
+}
+```
+
+根据创建应用时获取的key，修改下列键的值：
+
+键|值|
+------------|-------|
+applicationName|MaxLeap应用名称
+applicationId|Application ID
+applicationKey|Master Key
+javaMain|入口main函数类名
+packageHook|Hook包名
+packageClasses|Class实体包名
+version|当前云代码项目版本号
+
+### 定义一个简单的function
+
+```Java
+import com.maxleap.code.MLLoader;
+import com.maxleap.code.Response;
+import com.maxleap.code.impl.GlobalConfig;
+import com.maxleap.code.impl.LoaderBase;
+import com.maxleap.code.impl.Response;
+
+public class Main extends LoaderBase implements Loader {
+    @Override
+    public void main(GlobalConfig globalConfig) {
+
+    	//定义Cloud Function
+        defineFunction("hello", request -> {
+            Response<String> response = new Response<String>(String.class);
+            response.setResult("Hello, " + request.parameter(Map.class).get("name") + "!");
+            return response;
+        });
+    }
+}
+```
+
+**注意：**
+
+* Main class的main method是云代码项目启动的入口（在global.json中指定），需要继承LoaderBase并实现Loader接口，在main方法中需要注册所有的cloud function和job。
+
+### 打包
+
+在当前项目根目录下运行Maven命令：
+
+`mvn package`
+
+我们将在项目根目录下的target文件夹中发现 *xxx-1.0-SNAPSHOT-mod.zip* 文件，这便是我们想要的package.
+
+### 云代码的上传及部署
+MaxLeap 管理后台提供可视化的运维界面，包括上传、部署等。 
+
+####上传云代码
+登录 MaxLeap 管理后台，选择您的应用，进入【开发中心->云代码->版本】，点击【上传云代码】按钮，在弹出的文件选择框中选中生成的zip文件，点击上传。 
+
+![imgCCUpload](../../../images/imgCCUpload.png)
+
+####部署
+
+上传成功后，点击应用版本【操作】列下的【部署】按钮，在弹出的窗口中，您需要选择想要的部署策略（选择资源类型和对应启动的实例数量）来完成部署
+
+![imgCCDeploy](../../../images/imgCCDeploy.png)
+
+####正常运行
+部署成功后，您的云代码版本如下图所示：
+
+![imgCCVersionList](../../../images/imgCCVersionList.png)
+
+
+### 测试
+
+通过 curl，我们向部署好的Cloud Function发送如下POST请求，以测试我们的Function是否部署成功：
+
+```shell
+curl -X POST \
+-H "X-ML-AppId: YOUR_APPID" \
+-H "X-ML-APIKey: YOUR_APIKEY" \
+-H "Content-Type: application/json" \
+-d '{"name":"David Wang"}' \
+https://api.maxleap.cn/2.0/functions/hello
+```
+
+此时，我们将得到如下结果：
+
+```shell
+Hello, David Wang!
+```
+
+表明测试通过，部署成功。
+
+注意:
+
+* X-ML-APIKey的值为应用的API KEY，而非云代码项目中使用的Master Key.
+
+ 至此，您已经完成 MaxLeap SDK 的安装与必要的配置。
+##下一步
+至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至[云代码 SDK开发指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/java.html)以获取 MaxLeap 云代码 SDK 的详细功能介绍以及使用方法。
