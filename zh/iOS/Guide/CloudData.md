@@ -244,6 +244,22 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 **注意：Remove 和 Add/AddUnique 必需分开调用保存函数，否则数据不能正常上传和保存。**
 
+#### 可变数组(NSMutableArray)
+
+假如你在 `MLObject` 中存了可变数组，然后直接更改了这个数组中的元素，没用调用上面提到的 MLObject 的数组操作方法，保存时，本地的数组会覆盖云端的数组：
+
+```
+MLObject *obj; // an object retrieved from maxleap server
+NSMutableArray *array = [NSMutableArray arrayWithObjects:@"a", nil];
+obj[@"array"] = array;
+[array addObject:@"b"];
+[obj saveInBackground:nil];
+
+// 云端这条数据的 array 字段值为 ["a", "b"]
+```
+
+除此之外，对 MLObject 中的 `NSMutableDictionary`，`MLGeoPoint` 直接作出更改后，调用 `save` 方法时也会被更新到云端。
+
 ### 关系数据
 
 对象可以与其他对象相联系。如前面所述，我们可以把一个 `MLObject` 的实例 a，当成另一个 `MLObject` 实例 b 的属性值保存起来。这可以解决数据之间一对一或者一对多的关系映射，就像数据库中的主外键关系一样。
