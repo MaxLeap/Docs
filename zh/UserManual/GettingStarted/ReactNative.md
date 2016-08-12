@@ -1,9 +1,9 @@
 # React Native 快速入门
 ## 创建 MaxLeap 应用
 
-1. 进入 [MaxLeap](https://maxleap.cn) 注册并登录，然后在 [云数据](https://maxleap.cn/clouddata) 创建class，这里创建一个Post class。
+1. 进入 [MaxLeap](https://maxleap.cn) 注册并登录，然后在 [云数据](https://maxleap.cn/p/console/clouddata) 创建class，这里创建一个Post class。
 	
-	注意：SDK 没有创建 / 删除 class 的权限，所以要先在 [云数据](https://maxleap.cn/clouddata) 中创建好需要用到的 class。
+	注意：SDK 没有创建 / 删除 class 的权限，所以要先在 [云数据](https://maxleap.cn/p/console/clouddata) 中创建好需要用到的 class。
 	   
 
 2. 进入 我的应用－应用设置－应用密钥 复制 Application ID，Client Key。

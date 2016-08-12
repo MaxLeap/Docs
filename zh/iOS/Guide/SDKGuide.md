@@ -63,7 +63,7 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 **_MaxIMLibDynamic.framework 与 MaxIMLib.framework 二选一，不可以同时集成_**
 
-[使用指南](IM)
+[使用指南][IM]
 
 ### 1.3 maxleap-sdk-iosext.zip
 
