@@ -10,7 +10,7 @@
 
 需要 Xcode 7 或者更新版本。
 
-1. 下载最新版 [MaxIMSDK (maxleap-im-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)
+1. 下载最新版 [MaxIMSDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-ba39f61a-7364-489b-bbde-a9a23f841a88.zip)
 2. 在 Xcode 中打开你的项目，导航到 Project -> Target -> General
 3. 把下载好的 `MaxIMLibDynamic.framework` 和 `SocketIOClientSwift.framework` 拖到 **Embedded Binaries** 下面
 4. **重要：**导航到 Project -> Target -> Build Settings 找到 Embedded Content Contains Swift Code，并设置为 YES。

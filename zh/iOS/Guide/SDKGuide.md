@@ -4,11 +4,11 @@ MaxLeap SDK 有三个压缩包：maxleap-sdk-ios.zip, maxleap-im-ios.zip, maxlea
 
 另外，还发布了一些开源 UI 组件。
 
-## 1 闭源模块
-
-[SDK 压缩包下载地址](https://github.com/MaxLeap/SDK-iOS/releases)
+## 1 SDK 类库
 
 ### 1.1 maxleap-sdk-ios.zip
+
+[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
 
 包含以下代码库：
 
@@ -51,6 +51,8 @@ MaxLeap.framework 内置功能以及使用指南：
 <span id="maxleap-im-ios"></span>
 ### 1.2 maxleap-im-ios.zip
 
+[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-ba39f61a-7364-489b-bbde-a9a23f841a88.zip)
+
 包含以下代码库：
 
 SocketIOClientSwift.framework **动态库，**即时通讯基础功能代码库
@@ -61,9 +63,11 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 
 **_MaxIMLibDynamic.framework 与 MaxIMLib.framework 二选一，不可以同时集成_**
 
-集成使用指南：[https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF)
+[使用指南](IM)
 
 ### 1.3 maxleap-sdk-iosext.zip
+
+[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-496beb55-bcca-4a64-a3e7-0f6d7537ce8d.zip)
 
 这个压缩包只包含一个代码库 MaxLeapExt.framework，这个代码库是 MaxLeap.framework 的精简版本，支持 iOS 扩展程序。
 
@@ -150,6 +154,8 @@ MaxIMLib.framework **静态库，MaxIMLibDynamic.framework 的静态版本**
 [cloud_config]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#在线参数
 [smscode]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#账号服务-短信验证服务
 [marketing]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#推送营销
+
+[IM]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#即时通讯
 
 [MaxLeapPay_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#移动支付
 [MaxSocial_detail]: https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#应用内社交

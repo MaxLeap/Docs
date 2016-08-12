@@ -97,13 +97,13 @@
 
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS": "/quickstart/ios/core/existing.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/android/core/existing.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/java/core/existing.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_REACTNATIVE": "/quickstart/reactnative/core/existing.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS": "/quickstart/iosquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/androidquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/javaquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_REACTNATIVE": "/quickstart/reactnativequickstart.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS": "/api/ios/index.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVASCRIPT": "/quickstart/javascript/core/new.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVASCRIPT": "/quickstart/javascriptquickstart.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_JAVASCRIPT": "/api/javascript/index.html",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK": "/guide/devguide/php.html",
