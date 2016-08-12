@@ -47,7 +47,7 @@ URL |	HTTP|	功能
 使用云函数,你必须在请求头里指定你的appId和相应的key方可有权限调用,但同时云代码支持白名单模式,你可以将函数的某个调用方式添加至白名单(如何添加至白名单请参阅[云代码-白名单](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_WHITELIST)),添加后,当请求调用该函数时,将不进行http请求头中X-ML-AppId和X-ML-APIKey的校验,这一般用于回调请求,比如你调用银联支付接口设置了回调地址为MaxLeap的云函数地址
 
 ```
-http://api.maxleap.cn/2.0/functions/hello?LASAppId=569d84a0169e7d00012c7afe
+https://api.maxleap.cn/2.0/functions/hello?LASAppId=569d84a0169e7d00012c7afe
 ```
 这是一个URL,银联方在完成支付请求后会通过GET方式来回调该地址,这个GET请求只需添加query参数LASAppId来标示该请求的云函数所属app即可,这样你可以在不提供相关应用key的安全前提下通过白名单云函数来接受第三方回调请求.
 
@@ -85,7 +85,7 @@ hello job
 MaxLeap不建议你通过rest api方式来调用background job,而是通过console界面上创建后台任务来替代,一方面通过rest api调用job这是一个同步接口,如果你的后台任务需要比较长时间执行,你得到的响应可能便是超时,而通过后台界面执行任务是异步方式,你不但可以方便管理你的后台任务,同时也能清楚的追踪你的任务状态,详情请见 [云代码-任务](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH_JOB)
 
 ### 补充说明
-在调用云函数/执行Job时POST请求所传递数据必须符合application/json格式
+在调用云函数/执行 Job 时 POST 请求所传递数据必须符合 application/json 格式
 
 ## 错误码
 补充说明

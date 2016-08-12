@@ -107,7 +107,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/status?followerId=5704e0e9667a2300015c1bd0&userId=5704e0c3667a2300015c1bce"
+    "https://api.maxleap.cn/maxsocial/status?followerId=5704e0e9667a2300015c1bd0&userId=5704e0c3667a2300015c1bce"
 ```
 ```json
 Response:
@@ -121,7 +121,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/relation/getRelation?followerId=5704e0e9667a2300015c1bd0&userId=5704e0c3667a2300015c1bce"
+    "https://api.maxleap.cn/maxsocial/relation/getRelation?followerId=5704e0e9667a2300015c1bd0&userId=5704e0c3667a2300015c1bce"
 ```
 返回一条Relation详细信息：
 
@@ -203,7 +203,7 @@ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/relation/objectId/{objectId}
+    "https://api.maxleap.cn/maxsocial/relation/objectId/{objectId}
 ```
 根据userId来删除关系：
 
@@ -212,7 +212,7 @@ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/relation/delete?userId=xxx
+    "https://api.maxleap.cn/maxsocial/relation/delete?userId=xxx
 ```
 ### 说说
 ####创建或者更新说说
@@ -228,7 +228,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/shuo/objectId/{objectId}
+    "https://api.maxleap.cn/maxsocial/shuo/objectId/{objectId}
 ```
 返回一条说说信息：
 
@@ -366,7 +366,7 @@ curl -X POST \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/shuo/latest
+    "https://api.maxleap.cn/maxsocial/shuo/latest
 ```
 返回结果：
 
@@ -548,7 +548,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/location/objectId/{objectId}
+    "https://api.maxleap.cn/maxsocial/location/objectId/{objectId}
 ```
 ####获取用户的地理信息
 根据userId获取用户的地理信息：
@@ -558,7 +558,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/location/userId/{userId}
+    "https://api.maxleap.cn/maxsocial/location/userId/{userId}
 ```
 ```json
 Response:
@@ -586,7 +586,7 @@ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/location/objectId/{objectId}
+    "https://api.maxleap.cn/maxsocial/location/objectId/{objectId}
 
 ```
 ###评论
@@ -651,7 +651,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/comment/objectId/{objectId}
+    "https://api.maxleap.cn/maxsocial/comment/objectId/{objectId}
 ```
 ####得到未读评论
 ```shell
@@ -659,7 +659,7 @@ curl -X GET \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/comment/unread?shuoId=xxx
+    "https://api.maxleap.cn/maxsocial/comment/unread?shuoId=xxx
 ```
 ```json
 Response:
@@ -684,7 +684,7 @@ curl -X DELETE \
     -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
     -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
     -H "Content-Type: application/json" \
-    "http://api.maxleap.cn/maxsocial/comment/objectId/{objectId}
+    "https://api.maxleap.cn/maxsocial/comment/objectId/{objectId}
 ```
 ### 通行证
 ####注册

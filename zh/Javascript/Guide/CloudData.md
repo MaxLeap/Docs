@@ -1,8 +1,5 @@
 # 数据存储
 
-##### _Author: Henry
-##### _Github: https://github.com/henryybai
-
 ## 简介
 
 ### 什么是数据存储服务
