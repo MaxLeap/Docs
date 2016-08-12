@@ -1,8 +1,4 @@
 # React Native 快速入门
-## 准备
-
-##### 安装 IDE（iOS 或者 Android 平台具体选择）
-
 ## 创建 MaxLeap 应用
 
 1. 进入 [MaxLeap](https://maxleap.cn) 注册并登录，然后在 [云数据](https://maxleap.cn/clouddata) 创建class，这里创建一个Post class。
