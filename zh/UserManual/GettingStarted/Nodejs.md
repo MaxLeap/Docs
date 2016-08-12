@@ -12,7 +12,7 @@
 ![](../../../images/CreateAppCustom1.png)
 2、点击创建按钮后，应用创建成功，如果下图所示，可以应用相关密钥信息、移动端新手指南入口和我的应用列表入口
 
-新手指南如下：iOS 新手指南 ](quickstart/iosquickstart.html) ，[Android 新手指南 ](quickstart/androidquickstart.html) ，[React Native 新手指南 ](quickstart/reactnativequickstart.html) 
+新手指南如下：[iOS 新手指南 ](quickstart/iosquickstart.html) ，[Android 新手指南 ](quickstart/androidquickstart.html) ，[React Native 新手指南 ](quickstart/reactnativequickstart.html) 
 
 ![](../../../images/CreateAppCustom2.png)
 
