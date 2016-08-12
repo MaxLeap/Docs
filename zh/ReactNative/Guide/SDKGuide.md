@@ -8,7 +8,7 @@ MaxLeap RN SDK 包括一系列的基础包和一些开源 UI 组件。
 
 核心包，MaxLeap 的很多其它 SDK 都依赖于它。
 
-[集成指南](quickstart/reactnativequickstart.html)
+[集成指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_REACTNATIVE)
 
 MaxLeap.framework 内置功能以及使用指南：
 
