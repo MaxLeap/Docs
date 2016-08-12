@@ -21,7 +21,7 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 ### 浏览器环境
 
-下载[SDK](https://github.com/MaxLeap/MaxIM-JavaScript/releases/latest)
+下载[SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-8af78228-f7d9-4f40-b9a4-304d350af0a2.zip)
 
 下载好之后，在页面中加载 dist/ML.im.js 后即可使用 `ML.im` 全局变量。
 
