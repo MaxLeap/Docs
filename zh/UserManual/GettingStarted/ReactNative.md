@@ -123,7 +123,7 @@ npm install --save maxleap-react-native
 	});
 	```
 	注意：
-	[云数据](https://maxleap.cn/clouddata) 中的数据操作需要权限认证，所以请确保你在登录状态。
+	[云数据](https://maxleap.cn/p/console/clouddata) 中的数据操作需要权限认证，所以请确保你在登录状态。
 
 2.  存储数据：
 
