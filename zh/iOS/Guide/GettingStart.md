@@ -59,8 +59,7 @@ pod "MaxLeap/Social"
 1. 下载并解压缩 SDK
 
 	请确认您使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
-
-	<a class="download-sdk" href="https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip">下载 SDK</a>
+[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
 
 2. 添加 SDK 到您的应用
 
