@@ -257,7 +257,7 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 3. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用新浪微博登录” 开关。
 4. 下载 [微博 iOS SDK](https://github.com/sinaweibosdk/weibo_ios_sdk)
 5. 把 libWeiboSDK 文件夹添加到项目中，注意选择 Group Reference。
-6. 下载解压 [MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+6. 下载解压 [MaxLeap iOS SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)。
 7. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 MaxLeap.framework。
 8. 把 `MLWeiboUtils.framework` 添加到项目中。
 9. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
@@ -370,7 +370,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 2. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用微信登录” 开关。
 3. [下载微信 iOS SDK（iOS开发工具包64位）并解压](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319164&token=&lang=zh_CN)
 4. 微信 SDK 文件夹应该有 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h` 和 `WechatAuthSDK.h` 四个文件，把这个文件夹添加到项目中，注意选择 Group Reference 选项
-5. [下载解压 MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+5. [下载解压 MaxLeap iOS SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)。
 6. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 `MaxLeap.framework`。
 7. 把 `MLWeChatUtils.framework` 添加到项目中。
 8. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
@@ -496,7 +496,7 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 2. 前往 [MaxLeap 控制台][maxleap_console]，前往 MaxLeap 应用设置 >> 用户验证 页面，打开"允许QQ登录"选项。
 3. [下载并解压腾讯开发平台 SDK][qq_documentation]
 4. 把 `TencentOpenAPI.framework` 和 `TencentOpenAPI_iOS_Bundle.bundle` 添加到项目中。
-5. [下载解压 MaxLeap iOS SDK (maxleap-sdk-ios-*.zip)](https://github.com/MaxLeap/SDK-iOS/releases)。
+5. [下载解压 MaxLeap iOS SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)。
 6. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 `MaxLeap.framework`。
 7. 把 `MLQQUtils.framework` 添加到项目中。
 8. 初始化 `MLQQUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:

@@ -1,7 +1,4 @@
-# SDK 集成
-
-MaxLeap SDK RN [![npm version](https://badge.fury.io/js/maxleap-react-native.svg)](http://badge.fury.io/js/maxleap-react-native)
-
+# React Native 快速入门
 ## 创建 MaxLeap 应用
 
 1. 进入 [MaxLeap](https://maxleap.cn) 注册并登录，然后在 [云数据](https://maxleap.cn/p/console/clouddata) 创建class，这里创建一个Post class。
@@ -137,3 +134,5 @@ npm install --save maxleap-react-native
 		alert('success');
 	});
 	```
+##下一步
+至此，您已经完成 ReactNative SDK 的安装与必要的配置。请移步至 [ReactNative SDK开发指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/reactnative.html) 以获取 MaxLeap 的详细功能介绍以及使用方法，开启 MaxLeap 云服务之旅。

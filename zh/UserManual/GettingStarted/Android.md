@@ -1,4 +1,19 @@
-# SDK 集成
+# Android 快速入门
+## 注册并登录 MaxLeap
+首次登录会进入如下未创建过 App 页面
+
+![](../../../images/login_1.png)
+
+## 创建应用
+### 自定义应用
+用户自行创建工程项目并配置，根据具体业务设计数据库表结构和对应逻辑。
+
+1、点击创建应用后，进入如下页面，输入应用名称并选择自定义应用，然后点击创建按钮
+![](../../../images/CreateAppCustom1.png)
+2、点击创建按钮后，应用创建成功，如果下图所示，可以应用相关密钥信息、移动端新手指南入口和我的应用列表入口
+
+![](../../../images/CreateAppCustom2.png)
+
 
 ## 全新项目
 
@@ -204,3 +219,5 @@
     ```
 
     运行应用，查看 Logcat 的输出日志，没有错误的话，您已经完成 MaxLeap SDK 的安装与必要的配置。
+##下一步
+至此，您已经完成 MaxLeap SDK 的安装与必要的配置。请移步至 [Android SDK 开发指南](https://maxleap.cn/s/web/zh_cn/guide/devguide/android.html) 以获取 MaxLeap 的详细功能介绍以及使用方法，开启 MaxLeap 云服务之旅。

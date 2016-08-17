@@ -66,14 +66,14 @@ Key（属性名）必须是字母和数字组成的字符串，Value（属性值
 ```
 
 
-createdAt 和 updatedAt 都是 UTC 时间戳，以 ISO 8601 标准和毫秒级精度储存：YYYY-MM-DDTHH:MM:SS.MMMZ。objectId 是一个字符串，在类中可以唯一标识一个实例。 在 REST API 中，class 级的操作都是通过一个带类名的资源路径（URL）来标识的。例如，如果类名是 Post，那么 class 的 URL 就是：
+createdAt 和 updatedAt 都是 UTC 时间https://api.maxleap.cn戳，以 ISO 8601 标准和毫秒级精度储存：YYYY-MM-DDTHH:MM:SS.MMMZ。objectId 是一个字符串，在类中可以唯一标识一个实例。 在 REST API 中，class 级的操作都是通过一个带类名的资源路径（URL）来标识的。例如，如果类名是 Post，那么 class 的 URL 就是：
 
-`http://api.maxleap.cn/2.0/classes/product`
+`https://api.maxleap.cn/2.0/classes/product`
 
 
 针对于一个特定的对象的操作可以通过组织一个 URL 来做。例如，对 Post 中的一个 objectId 为 5718914a169e7d0001a24dec 的对象的操作应使用如下 URL：
 
-`http://api.maxleap.cn/2.0/classes/product/5718914a169e7d0001a24dec`
+`https://api.maxleap.cn/2.0/classes/product/5718914a169e7d0001a24dec`
 
 
 #### 创建对象
@@ -270,7 +270,7 @@ success 的值是通常是进行其他 REST 操作会返回的值：
     curl -X PUT \
       -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
       -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
-      -d '[object ArrayBuffer]' "http://api.maxleap.cn/2.0/files/0.jpeg"
+      -d '[object ArrayBuffer]' "https://api.maxleap.cn/2.0/files/0.jpeg"
 ```
 
 文件上传成功后，返回 201 Created 的应答和创建的文件对象：

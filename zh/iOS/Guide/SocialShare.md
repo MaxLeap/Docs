@@ -26,7 +26,7 @@
 
 2. 手动安装
 	
-	1. [下载最新版本的 MaxSocialShare SDK](https://github.com/MaxLeap/Module-MaxShare-iOS/releases)
+	1. [下载最新版本的 MaxSocialShare SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
 	
 	2. 解压后得到 `MaxSocialShare.framework` 和 `PlatformSDK` 文件夹，将它们拖到到项目中。其中 `PlatformSDK` 文件夹中是各平台的官方 SDK，是可选的。
 	

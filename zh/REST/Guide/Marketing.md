@@ -113,7 +113,7 @@ $ curl -X POST \
     -d ' {     
  	      "alert":"hello maxleap"
          }'\
-    "http://api.maxleap.cn/2.0/marketing/push/msg/a2188f955d1a4a968ee40e6952b05407" 
+    "https://api.maxleap.cn/2.0/marketing/push/msg/a2188f955d1a4a968ee40e6952b05407" 
 ```
 
 也可以向一批设备发送消息
@@ -147,7 +147,7 @@ $ curl -X POST \
           "content-available": 1
         },
    "customKey":"name"
-}' "http://api.maxleap.cn/2.0/marketing/push/msg/all"
+}' "https://api.maxleap.cn/2.0/marketing/push/msg/all"
 ```
 
 根据Installation 条件进行推送，下面是发送给中国地区用户的示例：
@@ -181,7 +181,7 @@ $ curl -X POST \
           "content-available": 1
         },
    "customKey":"name"
-}' "http://api.maxleap.cn/2.0/marketing/push/msg/all"
+}' "https://api.maxleap.cn/2.0/marketing/push/msg/all"
 ```
 
 `criteria` 为指定推送条件，格式为string 类型。
@@ -195,7 +195,7 @@ $ curl -X GET \
  -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
  -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ"\
  -H "Content-Type: application/json" \
- "http://api.maxleap.cn/2.0/gopush/server/get?k=a43f00f741b55a231cd25da08413ca3c&p=2"
+ "https://api.maxleap.cn/2.0/gopush/server/get?k=a43f00f741b55a231cd25da08413ca3c&p=2"
 ```
 
 其中`k=Md5(appId+installId).toHexString()`,p为指定使用的协议类型，支持`WebSocket(1)` 和`TCP(2)`,成功返回数据如下：
@@ -237,7 +237,7 @@ $ curl -X GET \
 -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
 -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
 -H "Content-Type: application/json" \
- "http://api.maxleap.cn/2.0/gopush/msg/get?k=a43f00f741b55a231cd25da08413ca3c&m=0"
+ "https://api.maxleap.cn/2.0/gopush/msg/get?k=a43f00f741b55a231cd25da08413ca3c&m=0"
 ```
 
 
@@ -280,7 +280,7 @@ $ curl -X GET \
 -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
 -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
 -H "Content-Type: application/json" \
- "http://api.maxleap.cn/2.0/gopush/time/get"
+ "https://api.maxleap.cn/2.0/gopush/time/get"
 ```
 
 * 返回结果说明
@@ -305,6 +305,6 @@ $ curl -X GET \
 ### 
 
 ## FAQ
-#### IOS 证书生成
+#### iOS 证书生成
 
-[请参考文档](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#推送营销-推送证书设置指南176)
+[请参考文档](https://maxleap.cn/s/web/zh_cn/guide/devguide/ios.html#推送营销-推送证书设置指南194)

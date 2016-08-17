@@ -1,5 +1,21 @@
-# SDK 集成
+# iOS 快速入门
 
+## 注册并登录 MaxLeap
+首次登录会进入如下未创建过 App 页面
+
+![](../../../images/login_1.png)
+
+## 创建应用
+### 自定义应用
+用户自行创建工程项目并配置，根据具体业务设计数据库表结构和对应逻辑。
+
+1、点击创建应用后，进入如下页面，输入应用名称并选择自定义应用，然后点击创建按钮
+![](../../../images/CreateAppCustom1.png)
+2、点击创建按钮后，应用创建成功，如果下图所示，可以应用相关密钥信息、移动端新手指南入口和我的应用列表入口
+
+![](../../../images/CreateAppCustom2.png)
+
+ 
 ## 新项目集成
 
 1. 下载模板项目并解压
@@ -59,7 +75,8 @@ pod "MaxLeap/Social"
 1. 下载并解压缩 SDK
 
 	请确认您使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
-[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
+
+	[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
 
 2. 添加 SDK 到您的应用
 
@@ -133,3 +150,8 @@ pod "MaxLeap/Social"
 ```
 
 运行您的应用。然后查看 Xcode console 中打印的日志。
+
+##下一步
+至此，您已经完成MaxLeap SDK的安装与必要的配置。请移步至   [iOS SDK开用指南](https://webuat.maxleap.cn/s/web/zh_cn/guide/devguide/ios.html)以获取MaxLeap的详细功能介绍以及使用方法，开启MaxLeap云服务使用之旅。
+
+
