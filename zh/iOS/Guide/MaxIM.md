@@ -805,8 +805,26 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
     [application registerForRemoteNotifications];
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd), userInfo);
+    [self parseMessageEntityFromNotificationPayload:userInfo];
+}
+
+// 实现这个代理方法，需要打开 remote notification background mode
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
+    [self parseMessageEntityFromNotificationPayload:userInfo];
     completionHandler(UIBackgroundFetchResultNoData);
+}
+
+- (void)parseMessageEntityFromNotificationPayload:(NSDictionary *)userInfo {
+    if (userInfo[@"parrot"] && [userInfo[@"parrot"] isKindOfClass:[NSString class]]) {
+        NSData *jsonData = [userInfo[@"parrot"] dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *messagePayload = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
+        if (messagePayload) {
+            MLIMMessage *message = [[MLIMMessage alloc] initWithPayloadDictionary:messagePayload];
+            // ...
+        }
+    }
 }
 ```
 
