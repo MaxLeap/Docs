@@ -14,14 +14,12 @@
 
 ### 添加项目依赖
 
-**MaxLeap SDK**
-
-<a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">下载 MaxLeap SDK</a>
+请按第二章【SDK 集成】步骤完成 SDK 下载，
 
 解压后将以下 Jar 包导入工程的 `libs` 目录下：
 
-- 核心 Jar 包: `maxleap-core-xxx.jar`
-- 支付 Jar 包: `maxleap-pay-xxx.jar`
+- 核心 Jar 包: `maxleap-sdk-core-xxx.jar`
+- 支付 Jar 包: `maxleap-sdk-pay-xxx.jar`
 
 **支付宝和微信平台的 SDK**
 

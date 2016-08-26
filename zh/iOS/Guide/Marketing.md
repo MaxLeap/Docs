@@ -6,14 +6,12 @@
 
 推送营销服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种消息模式：推送消息 和 应用内消息。您可以通过推送消息方式向指定人群推送消息，也可以通过应用内消息，在应用内向有某种行为的用户显示特定内容。您还可以在消息中设置用户点击后的目标 Activity。消息的创建，设置和发送均在Console中完成。
 
-### 为何需要 MaxLeap 推送营销服务
+## 准备
 
-结合 MaxLeap 数据分析服务提供的分析数据，以及用户分组，您可以高效地制定营销策略，并且通过推送营销服务实施您的策略。MaxLeap 推送营销服务的优势在于：
+> #### 推送营销功能集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
+你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
-
-* **提高转化率：**随时向用户发布营销活动，维持用户活跃度并提高转化率
-* **保障用户体验：**选择向指定用户分群发送消息，更具有针对性
-* **动态内容管理：**应用内消息和推送消息中的内容均在 Console 中设置，用户所见内容可实时更新
+**注意**：我们支持 iOS 7.0 及以上版本。
 
 ## 应用内消息
 
@@ -86,6 +84,28 @@
 	```
 	[MLMarketingManager handlePushNotificationOpened:launchOptions];
 	```
+
+### 设置 Badge
+
+badge 是 iOS 用来标记应用程序未读消息(通知)的一个数字，出现在应用图标右上角。MaxLeap 支持保存 badge 值到服务器，然后由后台来管理每个用户推送的 badge 值。
+
+>####  SDK 初始化时，会自动将应用实际 badge 值（[UIApplication sharedApplication].applicationIconBadgeNumber）上传到 MaxLeap 服务器。
+>####  在后台发送推送消息时，后台会自动把每个 installation.badge 加 1.
+
+#### 上传 badge 值
+
+```
+[MLInstallation currentInstallation].badge = 5;
+[[MLInstallation currentInstallation] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    if (succeeded) {
+        // 上传成功
+    } else {
+        // 上传失败
+    }
+}];
+```
+
+**注意：设置 badge 值操作并不会更改应用图标实际 badge 值，本地仍然需要调用 `-[UIApplication setApplicationIconBadgeNumber:]` 方法。**
 
 ## 推送证书设置指南
 

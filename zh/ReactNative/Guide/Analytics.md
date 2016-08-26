@@ -6,109 +6,58 @@
 
 MaxLeap 数据分析服务通过客户端及 Cloud Data，收集页面及用户的各种数据，并在 MaxLeap 中进行专业分析，最终生成面向运营者的报表。
 
-### 为何需要 MaxLeap 数据分析服务
-
-MaxLeap 数据分析服务是实时、免费、专业的页面统计分析服务，它将帮助您全面分析运营状况，深度了解典型用户并优化运营策略。最终实现：
-
-* **洞察运营概况及趋势**：从产品新增用户、活跃用户、页面打开次数、版本分布，到用户的使用细节、用户属性以及行为特征，你可以洞察到各类数据指标，全面了解产品运营情况和迭代效果。
-* **洞察用户行为**：还原每位用户的使用行为链条，并掌握其活跃度，留存率及转化率。
-* **提升用户体验**：定义用户分群，针对不同用户群体提供个性化体验。
-
-###  MaxLeap 数据分析如何工作
-
-“MaxLeap 数据分析”SDK，帮助我们跟踪用户行为，为云端的分析服务提供数据。主要包括：
-
-*  自动收集信息（如终端信息）
-*  追踪会话，页面访问
-*  追踪自定义事件
-
-收集到的数据会被保存至云端，MaxLeap 将针对不同时间的数据，对每个用户进行分析，也会将所有用户的数据汇总，进行全局分析。此外，您还可以自定义筛选条件，借助 MaxLeap 生成相应的分析报表。
-
 ## 启用服务
+安装SDK完成后，MaxLeap 服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
 
-安装 SDK 完成后，MaxLeap 服务将自动帮助您追踪页面内的一些数据，自动收集终端信息。
+1.	终端信息
+2.	应用启动和退出
+3.	应用崩溃等异常信息
 
-MaxLeap 分析服务的默认状态为 **开启**，如果您希望 **关闭** 分析服务，您可以在 SDK 初始化中调用以下代码：
+ MaxLeap 数据分析服务的默认状态为**开启**。
 
-```javascript
-var options = {
-        appId: '56273907169e7d0001bd5c92',
-        userId: '571d7d23a5ff7f0001a4f888',
-        appVersion: '1.0'
-      };
-//关闭数据分析服务      
-ML.analyticsEnable = false;
-var analytics = new ML.Analytics(options);
+## 页面访问路径统计
+
+可以统计每个 View 停留时长，请确保配对使用，而且这些 view 之间不要有嵌套关系：
+
+```js
+ML.Analytics.beginLogPageView(pagename)
+ML.Analytics.endLogPageView(pagename)
 ```
-
-## 页面
-
-页面加载完毕，自动统计用户的页面信息，如 url，referer，os，resolution 等。 
-
+ 
 ## 自定义事件
 
-自定义事件可以实现在页面中埋点，以记录用户的点击行为并且采集相应数据。
+自定义事件可以实现在应用程序中埋点，以纪录用户的点击行为并且采集相应数据。
 
-```javascript
-var data = {"sex":"man","age":"18"};
-analytics.trackEvent('userEvent', data)
+### 字段说明
+
+字段名|类型|描述
+---|---|---|---
+eventId|String|事件名
+key| String |事件参数
+value| String|事件参数的值
+
+请注意, 自定义事件名 (event_id) 请尽量保持其为静态值, 否则可能出现数目庞大的自定义事件列表, 而无法达到了解与分析用户行为的目的.
+ 
+### 统计某事件发生次数
+
+```
+ML.Analytics.trackEvent("event_id");
 ```
 
-## 用户使用轨迹
+### 统计事件属性被触发次数
 
-记录用户从注册开始到退出的整个时间段内，用户所有相关使用详情，您可以深度分析某个用户行为轨迹。
-分析用户使用轨迹的前提，是用户使用了 MaxLeap 的账号系统，并在初始化 MaxLeap 分析服务时传入了正确的 userId。
+考虑事件在不同属性上的取值，可以调用如下方法：
 
-### 用户注册
-
-记录用户注册时相关信息
-
-```javascript
-var data = {
-	eventId: 'registereventid',
-	eventName: 'registereventname',
-	eventNickName: 'registereventnickname'
-};
-analytics.trackUserRegister(data)
+```js
+ML.Analytics.trackEvent(eventId, parameters={}, count=1)
 ```
 
-### 用户登录
+`parameters` 为当前事件的属性和取值（键值对）
+`count` 为事件发生次数，可以用来减少发送的数据量
 
-记录用户登录时相关信息
+示例：统计电商应用中“购买”事件发生的次数，以及购买的商品类型及数量，那么在购买的函数里调用：
 
-```javascript
-var data = {
-	eventId: 'logineventid',
-	eventName: 'logineventname',
-	eventNickName: 'logineventnickname'
-};
-analytics.trackUserlogin(data)
+```objective_c
+let parameters = {type: 'book', quantity: '3'}
+ML.Analytics.trackEvent('purchase', parameters, 1)
 ```
-
-### 用户注销
-
-记录用户注册时相关信息
-
-```javascript
-var data = {
-	eventId: 'logouteventid',
-	eventName: 'logouteventname',
-	eventNickName: 'logouteventnickname'
-};
-analytics.trackUserLogout(data)
-```
-
-### 会话开始
-
-记录用户会话开始相关信息
-
-```javascript
-var data = {
-	eventId: 'sessionstartid',
-	eventName: 'sessionstartname',
-	eventNickName: 'sessionstartnickname'
-};
-analytics.trackSessionStart(data)
-```
-
-

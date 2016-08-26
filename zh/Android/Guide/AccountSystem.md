@@ -4,13 +4,11 @@
 
 ### 安装 SDK
 
-1. 获取 SDK，并解压缩
-
-    <a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">下载 MaxLeap SDK</a>
+1. 请按第二章 【SDK 集成】步骤，配置项目
 
 2. 将 SDK 添加至项目
 
-    将解压后的 `maxleap-core-<version>.jar` 文件添加到项目的 `libs` 目录中。
+    将解压后的 `maxleap-sdk-core-<version>.jar` 文件添加到项目的 `libs` 目录中。
 
 ## 用户管理
 

@@ -5,17 +5,10 @@
 ### 什么是数据存储服务
  Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint` (地理位置)，他们都是基于 `MLObject` 的对象。
 
-### 为何需要数据存储服务
- Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
-
-* 解决硬件资源的部署和运维
-* 提供标准而又完整的数据访问API
-* 不同于传统关系型数据库，向云端存储数据无需提前建表，数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可可结合代码托管服务，实现云端数据的 Hook （详见 [MaxLeap 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)）
-
 ## 准备
 
-如果您尚未安装 SDK，请先查阅[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)，安装 SDK 并使之在 Xcode 中运行。
+> #### 云数据存储集成在 `MaxLeap.framework` 中，如果尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
+
 您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 7.0 及以上版本。
@@ -67,7 +60,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 * **Comment表何时创建:** 出于数据安全考虑，MaxLeap 禁止客户端建表，所以在保存这条数据之前，必须先在开发者中心创建 Comment 这个表。
 * **表中同一属性值类型一致:** 新建 comment 对象时，对应属性的值的数据类型要和创建该属性时一致，否则保存数据将失败。
-* **客户端无法修改后端数据结构：** 例如，如果 Comment 表中没有 `isRead` 这个字段，那么保存将会失败
+* **客户端可以添加字段：** 例如，如果 Comment 表中没有 `isRead` 这个字段，那么保存时会自动添加这个字段，字段类型是第一次保存的 `isRead` 值的类型
 * **内建的属性:** 每个 MLObject 对象有以下几个字段是不需要开发者指定的。这些字段的创建和更新是由系统自动完成的，请不要在代码里使用这些字段来保存数据。
 
 属性名|值|
@@ -81,7 +74,7 @@ createdAt:"2011-06-10T18:33:42Z", updatedAt:"2011-06-10T18:33:42Z"
 
 ### 检索
 
-##### 获取 `MLObject`
+#### 获取 `MLObject`
 
 您可以通过某条数据的 `objectId`, 获取这条数据的完整内容:
 
@@ -96,7 +89,7 @@ MLQuery *query = [MLQuery queryWithClassName:@"Comment"];
 // inside the completion block above.
 ```
 
-##### 获取 `MLObject` 属性值
+#### 获取 `MLObject` 属性值
 
 要从检索到的 `MLObject` 实例中获取值，您可以使用 `objectForKey:` 方法或 `[]` 操作符：
 
@@ -143,7 +136,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 ### 删除对象
 
-##### 删除 `MLObject`
+**删除 `myComment` 整条数据，这条数据的 `objectId` 不能为空：**
 
 ```objective_c
 [myComment deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -154,19 +147,8 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 	}
 }];
 ```
-##### 批量删除 `MLObject`
 
-```
-[MLObject deleteAllInBackground:objectsToDelete block:^(BOOL succeeded, NSError *error) {
-	 if (succeeded) {
-    	//
-    } else {
-   	   // there was an error
-    }
-}];
-```
-
-##### 删除 `MLObject` 实例的某一属性
+**删除 `MLObject` 实例的某一属性**
 
 除了完整删除一个对象实例外，您还可以只删除实例中的某些指定的值。请注意只有调用 `-saveInBackgroundWithBlock:` 之后，修改才会同步到云端。
 
@@ -183,12 +165,28 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 }];
 ```
 
+### 批量操作
+
+为了减少请求次数带来的浪费，可以使用批量操作接口，在一个请求中对多条数据进行创建，更新，删除，获取操作，接口有下面这些：
+
+```
+// 批量创建、更新
++[MLObject saveAllInBackground:block:]
+
+// 批量删除
++[MLObject deleteAllInBackground:block:]
+
+// 批量获取
++[MLObject fetchAllInBackground:block:]
++[MLObject fetchAllIfNeededInBackground:block:]
+```
+
 ### 计数器
 计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
 
 比如纪录某用户游戏分数的字段"score"，我们便会频繁地修改，并且当有几个客户端同时请求数据修改时，如果我们每次都在客户端请求获取该数据，并且修改后保存至云端，便很容易造成冲突和覆盖。
 
-##### 递增计数器
+#### 递增计数器
 此时，我们可以利用`-incrementKey:`(增量为1)，高效并且更安全地更新计数器类型的字段。如，为了更新记录某帖子的阅读次数字段 `readCount`，我们可以使用如下方式：
 
 ```objective_c
@@ -196,10 +194,10 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 [myPost saveInBackgroundWithBlock:nil];
 ```
 
-##### 指定增量
+#### 指定增量
 您还可以使用 `-incrementKey:byAmount:` 实现任何数量的递增。注意，增量无需为整数，您还可以指定增量为浮点类型的数值。
 
-##### 递减计数器
+#### 递减计数器
 
 要实现递减计数器，只需要向 `-incrementKey:byAmount:` 接口传入一个负数即可：
 
@@ -212,7 +210,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 您可以通过以下方式，将数组类型的值保存至 `MLObject` 的某字段(如下例中的 `tags` 字段)下：
 
-##### 增加至数组尾部
+#### 增加至数组尾部
 您可以使用 `addObject:forKey:` 和 `addObjectsFromArray:forKey:`向`tags`属性的值的尾部，增加一个或多个值。
 
 ```objective_c
@@ -222,7 +220,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 同时，您还可以通过`-addUniqueObject:forKey:` 和 `addUniqueObjectsFromArray:forKey:`，仅增加与已有数组中所有 item 都不同的值。插入位置是不确定的。
 
-##### 使用新数组覆盖
+#### 使用新数组覆盖
 
 可以通过 `setObject:forKey:` 方法使用一个新数组覆盖 `tags` 中原有数组：
 
@@ -230,13 +228,29 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 [myPost setObject:@[] forKey:@"tags"]
 ```
 
-##### 删除某数组字段的值
+#### 删除某数组字段的值
 
 `-removeObject:forKey:` 和 `-removeObjectsInArray:forKey:` 会从数组字段中删除每个给定对象的所有实例。
 
 请注意 `removeObject:forKey` 与 `removeObjectForKey:` 的区别。 
 
 **注意：Remove 和 Add/AddUnique 必需分开调用保存函数，否则数据不能正常上传和保存。**
+
+#### 可变数组(NSMutableArray)
+
+假如你在 `MLObject` 中存了可变数组，然后直接更改了这个数组中的元素，没用调用上面提到的 MLObject 的数组操作方法，保存时，本地的数组会覆盖云端的数组：
+
+```
+MLObject *obj; // an object retrieved from maxleap server
+NSMutableArray *array = [NSMutableArray arrayWithObjects:@"a", nil];
+obj[@"array"] = array;
+[array addObject:@"b"];
+[obj saveInBackground:nil];
+
+// 云端这条数据的 array 字段值为 ["a", "b"]
+```
+
+除此之外，对 MLObject 中的 `NSMutableDictionary`，`MLGeoPoint` 直接作出更改后，调用 `save` 方法时也会被更新到云端。
 
 ### 关系数据
 
@@ -386,7 +400,7 @@ bigObject[@"myNull"] = null;
 
 `MLFile` 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `MLObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
 
-`MLFile` 上手很容易。首先，你要由 `NSData` 类型的数据，然后创建一个 `MLFile` 实例。下面的例子中，我们只是使用一个字符串：
+`MLFile` 上手很容易。首先，你要有 `NSData` 类型的数据，然后创建一个 `MLFile` 实例。下面的例子中，我们只是使用一个字符串：
 
 ```objective_c
 NSData *data = [@"Working at MaxLeap is great!" dataUsingEncoding:NSUTF8StringEncoding];
@@ -428,7 +442,7 @@ MLFile *applicantResume = anotherApplication[@"applicantResumeFile"];
 }];
 ```
 
-##### 图像
+#### 图像
 
 通过将图片转换成 `NSData` 然后使用 `MLFile` 就可以轻松地储存图片。假设您有一个名为 `image` 的 `UIImage`，并想把它另存为 `MLFile`：
 
@@ -536,7 +550,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"Post" predicate:predicate];
 - 将一个键与另一个键比较的谓语。
 - 带多个 `OR` 子句的复杂谓语。
 
-##### 设置过滤条件
+#### 设置过滤条件
 
 有几种方法可以对 `MLQuery` 可以查到的对象设置限制条件。您可以用 `whereKey:notEqualTo:` 将具有特定键值对的对象过滤出来：
 
@@ -687,7 +701,7 @@ MLQuery *postsQuery = [MLQuery queryWithClassName:@"Post"];
 [query whereKey:@"arrayKey" containsAllObjectsInArray:@[@2, @3, @4]];
 ```
 
-####值类型为字符串的查询
+#### 值类型为字符串的查询
 
 使用 `whereKey:hasPrefix:` 将结果限制为以某一特定字符串开头的字符串值。与 MySQL `LIKE` 运算符类似，它包含索引，所以对大型数据集很有效：
 
@@ -829,7 +843,7 @@ game[@"price"] = @0.99;
 转换为：
 
 ```objective_c
-Game *game = [Game object];
+MyGame *game = [MyGame object];
 game.displayName = @"Bird";
 game.multiplayer = @YES;
 game.price = @0.99;
@@ -840,23 +854,24 @@ game.price = @0.99;
 创建 `MLObject` 子类的步骤：
 
 1. 声明符合 `MLSubclassing` 协议的子类。
-2. 实现子类方法 `MLclassName`。这是您传给 `-initWithclassName:` 方法的字符串，这样以后就不必再传类名了。
-3. 将 `MLObject+Subclass.h` 导入您的 .m 文件。该操作导入了 `MLSubclassing` 协议中的所有方法的实现。其中 `MLclassName` 的默认实现是返回类名(指 Objective C 中的类)。
+2. 实现子类方法 `+ leapClassName`。返回你传给 `-initWithclassName:` 方法的字符串, 也就是在服务器上创建的表名，这样以后可以使用 `[Yourclass object]` 来创建新对象了。
+3. 将 `MLObject+Subclass.h` 导入您的 .m 文件。该操作导入了 `MLSubclassing` 协议中的所有方法的实现。其中 `+ leapClassName` 的默认实现是返回类名(指 Objective C 中的类)。
 4. 在 `+[MaxLeap setApplicationId:clientKey:]` 之前调用 `+[Yourclass registerSubclass]`。一个简单的方法是在类的 [+load][+load api reference] (Obj-C only) 或者 [+initialize][+initialize api reference] (both Obj-C and Swift) 方法中做这个事情。
 
-下面的代码成功地声明、实现和注册了 `MLObject` 的 `Game` 子类：
+下面的代码成功地声明、实现和注册了 `MLObject` 的 `MyGame` 子类：
 
 ```objective_c
-// Game.h
-@interface Game : MLObject <MLSubclassing>
+// MyGame.h
+@interface MyGame : MLObject <MLSubclassing>
 + (NSString *)leapClassName;
 @end
 
-// Game.m
+// MyGame.m
 // Import this header to let Armor know that MLObject privately provides most
 // of the methods for MLSubclassing.
 #import <MaxLeap/MLObject+Subclass.h>
-@implementation Game
+
+@implementation MyGame
 + (void)load {
     [self registerSubclass];
 }
@@ -870,16 +885,16 @@ game.price = @0.99;
 
 向 `MLObject` 子类添加自定义属性和方法有助于封装关于这个类的逻辑。借助 `MLSubclassing`，您可以将与同一个主题的所有相关逻辑放在一起，而不必分别针对事务逻辑和存储/传输逻辑使用单独的类。
 
-`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `Game` 类中创建了 `displayName` 属性：
+`MLObject` 支持动态合成器(dynamic synthesizers)，这一点与 `NSManagedObject` 类似。像平常一样声明一个属性，但是在您的 .m 文件中使用 `@dynamic` 而不用 `@synthesize`。下面的示例在 `MyGame` 类中创建了 `displayName` 属性：
 
 ```objective_c
-// Game.h
-@interface Game : MLObject <MLSubclassing>
+// MyGame.h
+@interface MyGame : MLObject <MLSubclassing>
 + (NSString *)leapClassName;
 @property (retain) NSString *displayName;
 @end
 
-// Game.m
+// MyGame.m
 @dynamic displayName;
 ```
 
@@ -892,7 +907,7 @@ game.price = @0.99;
 @property float price;
 ```
 
-这种情况下，`game[@"multiplayer"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"price"]` 将返回一个 `NSNumber`，可以使用 `floatValue` 访问。但是，`fireProof` 属性实际上是 `BOOL`，`rupees` 属性实际上是 `float`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。您可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
+这种情况下，`game[@"multiplayer"]` 将返回一个 `NSNumber`，可以使用 `boolValue` 访问；`game[@"price"]` 将返回一个 `NSNumber`，可以使用 `floatValue` 访问。但是，`multiplayer` 属性实际上是 `BOOL`，`price` 属性实际上是 `float`。动态 `getter` 会自动提取 `BOOL` 或 `int` 值，动态 `setter` 会自动将值装入 `NSNumber` 中。你可以使用任一格式。原始属性类型更易于使用，但是 `NSNumber` 属性类型明显支持 `nil` 值。
 
 ### 定义函数
 
@@ -919,11 +934,11 @@ game.price = @0.99;
 您可以使用类方法 `query` 获取对特定子类对象的查询。下面的示例查询了用户可购买的装备：
 
 ```objective_c
-MLQuery *query = [Game query];
+MLQuery *query = [MyGame query];
 [query whereKey:@"rupees" lessThanOrEqualTo:@0.99];
 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (!error) {
-        Game *firstArmor = objects[0];
+        MyGame *firstArmor = objects[0];
         // ...
     }
 }];
@@ -987,7 +1002,7 @@ query.limit = 10;
 
 ##### 查询一定地理位置范围内对象
 
-您还可以查询包含在特定区域内的对象集合。若要查找位于某个矩形区域内的对象，请将 `whereKey:withinGeoBoxFromSouthwest:toNortheast:` 限制条件添加至您的 `MLQuery`。
+您还可以查询包含在特定区域内的对象集合。若要查找位于某个矩形区域内的对象，请将 `whereKey:withinGeoBoxFromSouthwest:toNortheast:` 限制条件添加加至您的 `MLQuery`。
 
 ```objective_c
 MLGeoPoint *swOfSF = [MLGeoPoint geoPointWithLatitude:37.708813 longitude:-122.526398];
@@ -1021,30 +1036,3 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 [access control list]: http://en.wikipedia.org/wiki/Access_control_list
 [role-based access control]: http://en.wikipedia.org/wiki/Role-based_access_control
 
-[set up a facebook app]: https://developers.facebook.com/apps
-
-[getting started with the facebook sdk]: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
-
-[facebook permissions]: https://developers.facebook.com/docs/reference/api/permissions/
-
-[facebook sdk reference]: https://developers.facebook.com/docs/reference/ios/current/
-
-[set up twitter app]: https://dev.twitter.com/apps
-
-[twitter documentation]: https://dev.twitter.com/docs
-
-[twitter rest api]: https://dev.twitter.com/docs/api
-
-
-[weibo_develop_site]: http://open.weibo.com/
-[set up weibo app]: http://open.weibo.com/apps/new?sort=mobile
-[weibo documentation]: http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5
-
-[wechat_develop_site]: https://open.weixin.qq.com
-[wechat documentation]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&lang=zh_CN
-
-[open_qq_site]: http://open.qq.com/
-[set_up_qq_app]: http://op.open.qq.com/appregv2/
-[qq_documentation]: http://wiki.open.qq.com/wiki/IOS_API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E
-
-[maxleap_console]: https://maxleap.cn

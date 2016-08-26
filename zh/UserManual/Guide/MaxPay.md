@@ -201,14 +201,36 @@ MaxLeap 不收取任何费用，各支付渠道收费情况根据对应渠道的
 需要强调的是，**WebHook 不是必须配置的**
 
 
-## SDK 开发指南
+## SDK 集成
 
-[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXPAY_ZH)
+### 基础 API 库 MaxPayLib
+MaxPayLib 是不含界面的基础能力库，封装支付、交易查询和第三方渠道调用等API，引用到 App 工程中后，需要开发者自己实现 UI 界面，相对较轻量，适用于对 UI 有较高订制需求的开发者。
 
-[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXPAY_ZH)
+[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXPAY_ZH)
 
-[PHP开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP#MAXPAY_ZH)
+[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXPAY_ZH)
+
+[PHP 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP#MAXPAY_ZH)
+
+### 界面组件 MaxPayKit
+MaxPayKit 是将支付渠道选择等功能封装为 UI 组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间，并且您可以修改标准 UI 组件代码。您也可以针对自己界面需求自由设计开发。
+
+#### iOS
+[Module-MaxPay-iOS](https://github.com/MaxLeap/Module-MaxPay-iOS)
+
+#### Android
+[Module-MaxPay-Android](https://github.com/MaxLeap/Module-MaxPay-Android)
+
+ 
 
 ## 开放 REST API
 [开放API文档](ML_DOCS_REST_API_MAXPAY)
+
+
+## 样例应用
+### iOS
+[Sample-MaxMall-iOS](https://github.com/MaxLeap/Sample-MaxMall-iOS)
+
+### Android
+[Sample-MaxMall-Android](https://github.com/MaxLeap/Sample-MaxMall-Android)
 

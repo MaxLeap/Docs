@@ -3,11 +3,6 @@
 ## 简介
 ### 什么是在线参数
 每个应用在云端都有一个对应的`MLConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过 Console 在 MaxLeap 中配置应用参数，并且使用 iOS/Android SDK 读取云端的参数。
-### 为何需要在线参数
-将应用的部分配置放置在云端的优势在于：
-
-* **动态配置：**
-* **个性化用户体验：**在云端，您可以根据不同用户群体配置参数，使不同用户群有不同的用户体验
 
 ## 在线参数中添加参数
 您可以通过Console向Cloud Config中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
@@ -19,6 +14,14 @@ Type|参数类型
 Value|参数的值
 
 您还可以为不同的Segment设置不同的参数值。
+
+## 集成 SDK
+
+> #### 在线参数集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
+
+你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+
+**注意**：我们支持 iOS 7.0 及以上版本。
 
 ## 获取 MLConfig 对象
 
@@ -50,9 +53,9 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 `– doubleForKey:defaultValue:`
 
 
-## 更新在线参数
+## 获取最新的在线参数
 
-在每次 app 进入前台时，SDK 会自动更新 currentConfig
+在每次 app 进入前台时，SDK 会自动刷新 currentConfig
 
 也可以调用以下代码手动刷新所有云参数
 
@@ -71,7 +74,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 }];
 ```
 
-更新后，如果有参数的值发生变化，就会在主线程调用相应的 `valueChangedHandler()`
+刷新后，如果有参数的值发生变化，就会在主线程调用相应的 `valueChangedHandler()`
 
 ### 监听
 

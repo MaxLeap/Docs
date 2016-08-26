@@ -8,13 +8,6 @@
 ### 什么是数据存储服务
 云数据库是 MaxLeap 提供的数据存储服务，它建立在对象 `ML.Object` 的基础上，每个 `ML.Object` 包含若干键值对。所有 `ML.Object` 均存储在 MaxLeap 上，您可以通过 Javascript SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `ML.User` (用户)，`ML.File` (文件)，`ML.GeoPoint` (地理位置)，他们都是基于 `ML.Object` 的对象。
 
-### 为何需要数据存储服务
- 数据存储将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
- 
-* 解决硬件资源的部署和运维
-* 提供标准而又完整的数据访问API
-* 可结合代码托管服务，实现云端数据的 Hook （详见 [MaxLeap 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)）
-
 ## 对象
 存储在云数据的对象称为 `ML.Object`，而每个 `ML.Object` 被规划至不同的 `class` 中（类似“表”的概念)。`ML.Object` 包含若干键值对，且值为兼容 JSON 格式的数据。考虑到数据安全，MaxLeap 禁止客户端修改数据仓库的结构。您需要预先在 MaxLeap 开发者平台上创建需要用到的表，然后仔细定义每个表中的字段和其值类型。
 
@@ -191,6 +184,7 @@ relation.add(post);
 user.save()
 ```
 仅可以从一个 `ML.Relation` 中删除一个 post:
+
 ```javascript
 relation.remove(post);
 ```
@@ -203,6 +197,7 @@ query.first().then(function(result){
   relation.query().find();
 });
 ```
+
 ### 计数器
 计数器是应用常见的功能需求之一。当某一数值类型的字段会被频繁更新，且每次更新操作都是将原有的值增加某一数值，此时，我们可以借助计数器功能，更高效的完成数据操作。并且避免短时间内大量数据修改请求引发冲突和覆盖。
 
@@ -261,22 +256,13 @@ post.save();
 ## 文件
 ### ML.File的创建和上传
 `ML.File` 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `ML.Object` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
-在这个例子中，我们用 HTML5 上传一张图片：
+在这个例子中，我们上传一张图片：
 
 ```javascript
-<input type="file" id="photoFileUpload">
-<input type="button" id="fileUploadButton"/>
-<script>
-  document.querySelector('#fileUploadButton').addEventListener('click', function(){
-    var fileUploadControl = document.querySelector('#photoFileUpload');
-    if (fileUploadControl.files.length > 0) {
-      var file = fileUploadControl.files[0];
-      var name = 'avatar.jpg';
-      var ML.File = new ML.File(name, file);
-      ML.File.save();
-    }
-  });
-</script>
+  var filePath; // 文件路径
+  var name = 'avatar.jpg';
+  var ML.File = new ML.File(name, filePath);
+  ML.File.save();
 ```
 注意：
 
@@ -286,7 +272,7 @@ post.save();
 把上传的文件显示到页面的指定元素中：
 
 ```javascript
-document.querySelector('#avatarImg').src = file.url();
+<Image source={{uri: file.url()}}/>
 ```
 
 ### 删除文件

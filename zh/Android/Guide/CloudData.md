@@ -2,18 +2,13 @@
 
 ## 简介
 
-### 什么是 Cloud Data服务
+### 什么是 Cloud Data 服务
 
  Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象 `MLObject` 的基础上，每个 `MLObject` 包含若干键值对。所有` MLObject` 均存储在 MaxLeap 上，您可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如 `MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint`(地理位置)，他们都是基于 `MLObject` 的对象。
+ 
+## SDK 集成
 
-### 为何需要 Cloud Data 服务
-
-Cloud Data 将帮助您解决数据库基础设施的构建和维护，从而专注于实现真正带来价值的应用业务逻辑。其优势在于：
-
-* 解决硬件资源的部署和运维
-* 提供标准而又完整的数据访问 API
-* 数据对象以 JSON 格式随存随取，高并发访问轻松无压力
-* 可结合代码托管服务，实现云端数据的 Hook （详见 [MaxLeap 云代码](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_CODE_ZH)）
+请按第二章【SDK 集成】步骤完成 SDK 集成。
 
 ## Cloud Object
 
@@ -407,17 +402,17 @@ query.limit(10);
 int myNumber = 42;
 String myString = "the number is " + myNumber;
 Date myDate = new Date();
- 
+
 JSONArray myArray = new JSONArray();
 myArray.put(myString);
 myArray.put(myNumber);
- 
+
 JSONObject myObject = new JSONObject();
 myObject.put("number", myNumber);
 myObject.put("string", myString);
- 
+
 byte[] myData = { 4, 8, 16, 32 };
- 
+
 MLObject bigObject = new MLObject("BigObject");
 bigObject.put("myNumber", myNumber);
 bigObject.put("myString", myString);
@@ -599,7 +594,7 @@ MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
 ```java
 // Sorts the results in ascending order by the score field
 query.orderByAscending("score");
- 
+
 // Sorts the results in descending order by the score field
 query.orderByDescending("score");
 ```
@@ -610,13 +605,13 @@ query.orderByDescending("score");
 ```java
 // Restricts to wins < 50
 query.whereLessThan("wins", 50);
- 
+
 // Restricts to wins <= 50
 query.whereLessThanOrEqualTo("wins", 50);
- 
+
 // Restricts to wins > 50
 query.whereGreaterThan("wins", 50);
- 
+
 // Restricts to wins >= 50
 query.whereGreaterThanOrEqualTo("wins", 50);
 ```
@@ -676,12 +671,12 @@ query.whereNotContainedIn("playerName", Arrays.asList(names));
 ```java
 // 查询包含"score"属性的对象
 query.whereExists("score");
- 
+
 // 查询不包含"score"属性的对象
 query.whereDoesNotExist("score");
 ```
 
-您可以使用whereMatchesKeyInQuery方法查询一个query中的某属性的值与另一个query中某属性的值相同的数据。 
+您可以使用whereMatchesKeyInQuery方法查询一个query中的某属性的值与另一个query中某属性的值相同的数据。
 
 如：现有一个名为"Team"的class存储篮球队的数据，有一个名为"User"的class存储用户数据。Team中使用"city"存储篮球队所在地，User中使用"hometown"存储其家乡。则您可以通过以下Query，查找家乡与**特定**篮球队所在地相同的用户。
 
@@ -692,7 +687,7 @@ teamQuery.whereGreaterThan("winPct", 0.5);
 MLQuery<MLUser> userQuery = MLUser.getQuery();
 userQuery.whereMatchesKeyInQuery("hometown", "city", teamQuery);
 MLQueryManager.findAllInBackground(userQuery, new FindCallback<MLUser>() {
-    
+
   @Override
   public void done(List<MLUser> results, MLException e) {
     // results中包含胜率超过50%的篮球队所在地的用户
@@ -706,10 +701,10 @@ MLQueryManager.findAllInBackground(userQuery, new FindCallback<MLUser>() {
 MLQuery<MLUser> anotherUserQuery = MLUser.getQuery();
 losingUserQuery.whereDoesNotMatchKeyInQuery("hometown", "city", teamQuery);
 MLQueryManager.findAllInBackground(anotherUserQuery, new FindCallback<MLUser>() {
-    
+
   @Override
   public void done(List<MLUser> results, MLException e) {
-    // results中包含家乡不在指定篮球队所在地的用户 
+    // results中包含家乡不在指定篮球队所在地的用户
   }
 });
 ```
@@ -853,14 +848,14 @@ MLQueryManager.countInBackground(query, new CountCallback() {
 ```java
 MLQuery<MLObject> lotsOfWins = MLQuery.getQuery("Player");
 lotsOfWins.whereGreaterThan("score", 90);
- 
+
 MLQuery<MLObject> fewWins = MLQuery.getQuery("Player");
 fewWins.whereLessThan("score", 10);
- 
+
 List<MLQuery<MLObject>> queries = new ArrayList<MLQuery<MLObject>>();
 queries.add(lotsOfWins);
 queries.add(fewWins);
- 
+
 MLQuery<MLObject> mainQuery = MLQuery.or(queries);
 MLQueryManager.findAllInBackground(mainQuery, new FindCallback<MLObject>() {
   public void done(List<MLObject> results, MLException e) {
@@ -894,7 +889,7 @@ shield.setRupees(50);
 创建一个 MLObject 的子类很简单：
 
 1.   首先声明一个子类继承自 MLObject。
-2.   添加@MLClassName注解。它的值必须是一个字符串，也就是您过去传入 MLObject 构造函数的类名。这样一来，后续就不需要再在代码中出现这个字符串类名。
+2.   添加 `@MLClassName` 注解。它的值必须是一个字符串，也就是您过去传入 MLObject 构造函数的类名，该值与你在控制台创建的表名相同。这样一来，后续就不需要再在代码中出现这个字符串类名。
 3.   确保您的子类有一个 public 的默认（参数个数为 0）的构造函数。切记不要在构造函数里修改任何 MLObject 的字段。
 4.   在调用 MaxLeap.initialize() 注册应用之前，注册子类 MLObject.registerSubclass(Yourclass.class).
 
@@ -902,15 +897,15 @@ shield.setRupees(50);
 
 ```java
 // Armor.java
-import com.ML.MLObject;
-import com.ML.MLclassName;
+import com.maxleap.MLObject;
+import com.maxleap.MLClassName;
 
-@MLclassName("Armor")
+@MLclassName("t_armor")
 public class Armor extends MLObject {
 }
 
 // App.java
-import com.ML.MaxLeap;
+import com.maxleap.MaxLeap;
 import android.app.Application;
 
 public class App extends Application {
@@ -923,7 +918,7 @@ public class App extends Application {
   }
 }
 ```
- 
+
 ####	属性的访问/修改
 
 添加方法到 MLObject 的子类有助于封装类的逻辑。您可以将所有跟子类有关的逻辑放到一个地方，而不是分成多个类来分别处理商业逻辑和存储/转换逻辑。
@@ -932,7 +927,7 @@ public class App extends Application {
 
 ```java
 // Armor.java
-@MLclassName("Armor")
+@MLClassName("t_armor")
 public class Armor extends MLObject {
   public String getDisplayName() {
     return getString("displayName");

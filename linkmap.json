@@ -9,6 +9,7 @@
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_EN": "/guide/devguide/ios.html#support",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#USER_EN": "/guide/devguide/ios.html#user",
 
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install": "/guide/devguide/ios.html#sdk-集成",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_DATA_ZH": "/guide/devguide/ios.html#数据存储",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#CLOUD_CODE_ZH": "/guide/devguide/ios.html#云代码",
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#ACCOUNT_SYSTEM_ZH": "/guide/devguide/ios.html#账号服务",
@@ -65,6 +66,8 @@
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVASCRIPT": "/guide/devguide/javascript.html",
 
+  "ML_DOCS_GUIDE_LINK_PLACEHOLDER_REACTNATIVE": "/guide/devguide/reactnative.html",
+
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHP": "/guide/devguide/php.html",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS": "/guide/devguide/nodejs.html",
@@ -89,14 +92,19 @@
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SOCIALSHARE_ZH": "/guide/usermanual/socialshare.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#SUPPORT_ZH": "/guide/usermanual/support.html",
   "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#ANALYTICS_ZH": "/guide/usermanual/analytics.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#DATASOURCE_ZH": "/guide/usermanual/datasource.html",
+  "ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUDCONTAINER_ZH": "/guide/usermanual/cloudContainer.html",
 
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_IOS": "/tutorials/ios.html",
   "ML_DOCS_LINK_PLACEHOLDER_SDK_TUTORIALS_ANDROID": "/tutorials/android.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS": "/quickstart/ios/core/existing.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/android/core/existing.html",
-  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/java/core/existing.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS": "/quickstart/iosquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID": "/quickstart/androidquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVA": "/quickstart/javaquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_REACTNATIVE": "/quickstart/reactnativequickstart.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS": "/api/ios/index.html",
   "ML_DOCS_LINK_PLACEHOLDER_API_REF_ANDROID": "/api/android/index.html",
+  "ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_JAVASCRIPT": "/quickstart/javascriptquickstart.html",
+  "ML_DOCS_LINK_PLACEHOLDER_API_REF_JAVASCRIPT": "/api/javascript/index.html",
 
   "ML_DOCS_GUIDE_LINK_PLACEHOLDER_PHPPAYSDK": "/guide/devguide/php.html",
 

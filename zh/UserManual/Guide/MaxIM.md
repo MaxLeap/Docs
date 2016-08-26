@@ -1,15 +1,6 @@
 # 即时通讯
 MaxLeap 为开发者免费提供的即时通讯基础能力和云端服务，即时通讯服务是 MaxLeap 研发组件中的重要基础组件。开发者可以直接在自己的应用中构建出即时通讯产品，也可以无限创意出自己的即时通讯场景，如：构建游戏聊天频道、大型的在线聊天室、电商客服系统等等。
 
-## SDK
-
-### IM 通讯能力库 MaxIMLib
-MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和会话、消息等对象。引用到 App 工程中后，需要开发者自己实现 UI 界面，相对较轻量，适用于对 UI 有较高订制需求的开发者。
-### IM 界面组件 MaxIMKit
-MaxIMKit 是将即时通讯产品中最复杂的会话列表、聊天窗口、消息内容展现、会话设置等功能封装为组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间。您也可以针对自己界面需求自由设计开发。
-
-MaxIMKit 目前正在内测中，尽请期待。
-
 ## 账号系统
 
 MaxLeap 提供的即时通讯组件支持 **用户已有账号系统** 和 **使用 MaxLeap 账号系统** 两种模式。
@@ -122,9 +113,36 @@ MaxLeap 提供的即时通讯组件支持 **用户已有账号系统** 和 **使
 ## FAQ
 内容更新中
 
-## SDK 开发指南
+## SDK 集成
+
+### IM 通讯能力库 MaxIMLib
+MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和会话、消息等对象。引用到 App 工程中后，需要开发者自己实现 UI 界面，相对较轻量，适用于对 UI 有较高订制需求的开发者。
+
 [iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#MAXIM_ZH)
 
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)
 
 [JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
+
+### IM 界面组件 MaxIMKit
+MaxIMKit 是将即时通讯产品中最复杂的会话列表、聊天窗口、消息内容展现、会话设置等功能封装为组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间，并且您可以修改标准 UI 组件代码。您也可以针对自己界面需求自由设计开发。
+
+#### iOS
+[Module-MaxIM-iOS](https://github.com/MaxLeap/Module-MaxIM-iOS)
+
+#### Android
+[Module-MaxIM-Android](https://github.com/MaxLeap/Module-MaxIM-Android)
+
+
+## 样例应用
+
+### iOS
+[Sample-MaxChat-iOS](https://github.com/MaxLeap/Sample-MaxChat-iOS)
+
+### Android
+
+[Sample-MaxChat-Android](https://github.com/MaxLeap/Sample-MaxChat-Android)
+
+### JavaScript
+[Sample-IM-Javascript](https://github.com/MaxLeap/Demo-IM-Javascript)
+

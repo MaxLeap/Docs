@@ -3,7 +3,7 @@
 
 1. 下载模板项目并解压
 
-	请确保您使用的是最新的 Xcode (v7.0+), 并且目标平台版本为 iOS 6.0 或者更高。
+	请确保您使用的是最新的 Xcode (v7.0+), 并且目标平台版本为 iOS 7.0 或者更高。
 
 	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS" target="_blank">下载模板项目</a>
 

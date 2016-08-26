@@ -7,18 +7,23 @@ CocoaPods 是一个很好用的依赖管理工具，可以简化安装过程。
 在 Podfile 中添加：
 
 ```
-pod "MaxLeap"
+# MaxLeap 核心 SDK
+pod "MaxLeap/Core"
 
-# 如果使用 HelpCenter，需添加
-pod "MLHelpCenter"
+# 微信登录
+pod "MaxLeap/WeChatUtils"
 
-# 如果使用需要连接 Facebook，并使用的是 FacebookSDK v3.x，则添加
-pod "MLFacebookUtils"
-# 如果使用的是 FacebookSDK v4.x 版本，则添加
-pod "MLFacebookUtilsV4"
+# 微博登录
+pod "MaxLeap/WeiboUtils"
 
-# 如果需要连接 Twitter，需添加
-pod "MLTwitterUtils"
+# QQ 登录
+pod "MaxLeap/QQUtils"
+
+# 支付
+pod "MaxLeap/Pay"
+
+# 应用内支付
+pod "MaxLeap/Social"
 ```
 
 然后再项目根目录执行 `pod install` 命令，就能将 MaxLeap SDK 集成到你的项目中。
@@ -27,13 +32,13 @@ pod "MLTwitterUtils"
 
 1. 下载并解压缩 SDK
 
-	请确认您使用的是Xcode最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
+	请确认您使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
 
-	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 SDK</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 SDK (maxleap-sdk-ios-*.zip)</a>
 
 2. 添加 SDK 到您的应用
 
-	将下载的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
+	将解压后文件夹中的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
 	<p class="image-wrapper">
 	![drag_sdk_to_project](../../../images/drag_sdk_to_project.png)
@@ -73,7 +78,7 @@ pod "MLTwitterUtils"
 [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id" site:MLSiteCN];
 ```
 
-请把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。同时根据您应用平台的地区，设置服务器位置（`MLSiteUS`, `MLSiteCN`）。
+请把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。最后一个参数 site 目前有两个值：`MLSiteUS` 对应 https://maxleap.com, `MLSiteCN` 对应 https://maxleap.cn。
 
 编译并运行！
 

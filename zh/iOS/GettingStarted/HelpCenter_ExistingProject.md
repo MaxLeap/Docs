@@ -18,9 +18,9 @@ pod "MLHelpCenter"
 
 1. 下载并解压缩 SDK
 
-	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 6.0 或者更高版本。
+	请确认您使用的是 Xcode 最新版本（7.0+），目标平台为iOS 7.0 或者更高版本。
 
-	<a class="download-sdk" href="https://github.com/MaxLeap/Demo-Support-iOS" target="_blank">下载模板项目</a>
+	<a class="download-sdk" href="https://github.com/MaxLeap/SDK-iOS/releases" target="_blank">下载 iOS SDK</a>
 
 2. 添加SDK到您的应用
 

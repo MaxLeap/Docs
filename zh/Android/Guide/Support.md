@@ -7,9 +7,11 @@
 
 ## 准备工作
 
-1. 安装并配置 MaxLeap Core SDK。详细步骤请查看 [QuickStart - Core SDK](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
+请按第二章【SDK 集成】完成环境的准备。
 
-2. 安装并配置 HelpCenter SDK。详细步骤请查看 [QuickStart - HelpCenter](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_ANDROID)
+集成
+
+maxleap-sdk-core-{版本}.jar，maxleap-sdk-support-{版本}.jar，maxleap-sdk-support-resources等。
 
 ## 进入 FAQ 页面
 
@@ -107,7 +109,7 @@ MLHelpCenter.openConversation(context);
 
 #### All Questions 画面
 
-![actionbar](../../../images/hc_allQuestions.png)
+![actionbar](../../../images/hc_allquestions.png)
 
 - values/ml_hc_strings.xml
 	- `ml_hc_allQuestions` - 用于设置 ALL Questions 标题文字

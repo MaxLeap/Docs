@@ -7,14 +7,6 @@
 ### 什么是云代码服务
 云代码是部署运行在 MaxLeap 云引擎上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在 Web server上的 Web Service或 RESTful API。它对外提供的接口也是 RESTful API，也正是以这种方式被移动应用调用。 
 
-###为什么需要云代码服务
-
-如果应用非常简单，我们可以将业务逻辑都放在客户端里面实现。然而，当应用需要实现比较复杂的业务逻辑，访问更多的数据或需要大量的运算时，我们便需要借助云代码服务实现，其优势在于：
-
-* 强大的运算能力：云代码运行在 MaxLeap 的 Docker 容器中，可以使用多个CPU和大容量内存进行计算
-* 更高效：可以在一次调用中通过高速网络多次请求 Cloud Data，大大提升效率
-* 同一套代码可以为 iOS，Android，Web Site 等提供服务
-
 ###云代码如何工作
 
 <p class="image-wrapper">
@@ -126,9 +118,9 @@ public void doSomethingToCloudData(){
 
 上面例子是基本的增删改查操作，更多详细的参见下面章节
 
-#### 使用Cloud Function
+### 调用 Cloud Function
 
-##### API方式调用
+##### REST API 方式调用
 请求格式如下所示：
 
 ```shell
@@ -140,7 +132,8 @@ curl -X POST \
 https://api.maxleap.cn/2.0/functions/hello
 ```
 	
-##### 通过Android/iOS SDK调用：
+##### 通过 Android / iOS SDK调用：
+
 Android SDK中：
 
 ```java
@@ -169,7 +162,7 @@ NSDictionary *params = @{@"key1":@1, @"key2":@"2"};
     }];
 ```
 
-## Cloud Data Object的查询
+## Cloud Data Object 的查询
 我们可以通过构造MLQuery对象`MLQuery query = MLQuery.instance();`，来进行基础或相对比较复杂的查询，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的查询。
 
 ### 等值判断查询(=,!=,>,>=,<,<=)
@@ -525,7 +518,7 @@ public class Article extends MLObject {
 
 
 ## Cloud Data Object的更新
-我们可以通过构造MLUpdate对象`MLUpdate update = MLQuery.getUpdate();`，来实现记录的更新操作，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的更新。
+我们可以通过构造MLUpdate对象`MLUpdate update = MLUpdate.getUpdate();`，来实现记录的更新操作，MaxLeap SDK为我们提供了一系列的api来辅助我们构建自身需要的更新。
 
 ### 基本类型字段更新(set、setMany、unset、unsetMany、inc)
 `set`用来为指定字段赋值
@@ -740,7 +733,7 @@ https://api.maxleap.cn/2.0/jobs/YOUR_JOBNAME
 ```
 
 ####在管理中心中Schedule Job Plan
-img
+![imgCCScheduleJob](../../../images/imgCCScheduleJob.png)
 
 表单项目|作用 
 ----|-------|
@@ -979,53 +972,3 @@ new MLHandler<Request, Response>() {
 
 * 如果你不使用UserPrincipal来访问数据，SDK会默认使用master-key（即配置文件global.json中的applicationKey）来访问数据
 * 所有SDK的api都提供了使用UserPrincipal方式来访问数据，除了cloudcode云代码自身发起的请求必须使用masterKey来访问外，其他所有请求我们建议你使用UserPrincipal这种方式来保证你的秘钥安全
-
-## MLC － 云代码命令行工具
-MLC命令行工具是为云代码项目的上传，部署，停止及版本管理而设计的。您可以利用它，将Maven项目生成的package上传到MaxLeap，在云端，package将被制作成Docker Image，而部署过程，就是利用Docker Container将这个Image启动。而被上传到云端的每个版本的云代码都将被保存，您可以自由地卸载某一个版本，而后部署另外一个版本的云代码.
-###登录:
-```shell
-maxleap 或者maxleap -username <用户邮箱> -region <CN or US ...>
-```
-`<用户邮箱>` 为您登录MaxLeap管理中心的账号邮箱，`<CN or US ...>` 为选择中国区账号还是美国区账号，然后根据提示输入密码
-###显示所有app：
-```shell
-apps
-```
-查询账号下的所有应用，显示的信息为：AppId ：AppName
-###选择应用:
-```shell
-use <应用名>
-```
-`<应用名>`为目标应用名，如果应用名包含空格，你可以用`use "应用名"`即使用引号来切换应用。选择之后，接下来的操作（上传/部署/停止/版本管理）都将以此应用为上下文。
-###上传云代码:
-```shell
-upload <文件路径>
-```
-`<文件路径>`为你将部署的云代码 package（zip文件，由mvn package命令生成），它将被上传到步骤3指定的应用下。
-上传的的代码会被制作成Docker镜像，版本号在云代码项目里的global.json文件中指定：
-```
-"version": "0.0.1"
-```
-###显示所有云端云代码版本:
-```shell
-lv
-```
-即显示所有该应用下，用户上传过的云代码的所有版本。
-###部署云代码：
-```shell
-deploy <版本号>
-```
-`<版本号>`为想要部署的云代码版本号：如执行deploy 0.0.1，将部署指定应用下版本号为0.0.1的云代码。如果部署不存在的版本，会提示错误："version of appId not exists"
-###停止cloudcode：
-```shell
-undeploy <版本号>
-```
-停止该应用的指定版本云代码：如果之前已经部署过一个版本，需要先停止，再部署新的版本。
-###输出最近的日志：
-```shell
-log [-l <info|error>] [-n <number of log>] [-s <number of skipped log>]
-
--l 指定输出日志的级别：info或是error
--n 指定log的数量
--s 指定跳过最近的log数量
-```

@@ -59,8 +59,45 @@
 ## FAQ
 内容更新中
 
-## SDK 开发指南
 
-[iOS开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)
+## SDK 集成
 
-[Android开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)
+### 基础 API 库 MaxSupportLib
+MaxSupportLib 是不含界面的基础能力库，封装发送 Issue 和获取 FAQ 列表等API，引用到 App 工程中后，需要开发者自己实现 UI 界面，相对较轻量，适用于对 UI 有较高订制需求的开发者。
+
+[iOS 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SUPPORT_ZH)
+
+[Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SUPPORT_ZH)
+
+### 界面组件 MaxSupportKit
+MaxSupportKit 是将发送反馈、获取并显示 FAQ 列表等功能封装为 UI 组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间，并且您可以修改标准 UI 组件代码。您也可以针对自己界面需求自由设计开发。
+
+#### iOS
+
+用户反馈
+
+[Module-MaxIssues-iOS](https://github.com/MaxLeap/Module-MaxIssues-iOS)
+
+FAQ 管理
+
+[Module-MaxFAQ-iOS](https://github.com/MaxLeap/Module-MaxFAQ-iOS)
+
+#### Android
+
+用户反馈
+
+[Module-MaxIssues-Android](https://github.com/MaxLeap/Module-MaxIssues-Android)
+
+FAQ 管理
+
+[Module-MaxFAQ-Android](https://github.com/MaxLeap/Module-MaxFAQ-Android)
+
+
+## 样例应用
+
+### iOS
+[Sample-MaxNews-iOS](https://github.com/MaxLeap/Sample-MaxNews-iOS)
+
+### Android
+
+[Sample-MaxNews-Android](https://github.com/MaxLeap/Sample-MaxNews-Android)

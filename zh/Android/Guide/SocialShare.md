@@ -6,11 +6,9 @@
 
 ### 安装 SDK
 
-**MaxLeap SDK**
+请按第二章【SDK 集成】完成 SDK 下载，
 
-<a class="download-sdk" href="https://github.com/MaxLeap/SDK-Android/releases" target="_blank">下载 MaxLeap SDK</a>
-
-解压后将 `maxleap-social-xxx.jar` 包导入工程的 `libs` 目录下。
+解压后将 `maxleap-sdk-social-xxx.jar` 包导入工程的 `libs` 目录下。
 
 **第三方平台 SDK**
 
