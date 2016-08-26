@@ -33,7 +33,7 @@
 
 ### 字段说明
 
-`MLUser` 有几种可以将其与 `MLObject` 区分开的属性：
+`MLUser` 除了继承自 `MLObject` 的属性之外，还有有几个特有的属性：
 
 - `username`：用户的用户名（必填）。
 - `password`：用户的密码（注册时必填）。
@@ -52,7 +52,7 @@
     user.password = @"my_password";
     user.email = @"email@example.com";
     // other fields can be set just like with MLObject
-    user[@"mobilePhone"] = @"415-392-0202";
+    user[@"mobilePhone"] = @"13500000000";
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             // Hooray! Let them use the app now.
@@ -66,7 +66,7 @@
 
 这个调用将在您的 MaxLeap 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，MaxLeap 只保存密码的密文。我们从来不明文储存密码，也不会将密码明文传输回客户端。
 
-**注意**，我们使用的是 `-[user signUpInBackgroundWithBlock:]` 方法，而不是 `-[user saveInBackgroundWithBlock:]` 方法。应始终使用 `-[user signUpInBackgroundWithBlock:]` 方法创建新的 `MLUser`。调用 `-[user saveInBackgroundWithBlock:]` 可以完成用户的后续更新。
+**注意: 我们使用的是 `-[user signUpInBackgroundWithBlock:]` 方法，而不是 `-[user saveInBackgroundWithBlock:]` 方法。应始终使用 `-[user signUpInBackgroundWithBlock:]` 方法创建新的 `MLUser`。调用 `-[user saveInBackgroundWithBlock:]` 可以完成用户的后续更新。**
 
 若注册不成功，您应该查看返回的错误对象。最可能的情况就是该用户名或邮箱已被其他用户使用。你应该将这种情况清楚地告诉用户，并要求他们尝试不同的用户名。
 
@@ -90,7 +90,7 @@
 
 当前用户是指当前已经登录的用户，使用方法 `currentUser` 可以获取到当前用户对象，这个对象会被 SDK 自动缓存起来。
 
-可以使用缓存的 `currentUser` 对象实现自动登录，这样用户就不用每次打开应用都要登录了。
+可以使用缓存的 `currentUser` 对象实现**自动登录**，这样用户就不用每次打开应用都要登录了。
 
 每当用户成功注册或者登录后，这个用户对象就会被缓存到磁盘中。这个缓存可以用来判断用户是否登录：
 
@@ -110,7 +110,7 @@ if (currentUser) {
 MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```
 
-**注意：**由于 SDK 会自动创建匿名用户，所以 `currentUser` 有值并不能代表用户已经登录，在检查用户登录状态时，推荐这种方式：
+**注意：由于 SDK 会自动创建匿名用户，所以 `currentUser` 有值并不能代表用户已经登录，在检查用户登录状态时，推荐这种方式：**
 
 ```
 MLUser *currentUser = [MLUser currentUser];
@@ -164,9 +164,9 @@ NSString *theNewPassword;
 ```
 
 <span id="reset_password_by_email"></span>
-### 重置密码
+### 重置密码（使用邮箱）
 
-您刚刚将密码录入系统时就忘记密码的情况是存在的。这种情况下，我们的库提供一种方法让用户安全地重置密码。
+刚把密码录入系统后就忘记密码的情况是存在的。这种情况下，我们的 SDK 提供一种方法让用户安全地重置密码。
 
 若要开始密码重置流程，让用户填写电子邮箱地址，并调用：
 
@@ -185,9 +185,32 @@ NSString *theNewPassword;
 
 **注意**：该流程中的消息传送操作将根据您在 MaxLeap 上创建该应用时指定的名称引用您的应用程序。
 
+### 获取单个用户的信息
+
+可以使用 `-[MLUser fetchInBackgroundWithBlock:]` 方法来获取单个用户的信息：
+
+```
+MLUser *user = [MLUser objectWithoutDataWithObjectId:@"56fc921f70c67600015941a2"];
+// 如果 user 不是当前用户，只返回部分信息
+[user fetchInBackgroundWithBlock:^(MLUser * _Nullable user, NSError * _Nullable error) {
+    if (error) {
+        // 出错了，检查 error 看看是什么原因
+    } else {
+        // ...
+    }
+}];
+```
+
 ### 查询用户
 
-出于安全考虑，不允许客户端查询用户表。
+出于安全考虑，不允许客户端查询用户表。下面的代码会得到一个没有权限的错误：
+
+```
+MLQuery *query = [MLUser query];
+[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    // 该请求始终会返回没有权限的错误
+}];
+```
 
 ### 邮箱验证
 
@@ -196,8 +219,8 @@ NSString *theNewPassword;
 有三种 `emailVerified` 状态需要考虑：
 
 1. `true` － 用户通过点击 MaxLeap 发送给他们的链接确认电子邮箱地址。最初创建用户帐户时，`MLUsers` 没有 `true` 值。
-2. `false` － `MLUser` 对象最后一次刷新时，用户未确认其电子邮箱地址。若 `emailVerified` 为 `false`，可以考虑调用 `+[MLDataManager fetchDataOfObjectInBackground:block:]`，把 `MLUser` 传递给第一个参数。
-3. 缺失 － 电子邮箱验证关闭或没有填写 `email`。
+2. `false` － `MLUser` 对象最后一次刷新时，用户未确认其电子邮箱地址。若 `emailVerified` 为 `false`，可以考虑调用 `-[MLUser fetchInBackgroundWithBlock:]`，刷新用户信息。
+3. 缺失(`undefined`) － 电子邮箱验证关闭或没有填写 `email`。
 
 
 ### 匿名用户
@@ -231,6 +254,22 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 ## 第三方登录
 
 为简化用户的注册及登录流程，并且集成 MaxLeap 应用与 微博, 微信 等应用，MaxLeap 提供了第三方登录应用的服务。您可以同时使用第三方应用 SDK 与 MaxLeap SDK，并将 `MLUser` 与第三方应用的用户ID进行连接。
+
+使用第三方账户认证登录流程大致如下：
+
+1. 点击第三方登录按钮，跳转到第三方账号登录认证界面（通过 sso 或者网页）
+2. 用户确认授权以后，SDK 拿到认证信息，然后向 MaxLeap 服务器发送登录请求
+3. 服务器使用认证信息查询与之绑定的 `MLUser`， 假如没有查询到，服务器会自动创建一个 `MLUser`，并将这个认证信息与之绑定，该 `user` 对象的 `username` 为随机生成，`isNew` 为 `true`，不能使用用户名密码的方式登录；假如查询到一个 `MLUser`，直接返回这个对象。
+
+除了第一次使用第三方账号认证登录时，`MLUser` 自动与之绑定之外，还可以手动为 `MLUser` 绑定第三方账号，该流程大致如下：
+
+1. 首先，用户需要手动登录一个账号, 也就是 `MLUser`, 不论是何种方式（账户名/密码，手机号/验证码，第三方登录）
+2. 用户在已登录的状态下点击`绑定第三方账号`按钮，跳转到第三方账号登陆认证界面（通过 sso 或者网页）
+3. 用户确认授权以后，SDK 拿到认证信息，然后联系 MaxLeap 服务器，尝试将该认证信息与 `MLUser` 对象绑定
+4. 假如该第三方账号之前已经与其它 `MLUser` 绑定，则本次绑定失败
+5. 绑定成功的用户，稍后就可以使用这个第三方账号登陆 MaxLeap 服务器了
+
+第三方平台的集成方式有些许差别，请查阅以下几个小节来了解详细实现。
 
 ### 使用微博账号登陆
 
@@ -646,6 +685,8 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 
 ### 绑定手机号
 
+成功绑定手机号的用户以后就可以使用 `手机号／验证码` 方式登录，也可以使用 `短信/验证码` 方式重设密码。
+
 如果用户填写了手机号，并保存到 `mobilePhone` 字段，此时手机号为未验证状态。如果用户使用某个功能的时候需要验证手机号，可以调用接口进行验证，验证成功后 `mobilePhoneVerified ` 就会被置为 `true`。
 
 1. **上传手机号**
@@ -657,7 +698,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
     }];
     ```
 
-2. **请求发送验证码**
+2. **请求短信验证码**
 
 	```
 	[[MLUser currentUser] requestMobilePhoneVerifySmsCodeWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -669,6 +710,8 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 	
 3. **调用验证接口，验证用户输入的验证码是否正确**
 
+    验证通过的用户就可以使用短信验证码方式登陆和重设密码。
+
 	```
 	[[MLUser currentUser] verifyMobilePhoneWithSmsCode:@"123456" block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
@@ -676,7 +719,6 @@ MaxLeap 短信服务支持的应用场景有以下四种:
         }
     }];
 	```
-成功绑定手机号的用户以后就可以使用 手机号／验证码 方式登录了，也可以使用短信验证码重设密码。
 
 <span id="reset_password_by_mobile_phone"></span>
 ### 重设密码
