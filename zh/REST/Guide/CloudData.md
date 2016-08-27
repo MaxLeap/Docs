@@ -137,6 +137,300 @@ createdAt 和 updatedAt 都是 UTC 时间https://api.maxleap.cn戳，以 ISO 860
 ```json
     {"number":1,"updatedAt":"2016-04-21T09:19:25.585Z"}
 ```
+
+#### 查询对象
+
+##### 基础查询
+
+通过发送一个 GET 请求到类的 URL 上，不需要任何 URL 参数，你就可以一次获取多个对象。下面就是简单地获取所有产品：
+
+```shell
+    curl -X GET \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      https://api.maxleap.cn/2.0/classes/product
+```
+返回的主体是一个 JSON 对象列表：
+
+```json
+    {
+      "results": [
+        {
+          "createdAt": "2016-04-21T08:37:30.774Z",
+          "image": {
+            "__type": "File",
+            "name": "zcf-00c51b9d-3006-4877-ac95-012a9db82fa4.png",
+            "url": "https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-00c51b9d-3006-4877-ac95-012a9db82fa4.png"
+          },
+          "price": 1000,
+          "name": "真皮沙发",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "法国巴黎",
+          "objectId": "5718914a169e7d0001a24dec",
+          "updatedAt": "2016-07-21T05:29:34.779Z"
+        },
+        {
+          "createdAt": "2016-04-21T09:12:45.043Z",
+          "image": {
+            "__type": "File",
+            "name": "zcf-739fa899-0aca-423a-82b1-dbca564a439b.png",
+            "url": "https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-739fa899-0aca-423a-82b1-dbca564a439b.png"
+          },
+          "price": 1000,
+          "name": "真皮沙发",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "法国巴黎",
+          "objectId": "5718998d169e7d0001a25203",
+          "updatedAt": "2016-07-21T05:30:26.370Z"
+        },
+        {
+          "createdAt": "2016-04-21T09:12:59.585Z",
+          "image": {
+            "__type": "File",
+            "name": "",
+            "url": ""
+          },
+          "price": 1001,
+          "name": "真皮沙发",
+          "flags": 1,
+          "producer": "中国东莞",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "法国巴黎",
+          "objectId": "5718999b169e7d0001a2520a",
+          "updatedAt": "2016-07-21T05:29:29.074Z",
+          "tags": [
+            "高端",
+            "大气"
+          ]
+        },
+        {
+          "createdAt": "2016-04-22T01:34:43.683Z",
+          "price": 1000,
+          "name": "木质沙发",
+          "producer": "荷兰",
+          "objectId": "57197fb3169e7d0001a2c44e",
+          "updatedAt": "2016-04-22T01:34:43.683Z"
+        },
+        {
+          "createdAt": "2016-04-22T01:34:43.683Z",
+          "price": 100,
+          "name": "藤椅",
+          "producer": "中国广东",
+          "objectId": "57197fb3169e7d0001a2c44d",
+          "updatedAt": "2016-04-22T01:34:43.683Z"
+        },
+        {
+          "createdAt": "2016-08-26T01:30:39.111Z",
+          "price": 1000,
+          "name": "真皮沙发",
+          "producer": "法国巴黎",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "objectId": "57bf9bbfb0d8500007e2a68d",
+          "updatedAt": "2016-08-26T01:30:39.111Z"
+        }
+      ]
+    }
+```
+
+##### 查询约束
+
+通过 where 参数的形式可以对查询对象做出约束。
+
+where 参数的值应该是 JSON 编码过的。就是说，如果你查看真正被发出的 URL 请求，它应该是先被 JSON 编码过，然后又被 URL 编码过。最简单的使用 where 参数的方式就是包含应有的 key 和 value。
+
+查询所有价格为100的商品。
+
+```shell
+    curl -X GET \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      -G \
+      --data-urlencode 'where={"price":100}' \
+      https://api.maxleap.cn/2.0/classes/product
+```
+
+返回的主体是一个 JSON 对象列表：
+
+```json
+    {
+      "results": [
+        {
+          "createdAt": "2016-04-22T01:34:43.683Z",
+          "price": 100,
+          "name": "藤椅",
+          "producer": "中国广东",
+          "objectId": "57197fb3169e7d0001a2c44d",
+          "updatedAt": "2016-04-22T01:34:43.683Z"
+        }
+      ]
+    }
+```
+
+除了完全匹配一个给定的值以外，where 也支持比较的方式。where 参数支持下面一些选项：
+
+Key	| 操作
+------|--------
+$lt	| 小于
+$lte	| 小于等于
+$gt	| 大于
+$gte	| 大于等于
+$ne	| 不等于
+$in	| 包含
+$nin	| 不包含
+$exists	| 这个Key有值
+$select	| 匹配另一个查询的返回值
+$dontSelect	| 排除另一个查询的返回值
+$all	| 包括所有的给定的值
+
+例如，为了获取在 2016-04-22 前创建的商品，我们应该这样请求：
+
+
+```shell
+    curl -X GET \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      -G \
+      --data-urlencode 'where={"createdAt":{"$lt":{"__type":"Date","iso":"2016-04-22T00:00:00.000Z"}}}' \
+      https://api.maxleap.cn/2.0/classes/product
+```
+
+返回的主体是一个 JSON 对象列表：
+
+```json
+    {
+      "results": [
+        {
+          "createdAt": "2016-04-21T08:37:30.774Z",
+          "image": {
+            "__type": "File",
+            "name": "zcf-00c51b9d-3006-4877-ac95-012a9db82fa4.png",
+            "url": "https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-00c51b9d-3006-4877-ac95-012a9db82fa4.png"
+          },
+          "price": 1000,
+          "name": "真皮沙发",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "法国巴黎",
+          "objectId": "5718914a169e7d0001a24dec",
+          "updatedAt": "2016-07-21T05:29:34.779Z"
+        },
+        {
+          "createdAt": "2016-04-21T09:12:45.043Z",
+          "image": {
+            "__type": "File",
+            "name": "zcf-739fa899-0aca-423a-82b1-dbca564a439b.png",
+            "url": "https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-739fa899-0aca-423a-82b1-dbca564a439b.png"
+          },
+          "price": 1000,
+          "name": "真皮沙发",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "法国巴黎",
+          "objectId": "5718998d169e7d0001a25203",
+          "updatedAt": "2016-07-21T05:30:26.370Z"
+        },
+        {
+          "createdAt": "2016-04-21T09:12:59.585Z",
+          "image": {
+            "__type": "File",
+            "name": "",
+            "url": ""
+          },
+          "price": 1001,
+          "name": "真皮沙发",
+          "flags": 1,
+          "producer": "中国东莞",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "法国巴黎",
+          "objectId": "5718999b169e7d0001a2520a",
+          "updatedAt": "2016-07-21T05:29:29.074Z",
+          "tags": [
+            "高端",
+            "大气"
+          ]
+        }
+      ]
+    }
+```
+
+求价格低于1000，并且产地是荷兰的产品，查询条件要这样写：
+
+```shell
+    curl -X GET \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      -G \
+      --data-urlencode 'where={"price":{"$lt":1000}, "produce":"荷兰"}' \
+      https://api.maxleap.cn/2.0/classes/product
+```
+
+返回的主体是一个 JSON 对象列表：
+
+```json
+    {
+      "results": [
+        {
+          "createdAt": "2016-04-22T01:34:43.683Z",
+          "price": 100,
+          "name": "藤椅",
+          "producer": "中国广东",
+          "produce": "荷兰",
+          "objectId": "57197fb3169e7d0001a2c44d",
+          "updatedAt": "2016-08-27T09:25:43.668Z"
+        },
+        {
+          "createdAt": "2016-08-26T01:30:39.111Z",
+          "price": 999,
+          "name": "真皮沙发",
+          "producer": "法国巴黎",
+          "ACL": {
+            "creator": {
+              "id": null,
+              "type": "APIKey"
+            }
+          },
+          "produce": "荷兰",
+          "objectId": "57bf9bbfb0d8500007e2a68d",
+          "updatedAt": "2016-08-27T09:25:46.520Z"
+        }
+      ]
+    }
+```
+
+
 #### 计数器
 
 为了存储一个计数器类型的数据, MaxLeap 提供对任何数字字段进行原子增加（或者减少）的功能。
