@@ -430,6 +430,68 @@ $all	| 包括所有的给定的值
     }
 ```
 
+##### 分页和返回结果数量
+
+通过skip控制分页，limit控制返回结果数量，比如查询第1页产品，并且限制数量是2个
+
+```shell
+    curl -X GET \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-APIKey: MjVvSjJUMTZveUR2d1hoNlVoQ0R1QQ" \
+      -G \
+      --data-urlencode 'skip=0' \
+      --data-urlencode 'limit=2' \
+      https://api.maxleap.cn/2.0/classes/product
+```
+
+返回的主体是一个 JSON 对象列表：
+
+```
+{
+  "results": [
+    {
+      "createdAt": "2016-04-21T08:37:30.774Z",
+      "image": {
+        "__type": "File",
+        "name": "zcf-00c51b9d-3006-4877-ac95-012a9db82fa4.png",
+        "url": "https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-00c51b9d-3006-4877-ac95-012a9db82fa4.png"
+      },
+      "price": 1000,
+      "name": "真皮沙发",
+      "ACL": {
+        "creator": {
+          "id": null,
+          "type": "APIKey"
+        }
+      },
+      "produce": "法国巴黎",
+      "objectId": "5718914a169e7d0001a24dec",
+      "updatedAt": "2016-07-21T05:29:34.779Z"
+    },
+    {
+      "createdAt": "2016-04-21T09:12:45.043Z",
+      "image": {
+        "__type": "File",
+        "name": "zcf-739fa899-0aca-423a-82b1-dbca564a439b.png",
+        "url": "https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-739fa899-0aca-423a-82b1-dbca564a439b.png"
+      },
+      "price": 1000,
+      "name": "真皮沙发",
+      "ACL": {
+        "creator": {
+          "id": null,
+          "type": "APIKey"
+        }
+      },
+      "produce": "法国巴黎",
+      "objectId": "5718998d169e7d0001a25203",
+      "updatedAt": "2016-07-21T05:30:26.370Z"
+    }
+  ]
+}
+```
+
+
 
 #### 计数器
 
