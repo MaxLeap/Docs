@@ -5,55 +5,65 @@
 
 URL	| HTTP |	功能
 ------|--------|--------
-`/relation`|POST|	创建或者更新用户关系表
-`/relation/objectId/<objectId>`|GET|	获取用户关系
-`/relation/status`|GET|	 获取2个用户之间的关注状态
-`/relation/getRelation`|GET| 得到2个用户的关系
-`/relation/follows`|	POST| 获取关注列表
-`/relation/followers`	|POST|	获取粉丝列表
-`/relation/objectId/<objectId>`|	DELETE| 删除关系
-`/relation/delete`|	DELETE	| 删除关系
+`/maxsocial/relation`|POST|	创建或者更新用户关系表
+`/maxsocial/relation/objectId/<objectId>`|GET|	获取用户关系
+`/maxsocial/relation/status`|GET|	 获取2个用户之间的关注状态
+`/maxsocial/relation/getRelation`|GET| 得到2个用户的关系
+`/maxsocial/relation/follows`|	POST| 获取关注列表
+`/maxsocial/relation/followers`	|POST|	获取粉丝列表
+`/maxsocial/relation/objectId/<objectId>`|	DELETE| 删除关系
+`/maxsocial/relation/delete`|	DELETE	| 删除关系
 ###说说
 URL	| HTTP |	功能
 ------|--------|--------
-`/shuo`|POST|	 创建或者更新说说
-`/shuo/objectId/<objectId>`|GET|	获取说说
-`/shuo/list`|POST| 得到说说列表
-`/shuo/near`|	POST| 得到指定区域附近的说说
-`/shuo/latest`	|POST|	得到最新的一些说说
-`/shuo/getAll`	|POST|	得到一条说说所有内容
-`/shuo/friendCircle`	|POST|	得到朋友圈说说
-`/shuo/photosdelete `|	DELETE	| 删除说说
+`/maxsocial/shuo`|POST|	 创建或者更新说说
+`/maxsocial/shuo/objectId/<objectId>`|GET|	获取说说
+`/maxsocial/shuo/list`|POST| 得到说说列表
+`/maxsocial/shuo/near`|	POST| 得到指定区域附近的说说
+`/maxsocial/shuo/latest`	|POST|	得到最新的一些说说
+`/maxsocial/shuo/getAll`	|POST|	得到一条说说所有内容
+`/maxsocial/shuo/friendCircle`	|POST|	得到朋友圈说说
+`/maxsocial/shuo/photosdelete `|	DELETE	| 删除说说
 ###地理位置
 URL	| HTTP |	功能
 ------|--------|--------
-`/location`|POST|	创建或者更新用户和地理位置的对应关系
-`/location/near`|POST|	得到指定地点指定距离内的人
-`/location/<objectId>`|GET|	 获得用户和地理对应关系
-`/location/userId/<userId>`|GET| 获取用户的地理信息
-`/relation/<objectId>`|	DELETE| 删除用户和地理对应关系
+`/maxsocial/location`|POST|	创建或者更新用户和地理位置的对应关系
+`/maxsocial/location/near`|POST|	得到指定地点指定距离内的人
+`/maxsocial/location/<objectId>`|GET|	 获得用户和地理对应关系
+`/maxsocial/location/userId/<userId>`|GET| 获取用户的地理信息
+`/maxsocial/relation/<objectId>`|	DELETE| 删除用户和地理对应关系
 ###评论
 URL	| HTTP |	功能
 ------|--------|--------
-`/comment`|POST|	创建或者更新评论
-`/comment/list`|POST|	获取评论列表
-`/comment/update`|POST|	更新评论已读状态
-`/comment/objectId/<objectId>`|GET|	 获得评论
-`/comment/unread`|GET| 得到未读评论
-`/comment/objectId/<objectId>`|	DELETE| 删除评论
+`/maxsocial/comment`|POST|	创建或者更新评论
+`/maxsocial/comment/list`|POST|	获取评论列表
+`/maxsocial/comment/update`|POST|	更新评论已读状态
+`/maxsocial/comment/objectId/<objectId>`|GET|	 获得评论
+`/maxsocial/comment/unread`|GET| 得到未读评论
+`/maxsocial/comment/objectId/<objectId>`|	DELETE| 删除评论
 ###通行证
 URL	| HTTP |	功能
 ------|--------|--------
-`/socialpass/register`|POST|	注册
-`/socialpass/login`|POST|	登陆（账号密码）
-`/socialpass/smsCode`|POST|	获取短信验证码
-`/socialpass/loginByMobile`|POST|	 短信验证码登陆
+`/maxsocial/socialpass/register`|POST|	注册
+`/maxsocial/socialpass/login`|POST|	登陆（账号密码）
+`/maxsocial/socialpass/smsCode`|POST|	获取短信验证码
+`/maxsocial/socialpass/loginByMobile`|POST|	 短信验证码登陆
 
 ## API 详解
 
 ### 关系
 ####创建或者更新用户关系
 创建一个用户关系，或者更新对应的用户关系。请求中reverse字段表示2者是否相互关注:
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 4bbfe81d-bf4c-3a83-2aeb-c3130ff8e23b" -d '{
+  "userId": "5641b10b3330920001f1f7b1",
+  "followerId": "5641b10b3330920001f1f7a1",
+  "reverse": true
+}' "http://api.maxleap.cn/2.0/maxsocial/relation"
+```
 
 ```json
 Request:
@@ -82,6 +92,10 @@ or
 ```
 ####获取用户关系
 请求根据objectId获取用户关系:
+
+```json
+curl -X GET -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: ba97ada1-d483-520e-507b-4d6d28fa0cb9" "http://api.maxleap.cn/2.0/maxsocial/relation/objectId/5705d68a6b85b3410eaaabcd"
+```
 
 ```json
 Response:
