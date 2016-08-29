@@ -327,7 +327,7 @@ Pointer 类型是用来设定 CloudData Object 作为另一个对象的值时使
 
 指向用户对象的 Pointer 的 className 为 _User，前面加一个下划线表示开发者不能定义的类名，而且所指的类是 MaxLeap CloudData平台内置的。
 
-Relation 类型被用在多对多的类型上，移动端使用 AVRelation 作为值，它有一个 className 字段表示目标对象的类名.
+Relation 类型被用在多对多的类型上，它有一个 className 字段表示目标对象的类名.
 
 ```json
     {
