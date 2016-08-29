@@ -93,7 +93,7 @@ or
 ####获取用户关系
 请求根据objectId获取用户关系:
 
-```json
+```shell
 curl -X GET -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: ba97ada1-d483-520e-507b-4d6d28fa0cb9" "http://api.maxleap.cn/2.0/maxsocial/relation/objectId/5705d68a6b85b3410eaaabcd"
 ```
 
@@ -157,6 +157,14 @@ Response:
 ####获取关注列表
 请求followerId，得到其关注的所有人，支持分页(参数详见FAQ)：
 
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 0a55dfda-ce83-cbdf-cca2-71b2bec8c937" -d '{
+    "followerId":"5641b10b3330920001f1f7v1"
+}' "http://api.maxleap.cn/2.0/maxsocial/relation/follows"
+```
+
 ```json
 Request:
 {
@@ -179,6 +187,14 @@ Response:
 ```
 ####获取粉丝列表
 请求userId，得到其粉丝列表，支持分页(参数详见FAQ)：
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 04778a3d-1570-fc28-4f15-fe6503274abf" -d '{
+    "userId":"5641b10b3330920001f1f7b1"
+}' "http://api.maxleap.cn/2.0/maxsocial/relation/followers"
+```
 
 ```json
 Request:
@@ -264,6 +280,14 @@ curl -X GET \
 ####得到说说列表
 根据userId得到说说列表,black字段是从relation中query出来得到，支持分页(参数详见FAQ)，返回说说的同时会把对应的评论和赞一起返回
 
+curl:
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 5aaeba19-e5b0-04d2-bd6d-3429d3bb2ab3" -d '{
+    "userId":"5641b10b3330920001f1f7b1",
+    "black": false
+}' "http://api.maxleap.cn/2.0/maxsocial/shuo/list"
+```
+
 ```json
 Request:
 {
@@ -318,6 +342,16 @@ Response:
 ```
 ####得到指定区域附近的说说
 得到指定区域附近的说说，支持分页(参数详见FAQ)，返回说说的同时会把对应的评论和赞一起返回
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: c0128465-b63d-20a2-83bf-df0c43661731" -d '{
+    "latitude": 40.2,
+    "longitude": 20.1,
+    "distance": 100000000
+}' "http://api.maxleap.cn/2.0/maxsocial/shuo/near"
+```
 
 ```json
 Request:
@@ -434,6 +468,15 @@ Response:
 ####得到一条说说所有内容
 返回说说的同时会把对应的评论和赞一起返回
 
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 4ff155d4-ef16-d710-0aa6-327f6f80f6e4" -d '{
+    "userId": "5641b10b3330920001f1f7a4",
+    "shuoId": "5704b2b26b85b33d02184f08"
+}' "http://api.maxleap.cn/2.0/maxsocial/shuo/getAll"
+```
+
 ```json
 Request:
 {
@@ -466,6 +509,14 @@ response:
 ####得到朋友圈关注人的说说以及评论和赞
 得到朋友圈关注人的说说以及评论和赞,支持分页(参数详见FAQ)
 
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: c7c62f8b-a6b0-ccb4-5b33-5a3b00712f61" -d '{
+    "userId": "123"
+}' "http://api.maxleap.cn/2.0/maxsocial/shuo/friendCircle"
+```
+
 ```json
 Request:
 {
@@ -495,6 +546,15 @@ Response:
 ```
 ####删除说说
 删除说说以及对应的图片
+
+curl:
+
+```json
+curl -X DELETE -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: e058afd2-35f4-1737-127a-52cf34075bca" -d '{
+    "userId": "5641b10b3330920001f1f7a7",
+    "objectId": "570f13e9238c8f0001d622ef"
+}' "http://api.maxleap.cn/2.0/maxsocial/photosdelete"
+```
 
 ```json
 Request:
