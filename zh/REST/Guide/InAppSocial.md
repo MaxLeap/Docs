@@ -569,6 +569,21 @@ Response:
 ####创建或者更新用户和地理位置的对应关系
 参数说明：coordinates里面第一行代表经度longitude,第二行代表纬度latitude。
 
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: ed75162f-a386-edae-e1c0-c1e39fa5ec3d" -d '{
+  "userId": "5641b10b3330920001f1f7a5",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      40,
+      5
+    ]
+  }
+}' "http://api.maxleap.cn/2.0/maxsocial/location"
+```
+
 ```json
 Request:
 {
@@ -588,6 +603,17 @@ Response:
 }
 ```
 ####得到指定地点指定距离内的人
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: f3232411-6832-7b68-935a-0e9feadc168d" -d '{
+  "userId": "5641b10b3330920001f1f7a5",
+  "latitude":5,
+  "longitude":40,
+  "distance": 100000
+}' "http://api.maxleap.cn/2.0/maxsocial/location/near"
+```
 
 ```json
 Request:
@@ -684,6 +710,14 @@ Response:
 ####获取评论列表
 获取评论列表,请求可选字段：zan:默认false，支持分页(参数详见FAQ)
 
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 3e1b4a05-3d3c-cc25-e6be-51cd739164cf" -d '{
+  "shuoId":"5641b10b3330920001f1f7a2"
+}' "http://api.maxleap.cn/2.0/maxsocial/comment/list"
+```
+
 ```json
 Request:
 {
@@ -706,6 +740,16 @@ Response:
 }
 ```
 ####更新评论已读状态
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: f8f4cbf3-58e7-955e-fad9-48559789a6c4" -d '{
+  "objectId": "570620dd238c8f0001b4e85b",
+  "read": true
+}' "http://api.maxleap.cn/2.0/maxsocial/comment/update"
+```
+
 ```json
 Request:
 {
@@ -762,6 +806,16 @@ curl -X DELETE \
 ```
 ### 通行证
 ####注册
+
+curl
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 9368e9c9-92eb-a34b-d4a5-a9d29ebccb80" -d '{
+    "username":"yangtan",
+    "password":"123456"
+}' "http://api.maxleap.cn/2.0/maxsocial/socialpass/register"
+```
+
 ```json
 request:
 {
@@ -785,6 +839,16 @@ response:
 }
 ```
 ####登陆（账号密码
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: c48ce95f-76e4-ae2c-ff9d-f36019922bb1" -d '{
+    "username":"yangtan",
+    "password":"123456"
+}' "http://api.maxleap.cn/2.0/maxsocial/socialpass/login"
+```
+
 ```json
 request:
 {
@@ -808,6 +872,15 @@ response:
 }
 ```
 ####获取短信验证码
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 585278b6-ba80-4435-0015-d9cad0d11bb8" -d '{
+ "mobilePhone":"1347919XXXX",
+}' "http://api.maxleap.cn/2.0/maxsocial/socialpass/smsCode"
+```
+
 ```json
 Request
 {
@@ -821,6 +894,16 @@ Response
 }
 ```
 ####短信验证码登陆
+
+curl:
+
+```json
+curl -X POST -H "X-ML-appid: 5609fe7da5ff7f00012ce481" -H "X-ML-Session-Token: MuI3kNXYF1Jt8Ueb8RZvH5viI2CcehHlin5WhHr-l5k" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 132b0216-eeba-707e-0bd1-58c1ec2e282e" -d '{
+ "mobilePhone":"1347919XXXX",
+ "smsCode":"030684"
+}' "http://api.maxleap.cn/2.0/maxsocial/socialpass/loginByMobile"
+```
+
 ```json
 Request
 {
