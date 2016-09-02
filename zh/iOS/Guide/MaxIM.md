@@ -167,6 +167,89 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 }];
 ```
 
+## 陌生人聊天
+
+### 发消息给陌生人
+
+```
+[client sendMessage:message toStranger:@"strangerId" completion:^(BOOL succeeded, NSError * _Nullable error) {
+    // ...
+}];
+```
+
+### 获取与陌生人的聊天记录：
+
+与陌生人的聊天记录会在云端保存一年。
+
+```
+获取与 strangerA 最近 10 条聊天记录
+NSTimeInterval ts = [[NSDate date] timeIntervalSince1970];
+[client.currentUser getLatestChatsWithStranger:@"strangerA" before:ts limit:10 block:^(NSArray<MLIMMessage *> * _Nullable messages, NSError * _Nullable error) {
+    // ...
+}];
+```
+
+### 获取最近联系过的陌生人列表：
+
+```
+// 可选项
+NSDictionary *params = @{@"limit":@"10", // 限制返回陌生人数量
+                         @"skip":@"0",   // 跳过结果中的前面几条
+                         @"ids":@"id1,id2,id3" // 显式指定陌生人 ID
+                         };
+[client.currentUser fetchStrangersWithDetail:YES params:params completion:^(NSArray<MLIMRelationInfo *> * _Nullable result, NSError * _Nullable error) {
+    // ...
+}];
+```
+
+### 获取某个陌生人的信息
+
+```
+[client.currentUser getInfoOfStranger:@"strangerA" completion:^(MLIMRelationInfo * _Nonnull info, NSError * _Nullable error) {
+    // ...
+    if (info.online) {
+        // 用户 strangerA 在线
+    }
+}];
+```
+
+### 监听陌生人在线状态
+
+一般情况下，用户上下线事件不回推送给陌生人。如果想获取陌生人在线事件，只能通过 restful api 获取：`-[MLIMUser getInfoOfStranger:completion:]`
+
+如果某用户开启了 notifyAll 选项(iOS SDK 目前不提供此接口)，他的在线状态变化将推送至所有人，我们可以监听到他的上下线事件：
+
+1. 实现代理 `MLIMClientDelegate` 接口：
+
+	```
+	#pragma mark - MLIMClientDelegate
+	
+	- (void)client:(MLIMClient *)client someoneDidOnline:(MLIMRelationInfo *)aFriend {
+		// ...
+	}
+	
+	- (void)client:(MLIMClient *)client someoneDidOffline:(MLIMRelationInfo *)aFriend {
+		// ...
+	}
+	```
+
+2. 好友上下线的时候，都会发布通知，通过监听通知实现：
+	
+	```
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didOnline:) name:MLIMSomeoneOnlineNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didOffline:) name:MLIMSomeoneOfflineNotification object:nil];
+	
+	- (void)didOnline:(NSNotification *)notification {
+		NSString *userId = notification.userInfo[@"id"];
+		// ...
+	}
+	
+	- (void)didOffline:(NSNotification *)notification {
+	    NSString *userId = notification.userInfo[@"id"];
+	    // ...
+	}
+	```
+
 ## 好友管理
 
 ### 加好友
@@ -228,7 +311,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 	}
 	```
 
-3. 好友上下线的时候，`MLIMRelationInfo` 的 `online` 属性会跟着改变
+3. 好友上下线的时候，`MLIMRelationInfo` 的 `online` 属性会跟着改变（注意：此功能不支持多个 client 实例）
 
 ### 获取所有好友信息
 
@@ -584,7 +667,7 @@ message.receiver.roomId = @"RoomA";
         BOOL fromRoom = message.sender.type == MLIMMessageTargetTypeRoom && [message.sender.roomId isEqualToString:@"RoomA"];
         
         // 当前用户
-        NSString *cuid = [MLCDataManager currentUser].uid;
+        NSString *cuid = client.currentUser.uid;
         
         // 判断消息是否是当前用户使用其他终端发送给 Jerry 的
         BOOL fromSelfToFriend = [message.sender.userId isEqualToString:cuid]
