@@ -24,6 +24,22 @@
 
 ## 初始化 IM 客户端，创建 `MLIMClient` 实例
 
+### 客户端配置 MLIMClientConfiguration
+
+- **`baseURL:`** 默认为 https://im.maxleap.cn
+- **`appId:`** MaxLeap 应用 ApplicationId
+- **`clientKey:`** MaxLeap 应用 Client Key
+- **`installationId:`** 设备标识，用户登陆时会与这个 id 所标识的设备绑定，当用户断线后，服务器会尝试将消息通过远程推送发送至这台设备，一般可以使用 `currentInstallation.installationId`
+- **`shouldLog:`** 是否打印 socket.io 的日志信息，默认为 NO
+- **`autoReconnect:`** 断线后是否自动重连，默认为 YES
+- **`reconnectAttempts:`** 自动重连次数，默认为无限次
+- **`reconnectWait:`** 自动重连间隔时间，单位：秒；默认为 10秒
+- **`voipEnabled:`** 是否将 socket 注册为 voip 服务
+
+### 创建 `MLIMClient` 实例
+
+**注意：MLIMLib 不能很好地支持多个不同配置的 MLIMClient 实例**
+
 ```
 // 客户端配置
 MLIMClientConfiguration *configuration = [MLIMClientConfiguration 
@@ -33,12 +49,7 @@ defaultConfiguration];
 configuration.appId = @"Your_MaxLeap_ApplicationId";
 configuration.clientKey = @"Your_MaxLeap_ClientKey";
 
-// 断线重连设置
-configuration.autoReconnect = YES;
-configuration.reconnectAttempts = 3; // 自动重连次数
-configuration.reconnectWait = 30; // 断线后重连等待时间，单位：秒
-
-// 可选配置，如果不配置 installationId，将不会收到离线消息推送
+// 可选配置，用户登陆时会与当前设备绑定，用户处于断线状态时，服务器会尝试将消息通过远程推送发送至该设备
 configuration.installationId = [MLInstallation currentInstallation].installationId;
 
 MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
@@ -144,7 +155,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 
 ### 登出（注销）
 
-用户登出后，将不会再收到任何消息，包括[离线推送消息](#offline_message_push)。
+调用该方法，会解除与当前设备的绑定。当前设备将不会再收到任何消息，包括[离线推送消息](#offline_message_push)。
 
 ```
 [client logoutWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -163,7 +174,15 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 使用此接口添加对方为好友，无需经过对方的同意，自己也会出现在对方好友列表中。
 
 ```
-[client.currentUser addFriendWithUser:@"friendUserId" completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
+[client.currentUser addFriend:@"friendUserId" completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
+    // ...
+}];
+```
+
+### 批量加好友
+
+```
+[client.currentUser batchAddFriends:@[@"a", @"b"] completion:^(NSArray<NSDictionary *> * _Nonnull result, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -183,11 +202,11 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 	```
 	#pragma mark - MLIMClientDelegate
 	
-	- (void)client:(MLIMClient *)client friendDidOnline:(MLIMFriendInfo *)aFriend {
+	- (void)client:(MLIMClient *)client friendDidOnline:(MLIMRelationInfo *)aFriend {
 		// ...
 	}
 	
-	- (void)client:(MLIMClient *)client friendDidOffline:(MLIMFriendInfo *)aFriend {
+	- (void)client:(MLIMClient *)client friendDidOffline:(MLIMRelationInfo *)aFriend {
 		// ...
 	}
 	```
@@ -209,7 +228,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 	}
 	```
 
-3. 好友上下线的时候，`MLIMFriendInfo` 的 `online` 属性会跟着改变
+3. 好友上下线的时候，`MLIMRelationInfo` 的 `online` 属性会跟着改变
 
 ### 获取所有好友信息
 
@@ -227,7 +246,7 @@ NSDictionary *authData = [MLUser currentUser].oauthData;
 假如只知道好友的 ID，要拿好友详细信息，代码如下：
 
 ```
-[client.currentUser getFriendInfo:@"fid" completion:^(MLIMFriendInfo * _Nonnull info, NSError * _Nullable error) {
+[client.currentUser getFriendInfo:@"fid" completion:^(MLIMRelationInfo * _Nonnull info, NSError * _Nullable error) {
     // ...
 }];
 ```
@@ -514,7 +533,7 @@ message.receiver.roomId = @"RoomA";
     #pragma mark - MLIMClientDelegate
     
     // 接收好友的消息
-    - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)aFriend {
+    - (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMRelationInfo *)aFriend {
     	if ([aFriend.uid isEqualToString:@"Tom"]) {
     		if ([message.sender.userId isEqualToString:client.currentUser.uid]) {
     			// NSLog(@"Did receive Jerry's message send via another client.");
