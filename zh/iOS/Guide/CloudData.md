@@ -808,7 +808,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"Post"];
 
 对于含超过 1,000 个对象的类，计数操作受超时设定的限制。这种情况下，可能经常遇到超时错误，或只能返回近似正确的结果。因此，在应用程序的设计中，最好能做到避免此类计数操作。
 
-###复合查询
+### 复合查询
 
 如果想要查找与几个查询中的其中一个匹配的对象，您可以使用 `orQueryWithSubqueries:` 方法。例如，如果您想要查找赢得多场胜利或几场胜利的玩家，您可以：
 
@@ -827,8 +827,7 @@ MLQuery *query = [MLQuery orQueryWithSubqueries:@[fewReader, lotsOfReader]];
 
 但是，请注意：在混合查询结果中查询时，我们不支持非过滤型限制条件（如 `limit`、`skip`、`orderBy...:`、`includeKey:`）。
 
-###缓存查询
-
+<span id="mlobject_subclassing"></span>
 ##  `MLObject` 子类
 
 MaxLeap 的设计能让您尽快上手使用。您可以使用 `MLObject` 类访问所有数据，以及通过 `objectForKey:` 或 `[]` 操作符访问任何字段。在成熟的代码库中，子类具有许多优势，包括简洁性、可扩展性和支持自动完成。子类化纯属可选操作，但它会将以下代码：
@@ -1027,6 +1026,180 @@ MLQuery *query = [MLQuery queryWithclassName:@"PizzaPlaceObject"];
 每个到达 MaxLeap 云服务的请求是由移动端 SDK，管理后台，云代码或其他客户端发出，每个请求都附带一个 security token。MaxLeap 后台可以根据请求的 security token 确定请求发送者的身份和授权，并在处理数据请求的时候，根据发送者的授权过滤掉没有权限的数据。
 
 具体的介绍及操作方法，请参考 [数据存储-使用指南](ML_DOCS_LINK_PLACEHOLDER_USERMANUAL#CLOUD_DATA_ZH)
+
+## 错误处理
+
+MaxLeap iOS SDK 中有两种错误，一种是 exception，一种是 error。
+
+### Error
+
+Error 通常是由网络错误或者服务器无法返回正确的结果引起的。每个错误都有个代码，代码含义请参考[通用错误码](ML_DOCS_GUIDE_LINK_PLACEHOLDER_RESTAPI#ERROR_CODE)。
+
+### Exception
+
+通常逻辑错误和参数错误会抛出一个异常，会使程序崩溃，遇到这种情况不要慌张，先仔细查看日志信息，弄清楚发生异常的原因。比较常见的异常如下：
+
+- `You have to call +[MaxLeap setApplicationId:clientKey:site:] before using MaxLeap SDK.`
+
+    iOS SDK 的大多数功能都只能在初始化之后才能使用，否则就会抛出这个异常。
+
+- `Operation <%@> is invalid on data type <%@>.`
+
+    `MLObject` 内建了很多用于更改数据的接口，有些接口只支持特定的数据类型，比如 `-addObject:forKey:` 只支持数据类型。假如对值为其他数据类型的字段执行这个操作，就会抛出这个异常。
+
+- `You cannot increment a non-number.`
+
+    `MLObject` 内建了很多用于更改数据的接口，有些接口只支持特定的数据类型，比如 `-incrementKey:` 只支持数字类型。假如对值为其他数据类型的字段执行这个操作，就会抛出这个异常。
+
+- `Operation <%@> is invalid after previous operation <%@>. Please save the object before perform operation <%@>.`
+
+    `MLObject` 有些操作不能在一个请求内完成，连续执行这些操作就会抛出这个异常。例如下面的代码：
+    
+    ```
+    MLObject *a = [MLObject objectWithoutDataWithClassName:@"Song" objectId:@"573438df667a23000198b1f1"];
+    MLObject *b = [MLObject objectWithoutDataWithClassName:@"Song" objectId:@"573438f7667a23000198b1f2"];
+    MLObject *obj = [MLObject objectWithClassName:@"Test"];
+    MLRelation *relation = [obj relationForKey:@"foo"];
+    [relation addObject:a];
+    [relation removeObject:b];
+    // raise an `NSInternalInconsistencyException` exception, reason: 'Operation <Relation.add> is invalid after previous operation <Relation.remove>. Please save the object before perform operation <Relation.add>.'
+    ```
+
+- `You can't modify a relation after deleting it.`
+
+    删除一个 relation 之后，需要先保存数据，然后才可以更改这个 relation:
+    
+    ```
+    MLObject *a = [MLObject objectWithoutDataWithClassName:@"Song" objectId:@"573438df667a23000198b1f1"];
+    MLObject *obj = [MLObject objectWithClassName:@"Test"];
+    [obj removeObjectForKey:@"relation"]; // relation 字段类型是 Relation
+    MLRelation *relation = [obj relationForKey:@"relation"];
+    [relation addObject:a];
+    // 这里会抛出异常
+    
+    // 正确做法
+    [obj removeObjectForKey:@"relation"]; // relation 字段类型是 Relation
+    [obj saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            [relation addObject:a];
+            [obj saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                // ...
+            }];
+        }
+    }];
+    ```
+
+- `Found a circular dependency when saving object: %@.`
+
+    如果两个新建的 `MLObject` 之间存在循环引用，保存时会抛出这个异常。例如下面的代码：
+    
+    ```
+    MLObject *a = [MLObject objectWithClassName:@"A"];
+    MLObject *b = [MLObject objectWithClassName:@"B"];
+    a[@"b"] = b;
+    b[@"a"] = a;
+    [a saveInBackgroundWithBlock:nil];
+    ```
+    
+    可以先保存 a 或者 b, 然后再关联它们：
+    
+    ```
+    MLObject *a = [MLObject objectWithClassName:@"A"];
+    [a saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            MLObject *b = [MLObject objectWithClassName:@"B"];
+            a[@"b"] = b;
+            b[@"a"] = a;
+            [a saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                // ...
+            }];
+        } else {
+            // ...
+        }
+    }];
+    ```
+
+- `User cannot be saved unless they have been authenticated via logIn or signUp.`
+
+    未认证过的 `MLUser` 对象(user.isAuthenticated 为 NO)无法保存，这意味着以下代码会抛出异常：
+
+    ```
+    MLUser *user; // user.isAuthenticated 为 NO
+    MLObject *a = [MLObject objectWithClassName:@"A"];
+    a[@"user"] = user;
+    [a saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        NSLog(@"%@", a);
+    }];
+    ```
+
+- `The class %@ must be registered with +registerSubclass before using MaxLeap.`
+
+    在 SDK 初始化之前需要调用 `+registerSubclass` 方法注册 `MLObject` 的子类，推荐在该子类的 `+load` 方法中调用。MLObject 子类创建方法请查阅[MLObject 子类小节](#mlobject_subclassing)
+
+- `Can only call +registerSubclass on subclasses conforming to MLSubclassing.`
+
+    `MLObject` 的子类必须遵循 `MLSubclassing` 协议。
+
+- `Subclasses of subclasses may not have separate +leapClassName definitions. %@ should inherit +leapClassName from %@.`
+
+    创建 `MLObject` 子类的子类时，不能定义跟父类不同的 `leapClassName` 值：
+    
+    ```
+    @interface ClassA : MLObject <MLSubclassing>
+    @end
+    @implementation ClassA
+    + (NSString *)leapClassName {return @"A";}
+    @end
+    
+    @interface ClassB : ClassA
+    @end
+    @implementation ClassB
+    + (NSString *)leapClassName {return @"B";}
+    @end
+    
+    // ClassB 继承于 ClassA，但定义了与 ClassA 不同的 leapClassName
+    // 执行下面这句的时候会抛出异常
+    [ClassB registerSubclass];
+    ```
+
+- `Tried to register both %@ and %@ as the native MLObject subclass of %@. Cannot determine the right class to use because neither inherits from the other.`
+
+    同一个 leapClassName 下面只能注册有继承关系的 `MLObject` 子类：
+    
+    ```
+    @interface ClassA : MLObject <MLSubclassing>
+    @end
+    @implementation ClassA
+    + (NSString *)leapClassName {return @"A";}
+    @end
+    
+    @interface ClassB : MLObject <MLSubclassing>
+    @end
+    @implementation ClassB
+    + (NSString *)leapClassName {return @"A";}
+    @end
+    
+    // ClassA 与 ClassB 定义了相同的 leapClassName，但是它们却不存在继承关系
+    // 注册了其中一个类后，再注册另外一个时会抛出异常
+    [ClassB registerSubclass];
+    [ClassA registerSubclass];
+    ```
+
+- `Can only call -[MLObject init] on subclasses conforming to MLSubclassing.`
+
+    `MLObject` 的子类需要声明遵循 `MLSubclassing` 协议。
+
+- `The init method of %@ set values on the object, which is not allowed.`
+
+    `MLObject` 检测到子类在初始化方法中修改了一些值，这些修改不应该在初始化方法中做。
+
+- `Attempt to write readonly property `%@` of class `%@`.`
+
+    当 `MLObject` 子类的一个属性同时声明为 `readonly` 和 `dynamic` 的时候，`obj[@"foo"] = @"bar";` 语句将抛出异常。
+
+- `Unsupported type encoding: %s.`
+
+    `MLObject` 子类声明为 `dynamic` 的属性类型不受支持时会抛出这个异常。受支持的类型为：ObjC object, char, int, short, long, long long, unsigned char, unsigned int, unsigned short, unsigned long, unsigned long long, float, double, bool, BOOL。
 
 
 [+load api reference]: https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/classes/NSObject_class/#//apple_ref/occ/clm/NSObject/load
