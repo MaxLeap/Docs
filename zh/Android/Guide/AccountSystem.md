@@ -396,7 +396,7 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
 3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
 
     ```java
-    MLWechatUtils.initialize("YOUR WEIBO APP ID", "YOUR WEIBO SECRET");
+    MLWechatUtils.initialize("YOUR WECHAT APP ID", "YOUR WECHAT SECRET");
     ```
 
 #### 登录并注册新 MLUser
