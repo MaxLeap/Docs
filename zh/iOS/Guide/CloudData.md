@@ -1134,7 +1134,9 @@ Error 通常是由网络错误或者服务器无法返回正确的结果引起�
 
 - `The class %@ must be registered with +registerSubclass before using MaxLeap.`
 
-    在 SDK 初始化之前需要调用 `+registerSubclass` 方法注册 `MLObject` 的子类，推荐在该子类的 `+load` 方法中调用。MLObject 子类创建方法请查阅[MLObject 子类小节](#mlobject_subclassing)
+    在 SDK 初始化之前需要调用 `+registerSubclass` 方法注册 `MLObject` 的子类，推荐在该子类的 `+load` 方法中调用。MLObject 子类创建方法请查阅[MLObject 子类小节](#mlobject_subclassing)。
+    
+    `MLUser`, `MLInstallation` 是在 SDK 初始化方法中注册，在 SDK 初始化之前，尝试创建它们的实例会抛出异常。
 
 - `Can only call +registerSubclass on subclasses conforming to MLSubclassing.`
 
