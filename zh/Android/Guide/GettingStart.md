@@ -30,7 +30,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
         }
     }
     ```
@@ -80,7 +80,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
             //测试项目配置：
             MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
@@ -135,7 +135,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
         }
     }
     ```
@@ -185,7 +185,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
             //测试项目配置：
             MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
