@@ -28,10 +28,12 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
         }
     }
     ```
+    
+    请将上述代码中`MaxLeap.initialize`中的`appid`和`restapikey`分别替换为自己申请的`Application ID` 和 `REST API Key`。
 
 2. 权限配置
 
@@ -78,7 +80,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
             //测试项目配置：
             MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),

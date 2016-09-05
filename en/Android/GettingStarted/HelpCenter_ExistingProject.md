@@ -70,7 +70,7 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+		MaxLeap.initialize(this, "appid", "restapikey");
 
 		//Test Project Configuration:
 		MLObject testObject = new MLObject("People");
