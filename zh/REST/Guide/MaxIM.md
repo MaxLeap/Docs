@@ -1,25 +1,29 @@
 # 即时通讯
 
-## API 列表https://im.maxleap.cn
+## API 列表https://im.maxleap.cn/
 
 ### 用户
 
 | URL | HTTP | 功能 |
 |-----|------|------|
 | /ctx | GET | [搜索用户](#搜索用户) |
-| /ctx/`<userId>` | GET | [获取用户详情](#获取用户详情) |
-| /ctx/`<userId>`/attributes | POST | [设置用户属性](#设置用户属性) |
-| /ctx/`<userId>`/attributes | PUT | [覆盖更新用户属性](#覆盖更新用户属性) |
-| /ctx/`<userId>`/attributes | GET | [获取用户属性](#获取用户属性) |
-| /ctx/`<userId>`/attributes/`<attribute>` | GET | [获取某个用户属性](#获取某个用户属性) |
-| /ctx/`<userId>`/attributes | DELETE | [清空用户属性](#清空用户属性) |
-| /ctx/`<userId>`/friends/`<friendId>` | POST | [添加用户好友](#添加用户好友) |
-| /ctx/`<userId>`/friends/`<friendId>` | GET | [获取友谊信息](#获取友谊信息) |
-| /ctx/`<userId>`/friends/`<friendId>` | DELETE | [删除好友](#删除好友) |
-| /ctx/`<userId>`/friends/`<friendId>`/chats | GET | [获取好友聊天记录](#获取好友聊天记录) |
-| /ctx/`<userId>`/friends | GET | [获取用户好友列表](#获取用户好友列表) |
-| /ctx/`<userId>`/groups | GET | [获取用户已经加入的群组列表](#获取用户已经加入的群组列表) |
-| /ctx/`<userId>`/rooms | GET | [获取用户已经加入的聊天室列表](#获取用户已经加入的聊天室列表) |
+| /ctx/`{user_id}` | GET | [获取用户详情](#获取用户详情) |
+| /ctx/`{user_id}`/attributes | POST | [设置用户属性](#设置用户属性) |
+| /ctx/`{user_id}`/attributes | PUT | [覆盖更新用户属性](#覆盖更新用户属性) |
+| /ctx/`{user_id}`/attributes | GET | [获取用户属性](#获取用户属性) |
+| /ctx/`{user_id}`/attributes/`{attribute}` | GET | [获取某个用户属性](#获取某个用户属性) |
+| /ctx/`{user_id}`/attributes | DELETE | [清空用户属性](#清空用户属性) |
+| /ctx/`{user_id}`/friends/`{friend_id}` | POST | [添加用户好友](#添加用户好友) |
+| /ctx/`{user_id}`/friends/`{friend_id}` | GET | [获取友谊信息](#获取友谊信息) |
+| /ctx/`{user_id}`/friends/`{friend_id}` | DELETE | [删除好友](#删除好友) |
+| /ctx/`{user_id}`/friends/`{friend_id}`/chats | GET | [获取好友聊天记录](#获取好友聊天记录) |
+| /ctx/`{user_id}`/friends | GET | [获取用户好友列表](#获取用户好友列表) |
+| /ctx/`{user_id}`/groups | GET | [获取用户已经加入的群组列表](#获取用户已经加入的群组列表) |
+| /ctx/`{user_id}`/rooms | GET | [获取用户已经加入的聊天室列表](#获取用户已经加入的聊天室列表) |
+| /ctx/`{user_id}`/strangers | GET | [获取用户相关联的陌生人列表](#获取用户相关联的陌生人列表) |
+| /ctx/`{user_id}`/strangers/`{stranger_id}` | GET | [获取用户相关联的某个陌生人信息](#获取用户相关联的某个陌生人信息) |
+| /ctx/`{user_id}`/strangers/`{stranger_id}`/chats | GET | [获取与个陌生人的聊天记录](#获取与个陌生人的聊天记录) |
+
 
 ### 群组
 
@@ -27,18 +31,18 @@
 |-----|------|------|
 | /groups | POST | [创建群组](#创建群组) |
 | /groups | GET | [搜索群组](#搜索群组) |
-| /groups/`<groupId>` | GET | [获取群组基础信息](#获取群组基础信息) |
-| /groups/`<groupId>` | PUT | [更新群组基础信息](#更新群组基础信息) |
-| /groups/`<groupId>` | DELETE | [删除群组](#删除群组) |
-| /groups/`<groupId>`/attributes | POST | [设置群组属性](#设置群组属性) |
-| /groups/`<groupId>`/attributes | PUT | [覆盖更新群组属性](#覆盖更新群组属性) |
-| /groups/`<groupId>`/attributes | GET | [获取群组属性](#获取群组属性) |
-| /groups/`<groupId>`/attributes/`<attribute>` | GET | [获取某个群组属性](#获取某个群组属性) |
-| /groups/`<groupId>`/attributes | DELETE | [清空群组属性](#清空群组属性) |
-| /groups/`<groupId>`/members | POST | [追加群组成员](#追加群组成员) |
-| /groups/`<groupId>`/members | DELETE | [移除群组成员](#移除群组成员) |
-| /groups/`<groupId>`/chats | GET | [获取群组聊天记录](#获取群组聊天记录) |
-| /groups/`<groupId>`/chats | DELETE | [清空群组聊天记录](#清空群组聊天记录) |
+| /groups/`{group_id}` | GET | [获取群组基础信息](#获取群组基础信息) |
+| /groups/`{group_id}` | PUT | [更新群组基础信息](#更新群组基础信息) |
+| /groups/`{group_id}` | DELETE | [删除群组](#删除群组) |
+| /groups/`{group_id}`/attributes | POST | [设置群组属性](#设置群组属性) |
+| /groups/`{group_id}`/attributes | PUT | [覆盖更新群组属性](#覆盖更新群组属性) |
+| /groups/`{group_id}`/attributes | GET | [获取群组属性](#获取群组属性) |
+| /groups/`{group_id}`/attributes/`{attribute}` | GET | [获取某个群组属性](#获取某个群组属性) |
+| /groups/`{group_id}`/attributes | DELETE | [清空群组属性](#清空群组属性) |
+| /groups/`{group_id}`/members | POST | [追加群组成员](#追加群组成员) |
+| /groups/`{group_id}`/members | DELETE | [移除群组成员](#移除群组成员) |
+| /groups/`{group_id}`/chats | GET | [获取群组聊天记录](#获取群组聊天记录) |
+| /groups/`{group_id}`/chats | DELETE | [清空群组聊天记录](#清空群组聊天记录) |
 
 ### 聊天室
 
@@ -46,30 +50,30 @@
 |-----|------|------|
 | /rooms | POST | [创建聊天室](#创建聊天室) |
 | /rooms | GET | [搜索聊天室](#搜索聊天室) |
-| /rooms/`<roomId>` | GET | [获取聊天室基础信息](#获取聊天室基础信息) |
-| /rooms/`<roomId>` | DELETE | [删除聊天室](#删除聊天室) |
-| /rooms/`<roomId>`/attributes | POST | [设置聊天室属性](#设置聊天室属性) |
-| /rooms/`<roomId>`/attributes | PUT | [覆盖更新聊天室属性](#覆盖更新聊天室属性) |
-| /rooms/`<roomId>`/attributes | GET | [获取聊天室属性](#获取聊天室属性) |
-| /rooms/`<roomId>`/attributes/`<attribute>` | GET | [获取某个聊天室属性](#获取某个聊天室属性) |
-| /rooms/`<roomId>`/attributes | DELETE | [清空聊天室属性](#清空聊天室属性) |
-| /rooms/`<roomId>`/members | POST | [追加聊天室成员](#追加聊天室成员) |
-| /rooms/`<roomId>`/members | DELETE | [移除聊天室成员](#移除聊天室成员) |
+| /rooms/`{room_id}` | GET | [获取聊天室基础信息](#获取聊天室基础信息) |
+| /rooms/`{room_id}` | DELETE | [删除聊天室](#删除聊天室) |
+| /rooms/`{room_id}`/attributes | POST | [设置聊天室属性](#设置聊天室属性) |
+| /rooms/`{room_id}`/attributes | PUT | [覆盖更新聊天室属性](#覆盖更新聊天室属性) |
+| /rooms/`{room_id}`/attributes | GET | [获取聊天室属性](#获取聊天室属性) |
+| /rooms/`{room_id}`/attributes/`{attribute}` | GET | [获取某个聊天室属性](#获取某个聊天室属性) |
+| /rooms/`{room_id}`/attributes | DELETE | [清空聊天室属性](#清空聊天室属性) |
+| /rooms/`{room_id}`/members | POST | [追加聊天室成员](#追加聊天室成员) |
+| /rooms/`{room_id}`/members | DELETE | [移除聊天室成员](#移除聊天室成员) |
 
 ### 游客
 
 | URL | HTTP | 功能 |
 |-----|------|------|
 | /passengers | POST | [创建游客](#创建游客) |
-| /passengers/`<passengerId>` | GET | [获取游客基础信息](#获取游客基础信息) |
-| /passengers/`<passengerId>`/chats/`<userId>` | GET | [获取游客聊天记录](#获取游客聊天记录) |
+| /passengers/`{passenger_id}` | GET | [获取游客基础信息](#获取游客基础信息) |
+| /passengers/`{passenger_id}`/chats/`{user_id}` | GET | [获取游客聊天记录](#获取游客聊天记录) |
 
 ### 系统消息
 
 | URL | HTTP | 功能 |
 |-----|------|------|
 | /system | POST | [给所有人发送系统消息](#给所有人发送系统消息) |
-| /system/`<target>` | POST | [给指定对象发送系统消息](#给指定对象发送系统消息) |
+| /system/`{target}` | POST | [给指定对象发送系统消息](#给指定对象发送系统消息) |
 
 ### 附件
 
@@ -434,6 +438,106 @@ $ curl -X GET \
 
 其中id为聊天室标识, attributes为聊天室属性, members为聊天室成员表, ts表示聊天室创建日期时间戳。
 
+#### 获取用户相关联的陌生人列表
+
+当两个陌生用户聊天之后, 系统会记录两者的陌生人关联。您可以通过该API查询某个用户上下文中与其有过关联的陌生人列表。
+
+该接口支持分页, 您可以追加`skip`和`limit`来控制分页(`skip`表示跳过的记录数,`limit`表示返回的记录数, 默认返回20)。
+
+如果追加了`detail`, 系统将会在返回结果中附带详情信息(包括在线情况和最近一条聊天记录)。以下是范例:
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
+    -H "Content-Type: application/json" \
+    "https://im.maxleap.cn/ctx/testuser1/strangers?skip=0&limit=10&detail"
+```
+
+成功调用后返回`testuser1`的陌生人列表:
+
+``` json
+[
+  {
+    "id": "stranger_1",
+    "online": false,
+    "recent": {
+      "speaker": "testuser1",
+      "content": {
+        "media": 0,
+        "body": "hello world"
+      },
+      "ts": 1472635302198
+    }
+  }
+]
+```
+
+
+#### 获取用户相关联的某个陌生人信息
+
+获取与某个陌生人的关联信息。
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
+    -H "Content-Type: application/json" \
+    "https://im.maxleap.cn/ctx/testuser1/strangers/stranger_1"
+```
+
+将返回陌生人详情:
+
+``` json
+{
+  "ts": 1472543936000,
+  "online": false,
+  "recent": {
+    "speaker": "testuser1",
+    "content": {
+      "media": 0,
+      "body": "hello world"
+    },
+    "ts": 1472635302198
+  }
+}
+```
+
+#### 获取与个陌生人的聊天记录
+
+获取与某个陌生人的聊天记录。您可以追加查询条件`ts`来限制最后聊天时间戳(默认为当前时间戳), `limit`用于控制返回记录数(默认20条)。
+
+以下范例为查询最近聊天记录:
+
+``` shell
+$ curl -X GET \
+    -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+    -H "X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060" \
+    -H "Content-Type: application/json" \
+    "https://im.maxleap.cn/ctx/testuser1/strangers/stranger_1/chats"
+```
+
+调用成功将返回:
+
+``` json
+[
+  {
+    "speaker": "testuser1",
+    "content": {
+      "media": 0,
+      "body": "nice to meet you."
+    },
+    "ts": 1472635302198
+  },{
+    "speaker": "stranger_1",
+    "content": {
+      "media": 0,
+      "body": "nice to meet you too."
+    },
+    "ts": 1472635330023
+  }
+]
+```
 
 ### 群组
 
