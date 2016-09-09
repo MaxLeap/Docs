@@ -44,9 +44,19 @@
 
     [self registerRemoteNotifications];
 
+    // 开启推送营销功能，默认关闭
     [MLMarketingManager enable];
-    // 统计推送点击事件
-    [MLMarketingManager handlePushNotificationOpened:launchOptions];
+    
+    NSDictionary *aps = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (aps) {
+        NSLog(@"app was opened by remote notification: %@", aps);
+        
+        // 统计推送点击事件
+        // 注意防止重复统计
+        if (NO == [self respondsToSelector:@selector(application:didReceiveRemoteNotification:fetchCompletionHandler:)]) {
+            [MLMarketingManager handlePushNotificationOpened:launchOptions];
+        }
+    }
 
     return YES;
 }
@@ -64,7 +74,12 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // 将 device token 保存到 MaxLeap 服务器，以便服务器向本设备发送远程推送
-    [[MLInstallation currentInstallation] setDeviceTokenFromData:deviceToken];
+    // 请解除注释将下面几行代码
+//#if DEBUG
+    [[MLInstallation currentInstallation] setDeviceTokenFromData:deviceToken forSandbox:YES];
+//#else
+    [[MLInstallation currentInstallation] setDeviceTokenFromData:deviceToken forSandbox:NO];
+//#endif
     [[MLInstallation currentInstallation] saveInBackgroundWithBlock:nil];
 }
 
@@ -72,17 +87,28 @@
     [application registerForRemoteNotifications];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
+
+// 下面两个代理方法实现其中一个即可
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // 统计推送点击事件
+    [MLMarketingManager handlePushNotificationOpened:userInfo];
+}
+
+// 实现这个代理方法以后，不需要在 didFinishLaunchingWithOptions 中统计推送点击事件
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // 统计推送点击事件
+    [MLMarketingManager handlePushNotificationOpened:userInfo];
     completionHandler(UIBackgroundFetchResultNoData);
 }
 ```
 
 ### 统计推送点击率
 
-在 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
+收到远程推送时使用以下代码推送推送点击事件：
 
 	```
-	[MLMarketingManager handlePushNotificationOpened:launchOptions];
+	[MLMarketingManager handlePushNotificationOpened:notificationPayload];
 	```
 
 ### 设置 Badge
@@ -115,7 +141,7 @@ badge 是 iOS 用来标记应用程序未读消息(通知)的一个数字，出�
 
 	下载并双击证书，点击弹出框右下角的`添加`按钮，把证书导入到`钥匙串`中。
 	
-	在`钥匙串`中选择左边的 `login` 和 `My Certificates`，这时应该能在右边找到刚刚导入的证书。
+	在`钥匙串`中选择左边上半部分的 `登陆` 和下半部分的 `我的证书`，这时应该能在右边找到刚刚导入的证书。
 
 3. 导出 .p12 文件
 
