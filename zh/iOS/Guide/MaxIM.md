@@ -869,7 +869,7 @@ MLIMClient *client = [MLIMClient clientWithConfiguration:configuration];
 
 首先要申请并上传远程推送证书，详细步骤请参照：[iOS 推送证书设置指南](#营销-推送证书设置指南)。
 
-在 `appDelegate.m` 中，您可以使用下面的代码开启远程推送
+在 `appDelegate.m` 中，可以使用下面的代码开启远程推送
 
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

@@ -2,10 +2,10 @@
 
 ## 简介
 ### 什么是在线参数
-每个应用在云端都有一个对应的`MLConfig`对象，用以存储该应用的参数。Cloud Config服务帮助您访问和操作云端参数。您可以通过 Console 在 MaxLeap 中配置应用参数，并且使用 iOS/Android SDK 读取云端的参数。
+每个应用在云端都有一个对应的`MLConfig`对象，用以存储该应用的参数。Cloud Config服务帮助你访问和操作云端参数。你可以通过 Console 在 MaxLeap 中配置应用参数，并且使用 iOS/Android SDK 读取云端的参数。
 
 ## 在线参数中添加参数
-您可以通过Console向Cloud Config中增添应用参数。新建云端参数时，您需要指定该参数的以下属性：
+你可以通过Console向Cloud Config中增添应用参数。新建云端参数时，你需要指定该参数的以下属性：
 
 属性名|值
 -------|-------
@@ -13,7 +13,7 @@ Parameter|参数名
 Type|参数类型
 Value|参数的值
 
-您还可以为不同的Segment设置不同的参数值。
+你还可以为不同的Segment设置不同的参数值。
 
 ## 集成 SDK
 

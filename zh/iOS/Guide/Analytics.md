@@ -9,7 +9,7 @@
 
 > #### 统计分析功能集成在 `MaxLeap.framework` 中，如果还没有继承这个框架，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
 
-安装SDK完成后，MaxLeap 服务将自动帮助您追踪应用内的一些数据。自动收集的数据包括：
+安装SDK完成后，MaxLeap 服务将自动帮助你追踪应用内的一些数据。自动收集的数据包括：
 
 1.	终端信息
 2.	应用启动和退出
@@ -103,13 +103,13 @@ NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 
 充值过程可以跟踪四个状态：1、发出有效的充值请求；2、确认某次充值请求已完成充值；3、充值失败；4、充值被用户取消。
 
-您可在玩家发起充值请求时（例如玩家选择了某个充值包，进入支付流程那一刻）调用 `onChargeRequest`，并传入该笔交易的唯一订单ID和详细信息；在确认玩家支付成功时调用`onChargeSuccess`；在玩家支付失败时调用 `onChargeFailed`；在玩家取消支付时调用 `onChargeCancelled`。所有状态均需要传入订单ID。
+你可在玩家发起充值请求时（例如玩家选择了某个充值包，进入支付流程那一刻）调用 `onChargeRequest`，并传入该笔交易的唯一订单ID和详细信息；在确认玩家支付成功时调用`onChargeSuccess`；在玩家支付失败时调用 `onChargeFailed`；在玩家取消支付时调用 `onChargeCancelled`。所有状态均需要传入订单ID。
 
 **注意：**
 
 1、orderID是标识交易的关键，每一次的充值请求都需要是不同的orderID，否则会被认为重复数据而丢弃，造成收入数据偏差的情况。
 
-2、orderID由您自己构造和管理，可以使用类似 userID+时间戳+随机数 的方式来自己定义orderID，来保障其唯一性。
+2、orderID由你自己构造和管理，可以使用类似 userID+时间戳+随机数 的方式来自己定义orderID，来保障其唯一性。
 
 3、收入数据以调用了onChargeSuccess为准，Success调用时的orderID要与Request中orderID对应，才可追溯到交易内容，有效计量。 Request必须调用，且需要早于Success，否则可能影响收入数据的金额计数。
 
@@ -142,7 +142,7 @@ NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 transaction | SKPaymentTransaction | 用来进行支付的对象，不能为空
 orderId	  | NSString | 订单ID，最多64个字符。用于唯一标识一次交易。<br>*如果多次充值成功的orderID重复，将只算首次成功的数据，其他数据会认为重复数据丢弃。<br>\*如果Success调用时传入的orderID在之前Request没有对应orderID，则记录充值次数，但不会有收入金额体现。
 currencyAmount | double | 现金金额或现金等价物的额度。
-currencyType	| NSString | 请使用国际标准组织ISO 4217中规范的3位字母代码标记货币类型。点击查看参考 例：人民币CNY；美元USD；欧元EUR（如果您使用其他自定义等价物作为现金，亦可使用ISO 217中没有的3位字母组合传入货币类型，我们会在报表页面中提供汇率设定功能）
+currencyType	| NSString | 请使用国际标准组织ISO 4217中规范的3位字母代码标记货币类型。点击查看参考 例：人民币CNY；美元USD；欧元EUR（如果你使用其他自定义等价物作为现金，亦可使用ISO 217中没有的3位字母组合传入货币类型，我们会在报表页面中提供汇率设定功能）
 virtualCurrencyAmount | double | 虚拟币金额
 paymentSource	| NSString | 支付的途径，最多16个字符。例如：“支付宝”“苹果官方”“XX支付SDK”
 

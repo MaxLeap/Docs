@@ -6,7 +6,7 @@
 
 第三方登录需要集成 `ML**Utils.framework` 和第三方平台对应 SDK。
 
-您还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 7.0 及以上版本。
 
@@ -39,11 +39,11 @@
 - `password`：用户的密码（注册时必填）。
 - `email`：用户的电子邮箱地址（选填）。
 
-切记，如果您通过这些属性设置 `username` 和 `email`，则无需使用 `setObject:forKey:` 方法进行设置。
+切记，如果你通过这些属性设置 `username` 和 `email`，则无需使用 `setObject:forKey:` 方法进行设置。
 
 ### 注册用户
 
-您的应用程序要做的第一件事就是让用户注册。以下代码示范了一个典型注册过程：
+你的应用程序要做的第一件事就是让用户注册。以下代码示范了一个典型注册过程：
 
 ```objective_c
 - (void)myMethod {
@@ -64,17 +64,17 @@
 }
 ```
 
-这个调用将在您的 MaxLeap 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，MaxLeap 只保存密码的密文。我们从来不明文储存密码，也不会将密码明文传输回客户端。
+这个调用将在你的 MaxLeap 应用中异步创建一个新的用户。创建前，它还会检查确保用户名和邮箱唯一。此外，MaxLeap 只保存密码的密文。我们从来不明文储存密码，也不会将密码明文传输回客户端。
 
 **注意: 我们使用的是 `-[user signUpInBackgroundWithBlock:]` 方法，而不是 `-[user saveInBackgroundWithBlock:]` 方法。应始终使用 `-[user signUpInBackgroundWithBlock:]` 方法创建新的 `MLUser`。调用 `-[user saveInBackgroundWithBlock:]` 可以完成用户的后续更新。**
 
-若注册不成功，您应该查看返回的错误对象。最可能的情况就是该用户名或邮箱已被其他用户使用。你应该将这种情况清楚地告诉用户，并要求他们尝试不同的用户名。
+若注册不成功，你应该查看返回的错误对象。最可能的情况就是该用户名或邮箱已被其他用户使用。你应该将这种情况清楚地告诉用户，并要求他们尝试不同的用户名。
 
-您可以使用电子邮箱地址作为用户名。只需让您的用户输入他们的电子邮箱，但是需要将它填写在用户名属性中 － `MLUser` 将可以正常运作。我们将在*重置密码*部分说明是如何处理这种情况的。
+你可以使用电子邮箱地址作为用户名。只需让你的用户输入他们的电子邮箱，但是需要将它填写在用户名属性中 － `MLUser` 将可以正常运作。我们将在*重置密码*部分说明是如何处理这种情况的。
 
 ### 登录
 
-当然，您让用户注册后，需要让他们以后登录到他们的帐户。为此，您可以使用类方法 `+[MLUser logInWithUsernameInBackground:password:block:]`。
+当然，你让用户注册后，需要让他们以后登录到他们的帐户。为此，你可以使用类方法 `+[MLUser logInWithUsernameInBackground:password:block:]`。
 
 ```objective_c
 [MLUser logInWithUsernameInBackground:@"myname" password:@"mypass" block:^(MLUser *user, NSError *error) {
@@ -103,7 +103,7 @@ if (currentUser) {
 }
 ```
 
-您可以通过注销来清除他们的当前登录状态：
+你可以通过注销来清除他们的当前登录状态：
 
 ```objective_c
 [MLUser logOut];
@@ -174,7 +174,7 @@ NSString *theNewPassword;
 [MLUser requestPasswordResetForEmailInBackground:@"email@example.com"];
 ```
 
-该操作将尝试将给定的电子邮箱与用户电子邮箱或用户名字段进行匹配，并向用户发送密码重置邮件。这样，您可以选择让用户使用其电子邮箱作为用户名，或者您可以单独收集它并把它储存在电子邮箱字段。
+该操作将尝试将给定的电子邮箱与用户电子邮箱或用户名字段进行匹配，并向用户发送密码重置邮件。这样，你可以选择让用户使用其电子邮箱作为用户名，或者你可以单独收集它并把它储存在电子邮箱字段。
 
 密码重置流程如下：
 
@@ -183,7 +183,7 @@ NSString *theNewPassword;
 3. 用户点击重置链接，进入专用 MaxLeap 页面，用户在该页面输入新密码。
 4. 用户输入新密码。现在，用户的密码已经被重置为他们指定的值。
 
-**注意**：该流程中的消息传送操作将根据您在 MaxLeap 上创建该应用时指定的名称引用您的应用程序。
+**注意**：该流程中的消息传送操作将根据你在 MaxLeap 上创建该应用时指定的名称引用你的应用程序。
 
 ### 获取单个用户的信息
 
@@ -225,11 +225,11 @@ MLQuery *query = [MLUser query];
 
 ### 匿名用户
 
-能够将数据和对象与具体用户关联非常有价值，但是有时您想在不强迫用户输入用户名和密码的情况下也能达到这种效果。
+能够将数据和对象与具体用户关联非常有价值，但是有时你想在不强迫用户输入用户名和密码的情况下也能达到这种效果。
 
 匿名用户是指能在无用户名和密码的情况下创建的但仍与任何其他 `MLUser` 具有相同功能的用户。登出后，匿名用户将被抛弃，其数据也不能再访问。
 
-您可以使用 `MLAnonymousUtils` 创建匿名用户：
+你可以使用 `MLAnonymousUtils` 创建匿名用户：
 
 ```objective_c
 [MLAnonymousUtils logInWithBlock:^(MLUser *user, NSError *error) {
@@ -241,7 +241,7 @@ MLQuery *query = [MLUser query];
 }];
 ```
 
-您可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *微博* 或 *微信* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以使用 `+[MLAnonymousUtils isLinkedWithUser:]` 方法:
+你可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *微博* 或 *微信* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以使用 `+[MLAnonymousUtils isLinkedWithUser:]` 方法:
 
 ```objective_c
 if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
@@ -253,7 +253,7 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 
 ## 第三方登录
 
-为简化用户的注册及登录流程，并且集成 MaxLeap 应用与 微博, 微信 等应用，MaxLeap 提供了第三方登录应用的服务。您可以同时使用第三方应用 SDK 与 MaxLeap SDK，并将 `MLUser` 与第三方应用的用户ID进行连接。
+为简化用户的注册及登录流程，并且集成 MaxLeap 应用与 微博, 微信 等应用，MaxLeap 提供了第三方登录应用的服务。你可以同时使用第三方应用 SDK 与 MaxLeap SDK，并将 `MLUser` 与第三方应用的用户ID进行连接。
 
 使用第三方账户认证登录流程大致如下：
 
@@ -289,7 +289,7 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 
 #### 准备工作
 
-若要通过 MaxLeap 使用微博，您需要：
+若要通过 MaxLeap 使用微博，你需要：
 
 1. 前往[微博开放平台][weibo_develop_site]，[创建微博应用][set up weibo app]。
 2. 在 “微博应用 >> 应用信息 >> 高级信息” 中仔细填写授权回调页和取消授权回调页地址。授权回调页地址在集成微博 SDK 的时候需要用到，一般情况下填写默认值(`https://api.weibo.com/oauth2/default.html`)即可。
@@ -339,13 +339,13 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 	}
 	```
 
-若您遇到与微博相关的任何问题，请查阅 [微博官方文档][weibo documentation]。
+若你遇到与微博相关的任何问题，请查阅 [微博官方文档][weibo documentation]。
 
 MaxLeap 用户可通过以下两种主要方法使用微博：(1) 以微博用户身份登录，并创建 `MLUser`。(2) 将微博账号与已有的 `MLUser` 关联。
 
 #### 登录并注册新 MLUser
 
-`MLWeiboUtils` 提供一种方法让您的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
+`MLWeiboUtils` 提供一种方法让你的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
 ```objective_c
 [MLWeiboUtils loginInBackgroundWithScope:@"all" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
@@ -362,14 +362,14 @@ MaxLeap 用户可通过以下两种主要方法使用微博：(1) 以微博用�
 该代码运行时，会出现以下情况：
 
 1. 若设备安装了新浪微博客户端，则会跳转到微博客户端请求授权，否则弹出微博授权网页。
-2. 用户确认授权，您的应用程序会收到回调。
-3. 您的应用程序收到授权响应，并交由 `MLWeiboUtils` 处理，`[MLWeiboUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];`
+2. 用户确认授权，你的应用程序会收到回调。
+3. 你的应用程序收到授权响应，并交由 `MLWeiboUtils` 处理，`[MLWeiboUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];`
 3. 我们的 SDK 会收到微博数据并将其保存在 `MLUser` 中。如果是基于微博身份的新用户，那么该用户随后会被创建。
-4. 您的 `block` 被调用并带回这个用户对象(user)。
+4. 你的 `block` 被调用并带回这个用户对象(user)。
 
 #### 绑定 `MLUser` 与微博账号
 
-若您想要将已有的 `MLUser` 与微博帐户关联起来，您可以按以下方式进行关联：
+若你想要将已有的 `MLUser` 与微博帐户关联起来，你可以按以下方式进行关联：
 
 ```objective_c
 if (![MLWeiboUtils isLinkedWithUser:user]) {
@@ -385,7 +385,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 #### 解除绑定
 
-若您想要取消用户与微博的关联，操作如下：
+若你想要取消用户与微博的关联，操作如下：
 
 ```objective_c
 [MLWeiboUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
@@ -403,7 +403,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 #### 准备工作
 
-若要与微信集成，您需要：
+若要与微信集成，你需要：
 
 1. 前往[微信开放平台][wechat_develop_site]，创建微信移动应用。
 2. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用微信登录” 开关。
@@ -452,13 +452,13 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 	}
 	```
 
-若您遇到与微信相关的任何问题，请查阅 [微信官方文档][wechat documentation]。
+若你遇到与微信相关的任何问题，请查阅 [微信官方文档][wechat documentation]。
 
 MaxLeap 用户可通过以下两种主要方法使用微信：(1) 以微信用户身份登录，并创建 `MLUser`。(2) 将微信账号与已有的 `MLUser` 关联。
 
 #### 登录并注册新 MLUser
 
-`MLWeChatUtils` 提供了一个方法让您的 `MLUser` 可以通过微信登录或注册。这可以使用 `logInWithBlock` 方法实现：
+`MLWeChatUtils` 提供了一个方法让你的 `MLUser` 可以通过微信登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
 ```objective_c
 [MLWeChatUtils loginInBackgroundWithScope:@"snsapi_userinfo" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
@@ -475,14 +475,14 @@ MaxLeap 用户可通过以下两种主要方法使用微信：(1) 以微信用�
 该代码运行时，会出现以下情况：
 
 1. 跳转到微信客户端请求授权。
-2. 用户确认授权，您的应用程序会收到回调。
-3. 您的应用程序收到授权响应，并交由 `MLWeChatUtils` 处理，`[MLWeChatUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];`
+2. 用户确认授权，你的应用程序会收到回调。
+3. 你的应用程序收到授权响应，并交由 `MLWeChatUtils` 处理，`[MLWeChatUtils handleAuthorizeResponse:(WBAuthorizeResponse *)response];`
 3. 我们的 SDK 会收到微博数据并将其保存在 `MLUser` 中。如果是基于微信身份的新用户，那么该用户随后会被创建。
-4. 您的 `block` 被调用并带回这个用户对象(user)。
+4. 你的 `block` 被调用并带回这个用户对象(user)。
 
 #### 绑定 `MLUser` 与微信账号
 
-若您想要将已有的 `MLUser` 与微信帐户关联起来，您可以按以下方式进行关联：
+若你想要将已有的 `MLUser` 与微信帐户关联起来，你可以按以下方式进行关联：
 
 ```objective_c
 if (![MLWeChatUtils isLinkedWithUser:user]) {
@@ -498,7 +498,7 @@ if (![MLWeChatUtils isLinkedWithUser:user]) {
 
 #### 解除绑定
 
-若您想要取消用户与微信的关联，操作如下：
+若你想要取消用户与微信的关联，操作如下：
 
 ```objective_c
 [MLWeChatUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
@@ -529,7 +529,7 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 
 #### 准备工作
 
-若要通过 MaxLeap 使用 QQ ，您需要：
+若要通过 MaxLeap 使用 QQ ，你需要：
 
 1. 前往[腾讯开放平台][open_qq_site]，[创建 QQ 应用][set_up_qq_app]。
 2. 前往 [MaxLeap 控制台][maxleap_console]，前往 MaxLeap 应用设置 >> 用户验证 页面，打开"允许QQ登录"选项。
@@ -569,13 +569,13 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 	```
 
 
-若您遇到与 TencentOpenAPI SDK 相关的任何问题，请查阅 [腾讯官方文档][qq_documentation]。
+若你遇到与 TencentOpenAPI SDK 相关的任何问题，请查阅 [腾讯官方文档][qq_documentation]。
 
 MaxLeap 用户可通过以下两种主要方法使用 QQ：(1) 以QQ用户身份登录，并创建 `MLUser`。(2) 将QQ账号与已有的 `MLUser` 关联。
 
 #### 登录并注册新 MLUser
 
-`MLQQUtils` 提供一种方法让您的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `loginInBackgroundWithPermissions:block:` 方法实现：
+`MLQQUtils` 提供一种方法让你的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `loginInBackgroundWithPermissions:block:` 方法实现：
 
 ```objective_c
 NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
@@ -593,13 +593,13 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 该代码运行时，会出现以下情况：
 
 1. 若设备安装了新浪QQ客户端，则会跳转到QQ客户端请求授权，否则弹出QQ授权网页。
-2. 用户确认授权，您的应用程序会收到回调。
+2. 用户确认授权，你的应用程序会收到回调。
 3. 我们的 SDK 会收到QQ数据并将其保存在 `MLUser` 中。如果是基于QQ身份的新用户，那么该用户随后会被创建。
-4. 您的 `block` 被调用并带回这个用户对象(user)。
+4. 你的 `block` 被调用并带回这个用户对象(user)。
 
 #### 绑定 `MLUser` 与微博账号
 
-若您想要将已有的 `MLUser` 与微博帐户关联起来，您可以按以下方式进行关联：
+若你想要将已有的 `MLUser` 与微博帐户关联起来，你可以按以下方式进行关联：
 
 ```objective_c
 if (![MLQQUtils isLinkedWithUser:user]) {
@@ -615,7 +615,7 @@ if (![MLQQUtils isLinkedWithUser:user]) {
 
 #### 解除绑定
 
-若您想要取消用户与微博的关联，操作如下：
+若你想要取消用户与微博的关联，操作如下：
 
 ```objective_c
 [MLQQUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {

@@ -318,6 +318,7 @@ MLObject *post = fetchedComment[@"parent"];
 MLUser *user = [MLUser currentUser];
 MLRelation *relation = [user relationForKey:@"likes"];
 [relation addObject:post];
+// save the relation
 [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
