@@ -36,6 +36,7 @@
 
 ```gradle
 compile "com.squareup.okhttp3:okhttp:3.1.2"
+compile 'com.android.support:support-v4:24.2.0'
 ```
 
 ### 配置appID到应用
