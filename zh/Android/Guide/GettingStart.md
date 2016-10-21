@@ -105,7 +105,7 @@
 ## 已有项目
 
 1. 安装 SDK
-	[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-3177b3f8-d92a-4350-a6ce-4805cfae5efe.zip)
+	[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-49dfea97-9ca7-49d6-8068-1856d088a306.zip)
 
 2. 将 SDK 添加至项目
 
