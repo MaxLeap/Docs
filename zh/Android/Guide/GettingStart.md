@@ -225,6 +225,8 @@
     </application>
 	```
 在自定义的**Application**中调用：
+
+
 	```java
     import android.app.Application;
     import com.maxleap.MaxLeap;
@@ -254,6 +256,7 @@
     }
     ```
     
+    
     注：代码中配置的优先级会高于**AndroidManifest.xml**中配置的有限级。如果您同时在xml和代码中配置，将以代码配置为准。
     
 2. 使用Options参数的方式初始化
@@ -282,7 +285,8 @@
     
             //是否自动对activity页面的访问行为进行分析，默认为disable。
             //如果设置为MaxLeap.AUTO_TRACK_SESSION_AND_PAGEVIEW,需要Android sdk不小于14。
-            //自动分析与手动分析互斥，如果您手动在activity的生命周期中调用过MLAnalytics.onResume()或者MLAnalytics.onPause()等，需要设置为disable。
+            //自动分析与手动分析互斥，如果您手动在activity的生命周期中调用过MLAnalytics.onResume()
+            //或者MLAnalytics.onPause()等，需要设置为disable。
             options.autoTrackStrategy = MaxLeap.AUTO_TRACK_DISABLE;
             
             MaxLeap.setLogLevel(MaxLeap.LOG_LEVEL_NONE);//设置log输出的等级，默认不输出

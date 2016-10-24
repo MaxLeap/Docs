@@ -41,7 +41,7 @@ compile 'com.android.support:support-v4:24.2.0'
 
 ### 配置appID到应用
 
-将申请的appid等信息，在res->values->string.xml中配置如下：
+将申请的appid等信息，在res->values->`string.xml`中配置如下：
 
 ```xml
     <string name="ml_sina_weibo_app_id">your weibo appid</string>
@@ -53,7 +53,7 @@ compile 'com.android.support:support-v4:24.2.0'
 
 ### 配置AndroidManifest.xml
 
-将以下平台对应的组件配置到您项目的AndroidManifest.xml中
+将以下平台对应的组件配置到您项目的`AndroidManifest.xml`中
 
 #### 微信
 
@@ -62,13 +62,14 @@ compile 'com.android.support:support-v4:24.2.0'
         android:name="com.maxleap.social.thirdparty.WXEntryActivity"
         android:launchMode="singleTop"/>
     <activity-alias
-        android:name=".wxapi.WXEntryActivity"
+        android:name="${applicationId}.wxapi.WXEntryActivity"
         android:targetActivity="com.maxleap.social.thirdparty.WXEntryActivity"
         android:enabled="true"
         android:exported="true"/>
 ```
 
 #### QQ
+
 ```xml
         <activity
                 android:name="com.tencent.tauth.AuthActivity"
@@ -92,6 +93,7 @@ compile 'com.android.support:support-v4:24.2.0'
 ```
 
 #### weibo
+
 ```xml
         <activity
                 android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
@@ -107,7 +109,7 @@ compile 'com.android.support:support-v4:24.2.0'
 
 ### MLHermes
 
-首先在Application中对MLHermes进行初始化
+首先在`Application`中对MLHermes进行初始化
 
 ```java
     //maxleap上申请的appid和apikey
@@ -201,7 +203,7 @@ ShareProvider 目前共有以下四个子类：
 - `WeiboShareProvider`	微博分享
 - `QQShareProvider`	QQ 好友分享
 - `QZoneShareProvider`	QZone 分享
-- `WechatShareProvider`	微信分享，默认分享到微信好友，如果需要分享到朋友圈需要修改 `ShareItem` 的参数 `shareItem.putExtra(ShareItem.EXTRA_TIMELINE, isTimeline);`。
+- `WechatShareProvider`	微信分享，默认分享到微信好友，如果需要分享到朋友圈需要 `mShareItem.isTimeLine = true`。
 
 进行分享
 
