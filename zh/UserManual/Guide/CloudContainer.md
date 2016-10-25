@@ -232,7 +232,7 @@ step4:
 
 step5:
 
-修改php项目的目录名为Html, 并用zip -r 进行打包，备用：
+修改php项目的目录名为 html, 并用zip -r 进行打包，备用：
 
 ![imgCCVersionList](../../../images/php_container5.png)
 
