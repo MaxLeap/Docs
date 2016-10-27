@@ -18,7 +18,7 @@
 
 ### 申请AppID和配置签名
 
-下载完第三方平台的 SDK 后请按照各平台的规定申请应用，注意第三方平台上填写的应用包名和签名必须确保正确。
+下载完第三方平台的 SDK 后请按照各平台的规定申请应用，注意第三方平台上填写的应用`包名`和`签名`必须确保正确，否则您将无法跳转到分享界面。
 
 
 
@@ -226,6 +226,45 @@ shareProvider.shareItem(shareItem, new EventListener() {
 });
 ```
 
+### 分享后回调监听
+
+- 微信
+
+微信分享后监听已经在sdk中做了实现，您无需在做处理。
+
+- QQ
+
+ QQ分享或者QQ ZONE分享需要在`onActivityResult()`中加入回调方法。
+ 
+ 示例如下：
+
+```
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(shareProvider != null){
+            shareProvider.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+```
 
 
 
+- 微博
+
+ 微博分享需要在`onNewIntent()`中加入回调方法
+ 
+ 示例如下：
+ 
+```
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (shareProvider != null) {
+            shareProvider.onNewIntent(intent);
+        }
+    }
+```
+
+
+您可参考开源组件 [MaxShare](https://github.com/MaxLeap/Module-MaxShare-Android) 中的相关调用实现。

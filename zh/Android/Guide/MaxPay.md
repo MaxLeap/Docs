@@ -94,29 +94,50 @@
 - **微信**
 
     第一种
+    
+    由于微信的回调机制，在支付完成后会调用：包名+.wxapi.WXPayEntryActivity,所以需要自己在工程中实现`WXPayEntryActivity`类
 
-    需要在微信规定的自定义的 `WXPayEntryActivity` 的 `onCreate()` 方法中调用以下方法：
+    在 `onCreate()` 方法中调用以下方法：
+    
+     `MLPayManager.onCreate(getIntent());`
+     
+     在 `onNewIntent` 方法中调用以下方法：
+     
+     `setIntent(intent);`
+     `MLPayManager.onNewIntent(intent);`
+     
+     示例如下：
 
     ```java
-    MLPayManager.onCreate(getIntent());
-    ```
-
-    如果希望支付完成后关闭 `WXPayEntryActivity` 可以在 `onResp()` 中添加以下方法：
-
-    ```java
-    if (resp instanceof PayResp) {
-        finish();
+    public class WXPayEntryActivity extends Activity {
+    
+        @Override
+        protected void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            MLPayManager.onCreate(getIntent());
+            finish();
+        }
+    
+        @Override
+        protected void onNewIntent(Intent intent) {
+            super.onNewIntent(intent);
+            setIntent(intent);
+            MLPayManager.onNewIntent(intent);
+        }
     }
     ```
 
-    第二种
+    并在`AndroidManifest.xml`中相应的进行配置。
 
-    在 `AndroidManifest.xml` 中导入以下内容
+
+    第二种
+    
+    由于在`maxleap-sdk-pay-xxx.jar`中已经对WXPayEntryActivity回调做了处理，您只需要在 `AndroidManifest.xml` 中加入以下内容
 
     ```xml
     <activity android:name="com.maxleap.MLWechatPayEntryActivity"
               android:launchMode="singleTop"/>
-    <activity-alias android:name=".wxapi.WXPayEntryActivity"
+    <activity-alias android:name="${applicationId}.wxapi.WXPayEntryActivity"
                     android:targetActivity="com.maxleap.MLWechatPayEntryActivity"
                     android:enabled="true"
                     android:exported="true"/>
