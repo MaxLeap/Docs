@@ -14,7 +14,7 @@
 	在 `Podfile` 中加上下面这行：
 
 	```
-	pod 'MaxSocialShare'
+	pod 'MaxShare'
 	```
 
 	打开应用 `终端`，执行以下命令:
@@ -26,9 +26,9 @@
 
 2. 手动安装
 	
-	1. [下载最新版本的 MaxSocialShare SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
+	1. [下载最新版本的 MaxSocialShare SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-7bb96c27-5fb5-41b7-a325-47c74ac43536.zip)
 	
-	2. 解压后得到 `MaxSocialShare.framework` 和 `PlatformSDK` 文件夹，将它们拖到到项目中。其中 `PlatformSDK` 文件夹中是各平台的官方 SDK，是可选的。
+	2. 解压后得到 `MaxSocialShare.embeddedframework` 和 `PlatformSDK` 文件夹，将它们拖到到项目中。其中 `PlatformSDK` 文件夹中是各平台的官方 SDK，是可选的。
 	
 	3. 添加依赖库
 		
