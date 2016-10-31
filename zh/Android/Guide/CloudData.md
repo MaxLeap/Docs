@@ -78,13 +78,16 @@ MLDataManager.saveInBackground(myComment, new SaveCallback() {
 
 ### 查询
 
-##### 查询 MLObject
+#### 查询 MLObject
+
+##### 获取单条数据
 
 您可以通过某条数据的ObjectId，获取完整的`MLObject`。调用`MLQueryManager.getInBackground()`方法需要提供三个参数：第一个为查询对象所属的 class 名，第二个参数为 ObjectId，第三个参数为回调函数，将在 `getInBackground()` 方法完成后调用。
 
 ```java
+String className = "Comment";
 String objId = "OBJECT_ID";
-MLQueryManager.getInBackground("Comment", objId, new GetCallback<MLObject>() {
+MLQueryManager.getInBackground(className, objId, new GetCallback<MLObject>() {
 
   @Override
   public void done(MLObject object, MLException e) {
@@ -97,16 +100,77 @@ MLQueryManager.getInBackground("Comment", objId, new GetCallback<MLObject>() {
 也可以通过 "属性值 + MLQuery" 方式获取 MLObject：
 
 ```java
+
+        String className = "Comment";
+        String objId = "OBJECT_ID";
+        MLQuery query = MLQuery.getQuery(className);
+        
+        MLQueryManager.getInBackground(query, objId, new GetCallback() {
+            @Override
+            public void done(MLObject mlObject, MLException e) {
+
+            }
+        });
+
+```
+
+
+##### 获取多条数据
+
+您可以通过`MLQueryManager.findAllInBackground()`的方式获取多条数据：
+
+```java
+
 MLQuery<MLObject> query = MLQuery.getQuery("Comment");
 query.whereEqualTo("isRead",false);
 
 MLQueryManager.findAllInBackground(query, new FindCallback<MLObject>() {
   @Override
   public void done(List<MLObject> list, MLException e) {
-    // list即为所查询的对象
+    // list即为所查询的对象集合
   }
 });
+
 ```
+
+- 当获取的数据量较大的时候，您可以通过配置`MLQuery`的`setLimit()`参数来设置每次请求的条数，进行分页：
+
+
+```java
+query.setLimit(20);//每次最多返回的条数
+
+query.setSkip(page*20);//page 为已请求的页数，此处表示跳过之前已经获取的总条数
+```
+
+提示：MLQuery默认每次返回的最大条数为100。若您自行设置了返回的条数，最大条数不能超过1000。如果数据较多，建议您以分页的方式多次获取。
+
+- 当自定义的表中包含的字段比较多时，您可以通过配置`MLQuery`的`selectKeys()`来获取关注的字段：
+
+```java
+
+List<String> keyList = new ArrayList<>();
+keyList.add("name");
+keyList.add("age");
+
+query.selectKeys(keyList);
+
+```
+
+- 根据指定的字段对查询的结果进行升序或降序进行排列：
+
+```java
+
+query.orderByAscending(MLObject.KEY_UPDATED_AT);
+
+query.orderByDescending(MLObject.KEY_UPDATED_AT);
+
+```
+
+
+更多条件查询，您可以查询api进行了解。
+
+
+##### 获取第一条数据
 
 如果您只需获取 Query 结果的第一条，您可以使用 `MLQueryManager.getFirstInBackground()`方法：
 
@@ -123,14 +187,27 @@ MLQueryManager.getFirstInBackground(query, new GetCallback<MLObject>() {
 ```
 
 
-##### 查询 MLObject 属性值
+#### 获取 MLObject 属性值
 
 要从检索到的 MLObject 实例中获取值，可以使用相应的数据类型的 getType 方法：
 
 ```java
-int pubUserId = comment.getInt("pubUserId");
-String content = comment.getString("content");
-boolean isRead = comment.getBoolean("isRead");
+
+        MLQueryManager.getInBackground(query, objId, new GetCallback() {
+            @Override
+            public void done(MLObject mlObject, MLException e) {
+                if (e != null) {
+                    //获取结果失败
+                    return;
+                }
+
+                int age = mlObject.getInt("age");
+                String name = mlObject.getString("name");
+                boolean isRead = mlObject.getBoolean("isRead");
+
+            }
+        });
+
 ```
 
 若需要刷新已有对象，可以调用 `MLDataManager.fetchInBackground()` 方法：
@@ -164,7 +241,7 @@ MLQueryManager.getInBackground(query, objId, new GetCallback<MLObject>() {
 });
 ```
 
-客户端会自动找出被修改的数据，所以只有 “dirty” 字段会被发送到服务器。您不需要担心其中会包含您不想更新的数据。
+客户端会自动找出被修改的数据，所以只有 “isRead” 字段会被发送到服务器。您不需要担心其中会包含您不想更新的数据。
 
 ### 删除
 
@@ -173,7 +250,7 @@ MLQueryManager.getInBackground(query, objId, new GetCallback<MLObject>() {
 您可以使用`MLDataManager.deleteInBackground()` 方法删除MLObjcet。确认删除是否成功，您可以使用 DeleteCallback 回调来处理删除操作的结果。
 
 ```java
-MLDataManager.deleteInBackground(comment);
+MLDataManager.deleteInBackground(mlObject);
 ```
 
 ##### 批量删除

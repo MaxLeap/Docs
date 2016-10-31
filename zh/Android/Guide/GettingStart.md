@@ -211,7 +211,7 @@
 
 1. 在**AndroidManifest.xml**中配置相应的meta-data所对应的value
 
-    ```xml
+```xml
 	<application>
               <meta-data
                    android:name="com.maxleap.APPLICATION_ID"
@@ -223,11 +223,12 @@
                    android:name="ml_region"
                    android:value="CN" />
     </application>
-	```
+```
+
 在自定义的**Application**中调用：
 
 
-	```java
+```java
     import android.app.Application;
     import com.maxleap.MaxLeap;
     import com.maxleap.MLQueryManager;
@@ -254,14 +255,14 @@
                         });
         }
     }
-    ```
+```
     
     
     注：代码中配置的优先级会高于**AndroidManifest.xml**中配置的有限级。如果您同时在xml和代码中配置，将以代码配置为准。
     
 2. 使用Options参数的方式初始化
 
-    ```java
+```java
     import android.app.Application;
     import com.maxleap.MaxLeap;
     import com.maxleap.MLQueryManager;
@@ -295,6 +296,7 @@
              
         }
     }
-    ```
+```
+
 使用Options参数的方式初始化，灵活度更高。您可根据实际的项目需求进行配置。 
     
