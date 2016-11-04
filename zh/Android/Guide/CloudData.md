@@ -499,10 +499,42 @@ isRead|false|布尔
 
 MLFile 可以让您的应用程序将文件存储到服务器中，以应对文件太大或太多，不适宜放入普通 `MLObject` 的情况。比如常见的文件类型图像文件、影像文件、音乐文件和任何其他二进制数据（大小不超过 100 MB）都可以使用。
 
-在这个例子中，我们将图片保存为MLFile并上传到服务器端：
+目前有两种方式可以实现文件的上传：
+
+1.使用`MLFileManager`的`saveInBackground()`方法,将MLFile对象上传至服务器。
+
+直接上传File文件：
 
 ```java
-    public void UploadFile(Bitmap img){
+    private void upLoadFile(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return;
+        }
+
+        final MLFile mlFile = new MLFile(file.getName(), file);
+
+        MLFileManager.saveInBackground(mlFile, new SaveCallback() {
+            @Override
+            public void done(MLException e) {
+                if(e ==null){
+                    String url = mlFile.getUrl();//上传完成后，得到该文件的下载地址
+                    System.out.println(url);
+                }
+            }
+        }, new ProgressCallback() {
+            @Override
+            public void done(int percentDone) {
+                System.out.println("percentDone:" + percentDone);
+            }
+        });
+    }
+```
+
+您也可以上传byte数组：
+
+```java
+    public void uploadFile(Bitmap img){
       // 将Bitmap转换为二进制数据byte[]
       Bitmap bitmap = img;
       ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -522,29 +554,51 @@ MLFile 可以让您的应用程序将文件存储到服务器中，以应对文�
     }
 ```
 
-注意：
+`注意`：以上`MLFileManager`的方式会将文件直接将上传至存储服务器。当上传成功后，需要自己将下载的路径做记录或者存储。否则，您将无法在控制台查看到该文件。
 
-* 	MLFile 构造函数的第一个参数指定文件名称，第二个构造函数接收一个 byte 数组，也就是将要上传文件的二进制。您可以通过以下代码，获取文件名：
 
-```java
-    String fileName = myFile.getName();
-```
 
-* 	可以将 MLFile 直接存储到其他对象的某个属性里，后续可以取出来继续使用。
+2.可以将 MLFile 直接存储到其他对象的某个属性里，后续可以取出来继续使用。
+
+如下示例中，在 NewsImages 表中，存在image和image2两个FILE类型的字段和一个STRING类型的name，将MLFile直接存储到MLObject中：
 
 ```java
-    //创建一个MLObject，包含ImageName，ImageFile字段
-    MLObject imgupload = new MLObject("ImageUploaded");
-    imgupload.put("ImageName", "testpic");
-    imgupload.put("ImageFile", file);
-    
-    //保存
-    MLDataManager.saveInBackground(imgupload, new SaveCallback() {
-        @Override
-        public void done(MLException e) {
+    private void upLoadFileByMLObject(String path1, String path2) {
+
+        File file = new File(path1);
+        File file2 = new File(path2);
+        
+        if (!file.exists() || !file2.exists()) {
+            return;
         }
-    });
+
+        final MLFile mlFile = new MLFile(file.getName(), file);
+        final MLFile mlFile2 = new MLFile(file2.getName(), file2);
+
+        MLObject obj = new MLObject("NewsImages");
+        obj.put("image", mlFile);
+        obj.put("image2", mlFile2);
+        obj.put("name", file.getName());
+
+        MLDataManager.saveInBackground(obj, new SaveCallback() {
+            @Override
+            public void done(MLException e) {
+                if (e == null) {
+                    String url = mlFile.getUrl() + "   mlFile2:" + mlFile2.getUrl();
+                    System.out.println(url);
+                }
+            }
+        }, new FileProgressCallback() {
+            @Override
+            public void done(int filePosition, int percentDone) {
+                System.out.println("filePosition:" + filePosition + "  percentDone:" + percentDone);
+            }
+        });
+    }
 ```
+
+注意：以上方式上传成功后，会在NewsImages表中生成一条上传记录，其中会包含文件的下载路径。
+
 
 ### 上传进度
 
