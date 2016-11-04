@@ -13,20 +13,20 @@
 
 	在 `Podfile` 中加上下面这行：
 
-	```
+	```ruby
 	pod 'MaxShare'
 	```
 
 	打开应用 `终端`，执行以下命令:
 
-	```
+	```bash
 	$ cd your_project_dir
 	$ pod install
 	```
 
 2. 手动安装
 	
-	1. [下载最新版本的 MaxSocialShare SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-7bb96c27-5fb5-41b7-a325-47c74ac43536.zip)
+	1. [下载最新版本的 MaxSocialShare SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-share-ios-latest.zip)
 	
 	2. 解压后得到 `MaxSocialShare.embeddedframework` 和 `PlatformSDK` 文件夹，将它们拖到到项目中。其中 `PlatformSDK` 文件夹中是各平台的官方 SDK，是可选的。
 	
@@ -60,7 +60,7 @@ MaxSocialShare 不依赖于 MaxLeap, 不会自动使用 `MLUser` 中的第三方
 
 如果集成了 MaxLeap 微博登录模块 `MLWeiboUtils.framework`，启动代码中应该包含了下面这行：
 
-```
+```objc
 [MLWeiboUtils initializeWeiboWithAppKey:@"your_weibo_appKey" redirectURI:@"https://api.weibo.com/oauth2/default.html"];
 ```
 
@@ -68,7 +68,7 @@ MaxSocialShare 不依赖于 MaxLeap, 不会自动使用 `MLUser` 中的第三方
 
 如果没有集成微博登录模块，则需要下面这行代码来初始化：
 
-```
+```objc
 [WeiboSDK registerApp:@"your_weibo_appKey"];
 // MaxSocialShare 认证时会使用默认的 `redirectUrl`: https://api.weibo.com/oauth2/default.html
 ```
@@ -79,7 +79,7 @@ MaxSocialShare 不依赖于 MaxLeap, 不会自动使用 `MLUser` 中的第三方
 
 如果集成了 MaxLeap 微博登录模块 `MLQQUtils.framework`，启动代码中应该包含了下面这行：
 
-```
+```objc
 [MLQQUtils initializeQQWithAppId:@"222222" qqDelegate:self];
 ```
 
@@ -87,7 +87,7 @@ MaxSocialShare 不依赖于 MaxLeap, 不会自动使用 `MLUser` 中的第三方
 
 如果没有集成微博登录模块，则需要下面这行代码来初始化：
 
-```
+```objc
 TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" andDelegate:delegate];
 // 这个 oauth 对象会作用于全局，需要一直存在
 ```
@@ -98,7 +98,7 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 
 如果集成了 MaxLeap 微博登录模块 `MLWeChatUtils.framework`，启动代码中应该包含了下面这行代码：
 
-```
+```objc
 [MLWeChatUtils initializeWeChatWithAppId:@"wx_appId" appSecret:@"wx_app_secret" wxDelegate:self];
 ```
 
@@ -106,7 +106,7 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 
 如果没有集成微博登录模块，则需要下面这行代码来初始化：
 
-```
+```objc
 [WXApi registerApp:@"your_wx_appId"];
 ```
 
@@ -159,7 +159,7 @@ App Transport Security has blocked a cleartext HTTP (http://) resource load sinc
 
 #### 分享接口说明
 
-```
+```objc
 + (void)shareItem:(MLShareItem *)item
     withContainer:(nullable MaxSocialContainer *)container
        completion:(MLSActivityViewControllerCompletionBlock)block;
@@ -173,7 +173,7 @@ App Transport Security has blocked a cleartext HTTP (http://) resource load sinc
 
 使用方法：
 	
-```
+```objc
 // 创建一个 MLShareItem 对象
 MLShareItem *item = [MLShareItem itemWithMediaType:MLSContentMediaTypeText];
 item.title = @"title";
@@ -197,7 +197,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 
 - 分享文本
 
-	```
+	```objc
 	MLShareItem *textItem = [MLShareItem itemWithMediaType:MLSContentMediaTypeText];
     // textItem.title = @"文字标题"; // optional, 目前 QQ, 微信，微博 都不支持
     textItem.detail = @"文字内容"; // required
@@ -208,7 +208,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 
 - 分享图片
 
-	```
+	```objc
 	MLShareItem *imageItem = [MLShareItem itemWithMediaType:MLSContentMediaTypeImage];
 	imageItem.attachmentURL = imageUrl; // required，支持 fileURL 和 远程图片链接
     
@@ -223,7 +223,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 	
 - 分享网页
 
-	```
+	```objc
 	MLShareItem *webpageItem = [MLShareItem itemWithMediaType:MLSContentMediaTypeWebpage];
 	
 	// 腾讯，微博，微信都支持以下字段
@@ -239,7 +239,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 	
 - 分享音乐
 
-	```
+	```objc
 	MLShareItem *musicItem = [MLShareItem itemWithMediaType:MLSContentMediaTypeMusic];
 	
     musicItem.title = @"音乐标题";
@@ -256,7 +256,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 	
 - 分享视频
 
-	```
+	```objc
 	MLShareItem *videoItem = [MLShareItem itemWithMediaType:MLSContentMediaTypeVideo];
 	
 	// 以下字段三个平台都支持
@@ -282,7 +282,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 
 `CustomActivity.h` 文件:
 
-```
+```objc
 #import <MaxSocialShare/MaxSocialShare.h>
 
 @interface CustomActivity : MLSActivity
@@ -292,7 +292,7 @@ MaxSocialContainer *container = [MaxSocialContainer containerWithBarButtonItem:s
 
 `CustomActivity.m` 文件:
 
-```
+```objc
 #import "CustomActivity.h"
 
 // 定义 custom type，注意值不要和已有的重复了
@@ -336,13 +336,13 @@ MLSActivityType MLSActivityTypeCustom = 6;
 
 **重要：**最后一步操作：注册 `CustomActivity`
 
-```
+```objc
 [MLSActivity registerActivityClass:[CustomActivity class]];
 ```
 
 推荐把这行代码写到 `CustomActivity` 类的 `+load` 方法中，这样，当 `CustomActivity` 类加载时，就会自动注册。
 
-```
+```objc
 @implementation CustomActivity
 
 + (void)load {

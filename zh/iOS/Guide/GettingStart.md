@@ -28,27 +28,29 @@
 
 ### 使用 CocoaPods
 
-CocoaPods 是一个很好用的依赖管理工具，可以简化安装过程。
+[CocoaPods](https://guides.cocoapods.org/) 是 Objective-C 的依赖管理工具，现在已经支持 swift，它可以使第三方类库集成工作自动化，大大简化了这些工作。可以查看 [CocoaPods 入门指南](https://guides.cocoapods.org/using/getting-started.html)来进一步了解它。
 
-在 Podfile 中添加：
+在 Podfile 中合适的位置添加：
 
-```
+```ruby
 # MaxLeap 核心 SDK
 pod "MaxLeap/Core"
-
+    
 # 微信登录
 pod "MaxLeap/WeChatUtils"
-
+    
 # 微博登录
 pod "MaxLeap/WeiboUtils"
-
+    
 # QQ 登录
 pod "MaxLeap/QQUtils"
-
-# 支付
+    
+# 支付（支持微信，支付宝和银联三个支付渠道）
+# 2.2.0 之前版本，银联支付和支付宝支付SDK都需要另外安装
+# 2.2.0 之后版本，银联支付 SDK 需要另外安装
 pod "MaxLeap/Pay"
-
-# 应用内支付
+    
+# 应用内社交
 pod "MaxLeap/Social"
 ```
 
@@ -59,7 +61,7 @@ pod "MaxLeap/Social"
 1. 下载并解压缩 SDK
 
 	请确认你使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
-[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
+[下载 SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-sdk-ios-latest.zip)
 
 2. 添加 SDK 到你的应用
 

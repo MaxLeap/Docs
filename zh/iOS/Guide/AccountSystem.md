@@ -45,7 +45,7 @@
 
 你的应用程序要做的第一件事就是让用户注册。以下代码示范了一个典型注册过程：
 
-```objective_c
+```objc
 - (void)myMethod {
     MLUser *user = [MLUser user];
     user.username = @"my_name";
@@ -76,7 +76,7 @@
 
 当然，你让用户注册后，需要让他们以后登录到他们的帐户。为此，你可以使用类方法 `+[MLUser logInWithUsernameInBackground:password:block:]`。
 
-```objective_c
+```objc
 [MLUser logInWithUsernameInBackground:@"myname" password:@"mypass" block:^(MLUser *user, NSError *error) {
     if (user) {
         // Do stuff after successful login.
@@ -94,7 +94,7 @@
 
 每当用户成功注册或者登录后，这个用户对象就会被缓存到磁盘中。这个缓存可以用来判断用户是否登录：
 
-```objective_c
+```objc
 MLUser *currentUser = [MLUser currentUser];
 if (currentUser) {
     // do stuff with the user
@@ -105,14 +105,14 @@ if (currentUser) {
 
 你可以通过注销来清除他们的当前登录状态：
 
-```objective_c
+```objc
 [MLUser logOut];
 MLUser *currentUser = [MLUser currentUser]; // this will now be nil
 ```
 
 **注意：由于 SDK 会自动创建匿名用户，所以 `currentUser` 有值并不能代表用户已经登录，在检查用户登录状态时，推荐这种方式：**
 
-```
+```objc
 MLUser *currentUser = [MLUser currentUser];
 if (currentUser) {
     if ([MLAnonymousUtils isLinkedWithUser:currentUser]) {
@@ -130,7 +130,7 @@ if (currentUser) {
 
 可以通过更新 `password` 字段来更改密码：
 
-```
+```objc
 [MLUser currentUser].password = @"the new password";
 [[MLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
@@ -143,7 +143,7 @@ if (currentUser) {
 
 为了安全起见，在更改密码前需要让用户输入旧密码并验证是否与当前账户匹配：
 
-```
+```objc
 NSString *theOldPassword;
 NSString *theNewPassword;
 
@@ -170,7 +170,7 @@ NSString *theNewPassword;
 
 若要开始密码重置流程，让用户填写电子邮箱地址，并调用：
 
-```objective_c
+```objc
 [MLUser requestPasswordResetForEmailInBackground:@"email@example.com"];
 ```
 
@@ -189,7 +189,7 @@ NSString *theNewPassword;
 
 可以使用 `-[MLUser fetchInBackgroundWithBlock:]` 方法来获取单个用户的信息：
 
-```
+```objc
 MLUser *user = [MLUser objectWithoutDataWithObjectId:@"56fc921f70c67600015941a2"];
 // 如果 user 不是当前用户，只返回部分信息
 [user fetchInBackgroundWithBlock:^(MLUser * _Nullable user, NSError * _Nullable error) {
@@ -205,7 +205,7 @@ MLUser *user = [MLUser objectWithoutDataWithObjectId:@"56fc921f70c67600015941a2"
 
 出于安全考虑，不允许客户端查询用户表。下面的代码会得到一个没有权限的错误：
 
-```
+```objc
 MLQuery *query = [MLUser query];
 [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
     // 该请求始终会返回没有权限的错误
@@ -231,7 +231,7 @@ MLQuery *query = [MLUser query];
 
 你可以使用 `MLAnonymousUtils` 创建匿名用户：
 
-```objective_c
+```objc
 [MLAnonymousUtils logInWithBlock:^(MLUser *user, NSError *error) {
     if (error) {
         NSLog(@"Anonymous login failed.");
@@ -243,7 +243,7 @@ MLQuery *query = [MLUser query];
 
 你可以通过设置用户名和密码，然后调用 `-[user signUpInBackgroundWithlock:]` 的方式，或者通过登录或关联 *微博* 或 *微信* 等服务的方式，将匿名用户转换为常规用户。转换的用户将保留其所有数据。想要判断当前用户是否为匿名用户，可以使用 `+[MLAnonymousUtils isLinkedWithUser:]` 方法:
 
-```objective_c
+```objc
 if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
     // current user is anonymous
 } else {
@@ -275,7 +275,7 @@ if ([MLAnonymousUtils isLinkedWithUser:[MLUser currentUser]]) {
 
 MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 
-```
+```objc
 [MLWeiboUtils loginInBackgroundWithScope:@"all" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
     if (user) {
         // 登陆成功
@@ -296,12 +296,12 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 3. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用新浪微博登录” 开关。
 4. 下载 [微博 iOS SDK](https://github.com/sinaweibosdk/weibo_ios_sdk)
 5. 把 libWeiboSDK 文件夹添加到项目中，注意选择 Group Reference。
-6. 下载解压 [MaxLeap iOS SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)。
+6. 下载解压 [MaxLeap iOS SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-sdk-ios-latest.zip)。
 7. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 MaxLeap.framework。
 8. 把 `MLWeiboUtils.framework` 添加到项目中。
 9. 初始化 `MLWeiboUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
-	```objective_c
+	```objc
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	    [MaxLeap setApplicationId:@"your_maxleap_appId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
 	    [MLWeiboUtils initializeWeiboWithAppKey:@"your_weibo_app_key" redirectURI:@"微博应用授权回调页"];
@@ -311,7 +311,7 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 
 10. 处理授权回调
 	
-	```
+	```objc
 	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
    		return [WeiboSDK handleOpenURL:url delegate:self];
 	}
@@ -327,7 +327,7 @@ MaxLeap SDK 能够与微博 SDK 集成，使用微博账号登陆。
 	
 11. 处理授权响应
 	
-	```
+	```objc
 	#pragma mark WeiboSDKDelegate
 	
 	- (void)didReceiveWeiboResponse:(WBBaseResponse *)response {
@@ -347,7 +347,7 @@ MaxLeap 用户可通过以下两种主要方法使用微博：(1) 以微博用�
 
 `MLWeiboUtils` 提供一种方法让你的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
-```objective_c
+```objc
 [MLWeiboUtils loginInBackgroundWithScope:@"all" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
     if (!user) {
         NSLog(@"微博登陆失败");
@@ -371,7 +371,7 @@ MaxLeap 用户可通过以下两种主要方法使用微博：(1) 以微博用�
 
 若你想要将已有的 `MLUser` 与微博帐户关联起来，你可以按以下方式进行关联：
 
-```objective_c
+```objc
 if (![MLWeiboUtils isLinkedWithUser:user]) {
     [MLWeiboUtils linkUserInBackground:user withScope:@"all" block:^(BOOL succeeded, NSError * _Nullable error) {
         if ([MLWeiboUtils isLinkedWithUser:user]) {
@@ -387,7 +387,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 若你想要取消用户与微博的关联，操作如下：
 
-```objective_c
+```objc
 [MLWeiboUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
     if (!error && succeeded) {
         NSLog(@"The user is no longer associated with their Weibo account.");
@@ -409,12 +409,12 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 2. 前往 [MaxLeap 控制台][maxleap_console]，在 MaxLeap 应用设置 >> 用户验证 页面打开 “允许使用微信登录” 开关。
 3. [下载微信 iOS SDK（iOS开发工具包64位）并解压](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319164&token=&lang=zh_CN)
 4. 微信 SDK 文件夹应该有 `libWeChatSDK.a`、`WXApi.h`、`WXApiObject.h` 和 `WechatAuthSDK.h` 四个文件，把这个文件夹添加到项目中，注意选择 Group Reference 选项
-5. [下载解压 MaxLeap iOS SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)。
+5. [下载解压 MaxLeap iOS SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-sdk-ios-latest.zip)。
 6. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 `MaxLeap.framework`。
 7. 把 `MLWeChatUtils.framework` 添加到项目中。
 8. 初始化 `MLWeChatUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
-	```objective_c
+	```objc
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	    [MaxLeap setApplicationId:@"your_maxleap_appId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
 	    [MLWeChatUtils initializeWeChatWithAppId:@"your_weixin_appID" appSecret:@"your_weixin_AppSecret"];
@@ -424,7 +424,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 
 9. 处理授权回调
 	
-	```
+	```objc
 	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
    		return [WXApi handleOpenURL:url delegate:self];
 	}
@@ -440,7 +440,7 @@ if (![MLWeiboUtils isLinkedWithUser:user]) {
 	
 9. 处理授权响应
 	
-	```
+	```objc
 	#pragma mark WXApiDelegate
 	
 	- (void)onResp:(BaseResp *)resp {
@@ -460,7 +460,7 @@ MaxLeap 用户可通过以下两种主要方法使用微信：(1) 以微信用�
 
 `MLWeChatUtils` 提供了一个方法让你的 `MLUser` 可以通过微信登录或注册。这可以使用 `logInWithBlock` 方法实现：
 
-```objective_c
+```objc
 [MLWeChatUtils loginInBackgroundWithScope:@"snsapi_userinfo" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
     if (!user) {
         NSLog(@"微信登陆失败");
@@ -484,7 +484,7 @@ MaxLeap 用户可通过以下两种主要方法使用微信：(1) 以微信用�
 
 若你想要将已有的 `MLUser` 与微信帐户关联起来，你可以按以下方式进行关联：
 
-```objective_c
+```objc
 if (![MLWeChatUtils isLinkedWithUser:user]) {
     [MLWeChatUtils linkUserInBackground:user withScope:@"snsapi_userinfo" block:^(BOOL succeeded, NSError * _Nullable error) {
         if ([MLWeChatUtils isLinkedWithUser:user]) {
@@ -500,7 +500,7 @@ if (![MLWeChatUtils isLinkedWithUser:user]) {
 
 若你想要取消用户与微信的关联，操作如下：
 
-```objective_c
+```objc
 [MLWeChatUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
     if (!error && succeeded) {
         NSLog(@"The user is no longer associated with their Wechat account.");
@@ -514,7 +514,7 @@ if (![MLWeChatUtils isLinkedWithUser:user]) {
 
 MaxLeap SDK 能够与 TencentOpenAPI SDK 集成，使用 QQ 账号登陆。
 
-```
+```objc
 NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 [MLQQUtils loginInBackgroundWithPermissions:permissions block:^(MLUser * _Nullable user, NSError * _Nullable error) {
     if (user) {
@@ -533,14 +533,14 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 
 1. 前往[腾讯开放平台][open_qq_site]，[创建 QQ 应用][set_up_qq_app]。
 2. 前往 [MaxLeap 控制台][maxleap_console]，前往 MaxLeap 应用设置 >> 用户验证 页面，打开"允许QQ登录"选项。
-3. [下载并解压腾讯开发平台 SDK][qq_documentation]
+3. [下载并解压腾讯开发平台 SDK][qq_sdk_download]
 4. 把 `TencentOpenAPI.framework` 和 `TencentOpenAPI_iOS_Bundle.bundle` 添加到项目中。
-5. [下载解压 MaxLeap iOS SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)。
+5. [下载解压 MaxLeap iOS SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-sdk-ios-latest.zip)。
 6. 请确保已经按照[快速入门指南](ML_DOCS_LINK_PLACEHOLDER_SDK_QUICKSTART_IOS)正确集成了 `MaxLeap.framework`。
 7. 把 `MLQQUtils.framework` 添加到项目中。
 8. 初始化 `MLQQUtils`，比如在 `application:didFinishLaunchingWithOptions:` 方法中:
 
-	```objective_c
+	```objc
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	    [MaxLeap setApplicationId:@"your_maxleap_appId" clientKey:@"your_maxleap_clientKey" site:MLSiteCN];
 	    [MLQQUtils initializeQQWithAppId:@"222222" qqDelegate:self]; // self 不能为空且需遵循 TencentSessionDelegate 协议
@@ -550,7 +550,7 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 
 9. 实现 TencentSessionDelegate 协议方法
 	
-	```
+	```objc
 	#pragma mark TencentLoginDelegate
 	
 	// 以下三个方法保持空实现就可以，MLQQUtils 会置换这三个方法，但是会调用这里的实现
@@ -577,7 +577,7 @@ MaxLeap 用户可通过以下两种主要方法使用 QQ：(1) 以QQ用户身份
 
 `MLQQUtils` 提供一种方法让你的 `MLUser` 可以通过 `微博` 登录或注册。这可以使用 `loginInBackgroundWithPermissions:block:` 方法实现：
 
-```objective_c
+```objc
 NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 [MLQQUtils loginInBackgroundWithPermissions:permissions block:^(MLUser * _Nullable user, NSError * _Nullable error) {
     if (!user) {
@@ -601,7 +601,7 @@ NSArray *permissions = @[@"get_user_info", @"get_simple_userinfo", @"add_t"];
 
 若你想要将已有的 `MLUser` 与微博帐户关联起来，你可以按以下方式进行关联：
 
-```objective_c
+```objc
 if (![MLQQUtils isLinkedWithUser:user]) {
     [MLQQUtils linkUserInBackground:user withPermissions:@[@"all"] block:^(BOOL succeeded, NSError * _Nullable error) {
         if ([MLQQUtils isLinkedWithUser:user]) {
@@ -617,7 +617,7 @@ if (![MLQQUtils isLinkedWithUser:user]) {
 
 若你想要取消用户与微博的关联，操作如下：
 
-```objective_c
+```objc
 [MLQQUtils unlinkUserInBackground:user block:^(BOOL succeeded, NSError * _Nullable error) {
     if (!error && succeeded) {
         NSLog(@"The user is no longer associated with their QQ account.");
@@ -649,7 +649,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 	用户点击获取验证码按钮，发送成功后该按钮应该变成不可用状态，然后等待至少60秒再允许重新发送。
 	获取验证码按钮事件调用 `+[MLUser requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码。
 	
-	```
+	```objc
 	NSString *phoneNumber = @"18512340000";
 	/* verify the phoneNumber */
 	// 请求验证码
@@ -668,7 +668,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 	
 4. **用户登录，调用 `+[MLUser loginWithPhoneNumber:smsCode:block:]` 接口登录**
 
-	```
+	```objc
 	[MLUser loginWithPhoneNumber:@"18512340000" 
 							 smsCode:@"123456"
 							   block:^(MLUser * _Nullable user, NSError * _Nullable error) 
@@ -691,7 +691,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 
 1. **上传手机号**
     
-    ```
+    ```objc
     [MLUser currentUser][@"mobilePhone"] = @"135xxxxxxxx";
     [[MLUser currentUser] saveInBackground:^(BOOL succeeded, NSError *error) {
         // ...
@@ -700,7 +700,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 
 2. **请求短信验证码**
 
-	```
+	```objc
 	[[MLUser currentUser] requestMobilePhoneVerifySmsCodeWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             // 发送成功
@@ -712,7 +712,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 
     验证通过的用户就可以使用短信验证码方式登陆和重设密码。
 
-	```
+	```objc
 	[[MLUser currentUser] verifyMobilePhoneWithSmsCode:@"123456" block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             // 验证成功, currentUser[@"mobilePhoneVerified"].boolValue 为 YES
@@ -727,7 +727,7 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 
 1. **用户输入手机号，请求发送验证码**
 
-	```
+	```objc
 	[MLUser requestPasswordResetSmsCodeWithPhoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             // 验证码发送成功
@@ -739,7 +739,7 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 	
 	建议要求用户输入两次新密码，以免用户输错
 	
-	```
+	```objc
 	[MLUser resetPasswordWithPhoneNumber:@"18512340000" 
 									  smsCode:@"123456" 
 									 password:@"sine*&wehIHd" 
@@ -764,7 +764,7 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 	
 	注意，在执行这一步时，如果用户还没有提供手机号，则需要要求用户输入手机号。建议要求用户以手机号为用户名注册。
 	
-	```
+	```objc
 	[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
     	if (succeeded) {
         // 验证码发送成功
@@ -775,7 +775,7 @@ MaxLeap 提供了通过手机号重设密码的功能，验证过手机号的用
 3. **用户收到短信，输入验证码**
 4. **调用接口验证用户输入的验证码是否有效。**
 	
-	```
+	```objc
 	[MLSmsCodeUtils verifySmsCode:@"123456" phoneNumber:@"18512340000" block:^(BOOL succeeded, NSError * _Nullable error) {
     	if (succeeded) {
       	  // 验证成功
@@ -849,7 +849,8 @@ A: 让用户设置密码，之后用户就可以使用 手机号／密码 方式
     iv.  用户点击注册按钮</br>
     v.   程序验证验证码是否正确，调用 `+[MLSmsCodeUtils verifySmsCode:phoneNumber:block:]` 接口</br>
     vi.  验证通过后，注册用户：</br>
-        ```
+    
+        ```objc
         MLUser *user = [MLUser user];
         user.username = @"135xxxxxxxx"; // 用户名即手机号
         user.password = @"***********"; // 密码
@@ -889,4 +890,5 @@ A: 让用户设置密码，之后用户就可以使用 手机号／密码 方式
 
 [open_qq_site]: http://open.qq.com/
 [set_up_qq_app]: http://op.open.qq.com/appregv2/
+[qq_sdk_download]: http://wiki.open.qq.com/wiki/mobile/SDK下载
 [qq_documentation]: http://wiki.open.qq.com/wiki/IOS_API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E

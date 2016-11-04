@@ -17,7 +17,7 @@
 
 默认情况下，推送营销功能处于关闭状态，不会接收消息。启用这个功能很简单，只需要 `[MLMarketingManager enable]` 一行代码，如下：
 
-```
+```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"yout_client_key"];
 	[MLMarketingManager enable];
@@ -36,7 +36,7 @@
 
 在 `appDelegate.m` 中，你可以使用下面的代码开启远程推送
 
-```
+```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
@@ -107,7 +107,7 @@
 
 收到远程推送时使用以下代码推送推送点击事件：
 
-	```
+	```objc
 	[MLMarketingManager handlePushNotificationOpened:notificationPayload];
 	```
 
@@ -120,7 +120,7 @@ badge 是 iOS 用来标记应用程序未读消息(通知)的一个数字，出�
 
 #### 上传 badge 值
 
-```
+```objc
 [MLInstallation currentInstallation].badge = 5;
 [[MLInstallation currentInstallation] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
     if (succeeded) {

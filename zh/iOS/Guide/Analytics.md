@@ -21,7 +21,7 @@ MaxLeap 数据分析服务的默认状态为**开启**。
 
 可以统计每个 View 停留时长，请确保配对使用，而且这些 view 之间不要有嵌套关系：
 
-```objective_c
+```objc
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [MLAnalytics beginLogPageView:@"PageOne"];
@@ -49,7 +49,7 @@ value| String|事件参数的值
  
 ### 统计某事件发生次数
 
-```
+```objc
 [MLAnalytics trackEvent:@"event_id"];
 ```
 
@@ -57,7 +57,7 @@ value| String|事件参数的值
 
 示例：统计电商应用中“购买”事件发生的次数，以及购买的商品类型及数量，那么在购买的函数里调用：
 
-```objective_c
+```objc
 NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 [MLAnalytics trackEvent:@"purchase" parameters:dict];
 ```
@@ -66,28 +66,28 @@ NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 
 - 统计开始支付事件
 
-```
+```objc
 // transaction 不能为空
 [MLAnalytics onPurchaseRequest:transaction isSubscription:NO];
 ```
 
 - 统计支付成功事件
 
-```
+```objc
 // transaction 不能为空
 [MLAnalytics onPurchaseSuccess:transaction isSubscription:NO];
 ```
 
 - 统计支付失败事件
 
-```
+```objc
 // transaction 不能为空
 [MLAnalytics onPurchaseFailed:transaction isSubscription:NO];
 ```
 
 - 统计支付支付取消事件
 
-```
+```objc
 // transaction 不能为空
 [MLAnalytics onPurchaseCancelled:transaction isSubscription:NO];
 ```
@@ -116,7 +116,7 @@ NSDictionary *dict = @{@"type" : @"book", @"quantity" : @"3"};
 
 **【接口说明：（MLGAVirtualCurrency类）】**
  
-```
+```objc
 //充值请求
 + (void)onChargeRequest:(SKPaymentTransaction *)transaction 
 				   orderId:(NSString *)orderId
@@ -150,7 +150,7 @@ paymentSource	| NSString | 支付的途径，最多16个字符。例如：“支
 
 玩家使用支付宝方式成功购买了“大号宝箱”（实际为100元人民币购入1000元宝的礼包），该笔操作的订单编号为account123-0923173248-11。可以如下调用：
 
-```
+```objc
 //1）在向支付宝支付SDK发出请求时，同时调用：
 [MLGAVirtualCurrencyonChargeRequst:transaction orderId:@"account123-0923173248-11" currencyAmount:100 currencyType@"CNY" virtualCurrencyAmount:1000 paymentType: @"Alipay"];
 
@@ -162,7 +162,7 @@ paymentSource	| NSString | 支付的途径，最多16个字符。例如：“支
 
 在一款与91联运的游戏中，游戏使用了91的支付聚合SDK，玩家购买一个“钻石礼包1”（10个91豆购买60钻石），该笔操作的订单号为“7837331”。由于此类聚合SDK往往要求使用其自有的“代币”（91使用91豆，兑换人民币比例1：1）做充值依据，建议将“代币”折算为人民币后再调用统计：
  
-```
+```objc
 //1）在向91支付SDK发出请求时，进行调用
 [MLGAVirtualCurrency onChargeRequst:transaction orderId:@"7837331" iapId: @"钻石礼包1" currencyAmount:10 currencyType@”CNY” virtualCurrencyAmount:60 paymentType: @"91 SDK "];
 //2）订单order001充值成功：
@@ -190,13 +190,13 @@ reason|NSString|赠送虚拟币原因/类型。格式：32个字符内的中文�
 
 示例1：玩家在完成了新手引导后，成功获得了免费赠送的5个钻石：
  
-```
+```objc
 [MLGAVirtualCurrency onReward:5 reason:@"新手奖励"];
 ```
 
 示例2：玩家在游戏竞技场中排名较高，而获得了100消费券奖励：
 
-```
+```objc
 [MLGAVirtualCurrency onReward:100reason:@"竞技场Top2"];
 ```
 
@@ -211,7 +211,7 @@ reason|NSString|赠送虚拟币原因/类型。格式：32个字符内的中文�
 
 **【接口说明：（MLGAItem类）】**
  
-```
+```objc
 //记录付费点
 + (void)onPurchase:(NSString *)item itemNumber:(int) number priceInVirtualCurrency:(double) price;
 //消耗物品或服务等
@@ -229,20 +229,20 @@ price|double|虚拟币单价
 示例1：
 玩家以25元宝/个的单价购买了两个类别号为“helmet1”的头盔，可以调用：
 
-```
+```objc
 [MLGAItem onPurchase: @"helmet1" itemNumber:2 priceInVirtualCurrency:25];
 ```
 
 其中一个头盔在战斗中由于损坏过度而消失。
 
-```
+```objc
 [MLGAItem onUse: @"helmet1" itemNumber:1];
 ```
 
 示例2：
 玩家在某关卡中死亡，使用5个钻石进行复活。可调用：
 
-```
+```objc
 [MLGAItem onPurchase: @"revival" itemNumber:1 priceInVirtualCurrency:5];
 ```
 
@@ -255,7 +255,7 @@ price|double|虚拟币单价
 **【接口说明：（MLGAMission类）】**
 
 
-```
+```objc
 //接到任务
 + (void)onBegin:(NSString *)missionId;
 //完成任务
@@ -273,13 +273,13 @@ cause|NSString|必填|失败原因，最多16个字符。共支持100种原因�
 示例1：
 玩家进入名称为“蓝色龙之领地”的关卡。可调用：
 
-```
+```objc
 [MLGAMission onBegin:@"蓝色龙之领地"];
 ```
 
 游戏进入了后台，如果再次进入游戏时，关卡可继续，可调用:
 
-```
+```objc
 // 暂停 `蓝色龙之领地` 任务计时
 [MLGAMission onPause:@"蓝色龙之领地"];
 
@@ -289,7 +289,7 @@ cause|NSString|必填|失败原因，最多16个字符。共支持100种原因�
 
 玩家重新进入游戏，如果关卡可继续，可调用：
 
-```
+```objc
 // 继续对某个任务计时
 [MLGAMission onResume:@"aMission"];
 
@@ -301,14 +301,14 @@ cause|NSString|必填|失败原因，最多16个字符。共支持100种原因�
 
 玩家成功打过了关卡：
 
-```
+```objc
 [MLGAMission onCompleted:@"蓝色龙之领地"];
 ```
 
 示例2：
 玩家接到了“主线任务5”后，又接受了某个主线任务“赚钱1”，之后他在赚钱任务1进行中因为觉得任务过难，放弃任务而失败。
 
-```
+```objc
 [MLGAMission onBegin:@"主线任务5"];
 [MLGAMission onBegin:@"赚钱1"];
 [MLGAMission onFailed:@"赚钱1" failedCause:@"quit"];

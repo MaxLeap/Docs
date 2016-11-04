@@ -25,13 +25,13 @@ Value|参数的值
 
 ## 获取 MLConfig 对象
 
-```objective_c
+```objc
 MLConfig *currentConfig = [MLConfig currentConfig];
 ```
 
 ## 获取MaxLeap中的参数值
 
-```objective_c
+```objc
 // 获取 configname 对应的云参数，可能为 nil
 id value1 = [currentConfig objectForKey:@"configname"];
      
@@ -59,7 +59,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 也可以调用以下代码手动刷新所有云参数
 
-```objective_c
+```objc
 [MLConfig getConfigInBackgroundWithBlock:^(MLConfig *config, NSError *error) {
     // this config is currentConfig
 }];
@@ -67,7 +67,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 或者刷新某几个参数
 
-```objective_c
+```objc
 // keys 传入 nil 等同于上面的方法，刷新全部参数的值
 [MLConfig getValuesForKeys:@[@"key1", @"key2"] inBackgroundWithBlock:^(MLConfig *config, NSError *error) {
     // this config is currentConfig
@@ -80,7 +80,7 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 ###添加监听
 
-```objective_c
+```objc
 [MLConfig addObserver:anObserver forKey:@"configname" valueChangedHandler:^(id newValue, id oldValue) {
 	// the value changed
 }];
@@ -88,13 +88,13 @@ NSString *stringValue = [currentConfig stringForKey:@"configname" defaultValue:@
 
 ###移除监听
 
-```objective_c
+```objc
 [MLConfig removeObserver:anObserver forKey:@"configname"];
 ```
 
 在 `anObserver` 销毁之前必须移除监听者
 
-```objective_c
+```objc
 [MLConfig removeObserver:anObserver]; // 一次性移除所有跟 anObserver 相关的监听回调
 ```
 
