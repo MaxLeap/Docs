@@ -28,7 +28,7 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 ```javascript
 // 最简的示例代码，请换成自己的 appId，可以通过浏览器多个标签模拟多用户通信
-var appId = '{{appid}}';
+var appId = 'appid';
 // clientId 就是你自己的app 的 Client Key 或者 Javascript Key 或者 REST API Key 或者 Master Key
 var clientId = 'Y3FxbHE2aTJmQ2dQazYtQVlvc0NnQQ';
 // userId 就是你自己的app里面的用户id
@@ -149,7 +149,7 @@ ML.im(options, callback)
 
 ```javascript
 // 最简的示例代码，请换成自己的 appId，可以通过浏览器多个标签模拟多用户通信
-var appId = '{{appid}}';
+var appId = 'appid';
 // clientId 就是你自己的app 的 Client Key 或者 Javascript Key 或者 REST API Key 或者 Master Key
 var clientId = 'Y3FxbHE2aTJmQ2dQazYtQVlvc0NnQQ';
 // (模式一)userId 就是你自己的app里面的用户id

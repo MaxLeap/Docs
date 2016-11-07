@@ -18,6 +18,8 @@
 1. 在 `Podfile` 中加上下面这行:
 
     ```python
+    # 2.2.0 之前版本，需要另外安装银联支付和支付宝支付SDK
+    # 2.2.0 之后版本，需要另外安装银联支付SDK
     pod 'MaxLeap/Pay'
     ```
 
@@ -37,7 +39,7 @@
 	
 ### 手动安装
 
-1. [下载并解压最新版本的 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
+1. [下载并解压最新版本的 SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-sdk-ios-latest.zip)
 2. 把解压得到的 `MaxLeap.framework` 和 `MaxLeapPay.framework` 拖到项目中 
 3. 添加以下依赖库</br>
 	`MobileCoreServices.framework`</br>
@@ -87,7 +89,7 @@
 
 某些支付渠道需要跳转到相应平台应用中完成支付，`MaxLeapPay` 提供了统一的处理方法，
 
-```
+```objc
 // iOS 4.2 -- iOS 8.4
 // 如果需要兼容 iOS 6, iOS 7, iOS 8，需要实现这个代理方法
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -125,7 +127,7 @@
 
 4. 发起支付：
 
-	```
+	```objc
 	// 1. 生成 payment 对象
 	MLPayment *payment = [[MLPayment alloc] init];
 	
@@ -174,7 +176,7 @@
 
 4. 实现微信代理协议 `WXApiDelegate`：
 
-	```
+	```objc
 	@interface WXApiManager : NSObject <WXApiDelegate>
 	@end
 	
@@ -191,14 +193,14 @@
 
 5. 配置微信 SDK，在 `application:didFinishLaunchingWithOptions:`方法中，加入以下代码：
 
-	```
+	```objc
 	WXApiManager *wxDelegate = [[WXApiManager alloc] init];
 	[MaxLeapPay setWXAppId:@"your_weixin_appId" wxDelegate:wxDelegate description:@"sample"];
 	```
 
 6. 发起支付：
 
-	```
+	```objc
 	// 1. 生成 payment 对象
 	MLPayment *payment = [[MLPayment alloc] init];
 	
@@ -253,7 +255,7 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 
 5. 发起支付
 
-	```
+	```objc
 	// 1. 生成 payment 对象
 	MLPayment *payment = [[MLPayment alloc] init];
 	
@@ -295,7 +297,7 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 
 1. 如果知道交易流水号(billNo)和支付渠道(channel)，可以使用 `fetchOrderInfoWithBillNo:channel:block:` 直接获取交易信息，在回调中，可以检查交易状态。
 
-	```
+	```objc
 	NSString *billNo;
 	MLPayChannel channel = MLPayChannelAliApp;
 	[MaxLeapPay fetchOrderInfoWithBillNo:billNo channel:channel block:^(MLOrder * 	_Nonnull order, NSError * _Nonnull error) {
@@ -313,7 +315,7 @@ MaxPay iOS SDK 通过调用银联官方的手机支付控件来完成银联支�
 
 2. 如果只知道交易流水号，也可以查询，但由于不同支付渠道中可能存在相同的流水号，因此查询结果中可能会有多条记录。
 
-	```
+	```objc
 	[MaxLeapPay queryOrderWithBillNo:@"fffsa" block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 	    if (error) {
 	        // 出错了

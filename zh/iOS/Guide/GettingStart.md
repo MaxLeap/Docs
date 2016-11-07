@@ -4,7 +4,7 @@
 
 1. 下载模板项目并解压
 
-	请确保您使用的是最新的 Xcode (v7.0+), 并且目标平台版本为 iOS 7.0 或者更高。
+	请确保你使用的是最新的 Xcode (v7.0+), 并且目标平台版本为 iOS 7.0 或者更高。
 	
 	<a class="download-sdk" href="https://github.com/MaxLeap/StarterProject-iOS/archive/master.zip" target="_blank">下载模板项目</a>
 
@@ -18,7 +18,7 @@
 	[MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_key" site:MLSiteCN];
 	```
 	
-	请把 `your_application_id` 和 `your_client_key` 替换成您自己应用的。最后一个参数 site 目前有两个值：`MLSiteUS` 对应 https://maxleap.com, `MLSiteCN` 对应 https://maxleap.cn。
+	请把 `your_application_id` 和 `your_client_key` 替换成你自己应用的。最后一个参数 site 目前有两个值：`MLSiteUS` 对应 https://maxleap.com, `MLSiteCN` 对应 https://maxleap.cn。
 
 3. 现在可以运行了。
 
@@ -28,27 +28,29 @@
 
 ### 使用 CocoaPods
 
-CocoaPods 是一个很好用的依赖管理工具，可以简化安装过程。
+[CocoaPods](https://guides.cocoapods.org/) 是 Objective-C 的依赖管理工具，现在已经支持 swift，它可以使第三方类库集成工作自动化，大大简化了这些工作。可以查看 [CocoaPods 入门指南](https://guides.cocoapods.org/using/getting-started.html)来进一步了解它。
 
-在 Podfile 中添加：
+在 Podfile 中合适的位置添加：
 
-```
+```ruby
 # MaxLeap 核心 SDK
 pod "MaxLeap/Core"
-
+    
 # 微信登录
 pod "MaxLeap/WeChatUtils"
-
+    
 # 微博登录
 pod "MaxLeap/WeiboUtils"
-
+    
 # QQ 登录
 pod "MaxLeap/QQUtils"
-
-# 支付
+    
+# 支付（支持微信，支付宝和银联三个支付渠道）
+# 2.2.0 之前版本，银联支付和支付宝支付SDK都需要另外安装
+# 2.2.0 之后版本，银联支付 SDK 需要另外安装
 pod "MaxLeap/Pay"
-
-# 应用内支付
+    
+# 应用内社交
 pod "MaxLeap/Social"
 ```
 
@@ -58,10 +60,10 @@ pod "MaxLeap/Social"
 
 1. 下载并解压缩 SDK
 
-	请确认您使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
-[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-d92b8003-b7d2-43b7-80f2-47998aff9402.zip)
+	请确认你使用的是Xcode最新版本（7.0+），目标平台为 iOS 7.0 或者更高版本。
+[下载 SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/iOS/latest/maxleap-sdk-ios-latest.zip)
 
-2. 添加 SDK 到您的应用
+2. 添加 SDK 到你的应用
 
 	将解压后文件夹中的 `MaxLeap.framework` 拖至Xcode项目目标文件夹下。确保已勾选“Copy items to destination’s group folder”的复选框。
 	
@@ -105,7 +107,7 @@ pod "MaxLeap/Social"
 [MaxLeap setApplicationId:@"your_application_id" clientKey:@"your_client_id" site:MLSiteCN];
 ```
 
-请把 `your_application_id` 和 `your_client_id ` 替换成您自己的 MaxLeap 应用的。最后一个参数 site 目前有两个值：`MLSiteUS` 对应 https://maxleap.com, `MLSiteCN` 对应 https://maxleap.cn。
+请把 `your_application_id` 和 `your_client_id ` 替换成你自己的 MaxLeap 应用的。最后一个参数 site 目前有两个值：`MLSiteUS` 对应 https://maxleap.com, `MLSiteCN` 对应 https://maxleap.cn。
 
 编译并运行！
 
@@ -124,7 +126,7 @@ pod "MaxLeap/Social"
 	MLObject *obj = [MLObject objectWithoutDataWithClassName:@"Test" objectId:@"561c83c0226"];
     [obj fetchIfNeededInBackgroundWithBlock:^(MLObject * _Nullable object, NSError * _Nullable error) {
     	if (error.code == kMLErrorInvalidObjectId) {
-        	NSLog(@"已经能够正确连接上您的云端应用");
+        	NSLog(@"已经能够正确连接上你的云端应用");
     	} else {
         	NSLog(@"应用访问凭证不正确，请检查。");
     	}
@@ -132,4 +134,4 @@ pod "MaxLeap/Social"
 }
 ```
 
-运行您的应用。然后查看 Xcode console 中打印的日志。
+运行你的应用。然后查看 Xcode console 中打印的日志。

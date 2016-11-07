@@ -6,8 +6,8 @@ MaxLeap Android SDK 集中整合在 maxleap-sdk-all.zip 文件中。
 
 ### maxleap-sdk-all.zip
 
-[下载](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-220fc1ea-859f-403b-be1d-8fcfb8c114d7.zip)
-
+[下载](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/Android/latest/maxleap-sdk-all-latest.zip)
+      
 包含以下代码库：
 
 maxleap-sdk-core-{版本}.jar 核心库，下面的代码库都依赖它

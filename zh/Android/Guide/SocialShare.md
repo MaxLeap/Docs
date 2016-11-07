@@ -12,11 +12,15 @@
 
 **第三方平台 SDK**
 
-- [微信 SDK](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)：下载解压后将 `libammsdk.jar` 放入 `libs` 目录下。
+- [微信 SDK](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN)：下载解压后将 `libammsdk.jar` 放入 `libs` 目录下。
 - [QQ SDK](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)：下载解压后将 `open_sdk_r5509_lite.jar` 放入 `libs` 目录下。
 - [微博 SDK](http://open.weibo.com/wiki/SDK)：下载解压后将 `weiboSDKCore_xxx.jar` 放入 `libs` 目录下，将各平台的 `*.so` 文件放入 `jniLibs` 目录下。
 
-下载完第三方平台的 SDK 后请按照各平台的规定申请应用，注意第三方平台上的填写的应用包名和签名必须确保正确。
+### 申请AppID和配置签名
+
+下载完第三方平台的 SDK 后请按照各平台的规定申请应用，注意第三方平台上填写的应用`包名`和`签名`必须确保正确，否则您将无法跳转到分享界面。
+
+
 
 ### 配置权限
 
@@ -32,9 +36,94 @@
 
 ```gradle
 compile "com.squareup.okhttp3:okhttp:3.1.2"
+compile 'com.android.support:support-v4:24.2.0'
 ```
 
+### 配置appID到应用
+
+将申请的appid等信息，在res->values->`string.xml`中配置如下：
+
+```xml
+    <string name="ml_sina_weibo_app_id">your weibo appid</string>
+    <string name="qq_app_id">tencent+your qq appid</string>
+    <string name="ml_qq_app_id">your qq appid</string>
+    <string name="ml_wechat_app_id">your wechat appid</string>
+    <string name="ml_wechat_app_secret">your wechat secret</string>
+```
+
+### 配置AndroidManifest.xml
+
+将以下平台对应的组件配置到您项目的`AndroidManifest.xml`中
+
+#### 微信
+
+```xml
+    <activity
+        android:name="com.maxleap.social.thirdparty.WXEntryActivity"
+        android:launchMode="singleTop"/>
+    <activity-alias
+        android:name="${applicationId}.wxapi.WXEntryActivity"
+        android:targetActivity="com.maxleap.social.thirdparty.WXEntryActivity"
+        android:enabled="true"
+        android:exported="true"/>
+```
+
+#### QQ
+
+```xml
+        <activity
+                android:name="com.tencent.tauth.AuthActivity"
+                android:launchMode="singleTask"
+                android:noHistory="true"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="@string/qq_app_id"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name="com.tencent.connect.common.AssistActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+```
+
+#### weibo
+
+```xml
+        <activity
+                android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+                android:configChanges="keyboardHidden|orientation"
+                android:windowSoftInputMode="adjustResize"
+                android:exported="false">
+        </activity>
+```
+
+
 ## 使用
+
+
+### MLHermes
+
+首先在`Application`中对MLHermes进行初始化
+
+```java
+    //maxleap上申请的appid和apikey
+    private String APP_ID = "your appid";
+    private String API_KEY = "your apikey";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        MLHermes.initialize(this, APP_ID, API_KEY);
+        
+    }
+```
 
 ### Platform
 
@@ -114,7 +203,7 @@ ShareProvider 目前共有以下四个子类：
 - `WeiboShareProvider`	微博分享
 - `QQShareProvider`	QQ 好友分享
 - `QZoneShareProvider`	QZone 分享
-- `WechatShareProvider`	微信分享，默认分享到微信好友，如果需要分享到朋友圈需要修改 `ShareItem` 的参数 `shareItem.putExtra(ShareItem.EXTRA_TIMELINE, isTimeline);`。
+- `WechatShareProvider`	微信分享，默认分享到微信好友，如果需要分享到朋友圈需要 `mShareItem.isTimeLine = true`。
 
 进行分享
 
@@ -137,6 +226,45 @@ shareProvider.shareItem(shareItem, new EventListener() {
 });
 ```
 
+### 分享后回调监听
+
+- 微信
+
+微信分享后监听已经在sdk中做了实现，您无需在做处理。
+
+- QQ
+
+ QQ分享或者QQ ZONE分享需要在`onActivityResult()`中加入回调方法。
+ 
+ 示例如下：
+
+```
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(shareProvider != null){
+            shareProvider.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+```
 
 
 
+- 微博
+
+ 微博分享需要在`onNewIntent()`中加入回调方法
+ 
+ 示例如下：
+ 
+```
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (shareProvider != null) {
+            shareProvider.onNewIntent(intent);
+        }
+    }
+```
+
+
+您可参考开源组件 [MaxShare](https://github.com/MaxLeap/Module-MaxShare-Android) 中的相关调用实现。

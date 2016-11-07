@@ -45,7 +45,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
         }
     }
     ```
@@ -95,7 +95,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
             //测试项目配置：
             MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
@@ -120,7 +120,7 @@
 ## 已有项目
 
 1. 安装 SDK
-	[下载 SDK](https://cscdn.maxleap.cn/2.0/download/NTdhM2ZiZGIxNjllN2QwMDAxNjBhZGM0/zcf-220fc1ea-859f-403b-be1d-8fcfb8c114d7.zip)
+	[下载 SDK](https://s3.cn-north-1.amazonaws.com.cn/docs.maxleap.cn/Android/latest/maxleap-sdk-all-latest.zip)
 
 2. 将 SDK 添加至项目
 
@@ -150,7 +150,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
         }
     }
     ```
@@ -200,7 +200,7 @@
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
             //测试项目配置：
             MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
