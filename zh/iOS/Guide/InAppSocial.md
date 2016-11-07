@@ -6,7 +6,12 @@
 
 ## 集成
 
-> #### **重要:** `MaxSocial.framework` 依赖于 `MaxLeap.framework`，如果还没集成 `MaxLeap.framework`, 请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，集成并配置好 `MaxLeap.framework`.
+<aside class="notice">
+    <span class="icon"></span>
+    <span class="text">
+        **重要:** `MaxSocial.framework` 依赖于 `MaxLeap.framework`，如果还没集成 `MaxLeap.framework`, 请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，集成并配置好 `MaxLeap.framework`.
+    </span>
+</aside>
 
 ### 使用 `Cocoapods` 安装
 

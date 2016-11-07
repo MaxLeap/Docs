@@ -7,9 +7,13 @@
 推送营销服务是 MaxLeap 提供的营销和信息发布功能。目前提供两种消息模式：推送消息 和 应用内消息。你可以通过推送消息方式向指定人群推送消息，也可以通过应用内消息，在应用内向有某种行为的用户显示特定内容。你还可以在消息中设置用户点击后的目标 Activity。消息的创建，设置和发送均在Console中完成。
 
 ## 准备
-
-> #### 推送营销功能集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
-你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+<aside class="notice">
+    <span class="icon"></span>
+    <span class="text">
+        推送营销功能集成在 `MaxLeap.framework` 中，如果你尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
+你还可以查看我们的 [API 资料](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+    </span>
+</aside>
 
 **注意**：我们支持 iOS 7.0 及以上版本。
 

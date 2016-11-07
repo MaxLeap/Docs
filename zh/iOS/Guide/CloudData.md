@@ -7,9 +7,14 @@
 
 ## 准备
 
-> #### 云数据存储集成在 `MaxLeap.framework` 中，如果尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
+<aside class="notice">
+    <span class="icon"></span>
+    <span class="text">
+        云数据存储集成在 `MaxLeap.framework` 中，如果尚未安装，请先查阅[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)，安装 SDK 并使之在 Xcode 中运行。
+    </span>
+</aside>
 
-你还可以查看我们的 [API 参考](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
+你还可以查看我们的 [API 资料](ML_DOCS_LINK_PLACEHOLDER_API_REF_IOS)，了解有关我们 SDK 的更多详细信息。
 
 **注意**：我们支持 iOS 7.0 及以上版本。
 
