@@ -1245,7 +1245,7 @@ $ curl -X POST \
 | 名称 | 作用 | 示例 | 备注 |
 |----|----|----|----|
 | X-ML-AppId | 应用ID | X-ML-AppId: 569d84a0169e7d00012c7afe | 头名称大小写不敏感 |
-| X-ML-Request-Sign | 应用签名 | X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060 | 头名称大小写不敏感, 值可以为MaxLeap的任意类型密钥 |
+| X-ML-Request-Sign | 加密后的应用签名 | X-ML-Request-Sign: da1bb6b56200c84995127c784de90445,1461920236060 | 加密算法: 首先取变量TS为当前时间戳, 然后计算`MD5(TS + ClientKey) + "," + TS`, `ClientKey`可以在页面`应用设置-应用密钥中`找到 |
 | X-Parrot-Version | 请求的聊天服务版本 | X-Parrot-Version: 2 | 头名称大小写不敏感, 可选项, 默认使用最新版本的API |
 
 ### 通用的分页过滤参数
