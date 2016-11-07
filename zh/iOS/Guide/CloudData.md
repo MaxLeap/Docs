@@ -397,6 +397,20 @@ bigObject[@"myNull"] = null;
 
 我们不建议通过在 `MLObject` 中使用 `NSData` 字段来存储图像或文档等大型二进制数据。`MLObject` 的大小不应超过 128 KB。要存储更多数据，我们建议你使用 `MLFile` 或者 `MLPrivateFile`。更多详细信息请参考本指南的“文件”部分。
 
+### 链式调用
+
+从 2.2.0 版本开始，`MLObject` 支持链式调用，这个特性在 `swift` 中比较有用。你可以像下面这样组织代码：
+
+```swift
+MLObject(className: "Test")
+    .setObject("bar", forKey: "foo")
+    .add("barz", forKey: "array")
+    .incrementKey("count")
+    .saveInBackground { (succeeded, error) in
+        // ...
+}
+```
+
 ## 文件
 
 ### MLFile 的创建和上传
@@ -896,7 +910,7 @@ kMLCachePolicyCacheThenNetwork | 查询首先从缓存加载结果，然后再�
 
 查询缓存也适用于 `MLQuery` 的辅助方法，包括 `getFirstObjectInBackgroundWithBlock` 和 `getObjectInBackgroundWithId`。
 
-#### 链式调用
+### 链式调用
 
 从 2.2.0 版本开始，`MLObject` 和 `MLQuery` 支持链式调用，这个特性在 `swift` 中比较有用。你可以像下面这样组织代码：
 

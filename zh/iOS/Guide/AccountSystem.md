@@ -636,7 +636,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 - **用户操作验证：**例如银行金融类应用，用户在对资金进行敏感操作（例如转账、消费等）时，需要通过验证码来验证是否为用户本人操作。
 - **重设密码：**用户忘记密码时，可以凭借手机验证码重设密码。
 
-**注意：短信验证服务的 API 必须配对使用，`+[MLUser requestLoginSmsCodeWithPhoneNumber:block:]` 只能在登录接口 `+[MLUser loginWithPhoneNumber:smsCode:block:]` 上使用，其他类似。**
+**注意：短信验证服务的 API 必须配对使用，否则验证不会通过。`+[MLUser requestLoginSmsCodeWithPhoneNumber:block:]` 获取到的验证码只能在登录接口 `+[MLUser loginWithPhoneNumber:smsCode:block:]` 上使用，其他类似。**
 
 ### 短信验证码登录
 
