@@ -14,7 +14,7 @@
 
 1. 调用下面的方法展示 FAQ 界面
 	
-	```
+	```objc
 	[[MLHelpCenter sharedInstance] showFAQs:self]; // self 为弹出 App Issues 界面的 ViewController
 	```
 
@@ -24,7 +24,7 @@
 	
 	你也可以在任何有需要的地方调用下面的代码直接进入问题反馈界面：
 
-	```
+	```objc
 	[[MLHelpCenter sharedInstance] showConversation:self]; // self 为弹出 App Issues 界面的 ViewController
 	```
 

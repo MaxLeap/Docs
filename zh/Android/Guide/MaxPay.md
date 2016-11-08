@@ -39,42 +39,42 @@
 在 `AndroidManifest.xml` 中添加 `permission`
 
 ```xml
-<!--共通-->
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-<!--银联-->
-<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.NFC" />
+    <!--共通-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    
+    <!--银联-->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
 ```
 
 在 `AndroidManifest.xml` 中注册 `activity`
 
 ```xml
-<!--支付宝-->
-<activity
-        android:name="com.alipay.sdk.app.H5PayActivity"
-        android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-        android:exported="false"
-        android:screenOrientation="behind"
-        android:windowSoftInputMode="adjustResize|stateHidden">
-</activity>
-
-<!--银联-->
-<activity android:name="com.maxleap.MLUnionPaymentActivity"
-                  android:configChanges="orientation|keyboardHidden"
-                  android:excludeFromRecents="true"
-                  android:launchMode="singleTop"
-                  android:screenOrientation="portrait"/>
-<activity
-        android:name="com.unionpay.uppay.PayActivity"
-        android:configChanges="orientation|keyboardHidden"
-        android:excludeFromRecents="true"
-        android:screenOrientation="portrait"
-        android:windowSoftInputMode="adjustResize" />
+    <!--支付宝-->
+    <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+    </activity>
+    
+    <!--银联-->
+    <activity android:name="com.maxleap.MLUnionPaymentActivity"
+                      android:configChanges="orientation|keyboardHidden"
+                      android:excludeFromRecents="true"
+                      android:launchMode="singleTop"
+                      android:screenOrientation="portrait"/>
+    <activity
+            android:name="com.unionpay.uppay.PayActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 ```
 
 ### 初始化平台
@@ -83,9 +83,9 @@
 
 - **微信**
 
-    ```java
+```java
     MLPayManager.initializeWechatPay(context, "your wechat appId");
-    ```
+```
 
 ### 处理回调
 
@@ -94,53 +94,96 @@
 - **微信**
 
     第一种
+    
+    由于微信的回调机制，在支付完成后会调用：包名+.wxapi.WXPayEntryActivity,所以需要自己在工程中实现`WXPayEntryActivity`类
+    在 `onCreate()` 方法中调用以下方法：
+    
+     `MLPayManager.onCreate(getIntent());`
+     
+     在 `onNewIntent` 方法中调用以下方法：
+     
+     `setIntent(intent);`
+     `MLPayManager.onNewIntent(intent);`
+     
+     示例如下：
 
-    需要在微信规定的自定义的 `WXPayEntryActivity` 的 `onCreate()` 方法中调用以下方法：
-
-    ```java
-    MLPayManager.onCreate(getIntent());
-    ```
-
-    如果希望支付完成后关闭 `WXPayEntryActivity` 可以在 `onResp()` 中添加以下方法：
-
-    ```java
-    if (resp instanceof PayResp) {
-        finish();
+```java
+    public class WXPayEntryActivity extends Activity {
+        @Override
+        protected void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            MLPayManager.onCreate(getIntent());
+            finish();
+        }
+    
+        @Override
+        protected void onNewIntent(Intent intent) {
+            super.onNewIntent(intent);
+            setIntent(intent);
+            MLPayManager.onNewIntent(intent);
+        }
     }
-    ```
+```
 
-    第二种
+并在`AndroidManifest.xml`中相应的进行配置：
 
-    在 `AndroidManifest.xml` 中导入以下内容
+- 如果在`Gradle.build`中您修改过`applicationId`，即`applicationId`与`AndroidManifest.xml`中`package`不一致，您需要如下设置
+    
+```xml
+    <activity
+        android:name=".wxapi.WXPayEntryActivity"
+        android:launchMode="singleTop" />
 
-    ```xml
+    <activity-alias
+        android:name="${applicationId}.wxapi.WXPayEntryActivity"
+        android:enabled="true"
+        android:exported="true"
+        android:targetActivity=".wxapi.WXPayEntryActivity" />
+```
+
+- 反之，如果一致。您需要如下配置
+    
+```xml
+    <activity
+        android:name=".wxapi.WXPayEntryActivity"
+        android:enabled="true"
+        android:launchMode="singleTop" />
+```
+    
+
+
+第二种
+
+由于在`maxleap-sdk-pay-xxx.jar`中已经对WXPayEntryActivity回调做了处理，您只需要在 `AndroidManifest.xml` 中加入以下内容
+
+```xml
     <activity android:name="com.maxleap.MLWechatPayEntryActivity"
               android:launchMode="singleTop"/>
-    <activity-alias android:name=".wxapi.WXPayEntryActivity"
+    <activity-alias android:name="${applicationId}.wxapi.WXPayEntryActivity"
                     android:targetActivity="com.maxleap.MLWechatPayEntryActivity"
                     android:enabled="true"
                     android:exported="true"/>
-    ```
+```
 
 ### 进行支付
 
 ```java
-MLPayParam payParam = new MLPayParam();
-payParam.setChannel(MLPayParam.Channel.ALIPAY_APP);
-payParam.setSubject("a toy");
-payParam.setBillNum("" + System.currentTimeMillis());
-payParam.setTotalFee(1);
-MLPayManager.doPayInBackground(MainActivity.this, payParam,
-	new PayCallback() {
-            @Override
-            public void done(String id, MLException e) {
-                if (e != null) {
-                    Log.e(TAG, "支付失败,错误信息为 " + e.getMessage());
-                    return;
+    MLPayParam payParam = new MLPayParam();
+    payParam.setChannel(MLPayParam.Channel.ALIPAY_APP);
+    payParam.setSubject("a toy");
+    payParam.setBillNum("" + System.currentTimeMillis());
+    payParam.setTotalFee(1);
+    MLPayManager.doPayInBackground(MainActivity.this, payParam,
+        new PayCallback() {
+                @Override
+                public void done(String id, MLException e) {
+                    if (e != null) {
+                        Log.e(TAG, "支付失败,错误信息为 " + e.getMessage());
+                        return;
+                    }
+                    Log.i(TAG, "完成支付,订单号为 " + id);
                 }
-                Log.i(TAG, "完成支付,订单号为 " + id);
-            }
-        });
+            });
 ```
 
 参数依次为
@@ -165,17 +208,17 @@ MLPayParam.Channel 表示支付渠道，目前支持两种
 SDK 仅支持单笔账单的查询
 
 ```java
-MLPayManager.queryOrderInBackground(billNum, new QueryOrderCallback() {
-    @Override
-    public void done(List<MLOrder> orders, MLException e) {
-        if (e != null) {
-            Log.e(TAG, "查询失败,错误信息为 " + e.getMessage());
-            return;
+    MLPayManager.queryOrderInBackground(billNum, new QueryOrderCallback() {
+        @Override
+        public void done(List<MLOrder> orders, MLException e) {
+            if (e != null) {
+                Log.e(TAG, "查询失败,错误信息为 " + e.getMessage());
+                return;
+            }
+            Log.i(TAG, "完成查询, 订单数量为 " + orders.size());
+            Log.i(TAG, "订单信息为 " + Arrays.toString(orders.toArray()));
         }
-        Log.i(TAG, "完成查询, 订单数量为 " + orders.size());
-        Log.i(TAG, "订单信息为 " + Arrays.toString(orders.toArray()));
-    }
-});
+    });
 ```
 
 参数依次为

@@ -31,7 +31,7 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+		MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 	}
 }
 ```
@@ -83,7 +83,7 @@ public class MyApplication extends Application {
         @Override
         public void onCreate() {
             super.onCreate();
-            MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}", MaxLeap.REGION_CN);
+            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
             //测试项目配置：
             MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),

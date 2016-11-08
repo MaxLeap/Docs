@@ -145,7 +145,20 @@ MaxLeap 提供强大的邮箱验证服务，您只需在 控制台 -> 应用设�
 
 匿名用户是指提供用户名和密码，系统为您创建的一类特殊用户，它享有其他用户具备的相同功能。不过，一旦注销，匿名用户的所有数据都将无法访问。如果您的应用需要使用一个相对弱化的用户系统时，您可以考虑 MaxLeap 提供的匿名用户系统来实现您的功能。
 
-您可以通过 MLAnonymousUtils 获取一个匿名的用户账号：
+初次使用，SDK会通过`MLUser.getCurrentUser()`的方式来检测本地是否缓存注册用户信息。若不存在，会默认的在后端的`_User`表中创建一个匿名用户。您可以通过修改`options.enableAnonymousUser`参数，来取消匿名用户的创建：
+
+```java
+//初始化MaxLeap的时候，将Options中的enableAnonymousUser参数改为false
+MaxLeap.Options options = new MaxLeap.Options();
+        options.appId = APP_ID;
+        options.clientKey = API_KEY;
+        options.serverRegion = MaxLeap.REGION_CN;
+        
+        options.enableAnonymousUser = false;
+```
+
+
+您也可以通过 MLAnonymousUtils 获取一个匿名的用户账号：
 
 ```java
 MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
@@ -396,7 +409,7 @@ MLTwitterUtils.unlinkInBackground(user, new SaveCallback() {
 3. 在项目的 `Application.onCreate()` 函数中，于 `MaxLeap.initialize(this, APP_ID, API_KEY)` 之后，添加如下代码：
 
     ```java
-    MLWechatUtils.initialize("YOUR WEIBO APP ID", "YOUR WEIBO SECRET");
+    MLWechatUtils.initialize("YOUR WECHAT APP ID", "YOUR WECHAT SECRET");
     ```
 
 #### 登录并注册新 MLUser

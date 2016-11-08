@@ -32,7 +32,7 @@ public class MyApplication extends Application {
       @Override
       public void onCreate() {
           super.onCreate();
-          MaxLeap.initialize(this, "{{appid}}", "{{restapikey}}");
+          MaxLeap.initialize(this, "appid", "restapikey");
       }
     }
 ```
@@ -69,7 +69,7 @@ public class MyApplication extends Application {
    @Override
    public void onCreate() {
        super.onCreate();
-       MaxLeap.initialize(this, "{{appid}}", "{{restkey}}");
+       MaxLeap.initialize(this, "appid", "restkey");
 
        //Test Project Configuration:
        MLObject testObject = new MLObject("People");
