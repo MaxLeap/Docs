@@ -23,12 +23,14 @@ MaxLeap 国内和海外都有节点，但两个节点数据不互通。
 
 * iOS
 * Android
-* Javascript
 * Java
-* Python
-* Node.js
 * PHP
 
+<!--
+* Python
+* Node.js
+* Javascript
+-->
 更多平台 SDK 正在开发中，敬请期待。
 
 ### iOS 和 Android 是否可以使用同一个 App

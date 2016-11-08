@@ -21,8 +21,9 @@ MaxShareLib 是不含界面的基础能力库，封装第三方平台分享调�
 
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#SOCIALSHARE_ZH)
 
+<!--
 [Javascript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#SOCIALSHARE_ZH)
-
+-->
 ### 界面组件 MaxShareKit
 MaxShareKit 是将分享渠道选择、分享按钮等功能封装为 UI 组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间，并且您可以修改标准 UI 组件代码。您也可以针对自己界面需求自由设计开发。
 

@@ -64,8 +64,9 @@ MaxLoginLib 是不含界面的基础能力库，封装注册和登录，包括�
 
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#ACCOUNT_SYSTEM_ZH)
 
+<!--
 [Javascript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#ACCOUNTSYSTEM_ZH)
-
+-->
 ### 界面组件 MaxLoginKit
 MaxLoginKit 是将注册和登录，包括用户名邮箱注册登录，手机验证码登录注册，第三方登录等功能封装为 UI 组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间，并且您可以修改标准 UI 组件代码。您也可以针对自己界面需求自由设计开发。
 

@@ -3,7 +3,8 @@
 ### 什么是云代码服务
 云代码是部署运行在 MaxLeap 云引擎上的代码，您可以用它来实现较复杂的，需要运行在云端的业务逻辑。它类似于传统的运行在 Web server上的 Web Service或 RESTful API。它对外提供的接口也是 RESTful API，也正是以这种方式被移动应用调用。
 
-目前支持 Java、Python、Node.js，其他语言尽请期待。
+<!--目前支持 Java、Python、Node.js，其他语言尽情期待。-->
+目前支持 Java，其他语言尽请期待。
 
 ### 为什么需要云代码服务
 
@@ -156,16 +157,20 @@ MaxLeap 允许我们最多部署两个版本，以便我们在发布新版本的
 
 [Java 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JAVA)
 
+<!-- 
 [Python 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_PYTHON)
 
 [Node.js 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_NODEJS)
-
+-->
 ## Demo 项目
 ### Java
 [Demo-CloudCode-Java](https://github.com/MaxLeap/Demo-CloudCode-Java)
 
+<!-- 
 ### Python
 [Demo-CloudCode-Python](https://github.com/MaxLeap/Demo-CloudCode-Python)
 
 ### Node.js
 [Demo-CloudCode-Nodejs](https://github.com/MaxLeap/Demo-CloudCode-Nodejs)
+
+-->

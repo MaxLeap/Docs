@@ -122,8 +122,9 @@ MaxIMLib 是不含界面的基础 IM 通讯能力库，封装了通信能力和�
 
 [Android 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_ANDROID#MAXIM_ZH)
 
+<!--
 [JavaScript 开发指南](ML_DOCS_GUIDE_LINK_PLACEHOLDER_JS#IM_ZH)
-
+-->
 ### IM 界面组件 MaxIMKit
 MaxIMKit 是将即时通讯产品中最复杂的会话列表、聊天窗口、消息内容展现、会话设置等功能封装为组件，通过简短的代码，您就可以直接将以上界面集成到您的 App 产品中，省去大量的开发调试时间，并且您可以修改标准 UI 组件代码。您也可以针对自己界面需求自由设计开发。
 
@@ -143,6 +144,8 @@ MaxIMKit 是将即时通讯产品中最复杂的会话列表、聊天窗口、�
 
 [Sample-MaxChat-Android](https://github.com/MaxLeap/Sample-MaxChat-Android)
 
+<!--
 ### JavaScript
 [Sample-IM-Javascript](https://github.com/MaxLeap/Demo-IM-Javascript)
 
+-->
