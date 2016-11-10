@@ -222,10 +222,10 @@ MaxPayKit 是将支付渠道选择等功能封装为 UI 组件，通过简短的
 [Module-MaxPay-Android](https://github.com/MaxLeap/Module-MaxPay-Android)
 
  
-
+<!--
 ## 开放 REST API
 [开放API文档](ML_DOCS_REST_API_MAXPAY)
-
+-->
 
 ## 样例应用
 ### iOS
