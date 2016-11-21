@@ -838,9 +838,9 @@ App Transport Security has blocked a cleartext HTTP (http://) resource load sinc
 
 ## FAQ
 
-Q: 用户每次都请求短信验证码来登录的话，成本太高，有什么解决办法吗？
+**Q: 用户每次都请求短信验证码来登录的话，成本太高，有什么解决办法吗？**
 
-A: 让用户设置密码，之后用户就可以使用 手机号／密码 方式登录了。设置密码的方法大致有下面两种：
+**A:** 让用户设置密码，之后用户就可以使用 手机号／密码 方式登录了。设置密码的方法大致有下面两种：
 
 1. 注册时不设密码，注册完成后由用户自行更改密码:
 
@@ -871,7 +871,7 @@ A: 让用户设置密码，之后用户就可以使用 手机号／密码 方式
         }];
         ```
     
-    > `+[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:block:]` 和 `+[MLSmsCodeUtils verifySmsCode:phoneNumber:block:]` 两个接口都需要在用户登录状态下才能使用。但是此方案能正常使用，因为 SDK 会自动创建匿名用户，匿名登录状态也可以使这两个接口生效。
+    > 注：`+[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:block:]` 和 `+[MLSmsCodeUtils verifySmsCode:phoneNumber:block:]` 两个接口都需要在用户登录状态下才能使用。但是此方案能正常使用，因为 SDK 会自动创建匿名用户，匿名登录状态也可以使这两个接口生效。
 
 
 [maxleap_console]: https://maxleap.cn

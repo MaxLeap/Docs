@@ -3,7 +3,7 @@
 ## 简介
 
 ### 什么是数据存储服务
- Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，你可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint` (地理位置)，他们都是基于 `MLObject` 的对象。
+ Cloud Data 是 MaxLeap 提供的数据存储服务，它建立在对象`MLObject`的基础上，每个`MLObject`包含若干键值对。所有`MLObject`均存储在 MaxLeap 上，你可以通过 iOS/Android Core SDK 对其进行操作，也可在 Console 中管理所有的对象。此外 MaxLeap 还提供一些特殊的对象，如`MLUser`(用户)，`MLFile`(文件)，`MLGeoPoint` (地理位置)等。
 
 ## 准备
 
@@ -322,9 +322,9 @@ MLObject *post = fetchedComment[@"parent"];
 ```objc
 MLUser *user = [MLUser currentUser];
 MLRelation *relation = [user relationForKey:@"likes"];
-[relation addObject:post];
+[relation addObject:post]; // the post must be a saved object (has objectId)
 // save the relation
-[post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+[user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     if (succeeded) {
         //
     } else {
