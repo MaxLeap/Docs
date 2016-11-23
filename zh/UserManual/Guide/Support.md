@@ -98,6 +98,8 @@ FAQ 管理
 ### iOS
 [Sample-MaxNews-iOS](https://github.com/MaxLeap/Sample-MaxNews-iOS)
 
+<!--
 ### Android
 
 [Sample-MaxNews-Android](https://github.com/MaxLeap/Sample-MaxNews-Android)
+-->

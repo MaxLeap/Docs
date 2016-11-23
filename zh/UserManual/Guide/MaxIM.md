@@ -140,10 +140,11 @@ MaxIMKit 是将即时通讯产品中最复杂的会话列表、聊天窗口、�
 ### iOS
 [Sample-MaxChat-iOS](https://github.com/MaxLeap/Sample-MaxChat-iOS)
 
+<!--
 ### Android
 
 [Sample-MaxChat-Android](https://github.com/MaxLeap/Sample-MaxChat-Android)
-
+-->
 <!--
 ### JavaScript
 [Sample-IM-Javascript](https://github.com/MaxLeap/Demo-IM-Javascript)

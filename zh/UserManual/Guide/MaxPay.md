@@ -231,6 +231,7 @@ MaxPayKit 是将支付渠道选择等功能封装为 UI 组件，通过简短的
 ### iOS
 [Sample-MaxMall-iOS](https://github.com/MaxLeap/Sample-MaxMall-iOS)
 
+<!--
 ### Android
 [Sample-MaxMall-Android](https://github.com/MaxLeap/Sample-MaxMall-Android)
-
+-->

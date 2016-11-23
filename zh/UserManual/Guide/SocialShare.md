@@ -39,6 +39,8 @@ MaxShareKit 是将分享渠道选择、分享按钮等功能封装为 UI 组件�
 ### iOS
 [Sample-MaxNews-iOS](https://github.com/MaxLeap/Sample-MaxNews-iOS)
 
+<!--
 ### Android
 
 [Sample-MaxNews-Android](https://github.com/MaxLeap/Sample-MaxNews-Android)
+-->

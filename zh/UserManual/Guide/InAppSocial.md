@@ -74,5 +74,7 @@ MaxSocialKit 是将发表状态、评论、点赞、状态列表、评论列表�
 ### iOS
 [Sample-MaxChat-iOS](https://github.com/MaxLeap/Sample-MaxChat-iOS)
 
+<!--
 ### Android
 [Sample-MaxChat-Android](https://github.com/MaxLeap/Sample-MaxChat-Android)
+-->
