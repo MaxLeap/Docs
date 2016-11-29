@@ -27,29 +27,34 @@
 
 1. 检测是否可以连接到 MaxLeap 云端应用
 
-在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
+    在 `appDelegate.m` 的 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码：
 
-
-	```objc
-	#import <MaxLeap/MaxLeap.h>
-	#import <MLHelpCenter/MLHelpCenter.h>
-	
-	- (BOOL)application:(UIApplication *)application 	didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-	{
-		[MaxLeap setApplicationId:@"your_application_id" 	clientKey:@"your_client_key" site:MLSiteCN];
-		[MLHelpCenter install];
-
-		MLObject *obj = [MLObject objectWithoutDataWithClassName:@"Test" objectId:@"561c83c0226"];
+    ```objc
+    #import <MaxLeap/MaxLeap.h>
+    #import <MLHelpCenter/MLHelpCenter.h>
+    	
+    - (BOOL)application:(UIApplication *)application 	didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+    {
+    	[MaxLeap setApplicationId:@"your_application_id" 	clientKey:@"your_client_key" site:MLSiteCN];
+    	[MLHelpCenter install];
+    
+    	MLObject *obj = [MLObject objectWithoutDataWithClassName:@"Test" objectId:@"561c83c0226"];
     	[obj fetchIfNeededInBackgroundWithBlock:^(MLObject * _Nullable object, NSError * _Nullable error) {
-    		if (error.code == kMLErrorInvalidObjectId) {
-        		NSLog(@"已经能够正确连接上您的云端应用");
-    		} else {
-        		NSLog(@"应用访问凭证不正确，请检查。");
-    		}
-		}];
-	}
-	```
-
+            if (error.code == kMLErrorInvalidObjectId) {
+                NSLog(@"已经能够正确连接上您的云端应用");
+            } else if (error && error.code < kMLErrorInternalServer) {
+                NSLog(@"未知错误： %@", error);
+            } else if (error && error.code == kMLErrorInternalServer) {
+                NSLog(@"服务器出错： %@", error);
+            } else if (error && error.code == kMLErrorConnectionFailed) {
+                NSLog(@"网络错误： %@", error);
+            } else {
+                NSLog(@"\n\n应用访问凭证可能不正确，请检查。错误信息：\n%@\n\n", error);
+            }
+    	}];
+    }
+    ```
+    
 	运行您的应用。然后查看 Xcode console 中打印的日志。
 
 2. 检测 HelpCenter 模块是否可以正常使用：
