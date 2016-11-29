@@ -237,7 +237,7 @@ MLObject *object = [MLObject objectWithoutDataWithClassName:@"Comment" objectId:
 
 `-removeObject:forKey:` 和 `-removeObjectsInArray:forKey:` 会从数组字段中删除每个给定对象的所有实例。
 
-请注意 `removeObject:forKey` 与 `removeObjectForKey:` 的区别。 
+请注意 `removeObject:forKey:` 与 `removeObjectForKey:` 的区别。 
 
 **注意：Remove 和 Add/AddUnique 必需分开调用保存函数，否则数据不能正常上传和保存。**
 
