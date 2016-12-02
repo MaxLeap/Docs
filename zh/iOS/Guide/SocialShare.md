@@ -92,6 +92,10 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 // 这个 oauth 对象会作用于全局，需要一直存在
 ```
 
+**注意事项：**
+
+- 1. 必须在真机上运行并且安装了 QQ 的情况下，才会出现 QQ 分享按钮
+
 #### 初始化微信分享环境：
 
 首先需要前往[微信开放平台][wechat_develop_site]，创建微信移动应用。
@@ -104,11 +108,16 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 
 调用这行代码以后，新浪微博分享环境已经初始化，无需另外配置。
 
-如果没有集成微博登录模块，则需要下面这行代码来初始化：
+如果没有集成微信登录模块，则需要下面这行代码来初始化：
 
 ```objc
 [WXApi registerApp:@"your_wx_appId"];
 ```
+
+**注意事项：**
+
+- 1. 必须在真机上运行且安装微信客户端的情况下，才会出现微信分享按钮
+- 2. 初始化时使用的微信 appId 必须是在微信后台申请的，否则会报 `由于bad_param，无法分享到微信` 错误
 
 ### iOS 9 适配
 
@@ -351,6 +360,10 @@ MLSActivityType MLSActivityTypeCustom = 6;
 
 @end
 ```
+
+## 定制
+
+此项目已开源，如果 SDK 无法满足你的需求，可以[在这里下载项目源码](https://github.com/MaxLeap/Module-MaxShare-iOS)，进行个性化定制。
 
 
 [maxleap_console]: https://maxleap.cn

@@ -55,7 +55,7 @@ MaxLeap.framework 内置功能以及使用指南：
 
 包含以下代码库：
 
-SocketIOClientSwift.framework **动态库，**即时通讯基础功能代码库
+SocketIOClientSwift.framework / SocketIO.framework **动态库，**即时通讯基础功能代码库(**注意：此文件可能与你的Xcode不兼容，导致 crash。1.4.1 版本以后的 zip 包里面会多一个文件 README.md，请先阅读这个文件，再作决定是否要用这个文件。**)
 
 MaxIMLibDynamic.framework **动态库，**MaxLeap 提供的即时通讯功能代码库
 

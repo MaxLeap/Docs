@@ -5,6 +5,8 @@
 
 用户支持服务是 MaxLeap 为开发者提供的一套标准应用客服方案。在客户端，此方案提供完整的 FAQ 的显示页面及用户反馈对话页面。在Console端，用户支持服务提供FAQ 的管理及用户反馈的处理界面。
 
+**注：MLHelpCenter 已经被拆分为 [MaxFAQ](https://github.com/MaxLeap/Module-MaxFAQ-iOS) 和 [MaxIssues](https://github.com/MaxLeap/Module-MaxIssues-iOS) 两个项目，并且开源。**
+
 ## 准备工作
 
 1. 安装并配置 MaxLeap Core SDK. 详细步骤，请查看[SDK 集成小节](ML_DOCS_GUIDE_LINK_PLACEHOLDER_IOS#SDK_Install)
