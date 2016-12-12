@@ -583,7 +583,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"Post" predicate:predicate];
 [query whereKey:@"createdAt" greaterThan:[NSDate dateWithTimeIntervalSinceNow:-3600]];
 ```
 
-你可以通过设置 `limit` 来限制结果数量。默认结果数量限制为 100，但是 1 到 1000 之间的任意值都有效：
+你可以通过设置 `limit` 来限制结果数量。默认结果数量限制为 100，但是 1 到 2000 之间的任意值都有效：
 
 ```objc
 query.limit = 10; // limit to at most 10 results
@@ -824,7 +824,7 @@ MLQuery *query = [MLQuery queryWithclassName:@"Post"];
 }];
 ```
 
-对于含超过 1,000 个对象的类，计数操作受超时设定的限制。这种情况下，可能经常遇到超时错误，或只能返回近似正确的结果。因此，在应用程序的设计中，最好能做到避免此类计数操作。
+对于含超过 500,000 个对象的类，计数操作受超时设定的限制。这种情况下，可能经常遇到超时错误，或只能返回近似正确的结果。因此，在应用程序的设计中，最好能做到避免此类计数操作。
 
 ### 复合查询
 
