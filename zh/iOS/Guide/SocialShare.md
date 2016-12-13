@@ -123,18 +123,20 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 
 #### 允许 http 请求
 
-默认配置下，iOS 9 会拦截 http 协议的请求，并打印如下一行文字：
+默认配置下，iOS 9 以上版本系统会拦截 http 协议的请求，并打印如下一行文字：
 
 ```
 App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app's Info.plist file.
 ```
 
-问题是，大部分社交平台接口都使用 http 协议。而且，应用中也可能需要访问 http 协议的接口。
+~~问题是，部分社交平台接口都使用 http 协议。而且，应用中也可能需要访问 http 协议的接口。~~
 
-有一个简单粗暴的解决办法就是，允许所有的 http 请求：
+~~有一个简单粗暴的解决办法就是，允许所有的 http 请求：~~
 
-1. 在项目的 info.plist 文件中添加一个字段：NSAppTransportSecurity，值为字典类型
-2. 然后再在它下面添加一个字段：NSAllowsArbitraryLoads，值为 YES
+~~1. 在项目的 info.plist 文件中添加一个字段：NSAppTransportSecurity，值为字典类型~~
+~~2. 然后再在它下面添加一个字段：NSAllowsArbitraryLoads，值为 YES~~
+
+WWDC 2016 中，苹果表示将继续收紧对 HTTP 接口的访问限制。从 2017 年 1 月 1 日起，所有新提交的应用不允许使用 `NSAllowsArbitraryLoads` 绕过 ATS 限制。最好保证应用中所有请求都是使用 HTTPS 协议，否则可能会在应用审核时遇到麻烦。MaxLeap iOS SDK 所有接口默认都使用 HTTPS 协议。
 
 #### 添加 Scheme 白名单
 
