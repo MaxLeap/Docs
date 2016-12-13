@@ -88,8 +88,10 @@ pod "MaxLeap/Social"
 	MobileCoreServices.framework</br>
 	CoreTelephony.framework</br>
 	SystemConfiguration.framework</br>
-	libsqlite3.dylib</br>
-	libz.dylib</br>
+	libsqlite3.tbd</br>
+	libz.tbd</br>
+	
+    如果报 `CL` 开头的类找不到，需要加入 `CoreLocation.framework`
 
 
 <span id="connection_test"></span>

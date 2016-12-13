@@ -45,8 +45,8 @@
 	`MobileCoreServices.framework`</br>
 	`CoreTelephony.framework`</br>
 	`SystemConfiguration.framework`</br>
-	`libsqlite3.dylib`</br>
-	`libz.dylib`</br>
+	`libsqlite3.tbd`</br>
+	`libz.tbd`</br>
 
 4. 在 `application:didFinishLaunchingWithOptions:` 方法中加入以下代码，初始化 MaxLeap SDK：
 
