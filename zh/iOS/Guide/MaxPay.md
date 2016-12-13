@@ -75,7 +75,7 @@
 	
 #### 接入银联手机控件支付
 
-1. [下载并解压银联手机支付控件](https://open.unionpay.com/ajweb/help/file/techFile?productId=3)
+1. [下载并解压银联手机支付控件](https://open.unionpay.com/ajweb/help/file/techFile?productId=3)（[建议使用 3.3.6 及以上版本](https://open.unionpay.com/ajweb/system/notices/queryById?id=68)）
 2. 找到 "UPPaymentControl" 文件夹，该文件夹包括 `libPaymentControl.a` 和 `UPPaymentControl.h` 两个文件，把该文件夹拖到项目中。
 3. 添加依赖 libc++.tbd
 
