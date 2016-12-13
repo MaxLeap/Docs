@@ -106,7 +106,7 @@ TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:@"your_tecent_appId" a
 [MLWeChatUtils initializeWeChatWithAppId:@"wx_appId" appSecret:@"wx_app_secret" wxDelegate:self];
 ```
 
-调用这行代码以后，新浪微博分享环境已经初始化，无需另外配置。
+调用这行代码以后，微信分享环境已经初始化，无需另外配置。
 
 如果没有集成微信登录模块，则需要下面这行代码来初始化：
 
