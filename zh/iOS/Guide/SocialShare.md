@@ -83,7 +83,7 @@ MaxSocialShare 不依赖于 MaxLeap, 不会自动使用 `MLUser` 中的第三方
 [MLQQUtils initializeQQWithAppId:@"222222" qqDelegate:self];
 ```
 
-调用这行代码以后，新浪微博分享环境已经初始化，无需另外配置。
+调用这行代码以后，QQ 分享环境已经初始化，无需另外配置。
 
 如果没有集成微博登录模块，则需要下面这行代码来初始化：
 
