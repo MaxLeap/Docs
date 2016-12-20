@@ -73,14 +73,14 @@ maxleap-sdk-core.jar  内置功能以及使用指南：
 
 应用内社交组件，包含 说说发布界面，说说列表界面，广场界面，朋友圈界面等。
 
-组件地址：[https://github.com/MaxLeap/Module-MaxSocial-iOS](https://github.com/MaxLeap/Module-MaxSocial-iOS)
+组件地址：[https://github.com/MaxLeap/Module-MaxSocial-Android](https://github.com/MaxLeap/Module-MaxSocial-Android)
 
 
 ### 2.4 MaxPayUI
 
 移动支付界面组件。
 
-组件地址：https://github.com/MaxLeap/Module-MaxPay-Android
+组件地址：[https://github.com/MaxLeap/Module-MaxPay-Android](https://github.com/MaxLeap/Module-MaxPay-Android)
 
 ### 2.5 MaxShare
 
