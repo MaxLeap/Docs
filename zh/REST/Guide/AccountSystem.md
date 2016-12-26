@@ -5,8 +5,8 @@
 URL	| HTTP |	功能
 ------|--------|--------
 `/users`|POST|	用户注册
-`/users/login`|GET|	用户登录
-`/users/logout`|GET|	用户退出登录
+`/login`|GET|	用户登录
+`/logout`|GET|	用户退出登录
 `/users/<objectId>`|GET|	获取用户
 `/users/<objectId>`	|PUT|	更新用户
 `/users`	|GET|	查询用户
