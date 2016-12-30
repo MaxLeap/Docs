@@ -399,7 +399,7 @@ bigObject[@"myNull"] = null;
 
 ### 链式调用
 
-从 2.2.0 版本开始，`MLObject` 支持链式调用，这个特性在 `swift` 中比较有用。你可以像下面这样组织代码：
+从 2.2.0 版本开始，`MLObject` 部分 API 支持链式调用，这个特性在 `swift` 中比较有用。你可以像下面这样组织代码：
 
 ```swift
 MLObject(className: "Test")
@@ -409,6 +409,16 @@ MLObject(className: "Test")
     .saveInBackground { (succeeded, error) in
         // ...
 }
+```
+
+这些 API 有以下特征: OC 中返回值为 `instancetype`，swift 中返回值为 `Self`
+
+```objc
+- (instancetype)setObject:(id)object forKey:(NSString *)key;
+```
+
+```swift
+open func setObject(_ object: Any, forKey key: String) -> Self
 ```
 
 ## 文件
@@ -912,7 +922,7 @@ kMLCachePolicyCacheThenNetwork | 查询首先从缓存加载结果，然后再�
 
 ### 链式调用
 
-从 2.2.0 版本开始，`MLObject` 和 `MLQuery` 支持链式调用，这个特性在 `swift` 中比较有用。你可以像下面这样组织代码：
+从 2.2.0 版本开始，`MLObject` 和 `MLQuery` 部分 API 支持链式调用，这个特性在 `swift` 中比较有用。你可以像下面这样组织代码：
 
 ```swift
 MLObject(className: "Test")
@@ -934,6 +944,20 @@ MLQuery(className: "ChainTest")
     .findObjectsInBackground(block: { (objects, err) in
         // ...
     })
+```
+
+这些 API 有以下特征: OC 中返回值为 `instancetype`，swift 中返回值为 `Self`
+
+```objc
+- (instancetype)setObject:(id)object forKey:(NSString *)key;
+
+- (instancetype)whereKeyExists:(NSString *)key;
+```
+
+```swift
+open func setObject(_ object: Any, forKey key: String) -> Self
+
+open func whereKeyExists(_ key: String) -> Self
 ```
 
 <span id="mlobject_subclassing"></span>
