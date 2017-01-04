@@ -685,11 +685,21 @@ MaxLeap 短信服务支持的应用场景有以下四种:
 
 ### 绑定手机号
 
-成功绑定手机号的用户以后就可以使用 `手机号／验证码` 方式登录，也可以使用 `短信/验证码` 方式重设密码。
+成功绑定手机号的用户就可以使用 `手机号／验证码` 方式登录，也可以使用 `短信验证码` 重设密码。
 
 如果用户填写了手机号，并保存到 `mobilePhone` 字段，此时手机号为未验证状态。如果用户使用某个功能的时候需要验证手机号，可以调用接口进行验证，验证成功后 `mobilePhoneVerified ` 就会被置为 `true`。
 
-1. **上传手机号**
+1. **判断用户手机号是否已验证**
+
+    ```objc
+    [[MLUser currentUser] fetchInBackgroundWithBlock:^(__kindof MLObject * _Nullable object, NSError * _Nullable error) {
+        if ( ! error && [MLUser currentUser].mobilePhoneVerified) {
+            // 手机号已验证
+        }
+    }];
+    ```
+
+2. **上传手机号**
     
     ```objc
     [MLUser currentUser][@"mobilePhone"] = @"135xxxxxxxx";
@@ -698,7 +708,7 @@ MaxLeap 短信服务支持的应用场景有以下四种:
     }];
     ```
 
-2. **请求短信验证码**
+3. **请求短信验证码**
 
 	```objc
 	[[MLUser currentUser] requestMobilePhoneVerifySmsCodeWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -708,14 +718,14 @@ MaxLeap 短信服务支持的应用场景有以下四种:
     }];
 	```
 	
-3. **调用验证接口，验证用户输入的验证码是否正确**
+4. **调用验证接口，验证用户输入的验证码是否正确**
 
     验证通过的用户就可以使用短信验证码方式登陆和重设密码。
 
 	```objc
 	[[MLUser currentUser] verifyMobilePhoneWithSmsCode:@"123456" block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            // 验证成功, currentUser[@"mobilePhoneVerified"].boolValue 为 YES
+            // 验证成功, 服务器会把 mobilePhoneVerified 字段改为 true
         }
     }];
 	```
@@ -832,38 +842,16 @@ WWDC 2016 中，苹果表示将继续收紧对 HTTP 接口的访问限制。从 
 
 **Q: 用户每次都请求短信验证码来登录的话，成本太高，有什么解决办法吗？**
 
-**A:** 让用户设置密码，之后用户就可以使用 手机号／密码 方式登录了。设置密码的方法大致有下面两种：
+**A:** 让用户设置密码，之后用户就可以使用 `手机号／密码` 方式登录了。
 
-1. 注册时不设密码，注册完成后由用户自行更改密码:
-
-    i.   用户输入手机号<br>
-    ii.  用户点击请求验证码按钮，程序调用 `+[MLUser(MLSmsCodeUtils) requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码<br>
-    iii. 用户收到验证码短信后，输入验证码<br>
-    iv.  用户点击 注册／登录 按钮，程序调用 `+[MLUser(MLSmsCodeUtils) loginWithPhoneNumber:smsCode:block:]` 接口登录／注册<br>
-    v.   用户前往用户信息界面，修改密码（具体操作请查阅[修改密码](#change_password_directly)和[短信重置密码](reset_password_by_mobile_phone)两部分）<br>
-    vi.  以后用户即可以通过 手机号／密码 登录，也可以使用 手机号／验证码 登录<br>
-
-2. 在注册时设置密码, 流程：
-
-    i.   用户输入手机号</br>
-    ii.  用户点击请求验证码按钮，程序调用 `+[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码</br>
-    iii. 用户收到验证码短信后，输入验证码和密码</br>
-    iv.  用户点击注册按钮</br>
-    v.   程序验证验证码是否正确，调用 `+[MLSmsCodeUtils verifySmsCode:phoneNumber:block:]` 接口</br>
-    vi.  验证通过后，注册用户：</br>
+注册时不设密码，注册完成后由用户自行更改密码:
     
-        ```objc
-        MLUser *user = [MLUser user];
-        user.username = @"135xxxxxxxx"; // 用户名即手机号
-        user.password = @"***********"; // 密码
-        user[@"mobilePhone"] = @"135xxxxxxxx";
-        user[@"mobilePhoneVerified"] = @(YES); // 这两行代码含义是绑定手机号，这样用户即可以使用手机号／验证码登录，也可以使用 手机号／密码 登陆
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            // ...
-        }];
-        ```
-    
-    > 注：`+[MLSmsCodeUtils requestSmsCodeWithPhoneNumber:block:]` 和 `+[MLSmsCodeUtils verifySmsCode:phoneNumber:block:]` 两个接口都需要在用户登录状态下才能使用。但是此方案能正常使用，因为 SDK 会自动创建匿名用户，匿名登录状态也可以使这两个接口生效。
+i.   用户输入手机号<br>
+ii.  用户点击请求验证码按钮，程序调用 `+[MLUser(MLSmsCodeUtils) requestLoginSmsCodeWithPhoneNumber:block:]` 接口给用户发送验证码<br>
+iii. 用户收到验证码短信后，输入验证码<br>
+iv.  用户点击 `注册／登录` 按钮，程序调用 `+[MLUser(MLSmsCodeUtils) loginWithPhoneNumber:smsCode:block:]` 接口`登录／注册`<br>
+v.   用户前往用户信息界面，修改密码（具体操作请查阅[修改密码](#change_password_directly)和[短信重置密码](reset_password_by_mobile_phone)两部分）<br>
+vi.  以后用户即可以通过 `手机号／密码` 登录，也可以使用 `手机号／验证码` 登录<br>
 
 
 [maxleap_console]: https://maxleap.cn
