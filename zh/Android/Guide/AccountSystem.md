@@ -34,6 +34,7 @@ MLUser 除了从 MLObject 继承的属性外，还有几个特定的属性：
 注意：
 
 * 请确保用户名、手机号和电子邮件地址是独一无二的。
+
 * 这些属性和其它 MLObject 的属性不同，在设置时不是使用的 `put()` 方法，而是使用专门的 `setXXX()` 方法。
 
 ### <span id = "nimingUser">匿名用户</span>
@@ -67,9 +68,12 @@ MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
   }
 });
 ```
+
 注意：
-- 假如当前用户是一个匿名用户，这个时候直接调用注册接口，sdk 会把这个匿名用户更新成为一个普通用户，而不会创建一个新用户。
-- 匿名用户采用异步的方式创建,有一定的延迟，如果应用在某个时刻需要匿名登录，却发现当前用户为空，就需要手动创建匿名用户。
+
+* 假如当前用户是一个匿名用户，这个时候直接调用注册接口，sdk 会把这个匿名用户更新成为一个普通用户，而不会创建一个新用户。
+
+* 匿名用户采用异步的方式创建,有一定的延迟，如果应用在某个时刻需要匿名登录，却发现当前用户为空，就需要手动创建匿名用户。
 
 
 ### 注册
@@ -99,8 +103,11 @@ MLUserManager.signUpInBackground(user, new SignUpCallback() {
 注意：
 
 * 在注册过程中，服务器会进行注册用户信息的检查，以确保注册的用户名和电子邮件地址是独一无二的。此外，服务端还会对用户密码进行不可逆的加密处理，不会明文保存任何密码，应用切勿再次在客户端加密密码，这会导致重置密码等功能不可用。
+
 * 注册使用的是 signUpInBackground() 方法，而不是 saveInBackground() 方法。另外还有各种不同的 signUp 方法。像往常一样，我们建议在可能的情况下尽量使用异步版本的 signUp 方法，这样就不会影响到应用程序主 UI 线程的响应。您可以阅读 API 中更多的有关这些具体方法的使用。
+
 * 如果注册不成功，您可以查看返回的错误对象。最有可能的情况是，用户名或电子邮件已经被另一个用户注册。这种情况您可以提示用户，要求他们尝试使用不同的用户名进行注册。
+
 * 您也可以要求用户使用 Email 做为用户名注册，这样做的好处是，您在提交信息的时候可以将输入的“用户名“默认设置为用户的 Email 地址，以后在用户忘记密码的情况下可以使用 MaxLeap 提供的重置密码功能。
 
 
@@ -160,7 +167,7 @@ MLUserManager.logInInBackground("userName", "passWord", new LogInCallback<MLUser
 
 #### <span id = "phoneLogin">手机号验证码登录</span>
 
-此种登录方式同[手机号密码注册](#phoneRegist)。当用户使用手机号和验证码注册成功之后,如果该用户不存在则会创建一个新的用户,如果存在则直接登录到该用户。
+此种登录方式同[手机号验证码注册](#phoneRegist)。当用户使用手机号和验证码注册成功之后,如果该用户不存在则会创建一个新的用户,如果存在则直接登录到该用户。
 
 获得登录短信验证码
 
@@ -315,7 +322,7 @@ MLUserManager.fetchInBackground(currentUser, new GetCallback() {
 
 ```java
 MLUser currentUser = MLUser.getCurrentUser();
-currentUser.put("mobilePhone", phone);
+currentUser.setMobilePhone(phone);
 MLUserManager.saveInBackground(currentUser, new SaveCallback() {
     @Override
     public void done(MLException e) {
@@ -328,9 +335,12 @@ MLUserManager.saveInBackground(currentUser, new SaveCallback() {
     }
 });
 ```
+
 注：
-- 只有当手机号码设置成功以后，才能发送短信验证码。因为可能存在手机号被占用。
-- 如果之前已经成功绑定过手机号，此操作执行成功后将会替换为新的手机号，并处于未验证的状态。
+
+* 只有当手机号码设置成功以后，才能发送短信验证码。因为可能存在手机号被占用。
+
+* 如果之前已经成功绑定过手机号，此操作执行成功后将会替换为新的手机号，并处于未验证的状态。
 
 2.发送验证码
 
@@ -373,7 +383,7 @@ MLUserManager.verifyPhoneInBackground("手机号码", "验证码", new VerifyPho
 
 ```java
 MLUser currentUser = MLUser.getCurrentUser();
-currentUser.put("email", "邮箱地址");
+currentUser.setEmail("邮箱地址");
 MLUserManager.saveInBackground(currentUser, new SaveCallback() {
     @Override
     public void done(MLException e) {
@@ -389,7 +399,7 @@ MLUserManager.saveInBackground(currentUser, new SaveCallback() {
 2.请求发送认证邮件
 
 ```java
-MLUserManager.requestEmailVerifyInBackground(“邮箱地址”, new RequestEmailVerifyCallback() {
+MLUserManager.requestEmailVerifyInBackground("邮箱地址", new RequestEmailVerifyCallback() {
     @Override
     public void done(MLException e) {
         if (e != null) {
@@ -407,6 +417,7 @@ MaxLeap 提供强大的邮箱验证服务，您只需在 控制台 -> 应用设�
 `emailVerified`字段状态:
 
 * true - 用户通过点击系统发送的链接验证邮箱成功
+
 * false - 用户还未验证邮箱，或者验证失败
 
 ### <span id = "smsService">短信验证服务</span>

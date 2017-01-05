@@ -265,21 +265,29 @@ public class MyApplication extends Application {
 使用Options参数的方式初始化，灵活度更高。您可根据实际的项目需求进行配置。 
     
 ## FAQ
-- Q:提示"应用访问凭证不正确，请检查"是什么原因?
+
+Q: 提示"应用访问凭证不正确，请检查"是什么原因?
+
   A:我们提供了用于检测SDK是否正确的配置的方法:**MaxLeap.checkSDKConnection()**。该api会向后端查询一个名为`testTable`的表格,而此表格默认并未被创建。如果您的配置正确,后端会正确的返回该表格的状态,以此状态来判断配置是否正确。如果配置错误,则无法正常的获取该表的状态。
   
   可以到如下页面查看应用的配置信息
   
-![](https://github.com/MaxLeap/Docs/blob/master/images/android_start_faq1.png)
+  	<p class="image-wrapper">
+  	![android_start_faq1](../../../images/android_start_faq1.png)
 
   需要正确的配置对应的Application ID和REST API key初始化之后,才能正常的访问。
 
-- Q:提示"SDK 成功连接到你的云端应用"为什么日志中还会打印http 400异常?
+
+Q: 提示"SDK 成功连接到你的云端应用"为什么日志中还会打印http 400异常?
+
   A:该提示表示您的sdk配置正确,只需移除MaxLeap.checkSDKConnection()测试连接的代码即可。
 
-- Q:已经正确配置sdk,但是还是无法正常使用?
-  A:1.检查您的应用是否配置了相关的权限。
-    2.检查网络连接是否通畅。
-    3.检查自定义的Application是否在AndroidManifest.xml中的`<application>`节点的name进行了修改。
-    4.下载最新版本的sdk。
-    5.您可以尝试参考我们的开源组件[https://github.com/MaxLeap/Module-MaxLogin-Android](https://github.com/MaxLeap/Module-MaxLogin-Android)
+Q: 已经正确配置sdk,但是还是无法正常使用?
+
+A:可以从以下几点进行排除:
+
+* 检查您的应用是否配置了相关的权限。
+* 检查网络连接是否通畅。
+* 检查自定义的Application是否在AndroidManifest.xml中的`<application>`节点的name进行了修改。
+* 下载最新版本的sdk。
+* 您可以尝试参考我们的开源组件[https://github.com/MaxLeap/Module-MaxLogin-Android](https://github.com/MaxLeap/Module-MaxLogin-Android)
