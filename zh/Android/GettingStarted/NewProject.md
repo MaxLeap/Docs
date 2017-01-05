@@ -20,18 +20,18 @@
 
 	在 `Application` 的 `onCreate()` 方法中，调用 `MaxLeap.initialize` 来设置您应用的 `Application ID` 和 `REST API Key`：
 
-    ```java
-    import android.app.Application;
-    import com.maxleap.MaxLeap;
+```java
+import android.app.Application;
+import com.maxleap.MaxLeap;
 
-    public class MyApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
-        }
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
     }
-    ```
+}
+```
     
     请将上述代码中`MaxLeap.initialize`中的`appid`和`restapikey`分别替换为自己申请的`Application ID` 和 `REST API Key`。
 
@@ -39,12 +39,12 @@
 
 	在 `AndroidManifest.xml` 中，给予应用以下权限：
 
-    ```xml
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    ```
+```xml
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
 
     权限|用途|是否必需
     ---|---|---
@@ -57,46 +57,36 @@
 
 	在 `AndroidManifest.xml` 中配置用户渠道，渠道名可以是 `google_play` 之类的任意字符串。
 
-    ```xml
-	<application>
-       <meta-data
-            android:name="ml_channel"
-            android:value="google_play"/>
-    </application>
-	```
+```xml
+<application>
+   <meta-data
+        android:name="ml_channel"
+        android:value="google_play"/>
+</application>
+```
 
 4. 快速测试项目配置
 
     为了测试项目是否已经注册至 MaxLeap，我们可以向 `Application` 的 `onCreate()` 方法中添加以下代码：
 
-    ```java
-    import android.app.Application;
-    import com.maxleap.MaxLeap;
-    import com.maxleap.MLQueryManager;
-    import com.maxleap.MLQuery
-    import com.maxleap.MLObject;
+```java
+import android.app.Application;
+import com.maxleap.MaxLeap;
+import com.maxleap.MLQueryManager;
+import com.maxleap.MLQuery
+import com.maxleap.MLObject;
 
-    public class MyApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
-            //测试项目配置：
-            MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
-                        new GetCallback<MLObject>() {
-                            @Override
-                            public void done(MLObject mlObject, MLException e) {
-                                if (e != null && e.getCode() == MLException.INVALID_OBJECT_ID) {
-                                    Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
-                                } else {
-                                    Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
-                                }
-                            }
-                        });
-        }
+       //测试当前sdk的appid和restapikey配置是否正确。正式环境可移除。
+       MaxLeap.checkSDKConnection();
     }
-    ```
+}
+```
 
     运行应用，查看 Logcat 的输出日志。
 

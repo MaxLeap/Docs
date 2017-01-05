@@ -44,11 +44,11 @@ compile 'com.android.support:support-v4:24.2.0'
 将申请的appid等信息，在res->values->`string.xml`中配置如下：
 
 ```xml
-    <string name="ml_sina_weibo_app_id">your weibo appid</string>
-    <string name="qq_app_id">tencent+your qq appid</string>
-    <string name="ml_qq_app_id">your qq appid</string>
-    <string name="ml_wechat_app_id">your wechat appid</string>
-    <string name="ml_wechat_app_secret">your wechat secret</string>
+<string name="ml_sina_weibo_app_id">your weibo appid</string>
+<string name="qq_app_id">tencent+your qq appid</string>
+<string name="ml_qq_app_id">your qq appid</string>
+<string name="ml_wechat_app_id">your wechat appid</string>
+<string name="ml_wechat_app_secret">your wechat secret</string>
 ```
 
 ### 配置AndroidManifest.xml
@@ -58,49 +58,49 @@ compile 'com.android.support:support-v4:24.2.0'
 #### 微信
 
 ```xml
-    <activity
-        android:name="com.maxleap.social.thirdparty.WXEntryActivity"
-        android:launchMode="singleTop"/>
-    <activity-alias
-        android:name="${applicationId}.wxapi.WXEntryActivity"
-        android:targetActivity="com.maxleap.social.thirdparty.WXEntryActivity"
-        android:enabled="true"
-        android:exported="true"/>
+<activity
+    android:name="com.maxleap.social.thirdparty.WXEntryActivity"
+    android:launchMode="singleTop"/>
+<activity-alias
+    android:name="${applicationId}.wxapi.WXEntryActivity"
+    android:targetActivity="com.maxleap.social.thirdparty.WXEntryActivity"
+    android:enabled="true"
+    android:exported="true"/>
 ```
 
 #### QQ
 
 ```xml
-        <activity
-                android:name="com.tencent.tauth.AuthActivity"
-                android:launchMode="singleTask"
-                android:noHistory="true"
-                android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+<activity
+        android:name="com.tencent.tauth.AuthActivity"
+        android:launchMode="singleTask"
+        android:noHistory="true"
+        android:screenOrientation="portrait">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="@string/qq_app_id"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name="com.tencent.connect.common.AssistActivity"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:screenOrientation="portrait"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <data android:scheme="@string/qq_app_id"/>
+    </intent-filter>
+</activity>
+<activity
+        android:name="com.tencent.connect.common.AssistActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 ```
 
 #### weibo
 
 ```xml
-        <activity
-                android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-                android:configChanges="keyboardHidden|orientation"
-                android:windowSoftInputMode="adjustResize"
-                android:exported="false">
-        </activity>
+<activity
+        android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+        android:configChanges="keyboardHidden|orientation"
+        android:windowSoftInputMode="adjustResize"
+        android:exported="false">
+</activity>
 ```
 
 
@@ -112,17 +112,17 @@ compile 'com.android.support:support-v4:24.2.0'
 首先在`Application`中对MLHermes进行初始化
 
 ```java
-    //maxleap上申请的appid和apikey
-    private String APP_ID = "your appid";
-    private String API_KEY = "your apikey";
+//maxleap上申请的appid和apikey
+private String APP_ID = "your appid";
+private String API_KEY = "your apikey";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+@Override
+public void onCreate() {
+    super.onCreate();
 
-        MLHermes.initialize(this, APP_ID, API_KEY);
-        
-    }
+    MLHermes.initialize(this, APP_ID, API_KEY);
+    
+}
 ```
 
 ### Platform
@@ -239,13 +239,13 @@ shareProvider.shareItem(shareItem, new EventListener() {
  示例如下：
 
 ```
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(shareProvider != null){
-            shareProvider.onActivityResult(requestCode, resultCode, data);
-        }
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if(shareProvider != null){
+        shareProvider.onActivityResult(requestCode, resultCode, data);
     }
+}
 ```
 
 
@@ -257,13 +257,13 @@ shareProvider.shareItem(shareItem, new EventListener() {
  示例如下：
  
 ```
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (shareProvider != null) {
-            shareProvider.onNewIntent(intent);
-        }
+@Override
+protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    if (shareProvider != null) {
+        shareProvider.onNewIntent(intent);
     }
+}
 ```
 
 

@@ -67,34 +67,24 @@ public class MyApplication extends Application {
 
     为了测试项目是否已经注册至 MaxLeap，我们可以向 `Application` 的 `onCreate()` 方法中添加以下代码：
 
-    ```java
-    import android.app.Application;
-    import com.maxleap.MaxLeap;
-    import com.maxleap.MLQueryManager;
-    import com.maxleap.MLQuery
-    import com.maxleap.MLObject;
+```java
+import android.app.Application;
+import com.maxleap.MaxLeap;
+import com.maxleap.MLQueryManager;
+import com.maxleap.MLQuery
+import com.maxleap.MLObject;
 
-    public class MyApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MaxLeap.initialize(this, "appid", "restapikey", MaxLeap.REGION_CN);
 
-            //测试项目配置：
-            MLDataManager.fetchInBackground(MLObject.createWithoutData("foobar", "123"),
-                        new GetCallback<MLObject>() {
-                            @Override
-                            public void done(MLObject mlObject, MLException e) {
-                                if (e != null && e.getCode() == MLException.INVALID_OBJECT_ID) {
-                                    Log.d("MaxLeap", "SDK 成功连接到你的云端应用！");
-                                } else {
-                                    Log.d("MaxLeap", "应用访问凭证不正确，请检查。");
-                                }
-                            }
-                        });
-        }
+       //测试当前sdk的appid和restapikey配置是否正确。正式环境可移除。
+       MaxLeap.checkSDKConnection();
     }
-    ```
+}
+```
 
     运行应用，查看 Logcat 的输出日志。
 
@@ -102,9 +92,9 @@ public class MyApplication extends Application {
 
     为了测试项目能否使用 MaxLeap HelpCenter 服务，我们可以向 `Application` 的`onCreate()` 方法中添加以下代码：
 
-    ```java
-    MLHelpCenter.openFaqs(MainActivity.this);
-    ```
+```java
+MLHelpCenter.openFaqs(MainActivity.this);
+```
 
     运行后，您将在安卓测试设备中看见：
 
