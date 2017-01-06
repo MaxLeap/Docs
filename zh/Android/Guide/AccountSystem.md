@@ -227,6 +227,30 @@ MLUser currentUser = MLUser.getCurrentUser(); //此时，crrentUser 将 为null
 ```
 
 
+### 修改密码
+
+如果使用用户名/密码的方式进行登录,或者使用手机号/验证码登录后重置过密码,可以采用以下方式修改当前用户的密码:
+
+```java
+MLUserManager.changePasswordInBackground(oldPwd, newPwd, new ChangePasswordCallback() {
+    @Override
+    public void done(MLException e) {
+        if (e == null) {
+            showToast("修改成功");
+        } else {
+            showToast(e.getMessage());
+        }
+    }
+});
+```
+
+注:
+
+* 修改密码前请确保MLUser.getCurrentUser()不为空,即处于登录状态。
+
+* 该接口会先验证旧密码是否正确,如果正确才会执行修改密码操作。
+
+
 ### 重置密码
 
 #### <span id = "bindphoneRestPwd">手机号重置密码</span>
