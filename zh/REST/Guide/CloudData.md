@@ -16,6 +16,7 @@ URL	| HTTP	|功能
 URL	| HTTP |	功能
 ------|--------|--------
 `/files/<filename>`|PUT|	上传文件
+`/files`|DELETE|	删除单个文件
 
 ### 安装
 
@@ -702,6 +703,21 @@ user 字段是一个Pointer类型，指向__User类
       -d '{"image":{"__type":"File","name":"zcf-8a953de2-06bc-4210-a4c2-e5c3a7c16b7e.jpeg","url":"https://cscdn.maxleap.cn/2.0/download/NTY5ZDg0YTAxNjllN2QwMDAxMmM3YWZl/zcf-8a953de2-06bc-4210-a4c2-e5c3a7c16b7e.jpeg"}}' \
       https://api.maxleap.cn/2.0/classes/product/5718999b169e7d0001a2520a
 ```
+
+#### 删除文件
+
+删除文件通过 DELETE 请求，注意头信息需要指定文件的 X-ML-Fid ， X-ML-Fid就是创建文件时返回的 name 字段，需要用MasterKey，例如删除上面新建的文件 zcf-8a953de2-06bc-4210-a4c2-e5c3a7c16b7e.jpeg ：
+
+```shell
+    curl -X DELETE \
+      -H "X-ML-AppId: 569d84a0169e7d00012c7afe" \
+      -H "X-ML-MasterKey: TzZhQ1NJSS1WUmdFNUp1UTdISHVXXX" \
+      -H "X-ML-Fid: zcf-8a953de2-06bc-4210-a4c2-e5c3a7c16b7e.jpeg" \
+      "https://api.maxleap.cn/2.0/files"
+```
+
+文件上传成功后，返回 204 Deleted 。
+
 
 ### 安装
 
