@@ -350,7 +350,6 @@ currentUser.setMobilePhone(phone);
 MLUserManager.saveInBackground(currentUser, new SaveCallback() {
     @Override
     public void done(MLException e) {
-        progressBarArea.setVisibility(View.GONE);
         if (e == null) {
             sendSms();
         } else {
